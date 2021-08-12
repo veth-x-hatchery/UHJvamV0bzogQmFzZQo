@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vethx_login/core/blocs/app_state.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_email_entry.widget.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_options.widget.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_password_entry.widget.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_register_entry.widget.dart';
+import 'package:vethx_login/ui/widgets/transitions/slide_route.dart';
 
 enum SignInPageRoutes {
   signInOptions,
@@ -65,6 +67,8 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
     ];
   }
 
+  late final SignInNavigationBloc _signInNavigation;
+
   @override
   void initState() {
     _tabController = TabController(
@@ -73,6 +77,18 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
     );
     super.initState();
     _hideAppBarOptions = true;
+
+    _signInNavigation =
+        AppStateContainer.of(context).blocProvider.signInNavigation;
+
+    _signInNavigation.deviceBluetoothState.listen((event) {
+      Navigator.push(
+        context,
+        SlideRightRoute<void>(
+          page: SignInEmailEntry(nextForm: _goToTheNextPage),
+        ),
+      );
+    });
   }
 
   @override
@@ -89,7 +105,8 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
         elevation: 0,
       ),
       body: SignInOptions(
-        nextForm: (SignInPageRoutes delta) {},
+        nextForm: (SignInPageRoutes delta) =>
+            _signInNavigation.signInGoTo(delta),
       ),
       // body: TabBarView(
       //   controller: _tabController,

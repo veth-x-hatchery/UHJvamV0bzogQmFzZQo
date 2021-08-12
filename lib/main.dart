@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vethx_login/core/blocs/app_state.dart';
 import 'package:vethx_login/ui/alpha/alpha.page.dart';
-import 'package:vethx_login/ui/login/sign_in_page.dart';
 
 void main() {
   runApp(
@@ -17,7 +17,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AlphaPage(),
+      home: AppStateContainer(
+        blocProvider: BlocProvider(
+          signInNavigation: SignInNavigationBloc(),
+        ),
+        child: AlphaPage(),
+      ),
     );
   }
 }

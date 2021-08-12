@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:vethx_login/ui/login/sign_in_page.dart';
 
 class AppStateContainer extends StatefulWidget {
   final Widget child;
@@ -83,13 +86,25 @@ class _AppStoreContainer extends InheritedWidget {
 // }
 
 class BlocProvider {
-  // CartBloc cartBloc;
-  // CatalogBloc catalogBloc;
-  // UserBloc userBloc;
+  SignInNavigationBloc signInNavigation;
 
-  // BlocProvider({
-  //   @required this.cartBloc,
-  //   @required this.catalogBloc,
-  //   @required this.userBloc,
-  // });
+  BlocProvider({
+    required this.signInNavigation,
+  });
+}
+
+class SignInNavigationBloc {
+  final _signInPageRoutesController =
+      StreamController<SignInPageRoutes>.broadcast();
+
+  Stream<SignInPageRoutes> get deviceBluetoothState =>
+      _signInPageRoutesController.stream;
+
+  void signInGoTo(SignInPageRoutes page) {
+    _signInPageRoutesController.add(page);
+  }
+
+  void dispose() {
+    _signInPageRoutesController.close();
+  }
 }
