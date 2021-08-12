@@ -1,17 +1,28 @@
-import 'dart:io';
+import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vethx_login/core/blocs/app_state.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_email_entry.widget.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_options.widget.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_password_entry.widget.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_register_entry.widget.dart';
+import 'package:vethx_login/ui/widgets/transitions/slide_route.dart';
 
 enum SignInPageRoutes {
   signInOptions,
   emailEntry,
   passwordEntry,
   registerEmailSignIn,
+}
+
+class SignInPageGoTo {
+  final SignInPageRoutes from;
+  final SignInPageRoutes to;
+  SignInPageGoTo({required this.from, required this.to});
+
+  @override
+  String toString() => 'Go from $from to $to';
 }
 
 class SignInPage extends StatefulWidget {
@@ -22,62 +33,55 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
-  late TabController _tabController;
-  late bool _hideAppBarOptions;
+  late SignInNavigationBloc _signInNavigation;
 
-  void _goToTheNextPage(SignInPageRoutes delta) {
-    _tabController.animateTo(delta.index);
-    _changeSettings(delta.index);
-  }
-
-  void _goBack() {
-    final newRoute = _getGoBackOption(
-        SignInPageRoutes.values.elementAt(_tabController.index));
-    _tabController.animateTo(newRoute.index);
-    _changeSettings(newRoute.index);
-  }
-
-  SignInPageRoutes _getGoBackOption(SignInPageRoutes actual) {
-    if (actual == SignInPageRoutes.signInOptions) {
-      return SignInPageRoutes.signInOptions;
+  Stream<SignInPageGoTo>? _previousStream;
+  StreamSubscription? _streamSubscription;
+  void _listenGoTo(Stream<SignInPageGoTo> received) {
+    if (received != _previousStream) {
+      _streamSubscription?.cancel();
+      _previousStream = received;
+      _streamSubscription = _previousStream!.listen(_goTo);
     }
-    final newIndex = actual == SignInPageRoutes.registerEmailSignIn
-        ? SignInPageRoutes.emailEntry.index
-        : actual.index - 1;
-    return SignInPageRoutes.values.elementAt(newIndex);
   }
 
-  Future<void> _changeSettings(int newIndex) {
-    return Future.delayed(Duration.zero).then((void _) => setState(() {
-          _hideAppBarOptions = newIndex == SignInPageRoutes.signInOptions.index;
-          if (_hideAppBarOptions) {
-            FocusScope.of(context).unfocus();
-          }
-        }));
-  }
-
-  List<Widget> _routes() {
-    return [
-      SignInOptions(nextForm: _goToTheNextPage),
-      SignInEmailEntry(nextForm: _goToTheNextPage),
-      SignInPasswordEntry(nextForm: _goToTheNextPage),
-      SignInRegisterEntry(nextForm: _goToTheNextPage),
-    ];
+  void _goTo(SignInPageGoTo page) {
+    switch (page.to) {
+      case SignInPageRoutes.passwordEntry:
+        Navigator.pushReplacement(
+          context,
+          SlideLeftRoute<void>(page: SignInPasswordEntry()),
+        );
+        break;
+      case SignInPageRoutes.registerEmailSignIn:
+        Navigator.pushReplacement(
+          context,
+          SlideLeftRoute<void>(page: SignInRegisterEntry()),
+        );
+        break;
+      case SignInPageRoutes.emailEntry:
+      default:
+        page.from == SignInPageRoutes.signInOptions
+            ? Navigator.push(
+                context, SlideLeftRoute<void>(page: SignInEmailEntry()))
+            : Navigator.pushReplacement(
+                context, SlideLeftRoute<void>(page: SignInEmailEntry()));
+        break;
+    }
   }
 
   @override
-  void initState() {
-    _tabController = TabController(
-      vsync: this,
-      length: SignInPageRoutes.values.length,
-    );
-    super.initState();
-    _hideAppBarOptions = true;
+  void didChangeDependencies() {
+    _signInNavigation =
+        AppStateContainer.of(context).blocProvider.signInNavigation;
+    _listenGoTo(_signInNavigation.goTo);
+    FocusScope.of(context).unfocus();
+    super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _streamSubscription?.cancel();
     super.dispose();
   }
 
@@ -87,22 +91,8 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
-        centerTitle: true,
-        leading: _hideAppBarOptions
-            ? null
-            : IconButton(
-                icon: Icon(
-                  Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
-                  color: Theme.of(context).primaryColor,
-                ),
-                onPressed: _goBack,
-              ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        physics: NeverScrollableScrollPhysics(),
-        children: _routes(),
-      ),
+      body: SignInOptions(),
     );
   }
 }

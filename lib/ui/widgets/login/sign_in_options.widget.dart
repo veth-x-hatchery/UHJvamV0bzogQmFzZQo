@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:vethx_login/core/blocs/app_state.dart';
 import 'package:vethx_login/core/consts/size_config.dart';
 import 'package:vethx_login/core/notifications/messages.dart';
 import 'package:vethx_login/ui/login/sign_in_page.dart';
@@ -7,12 +10,7 @@ import 'package:vethx_login/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_login/ui/widgets/shared/forms/logo_text_loading.widget.dart';
 
 class SignInOptions extends StatefulWidget {
-  const SignInOptions({
-    Key? key,
-    required this.nextForm,
-  }) : super(key: key);
-
-  final void Function(SignInPageRoutes delta) nextForm;
+  const SignInOptions({Key? key}) : super(key: key);
 
   @override
   _SignInOptionsState createState() => _SignInOptionsState();
@@ -70,7 +68,13 @@ class _SignInOptionsState extends State<SignInOptions> {
           text: 'Sign in with email',
           textColor: Colors.white,
           color: Colors.teal[700],
-          onPressed: () => widget.nextForm(SignInPageRoutes.emailEntry),
+          onPressed: () => AppStateContainer.of(context)
+              .blocProvider
+              .signInNavigation
+              .goToPage(SignInPageGoTo(
+                from: SignInPageRoutes.signInOptions,
+                to: SignInPageRoutes.emailEntry,
+              )),
         ),
       ],
     );

@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:vethx_login/core/blocs/app_state.dart';
 import 'package:vethx_login/core/consts/size_config.dart';
 import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_login/ui/login/sign_in_page.dart';
@@ -9,12 +12,7 @@ import 'package:vethx_login/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_login/ui/widgets/shared/forms/logo_text_loading.widget.dart';
 
 class SignInRegisterEntry extends StatefulWidget {
-  const SignInRegisterEntry({
-    Key? key,
-    required this.nextForm,
-  }) : super(key: key);
-
-  final void Function(SignInPageRoutes delta) nextForm;
+  const SignInRegisterEntry({Key? key}) : super(key: key);
 
   @override
   _SignInRegisterEntryState createState() => _SignInRegisterEntryState();
@@ -46,7 +44,13 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
         setState(() {
           _loading = false;
         });
-        widget.nextForm(SignInPageRoutes.passwordEntry);
+        AppStateContainer.of(context)
+            .blocProvider
+            .signInNavigation
+            .goToPage(SignInPageGoTo(
+              from: SignInPageRoutes.registerEmailSignIn,
+              to: SignInPageRoutes.passwordEntry,
+            ));
       });
     }
   }
@@ -69,34 +73,48 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
 
   @override
   Widget build(BuildContext context) {
-    return FormColumn(
-      children: [
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        LogoTextLoading(
-            title: Texts.signInPageTitle,
-            size: SizeConfig.screenHeight * 0.25,
-            loading: _loading),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        EmailFormField(
-          emailFormKey: _emailFormKey,
-          emailFocusNode: _emailFocusNode,
-          emailValidate: _validateEmail,
-        ),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        PasswordFormField(
-          passwordFormKey: _passwordFormKey,
-          passwordFocusNode: _passwordFocusNode,
-          hidePassword: _validatePassword,
-        ),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        CustomRaisedButton(
-          child: Text(
-            Texts.goToNextStep,
-            style: Theme.of(context).textTheme.button,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+            color: Theme.of(context).primaryColor,
           ),
-          onPressed: _validatePassword,
+          onPressed: Navigator.of(context).maybePop,
         ),
-      ],
+      ),
+      body: FormColumn(
+        children: [
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          LogoTextLoading(
+              title: Texts.signInPageTitle,
+              size: SizeConfig.screenHeight * 0.25,
+              loading: _loading),
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          EmailFormField(
+            emailFormKey: _emailFormKey,
+            emailFocusNode: _emailFocusNode,
+            emailValidate: _validateEmail,
+          ),
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          PasswordFormField(
+            passwordFormKey: _passwordFormKey,
+            passwordFocusNode: _passwordFocusNode,
+            hidePassword: _validatePassword,
+          ),
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          CustomRaisedButton(
+            child: Text(
+              Texts.goToNextStep,
+              style: Theme.of(context).textTheme.button,
+            ),
+            onPressed: _validatePassword,
+          ),
+        ],
+      ),
     );
   }
 }

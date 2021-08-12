@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:vethx_login/core/blocs/app_state.dart';
 import 'package:vethx_login/core/consts/size_config.dart';
 import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_login/ui/login/sign_in_page.dart';
@@ -8,12 +11,7 @@ import 'package:vethx_login/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_login/ui/widgets/shared/forms/logo_text_loading.widget.dart';
 
 class SignInEmailEntry extends StatefulWidget {
-  const SignInEmailEntry({
-    Key? key,
-    required this.nextForm,
-  }) : super(key: key);
-
-  final void Function(SignInPageRoutes delta) nextForm;
+  const SignInEmailEntry({Key? key}) : super(key: key);
 
   @override
   _SignInEmailEntryState createState() => _SignInEmailEntryState();
@@ -25,7 +23,7 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
   final _emailFormKey = GlobalKey<FormState>();
   final _emailFocusNode = FocusNode();
 
-  Future<void> _validarEmail() async {
+  Future<void> _validateEmail() async {
     if (_emailFormKey.currentState!.validate()) {
       _emailFormKey.currentState!.save();
       setState(() {
@@ -35,7 +33,13 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
         setState(() {
           _loading = false;
         });
-        widget.nextForm(SignInPageRoutes.registerEmailSignIn);
+        AppStateContainer.of(context)
+            .blocProvider
+            .signInNavigation
+            .goToPage(SignInPageGoTo(
+              from: SignInPageRoutes.emailEntry,
+              to: SignInPageRoutes.registerEmailSignIn,
+            ));
       });
     }
   }
@@ -55,26 +59,40 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
 
   @override
   Widget build(BuildContext context) {
-    return FormColumn(
-      children: [
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        LogoTextLoading(
-            size: SizeConfig.screenHeight * 0.25, loading: _loading),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        EmailFormField(
-          emailFormKey: _emailFormKey,
-          emailFocusNode: _emailFocusNode,
-          emailValidate: _validarEmail,
-        ),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        CustomRaisedButton(
-          child: Text(
-            Texts.goToNextStep,
-            style: Theme.of(context).textTheme.button,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+            color: Theme.of(context).primaryColor,
           ),
-          onPressed: _validarEmail,
+          onPressed: Navigator.of(context).maybePop,
         ),
-      ],
+      ),
+      body: FormColumn(
+        children: [
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          LogoTextLoading(
+              size: SizeConfig.screenHeight * 0.25, loading: _loading),
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          EmailFormField(
+            emailFormKey: _emailFormKey,
+            emailFocusNode: _emailFocusNode,
+            emailValidate: _validateEmail,
+          ),
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          CustomRaisedButton(
+            child: Text(
+              Texts.goToNextStep,
+              style: Theme.of(context).textTheme.button,
+            ),
+            onPressed: _validateEmail,
+          ),
+        ],
+      ),
     );
   }
 }
