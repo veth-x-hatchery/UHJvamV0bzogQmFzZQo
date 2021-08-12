@@ -97,8 +97,7 @@ class SignInNavigationBloc {
   final _signInPageRoutesController =
       StreamController<SignInPageRoutes>.broadcast();
 
-  Stream<SignInPageRoutes> get deviceBluetoothState =>
-      _signInPageRoutesController.stream;
+  Stream<SignInPageRoutes> get goTo => _signInPageRoutesController.stream;
 
   void signInGoTo(SignInPageRoutes page) {
     _signInPageRoutesController.add(page);

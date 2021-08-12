@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -67,28 +68,42 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
     ];
   }
 
-  late final SignInNavigationBloc _signInNavigation;
+  late SignInNavigationBloc _signInNavigation;
 
   @override
   void initState() {
+    _hideAppBarOptions = true;
     _tabController = TabController(
       vsync: this,
       length: SignInPageRoutes.values.length,
     );
     super.initState();
-    _hideAppBarOptions = true;
+  }
 
+  Stream<SignInPageRoutes>? _previousStream;
+  StreamSubscription? _streamSubscription;
+  void _listenGoTo(Stream<SignInPageRoutes> received) {
+    if (received != _previousStream) {
+      _streamSubscription?.cancel();
+      _previousStream = received;
+      _streamSubscription = _previousStream!.listen((event) {
+        print('********************** STREAMED: $event');
+        Navigator.push(
+          context,
+          SlideRightRoute<void>(
+            page: SignInEmailEntry(nextForm: _goToTheNextPage),
+          ),
+        );
+      });
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
     _signInNavigation =
         AppStateContainer.of(context).blocProvider.signInNavigation;
-
-    _signInNavigation.deviceBluetoothState.listen((event) {
-      Navigator.push(
-        context,
-        SlideRightRoute<void>(
-          page: SignInEmailEntry(nextForm: _goToTheNextPage),
-        ),
-      );
-    });
+    _listenGoTo(_signInNavigation.goTo);
+    super.didChangeDependencies();
   }
 
   @override
