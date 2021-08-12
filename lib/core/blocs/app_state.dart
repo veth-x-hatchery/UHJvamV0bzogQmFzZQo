@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:vethx_login/core/utils/logger.dart';
 import 'package:vethx_login/ui/login/sign_in_page.dart';
 
 class AppStateContainer extends StatefulWidget {
@@ -100,6 +101,7 @@ class SignInNavigationBloc {
   Stream<SignInPageRoutes> get goTo => _signInPageRoutesController.stream;
 
   void signInGoTo(SignInPageRoutes page) {
+    Logger.i('SignInNavigationBloc -> signInGoTo: $page');
     _signInPageRoutesController.add(page);
   }
 

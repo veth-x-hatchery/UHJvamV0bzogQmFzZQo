@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:vethx_login/core/blocs/app_state.dart';
 import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_login/core/consts/size_config.dart';
 import 'package:vethx_login/core/notifications/messages.dart';
@@ -11,12 +12,7 @@ import 'package:vethx_login/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_login/ui/widgets/shared/forms/logo_text_loading.widget.dart';
 
 class SignInPasswordEntry extends StatefulWidget {
-  const SignInPasswordEntry({
-    Key? key,
-    required this.nextForm,
-  }) : super(key: key);
-
-  final void Function(SignInPageRoutes delta) nextForm;
+  const SignInPasswordEntry({Key? key}) : super(key: key);
 
   @override
   _SignInPasswordEntryState createState() => _SignInPasswordEntryState();
@@ -55,7 +51,10 @@ class _SignInPasswordEntryState extends State<SignInPasswordEntry> {
         setState(() {
           _loading = false;
         });
-        widget.nextForm(SignInPageRoutes.emailEntry);
+        AppStateContainer.of(context)
+            .blocProvider
+            .signInNavigation
+            .signInGoTo(SignInPageRoutes.emailEntry);
       });
     }
   }
@@ -124,7 +123,10 @@ class _SignInPasswordEntryState extends State<SignInPasswordEntry> {
             ),
             onPressed: _loading
                 ? null
-                : () => widget.nextForm(SignInPageRoutes.emailEntry),
+                : () => AppStateContainer.of(context)
+                    .blocProvider
+                    .signInNavigation
+                    .signInGoTo(SignInPageRoutes.emailEntry),
           ),
         ],
       ),

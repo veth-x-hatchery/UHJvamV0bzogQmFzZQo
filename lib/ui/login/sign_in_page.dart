@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vethx_login/core/blocs/app_state.dart';
+import 'package:vethx_login/core/utils/logger.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_email_entry.widget.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_options.widget.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_password_entry.widget.dart';
@@ -61,10 +62,10 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
 
   List<Widget> _routes() {
     return [
-      SignInOptions(nextForm: _goToTheNextPage),
-      SignInEmailEntry(nextForm: _goToTheNextPage),
-      SignInPasswordEntry(nextForm: _goToTheNextPage),
-      SignInRegisterEntry(nextForm: _goToTheNextPage),
+      SignInOptions(),
+      SignInEmailEntry(),
+      SignInPasswordEntry(),
+      SignInRegisterEntry(),
     ];
   }
 
@@ -86,15 +87,38 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
     if (received != _previousStream) {
       _streamSubscription?.cancel();
       _previousStream = received;
-      _streamSubscription = _previousStream!.listen((event) {
-        print('********************** STREAMED: $event');
+      _streamSubscription = _previousStream!.listen(_goTo);
+    }
+  }
+
+  void _goTo(SignInPageRoutes page) {
+    Logger.i('SignInPage -> _goTo: $page');
+    switch (page) {
+      case SignInPageRoutes.emailEntry:
         Navigator.push(
           context,
           SlideRightRoute<void>(
-            page: SignInEmailEntry(nextForm: _goToTheNextPage),
+            page: SignInEmailEntry(),
           ),
         );
-      });
+        break;
+      case SignInPageRoutes.passwordEntry:
+        Navigator.push(
+          context,
+          SlideRightRoute<void>(
+            page: SignInPasswordEntry(),
+          ),
+        );
+        break;
+      case SignInPageRoutes.registerEmailSignIn:
+        Navigator.push(
+          context,
+          SlideRightRoute<void>(
+            page: SignInRegisterEntry(),
+          ),
+        );
+        break;
+      default:
     }
   }
 
@@ -103,6 +127,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
     _signInNavigation =
         AppStateContainer.of(context).blocProvider.signInNavigation;
     _listenGoTo(_signInNavigation.goTo);
+    FocusScope.of(context).unfocus();
     super.didChangeDependencies();
   }
 
@@ -119,10 +144,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),
-      body: SignInOptions(
-        nextForm: (SignInPageRoutes delta) =>
-            _signInNavigation.signInGoTo(delta),
-      ),
+      body: SignInOptions(),
       // body: TabBarView(
       //   controller: _tabController,
       //   physics: NeverScrollableScrollPhysics(),

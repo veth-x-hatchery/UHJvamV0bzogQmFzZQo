@@ -11,17 +11,17 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return AppStateContainer(
+      blocProvider: BlocProvider(
+        signInNavigation: SignInNavigationBloc(),
       ),
-      home: AppStateContainer(
-        blocProvider: BlocProvider(
-          signInNavigation: SignInNavigationBloc(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
         ),
-        child: AlphaPage(),
+        home: AlphaPage(),
       ),
     );
   }
