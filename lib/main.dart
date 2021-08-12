@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vethx_login/core/blocs/app_state.dart';
+import 'package:vethx_login/core/routes/navigation.dart';
 import 'package:vethx_login/ui/alpha/alpha.page.dart';
 
 void main() {
@@ -17,10 +18,10 @@ class MyApp extends StatelessWidget {
       ),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        onGenerateRoute: NavigationRoutes.onGenerateRoute,
+        // initialRoute: NavigationRoutes.alpha,
+        navigatorObservers: [LoggingNavigationObserver()],
+        theme: ThemeData(primarySwatch: Colors.blue),
         home: AlphaPage(),
       ),
     );
