@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_login/core/consts/size_config.dart';
+import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_login/ui/login/sign_in_page.dart';
 import 'package:vethx_login/ui/widgets/login/field_email.widget.dart';
 import 'package:vethx_login/ui/widgets/shared/custom_raised_button.dart';
@@ -20,7 +20,7 @@ class SignInEmailEntry extends StatefulWidget {
 }
 
 class _SignInEmailEntryState extends State<SignInEmailEntry> {
-  bool _realizandoRequisicao = false;
+  bool _loading = false;
 
   final _emailFormKey = GlobalKey<FormState>();
   final _emailFocusNode = FocusNode();
@@ -29,11 +29,11 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
     if (_emailFormKey.currentState!.validate()) {
       _emailFormKey.currentState!.save();
       setState(() {
-        _realizandoRequisicao = true;
+        _loading = true;
       });
       await Future.delayed(Duration(seconds: 1)).then((void _) {
         setState(() {
-          _realizandoRequisicao = false;
+          _loading = false;
         });
         widget.nextForm(SignInPageRoutes.registerEmailSignIn);
       });
@@ -59,10 +59,9 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
       children: [
         SizedBox(height: SizeConfig.defaultEdgeSpace),
         LogoTextLoading(
-            size: SizeConfig.screenHeight * 0.25,
-            loading: _realizandoRequisicao),
+            size: SizeConfig.screenHeight * 0.25, loading: _loading),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
-        CampoDeEmail(
+        EmailFormField(
           emailFormKey: _emailFormKey,
           emailFocusNode: _emailFocusNode,
           emailValidate: _validarEmail,

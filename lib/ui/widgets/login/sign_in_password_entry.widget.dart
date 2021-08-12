@@ -81,7 +81,7 @@ class _SignInPasswordEntryState extends State<SignInPasswordEntry> {
           loading: _loading,
         ),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
-        FieldPassword(
+        PasswordFormField(
           passwordFormKey: _senhaFormKey,
           passwordFocusNode: _senhaFocusNode,
           hidePassword: _passwordVerify,

@@ -3,8 +3,8 @@ import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_login/ui/widgets/shared/forms/field_styles.dart';
 import 'package:vethx_login/ui/widgets/validators/custom.validators.dart';
 
-class CampoDeEmail extends StatelessWidget {
-  const CampoDeEmail({
+class EmailFormField extends StatelessWidget {
+  const EmailFormField({
     Key? key,
     required this.emailFormKey,
     required this.emailFocusNode,

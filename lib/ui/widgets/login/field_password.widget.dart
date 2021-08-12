@@ -3,8 +3,8 @@ import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_login/ui/widgets/shared/forms/field_styles.dart';
 import 'package:vethx_login/ui/widgets/validators/custom.validators.dart';
 
-class FieldPassword extends StatefulWidget {
-  const FieldPassword({
+class PasswordFormField extends StatefulWidget {
+  const PasswordFormField({
     Key? key,
     required this.passwordFormKey,
     required this.passwordFocusNode,
@@ -18,10 +18,10 @@ class FieldPassword extends StatefulWidget {
   final String? dica;
 
   @override
-  _FieldPasswordState createState() => _FieldPasswordState();
+  _PasswordFormFieldState createState() => _PasswordFormFieldState();
 }
 
-class _FieldPasswordState extends State<FieldPassword> {
+class _PasswordFormFieldState extends State<PasswordFormField> {
   bool _hidePassword = true;
   @override
   Widget build(BuildContext context) {

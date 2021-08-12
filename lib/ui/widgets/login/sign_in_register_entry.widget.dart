@@ -77,13 +77,13 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
             size: SizeConfig.screenHeight * 0.25,
             loading: _loading),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
-        CampoDeEmail(
+        EmailFormField(
           emailFormKey: _emailFormKey,
           emailFocusNode: _emailFocusNode,
           emailValidate: _validateEmail,
         ),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
-        FieldPassword(
+        PasswordFormField(
           passwordFormKey: _passwordFormKey,
           passwordFocusNode: _passwordFocusNode,
           hidePassword: _validatePassword,
