@@ -62,7 +62,7 @@ class SizeConfig {
   static EdgeInsetsGeometry get defaultEdgeInsetsAll =>
       EdgeInsets.all(defaultEdgeSpace);
 
-  static double get defaultEdgeSpace => SizeConfig.screenWidth * 0.05;
+  static double get defaultEdgeSpace => screenWidth * 0.05;
 }
 
 enum DeviceScreenType { Mobile, Tablet, Desktop }
