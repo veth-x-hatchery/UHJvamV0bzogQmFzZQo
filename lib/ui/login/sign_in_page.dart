@@ -87,22 +87,15 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
-        centerTitle: true,
-        leading: _hideAppBarOptions
-            ? null
-            : IconButton(
-                icon: Icon(
-                  Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
-                  color: Theme.of(context).primaryColor,
-                ),
-                onPressed: _goBack,
-              ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        physics: NeverScrollableScrollPhysics(),
-        children: _routes(),
+      body: SignInOptions(
+        nextForm: (SignInPageRoutes delta) {},
       ),
+      // body: TabBarView(
+      //   controller: _tabController,
+      //   physics: NeverScrollableScrollPhysics(),
+      //   children: _routes(),
+      // ),
     );
   }
 }

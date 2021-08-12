@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_login/core/consts/size_config.dart';
@@ -73,45 +75,59 @@ class _SignInPasswordEntryState extends State<SignInPasswordEntry> {
 
   @override
   Widget build(BuildContext context) {
-    return FormColumn(
-      children: [
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        LogoTextLoading(
-          size: SizeConfig.screenHeight * 0.25,
-          loading: _loading,
-        ),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        PasswordFormField(
-          passwordFormKey: _senhaFormKey,
-          passwordFocusNode: _senhaFocusNode,
-          hidePassword: _passwordVerify,
-        ),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        CustomRaisedButton(
-          child: Text(
-            Texts.goToAccess,
-            style: Theme.of(context).textTheme.button,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+            color: Theme.of(context).primaryColor,
           ),
-          onPressed: _passwordVerify,
+          onPressed: Navigator.of(context).maybePop,
         ),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        TextButton(
-          child: Text(
-            Texts.forgotMyPassword,
-            style: Theme.of(context).textTheme.button,
+      ),
+      body: FormColumn(
+        children: [
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          LogoTextLoading(
+            size: SizeConfig.screenHeight * 0.25,
+            loading: _loading,
           ),
-          onPressed: _newPassword,
-        ),
-        TextButton(
-          child: Text(
-            Texts.changeEmail,
-            style: Theme.of(context).textTheme.button,
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          PasswordFormField(
+            passwordFormKey: _senhaFormKey,
+            passwordFocusNode: _senhaFocusNode,
+            hidePassword: _passwordVerify,
           ),
-          onPressed: _loading
-              ? null
-              : () => widget.nextForm(SignInPageRoutes.emailEntry),
-        ),
-      ],
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          CustomRaisedButton(
+            child: Text(
+              Texts.goToAccess,
+              style: Theme.of(context).textTheme.button,
+            ),
+            onPressed: _passwordVerify,
+          ),
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          TextButton(
+            child: Text(
+              Texts.forgotMyPassword,
+              style: Theme.of(context).textTheme.button,
+            ),
+            onPressed: _newPassword,
+          ),
+          TextButton(
+            child: Text(
+              Texts.changeEmail,
+              style: Theme.of(context).textTheme.button,
+            ),
+            onPressed: _loading
+                ? null
+                : () => widget.nextForm(SignInPageRoutes.emailEntry),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:vethx_login/core/consts/size_config.dart';
 import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
@@ -69,34 +71,48 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
 
   @override
   Widget build(BuildContext context) {
-    return FormColumn(
-      children: [
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        LogoTextLoading(
-            title: Texts.signInPageTitle,
-            size: SizeConfig.screenHeight * 0.25,
-            loading: _loading),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        EmailFormField(
-          emailFormKey: _emailFormKey,
-          emailFocusNode: _emailFocusNode,
-          emailValidate: _validateEmail,
-        ),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        PasswordFormField(
-          passwordFormKey: _passwordFormKey,
-          passwordFocusNode: _passwordFocusNode,
-          hidePassword: _validatePassword,
-        ),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        CustomRaisedButton(
-          child: Text(
-            Texts.goToNextStep,
-            style: Theme.of(context).textTheme.button,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+            color: Theme.of(context).primaryColor,
           ),
-          onPressed: _validatePassword,
+          onPressed: Navigator.of(context).maybePop,
         ),
-      ],
+      ),
+      body: FormColumn(
+        children: [
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          LogoTextLoading(
+              title: Texts.signInPageTitle,
+              size: SizeConfig.screenHeight * 0.25,
+              loading: _loading),
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          EmailFormField(
+            emailFormKey: _emailFormKey,
+            emailFocusNode: _emailFocusNode,
+            emailValidate: _validateEmail,
+          ),
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          PasswordFormField(
+            passwordFormKey: _passwordFormKey,
+            passwordFocusNode: _passwordFocusNode,
+            hidePassword: _validatePassword,
+          ),
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          CustomRaisedButton(
+            child: Text(
+              Texts.goToNextStep,
+              style: Theme.of(context).textTheme.button,
+            ),
+            onPressed: _validatePassword,
+          ),
+        ],
+      ),
     );
   }
 }
