@@ -23,7 +23,7 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
   final _emailFormKey = GlobalKey<FormState>();
   final _emailFocusNode = FocusNode();
 
-  Future<void> _validarEmail() async {
+  Future<void> _validateEmail() async {
     if (_emailFormKey.currentState!.validate()) {
       _emailFormKey.currentState!.save();
       setState(() {
@@ -36,7 +36,10 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
         AppStateContainer.of(context)
             .blocProvider
             .signInNavigation
-            .signInGoTo(SignInPageRoutes.registerEmailSignIn);
+            .goToPage(SignInPageGoTo(
+              from: SignInPageRoutes.emailEntry,
+              to: SignInPageRoutes.registerEmailSignIn,
+            ));
       });
     }
   }
@@ -78,7 +81,7 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
           EmailFormField(
             emailFormKey: _emailFormKey,
             emailFocusNode: _emailFocusNode,
-            emailValidate: _validarEmail,
+            emailValidate: _validateEmail,
           ),
           SizedBox(height: SizeConfig.defaultEdgeSpace),
           CustomRaisedButton(
@@ -86,7 +89,7 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
               Texts.goToNextStep,
               style: Theme.of(context).textTheme.button,
             ),
-            onPressed: _validarEmail,
+            onPressed: _validateEmail,
           ),
         ],
       ),

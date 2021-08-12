@@ -1,11 +1,8 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vethx_login/core/blocs/app_state.dart';
-import 'package:vethx_login/core/routes/navigation.dart';
-import 'package:vethx_login/core/utils/logger.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_email_entry.widget.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_options.widget.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_password_entry.widget.dart';
@@ -19,6 +16,15 @@ enum SignInPageRoutes {
   registerEmailSignIn,
 }
 
+class SignInPageGoTo {
+  final SignInPageRoutes from;
+  final SignInPageRoutes to;
+  SignInPageGoTo({required this.from, required this.to});
+
+  @override
+  String toString() => 'Go from $from to $to';
+}
+
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
@@ -29,9 +35,9 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
   late SignInNavigationBloc _signInNavigation;
 
-  Stream<SignInPageRoutes>? _previousStream;
+  Stream<SignInPageGoTo>? _previousStream;
   StreamSubscription? _streamSubscription;
-  void _listenGoTo(Stream<SignInPageRoutes> received) {
+  void _listenGoTo(Stream<SignInPageGoTo> received) {
     if (received != _previousStream) {
       _streamSubscription?.cancel();
       _previousStream = received;
@@ -39,38 +45,28 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
     }
   }
 
-  void _goTo(SignInPageRoutes page) {
-    Logger.i('SignInPage -> _goTo: $page');
-    switch (page) {
-      case SignInPageRoutes.emailEntry:
-        Navigator.of(context).widget.initialRoute == NavigationRoutes.slash
-            ? Navigator.push(
-                context,
-                SlideRightRoute<void>(page: SignInEmailEntry()),
-              )
-            : Navigator.pushReplacement(
-                context,
-                SlideRightRoute<void>(page: SignInEmailEntry()),
-              );
-
-        break;
+  void _goTo(SignInPageGoTo page) {
+    switch (page.to) {
       case SignInPageRoutes.passwordEntry:
         Navigator.pushReplacement(
           context,
-          SlideRightRoute<void>(
-            page: SignInPasswordEntry(),
-          ),
+          SlideLeftRoute<void>(page: SignInPasswordEntry()),
         );
         break;
       case SignInPageRoutes.registerEmailSignIn:
         Navigator.pushReplacement(
           context,
-          SlideRightRoute<void>(
-            page: SignInRegisterEntry(),
-          ),
+          SlideLeftRoute<void>(page: SignInRegisterEntry()),
         );
         break;
+      case SignInPageRoutes.emailEntry:
       default:
+        page.from == SignInPageRoutes.signInOptions
+            ? Navigator.push(
+                context, SlideLeftRoute<void>(page: SignInEmailEntry()))
+            : Navigator.pushReplacement(
+                context, SlideLeftRoute<void>(page: SignInEmailEntry()));
+        break;
     }
   }
 

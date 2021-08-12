@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class RotationRoute extends PageRouteBuilder<dynamic> {
+class RotationRoute<T> extends PageRouteBuilder<T> {
   final Widget page;
   RotationRoute({required this.page})
       : super(

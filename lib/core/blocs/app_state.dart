@@ -88,24 +88,32 @@ class _AppStoreContainer extends InheritedWidget {
 
 class BlocProvider {
   SignInNavigationBloc signInNavigation;
-
+  NavigationService navigationService;
   BlocProvider({
     required this.signInNavigation,
+    required this.navigationService,
   });
 }
 
 class SignInNavigationBloc {
   final _signInPageRoutesController =
-      StreamController<SignInPageRoutes>.broadcast();
+      StreamController<SignInPageGoTo>.broadcast();
 
-  Stream<SignInPageRoutes> get goTo => _signInPageRoutesController.stream;
+  Stream<SignInPageGoTo> get goTo => _signInPageRoutesController.stream;
 
-  void signInGoTo(SignInPageRoutes page) {
+  void goToPage(SignInPageGoTo page) {
     Logger.i('SignInNavigationBloc -> signInGoTo: $page');
     _signInPageRoutesController.add(page);
   }
 
   void dispose() {
     _signInPageRoutesController.close();
+  }
+}
+
+class NavigationService {
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  Future<dynamic> navigateTo(String routeName) {
+    return navigatorKey.currentState!.pushNamed(routeName);
   }
 }

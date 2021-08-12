@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class EnterExitRoute extends PageRouteBuilder<dynamic> {
+class EnterExitRoute<T> extends PageRouteBuilder<T> {
   final Widget enterPage;
   final Widget exitPage;
   EnterExitRoute({

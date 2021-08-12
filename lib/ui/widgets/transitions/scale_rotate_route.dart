@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ScaleRotateRoute extends PageRouteBuilder<dynamic> {
+class ScaleRotateRoute<T> extends PageRouteBuilder<T> {
   final Widget page;
   ScaleRotateRoute({required this.page})
       : super(

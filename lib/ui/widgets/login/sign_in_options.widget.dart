@@ -71,7 +71,10 @@ class _SignInOptionsState extends State<SignInOptions> {
           onPressed: () => AppStateContainer.of(context)
               .blocProvider
               .signInNavigation
-              .signInGoTo(SignInPageRoutes.emailEntry),
+              .goToPage(SignInPageGoTo(
+                from: SignInPageRoutes.signInOptions,
+                to: SignInPageRoutes.emailEntry,
+              )),
         ),
       ],
     );

@@ -47,7 +47,10 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
         AppStateContainer.of(context)
             .blocProvider
             .signInNavigation
-            .signInGoTo(SignInPageRoutes.passwordEntry);
+            .goToPage(SignInPageGoTo(
+              from: SignInPageRoutes.registerEmailSignIn,
+              to: SignInPageRoutes.passwordEntry,
+            ));
       });
     }
   }

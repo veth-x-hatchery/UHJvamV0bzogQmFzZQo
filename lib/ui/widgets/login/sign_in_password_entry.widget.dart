@@ -54,7 +54,10 @@ class _SignInPasswordEntryState extends State<SignInPasswordEntry> {
         AppStateContainer.of(context)
             .blocProvider
             .signInNavigation
-            .signInGoTo(SignInPageRoutes.emailEntry);
+            .goToPage(SignInPageGoTo(
+              from: SignInPageRoutes.passwordEntry,
+              to: SignInPageRoutes.emailEntry,
+            ));
       });
     }
   }
@@ -126,7 +129,10 @@ class _SignInPasswordEntryState extends State<SignInPasswordEntry> {
                 : () => AppStateContainer.of(context)
                     .blocProvider
                     .signInNavigation
-                    .signInGoTo(SignInPageRoutes.emailEntry),
+                    .goToPage(SignInPageGoTo(
+                      from: SignInPageRoutes.passwordEntry,
+                      to: SignInPageRoutes.emailEntry,
+                    )),
           ),
         ],
       ),

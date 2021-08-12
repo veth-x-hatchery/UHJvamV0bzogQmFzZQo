@@ -7,7 +7,7 @@ class Logger {
     // ignore: leading_newlines_in_multiline_strings
     print('''\nLogger | Message: $message 
              \nException: ${ex.toString()} 
-             \nStacktrace: ${stacktrace.toString()} ''');
+             \nStacktrace: ${stacktrace.toString()}\n''');
     //  \nDeviceInfo: ${sl<DeviceInfo>().data()}""");
   }
 
@@ -15,6 +15,6 @@ class Logger {
     // if (message.contains("DeviceBluetoothRepository")) {
     //   return;
     // }
-    print('\nLogger | $message');
+    print('\nLogger | $message\n');
   }
 }
