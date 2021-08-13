@@ -17,7 +17,7 @@ class APIBase {
 
   final API api;
   final http.Client client;
-  final NetworkInfo networkInfo;
+  final INetworkInfo networkInfo;
   final CacheService servicoDeCache;
 
   Future verificarConexaoComInternet() async {

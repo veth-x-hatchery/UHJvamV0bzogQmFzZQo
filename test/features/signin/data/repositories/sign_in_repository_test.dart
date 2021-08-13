@@ -15,7 +15,7 @@ import 'sign_in_repository_test.mocks.dart';
 @GenerateMocks([
   ISignInLocalSource,
   ISignInRemoteSource,
-  NetworkInfo,
+  INetworkInfo,
 ])
 void main() {
   late SignInRepository repository;
