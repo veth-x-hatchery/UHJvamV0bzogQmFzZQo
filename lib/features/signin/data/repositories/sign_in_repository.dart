@@ -27,8 +27,8 @@ class SignInRepository implements ISignInRepository {
 
   @override
   Future<Either<Failure, User>> currentUser() {
-    // TODO: implement currentUser
-    throw UnimplementedError();
+    _networkInfo.isConnected;
+    return Future.value(Left(ServerFailure()));
   }
 
   @override
