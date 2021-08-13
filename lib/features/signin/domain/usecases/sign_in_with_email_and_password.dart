@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:vethx_login/core/error/failures.dart';
 import 'package:vethx_login/core/usecases/usecase.dart';
 import 'package:vethx_login/features/signin/domain/entities/credentials_entity.dart';
