@@ -125,7 +125,7 @@ class MockISignInRemoteSource extends _i1.Mock
 /// A class which mocks [NetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i7.NetworkInfo {
+class MockNetworkInfo extends _i1.Mock implements _i7.INetworkInfo {
   MockNetworkInfo() {
     _i1.throwOnMissingStub(this);
   }

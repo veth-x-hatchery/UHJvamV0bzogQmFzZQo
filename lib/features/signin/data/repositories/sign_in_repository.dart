@@ -11,7 +11,7 @@ import 'package:vethx_login/features/signin/domain/repositories/sign_in_reposito
 // typedef Future<User> _userFromDataSource();
 
 class SignInRepository implements ISignInRepository {
-  final NetworkInfo _networkInfo;
+  final INetworkInfo _networkInfo;
   final ISignInLocalSource _localDataSource;
   final ISignInRemoteSource _remoteDataSource;
 
