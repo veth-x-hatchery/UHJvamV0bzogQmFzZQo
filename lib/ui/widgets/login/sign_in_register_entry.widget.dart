@@ -90,7 +90,7 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
         children: [
           SizedBox(height: SizeConfig.defaultEdgeSpace),
           LogoTextLoading(
-              title: Texts.signInPageTitle,
+              title: Texts.signInRegisterEntryTitle,
               size: SizeConfig.screenHeight * 0.25,
               loading: _loading),
           SizedBox(height: SizeConfig.defaultEdgeSpace),

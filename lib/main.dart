@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vethx_login/core/blocs/app_state.dart';
+import 'package:vethx_login/core/blocs/core_business_logic.dart';
+import 'package:vethx_login/core/blocs/core_services.dart';
 import 'package:vethx_login/core/routes/navigation.dart';
 import 'package:vethx_login/ui/alpha/alpha.page.dart';
-import 'package:vethx_login/ui/login/sign_in_page.dart';
 
 void main() {
   runApp(App());
@@ -13,8 +14,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     final navigationService = NavigationService();
     return AppStateContainer(
-      blocProvider: BlocProvider(
+      serviceProvider: ServiceProvider(
         navigationService: navigationService,
+      ),
+      blocProvider: BlocProvider(
         signInNavigation: SignInNavigationBloc(),
       ),
       child: MaterialApp(

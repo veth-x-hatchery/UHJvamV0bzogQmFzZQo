@@ -19,6 +19,7 @@ class Texts {
   static const String accessDeniedMessage = 'E-mail or password invalid';
 
   static const String signInPageTitle = 'Sign-In';
+  static const String signInRegisterEntryTitle = 'Register';
 
   //! Error Messages
   static const String errorTroubleFriendlyMessage = 'Ops...';
