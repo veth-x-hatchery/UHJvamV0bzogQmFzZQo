@@ -122,11 +122,11 @@ class MockISignInRemoteSource extends _i1.Mock
   String toString() => super.toString();
 }
 
-/// A class which mocks [NetworkInfo].
+/// A class which mocks [INetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i7.INetworkInfo {
-  MockNetworkInfo() {
+class MockINetworkInfo extends _i1.Mock implements _i7.INetworkInfo {
+  MockINetworkInfo() {
     _i1.throwOnMissingStub(this);
   }
 

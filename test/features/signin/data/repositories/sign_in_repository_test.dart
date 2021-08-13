@@ -21,12 +21,12 @@ void main() {
   late SignInRepository repository;
   late MockISignInRemoteSource mockRemoteDataSource;
   late MockISignInLocalSource mockLocalDataSource;
-  late MockNetworkInfo mockNetworkInfo;
+  late MockINetworkInfo mockNetworkInfo;
 
   setUp(() {
     mockRemoteDataSource = MockISignInRemoteSource();
     mockLocalDataSource = MockISignInLocalSource();
-    mockNetworkInfo = MockNetworkInfo();
+    mockNetworkInfo = MockINetworkInfo();
     repository = SignInRepository(
       mockRemoteDataSource,
       mockLocalDataSource,
