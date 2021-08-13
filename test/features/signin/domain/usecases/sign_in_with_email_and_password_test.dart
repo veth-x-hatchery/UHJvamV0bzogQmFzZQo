@@ -23,17 +23,18 @@ void main() {
   final credentials =
       Credentials(user: emailTester, password: 'dGVzdEB2ZXRoeC5jb20K');
   final user = User(email: emailTester);
-
-  test('should get user from the repository with the given credentials',
-      () async {
-    // arrange
-    when(mockSignInRepository.signInWithEmailAndPassword(credentials))
-        .thenAnswer((_) async => Right(user));
-    // act
-    final result = await signInUseCase.call(Params(credentials: credentials));
-    // assert
-    expect(result, Right(user));
-    verify(mockSignInRepository.signInWithEmailAndPassword(credentials));
-    verifyNoMoreInteractions(mockSignInRepository);
+  group('sign in process', () {
+    test('should get user from the repository with the given credentials',
+        () async {
+      // arrange
+      when(mockSignInRepository.signInWithEmailAndPassword(credentials))
+          .thenAnswer((_) async => Right(user));
+      // act
+      final result = await signInUseCase.call(Params(credentials: credentials));
+      // assert
+      expect(result, Right(user));
+      verify(mockSignInRepository.signInWithEmailAndPassword(credentials));
+      verifyNoMoreInteractions(mockSignInRepository);
+    });
   });
 }
