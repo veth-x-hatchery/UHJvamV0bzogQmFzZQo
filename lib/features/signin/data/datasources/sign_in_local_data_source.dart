@@ -5,6 +5,8 @@ abstract class ISignInLocalSource {
   /// Throws [CacheException] if no cached data is present.
   Future<UserModel> currentUser();
 
+  Future<void> cacheCurrentUser(UserModel user);
+
   Future<void> signOut();
 
   Future<Stream<User>> get onAuthStateChange;

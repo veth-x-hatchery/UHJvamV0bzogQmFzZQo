@@ -45,6 +45,11 @@ class MockISignInLocalSource extends _i1.Mock
               returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0()))
           as _i4.Future<_i2.UserModel>);
   @override
+  _i4.Future<void> cacheCurrentUser(_i2.UserModel? user) =>
+      (super.noSuchMethod(Invocation.method(#cacheCurrentUser, [user]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
   _i4.Future<void> signOut() =>
       (super.noSuchMethod(Invocation.method(#signOut, []),
           returnValue: Future<void>.value(),

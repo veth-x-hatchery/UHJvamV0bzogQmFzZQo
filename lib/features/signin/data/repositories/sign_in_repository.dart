@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:vethx_login/core/error/exceptions.dart';
 import 'package:vethx_login/core/error/failures.dart';
 import 'package:vethx_login/core/network/network_info.dart';
 import 'package:vethx_login/features/signin/data/datasources/sign_in_local_data_source.dart';
@@ -6,6 +7,8 @@ import 'package:vethx_login/features/signin/data/datasources/sign_in_remote_data
 import 'package:vethx_login/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_login/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_login/features/signin/domain/repositories/sign_in_repository.dart';
+
+// typedef Future<User> _userFromDataSource();
 
 class SignInRepository implements ISignInRepository {
   final NetworkInfo _networkInfo;
@@ -26,9 +29,24 @@ class SignInRepository implements ISignInRepository {
   }
 
   @override
-  Future<Either<Failure, User>> currentUser() {
-    _networkInfo.isConnected;
-    return Future.value(Left(ServerFailure()));
+  Future<Either<Failure, User>> currentUser() async {
+    if (await _networkInfo.isConnected) {
+      try {
+        /// get current user on Firebase service and UPDATE the local storage
+        final user = await _remoteDataSource.currentUser();
+        await _localDataSource.cacheCurrentUser(user);
+        return Right(user);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      try {
+        final local = await _localDataSource.currentUser();
+        return Right(local);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
   }
 
   @override
