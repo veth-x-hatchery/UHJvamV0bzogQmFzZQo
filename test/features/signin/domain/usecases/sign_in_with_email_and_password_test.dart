@@ -30,7 +30,7 @@ void main() {
     when(mockSignInRepository.signInWithEmailAndPassword(credentials))
         .thenAnswer((_) async => Right(user));
     // act
-    final result = await signInUseCase.execute(credentials: credentials);
+    final result = await signInUseCase.call(Params(credentials: credentials));
     // assert
     expect(result, Right(user));
     verify(mockSignInRepository.signInWithEmailAndPassword(credentials));
