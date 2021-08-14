@@ -8,12 +8,12 @@ import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_google.
 import 'sign_in_with_email_and_password_test.mocks.dart';
 
 void main() {
-  late SignInWithGoogle signInUseCase;
-  late MockISignInRepository mockSignInRepository;
+  late SignInWithGoogle _signInUseCase;
+  late MockISignInRepository _mockSignInRepository;
 
   setUp(() {
-    mockSignInRepository = MockISignInRepository();
-    signInUseCase = SignInWithGoogle(mockSignInRepository);
+    _mockSignInRepository = MockISignInRepository();
+    _signInUseCase = SignInWithGoogle(_mockSignInRepository);
   });
 
   const emailTester = 'test@vethx.com';
@@ -22,20 +22,20 @@ void main() {
     test('should get user from the repository with google sign in', () async {
       // arrange
 
-      when(mockSignInRepository.signInWithGoogle())
+      when(_mockSignInRepository.signInWithGoogle())
           .thenAnswer((_) async => Right(user));
 
       // act
 
-      final result = await signInUseCase.call(NoParams());
+      final result = await _signInUseCase.call(NoParams());
 
       // assert
 
       expect(result, Right(user));
 
-      verify(mockSignInRepository.signInWithGoogle());
+      verify(_mockSignInRepository.signInWithGoogle());
 
-      verifyNoMoreInteractions(mockSignInRepository);
+      verifyNoMoreInteractions(_mockSignInRepository);
     });
   });
 }

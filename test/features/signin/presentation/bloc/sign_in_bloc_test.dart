@@ -29,9 +29,9 @@ void main() {
     _mockSignInWithGoogle = MockSignInWithGoogle();
     _mockSignInCheckIfEmailIsInUse = MockSignInCheckIfEmailIsInUse();
     _bloc = SignInBloc(
-      signInCheckIfEmailIsInUse: _mockSignInCheckIfEmailIsInUse,
-      signInWithEmailAndPassword: _mockSignInWithEmailAndPassword,
-      signInWithGoogle: _mockSignInWithGoogle,
+      _mockSignInCheckIfEmailIsInUse,
+      _mockSignInWithEmailAndPassword,
+      _mockSignInWithGoogle,
     );
   });
 

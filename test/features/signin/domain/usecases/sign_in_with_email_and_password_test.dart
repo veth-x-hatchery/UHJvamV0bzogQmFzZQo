@@ -27,13 +27,20 @@ void main() {
     test('should get user from the repository with the given credentials',
         () async {
       // arrange
+
       when(mockSignInRepository.signInWithEmailAndPassword(credentials))
           .thenAnswer((_) async => Right(user));
+
       // act
+
       final result = await signInUseCase.call(Params(credentials: credentials));
+
       // assert
+
       expect(result, Right(user));
+
       verify(mockSignInRepository.signInWithEmailAndPassword(credentials));
+
       verifyNoMoreInteractions(mockSignInRepository);
     });
   });

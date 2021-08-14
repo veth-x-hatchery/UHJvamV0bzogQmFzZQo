@@ -13,30 +13,30 @@ part 'sign_in_event.dart';
 part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  final a.SignInCheckIfEmailIsInUse signInCheckIfEmailIsInUse;
-  final SignInWithEmailAndPassword signInWithEmailAndPassword;
-  final SignInWithGoogle signInWithGoogle;
+  final a.SignInCheckIfEmailIsInUse _checkIfEmailIsInUse;
+  final SignInWithEmailAndPassword _signInWithEmailAndPassword;
+  final SignInWithGoogle _signInWithGoogle;
 
-  SignInBloc({
-    required this.signInWithGoogle,
-    required this.signInWithEmailAndPassword,
-    required this.signInCheckIfEmailIsInUse,
-  }) : super(SignInInitial());
+  SignInBloc(
+    this._checkIfEmailIsInUse,
+    this._signInWithEmailAndPassword,
+    this._signInWithGoogle,
+  ) : super(SignInInitial());
 
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
     if (event is SignInCheckEmail) {
-      yield* _signInCheckEmail(
-          await signInCheckIfEmailIsInUse.call(a.Params(email: event.email)));
+      yield* _checkEmail(
+          await _checkIfEmailIsInUse.call(a.Params(email: event.email)));
     }
   }
 
-  Stream<SignInState> _signInCheckEmail(Either<Failure, bool> usecase) async* {
+  Stream<SignInState> _checkEmail(Either<Failure, bool> usecase) async* {
     yield SignInLoading();
     yield usecase.fold(
       _mapFailureToSignStateErrorMessage,
-      (alreadyRegistered) =>
-          alreadyRegistered ? EmailAlreadyRegistered() : EmailNotFound(),
+      (emailIsInUse) =>
+          emailIsInUse ? EmailAlreadyRegistered() : EmailNotFound(),
     );
   }
 
