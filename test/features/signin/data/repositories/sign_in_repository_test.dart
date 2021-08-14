@@ -34,6 +34,36 @@ void main() {
     );
   });
 
+  group('check if email already registered', () {
+    const emailToCheck = 'test@vethx.com';
+
+    test('should return no registered (false)', () async {
+      // arrange
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      when(mockRemoteDataSource.emailAlreadyRegistered(any))
+          .thenAnswer((_) async => true);
+      // act
+      final result = await repository.emailAlreadyRegistered(emailToCheck);
+      // assert
+      verify(mockRemoteDataSource.emailAlreadyRegistered(any));
+      expect(result, equals(Right(true)));
+    });
+
+    test(
+        'should return server failure when the call to remote data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      when(mockRemoteDataSource.emailAlreadyRegistered(any))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.emailAlreadyRegistered(emailToCheck);
+      // assert
+      verify(mockRemoteDataSource.emailAlreadyRegistered(any));
+      expect(result, equals(Left(ServerFailure())));
+    });
+  });
+
   group('get current logged user', () {
     test(
       'should check if the device is online',

@@ -52,7 +52,7 @@ void main() {
         // arrange
         _setUpMockCustomValidatorsEmailAnalysisSuccess();
         // act
-        bloc.add(SignInVerifyEmail(email: email));
+        bloc.add(SignInCheckEmail(email: email));
         await untilCalled(mockCustomValidators.emailAnalysis(any));
         // assert
         verify(mockCustomValidators.emailAnalysis(any));
@@ -71,7 +71,7 @@ void main() {
             .thenReturn(Left(expectedFailure));
 
         // act
-        bloc.add(SignInVerifyEmail(email: ''));
+        bloc.add(SignInCheckEmail(email: ''));
 
         // assert later
         final expected = [

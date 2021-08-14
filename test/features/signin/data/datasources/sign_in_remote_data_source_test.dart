@@ -57,7 +57,8 @@ void main() {
 
         // act
 
-        final result = await _dataSource.isAlreadyRegistered(registeredEmail);
+        final result =
+            await _dataSource.emailAlreadyRegistered(registeredEmail);
 
         // assert
 
@@ -84,7 +85,7 @@ void main() {
         // act
 
         final result =
-            await _dataSource.isAlreadyRegistered(notRegisteredEmail);
+            await _dataSource.emailAlreadyRegistered(notRegisteredEmail);
 
         // assert
 
@@ -108,7 +109,7 @@ void main() {
                 http.Response('Something went wrong', HttpStatus.badRequest));
 
         // act
-        final call = _dataSource.isAlreadyRegistered;
+        final call = _dataSource.emailAlreadyRegistered;
         // assert
         expect(() => call(notRegisteredEmail),
             throwsA(TypeMatcher<ServerException>()));

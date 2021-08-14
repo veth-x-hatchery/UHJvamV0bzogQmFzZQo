@@ -90,4 +90,16 @@ class SignInRepository implements ISignInRepository {
     // TODO: implement signOut
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<Failure, bool>> emailAlreadyRegistered(String email) async {
+    if (!await _networkInfo.isConnected) {
+      return Left(ServerFailure());
+    }
+    try {
+      return Right(await _remoteDataSource.emailAlreadyRegistered(email));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }

@@ -13,9 +13,9 @@ class SignInWithFacebookEvent extends SignInEvent {}
 
 class SignInAnonimously extends SignInEvent {}
 
-class SignInVerifyEmail extends SignInEvent {
+class SignInCheckEmail extends SignInEvent {
   final String email;
-  const SignInVerifyEmail({
+  const SignInCheckEmail({
     required this.email,
   });
   @override

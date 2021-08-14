@@ -9,5 +9,11 @@ class NetworkInfo implements INetworkInfo {
   final InternetConnectionChecker connectionChecker;
 
   @override
-  Future<bool> get isConnected => connectionChecker.hasConnection;
+  Future<bool> get isConnected {
+    try {
+      return connectionChecker.hasConnection;
+    } on Exception {
+      return Future.value(false);
+    }
+  }
 }

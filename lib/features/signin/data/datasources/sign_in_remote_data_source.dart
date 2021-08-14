@@ -9,7 +9,7 @@ import 'package:vethx_login/features/signin/domain/entities/user_entity.dart';
 
 abstract class ISignInRemoteSource {
   /// Throws a [ServerException] for all error codes.
-  Future<bool> isAlreadyRegistered(String email);
+  Future<bool> emailAlreadyRegistered(String email);
 
   /// Throws a [ServerException] for all error codes.
   Future<UserModel> createUserWithEmailAndPassword(
@@ -111,7 +111,7 @@ class SignInRemoteSource implements ISignInRemoteSource {
   }
 
   @override
-  Future<bool> isAlreadyRegistered(String email) async {
+  Future<bool> emailAlreadyRegistered(String email) async {
     final response = await _http.get(_api.endpointUri(
       Endpoint.checkEmail,
       queryParameters: <String, String>{'email': email},
