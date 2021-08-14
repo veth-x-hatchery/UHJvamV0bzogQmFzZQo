@@ -38,7 +38,7 @@ void main() {
     expect(bloc.state, equals(SignInInitial()));
   });
 
-  group('use case SignInWithEmailAndPassword', () {
+  group('use case SignInWithEmailAngtcdPassword', () {
     const String email = 'user@domain.com';
     const String password = 'dXNlckBkb21haW4uY29tCg';
 
@@ -53,7 +53,7 @@ void main() {
         // arrange
         _setUpMockCustomValidatorsEmailAnalysisSuccess();
         // act
-        bloc.add(SignInWithEmailEvent(email: email));
+        bloc.add(SignInVerifyEmail(email: email));
         await untilCalled(mockCustomValidators.emailAnalysis(any));
         // assert
         verify(mockCustomValidators.emailAnalysis(any));
@@ -72,7 +72,7 @@ void main() {
             .thenReturn(Left(expectedFailure));
 
         // act
-        bloc.add(SignInWithEmailEvent(email: ''));
+        bloc.add(SignInVerifyEmail(email: ''));
 
         // assert later
         final expected = [

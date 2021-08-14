@@ -26,7 +26,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async* {
     // Immediately branching the logic with type checking, in order
     // for the event to be smart casted
-    if (event is SignInWithEmailEvent) {
+    if (event is SignInVerifyEmail) {
       final emailAnalysis = validators.emailAnalysis(event.email);
       yield* emailAnalysis.fold(
         (failure) async* {
@@ -34,10 +34,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         },
         (email) async* {
           yield SignInLoading();
-          // final failureOrTrivia = await signInWithEmailAndPassword(Params(
+          // final failureOrTrivia = await ???(Params(
           //   credentials: Credentials(
           //     user: email,
-          //     password: '',
           //   ),
           // ));
           yield* throw UnimplementedError();

@@ -1,5 +1,37 @@
 part of 'sign_in_bloc.dart';
 
+/// [SignInWithGoogleEvent]
+///
+/// [SignInWithFacebookEvent]
+/// - [SignInAllowed]
+/// - [SignInDenied]
+/// - [SignInCancelled]
+/// - [SignInError]
+///
+/// [SignInVerifyEmail]
+/// - [EmailAlreadyRegistered]
+/// - [EmailNotFound]
+/// - [SignInError]
+///
+/// [SignInWithEmailEvent]
+///
+/// [SignInAnonimously]
+/// - [SignInAllowed]
+/// - [SignInDenied]
+/// - [SignInError]
+///
+/// [SignInEmailRegisterEvent]
+/// - [EmailAlreadyRegistered]
+/// - [SignInError]
+///
+/// [ForgotPasswordEvent]
+/// - [SignInEmailWithResetPasswordInstructionsSent]
+/// - [SignInError]
+///
+/// [ChangeTheGivenEmailEvent]
+/// - [SignInGivenEmailChanged]
+/// - [SignInError]
+
 abstract class SignInState extends Equatable {
   const SignInState();
   @override
@@ -27,24 +59,6 @@ class SignInEmailWithResetPasswordInstructionsSent extends SignInState {}
 
 class SignInGivenEmailChanged extends SignInState {}
 
-/**
- * Event -> Sign In With Google
- * Event -> Sign In With Facebook
- *       State -> Allowed
- *       State -> Denied
- *       State -> Cancelled
- *       State -> Error
+class EmailAlreadyRegistered extends SignInState {}
 
- * Event -> Sign In With Email
- * Event -> Sign In Anonymounsly
- *       State -> Allowed
- *       State -> Denied
- *       State -> Error
-
- * Event -> Forgot my password
- *       State -> EmailWithResetPasswordInstructionsSent
- *       State -> Error
- * Event -> Change the given email
- *       State -> GivenEmailChanged
- *       State -> Error
- */
+class EmailNotFound extends SignInState {}
