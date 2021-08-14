@@ -32,13 +32,15 @@ void main() {
   void _setUpEmailAnalysis({
     required String email,
     required bool isValid,
+    InvalidEmailFailure? expectedFailure,
   }) {
     when(_mockCustomValidators.emailAnalysis(any)).thenReturn(
       isValid
           ? Right(email)
-          : Left(InvalidEmailFailure(
-              message: CustomValidatorsMessages.invalidEmail,
-            )),
+          : Left(expectedFailure ??
+              InvalidEmailFailure(
+                message: CustomValidatorsMessages.invalidEmail,
+              )),
     );
   }
 
@@ -67,51 +69,50 @@ void main() {
       },
     );
 
-    // test(
-    //   'should emit [Error] when the input is invalid',
-    //   () async {
-    //     // arrange
+    test(
+      'should emit [InvalidEmailFailure] when the input is invalid',
+      () async {
+        // arrange
+        final expectedFailure = InvalidEmailFailure(
+            message: CustomValidatorsMessages.invalidEmptyEmail);
 
-    //     final expectedFailure = InvalidEmailFailure(
-    //         message: CustomValidatorsMessages.invalidEmptyEmail);
+        _setUpEmailAnalysis(
+          email: '',
+          isValid: false,
+          expectedFailure: expectedFailure,
+        );
 
-    //     when(_mockCustomValidators.emailAnalysis(any))
-    //         .thenReturn(Left(expectedFailure));
+        final result =
+            await _signInCheckIfEmailIsInUse.call(Params(email: email));
 
-    //     // act
-    //     _bloc.add(SignInCheckEmail(email: ''));
+        await untilCalled(_mockCustomValidators.emailAnalysis(any));
 
-    //     // assert later
-    //     final expected = [
-    //       SignInError(message: expectedFailure.message),
-    //     ];
-
-    //     await expectLater(_bloc.stream, emitsInOrder(expected));
-    //   },
-    // );
+        expect(result, Left(expectedFailure));
+      },
+    );
   });
 
-  group('sign in check user is already registered', () {
-    const emailTester = 'test@vethx.com';
+  group('sign in check user email is already registered', () {
+    const testEmail = 'test@vethx.com';
 
     test('should return user is registered', () async {
       // arrange
 
-      _setUpEmailAnalysis(email: emailTester, isValid: true);
+      _setUpEmailAnalysis(email: testEmail, isValid: true);
 
-      when(_mockSignInRepository.emailAlreadyRegistered(emailTester))
+      when(_mockSignInRepository.emailAlreadyRegistered(testEmail))
           .thenAnswer((_) async => Right(true));
 
       // act
 
       final result =
-          await _signInCheckIfEmailIsInUse.call(Params(email: emailTester));
+          await _signInCheckIfEmailIsInUse.call(Params(email: testEmail));
 
       // assert
 
       expect(result, Right(true));
 
-      verify(_mockSignInRepository.emailAlreadyRegistered(emailTester));
+      verify(_mockSignInRepository.emailAlreadyRegistered(testEmail));
 
       verifyNoMoreInteractions(_mockSignInRepository);
     });
@@ -119,21 +120,21 @@ void main() {
     test('should return a server failure', () async {
       // arrange
 
-      _setUpEmailAnalysis(email: emailTester, isValid: true);
+      _setUpEmailAnalysis(email: testEmail, isValid: true);
 
-      when(_mockSignInRepository.emailAlreadyRegistered(emailTester))
+      when(_mockSignInRepository.emailAlreadyRegistered(testEmail))
           .thenAnswer((_) async => Left(ServerFailure()));
 
       // act
 
       final result =
-          await _signInCheckIfEmailIsInUse.call(Params(email: emailTester));
+          await _signInCheckIfEmailIsInUse.call(Params(email: testEmail));
 
       // assert
 
       expect(result, Left(ServerFailure()));
 
-      verify(_mockSignInRepository.emailAlreadyRegistered(emailTester));
+      verify(_mockSignInRepository.emailAlreadyRegistered(testEmail));
 
       verifyNoMoreInteractions(_mockSignInRepository);
     });
