@@ -7,11 +7,8 @@ class CustomValidatorsMessages {
 }
 
 class InvalidEmailFailure extends Failure {
-  final String message;
-
-  InvalidEmailFailure({required this.message});
-  @override
-  List<Object> get props => [message];
+  const InvalidEmailFailure({required String message})
+      : super(message: message);
 }
 
 class CustomValidators {

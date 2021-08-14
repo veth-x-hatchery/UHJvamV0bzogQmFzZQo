@@ -9,6 +9,7 @@ part of 'sign_in_bloc.dart';
 /// - [SignInError]
 ///
 /// [SignInCheckEmail]
+/// - [EmailNotRegistered]
 /// - [EmailAlreadyRegistered]
 /// - [EmailNotFound]
 /// - [SignInError]
@@ -49,16 +50,25 @@ class SignInDenied extends SignInState {}
 class SignInCancelled extends SignInState {}
 
 class SignInError extends SignInState {
-  final String message;
-  const SignInError({required this.message});
+  final String? message;
+  const SignInError({this.message = UseCasesDefaultMessages.error});
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [message!];
 }
 
 class SignInEmailWithResetPasswordInstructionsSent extends SignInState {}
 
 class SignInGivenEmailChanged extends SignInState {}
 
-class EmailAlreadyRegistered extends SignInState {}
+class EmailAlreadyRegistered extends SignInState {
+  final bool result;
+  const EmailAlreadyRegistered(this.result);
+  @override
+  List<Object> get props => [result];
+}
 
 class EmailNotFound extends SignInState {}
+
+class UseCasesDefaultMessages {
+  static const String error = 'Sorry';
+}

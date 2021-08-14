@@ -7,15 +7,15 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_login/core/error/failures.dart' as _i5;
-import 'package:vethx_login/core/usecases/usecase.dart' as _i8;
+import 'package:vethx_login/core/usecases/usecase.dart' as _i9;
 import 'package:vethx_login/features/signin/domain/entities/user_entity.dart'
-    as _i6;
-import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_email_and_password.dart'
-    as _i3;
-import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_google.dart'
     as _i7;
-import 'package:vethx_login/features/signin/presentation/utils/custom_validators.dart'
-    as _i9;
+import 'package:vethx_login/features/signin/domain/usecases/sign_in_check_email.dart'
+    as _i3;
+import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_email_and_password.dart'
+    as _i6;
+import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_google.dart'
+    as _i8;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -27,21 +27,40 @@ import 'package:vethx_login/features/signin/presentation/utils/custom_validators
 
 class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 
+/// A class which mocks [SignInCheckIfEmailIsInUse].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSignInCheckIfEmailIsInUse extends _i1.Mock
+    implements _i3.SignInCheckIfEmailIsInUse {
+  MockSignInCheckIfEmailIsInUse() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, bool>> call(_i3.Params? params) =>
+      (super.noSuchMethod(Invocation.method(#call, [params]),
+              returnValue: Future<_i2.Either<_i5.Failure, bool>>.value(
+                  _FakeEither_0<_i5.Failure, bool>()))
+          as _i4.Future<_i2.Either<_i5.Failure, bool>>);
+  @override
+  String toString() => super.toString();
+}
+
 /// A class which mocks [SignInWithEmailAndPassword].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSignInWithEmailAndPassword extends _i1.Mock
-    implements _i3.SignInWithEmailAndPassword {
+    implements _i6.SignInWithEmailAndPassword {
   MockSignInWithEmailAndPassword() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.User>> call(_i3.Params? params) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i7.User>> call(_i6.Params? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<_i2.Either<_i5.Failure, _i6.User>>.value(
-                  _FakeEither_0<_i5.Failure, _i6.User>()))
-          as _i4.Future<_i2.Either<_i5.Failure, _i6.User>>);
+              returnValue: Future<_i2.Either<_i5.Failure, _i7.User>>.value(
+                  _FakeEither_0<_i5.Failure, _i7.User>()))
+          as _i4.Future<_i2.Either<_i5.Failure, _i7.User>>);
   @override
   String toString() => super.toString();
 }
@@ -49,34 +68,17 @@ class MockSignInWithEmailAndPassword extends _i1.Mock
 /// A class which mocks [SignInWithGoogle].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInWithGoogle extends _i1.Mock implements _i7.SignInWithGoogle {
+class MockSignInWithGoogle extends _i1.Mock implements _i8.SignInWithGoogle {
   MockSignInWithGoogle() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.User>> call(_i8.NoParams? params) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i7.User>> call(_i9.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<_i2.Either<_i5.Failure, _i6.User>>.value(
-                  _FakeEither_0<_i5.Failure, _i6.User>()))
-          as _i4.Future<_i2.Either<_i5.Failure, _i6.User>>);
-  @override
-  String toString() => super.toString();
-}
-
-/// A class which mocks [CustomValidators].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockCustomValidators extends _i1.Mock implements _i9.CustomValidators {
-  MockCustomValidators() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i2.Either<_i9.InvalidEmailFailure, String> emailAnalysis(String? value) =>
-      (super.noSuchMethod(Invocation.method(#emailAnalysis, [value]),
-              returnValue: _FakeEither_0<_i9.InvalidEmailFailure, String>())
-          as _i2.Either<_i9.InvalidEmailFailure, String>);
+              returnValue: Future<_i2.Either<_i5.Failure, _i7.User>>.value(
+                  _FakeEither_0<_i5.Failure, _i7.User>()))
+          as _i4.Future<_i2.Either<_i5.Failure, _i7.User>>);
   @override
   String toString() => super.toString();
 }
