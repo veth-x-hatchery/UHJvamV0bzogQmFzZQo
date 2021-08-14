@@ -29,25 +29,28 @@ void main() {
     );
   });
 
+  void _setUpEmailAnalysis({
+    required String email,
+    required bool isValid,
+  }) {
+    when(_mockCustomValidators.emailAnalysis(any)).thenReturn(
+      isValid
+          ? Right(email)
+          : Left(InvalidEmailFailure(
+              message: CustomValidatorsMessages.invalidEmail,
+            )),
+    );
+  }
+
   group('custom validations', () {
     const String email = 'user@domain.com';
-
-    void _setUpEmailAnalysis(bool option) {
-      when(_mockCustomValidators.emailAnalysis(any)).thenReturn(
-        option
-            ? Right(email)
-            : Left(InvalidEmailFailure(
-                message: CustomValidatorsMessages.invalidEmail,
-              )),
-      );
-    }
 
     test(
       'should call the CustomValidators to return a valid email',
       () async {
         // arrange
 
-        _setUpEmailAnalysis(true);
+        _setUpEmailAnalysis(email: email, isValid: true);
 
         when(_mockSignInRepository.emailAlreadyRegistered(email))
             .thenAnswer((_) async => Right(true));
@@ -88,11 +91,13 @@ void main() {
     // );
   });
 
-  group('sign in check if user is already registered', () {
+  group('sign in check user is already registered', () {
     const emailTester = 'test@vethx.com';
 
-    test('should return that the user is registered', () async {
+    test('should return user is registered', () async {
       // arrange
+
+      _setUpEmailAnalysis(email: emailTester, isValid: true);
 
       when(_mockSignInRepository.emailAlreadyRegistered(emailTester))
           .thenAnswer((_) async => Right(true));
@@ -113,14 +118,23 @@ void main() {
 
     test('should return a server failure', () async {
       // arrange
+
+      _setUpEmailAnalysis(email: emailTester, isValid: true);
+
       when(_mockSignInRepository.emailAlreadyRegistered(emailTester))
           .thenAnswer((_) async => Left(ServerFailure()));
+
       // act
+
       final result =
           await _signInCheckIfEmailIsInUse.call(Params(email: emailTester));
+
       // assert
+
       expect(result, Left(ServerFailure()));
+
       verify(_mockSignInRepository.emailAlreadyRegistered(emailTester));
+
       verifyNoMoreInteractions(_mockSignInRepository);
     });
   });
