@@ -40,7 +40,6 @@ void main() {
 
   group('use case SignInWithEmailAngtcdPassword', () {
     const String email = 'user@domain.com';
-    const String password = 'dXNlckBkb21haW4uY29tCg';
 
     void _setUpMockCustomValidatorsEmailAnalysisSuccess() =>
         when(mockCustomValidators.emailAnalysis(any)).thenReturn(

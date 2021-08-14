@@ -13,14 +13,14 @@ part of 'sign_in_bloc.dart';
 /// - [EmailNotFound]
 /// - [SignInError]
 ///
-/// [SignInWithEmailEvent]
+/// [SignInWithEmail]
 ///
 /// [SignInAnonimously]
 /// - [SignInAllowed]
 /// - [SignInDenied]
 /// - [SignInError]
 ///
-/// [SignInEmailRegisterEvent]
+/// [SignInEmailRegister]
 /// - [EmailAlreadyRegistered]
 /// - [SignInError]
 ///
@@ -28,7 +28,7 @@ part of 'sign_in_bloc.dart';
 /// - [SignInEmailWithResetPasswordInstructionsSent]
 /// - [SignInError]
 ///
-/// [ChangeTheGivenEmailEvent]
+/// [ChangeTheGivenEmail]
 /// - [SignInGivenEmailChanged]
 /// - [SignInError]
 

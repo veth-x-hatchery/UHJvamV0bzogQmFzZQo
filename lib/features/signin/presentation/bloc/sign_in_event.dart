@@ -22,10 +22,10 @@ class SignInVerifyEmail extends SignInEvent {
   List<Object> get props => [email];
 }
 
-class SignInWithEmailEvent extends SignInEvent {
+class SignInWithEmail extends SignInEvent {
   final String email;
   final String password;
-  const SignInWithEmailEvent({
+  const SignInWithEmail({
     required this.email,
     required this.password,
   });
@@ -33,10 +33,10 @@ class SignInWithEmailEvent extends SignInEvent {
   List<Object> get props => [email, password];
 }
 
-class SignInEmailRegisterEvent extends SignInEvent {
+class SignInEmailRegister extends SignInEvent {
   final String email;
   final String password;
-  const SignInEmailRegisterEvent({
+  const SignInEmailRegister({
     required this.email,
     required this.password,
   });
@@ -56,4 +56,4 @@ class ForgotPasswordEvent extends SignInEvent {
   List<Object> get props => [email];
 }
 
-class ChangeTheGivenEmailEvent extends SignInEvent {}
+class ChangeTheGivenEmail extends SignInEvent {}
