@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
@@ -35,11 +37,90 @@ void main() {
         .thenAnswer((_) async => http.Response('Something went wrong', 404));
   }
 
+  group('check if email is already registered', () {
+    const String registeredEmail = 'alreadyregistered@veth-x.com';
+    const String notRegisteredEmail = 'notregistered@veth-x.com';
+
+    test(
+      'should perform a GET request and receive HttpStatus.found == 302',
+      () async {
+        //arrange
+
+        final uri = _api.endpointUri(
+          Endpoint.checkEmail,
+          queryParameters: <String, String>{'email': registeredEmail},
+        );
+
+        when(_mockHttpClient.get(uri, headers: anyNamed('headers'))).thenAnswer(
+          (_) async => http.Response('', HttpStatus.found),
+        );
+
+        // act
+
+        final result = await _dataSource.isAlreadyRegistered(registeredEmail);
+
+        // assert
+
+        verify(_mockHttpClient.get(uri));
+
+        expect(result, true);
+      },
+    );
+
+    test(
+      'should perform a GET request and receive HttpStatus.notFound == 404',
+      () async {
+        //arrange
+
+        final uri = _api.endpointUri(
+          Endpoint.checkEmail,
+          queryParameters: <String, String>{'email': notRegisteredEmail},
+        );
+
+        when(_mockHttpClient.get(uri, headers: anyNamed('headers'))).thenAnswer(
+          (_) async => http.Response('', HttpStatus.notFound),
+        );
+
+        // act
+
+        final result =
+            await _dataSource.isAlreadyRegistered(notRegisteredEmail);
+
+        // assert
+
+        verify(_mockHttpClient.get(uri));
+
+        expect(result, !true);
+      },
+    );
+
+    test(
+      'should throw a ServerException when the response code is not 302 or 404',
+      () async {
+        // arrange
+        final uri = _api.endpointUri(
+          Endpoint.checkEmail,
+          queryParameters: <String, String>{'email': notRegisteredEmail},
+        );
+
+        when(_mockHttpClient.get(uri, headers: anyNamed('headers'))).thenAnswer(
+            (_) async =>
+                http.Response('Something went wrong', HttpStatus.badRequest));
+
+        // act
+        final call = _dataSource.isAlreadyRegistered;
+        // assert
+        expect(() => call(notRegisteredEmail),
+            throwsA(TypeMatcher<ServerException>()));
+      },
+    );
+  });
+
   group('get current user', () {
     final user = UserModel(authType: 'google', email: 'test@vethx.com');
 
     test(
-      'should preform a GET request on a URL being the endpoint and with application/json header',
+      'should perform a GET request on a URL being the endpoint and with application/json header',
       () {
         //arrange
         final uri = _api.endpointUri(Endpoint.signInCurrentUser);
@@ -55,7 +136,7 @@ void main() {
     );
 
     test(
-      'should return NumberTrivia when the response code is 200 (success)',
+      'should return the current user when the response code is 200 (success)',
       () async {
         // arrange
         _setUpMockHttpClientSuccess200();
