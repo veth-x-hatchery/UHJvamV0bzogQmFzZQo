@@ -17,7 +17,7 @@ class ApiSetupDevelopment implements IApiSetup {
 
 class ApiSetupProduction implements IApiSetup {
   @override
-  String host = 'apisig.acelerarvendas.com.br';
+  String host = 'vethx.io';
 
   @override
   int port = 0;
