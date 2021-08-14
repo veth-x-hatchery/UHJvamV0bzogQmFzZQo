@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:http/http.dart' as http;
 import 'package:vethx_login/core/api/api.dart';
 import 'package:vethx_login/core/error/exceptions.dart';
 import 'package:vethx_login/core/network/network_info.dart';
 import 'package:vethx_login/core/services/data_cache_service.dart';
 import 'package:vethx_login/core/utils/logger.dart';
-import 'package:http/http.dart' as http;
 
 class APIBase {
   APIBase(

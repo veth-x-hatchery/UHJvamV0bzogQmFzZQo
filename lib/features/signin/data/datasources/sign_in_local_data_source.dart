@@ -5,7 +5,7 @@ import 'package:vethx_login/core/error/exceptions.dart';
 import 'package:vethx_login/features/signin/data/models/user_model.dart';
 import 'package:vethx_login/features/signin/domain/entities/user_entity.dart';
 
-const CACHED_CURRENT_USER = 'CACHED_CURRENT_USER';
+const String CACHED_CURRENT_USER = 'CACHED_CURRENT_USER';
 
 abstract class ISignInLocalSource {
   /// Throws [CacheException] if no cached data is present.
