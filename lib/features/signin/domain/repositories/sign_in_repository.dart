@@ -4,6 +4,8 @@ import 'package:vethx_login/features/signin/domain/entities/credentials_entity.d
 import 'package:vethx_login/features/signin/domain/entities/user_entity.dart';
 
 abstract class ISignInRepository {
+  /// Left(ServerFailure()) on errors
+  Future<Either<Failure, bool>> emailAlreadyRegistered(String email);
   Future<Either<Failure, User>> currentUser();
   Future<Either<Failure, User>> signInAnonymously();
   Future<Either<Failure, User>> signInWithEmailAndPassword(

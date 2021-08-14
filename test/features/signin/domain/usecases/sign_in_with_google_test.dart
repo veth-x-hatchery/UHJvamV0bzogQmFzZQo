@@ -21,13 +21,20 @@ void main() {
   group('sign in process', () {
     test('should get user from the repository with google sign in', () async {
       // arrange
+
       when(mockSignInRepository.signInWithGoogle())
           .thenAnswer((_) async => Right(user));
+
       // act
+
       final result = await signInUseCase.call(NoParams());
+
       // assert
+
       expect(result, Right(user));
+
       verify(mockSignInRepository.signInWithGoogle());
+
       verifyNoMoreInteractions(mockSignInRepository);
     });
   });

@@ -7,23 +7,36 @@ abstract class SignInEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SignInWithGoogle extends SignInEvent {}
+class SignInWithGoogleEvent extends SignInEvent {}
 
-class SignInWithFacebook extends SignInEvent {}
+class SignInWithFacebookEvent extends SignInEvent {}
 
-class SignInWithEmail extends SignInEvent {
+class SignInAnonimously extends SignInEvent {}
+
+class SignInCheckEmail extends SignInEvent {
   final String email;
-  const SignInWithEmail({
+  const SignInCheckEmail({
     required this.email,
   });
   @override
   List<Object> get props => [email];
 }
 
-class SignInRegister extends SignInEvent {
+class SignInWithEmail extends SignInEvent {
   final String email;
   final String password;
-  const SignInRegister({
+  const SignInWithEmail({
+    required this.email,
+    required this.password,
+  });
+  @override
+  List<Object> get props => [email, password];
+}
+
+class SignInEmailRegister extends SignInEvent {
+  final String email;
+  final String password;
+  const SignInEmailRegister({
     required this.email,
     required this.password,
   });
@@ -34,9 +47,9 @@ class SignInRegister extends SignInEvent {
       ];
 }
 
-class ForgotPassword extends SignInEvent {
+class ForgotPasswordEvent extends SignInEvent {
   final String email;
-  const ForgotPassword({
+  const ForgotPasswordEvent({
     required this.email,
   });
   @override
@@ -44,12 +57,3 @@ class ForgotPassword extends SignInEvent {
 }
 
 class ChangeTheGivenEmail extends SignInEvent {}
-
-/**
- * 1 - Sign In With Google
- * 2 - Sign In With Facebook
- * 3 - Sign In With Email
- * 4 - Sign In Anonymounsly
- * 5 - Forgot my password
- * 6 - Change the given email
- */

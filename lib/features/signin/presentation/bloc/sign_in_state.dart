@@ -1,5 +1,37 @@
 part of 'sign_in_bloc.dart';
 
+/// [SignInWithGoogleEvent]
+///
+/// [SignInWithFacebookEvent]
+/// - [SignInAllowed]
+/// - [SignInDenied]
+/// - [SignInCancelled]
+/// - [SignInError]
+///
+/// [SignInCheckEmail]
+/// - [EmailAlreadyRegistered]
+/// - [EmailNotFound]
+/// - [SignInError]
+///
+/// [SignInWithEmail]
+///
+/// [SignInAnonimously]
+/// - [SignInAllowed]
+/// - [SignInDenied]
+/// - [SignInError]
+///
+/// [SignInEmailRegister]
+/// - [EmailAlreadyRegistered]
+/// - [SignInError]
+///
+/// [ForgotPasswordEvent]
+/// - [SignInEmailWithResetPasswordInstructionsSent]
+/// - [SignInError]
+///
+/// [ChangeTheGivenEmail]
+/// - [SignInGivenEmailChanged]
+/// - [SignInError]
+
 abstract class SignInState extends Equatable {
   const SignInState();
   @override
@@ -7,6 +39,8 @@ abstract class SignInState extends Equatable {
 }
 
 class SignInInitial extends SignInState {}
+
+class SignInLoading extends SignInState {}
 
 class SignInAllowed extends SignInState {}
 
@@ -16,7 +50,7 @@ class SignInCancelled extends SignInState {}
 
 class SignInError extends SignInState {
   final String message;
-  const SignInError({required this.message});
+  const SignInError({this.message = UseCasesDefaultMessages.error});
   @override
   List<Object> get props => [message];
 }
@@ -25,24 +59,10 @@ class SignInEmailWithResetPasswordInstructionsSent extends SignInState {}
 
 class SignInGivenEmailChanged extends SignInState {}
 
-/**
- * Event -> Sign In With Google
- * Event -> Sign In With Facebook
- *       State -> Allowed
- *       State -> Denied
- *       State -> Cancelled
- *       State -> Error
+class EmailAlreadyRegistered extends SignInState {}
 
- * Event -> Sign In With Email
- * Event -> Sign In Anonymounsly
- *       State -> Allowed
- *       State -> Denied
- *       State -> Error
+class EmailNotFound extends SignInState {}
 
- * Event -> Forgot my password
- *       State -> EmailWithResetPasswordInstructionsSent
- *       State -> Error
- * Event -> Change the given email
- *       State -> GivenEmailChanged
- *       State -> Error
- */
+class UseCasesDefaultMessages {
+  static const String error = 'Sorry';
+}

@@ -32,5 +32,18 @@ void main() {
         expect(result, tHasConnectionFuture);
       },
     );
+
+    test(
+      'should return false in exeptions cases',
+      () async {
+        // arrange
+        when(connectionChecker.hasConnection).thenThrow(Exception());
+        // act
+        final result = await networkInfo.isConnected;
+        // assert
+        verify(connectionChecker.hasConnection);
+        expect(result, false);
+      },
+    );
   });
 }

@@ -74,6 +74,10 @@ class MockISignInRemoteSource extends _i1.Mock
                   Future<_i4.Stream<_i5.User>>.value(Stream<_i5.User>.empty()))
           as _i4.Future<_i4.Stream<_i5.User>>);
   @override
+  _i4.Future<bool> emailAlreadyRegistered(String? email) =>
+      (super.noSuchMethod(Invocation.method(#emailAlreadyRegistered, [email]),
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+  @override
   _i4.Future<_i2.UserModel> createUserWithEmailAndPassword(
           String? email, String? password) =>
       (super.noSuchMethod(

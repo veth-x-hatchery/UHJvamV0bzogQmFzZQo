@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:vethx_login/core/api/api.dart';
@@ -7,6 +8,9 @@ import 'package:vethx_login/features/signin/data/models/user_model.dart';
 import 'package:vethx_login/features/signin/domain/entities/user_entity.dart';
 
 abstract class ISignInRemoteSource {
+  /// Throws a [ServerException] for all error codes.
+  Future<bool> emailAlreadyRegistered(String email);
+
   /// Throws a [ServerException] for all error codes.
   Future<UserModel> createUserWithEmailAndPassword(
       String email, String password);
@@ -104,5 +108,22 @@ class SignInRemoteSource implements ISignInRemoteSource {
   Future<void> signOut() {
     // TODO: implement signOut
     throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> emailAlreadyRegistered(String email) async {
+    final response = await _http.get(_api.endpointUri(
+      Endpoint.checkEmail,
+      queryParameters: <String, String>{'email': email},
+    ));
+
+    if (![
+      HttpStatus.found,
+      HttpStatus.notFound,
+    ].contains(response.statusCode)) {
+      throw ServerException();
+    }
+
+    return Future.value(response.statusCode == HttpStatus.found);
   }
 }
