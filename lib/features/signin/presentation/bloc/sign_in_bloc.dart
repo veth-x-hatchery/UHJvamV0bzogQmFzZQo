@@ -34,11 +34,14 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   Stream<SignInState> _signInCheckEmail(Either<Failure, bool> usecase) async* {
     yield SignInLoading();
     yield usecase.fold(
-      (failure) => failure.message == null
-          ? SignInError()
-          : SignInError(message: failure.message!),
+      _mapFailureToSignStateErrorMessage,
       (alreadyRegistered) =>
           alreadyRegistered ? EmailAlreadyRegistered() : EmailNotFound(),
     );
   }
+
+  SignInState _mapFailureToSignStateErrorMessage(Failure failure) =>
+      failure.message == null
+          ? SignInError()
+          : SignInError(message: failure.message!);
 }
