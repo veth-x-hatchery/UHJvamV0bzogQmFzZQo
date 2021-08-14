@@ -59,5 +59,28 @@ void main() {
         verify(mockCustomValidators.emailAnalysis(any));
       },
     );
+
+    test(
+      'should emit [Error] when the input is invalid',
+      () async {
+        // arrange
+
+        final expectedFailure = InvalidEmailFailure(
+            message: CustomValidatorsMessages.invalidEmptyEmail);
+
+        when(mockCustomValidators.emailAnalysis(any))
+            .thenReturn(Left(expectedFailure));
+
+        // act
+        bloc.add(SignInWithEmailEvent(email: ''));
+
+        // assert later
+        final expected = [
+          SignInError(message: expectedFailure.message),
+        ];
+
+        await expectLater(bloc.stream, emitsInOrder(expected));
+      },
+    );
   });
 }

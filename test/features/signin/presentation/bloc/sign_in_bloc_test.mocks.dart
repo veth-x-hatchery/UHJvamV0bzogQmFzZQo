@@ -73,10 +73,10 @@ class MockCustomValidators extends _i1.Mock implements _i9.CustomValidators {
   }
 
   @override
-  _i2.Either<_i5.Failure, String> emailAnalysis(String? value) =>
+  _i2.Either<_i9.InvalidEmailFailure, String> emailAnalysis(String? value) =>
       (super.noSuchMethod(Invocation.method(#emailAnalysis, [value]),
-              returnValue: _FakeEither_0<_i5.Failure, String>())
-          as _i2.Either<_i5.Failure, String>);
+              returnValue: _FakeEither_0<_i9.InvalidEmailFailure, String>())
+          as _i2.Either<_i9.InvalidEmailFailure, String>);
   @override
   String toString() => super.toString();
 }

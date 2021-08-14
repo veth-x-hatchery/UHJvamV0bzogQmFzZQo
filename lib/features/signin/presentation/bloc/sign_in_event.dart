@@ -1,5 +1,9 @@
 part of 'sign_in_bloc.dart';
 
+class SignInEventsMessages {
+  // static const String
+}
+
 abstract class SignInEvent extends Equatable {
   const SignInEvent();
 

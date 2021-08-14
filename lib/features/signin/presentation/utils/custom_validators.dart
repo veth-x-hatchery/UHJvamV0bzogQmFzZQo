@@ -18,7 +18,7 @@ class CustomValidators {
   static const String _emailRegex =
       r"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
 
-  Either<Failure, String> emailAnalysis(String? value) {
+  Either<InvalidEmailFailure, String> emailAnalysis(String? value) {
     if (value == null || value.trim().isEmpty) {
       return Left(InvalidEmailFailure(
           message: CustomValidatorsMessages.invalidEmptyEmail));

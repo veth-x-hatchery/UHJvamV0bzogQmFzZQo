@@ -57,7 +57,7 @@ void main() {
       final user = UserModel(authType: 'google', email: 'test@vethx.com');
 
       test('should return current user from remote data source', () async {
-        // arranje
+        // arrange
         when(mockRemoteDataSource.currentUser()).thenAnswer((_) async => user);
         // act
         final result = await repository.currentUser();
