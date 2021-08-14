@@ -26,14 +26,19 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     SignInEvent event,
   ) async* {
     if (event is SignInCheckEmail) {
+      yield SignInLoading();
+
       final useCaseReturn =
           await signInCheckIfEmailIsInUse.call(a.Params(email: event.email));
+
       yield* useCaseReturn.fold(
         (failure) async* {
-          yield SignInError(message: failure.message);
+          yield failure.message == null
+              ? SignInError()
+              : SignInError(message: failure.message!);
         },
-        (result) async* {
-          yield EmailAlreadyRegistered(result);
+        (alreadyRegistered) async* {
+          yield alreadyRegistered ? EmailAlreadyRegistered() : EmailNotFound();
         },
       );
     }

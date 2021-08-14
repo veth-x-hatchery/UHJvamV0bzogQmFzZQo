@@ -70,7 +70,34 @@ void main() {
     );
 
     test(
-      'should emit [InvalidEmailFailure] when the input is invalid',
+      'should emit [InvalidEmailFailure(message: CustomValidatorsMessages.invalidEmail)] when the input is invalid',
+      () async {
+        // arrange
+        final expectedFailure =
+            InvalidEmailFailure(message: CustomValidatorsMessages.invalidEmail);
+
+        _setUpEmailAnalysis(
+          email: 'asdf@',
+          isValid: false,
+          expectedFailure: expectedFailure,
+        );
+
+        final result =
+            await _signInCheckIfEmailIsInUse.call(Params(email: email));
+
+        await untilCalled(_mockCustomValidators.emailAnalysis(any));
+
+        expect(result, Left(expectedFailure));
+
+        result.fold(
+          (l) => expect(l.message, expectedFailure.message),
+          (r) => null,
+        );
+      },
+    );
+
+    test(
+      'should emit [InvalidEmailFailure(message: CustomValidatorsMessages.invalidEmptyEmail)] when the input is not given',
       () async {
         // arrange
         final expectedFailure = InvalidEmailFailure(
@@ -88,6 +115,11 @@ void main() {
         await untilCalled(_mockCustomValidators.emailAnalysis(any));
 
         expect(result, Left(expectedFailure));
+
+        result.fold(
+          (l) => expect(l.message, expectedFailure.message),
+          (r) => null,
+        );
       },
     );
   });

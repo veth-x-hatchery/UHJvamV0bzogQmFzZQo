@@ -14,15 +14,22 @@ void main() {
       'should return correct invalid email message when the value is empty',
       () async {
         // arrange
+
+        final expectedFailure = InvalidEmailFailure(
+            message: CustomValidatorsMessages.invalidEmptyEmail);
+
         // act
+
         final result = customValidators.emailAnalysis(null);
+
         // assert
-        expect(
-            result,
-            Left(
-              InvalidEmailFailure(
-                  message: CustomValidatorsMessages.invalidEmptyEmail),
-            ));
+
+        expect(result, Left(expectedFailure));
+
+        result.fold(
+          (l) => expect(l.message, expectedFailure.message),
+          (r) => null,
+        );
       },
     );
 
@@ -30,15 +37,22 @@ void main() {
       'should return correct invalid email message when the email is not valid',
       () async {
         // arrange
+
+        final expectedFailure =
+            InvalidEmailFailure(message: CustomValidatorsMessages.invalidEmail);
+
         // act
+
         final result = customValidators.emailAnalysis('user@domain');
+
         // assert
-        expect(
-            result,
-            Left(
-              InvalidEmailFailure(
-                  message: CustomValidatorsMessages.invalidEmail),
-            ));
+
+        expect(result, Left(expectedFailure));
+
+        result.fold(
+          (l) => expect(l.message, expectedFailure.message),
+          (r) => null,
+        );
       },
     );
   });
