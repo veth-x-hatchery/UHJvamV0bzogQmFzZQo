@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_login/core/error/failures.dart';
+import 'package:vethx_login/features/signin/data/repositories/sign_in_repository.dart';
 import 'package:vethx_login/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_login/features/signin/domain/usecases/sign_in_check_email.dart';
 import 'package:vethx_login/features/signin/presentation/utils/custom_validators.dart';
@@ -154,8 +155,9 @@ void main() {
 
       _setUpEmailAnalysis(email: testEmail, isValid: true);
 
-      when(_mockSignInRepository.emailAlreadyRegistered(testEmail))
-          .thenAnswer((_) async => Left(ServerFailure()));
+      when(_mockSignInRepository.emailAlreadyRegistered(testEmail)).thenAnswer(
+          (_) async => Left(
+              ServerFailure(message: SignInRepositoryDefaultMessages.error)));
 
       // act
 
@@ -164,7 +166,8 @@ void main() {
 
       // assert
 
-      expect(result, Left(ServerFailure()));
+      expect(result,
+          Left(ServerFailure(message: SignInRepositoryDefaultMessages.error)));
 
       verify(_mockSignInRepository.emailAlreadyRegistered(testEmail));
 

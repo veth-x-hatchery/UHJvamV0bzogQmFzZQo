@@ -53,14 +53,25 @@ void main() {
         'should return server failure when the call to remote data source is unsuccessful',
         () async {
       // arrange
+
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+
       when(mockRemoteDataSource.emailAlreadyRegistered(any))
           .thenThrow(ServerException());
+
       // act
+
       final result = await repository.emailAlreadyRegistered(emailToCheck);
+
       // assert
+
       verify(mockRemoteDataSource.emailAlreadyRegistered(any));
-      expect(result, equals(Left(ServerFailure())));
+
+      expect(
+          result,
+          equals(Left(
+            ServerFailure(message: SignInRepositoryDefaultMessages.error),
+          )));
     });
   });
 
@@ -69,12 +80,19 @@ void main() {
       'should check if the device is online',
       () async {
         // arrange
+
         final user = UserModel(authType: 'google', email: 'test@vethx.com');
+
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+
         when(mockRemoteDataSource.currentUser()).thenAnswer((_) async => user);
+
         // act
+
         await repository.currentUser();
+
         // assert
+
         verify(mockNetworkInfo.isConnected);
       },
     );
@@ -88,11 +106,17 @@ void main() {
 
       test('should return current user from remote data source', () async {
         // arrange
+
         when(mockRemoteDataSource.currentUser()).thenAnswer((_) async => user);
+
         // act
+
         final result = await repository.currentUser();
+
         // assert
+
         verify(mockRemoteDataSource.currentUser());
+
         expect(result, equals(Right(user)));
       });
 
@@ -100,12 +124,18 @@ void main() {
         'should cache the data locally when the call to remote data source is successful',
         () async {
           // arrange
+
           when(mockRemoteDataSource.currentUser())
               .thenAnswer((_) async => user);
+
           // act
+
           await repository.currentUser();
+
           // assert
+
           verify(mockRemoteDataSource.currentUser());
+
           verify(mockLocalDataSource.cacheCurrentUser(user));
         },
       );
@@ -114,13 +144,23 @@ void main() {
         'should return server failure when the call to remote data source is unsuccessful',
         () async {
           // arrange
+
           when(mockRemoteDataSource.currentUser()).thenThrow(ServerException());
+
           // act
+
           final result = await repository.currentUser();
+
           // assert
+
           verify(mockRemoteDataSource.currentUser());
+
           verifyZeroInteractions(mockLocalDataSource);
-          expect(result, equals(Left(ServerFailure())));
+
+          expect(
+              result,
+              equals(Left(ServerFailure(
+                  message: SignInRepositoryDefaultMessages.error))));
         },
       );
     });
@@ -150,13 +190,23 @@ void main() {
         'should return CacheFailure when there is no cached data present',
         () async {
           // arrange
+
           when(mockLocalDataSource.currentUser()).thenThrow(CacheException());
+
           // act
+
           final result = await repository.currentUser();
+
           // assert
+
           verifyZeroInteractions(mockRemoteDataSource);
+
           verify(mockLocalDataSource.currentUser());
-          expect(result, equals(Left(CacheFailure())));
+
+          expect(
+              result,
+              equals(Left(CacheFailure(
+                  message: SignInRepositoryDefaultMessages.error))));
         },
       );
     });

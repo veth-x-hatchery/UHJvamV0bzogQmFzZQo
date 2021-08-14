@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_login/core/error/failures.dart';
+import 'package:vethx_login/features/signin/data/repositories/sign_in_repository.dart';
 import 'package:vethx_login/features/signin/domain/usecases/sign_in_check_email.dart';
 import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
 import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_google.dart';
@@ -144,8 +145,8 @@ void main() {
         // arrange
         const errorMessage = UseCasesDefaultMessages.error;
 
-        when(_mockSignInCheckIfEmailIsInUse.call(any))
-            .thenAnswer((_) async => Left(ServerFailure()));
+        when(_mockSignInCheckIfEmailIsInUse.call(any)).thenAnswer(
+            (_) async => Left(ServerFailure(message: errorMessage)));
 
         // act
         _bloc.add(SignInCheckEmail(email: testEmail));
