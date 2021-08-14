@@ -32,21 +32,29 @@ void main() {
   group('custom validations', () {
     const String email = 'user@domain.com';
 
+    void _setUpEmailAnalysis(bool option) {
+      when(_mockCustomValidators.emailAnalysis(any)).thenReturn(
+        option
+            ? Right(email)
+            : Left(InvalidEmailFailure(
+                message: CustomValidatorsMessages.invalidEmail,
+              )),
+      );
+    }
+
     test(
       'should call the CustomValidators to return a valid email',
       () async {
         // arrange
-        when(_mockCustomValidators.emailAnalysis(any)).thenReturn(
-          Right(email),
-        );
+
+        _setUpEmailAnalysis(true);
 
         when(_mockSignInRepository.emailAlreadyRegistered(email))
             .thenAnswer((_) async => Right(true));
 
-        when(_signInCheckIfEmailIsInUse.call(Params(email: email)))
-            .thenAnswer((_) async => Right(true));
-
         // act
+
+        await _signInCheckIfEmailIsInUse.call(Params(email: email));
 
         await untilCalled(_mockCustomValidators.emailAnalysis(any));
 
@@ -82,16 +90,24 @@ void main() {
 
   group('sign in check if user is already registered', () {
     const emailTester = 'test@vethx.com';
+
     test('should return that the user is registered', () async {
       // arrange
+
       when(_mockSignInRepository.emailAlreadyRegistered(emailTester))
           .thenAnswer((_) async => Right(true));
+
       // act
+
       final result =
           await _signInCheckIfEmailIsInUse.call(Params(email: emailTester));
+
       // assert
+
       expect(result, Right(true));
+
       verify(_mockSignInRepository.emailAlreadyRegistered(emailTester));
+
       verifyNoMoreInteractions(_mockSignInRepository);
     });
 
