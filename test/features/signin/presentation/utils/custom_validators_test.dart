@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vethx_login/features/signin/presentation/utils/custom_validators.dart';
+import 'package:vethx_beta/features/signin/presentation/utils/custom_validators.dart';
 
 void main() {
   late CustomValidators customValidators;

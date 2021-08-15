@@ -1,4 +1,4 @@
-import 'package:vethx_login/features/signin/domain/entities/user_entity.dart';
+import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 
 enum SignInProviderUserAuthType {
   facebook,

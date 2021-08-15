@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_login/core/error/failures.dart';
-import 'package:vethx_login/features/signin/domain/entities/credentials_entity.dart';
-import 'package:vethx_login/features/signin/domain/entities/user_entity.dart';
+import 'package:vethx_beta/core/error/failures.dart';
+import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
+import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 
 abstract class ISignInRepository {
   /// Left(ServerFailure()) on errors

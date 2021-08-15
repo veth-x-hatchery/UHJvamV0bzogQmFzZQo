@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
-import 'package:vethx_login/features/signin/domain/auth/auth_failure.dart';
-import 'package:vethx_login/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/domain/auth/auth_failure.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 
 abstract class IAuthFacade {
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({

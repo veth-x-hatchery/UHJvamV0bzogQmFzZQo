@@ -1,5 +1,5 @@
-import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
-import 'package:vethx_login/ui/widgets/shared/platform_alert_dialog.widget.dart';
+import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/ui/widgets/shared/platform_alert_dialog.widget.dart';
 import 'package:flutter/material.dart';
 
 enum VethxNotificationType {

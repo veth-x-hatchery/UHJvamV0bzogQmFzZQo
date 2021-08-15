@@ -5,12 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "vethx_login",
+            "name": "vethx_beta",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "vethx_login (profile mode)",
+            "name": "vethx_beta (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"

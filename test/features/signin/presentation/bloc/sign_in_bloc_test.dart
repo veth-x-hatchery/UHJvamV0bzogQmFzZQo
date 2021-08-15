@@ -2,14 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_login/core/error/failures.dart';
-import 'package:vethx_login/features/signin/data/repositories/sign_in_repository.dart';
-import 'package:vethx_login/features/signin/domain/usecases/sign_in_check_email.dart';
-import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
-import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_google.dart';
-import 'package:vethx_login/features/signin/presentation/bloc/sign_in_bloc.dart';
-import 'package:vethx_login/features/signin/presentation/utils/custom_validators.dart';
-import 'package:vethx_login/features/signin/presentation/pages/sign_in_page.dart';
+import 'package:vethx_beta/core/error/failures.dart';
+import 'package:vethx_beta/features/signin/data/repositories/sign_in_repository.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/utils/custom_validators.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
 
 import 'sign_in_bloc_test.mocks.dart';
 

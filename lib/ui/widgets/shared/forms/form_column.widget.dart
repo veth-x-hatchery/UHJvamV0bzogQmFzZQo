@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_login/core/consts/size_config.dart';
+import 'package:vethx_beta/core/consts/size_config.dart';
 
 class FormColumn extends StatelessWidget {
   const FormColumn({

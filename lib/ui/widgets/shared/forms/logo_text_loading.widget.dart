@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_login/ui/widgets/shared/progress-indicator.widget.dart';
+import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 class LogoTextLoading extends StatelessWidget {
   const LogoTextLoading({

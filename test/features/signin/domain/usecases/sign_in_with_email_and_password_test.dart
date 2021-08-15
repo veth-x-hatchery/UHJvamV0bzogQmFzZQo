@@ -2,10 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_login/features/signin/domain/entities/credentials_entity.dart';
-import 'package:vethx_login/features/signin/domain/entities/user_entity.dart';
-import 'package:vethx_login/features/signin/domain/repositories/sign_in_repository.dart';
-import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
+import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
+import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
 
 import 'sign_in_with_email_and_password_test.mocks.dart';
 

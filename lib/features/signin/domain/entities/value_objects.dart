@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_login/features/signin/domain/core/failures.dart';
-import 'package:vethx_login/features/signin/domain/core/value_objects.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures.dart';
+import 'package:vethx_beta/features/signin/domain/core/value_objects.dart';
 
 class EmailAddress extends ValueObject<String> {
   @override

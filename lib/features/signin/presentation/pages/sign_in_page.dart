@@ -4,10 +4,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vethx_login/features/signin/presentation/bloc/sign_in_bloc.dart';
-import 'package:vethx_login/features/signin/presentation/widgets/sign_in.widgets.dart';
-import 'package:vethx_login/injection_container.dart';
-import 'package:vethx_login/ui/widgets/transitions/slide_route.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/injection_container.dart';
+import 'package:vethx_beta/ui/widgets/transitions/slide_route.dart';
 
 enum SignInPageRoutes {
   signInOptions,

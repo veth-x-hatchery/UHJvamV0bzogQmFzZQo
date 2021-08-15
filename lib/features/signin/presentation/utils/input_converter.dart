@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_login/core/error/failures.dart';
+import 'package:vethx_beta/core/error/failures.dart';
 
 class InputConverter {
   Either<Failure, int> stringToUnsignedInteger(String str) {

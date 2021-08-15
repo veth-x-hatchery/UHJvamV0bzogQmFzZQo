@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:vethx_login/core/utils/logger.dart';
-import 'package:vethx_login/features/signin/presentation/pages/sign_in_page.dart';
-import 'package:vethx_login/features/signin/presentation/routes/navigation.dart';
-import 'package:vethx_login/features/signin/presentation/widgets/sign_in.widgets.dart';
-import 'package:vethx_login/ui/alpha/alpha.page.dart';
+import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
+import 'package:vethx_beta/features/signin/presentation/routes/navigation.dart';
+import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
 class NavigationRoutes {
   static const String slash = '/';

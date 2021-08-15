@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:vethx_login/core/api/api.dart';
-import 'package:vethx_login/core/error/exceptions.dart';
-import 'package:vethx_login/features/signin/data/models/user_model.dart';
-import 'package:vethx_login/features/signin/domain/entities/user_entity.dart';
+import 'package:vethx_beta/core/api/api.dart';
+import 'package:vethx_beta/core/error/exceptions.dart';
+import 'package:vethx_beta/features/signin/data/models/user_model.dart';
+import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 
 abstract class ISignInRemoteSource {
   /// Throws a [ServerException] for all error codes.

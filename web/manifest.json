@@ -1,6 +1,6 @@
 {
-    "name": "vethx_login",
-    "short_name": "vethx_login",
+    "name": "vethx_beta",
+    "short_name": "vethx_beta",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

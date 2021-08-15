@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 

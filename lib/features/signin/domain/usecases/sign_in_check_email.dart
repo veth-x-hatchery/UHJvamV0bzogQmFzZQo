@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:vethx_login/core/error/failures.dart';
-import 'package:vethx_login/core/usecases/usecase.dart';
-import 'package:vethx_login/features/signin/domain/repositories/sign_in_repository.dart';
-import 'package:vethx_login/features/signin/presentation/utils/custom_validators.dart';
+import 'package:vethx_beta/core/error/failures.dart';
+import 'package:vethx_beta/core/usecases/usecase.dart';
+import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
+import 'package:vethx_beta/features/signin/presentation/utils/custom_validators.dart';
 
 class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
   final ISignInRepository _signInRepository;
