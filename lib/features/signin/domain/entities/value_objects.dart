@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:meta/meta.dart';
 import 'package:vethx_login/features/signin/domain/core/failures.dart';
+import 'package:vethx_login/features/signin/domain/core/value_objects.dart';
 
-@immutable
-class EmailAddress {
+class EmailAddress extends ValueObject<String> {
+  @override
   final Either<ValueFailure<String>, String> value;
 
   factory EmailAddress(String input) {
@@ -11,8 +11,17 @@ class EmailAddress {
   }
 
   const EmailAddress._(this.value);
+}
 
-  // toString, equals, hashCode...
+class Password extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Password(String input) {
+    return Password._(validatePassword(input));
+  }
+
+  const Password._(this.value);
 }
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
@@ -25,13 +34,11 @@ Either<ValueFailure<String>, String> validateEmailAddress(String input) {
   }
 }
 
-/*
-void f() {
-  try {
-  final email = EmailAddress('pazzwrd');
-  } on InvalidEmailException catch (e) {
-    // Do some exception handling here
+Either<ValueFailure<String>, String> validatePassword(String input) {
+  // You can also add some advanced password checks (uppercase/lowercase, at least 1 number, ...)
+  if (input.length >= 6) {
+    return right(input);
+  } else {
+    return left(ValueFailure.shortPassword(failedValue: input));
   }
-  // If you have multiple validators, remember to catch their exceptions too
-} 
-*/
+}
