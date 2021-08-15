@@ -67,12 +67,12 @@ class _SignInOptionsState extends State<SignInOptions> {
           text: 'Sign in with email',
           textColor: Colors.white,
           color: Colors.teal[700],
-          onPressed: () =>
-              // ignore: prefer_const_constructors
-              BlocProvider.of<SignInBloc>(context).goToPage(SignInPageGoTo(
-            from: SignInPageRoutes.signInOptions,
-            to: SignInPageRoutes.emailEntry,
-          )),
+          onPressed: () => BlocProvider.of<SignInBloc>(context).goToPage(
+            const SignInPageGoTo(
+              from: SignInPageRoutes.signInOptions,
+              to: SignInPageRoutes.emailEntry,
+            ),
+          ),
         ),
       ],
     );
