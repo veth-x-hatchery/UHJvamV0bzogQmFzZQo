@@ -40,7 +40,7 @@ void main() {
           ? Right(email)
           : Left(expectedFailure ??
               InvalidEmailFailure(
-                message: CustomValidatorsMessages.invalidEmail,
+                message: InvalidEmailFailure.invalidEmail,
               )),
     );
   }
@@ -71,11 +71,11 @@ void main() {
     );
 
     test(
-      'should emit [InvalidEmailFailure(message: CustomValidatorsMessages.invalidEmail)] when the input is invalid',
+      'should emit [InvalidEmailFailure(message: InvalidEmailFailure.invalidEmail)] when the input is invalid',
       () async {
         // arrange
         final expectedFailure =
-            InvalidEmailFailure(message: CustomValidatorsMessages.invalidEmail);
+            InvalidEmailFailure(message: InvalidEmailFailure.invalidEmail);
 
         _setUpEmailAnalysis(
           email: 'asdf@',
@@ -98,11 +98,11 @@ void main() {
     );
 
     test(
-      'should emit [InvalidEmailFailure(message: CustomValidatorsMessages.invalidEmptyEmail)] when the input is not given',
+      'should emit [InvalidEmailFailure(message: InvalidEmailFailure.invalidEmptyEmail)] when the input is not given',
       () async {
         // arrange
-        final expectedFailure = InvalidEmailFailure(
-            message: CustomValidatorsMessages.invalidEmptyEmail);
+        final expectedFailure =
+            InvalidEmailFailure(message: InvalidEmailFailure.invalidEmptyEmail);
 
         _setUpEmailAnalysis(
           email: '',

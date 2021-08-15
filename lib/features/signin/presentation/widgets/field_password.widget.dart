@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_login/features/signin/presentation/utils/custom_validators.dart';
 import 'package:vethx_login/ui/widgets/shared/forms/field_styles.dart';
-import 'package:vethx_login/ui/widgets/validators/custom.validators.dart';
 
 class PasswordFormField extends StatefulWidget {
   const PasswordFormField({
@@ -9,13 +9,13 @@ class PasswordFormField extends StatefulWidget {
     required this.passwordFormKey,
     required this.passwordFocusNode,
     required this.hidePassword,
-    this.dica,
+    this.hint,
   }) : super(key: key);
 
   final GlobalKey<FormState> passwordFormKey;
   final FocusNode passwordFocusNode;
   final void Function() hidePassword;
-  final String? dica;
+  final String? hint;
 
   @override
   _PasswordFormFieldState createState() => _PasswordFormFieldState();
@@ -46,10 +46,10 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
         ),
         style: Theme.of(context).textTheme.bodyText1,
         validator: (value) {
-          if (!CustomValidators.validatePassword(value)) {
-            return Texts.invalidPassword;
-          }
-          return null;
+          CustomValidators().emailAnalysis(value).fold(
+                (l) => l.message,
+                (r) => null,
+              );
         },
         onEditingComplete: widget.hidePassword,
         // onSaved: (input) => _gerenciador.senha = input!,

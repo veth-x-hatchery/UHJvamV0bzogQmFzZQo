@@ -15,7 +15,10 @@ class SignInAnonimously extends SignInEvent {}
 
 class SignInCheckEmail extends SignInEvent {
   final String email;
+  final SignInPageRoutes fromPage;
+
   const SignInCheckEmail({
+    required this.fromPage,
     required this.email,
   });
   @override

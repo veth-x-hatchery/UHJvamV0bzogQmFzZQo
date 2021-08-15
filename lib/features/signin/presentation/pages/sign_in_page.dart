@@ -1,14 +1,12 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vethx_login/core/blocs/app_state.dart';
-import 'package:vethx_login/core/blocs/core_business_logic.dart';
-import 'package:vethx_login/core/blocs/core_services.dart';
-import 'package:vethx_login/ui/widgets/login/sign_in_email_entry.widget.dart';
-import 'package:vethx_login/ui/widgets/login/sign_in_options.widget.dart';
-import 'package:vethx_login/ui/widgets/login/sign_in_password_entry.widget.dart';
-import 'package:vethx_login/ui/widgets/login/sign_in_register_entry.widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vethx_login/features/signin/presentation/bloc/sign_in_bloc.dart';
+import 'package:vethx_login/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_login/injection_container.dart';
 import 'package:vethx_login/ui/widgets/transitions/slide_route.dart';
 
 enum SignInPageRoutes {
@@ -18,13 +16,18 @@ enum SignInPageRoutes {
   registerEmailSignIn,
 }
 
-class SignInPageGoTo {
+class SignInPageGoTo extends Equatable {
   final SignInPageRoutes from;
   final SignInPageRoutes to;
-  SignInPageGoTo({required this.from, required this.to});
+
+  const SignInPageGoTo({required this.from, required this.to});
 
   @override
   String toString() => 'Go from $from to $to';
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [from, to];
 }
 
 class SignInPage extends StatefulWidget {
@@ -32,10 +35,17 @@ class SignInPage extends StatefulWidget {
 
   @override
   _SignInPageState createState() => _SignInPageState();
+
+  static Widget create(BuildContext context) {
+    return BlocProvider(
+      create: (_) => sl<SignInBloc>(),
+      child: SignInPage(),
+    );
+  }
 }
 
 class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
-  late SignInNavigationBloc _signInNavigation;
+  late SignInBloc _signInNavigation;
 
   Stream<SignInPageGoTo>? _previousStream;
   StreamSubscription? _streamSubscription;
@@ -74,8 +84,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
 
   @override
   void didChangeDependencies() {
-    _signInNavigation =
-        AppStateContainer.of(context).blocProvider.signInNavigation;
+    _signInNavigation = BlocProvider.of<SignInBloc>(context);
     _listenGoTo(_signInNavigation.goTo);
     FocusScope.of(context).unfocus();
     super.didChangeDependencies();

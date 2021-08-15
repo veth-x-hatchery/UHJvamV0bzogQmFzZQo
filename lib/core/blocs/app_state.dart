@@ -4,7 +4,7 @@ import 'package:vethx_login/core/blocs/core_services.dart';
 
 class AppStateContainer extends StatefulWidget {
   final Widget child;
-  final BlocProvider blocProvider;
+  final RootBLoCProvider blocProvider;
   final ServiceProvider serviceProvider;
 
   const AppStateContainer({
@@ -32,7 +32,7 @@ class AppStateContainer extends StatefulWidget {
 }
 
 class AppState extends State<AppStateContainer> {
-  BlocProvider get blocProvider => widget.blocProvider;
+  RootBLoCProvider get blocProvider => widget.blocProvider;
   ServiceProvider get serviceProvider => widget.serviceProvider;
 
   @override
@@ -70,7 +70,7 @@ class _AppStoreContainer extends InheritedWidget {
   }) : super(key: key, child: child);
 
   final AppState appData;
-  final BlocProvider blocProvider;
+  final RootBLoCProvider blocProvider;
   final ServiceProvider serviceProvider;
 
   /// This method is called

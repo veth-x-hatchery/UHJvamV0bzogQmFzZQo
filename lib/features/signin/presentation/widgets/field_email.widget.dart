@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_login/features/signin/presentation/utils/custom_validators.dart';
 import 'package:vethx_login/ui/widgets/shared/forms/field_styles.dart';
 import 'package:vethx_login/ui/widgets/validators/custom.validators.dart';
 
@@ -8,18 +9,21 @@ class EmailFormField extends StatelessWidget {
     Key? key,
     required this.emailFormKey,
     required this.emailFocusNode,
+    required this.emailEditingController,
     required this.emailValidate,
   }) : super(key: key);
 
   final GlobalKey<FormState> emailFormKey;
   final FocusNode emailFocusNode;
   final void Function() emailValidate;
+  final TextEditingController emailEditingController;
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: emailFormKey,
       child: TextFormField(
+        controller: emailEditingController,
         // initialValue: _gerenciador.email,
         focusNode: emailFocusNode,
         autofocus: true,
@@ -30,10 +34,10 @@ class EmailFormField extends StatelessWidget {
         ),
         style: Theme.of(context).textTheme.bodyText1,
         validator: (value) {
-          if (!CustomValidators.isValidEmail(value)) {
-            return Texts.invalidEmail;
-          }
-          return null;
+          CustomValidators().emailAnalysis(value).fold(
+                (l) => l.message,
+                (r) => null,
+              );
         },
         onEditingComplete: emailValidate,
         // onSaved: (input) => _gerenciador.email = input!,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vethx_login/core/consts/size_config.dart';
-import 'package:vethx_login/ui/login/sign_in_page.dart';
+import 'package:vethx_login/features/signin/presentation/pages/sign_in_page.dart';
 
 class AlphaPage extends StatelessWidget {
   const AlphaPage({
@@ -11,7 +11,7 @@ class AlphaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      body: SignInPage(),
+      body: SignInPage.create(context),
     );
   }
 }

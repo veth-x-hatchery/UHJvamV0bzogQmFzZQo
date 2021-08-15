@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:vethx_login/core/blocs/app_state.dart';
-import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_login/core/consts/size_config.dart';
+import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_login/core/notifications/messages.dart';
-import 'package:vethx_login/ui/login/sign_in_page.dart';
-import 'package:vethx_login/ui/widgets/login/field_password.widget.dart';
+import 'package:vethx_login/features/signin/presentation/bloc/sign_in_bloc.dart';
+import 'package:vethx_login/features/signin/presentation/pages/sign_in_page.dart';
+import 'package:vethx_login/features/signin/presentation/widgets/field_password.widget.dart';
 import 'package:vethx_login/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_login/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_login/ui/widgets/shared/forms/logo_text_loading.widget.dart';
@@ -51,13 +52,10 @@ class _SignInPasswordEntryState extends State<SignInPasswordEntry> {
         setState(() {
           _loading = false;
         });
-        AppStateContainer.of(context)
-            .blocProvider
-            .signInNavigation
-            .goToPage(SignInPageGoTo(
-              from: SignInPageRoutes.passwordEntry,
-              to: SignInPageRoutes.emailEntry,
-            ));
+        BlocProvider.of<SignInBloc>(context).goToPage(SignInPageGoTo(
+          from: SignInPageRoutes.passwordEntry,
+          to: SignInPageRoutes.emailEntry,
+        ));
       });
     }
   }
@@ -126,10 +124,8 @@ class _SignInPasswordEntryState extends State<SignInPasswordEntry> {
             ),
             onPressed: _loading
                 ? null
-                : () => AppStateContainer.of(context)
-                    .blocProvider
-                    .signInNavigation
-                    .goToPage(SignInPageGoTo(
+                : () => BlocProvider.of<SignInBloc>(context)
+                        .goToPage(SignInPageGoTo(
                       from: SignInPageRoutes.passwordEntry,
                       to: SignInPageRoutes.emailEntry,
                     )),

@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:vethx_login/core/blocs/app_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_login/core/consts/size_config.dart';
 import 'package:vethx_login/core/notifications/messages.dart';
-import 'package:vethx_login/ui/login/sign_in_page.dart';
-import 'package:vethx_login/ui/widgets/login/sign_in_button.widget.dart';
+import 'package:vethx_login/features/signin/presentation/bloc/sign_in_bloc.dart';
+import 'package:vethx_login/features/signin/presentation/pages/sign_in_page.dart';
+import 'package:vethx_login/features/signin/presentation/widgets/sign_in_button.widget.dart';
 import 'package:vethx_login/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_login/ui/widgets/shared/forms/logo_text_loading.widget.dart';
 
@@ -68,13 +67,11 @@ class _SignInOptionsState extends State<SignInOptions> {
           text: 'Sign in with email',
           textColor: Colors.white,
           color: Colors.teal[700],
-          onPressed: () => AppStateContainer.of(context)
-              .blocProvider
-              .signInNavigation
-              .goToPage(SignInPageGoTo(
-                from: SignInPageRoutes.signInOptions,
-                to: SignInPageRoutes.emailEntry,
-              )),
+          onPressed: () =>
+              BlocProvider.of<SignInBloc>(context).goToPage(SignInPageGoTo(
+            from: SignInPageRoutes.signInOptions,
+            to: SignInPageRoutes.emailEntry,
+          )),
         ),
       ],
     );

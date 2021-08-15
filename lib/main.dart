@@ -4,8 +4,10 @@ import 'package:vethx_login/core/blocs/core_business_logic.dart';
 import 'package:vethx_login/core/blocs/core_services.dart';
 import 'package:vethx_login/core/routes/navigation.dart';
 import 'package:vethx_login/ui/alpha/alpha.page.dart';
+import 'injection_container.dart' as di;
 
-void main() {
+Future<void> main() async {
+  await di.init();
   runApp(App());
 }
 
@@ -17,7 +19,7 @@ class App extends StatelessWidget {
       serviceProvider: ServiceProvider(
         navigationService: navigationService,
       ),
-      blocProvider: BlocProvider(
+      blocProvider: RootBLoCProvider(
         signInNavigation: SignInNavigationBloc(),
       ),
       child: MaterialApp(
