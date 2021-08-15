@@ -5,11 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_login/features/signin/presentation/bloc/sign_in_bloc.dart';
+import 'package:vethx_login/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_login/injection_container.dart';
-import 'package:vethx_login/ui/widgets/login/sign_in_email_entry.widget.dart';
-import 'package:vethx_login/ui/widgets/login/sign_in_options.widget.dart';
-import 'package:vethx_login/ui/widgets/login/sign_in_password_entry.widget.dart';
-import 'package:vethx_login/ui/widgets/login/sign_in_register_entry.widget.dart';
 import 'package:vethx_login/ui/widgets/transitions/slide_route.dart';
 
 enum SignInPageRoutes {

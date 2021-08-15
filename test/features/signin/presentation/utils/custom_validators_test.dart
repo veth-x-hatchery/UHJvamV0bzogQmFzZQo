@@ -9,51 +9,101 @@ void main() {
     customValidators = CustomValidators();
   });
 
-  group('custom email validators', () {
-    test(
-      'should return correct invalid email message when the value is empty',
-      () async {
-        // arrange
+  group('custom validators', () {
+    group('email analysis', () {
+      test(
+        'should return correct invalid email message when the value is empty',
+        () async {
+          // arrange
 
-        final expectedFailure = InvalidEmailFailure(
-            message: CustomValidatorsMessages.invalidEmptyEmail);
+          final expectedFailure = InvalidEmailFailure(
+            message: InvalidEmailFailure.invalidEmptyEmail,
+          );
 
-        // act
+          // act
 
-        final result = customValidators.emailAnalysis(null);
+          final result = customValidators.emailAnalysis(null);
 
-        // assert
+          // assert
 
-        expect(result, Left(expectedFailure));
+          expect(result, Left(expectedFailure));
 
-        result.fold(
-          (l) => expect(l.message, expectedFailure.message),
-          (r) => null,
-        );
-      },
-    );
+          result.fold(
+            (l) => expect(l.message, expectedFailure.message),
+            (r) => null,
+          );
+        },
+      );
+      test(
+        'should return correct invalid email message when the email is not valid',
+        () async {
+          // arrange
 
-    test(
-      'should return correct invalid email message when the email is not valid',
-      () async {
-        // arrange
+          final expectedFailure =
+              InvalidEmailFailure(message: InvalidEmailFailure.invalidEmail);
 
-        final expectedFailure =
-            InvalidEmailFailure(message: CustomValidatorsMessages.invalidEmail);
+          // act
 
-        // act
+          final result = customValidators.emailAnalysis('user@domain');
 
-        final result = customValidators.emailAnalysis('user@domain');
+          // assert
 
-        // assert
+          expect(result, Left(expectedFailure));
 
-        expect(result, Left(expectedFailure));
+          result.fold(
+            (l) => expect(l.message, expectedFailure.message),
+            (r) => null,
+          );
+        },
+      );
+    });
 
-        result.fold(
-          (l) => expect(l.message, expectedFailure.message),
-          (r) => null,
-        );
-      },
-    );
+    group('password analysis', () {
+      test(
+        'should return correct invalid password message when the value is empty',
+        () async {
+          // arrange
+
+          final expectedFailure = InvalidPasswordFailure(
+            message: InvalidPasswordFailure.invalidPasswordEmpty,
+          );
+
+          // act
+
+          final result = customValidators.passwordAnalysis(null);
+
+          // assert
+
+          expect(result, Left(expectedFailure));
+
+          result.fold(
+            (l) => expect(l.message, expectedFailure.message),
+            (r) => null,
+          );
+        },
+      );
+      test(
+        'should return correct invalid password message when the password lenght is not valid',
+        () async {
+          // arrange
+
+          final expectedFailure = InvalidPasswordFailure(
+              message: InvalidPasswordFailure.invalidPasswordLenght);
+
+          // act
+
+          final result = customValidators.passwordAnalysis('12345');
+
+          // assert
+
+          expect(result, Left(expectedFailure));
+
+          result.fold(
+            (l) => expect(l.message, expectedFailure.message),
+            (r) => null,
+          );
+        },
+      );
+    });
   });
 }

@@ -23,23 +23,6 @@ class EmailAndPasswordValidators {
   final String invalidPasswordTextErrorText = Texts.invalidPassword;
 }
 
-class CustomValidators {
-  static bool isValidEmail(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return false;
-    }
-    return RegExp(r"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$")
-        .hasMatch(value);
-  }
-
-  static bool validatePassword(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return false;
-    }
-    return true;
-  }
-}
-
 class DecimalTextInputFormatter extends TextInputFormatter {
   DecimalTextInputFormatter({required this.decimalRange})
       : assert(decimalRange > 0,

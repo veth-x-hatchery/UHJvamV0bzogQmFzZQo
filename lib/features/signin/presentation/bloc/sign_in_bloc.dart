@@ -9,7 +9,7 @@ import 'package:vethx_login/features/signin/domain/usecases/sign_in_check_email.
     as a;
 import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
 import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_google.dart';
-import 'package:vethx_login/ui/login/sign_in_page.dart';
+import 'package:vethx_login/features/signin/presentation/pages/sign_in_page.dart';
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';

@@ -9,7 +9,7 @@ import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_email_a
 import 'package:vethx_login/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_login/features/signin/presentation/bloc/sign_in_bloc.dart';
 import 'package:vethx_login/features/signin/presentation/utils/custom_validators.dart';
-import 'package:vethx_login/ui/login/sign_in_page.dart';
+import 'package:vethx_login/features/signin/presentation/pages/sign_in_page.dart';
 
 import 'sign_in_bloc_test.mocks.dart';
 
@@ -169,10 +169,10 @@ void main() {
     });
 
     test(
-      'should emit [SignInError(message: CustomValidatorsMessages.invalidEmail)] when email is invalid',
+      'should emit [SignInError(message: InvalidEmailFailure.invalidEmail)] when email is invalid',
       () async {
         // arrange
-        const errorMessage = CustomValidatorsMessages.invalidEmail;
+        const errorMessage = InvalidEmailFailure.invalidEmail;
 
         when(_mockSignInCheckIfEmailIsInUse.call(any))
             .thenAnswer((_) async => Left(InvalidEmailFailure(
@@ -197,10 +197,10 @@ void main() {
     );
 
     test(
-      'should emit [SignInError(message: CustomValidatorsMessages.invalidEmptyEmail)] when email is not given',
+      'should emit [SignInError(message: InvalidEmailFailure.invalidEmptyEmail)] when email is not given',
       () async {
         // arrange
-        const errorMessage = CustomValidatorsMessages.invalidEmptyEmail;
+        const errorMessage = InvalidEmailFailure.invalidEmptyEmail;
 
         when(_mockSignInCheckIfEmailIsInUse.call(any))
             .thenAnswer((_) async => Left(InvalidEmailFailure(
