@@ -19,7 +19,7 @@ class App extends StatelessWidget {
       serviceProvider: ServiceProvider(
         navigationService: navigationService,
       ),
-      blocProvider: BlocProvider(
+      blocProvider: RootBLoCProvider(
         signInNavigation: SignInNavigationBloc(),
       ),
       child: MaterialApp(
