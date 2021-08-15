@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vethx_login/core/error/exceptions.dart';
 import 'package:vethx_login/features/signin/data/models/user_model.dart';
-import 'package:vethx_login/features/signin/domain/entities/user_entity.dart';
 
+// ignore: constant_identifier_names
 const String CACHED_CURRENT_USER = 'CACHED_CURRENT_USER';
 
 abstract class ISignInLocalSource {
@@ -14,8 +14,6 @@ abstract class ISignInLocalSource {
   Future<void> cacheCurrentUser(UserModel user);
 
   Future<void> signOut();
-
-  Future<Stream<User>> get onAuthStateChange;
 }
 
 class SignInLocalSource implements ISignInLocalSource {
@@ -40,10 +38,6 @@ class SignInLocalSource implements ISignInLocalSource {
     return Future.value(
         UserModel.fromJson(json.decode(jsonString) as Map<String, dynamic>));
   }
-
-  @override
-  // TODO: implement onAuthStateChange
-  Future<Stream<User>> get onAuthStateChange => throw UnimplementedError();
 
   @override
   Future<void> signOut() {
