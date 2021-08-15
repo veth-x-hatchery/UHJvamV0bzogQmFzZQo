@@ -11,7 +11,7 @@ class AlphaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      body: SignInPage(),
+      body: SignInPage.create(context),
     );
   }
 }

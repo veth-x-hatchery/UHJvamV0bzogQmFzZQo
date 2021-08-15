@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_login/core/blocs/app_state.dart';
 import 'package:vethx_login/core/blocs/core_business_logic.dart';
-import 'package:vethx_login/core/blocs/core_services.dart';
+import 'package:vethx_login/features/signin/presentation/bloc/sign_in_bloc.dart';
+import 'package:vethx_login/injection_container.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_email_entry.widget.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_options.widget.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_password_entry.widget.dart';
@@ -32,6 +34,13 @@ class SignInPage extends StatefulWidget {
 
   @override
   _SignInPageState createState() => _SignInPageState();
+
+  static Widget create(BuildContext context) {
+    return BlocProvider(
+      create: (_) => sl<SignInBloc>(),
+      child: SignInPage(),
+    );
+  }
 }
 
 class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {

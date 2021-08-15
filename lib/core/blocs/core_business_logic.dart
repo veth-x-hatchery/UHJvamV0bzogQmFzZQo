@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:vethx_login/core/utils/logger.dart';
 import 'package:vethx_login/ui/login/sign_in_page.dart';
 
-class BlocProvider {
+class RootBLoCProvider {
   SignInNavigationBloc signInNavigation;
-  BlocProvider({
+  RootBLoCProvider({
     required this.signInNavigation,
   });
 }
