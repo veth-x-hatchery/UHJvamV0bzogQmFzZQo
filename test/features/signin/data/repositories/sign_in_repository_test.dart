@@ -5,10 +5,10 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
 import 'package:vethx_beta/core/error/failures.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
-import 'package:vethx_beta/features/signin/data/datasources/sign_in_local_data_source.dart';
-import 'package:vethx_beta/features/signin/data/datasources/sign_in_remote_data_source.dart';
-import 'package:vethx_beta/features/signin/data/models/user_model.dart';
-import 'package:vethx_beta/features/signin/data/repositories/sign_in_repository.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_remote_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/models/user_model.dart';
+import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 
 import 'sign_in_repository_test.mocks.dart';
 

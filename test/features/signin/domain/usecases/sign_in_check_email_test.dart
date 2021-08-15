@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/error/failures.dart';
-import 'package:vethx_beta/features/signin/data/repositories/sign_in_repository.dart';
+import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
 import 'package:vethx_beta/features/signin/presentation/utils/custom_validators.dart';

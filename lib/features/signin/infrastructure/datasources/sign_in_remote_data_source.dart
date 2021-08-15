@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
-import 'package:vethx_beta/features/signin/data/models/user_model.dart';
+import 'package:vethx_beta/features/signin/infrastructure/models/user_model.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 
 abstract class ISignInRemoteSource {

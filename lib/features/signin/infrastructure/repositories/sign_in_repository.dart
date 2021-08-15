@@ -2,11 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
 import 'package:vethx_beta/core/error/failures.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
-import 'package:vethx_beta/features/signin/data/datasources/sign_in_local_data_source.dart';
-import 'package:vethx_beta/features/signin/data/datasources/sign_in_remote_data_source.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_remote_data_source.dart';
 
 class SignInRepositoryDefaultMessages {
   static const error = '';

@@ -5,8 +5,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
-import 'package:vethx_beta/features/signin/data/datasources/sign_in_local_data_source.dart';
-import 'package:vethx_beta/features/signin/data/models/user_model.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/models/user_model.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 

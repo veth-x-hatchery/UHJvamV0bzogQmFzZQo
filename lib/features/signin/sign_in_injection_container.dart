@@ -6,19 +6,19 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/api/api_setup.dart';
-import 'package:vethx_beta/features/signin/data/datasources/sign_in_local_data_source.dart';
-import 'package:vethx_beta/features/signin/data/datasources/sign_in_remote_data_source.dart';
-import 'package:vethx_beta/features/signin/data/repositories/sign_in_repository.dart';
-import 'package:vethx_beta/features/signin/domain/auth/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
+import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
-import 'package:vethx_beta/features/signin/infrastructure/firebase_auth_facade.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_remote_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_form/bloc/sign_in_form_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/utils/custom_validators.dart';
 import 'package:vethx_beta/features/signin/presentation/utils/input_converter.dart';
+import 'package:vethx_beta/features/signin/services/firebase_auth_facade.dart';
 
 import '../../core/network/network_info.dart';
 

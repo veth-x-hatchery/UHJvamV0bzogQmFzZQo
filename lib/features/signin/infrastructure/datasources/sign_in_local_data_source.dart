@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
-import 'package:vethx_beta/features/signin/data/models/user_model.dart';
+import 'package:vethx_beta/features/signin/infrastructure/models/user_model.dart';
 
 // ignore: constant_identifier_names
 const String CACHED_CURRENT_USER = 'CACHED_CURRENT_USER';

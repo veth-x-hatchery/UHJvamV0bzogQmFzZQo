@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/signin/domain/auth/auth_failure.dart';
-import 'package:vethx_beta/features/signin/domain/auth/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
+import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
 class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
@@ -84,5 +84,11 @@ class FirebaseAuthFacade implements IAuthFacade {
       Logger.e(e.message ?? 'signInWithGoogle', ex: e, stacktrace: stacktrace);
       return left(const AuthFailure.serverError());
     }
+  }
+
+  @override
+  Future<Either<AuthFailure, bool>> emailIsAlreadyInUse() {
+    // TODO: implement emailIsAlreadyInUse
+    throw UnimplementedError();
   }
 }

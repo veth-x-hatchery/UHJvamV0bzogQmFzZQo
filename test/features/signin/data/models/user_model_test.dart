@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vethx_beta/features/signin/data/models/user_model.dart';
+import 'package:vethx_beta/features/signin/infrastructure/models/user_model.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 

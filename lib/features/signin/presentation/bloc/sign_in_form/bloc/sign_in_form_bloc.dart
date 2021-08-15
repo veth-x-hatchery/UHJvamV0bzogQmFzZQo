@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:vethx_beta/features/signin/domain/auth/auth_failure.dart';
-import 'package:vethx_beta/features/signin/domain/auth/i_auth_facade.dart';
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
+import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 
 part 'sign_in_form_event.dart';

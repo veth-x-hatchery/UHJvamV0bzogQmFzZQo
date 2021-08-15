@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_beta/features/signin/domain/auth/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 
 abstract class IAuthFacade {
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
@@ -12,4 +12,5 @@ abstract class IAuthFacade {
     required Password password,
   });
   Future<Either<AuthFailure, Unit>> signInWithGoogle();
+  Future<Either<AuthFailure, bool>> emailIsAlreadyInUse();
 }
