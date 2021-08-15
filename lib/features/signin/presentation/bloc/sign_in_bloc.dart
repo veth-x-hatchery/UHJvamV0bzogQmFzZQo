@@ -35,17 +35,27 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
     if (event is SignInCheckEmail) {
-      yield* _checkEmail(
-          await _checkIfEmailIsInUse.call(a.Params(email: event.email)));
+      yield* _checkEmail(event);
     }
   }
 
-  Stream<SignInState> _checkEmail(Either<Failure, bool> usecase) async* {
+  Stream<SignInState> _checkEmail(SignInCheckEmail event) async* {
+    final usecase =
+        await _checkIfEmailIsInUse.call(a.Params(email: event.email));
     yield SignInLoading();
     yield usecase.fold(
       _mapFailureToSignStateErrorMessage,
-      (emailIsInUse) =>
-          emailIsInUse ? EmailAlreadyRegistered() : EmailNotFound(),
+      (emailIsInUse) {
+        if (event.fromPage == SignInPageRoutes.emailEntry) {
+          goToPage(SignInPageGoTo(
+            from: SignInPageRoutes.emailEntry,
+            to: emailIsInUse
+                ? SignInPageRoutes.passwordEntry
+                : SignInPageRoutes.registerEmailSignIn,
+          ));
+        }
+        return emailIsInUse ? EmailAlreadyRegistered() : EmailNotFound();
+      },
     );
   }
 

@@ -25,6 +25,7 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
 
   final _emailFormKey = GlobalKey<FormState>();
   final _emailFocusNode = FocusNode();
+  final _emailEditingController = TextEditingController();
 
   final _passwordFormKey = GlobalKey<FormState>();
   final _passwordFocusNode = FocusNode();
@@ -64,6 +65,7 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
   void dispose() {
     _emailFormKey.currentState?.dispose();
     _emailFocusNode.dispose();
+    _emailEditingController.dispose();
 
     _passwordFormKey.currentState?.dispose();
     _passwordFocusNode.dispose();
@@ -94,6 +96,7 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
               loading: _loading),
           SizedBox(height: SizeConfig.defaultEdgeSpace),
           EmailFormField(
+            emailEditingController: _emailEditingController,
             emailFormKey: _emailFormKey,
             emailFocusNode: _emailFocusNode,
             emailValidate: _validateEmail,

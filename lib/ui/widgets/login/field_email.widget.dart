@@ -8,18 +8,21 @@ class EmailFormField extends StatelessWidget {
     Key? key,
     required this.emailFormKey,
     required this.emailFocusNode,
+    required this.emailEditingController,
     required this.emailValidate,
   }) : super(key: key);
 
   final GlobalKey<FormState> emailFormKey;
   final FocusNode emailFocusNode;
   final void Function() emailValidate;
+  final TextEditingController emailEditingController;
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: emailFormKey,
       child: TextFormField(
+        controller: emailEditingController,
         // initialValue: _gerenciador.email,
         focusNode: emailFocusNode,
         autofocus: true,

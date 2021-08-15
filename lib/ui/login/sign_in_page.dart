@@ -1,10 +1,9 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vethx_login/core/blocs/app_state.dart';
-import 'package:vethx_login/core/blocs/core_business_logic.dart';
 import 'package:vethx_login/features/signin/presentation/bloc/sign_in_bloc.dart';
 import 'package:vethx_login/injection_container.dart';
 import 'package:vethx_login/ui/widgets/login/sign_in_email_entry.widget.dart';
@@ -20,13 +19,18 @@ enum SignInPageRoutes {
   registerEmailSignIn,
 }
 
-class SignInPageGoTo {
+class SignInPageGoTo extends Equatable {
   final SignInPageRoutes from;
   final SignInPageRoutes to;
-  SignInPageGoTo({required this.from, required this.to});
+
+  const SignInPageGoTo({required this.from, required this.to});
 
   @override
   String toString() => 'Go from $from to $to';
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [from, to];
 }
 
 class SignInPage extends StatefulWidget {
