@@ -9,13 +9,13 @@ class PasswordFormField extends StatefulWidget {
     required this.passwordFormKey,
     required this.passwordFocusNode,
     required this.hidePassword,
-    this.dica,
+    this.hint,
   }) : super(key: key);
 
   final GlobalKey<FormState> passwordFormKey;
   final FocusNode passwordFocusNode;
   final void Function() hidePassword;
-  final String? dica;
+  final String? hint;
 
   @override
   _PasswordFormFieldState createState() => _PasswordFormFieldState();

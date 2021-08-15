@@ -44,7 +44,7 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
-  late SignInNavigationBloc _signInNavigation;
+  late SignInBloc _signInNavigation;
 
   Stream<SignInPageGoTo>? _previousStream;
   StreamSubscription? _streamSubscription;
@@ -83,8 +83,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
 
   @override
   void didChangeDependencies() {
-    _signInNavigation =
-        AppStateContainer.of(context).blocProvider.signInNavigation;
+    _signInNavigation = BlocProvider.of<SignInBloc>(context);
     _listenGoTo(_signInNavigation.goTo);
     FocusScope.of(context).unfocus();
     super.didChangeDependencies();
