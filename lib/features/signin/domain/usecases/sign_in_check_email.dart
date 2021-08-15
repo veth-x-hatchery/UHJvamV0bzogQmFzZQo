@@ -15,18 +15,17 @@ class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
   );
 
   @override
-  Future<Either<Failure, bool>> call(Params params) {
-    final emailAnalysis = _validators.emailAnalysis(params.email);
-    return emailAnalysis.fold(
-      (failure) async => Future.value(Left(failure)),
-      (email) async => _signInRepository.emailAlreadyRegistered(email).then(
-            (registered) => registered.fold(
-              (failure) => Future.value(Left(failure)),
-              (result) => Future.value(Right(result)),
-            ),
-          ),
-    );
-  }
+  Future<Either<Failure, bool>> call(Params params) =>
+      _validators.emailAnalysis(params.email).fold(
+            (failure) async => Left(failure),
+            (validatedEmail) =>
+                _signInRepository.emailAlreadyRegistered(validatedEmail).then(
+                      (registered) => registered.fold(
+                        (failure) => Left(failure),
+                        (isAlreadyRegistered) => Right(isAlreadyRegistered),
+                      ),
+                    ),
+          );
 }
 
 class Params extends Equatable {
