@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vethx_beta/core/api/api.dart';
+import 'package:vethx_beta/core/api/api_setup.dart';
 import 'package:vethx_beta/features/signin/data/datasources/sign_in_local_data_source.dart';
 import 'package:vethx_beta/features/signin/data/datasources/sign_in_remote_data_source.dart';
 import 'package:vethx_beta/features/signin/data/repositories/sign_in_repository.dart';
@@ -23,19 +24,32 @@ import '../../core/network/network_info.dart';
 
 Future<void> signInDependenciesInjection(GetIt sl) async {
   //! External
+
   sl.registerLazySingleton(() async => SharedPreferences.getInstance());
+
   sl.registerLazySingleton(() => http.Client());
+
   sl.registerLazySingleton(() => InternetConnectionChecker());
 
   //! Core
+
   sl.registerLazySingleton(() => InputConverter());
+
   sl.registerLazySingleton(() => CustomValidators());
+
   sl.registerLazySingleton<INetworkInfo>(() => NetworkInfo(sl()));
+
+  sl.registerLazySingleton<IApiSetup>(() => ApiSetupProduction());
+
+  sl.registerLazySingleton<API>(() => API(sl<IApiSetup>()));
 
   // Data sources
 
   sl.registerLazySingleton<ISignInRemoteSource>(
-    () => SignInRemoteSource(sl<http.Client>(), sl<API>()),
+    () => SignInRemoteSource(
+      sl<http.Client>(),
+      sl<API>(),
+    ),
   );
 
   sl.registerLazySingleton<ISignInLocalSource>(
@@ -52,37 +66,50 @@ Future<void> signInDependenciesInjection(GetIt sl) async {
   );
 
   // Use cases
-  sl.registerLazySingleton(() => SignInCheckIfEmailIsInUse(
-        sl<CustomValidators>(),
-        sl<ISignInRepository>(),
-      ));
+  sl.registerLazySingleton(
+    () => SignInCheckIfEmailIsInUse(
+      sl<CustomValidators>(),
+      sl<ISignInRepository>(),
+    ),
+  );
 
-  sl.registerLazySingleton(() => SignInWithEmailAndPassword(
-        sl<ISignInRepository>(),
-      ));
+  sl.registerLazySingleton(
+    () => SignInWithEmailAndPassword(
+      sl<ISignInRepository>(),
+    ),
+  );
 
-  sl.registerLazySingleton(() => SignInWithGoogle(
-        sl<ISignInRepository>(),
-      ));
+  sl.registerLazySingleton(
+    () => SignInWithGoogle(
+      sl<ISignInRepository>(),
+    ),
+  );
 
   // Bloc
-  sl.registerFactory(() => SignInBloc(
-        sl<SignInCheckIfEmailIsInUse>(),
-        sl<SignInWithEmailAndPassword>(),
-        sl<SignInWithGoogle>(),
-      ));
+  sl.registerFactory(
+    () => SignInBloc(
+      sl<SignInCheckIfEmailIsInUse>(),
+      sl<SignInWithEmailAndPassword>(),
+      sl<SignInWithGoogle>(),
+    ),
+  );
 
   //********************************** */
 
   sl.registerLazySingleton(() => FirebaseAuth.instance);
+
   sl.registerLazySingleton(() => GoogleSignIn());
 
-  sl.registerLazySingleton<IAuthFacade>(() => FirebaseAuthFacade(
-        sl<FirebaseAuth>(),
-        sl<GoogleSignIn>(),
-      ));
+  sl.registerLazySingleton<IAuthFacade>(
+    () => FirebaseAuthFacade(
+      sl<FirebaseAuth>(),
+      sl<GoogleSignIn>(),
+    ),
+  );
 
-  sl.registerFactory<SignInFormBloc>(() => SignInFormBloc(
-        sl<IAuthFacade>(),
-      ));
+  sl.registerFactory<SignInFormBloc>(
+    () => SignInFormBloc(
+      sl<IAuthFacade>(),
+    ),
+  );
 }
