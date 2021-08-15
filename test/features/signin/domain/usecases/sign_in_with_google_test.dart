@@ -10,10 +10,16 @@ import 'sign_in_with_email_and_password_test.mocks.dart';
 void main() {
   late SignInWithGoogle _signInUseCase;
   late MockISignInRepository _mockSignInRepository;
+  late MockIAuthFacade _mockAuthFacade;
 
   setUp(() {
     _mockSignInRepository = MockISignInRepository();
-    _signInUseCase = SignInWithGoogle(_mockSignInRepository);
+    _mockAuthFacade = MockIAuthFacade();
+
+    _signInUseCase = SignInWithGoogle(
+      _mockSignInRepository,
+      _mockAuthFacade,
+    );
   });
 
   const emailTester = 'test@vethx.com';

@@ -3,9 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/error/failures.dart';
-import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
+import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
+import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/presentation/utils/custom_validators.dart';
 
 import 'sign_in_check_email_test.mocks.dart';
@@ -13,20 +14,24 @@ import 'sign_in_check_email_test.mocks.dart';
 @GenerateMocks([
   ISignInRepository,
   CustomValidators,
+  IAuthFacade,
 ])
 void main() {
   late SignInCheckIfEmailIsInUse _signInCheckIfEmailIsInUse;
 
   late MockCustomValidators _mockCustomValidators;
   late MockISignInRepository _mockSignInRepository;
+  late MockIAuthFacade _mockAuthFacade;
 
   setUp(() {
     _mockCustomValidators = MockCustomValidators();
     _mockSignInRepository = MockISignInRepository();
+    _mockAuthFacade = MockIAuthFacade();
 
     _signInCheckIfEmailIsInUse = SignInCheckIfEmailIsInUse(
       _mockCustomValidators,
       _mockSignInRepository,
+      _mockAuthFacade,
     );
   });
 

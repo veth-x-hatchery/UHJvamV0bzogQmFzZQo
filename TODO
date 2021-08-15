@@ -1,0 +1,11 @@
+1 - IAuthFacade
+
+	1 - Escrever os testes para o IAuthFacade
+	
+	2 - Refatorar os testes de UseCases
+	
+	3 - Remover o codigo desnecessario nos repositorios e datasources
+	
+	4 - Remover os Value Objects?
+		
+2 - Escrever os testes de integracao

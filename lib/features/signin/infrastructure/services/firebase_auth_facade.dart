@@ -91,4 +91,10 @@ class FirebaseAuthFacade implements IAuthFacade {
     // TODO: implement emailIsAlreadyInUse
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<AuthFailure, Unit>> signOut() {
+    // TODO: implement signOut
+    throw UnimplementedError();
+  }
 }

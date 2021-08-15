@@ -13,4 +13,5 @@ abstract class IAuthFacade {
   });
   Future<Either<AuthFailure, Unit>> signInWithGoogle();
   Future<Either<AuthFailure, bool>> emailIsAlreadyInUse();
+  Future<Either<AuthFailure, Unit>> signOut();
 }
