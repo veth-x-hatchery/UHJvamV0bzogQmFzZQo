@@ -44,13 +44,13 @@ class AppState extends State<AppStateContainer> {
       /// property
 
       appData: this,
+      blocProvider: blocProvider, serviceProvider: serviceProvider,
 
       /// Remember that this "widget.child"
       /// child is passed in from the runApp method, and it
       /// represents the rest of the widget tree
 
       child: widget.child,
-      blocProvider: blocProvider, serviceProvider: serviceProvider,
     );
   }
 

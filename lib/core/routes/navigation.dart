@@ -6,6 +6,7 @@ import 'package:vethx_beta/features/signin/presentation/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
+// ignore: avoid_classes_with_only_static_members
 class NavigationRoutes {
   static const String slash = '/';
   static const String alpha = '/alpha';
@@ -15,17 +16,18 @@ class NavigationRoutes {
         'Class: App, Method: onGenerateRoute: name ${settings.name}, arguments ${settings.arguments}');
     switch (settings.name) {
       case SignInNavigationRoutes.signIn:
-        return MaterialPageRoute<void>(builder: (_) => SignInPage());
+        return MaterialPageRoute<void>(builder: (_) => const SignInPage());
       case SignInNavigationRoutes.signInOptions:
-        return MaterialPageRoute<void>(builder: (_) => SignInOptions());
+        return MaterialPageRoute<void>(builder: (_) => const SignInOptions());
       case slash:
       default:
-        return MaterialPageRoute<void>(builder: (_) => AlphaPage());
+        return MaterialPageRoute<void>(builder: (_) => const AlphaPage());
     }
   }
 
   static Map<String, WidgetBuilder> routes() => <String, WidgetBuilder>{
-        SignInNavigationRoutes.signIn: (BuildContext context) => SignInPage(),
+        SignInNavigationRoutes.signIn: (BuildContext context) =>
+            const SignInPage(),
       };
 }
 

@@ -112,13 +112,13 @@ void main() {
         final call = _dataSource.emailAlreadyRegistered;
         // assert
         expect(() => call(notRegisteredEmail),
-            throwsA(TypeMatcher<ServerException>()));
+            throwsA(const TypeMatcher<ServerException>()));
       },
     );
   });
 
   group('get current user', () {
-    final user = UserModel(authType: 'google', email: 'test@vethx.com');
+    const user = UserModel(authType: 'google', email: 'test@vethx.com');
 
     test(
       'should perform a GET request on a URL being the endpoint and with application/json header',
@@ -156,7 +156,7 @@ void main() {
         // act
         final call = _dataSource.currentUser;
         // assert
-        expect(() => call(), throwsA(TypeMatcher<ServerException>()));
+        expect(() => call(), throwsA(const TypeMatcher<ServerException>()));
       },
     );
   });

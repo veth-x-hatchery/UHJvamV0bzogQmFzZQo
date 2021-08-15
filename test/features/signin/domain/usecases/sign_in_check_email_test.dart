@@ -39,7 +39,7 @@ void main() {
       isValid
           ? Right(email)
           : Left(expectedFailure ??
-              InvalidEmailFailure(
+              const InvalidEmailFailure(
                 message: InvalidEmailFailure.invalidEmail,
               )),
     );
@@ -56,11 +56,11 @@ void main() {
         _setUpEmailAnalysis(email: email, isValid: true);
 
         when(_mockSignInRepository.emailAlreadyRegistered(email))
-            .thenAnswer((_) async => Right(true));
+            .thenAnswer((_) async => const Right(true));
 
         // act
 
-        await _signInCheckIfEmailIsInUse.call(Params(email: email));
+        await _signInCheckIfEmailIsInUse.call(const Params(email: email));
 
         await untilCalled(_mockCustomValidators.emailAnalysis(any));
 
@@ -74,7 +74,7 @@ void main() {
       'should emit [InvalidEmailFailure(message: InvalidEmailFailure.invalidEmail)] when the input is invalid',
       () async {
         // arrange
-        final expectedFailure =
+        const expectedFailure =
             InvalidEmailFailure(message: InvalidEmailFailure.invalidEmail);
 
         _setUpEmailAnalysis(
@@ -84,11 +84,11 @@ void main() {
         );
 
         final result =
-            await _signInCheckIfEmailIsInUse.call(Params(email: email));
+            await _signInCheckIfEmailIsInUse.call(const Params(email: email));
 
         await untilCalled(_mockCustomValidators.emailAnalysis(any));
 
-        expect(result, Left(expectedFailure));
+        expect(result, const Left(expectedFailure));
 
         result.fold(
           (l) => expect(l.message, expectedFailure.message),
@@ -101,7 +101,7 @@ void main() {
       'should emit [InvalidEmailFailure(message: InvalidEmailFailure.invalidEmptyEmail)] when the input is not given',
       () async {
         // arrange
-        final expectedFailure =
+        const expectedFailure =
             InvalidEmailFailure(message: InvalidEmailFailure.invalidEmptyEmail);
 
         _setUpEmailAnalysis(
@@ -111,11 +111,11 @@ void main() {
         );
 
         final result =
-            await _signInCheckIfEmailIsInUse.call(Params(email: email));
+            await _signInCheckIfEmailIsInUse.call(const Params(email: email));
 
         await untilCalled(_mockCustomValidators.emailAnalysis(any));
 
-        expect(result, Left(expectedFailure));
+        expect(result, const Left(expectedFailure));
 
         result.fold(
           (l) => expect(l.message, expectedFailure.message),
@@ -134,16 +134,16 @@ void main() {
       _setUpEmailAnalysis(email: testEmail, isValid: true);
 
       when(_mockSignInRepository.emailAlreadyRegistered(testEmail))
-          .thenAnswer((_) async => Right(true));
+          .thenAnswer((_) async => const Right(true));
 
       // act
 
       final result =
-          await _signInCheckIfEmailIsInUse.call(Params(email: testEmail));
+          await _signInCheckIfEmailIsInUse.call(const Params(email: testEmail));
 
       // assert
 
-      expect(result, Right(true));
+      expect(result, const Right(true));
 
       verify(_mockSignInRepository.emailAlreadyRegistered(testEmail));
 
@@ -156,18 +156,20 @@ void main() {
       _setUpEmailAnalysis(email: testEmail, isValid: true);
 
       when(_mockSignInRepository.emailAlreadyRegistered(testEmail)).thenAnswer(
-          (_) async => Left(
+          (_) async => const Left(
               ServerFailure(message: SignInRepositoryDefaultMessages.error)));
 
       // act
 
       final result =
-          await _signInCheckIfEmailIsInUse.call(Params(email: testEmail));
+          await _signInCheckIfEmailIsInUse.call(const Params(email: testEmail));
 
       // assert
 
-      expect(result,
-          Left(ServerFailure(message: SignInRepositoryDefaultMessages.error)));
+      expect(
+          result,
+          const Left(
+              ServerFailure(message: SignInRepositoryDefaultMessages.error)));
 
       verify(_mockSignInRepository.emailAlreadyRegistered(testEmail));
 

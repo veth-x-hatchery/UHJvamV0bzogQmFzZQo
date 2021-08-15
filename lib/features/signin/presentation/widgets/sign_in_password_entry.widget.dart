@@ -48,11 +48,11 @@ class _SignInPasswordEntryState extends State<SignInPasswordEntry> {
       setState(() {
         _loading = true;
       });
-      await Future.delayed(Duration(seconds: 1)).then((void _) {
+      await Future.delayed(const Duration(seconds: 1)).then((void _) {
         setState(() {
           _loading = false;
         });
-        BlocProvider.of<SignInBloc>(context).goToPage(SignInPageGoTo(
+        BlocProvider.of<SignInBloc>(context).goToPage(const SignInPageGoTo(
           from: SignInPageRoutes.passwordEntry,
           to: SignInPageRoutes.emailEntry,
         ));
@@ -103,32 +103,32 @@ class _SignInPasswordEntryState extends State<SignInPasswordEntry> {
           ),
           SizedBox(height: SizeConfig.defaultEdgeSpace),
           CustomRaisedButton(
+            onPressed: _passwordVerify,
             child: Text(
               Texts.goToAccess,
               style: Theme.of(context).textTheme.button,
             ),
-            onPressed: _passwordVerify,
           ),
           SizedBox(height: SizeConfig.defaultEdgeSpace),
           TextButton(
+            onPressed: _newPassword,
             child: Text(
               Texts.forgotMyPassword,
               style: Theme.of(context).textTheme.button,
             ),
-            onPressed: _newPassword,
           ),
           TextButton(
+            onPressed: _loading
+                ? null
+                : () => BlocProvider.of<SignInBloc>(context)
+                        .goToPage(const SignInPageGoTo(
+                      from: SignInPageRoutes.passwordEntry,
+                      to: SignInPageRoutes.emailEntry,
+                    )),
             child: Text(
               Texts.changeEmail,
               style: Theme.of(context).textTheme.button,
             ),
-            onPressed: _loading
-                ? null
-                : () => BlocProvider.of<SignInBloc>(context)
-                        .goToPage(SignInPageGoTo(
-                      from: SignInPageRoutes.passwordEntry,
-                      to: SignInPageRoutes.emailEntry,
-                    )),
           ),
         ],
       ),

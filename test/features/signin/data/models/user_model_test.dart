@@ -6,7 +6,7 @@ import 'package:vethx_beta/features/signin/data/models/user_model.dart';
 import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
-  final user = UserModel(authType: 'google', email: 'test@vethx.com');
+  const user = UserModel(authType: 'google', email: 'test@vethx.com');
 
   group('fromJson', () {
     test(

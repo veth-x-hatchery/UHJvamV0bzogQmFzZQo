@@ -41,7 +41,7 @@ class SignInRepository implements ISignInRepository {
         await _localDataSource.cacheCurrentUser(user);
         return Right(user);
       } on ServerException {
-        return Left(
+        return const Left(
             ServerFailure(message: SignInRepositoryDefaultMessages.error));
       }
     } else {
@@ -49,8 +49,10 @@ class SignInRepository implements ISignInRepository {
         final local = await _localDataSource.currentUser();
         return Right(local);
       } on CacheException {
+        // ignore: prefer_const_constructors
         return Left(
-            CacheFailure(message: SignInRepositoryDefaultMessages.error));
+          const CacheFailure(message: SignInRepositoryDefaultMessages.error),
+        );
       }
     }
   }
@@ -100,13 +102,13 @@ class SignInRepository implements ISignInRepository {
   @override
   Future<Either<Failure, bool>> emailAlreadyRegistered(String email) async {
     if (!await _networkInfo.isConnected) {
-      return Left(
+      return const Left(
           ServerFailure(message: SignInRepositoryDefaultMessages.error));
     }
     try {
       return Right(await _remoteDataSource.emailAlreadyRegistered(email));
     } on ServerException {
-      return Left(
+      return const Left(
           ServerFailure(message: SignInRepositoryDefaultMessages.error));
     }
   }

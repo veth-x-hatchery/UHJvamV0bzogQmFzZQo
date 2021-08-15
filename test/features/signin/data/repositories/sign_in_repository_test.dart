@@ -46,7 +46,7 @@ void main() {
       final result = await repository.emailAlreadyRegistered(emailToCheck);
       // assert
       verify(mockRemoteDataSource.emailAlreadyRegistered(any));
-      expect(result, equals(Right(true)));
+      expect(result, equals(const Right(true)));
     });
 
     test(
@@ -69,7 +69,7 @@ void main() {
 
       expect(
           result,
-          equals(Left(
+          equals(const Left(
             ServerFailure(message: SignInRepositoryDefaultMessages.error),
           )));
     });
@@ -81,7 +81,7 @@ void main() {
       () async {
         // arrange
 
-        final user = UserModel(authType: 'google', email: 'test@vethx.com');
+        const user = UserModel(authType: 'google', email: 'test@vethx.com');
 
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
 
@@ -102,7 +102,7 @@ void main() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       });
 
-      final user = UserModel(authType: 'google', email: 'test@vethx.com');
+      const user = UserModel(authType: 'google', email: 'test@vethx.com');
 
       test('should return current user from remote data source', () async {
         // arrange
@@ -117,7 +117,7 @@ void main() {
 
         verify(mockRemoteDataSource.currentUser());
 
-        expect(result, equals(Right(user)));
+        expect(result, equals(const Right(user)));
       });
 
       test(
@@ -159,7 +159,7 @@ void main() {
 
           expect(
               result,
-              equals(Left(ServerFailure(
+              equals(const Left(ServerFailure(
                   message: SignInRepositoryDefaultMessages.error))));
         },
       );
@@ -170,7 +170,7 @@ void main() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
       });
 
-      final user = UserModel(authType: 'google', email: 'test@vethx.com');
+      const user = UserModel(authType: 'google', email: 'test@vethx.com');
 
       test(
         'should return last locally cached data when the cached data is present',
@@ -182,7 +182,7 @@ void main() {
           // assert
           verifyZeroInteractions(mockRemoteDataSource);
           verify(mockLocalDataSource.currentUser());
-          expect(result, equals(Right(user)));
+          expect(result, equals(const Right(user)));
         },
       );
 
@@ -205,7 +205,7 @@ void main() {
 
           expect(
               result,
-              equals(Left(CacheFailure(
+              equals(const Left(CacheFailure(
                   message: SignInRepositoryDefaultMessages.error))));
         },
       );

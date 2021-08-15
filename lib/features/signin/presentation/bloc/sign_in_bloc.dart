@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/core/error/failures.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart'
@@ -62,7 +60,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   SignInState _mapFailureToSignStateErrorMessage(Failure failure) =>
       failure.message == null
-          ? SignInError()
+          ? const SignInError()
           : SignInError(message: failure.message!);
 
   void goToPage(SignInPageGoTo page) {

@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'platform.widget.dart';
 
@@ -51,12 +51,10 @@ class PlatformAlertDialog extends PlatformWidget {
 
   List<Widget> _buildActions(BuildContext context) {
     final actions = <Widget>[];
-    if (cancelActionText != null) {
-      actions.add(PlatformAlertDialogAction(
-        child: Text(cancelActionText),
-        onPressed: () => Navigator.of(context).pop(false),
-      ));
-    }
+    actions.add(PlatformAlertDialogAction(
+      child: Text(cancelActionText),
+      onPressed: () => Navigator.of(context).pop(false),
+    ));
     actions.add(PlatformAlertDialogAction(
       child: Text(defaultActionText),
       onPressed: () => Navigator.of(context).pop(true),
@@ -77,16 +75,17 @@ class PlatformAlertDialogAction extends PlatformWidget {
   @override
   Widget buildCupertinoWidget(BuildContext context) {
     return CupertinoDialogAction(
-      child: child,
       onPressed: onPressed,
+      child: child,
     );
   }
 
   @override
   Widget buildMaterialWidget(BuildContext context) {
+    // ignore: deprecated_member_use
     return FlatButton(
-      child: child,
       onPressed: onPressed,
+      child: child,
     );
   }
 }
@@ -96,6 +95,7 @@ void muellerSnackBar(
   Duration duration = const Duration(seconds: 2),
   required GlobalKey<ScaffoldState> scaffoldKey,
 }) {
+  // ignore: deprecated_member_use
   scaffoldKey.currentState?.showSnackBar(
     SnackBar(
       content: Text(message, textAlign: TextAlign.center),

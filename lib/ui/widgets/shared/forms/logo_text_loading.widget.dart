@@ -20,7 +20,7 @@ class LogoTextLoading extends StatelessWidget {
       height: size,
       child: Center(
         child: loading
-            ? GenericProgressIndicator()
+            ? const GenericProgressIndicator()
             : Text(
                 title ?? 'Sign in',
                 textAlign: TextAlign.center,

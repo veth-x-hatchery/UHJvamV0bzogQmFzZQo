@@ -30,7 +30,7 @@ class App extends StatelessWidget {
         // initialRoute: NavigationRoutes.alpha,
         navigatorObservers: [LoggingNavigationObserver()],
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: AlphaPage(),
+        home: const AlphaPage(),
       ),
     );
   }

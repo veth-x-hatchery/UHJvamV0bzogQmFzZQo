@@ -23,7 +23,7 @@ class _SignInOptionsState extends State<SignInOptions> {
       return;
     }
     setState(() => _loading = !_loading);
-    await Future.delayed(Duration(seconds: 1)).then((void _) {
+    await Future.delayed(const Duration(seconds: 1)).then((void _) {
       vethxNotify(
         context,
         VethxNotification(
@@ -57,7 +57,7 @@ class _SignInOptionsState extends State<SignInOptions> {
           assetName: 'assets/images/facebook-logo.png',
           text: 'Sign in with Facebook',
           textColor: Colors.white,
-          color: Color(0xFF334D92),
+          color: const Color(0xFF334D92),
           // ignore: avoid_returning_null_for_void
           onPressed: _signIn,
         ),
@@ -68,6 +68,7 @@ class _SignInOptionsState extends State<SignInOptions> {
           textColor: Colors.white,
           color: Colors.teal[700],
           onPressed: () =>
+              // ignore: prefer_const_constructors
               BlocProvider.of<SignInBloc>(context).goToPage(SignInPageGoTo(
             from: SignInPageRoutes.signInOptions,
             to: SignInPageRoutes.emailEntry,

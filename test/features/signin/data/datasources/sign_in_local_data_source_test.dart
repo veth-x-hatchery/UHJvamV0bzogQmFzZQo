@@ -48,13 +48,13 @@ void main() {
         // act
         final call = dataSource.currentUser;
         // assert
-        expect(() => call(), throwsA(TypeMatcher<CacheException>()));
+        expect(() => call(), throwsA(const TypeMatcher<CacheException>()));
       },
     );
   });
 
   group('cache current user', () {
-    final user = UserModel(
+    const user = UserModel(
       email: 'test@vethx.com',
       authType: 'google',
     );

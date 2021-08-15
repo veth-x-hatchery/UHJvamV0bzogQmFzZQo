@@ -20,7 +20,6 @@ class CustomRaisedButton extends StatelessWidget {
     return SizedBox(
       height: height,
       child: ElevatedButton(
-        child: child,
         style: ElevatedButton.styleFrom(
           // padding: EdgeInsets.zero,
           primary: color,
@@ -35,6 +34,7 @@ class CustomRaisedButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
+        child: child,
       ),
     );
   }

@@ -16,7 +16,7 @@ void main() {
         () async {
           // arrange
 
-          final expectedFailure = InvalidEmailFailure(
+          const expectedFailure = InvalidEmailFailure(
             message: InvalidEmailFailure.invalidEmptyEmail,
           );
 
@@ -26,7 +26,7 @@ void main() {
 
           // assert
 
-          expect(result, Left(expectedFailure));
+          expect(result, const Left(expectedFailure));
 
           result.fold(
             (l) => expect(l.message, expectedFailure.message),
@@ -39,7 +39,7 @@ void main() {
         () async {
           // arrange
 
-          final expectedFailure =
+          const expectedFailure =
               InvalidEmailFailure(message: InvalidEmailFailure.invalidEmail);
 
           // act
@@ -48,7 +48,7 @@ void main() {
 
           // assert
 
-          expect(result, Left(expectedFailure));
+          expect(result, const Left(expectedFailure));
 
           result.fold(
             (l) => expect(l.message, expectedFailure.message),
@@ -64,7 +64,7 @@ void main() {
         () async {
           // arrange
 
-          final expectedFailure = InvalidPasswordFailure(
+          const expectedFailure = InvalidPasswordFailure(
             message: InvalidPasswordFailure.invalidPasswordEmpty,
           );
 
@@ -74,7 +74,7 @@ void main() {
 
           // assert
 
-          expect(result, Left(expectedFailure));
+          expect(result, const Left(expectedFailure));
 
           result.fold(
             (l) => expect(l.message, expectedFailure.message),
@@ -87,7 +87,7 @@ void main() {
         () async {
           // arrange
 
-          final expectedFailure = InvalidPasswordFailure(
+          const expectedFailure = InvalidPasswordFailure(
               message: InvalidPasswordFailure.invalidPasswordLenght);
 
           // act
@@ -96,7 +96,7 @@ void main() {
 
           // assert
 
-          expect(result, Left(expectedFailure));
+          expect(result, const Left(expectedFailure));
 
           result.fold(
             (l) => expect(l.message, expectedFailure.message),

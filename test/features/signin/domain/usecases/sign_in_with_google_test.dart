@@ -17,13 +17,13 @@ void main() {
   });
 
   const emailTester = 'test@vethx.com';
-  final user = User(email: emailTester);
+  const user = User(email: emailTester);
   group('sign in process', () {
     test('should get user from the repository with google sign in', () async {
       // arrange
 
       when(_mockSignInRepository.signInWithGoogle())
-          .thenAnswer((_) async => Right(user));
+          .thenAnswer((_) async => const Right(user));
 
       // act
 
@@ -31,7 +31,7 @@ void main() {
 
       // assert
 
-      expect(result, Right(user));
+      expect(result, const Right(user));
 
       verify(_mockSignInRepository.signInWithGoogle());
 

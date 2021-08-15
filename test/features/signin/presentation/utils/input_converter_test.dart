@@ -18,7 +18,7 @@ void main() {
         // act
         final result = inputConverter.stringToUnsignedInteger(str);
         // assert
-        expect(result, Right(123));
+        expect(result, const Right(123));
       },
     );
   });

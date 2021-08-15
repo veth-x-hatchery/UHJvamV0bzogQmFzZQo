@@ -39,7 +39,7 @@ class SignInPage extends StatefulWidget {
   static Widget create(BuildContext context) {
     return BlocProvider(
       create: (_) => sl<SignInBloc>(),
-      child: SignInPage(),
+      child: const SignInPage(),
     );
   }
 }
@@ -62,22 +62,22 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
       case SignInPageRoutes.passwordEntry:
         Navigator.pushReplacement(
           context,
-          SlideLeftRoute<void>(page: SignInPasswordEntry()),
+          SlideLeftRoute<void>(page: const SignInPasswordEntry()),
         );
         break;
       case SignInPageRoutes.registerEmailSignIn:
         Navigator.pushReplacement(
           context,
-          SlideLeftRoute<void>(page: SignInRegisterEntry()),
+          SlideLeftRoute<void>(page: const SignInRegisterEntry()),
         );
         break;
       case SignInPageRoutes.emailEntry:
       default:
         page.from == SignInPageRoutes.signInOptions
             ? Navigator.push(
-                context, SlideLeftRoute<void>(page: SignInEmailEntry()))
+                context, SlideLeftRoute<void>(page: const SignInEmailEntry()))
             : Navigator.pushReplacement(
-                context, SlideLeftRoute<void>(page: SignInEmailEntry()));
+                context, SlideLeftRoute<void>(page: const SignInEmailEntry()));
         break;
     }
   }
@@ -103,7 +103,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),
-      body: SignInOptions(),
+      body: const SignInOptions(),
     );
   }
 }

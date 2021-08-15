@@ -7,9 +7,9 @@ InputDecoration vethxInputDecoration(
 }) =>
     InputDecoration(
       suffixIcon: suffixIcon,
-      contentPadding: EdgeInsets.only(left: 20, right: 20),
-      border: OutlineInputBorder(
-        borderRadius: const BorderRadius.all(
+      contentPadding: const EdgeInsets.only(left: 20, right: 20),
+      border: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(
           Radius.circular(30),
         ),
       ),

@@ -54,7 +54,7 @@ class SizeConfig {
           bottom: _safeAreaVertical * 2,
         );
 
-    edgeMaxSpace = EdgeInsets.all(25.0);
+    edgeMaxSpace = const EdgeInsets.all(25.0);
 
     isTablet = getDeviceType(_mediaQueryData) == DeviceScreenType.Tablet;
   }

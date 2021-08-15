@@ -42,11 +42,11 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
       setState(() {
         _loading = true;
       });
-      await Future.delayed(Duration(seconds: 1)).then((void _) {
+      await Future.delayed(const Duration(seconds: 1)).then((void _) {
         setState(() {
           _loading = false;
         });
-        BlocProvider.of<SignInBloc>(context).goToPage(SignInPageGoTo(
+        BlocProvider.of<SignInBloc>(context).goToPage(const SignInPageGoTo(
           from: SignInPageRoutes.registerEmailSignIn,
           to: SignInPageRoutes.passwordEntry,
         ));
@@ -108,11 +108,11 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
           ),
           SizedBox(height: SizeConfig.defaultEdgeSpace),
           CustomRaisedButton(
+            onPressed: _validatePassword,
             child: Text(
               Texts.goToNextStep,
               style: Theme.of(context).textTheme.button,
             ),
-            onPressed: _validatePassword,
           ),
         ],
       ),

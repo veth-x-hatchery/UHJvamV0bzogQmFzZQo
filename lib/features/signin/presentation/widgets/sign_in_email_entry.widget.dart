@@ -79,11 +79,11 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
               ),
               SizedBox(height: SizeConfig.defaultEdgeSpace),
               CustomRaisedButton(
+                onPressed: _validateEmail,
                 child: Text(
                   Texts.goToNextStep,
                   style: Theme.of(context).textTheme.button,
                 ),
-                onPressed: _validateEmail,
               ),
             ],
           );

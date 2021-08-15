@@ -1,6 +1,6 @@
+import 'package:flutter/services.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/ui/widgets/shared/platform_alert_dialog.widget.dart';
-import 'package:flutter/services.dart';
 
 class PlatformExceptionAlertDialog extends PlatformAlertDialog {
   PlatformExceptionAlertDialog({
