@@ -2,15 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vethx_login/core/consts/size_config.dart';
-import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
-import 'package:vethx_login/features/signin/presentation/bloc/sign_in_bloc.dart';
-import 'package:vethx_login/features/signin/presentation/pages/sign_in_page.dart';
-import 'package:vethx_login/features/signin/presentation/widgets/field_email.widget.dart';
-import 'package:vethx_login/features/signin/presentation/widgets/field_password.widget.dart';
-import 'package:vethx_login/ui/widgets/shared/custom_raised_button.dart';
-import 'package:vethx_login/ui/widgets/shared/forms/form_column.widget.dart';
-import 'package:vethx_login/ui/widgets/shared/forms/logo_text_loading.widget.dart';
+import 'package:vethx_beta/core/consts/size_config.dart';
+import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
+import 'package:vethx_beta/features/signin/presentation/widgets/field_email.widget.dart';
+import 'package:vethx_beta/features/signin/presentation/widgets/field_password.widget.dart';
+import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
+import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
+import 'package:vethx_beta/ui/widgets/shared/forms/logo_text_loading.widget.dart';
 
 class SignInRegisterEntry extends StatefulWidget {
   const SignInRegisterEntry({Key? key}) : super(key: key);
@@ -42,11 +42,11 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
       setState(() {
         _loading = true;
       });
-      await Future.delayed(Duration(seconds: 1)).then((void _) {
+      await Future.delayed(const Duration(seconds: 1)).then((void _) {
         setState(() {
           _loading = false;
         });
-        BlocProvider.of<SignInBloc>(context).goToPage(SignInPageGoTo(
+        BlocProvider.of<SignInBloc>(context).goToPage(const SignInPageGoTo(
           from: SignInPageRoutes.registerEmailSignIn,
           to: SignInPageRoutes.passwordEntry,
         ));
@@ -108,11 +108,11 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
           ),
           SizedBox(height: SizeConfig.defaultEdgeSpace),
           CustomRaisedButton(
+            onPressed: _validatePassword,
             child: Text(
               Texts.goToNextStep,
               style: Theme.of(context).textTheme.button,
             ),
-            onPressed: _validatePassword,
           ),
         ],
       ),

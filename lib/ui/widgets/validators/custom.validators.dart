@@ -1,7 +1,8 @@
 import 'dart:math' as math;
-import 'package:vethx_login/core/consts/vethx_connect_texts.dart';
+
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 
 abstract class StringValidator {
   bool isValid(String value);
@@ -56,7 +57,6 @@ class DecimalTextInputFormatter extends TextInputFormatter {
     return TextEditingValue(
       text: truncated,
       selection: newSelection,
-      composing: TextRange.empty,
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vethx_login/features/signin/presentation/utils/input_converter.dart';
+import 'package:vethx_beta/features/signin/presentation/utils/input_converter.dart';
 
 void main() {
   late InputConverter inputConverter;
@@ -18,7 +18,7 @@ void main() {
         // act
         final result = inputConverter.stringToUnsignedInteger(str);
         // assert
-        expect(result, Right(123));
+        expect(result, const Right(123));
       },
     );
   });

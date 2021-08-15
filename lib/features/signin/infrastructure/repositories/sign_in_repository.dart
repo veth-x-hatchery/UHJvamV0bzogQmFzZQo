@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_login/core/error/exceptions.dart';
-import 'package:vethx_login/core/error/failures.dart';
-import 'package:vethx_login/core/network/network_info.dart';
-import 'package:vethx_login/features/signin/data/datasources/sign_in_local_data_source.dart';
-import 'package:vethx_login/features/signin/data/datasources/sign_in_remote_data_source.dart';
-import 'package:vethx_login/features/signin/domain/entities/credentials_entity.dart';
-import 'package:vethx_login/features/signin/domain/entities/user_entity.dart';
-import 'package:vethx_login/features/signin/domain/repositories/sign_in_repository.dart';
+import 'package:vethx_beta/core/error/exceptions.dart';
+import 'package:vethx_beta/core/error/failures.dart';
+import 'package:vethx_beta/core/network/network_info.dart';
+import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
+import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
+import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_remote_data_source.dart';
 
 class SignInRepositoryDefaultMessages {
   static const error = '';
@@ -41,7 +41,7 @@ class SignInRepository implements ISignInRepository {
         await _localDataSource.cacheCurrentUser(user);
         return Right(user);
       } on ServerException {
-        return Left(
+        return const Left(
             ServerFailure(message: SignInRepositoryDefaultMessages.error));
       }
     } else {
@@ -49,8 +49,10 @@ class SignInRepository implements ISignInRepository {
         final local = await _localDataSource.currentUser();
         return Right(local);
       } on CacheException {
+        // ignore: prefer_const_constructors
         return Left(
-            CacheFailure(message: SignInRepositoryDefaultMessages.error));
+          const CacheFailure(message: SignInRepositoryDefaultMessages.error),
+        );
       }
     }
   }
@@ -100,13 +102,13 @@ class SignInRepository implements ISignInRepository {
   @override
   Future<Either<Failure, bool>> emailAlreadyRegistered(String email) async {
     if (!await _networkInfo.isConnected) {
-      return Left(
+      return const Left(
           ServerFailure(message: SignInRepositoryDefaultMessages.error));
     }
     try {
       return Right(await _remoteDataSource.emailAlreadyRegistered(email));
     } on ServerException {
-      return Left(
+      return const Left(
           ServerFailure(message: SignInRepositoryDefaultMessages.error));
     }
   }

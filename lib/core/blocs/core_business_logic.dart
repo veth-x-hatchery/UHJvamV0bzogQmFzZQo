@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:vethx_login/core/utils/logger.dart';
-import 'package:vethx_login/features/signin/presentation/pages/sign_in_page.dart';
+import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
 
 class RootBLoCProvider {
   SignInNavigationBloc signInNavigation;

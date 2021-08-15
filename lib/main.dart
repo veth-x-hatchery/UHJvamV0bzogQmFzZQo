@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_login/core/blocs/app_state.dart';
-import 'package:vethx_login/core/blocs/core_business_logic.dart';
-import 'package:vethx_login/core/blocs/core_services.dart';
-import 'package:vethx_login/core/routes/navigation.dart';
-import 'package:vethx_login/ui/alpha/alpha.page.dart';
+import 'package:vethx_beta/core/blocs/app_state.dart';
+import 'package:vethx_beta/core/blocs/core_business_logic.dart';
+import 'package:vethx_beta/core/blocs/core_services.dart';
+import 'package:vethx_beta/core/routes/navigation.dart';
+import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 import 'injection_container.dart' as di;
 
 Future<void> main() async {
@@ -30,7 +30,7 @@ class App extends StatelessWidget {
         // initialRoute: NavigationRoutes.alpha,
         navigatorObservers: [LoggingNavigationObserver()],
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: AlphaPage(),
+        home: const AlphaPage(),
       ),
     );
   }

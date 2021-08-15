@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_login/ui/widgets/shared/progress-indicator.widget.dart';
+import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 class LogoTextLoading extends StatelessWidget {
   const LogoTextLoading({
@@ -20,7 +20,7 @@ class LogoTextLoading extends StatelessWidget {
       height: size,
       child: Center(
         child: loading
-            ? GenericProgressIndicator()
+            ? const GenericProgressIndicator()
             : Text(
                 title ?? 'Sign in',
                 textAlign: TextAlign.center,

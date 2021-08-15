@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_login/core/blocs/core_business_logic.dart';
-import 'package:vethx_login/core/blocs/core_services.dart';
+import 'package:vethx_beta/core/blocs/core_business_logic.dart';
+import 'package:vethx_beta/core/blocs/core_services.dart';
 
 class AppStateContainer extends StatefulWidget {
   final Widget child;
@@ -44,13 +44,13 @@ class AppState extends State<AppStateContainer> {
       /// property
 
       appData: this,
+      blocProvider: blocProvider, serviceProvider: serviceProvider,
 
       /// Remember that this "widget.child"
       /// child is passed in from the runApp method, and it
       /// represents the rest of the widget tree
 
       child: widget.child,
-      blocProvider: blocProvider, serviceProvider: serviceProvider,
     );
   }
 

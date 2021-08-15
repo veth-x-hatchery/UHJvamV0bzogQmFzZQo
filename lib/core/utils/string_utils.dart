@@ -1,3 +1,4 @@
+// ignore: avoid_classes_with_only_static_members
 class StringUtils {
   static double tratarValorMonetario(String valor) {
     return double.parse(
@@ -9,7 +10,6 @@ class StringUtils {
       // ignore: unnecessary_raw_strings
       r'<[^>]*>',
       multiLine: true,
-      caseSensitive: true,
     );
     return valor
         .replaceAll('<br />', '\n')

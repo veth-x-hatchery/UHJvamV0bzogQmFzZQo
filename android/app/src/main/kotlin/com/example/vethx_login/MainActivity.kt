@@ -1,4 +1,4 @@
-package com.example.vethx_login
+package br.tech.vethx.beta
 
 import io.flutter.embedding.android.FlutterActivity
 

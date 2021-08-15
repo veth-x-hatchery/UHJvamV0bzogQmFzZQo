@@ -4,9 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vethx_login/core/error/exceptions.dart';
-import 'package:vethx_login/features/signin/data/datasources/sign_in_local_data_source.dart';
-import 'package:vethx_login/features/signin/data/models/user_model.dart';
+import 'package:vethx_beta/core/error/exceptions.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/models/user_model.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 
@@ -48,13 +48,13 @@ void main() {
         // act
         final call = dataSource.currentUser;
         // assert
-        expect(() => call(), throwsA(TypeMatcher<CacheException>()));
+        expect(() => call(), throwsA(const TypeMatcher<CacheException>()));
       },
     );
   });
 
   group('cache current user', () {
-    final user = UserModel(
+    const user = UserModel(
       email: 'test@vethx.com',
       authType: 'google',
     );

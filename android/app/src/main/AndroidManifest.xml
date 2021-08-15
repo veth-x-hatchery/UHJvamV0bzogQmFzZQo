@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.vethx_login">
+    package="br.tech.vethx.beta">
    <application
-        android:label="vethx_login"
+        android:label="vethx_beta"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

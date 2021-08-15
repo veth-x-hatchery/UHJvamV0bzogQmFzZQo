@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_login/core/error/failures.dart';
+import 'package:vethx_beta/core/error/failures.dart';
 
 class InvalidEmailFailure extends Failure {
   static const String invalidEmptyEmail = 'Please, fill the email field';
@@ -24,11 +24,11 @@ class CustomValidators {
 
   Either<InvalidEmailFailure, String> emailAnalysis(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return Left(
+      return const Left(
           InvalidEmailFailure(message: InvalidEmailFailure.invalidEmptyEmail));
     }
     if (!RegExp(_emailRegex).hasMatch(value)) {
-      return Left(
+      return const Left(
           InvalidEmailFailure(message: InvalidEmailFailure.invalidEmail));
     }
     return Right(value.trim());
@@ -36,11 +36,11 @@ class CustomValidators {
 
   Either<Failure, String> passwordAnalysis(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return Left(InvalidPasswordFailure(
+      return const Left(InvalidPasswordFailure(
           message: InvalidPasswordFailure.invalidPasswordEmpty));
     }
     if (value.length < 8) {
-      return Left(InvalidPasswordFailure(
+      return const Left(InvalidPasswordFailure(
         message: InvalidPasswordFailure.invalidPasswordLenght,
       ));
     }

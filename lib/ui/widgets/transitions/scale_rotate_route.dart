@@ -10,7 +10,7 @@ class ScaleRotateRoute<T> extends PageRouteBuilder<T> {
             Animation<double> secondaryAnimation,
           ) =>
               page,
-          transitionDuration: Duration(seconds: 1),
+          transitionDuration: const Duration(seconds: 1),
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,

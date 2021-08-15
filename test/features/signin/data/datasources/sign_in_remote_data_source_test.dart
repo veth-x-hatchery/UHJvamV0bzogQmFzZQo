@@ -4,11 +4,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_login/core/api/api.dart';
-import 'package:vethx_login/core/api/api_setup.dart';
-import 'package:vethx_login/core/error/exceptions.dart';
-import 'package:vethx_login/features/signin/data/datasources/sign_in_remote_data_source.dart';
-import 'package:vethx_login/features/signin/data/models/user_model.dart';
+import 'package:vethx_beta/core/api/api.dart';
+import 'package:vethx_beta/core/api/api_setup.dart';
+import 'package:vethx_beta/core/error/exceptions.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_remote_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/models/user_model.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 import 'sign_in_remote_data_source_test.mocks.dart';
@@ -112,13 +112,13 @@ void main() {
         final call = _dataSource.emailAlreadyRegistered;
         // assert
         expect(() => call(notRegisteredEmail),
-            throwsA(TypeMatcher<ServerException>()));
+            throwsA(const TypeMatcher<ServerException>()));
       },
     );
   });
 
   group('get current user', () {
-    final user = UserModel(authType: 'google', email: 'test@vethx.com');
+    const user = UserModel(authType: 'google', email: 'test@vethx.com');
 
     test(
       'should perform a GET request on a URL being the endpoint and with application/json header',
@@ -156,7 +156,7 @@ void main() {
         // act
         final call = _dataSource.currentUser;
         // assert
-        expect(() => call(), throwsA(TypeMatcher<ServerException>()));
+        expect(() => call(), throwsA(const TypeMatcher<ServerException>()));
       },
     );
   });
