@@ -9,10 +9,10 @@ import 'package:vethx_login/core/network/network_info.dart' as _i7;
 import 'package:vethx_login/features/signin/data/datasources/sign_in_local_data_source.dart'
     as _i3;
 import 'package:vethx_login/features/signin/data/datasources/sign_in_remote_data_source.dart'
-    as _i6;
+    as _i5;
 import 'package:vethx_login/features/signin/data/models/user_model.dart' as _i2;
 import 'package:vethx_login/features/signin/domain/entities/user_entity.dart'
-    as _i5;
+    as _i6;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -33,12 +33,6 @@ class MockISignInLocalSource extends _i1.Mock
     _i1.throwOnMissingStub(this);
   }
 
-  @override
-  _i4.Future<_i4.Stream<_i5.User>> get onAuthStateChange =>
-      (super.noSuchMethod(Invocation.getter(#onAuthStateChange),
-              returnValue:
-                  Future<_i4.Stream<_i5.User>>.value(Stream<_i5.User>.empty()))
-          as _i4.Future<_i4.Stream<_i5.User>>);
   @override
   _i4.Future<_i2.UserModel> currentUser() =>
       (super.noSuchMethod(Invocation.method(#currentUser, []),
@@ -62,17 +56,17 @@ class MockISignInLocalSource extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockISignInRemoteSource extends _i1.Mock
-    implements _i6.ISignInRemoteSource {
+    implements _i5.ISignInRemoteSource {
   MockISignInRemoteSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i4.Stream<_i5.User>> get onAuthStateChange =>
+  _i4.Future<_i4.Stream<_i6.User>> get onAuthStateChange =>
       (super.noSuchMethod(Invocation.getter(#onAuthStateChange),
               returnValue:
-                  Future<_i4.Stream<_i5.User>>.value(Stream<_i5.User>.empty()))
-          as _i4.Future<_i4.Stream<_i5.User>>);
+                  Future<_i4.Stream<_i6.User>>.value(Stream<_i6.User>.empty()))
+          as _i4.Future<_i4.Stream<_i6.User>>);
   @override
   _i4.Future<bool> emailAlreadyRegistered(String? email) =>
       (super.noSuchMethod(Invocation.method(#emailAlreadyRegistered, [email]),

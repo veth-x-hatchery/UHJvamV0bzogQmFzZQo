@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_login/core/error/failures.dart';
 import 'package:vethx_login/core/utils/logger.dart';
 import 'package:vethx_login/features/signin/domain/usecases/sign_in_check_email.dart'
