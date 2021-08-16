@@ -35,104 +35,25 @@ void main() {
     );
   });
 
-  // group('custom validations', () {
-  //   final email = EmailAddress('test@vethx.com');
-  //   test(
-  //     'should call the CustomValidators to return a valid email',
-  //     () async {
-  //       // arrange
-
-  //       // _setUpEmailAnalysis(email: email, isValid: true);
-
-  //       when(_mockAuthFacade.emailIsAlreadyInUse(email))
-  //           .thenAnswer((_) async => const Right(true));
-
-  //       // act
-
-  //       await _signInCheckIfEmailIsInUse.call(Params(email: email));
-
-  //       await untilCalled(_mockCustomValidators.emailAnalysis(any));
-
-  //       // assert
-
-  //       verify(_mockCustomValidators.emailAnalysis(any));
-  //     },
-  //   );
-
-  //   test(
-  //     'should emit [InvalidEmailFailure(message: InvalidEmailFailure.invalidEmail)] when the input is invalid',
-  //     () async {
-  //       // arrange
-  //       const expectedFailure =
-  //           InvalidEmailFailure(message: InvalidEmailFailure.invalidEmail);
-
-  //       // _setUpEmailAnalysis(
-  //         email: email,
-  //         isValid: false,
-  //         expectedFailure: expectedFailure,
-  //       );
-
-  //       final result =
-  //           await _signInCheckIfEmailIsInUse.call(Params(email: email));
-
-  //       await untilCalled(_mockCustomValidators.emailAnalysis(any));
-
-  //       expect(result, const Left(expectedFailure));
-
-  //       result.fold(
-  //         (l) => expect(l.message, expectedFailure.message),
-  //         (r) => null,
-  //       );
-  //     },
-  //   );
-
-  //   test(
-  //     'should emit [InvalidEmailFailure(message: InvalidEmailFailure.invalidEmptyEmail)] when the input is not given',
-  //     () async {
-  //       // arrange
-  //       const expectedFailure =
-  //           InvalidEmailFailure(message: InvalidEmailFailure.invalidEmptyEmail);
-
-  //       // _setUpEmailAnalysis(
-  //         email: email,
-  //         isValid: false,
-  //         expectedFailure: expectedFailure,
-  //       );
-
-  //       final result =
-  //           await _signInCheckIfEmailIsInUse.call(Params(email: email));
-
-  //       await untilCalled(_mockCustomValidators.emailAnalysis(any));
-
-  //       expect(result, const Left(expectedFailure));
-
-  //       result.fold(
-  //         (l) => expect(l.message, expectedFailure.message),
-  //         (r) => null,
-  //       );
-  //     },
-  //   );
-  // });
-
   group('sign in check user email is already registered', () {
-    final testEmail = EmailAddress('test@vethx.com');
+    final email = EmailAddress('test@vethx.com');
 
     test('should return user is registered', () async {
       // arrange
 
-      when(_mockAuthFacade.emailIsAlreadyInUse(testEmail))
+      when(_mockAuthFacade.emailIsAlreadyInUse(email))
           .thenAnswer((_) async => const Right(true));
 
       // act
 
       final result =
-          await _signInCheckIfEmailIsInUse.call(Params(email: testEmail));
+          await _signInCheckIfEmailIsInUse.call(Params(email: email));
 
       // assert
 
       expect(result, const Right(true));
 
-      verify(_mockAuthFacade.emailIsAlreadyInUse(testEmail));
+      verify(_mockAuthFacade.emailIsAlreadyInUse(email));
 
       verifyNoMoreInteractions(_mockSignInRepository);
     });
@@ -143,22 +64,22 @@ void main() {
 
       final failureDetails = FailureDetails(
         failedValue: throwFailure,
-        message: '',
+        message: CheckEmailErrorMessages.UnknowError,
       );
 
-      when(_mockAuthFacade.emailIsAlreadyInUse(testEmail))
+      when(_mockAuthFacade.emailIsAlreadyInUse(email))
           .thenAnswer((_) async => const Left(throwFailure));
 
       // act
 
       final result =
-          await _signInCheckIfEmailIsInUse.call(Params(email: testEmail));
+          await _signInCheckIfEmailIsInUse.call(Params(email: email));
 
       // assert
 
       expect(result, left(failureDetails));
 
-      verify(_mockAuthFacade.emailIsAlreadyInUse(testEmail));
+      verify(_mockAuthFacade.emailIsAlreadyInUse(email));
 
       verifyNoMoreInteractions(_mockSignInRepository);
     });
