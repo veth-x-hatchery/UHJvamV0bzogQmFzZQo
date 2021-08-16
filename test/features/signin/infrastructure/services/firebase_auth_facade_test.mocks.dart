@@ -309,3 +309,15 @@ class MockGoogleSignIn extends _i1.Mock implements _i6.GoogleSignIn {
   @override
   String toString() => super.toString();
 }
+
+/// A class which mocks [UserCredential].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserCredential extends _i1.Mock implements _i4.UserCredential {
+  MockUserCredential() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String toString() => super.toString();
+}

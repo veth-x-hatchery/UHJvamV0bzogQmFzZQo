@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,14 +17,17 @@ import 'firebase_auth_facade_test.mocks.dart';
 @GenerateMocks([
   FirebaseAuth,
   GoogleSignIn,
+  UserCredential,
 ])
 void main() {
   late MockFirebaseAuth _mockFirebaseAuth;
   late MockGoogleSignIn _mockGoogleSignIn;
+  late MockUserCredential _mockUserCredential;
 
   late FirebaseAuthFacade _authFacade;
 
   setUp(() {
+    _mockUserCredential = MockUserCredential();
     _mockFirebaseAuth = MockFirebaseAuth();
     _mockGoogleSignIn = MockGoogleSignIn();
     _authFacade = FirebaseAuthFacade(
@@ -109,8 +115,8 @@ void main() {
           email: email.getOrCrash(),
           password: password.getOrCrash(),
         ),
-        // ignore: null_argument_to_non_null_type
-      ).thenAnswer((_) => Future.value(any));
+      ).thenAnswer(
+          (_) => Future<MockUserCredential>.value(_mockUserCredential));
 
       // act
 
