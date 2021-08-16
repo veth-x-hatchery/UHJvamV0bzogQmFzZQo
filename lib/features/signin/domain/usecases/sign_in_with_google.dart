@@ -17,8 +17,19 @@ class SignInWithGoogle extends UseCase<Unit, NoParams> {
   @override
   Future<Either<FailureDetails, Unit>> call(NoParams params) {
     return _authFacade.signInWithGoogle().then((value) => value.fold(
-          (l) => left(FailureDetails(failure: l, message: '')),
+          (l) => left(_mapFailures(l)),
           (r) => right(unit),
         ));
   }
+
+  FailureDetails _mapFailures(AuthFailure auth) {
+    return FailureDetails(
+      failure: auth,
+      message: SignInWithGoogleErrorMessages.unknowError,
+    );
+  }
+}
+
+class SignInWithGoogleErrorMessages {
+  static const unknowError = 'Unavailable';
 }

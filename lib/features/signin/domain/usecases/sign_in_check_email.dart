@@ -27,14 +27,10 @@ class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
           );
 
   FailureDetails _mapFailures(AuthFailure auth) {
-    switch (auth.runtimeType) {
-      case ServerError:
-      default:
-        return FailureDetails(
-          failure: auth,
-          message: CheckEmailErrorMessages.UnknowError,
-        );
-    }
+    return FailureDetails(
+      failure: auth,
+      message: CheckEmailErrorMessages.unknowError,
+    );
   }
 }
 
@@ -48,5 +44,5 @@ class Params extends Equatable {
 }
 
 class CheckEmailErrorMessages {
-  static const UnknowError = 'Unavailable';
+  static const unknowError = 'Unavailable';
 }

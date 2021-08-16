@@ -176,7 +176,7 @@ void main() {
 
         final failureDetails = FailureDetails(
           failure: throwFailure,
-          message: CheckEmailErrorMessages.UnknowError,
+          message: CheckEmailErrorMessages.unknowError,
         );
 
         when(_mockSignInCheckIfEmailIsInUse.call(any))
@@ -207,7 +207,7 @@ void main() {
 
         final failureDetails = FailureDetails(
           failure: throwFailure,
-          message: CheckEmailErrorMessages.UnknowError,
+          message: CheckEmailErrorMessages.unknowError,
         );
 
         when(_mockSignInCheckIfEmailIsInUse.call(any))
@@ -238,7 +238,7 @@ void main() {
 
         final failureDetails = FailureDetails(
           failure: throwFailure,
-          message: CheckEmailErrorMessages.UnknowError,
+          message: CheckEmailErrorMessages.unknowError,
         );
 
         when(_mockSignInCheckIfEmailIsInUse.call(any))

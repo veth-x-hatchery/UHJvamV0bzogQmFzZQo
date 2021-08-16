@@ -7,11 +7,11 @@ import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repositor
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
-class SignInWithEmailAndPassword extends UseCase<Unit, Params> {
+class SignInRegisterEmailAndPassword extends UseCase<Unit, Params> {
   final ISignInRepository _signInRepository;
   final IAuthFacade _authFacade;
 
-  SignInWithEmailAndPassword(
+  SignInRegisterEmailAndPassword(
     this._signInRepository,
     this._authFacade,
   );
@@ -19,7 +19,7 @@ class SignInWithEmailAndPassword extends UseCase<Unit, Params> {
   @override
   Future<Either<FailureDetails, Unit>> call(Params params) {
     return _authFacade
-        .signInWithEmailAndPassword(
+        .registerWithEmailAndPassword(
           emailAddress: params.credentials.user,
           password: params.credentials.password,
         )
@@ -30,24 +30,22 @@ class SignInWithEmailAndPassword extends UseCase<Unit, Params> {
   }
 
   FailureDetails _mapFailures(AuthFailure auth) {
-    if (auth == const AuthFailure.invalidEmailAndPasswordCombination()) {
+    if (auth == const AuthFailure.emailAlreadyInUse()) {
       return FailureDetails(
         failure: auth,
-        message: SignInWithEmailAndPasswordErrorMessages
-            .invalidEmailAndPasswordCombination,
+        message: SignInRegisterEmailAndPasswordErrorMessages.emailAlreadyInUse,
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInWithEmailAndPasswordErrorMessages.unknowError,
+      message: SignInRegisterEmailAndPasswordErrorMessages.unknowError,
     );
   }
 }
 
-class SignInWithEmailAndPasswordErrorMessages {
+class SignInRegisterEmailAndPasswordErrorMessages {
   static const unknowError = 'Unavailable';
-  static const invalidEmailAndPasswordCombination =
-      'Invalid email and password combination';
+  static const emailAlreadyInUse = 'This email is already in use';
 }
 
 class Params extends Equatable {
