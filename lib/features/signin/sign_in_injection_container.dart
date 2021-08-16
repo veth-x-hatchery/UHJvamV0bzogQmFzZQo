@@ -80,7 +80,6 @@ Future<void> signInDependenciesInjection(GetIt sl) async {
   // Use cases
   sl.registerLazySingleton(
     () => SignInCheckIfEmailIsInUse(
-      sl<CustomValidators>(),
       sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),

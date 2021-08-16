@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/error/failures.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
@@ -41,7 +42,7 @@ void main() {
   });
 
   group('when sign in check user email', () {
-    const testEmail = 'test@vethx.com';
+    final testEmail = EmailAddress('test@vethx.com');
 
     Future<void> _assertSignInStatesAndNativation(bool isEmailAlreadyRegistered,
         SignInPageGoTo signInPageGoTo, List<SignInState> statesExpected,
@@ -179,7 +180,7 @@ void main() {
                 )));
 
         // act
-        _bloc.add(const SignInCheckEmail(
+        _bloc.add(SignInCheckEmail(
           email: testEmail,
           fromPage: SignInPageRoutes.emailEntry,
         ));
@@ -207,8 +208,8 @@ void main() {
                 )));
 
         // act
-        _bloc.add(const SignInCheckEmail(
-          email: '',
+        _bloc.add(SignInCheckEmail(
+          email: testEmail,
           fromPage: SignInPageRoutes.emailEntry,
         ));
 
@@ -233,7 +234,7 @@ void main() {
             (_) async => const Left(ServerFailure(message: errorMessage)));
 
         // act
-        _bloc.add(const SignInCheckEmail(
+        _bloc.add(SignInCheckEmail(
           email: testEmail,
           fromPage: SignInPageRoutes.emailEntry,
         ));
