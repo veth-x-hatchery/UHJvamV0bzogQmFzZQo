@@ -37,10 +37,7 @@ class SignInPage extends StatefulWidget {
   _SignInPageState createState() => _SignInPageState();
 
   static Widget create(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<SignInBloc>(),
-      child: const SignInPage(),
-    );
+    return const SignInPage();
   }
 }
 
