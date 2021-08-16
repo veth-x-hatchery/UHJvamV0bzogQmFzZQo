@@ -38,8 +38,6 @@ Future<void> signInDependenciesInjection(GetIt sl) async {
 
   sl.registerLazySingleton(() => InputConverter());
 
-  sl.registerLazySingleton(() => CustomValidators());
-
   sl.registerLazySingleton<INetworkInfo>(() => NetworkInfo(sl()));
 
   sl.registerLazySingleton<IApiSetup>(() => ApiSetupProduction());

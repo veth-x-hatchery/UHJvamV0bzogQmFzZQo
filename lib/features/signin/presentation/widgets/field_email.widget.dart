@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
 import 'package:vethx_beta/features/signin/presentation/utils/custom_validators.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
 
@@ -33,10 +34,13 @@ class EmailFormField extends StatelessWidget {
         ),
         style: Theme.of(context).textTheme.bodyText1,
         validator: (value) {
-          CustomValidators().emailAnalysis(value).fold(
-                (l) => l.message,
-                (r) => null,
-              );
+          if (value == null) {
+            return 'invalid email';
+          }
+          validateEmailAddress(value).fold(
+            (l) => 'invalid email',
+            (r) => null,
+          );
         },
         onEditingComplete: emailValidate,
         // onSaved: (input) => _gerenciador.email = input!,
