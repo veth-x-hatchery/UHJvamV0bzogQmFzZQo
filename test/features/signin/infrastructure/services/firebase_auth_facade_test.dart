@@ -364,4 +364,23 @@ void main() {
       expect(result, right(false));
     });
   });
+
+  test('when request sign out should call all listed methods', () {
+    //arrange
+
+    when(_mockGoogleSignIn.signOut())
+        .thenAnswer((_) => Future<MockGoogleSignInAccount?>.value());
+
+    when(_mockFirebaseAuth.signOut()).thenAnswer((_) => Future.value());
+
+    //act
+
+    _authFacade.signOut();
+
+    //assert
+
+    verify(_mockGoogleSignIn.signOut());
+
+    verify(_mockFirebaseAuth.signOut());
+  });
 }
