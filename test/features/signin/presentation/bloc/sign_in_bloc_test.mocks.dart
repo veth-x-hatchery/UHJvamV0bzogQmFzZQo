@@ -6,16 +6,15 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:vethx_beta/core/error/failures.dart' as _i5;
-import 'package:vethx_beta/core/usecases/usecase.dart' as _i9;
-import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart'
-    as _i7;
+import 'package:vethx_beta/features/signin/domain/core/usecase.dart' as _i8;
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart'
+    as _i5;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart'
     as _i3;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart'
     as _i6;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart'
-    as _i8;
+    as _i7;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -37,11 +36,11 @@ class MockSignInCheckIfEmailIsInUse extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, bool>> call(_i3.Params? params) =>
+  _i4.Future<_i2.Either<_i5.AuthFailure, bool>> call(_i3.Params? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<_i2.Either<_i5.Failure, bool>>.value(
-                  _FakeEither_0<_i5.Failure, bool>()))
-          as _i4.Future<_i2.Either<_i5.Failure, bool>>);
+              returnValue: Future<_i2.Either<_i5.AuthFailure, bool>>.value(
+                  _FakeEither_0<_i5.AuthFailure, bool>()))
+          as _i4.Future<_i2.Either<_i5.AuthFailure, bool>>);
   @override
   String toString() => super.toString();
 }
@@ -56,11 +55,11 @@ class MockSignInWithEmailAndPassword extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i7.User>> call(_i6.Params? params) =>
+  _i4.Future<_i2.Either<_i5.AuthFailure, _i2.Unit>> call(_i6.Params? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<_i2.Either<_i5.Failure, _i7.User>>.value(
-                  _FakeEither_0<_i5.Failure, _i7.User>()))
-          as _i4.Future<_i2.Either<_i5.Failure, _i7.User>>);
+              returnValue: Future<_i2.Either<_i5.AuthFailure, _i2.Unit>>.value(
+                  _FakeEither_0<_i5.AuthFailure, _i2.Unit>()))
+          as _i4.Future<_i2.Either<_i5.AuthFailure, _i2.Unit>>);
   @override
   String toString() => super.toString();
 }
@@ -68,17 +67,18 @@ class MockSignInWithEmailAndPassword extends _i1.Mock
 /// A class which mocks [SignInWithGoogle].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInWithGoogle extends _i1.Mock implements _i8.SignInWithGoogle {
+class MockSignInWithGoogle extends _i1.Mock implements _i7.SignInWithGoogle {
   MockSignInWithGoogle() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i7.User>> call(_i9.NoParams? params) =>
+  _i4.Future<_i2.Either<_i5.AuthFailure, _i2.Unit>> call(
+          _i8.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<_i2.Either<_i5.Failure, _i7.User>>.value(
-                  _FakeEither_0<_i5.Failure, _i7.User>()))
-          as _i4.Future<_i2.Either<_i5.Failure, _i7.User>>);
+              returnValue: Future<_i2.Either<_i5.AuthFailure, _i2.Unit>>.value(
+                  _FakeEither_0<_i5.AuthFailure, _i2.Unit>()))
+          as _i4.Future<_i2.Either<_i5.AuthFailure, _i2.Unit>>);
   @override
   String toString() => super.toString();
 }

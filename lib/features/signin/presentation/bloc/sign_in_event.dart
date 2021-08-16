@@ -14,7 +14,7 @@ class SignInWithFacebookEvent extends SignInEvent {}
 class SignInAnonimously extends SignInEvent {}
 
 class SignInCheckEmail extends SignInEvent {
-  final String email;
+  final EmailAddress email;
   final SignInPageRoutes fromPage;
 
   const SignInCheckEmail({

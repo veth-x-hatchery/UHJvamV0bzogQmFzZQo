@@ -14,11 +14,10 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.d
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_remote_data_source.dart';
 import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_form/bloc/sign_in_form_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/utils/custom_validators.dart';
 import 'package:vethx_beta/features/signin/presentation/utils/input_converter.dart';
-import 'package:vethx_beta/features/signin/services/firebase_auth_facade.dart';
 
 import '../../core/network/network_info.dart';
 
@@ -31,6 +30,10 @@ Future<void> signInDependenciesInjection(GetIt sl) async {
 
   sl.registerLazySingleton(() => InternetConnectionChecker());
 
+  sl.registerLazySingleton(() => FirebaseAuth.instance);
+
+  sl.registerLazySingleton(() => GoogleSignIn());
+
   //! Core
 
   sl.registerLazySingleton(() => InputConverter());
@@ -42,6 +45,15 @@ Future<void> signInDependenciesInjection(GetIt sl) async {
   sl.registerLazySingleton<IApiSetup>(() => ApiSetupProduction());
 
   sl.registerLazySingleton<API>(() => API(sl<IApiSetup>()));
+
+  // Services
+
+  sl.registerLazySingleton<IAuthFacade>(
+    () => FirebaseAuthFacade(
+      sl<FirebaseAuth>(),
+      sl<GoogleSignIn>(),
+    ),
+  );
 
   // Data sources
 
@@ -68,20 +80,22 @@ Future<void> signInDependenciesInjection(GetIt sl) async {
   // Use cases
   sl.registerLazySingleton(
     () => SignInCheckIfEmailIsInUse(
-      sl<CustomValidators>(),
       sl<ISignInRepository>(),
+      sl<IAuthFacade>(),
     ),
   );
 
   sl.registerLazySingleton(
     () => SignInWithEmailAndPassword(
       sl<ISignInRepository>(),
+      sl<IAuthFacade>(),
     ),
   );
 
   sl.registerLazySingleton(
     () => SignInWithGoogle(
       sl<ISignInRepository>(),
+      sl<IAuthFacade>(),
     ),
   );
 
@@ -95,21 +109,4 @@ Future<void> signInDependenciesInjection(GetIt sl) async {
   );
 
   //********************************** */
-
-  sl.registerLazySingleton(() => FirebaseAuth.instance);
-
-  sl.registerLazySingleton(() => GoogleSignIn());
-
-  sl.registerLazySingleton<IAuthFacade>(
-    () => FirebaseAuthFacade(
-      sl<FirebaseAuth>(),
-      sl<GoogleSignIn>(),
-    ),
-  );
-
-  sl.registerFactory<SignInFormBloc>(
-    () => SignInFormBloc(
-      sl<IAuthFacade>(),
-    ),
-  );
 }

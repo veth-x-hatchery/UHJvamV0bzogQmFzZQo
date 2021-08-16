@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/field_email.widget.dart';
@@ -28,7 +29,7 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
       _emailFormKey.currentState!.save();
       BlocProvider.of<SignInBloc>(context).add(SignInCheckEmail(
         fromPage: SignInPageRoutes.emailEntry,
-        email: _emailEditingController.text,
+        email: EmailAddress(_emailEditingController.text),
       ));
     }
   }
