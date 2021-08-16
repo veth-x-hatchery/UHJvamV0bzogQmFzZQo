@@ -6,4 +6,13 @@
 
 	3 - Implementar mensagens de erro para Failures
 
+		Switch Case para os AuthFailures
+		
+		Use Cases retornando Either<String, Unit>
+
+			Left(Mensagem para exibicao)
+			
+			Right(Retorno com sucesso)
+
 	4 - Testar as mensagens de retorno
+
