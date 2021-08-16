@@ -2,16 +2,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/error/failures.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
-import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
-import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
-import 'package:vethx_beta/features/signin/presentation/utils/custom_validators.dart';
 
 import 'sign_in_check_email_test.mocks.dart';
 
@@ -35,7 +31,7 @@ void main() {
     );
   });
 
-  group('sign in check user email is already registered', () {
+  group('when check user email is already registered', () {
     final email = EmailAddress('test@vethx.com');
 
     test('should return user is registered', () async {
@@ -63,7 +59,7 @@ void main() {
       const throwFailure = AuthFailure.serverError();
 
       final failureDetails = FailureDetails(
-        failedValue: throwFailure,
+        failure: throwFailure,
         message: CheckEmailErrorMessages.UnknowError,
       );
 

@@ -17,7 +17,7 @@ class SignInWithGoogle extends UseCase<Unit, NoParams> {
   @override
   Future<Either<FailureDetails, Unit>> call(NoParams params) {
     return _authFacade.signInWithGoogle().then((value) => value.fold(
-          (l) => left(FailureDetails(failedValue: l, message: '')),
+          (l) => left(FailureDetails(failure: l, message: '')),
           (r) => right(unit),
         ));
   }

@@ -31,7 +31,7 @@ class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
       case ServerError:
       default:
         return FailureDetails(
-          failedValue: auth,
+          failure: auth,
           message: CheckEmailErrorMessages.UnknowError,
         );
     }

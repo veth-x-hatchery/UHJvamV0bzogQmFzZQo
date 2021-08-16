@@ -175,7 +175,7 @@ void main() {
         const throwFailure = AuthFailure.serverError();
 
         final failureDetails = FailureDetails(
-          failedValue: throwFailure,
+          failure: throwFailure,
           message: CheckEmailErrorMessages.UnknowError,
         );
 
@@ -206,7 +206,7 @@ void main() {
         const throwFailure = AuthFailure.serverError();
 
         final failureDetails = FailureDetails(
-          failedValue: throwFailure,
+          failure: throwFailure,
           message: CheckEmailErrorMessages.UnknowError,
         );
 
@@ -237,7 +237,7 @@ void main() {
         const throwFailure = AuthFailure.serverError();
 
         final failureDetails = FailureDetails(
-          failedValue: throwFailure,
+          failure: throwFailure,
           message: CheckEmailErrorMessages.UnknowError,
         );
 

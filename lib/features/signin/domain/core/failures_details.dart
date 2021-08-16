@@ -7,6 +7,6 @@ part 'failures_details.freezed.dart';
 class FailureDetails with _$FailureDetails {
   factory FailureDetails({
     required String message,
-    required AuthFailure failedValue,
+    required AuthFailure failure,
   }) = _FailureDetails;
 }

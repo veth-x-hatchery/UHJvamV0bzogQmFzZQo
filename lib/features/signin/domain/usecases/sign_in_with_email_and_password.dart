@@ -24,7 +24,7 @@ class SignInWithEmailAndPassword extends UseCase<Unit, Params> {
           password: params.credentials.password,
         )
         .then((value) => value.fold(
-              (l) => left(FailureDetails(failedValue: l, message: '')),
+              (l) => left(FailureDetails(failure: l, message: '')),
               (r) => right(unit),
             ));
   }

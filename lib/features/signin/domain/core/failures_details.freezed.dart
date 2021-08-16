@@ -18,10 +18,10 @@ class _$FailureDetailsTearOff {
   const _$FailureDetailsTearOff();
 
   _FailureDetails call(
-      {required String message, required AuthFailure failedValue}) {
+      {required String message, required AuthFailure failure}) {
     return _FailureDetails(
       message: message,
-      failedValue: failedValue,
+      failure: failure,
     );
   }
 }
@@ -32,7 +32,7 @@ const $FailureDetails = _$FailureDetailsTearOff();
 /// @nodoc
 mixin _$FailureDetails {
   String get message => throw _privateConstructorUsedError;
-  AuthFailure get failedValue => throw _privateConstructorUsedError;
+  AuthFailure get failure => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FailureDetailsCopyWith<FailureDetails> get copyWith =>
@@ -44,9 +44,9 @@ abstract class $FailureDetailsCopyWith<$Res> {
   factory $FailureDetailsCopyWith(
           FailureDetails value, $Res Function(FailureDetails) then) =
       _$FailureDetailsCopyWithImpl<$Res>;
-  $Res call({String message, AuthFailure failedValue});
+  $Res call({String message, AuthFailure failure});
 
-  $AuthFailureCopyWith<$Res> get failedValue;
+  $AuthFailureCopyWith<$Res> get failure;
 }
 
 /// @nodoc
@@ -61,24 +61,24 @@ class _$FailureDetailsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = freezed,
-    Object? failedValue = freezed,
+    Object? failure = freezed,
   }) {
     return _then(_value.copyWith(
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      failedValue: failedValue == freezed
-          ? _value.failedValue
-          : failedValue // ignore: cast_nullable_to_non_nullable
+      failure: failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
               as AuthFailure,
     ));
   }
 
   @override
-  $AuthFailureCopyWith<$Res> get failedValue {
-    return $AuthFailureCopyWith<$Res>(_value.failedValue, (value) {
-      return _then(_value.copyWith(failedValue: value));
+  $AuthFailureCopyWith<$Res> get failure {
+    return $AuthFailureCopyWith<$Res>(_value.failure, (value) {
+      return _then(_value.copyWith(failure: value));
     });
   }
 }
@@ -90,10 +90,10 @@ abstract class _$FailureDetailsCopyWith<$Res>
           _FailureDetails value, $Res Function(_FailureDetails) then) =
       __$FailureDetailsCopyWithImpl<$Res>;
   @override
-  $Res call({String message, AuthFailure failedValue});
+  $Res call({String message, AuthFailure failure});
 
   @override
-  $AuthFailureCopyWith<$Res> get failedValue;
+  $AuthFailureCopyWith<$Res> get failure;
 }
 
 /// @nodoc
@@ -110,16 +110,16 @@ class __$FailureDetailsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = freezed,
-    Object? failedValue = freezed,
+    Object? failure = freezed,
   }) {
     return _then(_FailureDetails(
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      failedValue: failedValue == freezed
-          ? _value.failedValue
-          : failedValue // ignore: cast_nullable_to_non_nullable
+      failure: failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
               as AuthFailure,
     ));
   }
@@ -128,16 +128,16 @@ class __$FailureDetailsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FailureDetails implements _FailureDetails {
-  _$_FailureDetails({required this.message, required this.failedValue});
+  _$_FailureDetails({required this.message, required this.failure});
 
   @override
   final String message;
   @override
-  final AuthFailure failedValue;
+  final AuthFailure failure;
 
   @override
   String toString() {
-    return 'FailureDetails(message: $message, failedValue: $failedValue)';
+    return 'FailureDetails(message: $message, failure: $failure)';
   }
 
   @override
@@ -147,16 +147,15 @@ class _$_FailureDetails implements _FailureDetails {
             (identical(other.message, message) ||
                 const DeepCollectionEquality()
                     .equals(other.message, message)) &&
-            (identical(other.failedValue, failedValue) ||
-                const DeepCollectionEquality()
-                    .equals(other.failedValue, failedValue)));
+            (identical(other.failure, failure) ||
+                const DeepCollectionEquality().equals(other.failure, failure)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(message) ^
-      const DeepCollectionEquality().hash(failedValue);
+      const DeepCollectionEquality().hash(failure);
 
   @JsonKey(ignore: true)
   @override
@@ -167,12 +166,12 @@ class _$_FailureDetails implements _FailureDetails {
 abstract class _FailureDetails implements FailureDetails {
   factory _FailureDetails(
       {required String message,
-      required AuthFailure failedValue}) = _$_FailureDetails;
+      required AuthFailure failure}) = _$_FailureDetails;
 
   @override
   String get message => throw _privateConstructorUsedError;
   @override
-  AuthFailure get failedValue => throw _privateConstructorUsedError;
+  AuthFailure get failure => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$FailureDetailsCopyWith<_FailureDetails> get copyWith =>
