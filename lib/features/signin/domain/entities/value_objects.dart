@@ -8,7 +8,9 @@ class EmailAddress extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory EmailAddress(String input) {
-    return EmailAddress._(validateEmailAddress(input));
+    return EmailAddress._(
+      validateStringNullOrEmpty(input).flatMap(validateEmailAddress),
+    );
   }
 
   const EmailAddress._(this.value);
@@ -19,7 +21,9 @@ class Password extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory Password(String input) {
-    return Password._(validatePassword(input));
+    return Password._(
+      validateStringNullOrEmpty(input).flatMap(validatePassword),
+    );
   }
 
   const Password._(this.value);

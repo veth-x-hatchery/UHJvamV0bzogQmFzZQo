@@ -4,12 +4,12 @@ import 'package:vethx_beta/features/signin/domain/core/failures.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
 
 void main() {
-  group('when validate is not empty', () {
-    test('should return [ValueFailure.empty] when value is null', () {
+  group('when validate is null or empty', () {
+    test('should return [ValueFailure.empty] when receives null', () {
       // arrange
       const String input = '';
       // act
-      final validation = validateStringNotEmpty(null);
+      final validation = validateStringNullOrEmpty(null);
       // assert
       expect(validation, left(const ValueFailure.empty(failedValue: input)));
     });
@@ -18,7 +18,7 @@ void main() {
       // arrange
       const String input = '';
       // act
-      final validation = validateStringNotEmpty(input);
+      final validation = validateStringNullOrEmpty(input);
       // assert
       expect(validation, left(const ValueFailure.empty(failedValue: input)));
     });
@@ -27,7 +27,7 @@ void main() {
       // arrange
       const String input = 'input';
       // act
-      final validation = validateStringNotEmpty(input);
+      final validation = validateStringNullOrEmpty(input);
       // assert
       expect(validation, right(input));
     });
@@ -67,7 +67,7 @@ void main() {
 
     test('should validate password with success', () {
       // arrange
-      const String password = '123456';
+      const String password = 'dmFsdWVfdmFsaWRhdG9yc190ZXN0LmRhcnQK';
       // act
       final validation = validatePassword(password);
       // assert

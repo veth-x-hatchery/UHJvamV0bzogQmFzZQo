@@ -20,7 +20,7 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
   }
 }
 
-Either<ValueFailure<String>, String> validateStringNotEmpty(String? input) {
+Either<ValueFailure<String>, String> validateStringNullOrEmpty(String? input) {
   if (input == null || input.isEmpty) {
     return left(ValueFailure.empty(failedValue: input ?? ''));
   } else {
