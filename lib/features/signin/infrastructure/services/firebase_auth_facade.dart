@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:uuid/uuid.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
@@ -10,6 +11,9 @@ import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
+
+  //Todo(v): implement random
+  String get randomPassword => 'nnI7j5i8B2#bkRZ97bPON#I6cfpyE&I';
 
   FirebaseAuthFacade(
     this._firebaseAuth,
@@ -54,8 +58,8 @@ class FirebaseAuthFacade implements IAuthFacade {
         return left(const AuthFailure.invalidEmailAndPasswordCombination());
       } else {
         // Todo(v): implement analytics
-        Logger.e(e.message ?? 'signInWithEmailAndPassword',
-            ex: e, stacktrace: stacktrace);
+        // Logger.e(e.message ?? 'signInWithEmailAndPassword',
+        //     ex: e, stacktrace: stacktrace);
         return left(const AuthFailure.serverError());
       }
     }
@@ -81,15 +85,34 @@ class FirebaseAuthFacade implements IAuthFacade {
           .then((_) => right(unit));
     } on PlatformException catch (e, stacktrace) {
       // Todo(v): implement analytics
-      Logger.e(e.message ?? 'signInWithGoogle', ex: e, stacktrace: stacktrace);
+      // Logger.e(e.message ?? 'signInWithGoogle', ex: e, stacktrace: stacktrace);
       return left(const AuthFailure.serverError());
     }
   }
 
   @override
-  Future<Either<AuthFailure, bool>> emailIsAlreadyInUse() {
-    // TODO: implement emailIsAlreadyInUse
-    throw UnimplementedError();
+  Future<Either<AuthFailure, bool>> emailIsAlreadyInUse(
+      EmailAddress emailAddress) async {
+    try {
+      return await _firebaseAuth
+          .signInWithEmailAndPassword(
+            email: emailAddress.getOrCrash(),
+            password: randomPassword,
+          )
+          .then((_) => right(true));
+      //Todo(v): Logout if works
+    } on PlatformException catch (e, stacktrace) {
+      if (e.code == 'wrong-password') {
+        return right(true);
+      } else if (e.code == 'user-not-found') {
+        return right(false);
+      } else {
+        // Todo(v): implement analytics
+        // Logger.e(e.message ?? 'signInWithEmailAndPassword',
+        //     ex: e, stacktrace: stacktrace);
+        return left(const AuthFailure.serverError());
+      }
+    }
   }
 
   @override

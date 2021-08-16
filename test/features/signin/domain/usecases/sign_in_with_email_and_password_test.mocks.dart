@@ -119,6 +119,14 @@ class MockIAuthFacade extends _i1.Mock implements _i8.IAuthFacade {
   }
 
   @override
+  _i4.Future<_i2.Either<_i9.AuthFailure, bool>> emailIsAlreadyInUse(
+          _i10.EmailAddress? emailAddress) =>
+      (super.noSuchMethod(
+              Invocation.method(#emailIsAlreadyInUse, [emailAddress]),
+              returnValue: Future<_i2.Either<_i9.AuthFailure, bool>>.value(
+                  _FakeEither_0<_i9.AuthFailure, bool>()))
+          as _i4.Future<_i2.Either<_i9.AuthFailure, bool>>);
+  @override
   _i4.Future<_i2.Either<_i9.AuthFailure, _i2.Unit>>
       registerWithEmailAndPassword(
               {_i10.EmailAddress? emailAddress, _i10.Password? password}) =>
@@ -143,12 +151,6 @@ class MockIAuthFacade extends _i1.Mock implements _i8.IAuthFacade {
               returnValue: Future<_i2.Either<_i9.AuthFailure, _i2.Unit>>.value(
                   _FakeEither_0<_i9.AuthFailure, _i2.Unit>()))
           as _i4.Future<_i2.Either<_i9.AuthFailure, _i2.Unit>>);
-  @override
-  _i4.Future<_i2.Either<_i9.AuthFailure, bool>> emailIsAlreadyInUse() =>
-      (super.noSuchMethod(Invocation.method(#emailIsAlreadyInUse, []),
-              returnValue: Future<_i2.Either<_i9.AuthFailure, bool>>.value(
-                  _FakeEither_0<_i9.AuthFailure, bool>()))
-          as _i4.Future<_i2.Either<_i9.AuthFailure, bool>>);
   @override
   _i4.Future<_i2.Either<_i9.AuthFailure, _i2.Unit>> signOut() =>
       (super.noSuchMethod(Invocation.method(#signOut, []),
