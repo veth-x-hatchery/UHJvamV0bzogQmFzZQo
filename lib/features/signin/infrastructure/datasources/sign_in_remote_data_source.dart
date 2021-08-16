@@ -1,13 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
+import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/models/user_model.dart';
-import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 
-abstract class ISignInRemoteSource {
+abstract class ISignInRemoteSource extends IAuthFacade {
   /// Throws a [ServerException] for all error codes.
   Future<bool> emailAlreadyRegistered(String email);
 
@@ -17,12 +20,6 @@ abstract class ISignInRemoteSource {
 
   /// Throws a [ServerException] for all error codes.
   Future<void> passwordReset(String email);
-
-  /// Throws a [ServerException] for all error codes.
-  Future<UserModel> signInWithEmailAndPassword(String email, String password);
-
-  /// Throws a [ServerException] for all error codes.
-  Future<UserModel> signInWithGoogle();
 
   /// Throws a [ServerException] for all error codes.
   Future<UserModel> signInWithFacebook();
@@ -35,9 +32,6 @@ abstract class ISignInRemoteSource {
 
   /// Throws a [ServerException] for all error codes.
   Future<void> signOut();
-
-  /// Throws a [ServerException] for all error codes.
-  Future<Stream<User>> get onAuthStateChange;
 }
 
 class SignInRemoteSource implements ISignInRemoteSource {
@@ -71,10 +65,6 @@ class SignInRemoteSource implements ISignInRemoteSource {
   }
 
   @override
-  // TODO: implement onAuthStateChange
-  Future<Stream<User>> get onAuthStateChange => throw UnimplementedError();
-
-  @override
   Future<void> passwordReset(String email) {
     // TODO: implement passwordReset
     throw UnimplementedError();
@@ -83,24 +73,6 @@ class SignInRemoteSource implements ISignInRemoteSource {
   @override
   Future<UserModel> signInAnonymously() {
     // TODO: implement signInAnonymously
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<UserModel> signInWithEmailAndPassword(String email, String password) {
-    // TODO: implement signInWithEmailAndPassword
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<UserModel> signInWithFacebook() {
-    // TODO: implement signInWithFacebook
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<UserModel> signInWithGoogle() {
-    // TODO: implement signInWithGoogle
     throw UnimplementedError();
   }
 
@@ -125,5 +97,38 @@ class SignInRemoteSource implements ISignInRemoteSource {
     }
 
     return Future.value(response.statusCode == HttpStatus.found);
+  }
+
+  @override
+  Future<Either<AuthFailure, bool>> emailIsAlreadyInUse(
+      EmailAddress emailAddress) {
+    // TODO: implement emailIsAlreadyInUse
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
+      {required EmailAddress emailAddress, required Password password}) {
+    // TODO: implement registerWithEmailAndPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword(
+      {required EmailAddress emailAddress, required Password password}) {
+    // TODO: implement signInWithEmailAndPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserModel> signInWithFacebook() {
+    // TODO: implement signInWithFacebook
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> signInWithGoogle() {
+    // TODO: implement signInWithGoogle
+    throw UnimplementedError();
   }
 }

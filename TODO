@@ -9,3 +9,7 @@
 	4 - Remover os Value Objects?
 		
 2 - Escrever os testes de integracao
+
+	1 - Escrever os testes para os Value Objects
+	2 - Integrar os value objects nos formularios
+	3 - Implementar mensagens de erro para Failures

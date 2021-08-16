@@ -2,16 +2,19 @@
 // in vethx_beta/test/features/signin/infrastructure/repositories/sign_in_repository_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
+import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:vethx_beta/core/network/network_info.dart' as _i7;
-import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart'
-    as _i6;
+import 'package:vethx_beta/core/network/network_info.dart' as _i9;
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
+    as _i8;
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart'
+    as _i7;
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart'
-    as _i3;
+    as _i4;
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_remote_data_source.dart'
-    as _i5;
+    as _i6;
 import 'package:vethx_beta/features/signin/infrastructure/models/user_model.dart'
     as _i2;
 
@@ -25,30 +28,32 @@ import 'package:vethx_beta/features/signin/infrastructure/models/user_model.dart
 
 class _FakeUserModel_0 extends _i1.Fake implements _i2.UserModel {}
 
+class _FakeEither_1<L, R> extends _i1.Fake implements _i3.Either<L, R> {}
+
 /// A class which mocks [ISignInLocalSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockISignInLocalSource extends _i1.Mock
-    implements _i3.ISignInLocalSource {
+    implements _i4.ISignInLocalSource {
   MockISignInLocalSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.UserModel> currentUser() =>
+  _i5.Future<_i2.UserModel> currentUser() =>
       (super.noSuchMethod(Invocation.method(#currentUser, []),
               returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0()))
-          as _i4.Future<_i2.UserModel>);
+          as _i5.Future<_i2.UserModel>);
   @override
-  _i4.Future<void> cacheCurrentUser(_i2.UserModel? user) =>
+  _i5.Future<void> cacheCurrentUser(_i2.UserModel? user) =>
       (super.noSuchMethod(Invocation.method(#cacheCurrentUser, [user]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
   @override
-  _i4.Future<void> signOut() =>
+  _i5.Future<void> signOut() =>
       (super.noSuchMethod(Invocation.method(#signOut, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
   @override
   String toString() => super.toString();
 }
@@ -57,66 +62,81 @@ class MockISignInLocalSource extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockISignInRemoteSource extends _i1.Mock
-    implements _i5.ISignInRemoteSource {
+    implements _i6.ISignInRemoteSource {
   MockISignInRemoteSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i4.Stream<_i6.User>> get onAuthStateChange =>
-      (super.noSuchMethod(Invocation.getter(#onAuthStateChange),
-              returnValue:
-                  Future<_i4.Stream<_i6.User>>.value(Stream<_i6.User>.empty()))
-          as _i4.Future<_i4.Stream<_i6.User>>);
-  @override
-  _i4.Future<bool> emailAlreadyRegistered(String? email) =>
+  _i5.Future<bool> emailAlreadyRegistered(String? email) =>
       (super.noSuchMethod(Invocation.method(#emailAlreadyRegistered, [email]),
-          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
   @override
-  _i4.Future<_i2.UserModel> createUserWithEmailAndPassword(
+  _i5.Future<_i2.UserModel> createUserWithEmailAndPassword(
           String? email, String? password) =>
       (super.noSuchMethod(
           Invocation.method(#createUserWithEmailAndPassword, [email, password]),
           returnValue:
-              Future<_i2.UserModel>.value(_FakeUserModel_0())) as _i4
+              Future<_i2.UserModel>.value(_FakeUserModel_0())) as _i5
           .Future<_i2.UserModel>);
   @override
-  _i4.Future<void> passwordReset(String? email) =>
+  _i5.Future<void> passwordReset(String? email) =>
       (super.noSuchMethod(Invocation.method(#passwordReset, [email]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
   @override
-  _i4.Future<_i2.UserModel> signInWithEmailAndPassword(
-          String? email, String? password) =>
-      (super.noSuchMethod(
-              Invocation.method(#signInWithEmailAndPassword, [email, password]),
-              returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0()))
-          as _i4.Future<_i2.UserModel>);
-  @override
-  _i4.Future<_i2.UserModel> signInWithGoogle() =>
-      (super.noSuchMethod(Invocation.method(#signInWithGoogle, []),
-              returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0()))
-          as _i4.Future<_i2.UserModel>);
-  @override
-  _i4.Future<_i2.UserModel> signInWithFacebook() =>
+  _i5.Future<_i2.UserModel> signInWithFacebook() =>
       (super.noSuchMethod(Invocation.method(#signInWithFacebook, []),
               returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0()))
-          as _i4.Future<_i2.UserModel>);
+          as _i5.Future<_i2.UserModel>);
   @override
-  _i4.Future<_i2.UserModel> currentUser() =>
+  _i5.Future<_i2.UserModel> currentUser() =>
       (super.noSuchMethod(Invocation.method(#currentUser, []),
               returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0()))
-          as _i4.Future<_i2.UserModel>);
+          as _i5.Future<_i2.UserModel>);
   @override
-  _i4.Future<_i2.UserModel> signInAnonymously() =>
+  _i5.Future<_i2.UserModel> signInAnonymously() =>
       (super.noSuchMethod(Invocation.method(#signInAnonymously, []),
               returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0()))
-          as _i4.Future<_i2.UserModel>);
+          as _i5.Future<_i2.UserModel>);
   @override
-  _i4.Future<void> signOut() =>
+  _i5.Future<void> signOut() =>
       (super.noSuchMethod(Invocation.method(#signOut, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  @override
+  _i5.Future<_i3.Either<_i7.AuthFailure, bool>> emailIsAlreadyInUse(
+          _i8.EmailAddress? emailAddress) =>
+      (super.noSuchMethod(
+              Invocation.method(#emailIsAlreadyInUse, [emailAddress]),
+              returnValue: Future<_i3.Either<_i7.AuthFailure, bool>>.value(
+                  _FakeEither_1<_i7.AuthFailure, bool>()))
+          as _i5.Future<_i3.Either<_i7.AuthFailure, bool>>);
+  @override
+  _i5.Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>
+      registerWithEmailAndPassword(
+              {_i8.EmailAddress? emailAddress, _i8.Password? password}) =>
+          (super.noSuchMethod(
+              Invocation.method(#registerWithEmailAndPassword, [],
+                  {#emailAddress: emailAddress, #password: password}),
+              returnValue: Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>.value(
+                  _FakeEither_1<_i7.AuthFailure, _i3.Unit>())) as _i5
+              .Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>);
+  @override
+  _i5.Future<_i3.Either<_i7.AuthFailure, _i3.Unit>> signInWithEmailAndPassword(
+          {_i8.EmailAddress? emailAddress, _i8.Password? password}) =>
+      (super.noSuchMethod(
+              Invocation.method(#signInWithEmailAndPassword, [],
+                  {#emailAddress: emailAddress, #password: password}),
+              returnValue: Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>.value(
+                  _FakeEither_1<_i7.AuthFailure, _i3.Unit>()))
+          as _i5.Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>);
+  @override
+  _i5.Future<_i3.Either<_i7.AuthFailure, _i3.Unit>> signInWithGoogle() =>
+      (super.noSuchMethod(Invocation.method(#signInWithGoogle, []),
+              returnValue: Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>.value(
+                  _FakeEither_1<_i7.AuthFailure, _i3.Unit>()))
+          as _i5.Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>);
   @override
   String toString() => super.toString();
 }
@@ -124,15 +144,15 @@ class MockISignInRemoteSource extends _i1.Mock
 /// A class which mocks [INetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockINetworkInfo extends _i1.Mock implements _i7.INetworkInfo {
+class MockINetworkInfo extends _i1.Mock implements _i9.INetworkInfo {
   MockINetworkInfo() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<bool> get isConnected =>
+  _i5.Future<bool> get isConnected =>
       (super.noSuchMethod(Invocation.getter(#isConnected),
-          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
   @override
   String toString() => super.toString();
 }
