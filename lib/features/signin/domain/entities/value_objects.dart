@@ -10,7 +10,7 @@ class PasswordMessageErrors {
 
 class EmailAddressMessageErrors {
   static const empty = 'Informe your password';
-  static const invalidEmail = 'Your password must be more than 6 chars';
+  static const invalidEmail = 'Invalid Email';
 }
 
 class EmailAddress extends ValueObject<String> {

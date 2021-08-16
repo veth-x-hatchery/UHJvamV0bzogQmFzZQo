@@ -46,7 +46,7 @@ void main() {
     final password = Password('dGVzdEB2ZXRoeC5jb20K');
 
     Future<void> _registerWithEmailAndPassword(
-      PlatformException firebaseException,
+      Exception firebaseException,
       AuthFailure expectedFailure,
     ) async {
       // Arrange
@@ -74,7 +74,7 @@ void main() {
         // arrange
 
         final firebaseException =
-            PlatformException(code: 'email-already-in-use');
+            FirebaseException(code: 'email-already-in-use', plugin: '');
 
         const expectedFailure = AuthFailure.emailAlreadyInUse();
 
@@ -92,7 +92,8 @@ void main() {
       () async {
         // arrange
 
-        final firebaseException = PlatformException(code: 'invalid-email');
+        final firebaseException =
+            FirebaseException(code: 'invalid-email', plugin: '');
 
         const expectedFailure = AuthFailure.serverError();
 
@@ -135,7 +136,7 @@ void main() {
     final password = Password('dGVzdEB2ZXRoeC5jb20K');
 
     Future<void> _signInWithEmailAndPassword(
-      PlatformException firebaseException,
+      Exception firebaseException,
       AuthFailure expectedFailure,
     ) async {
       // Arrange
@@ -162,7 +163,8 @@ void main() {
         () async {
       // arrange
 
-      final firebaseException = PlatformException(code: 'wrong-password');
+      final firebaseException =
+          FirebaseException(code: 'wrong-password', plugin: '');
 
       const expectedFailure = AuthFailure.invalidEmailAndPasswordCombination();
 
@@ -179,7 +181,8 @@ void main() {
         () async {
       // arrange
 
-      final firebaseException = PlatformException(code: 'user-not-found');
+      final firebaseException =
+          FirebaseException(code: 'user-not-found', plugin: '');
 
       const expectedFailure = AuthFailure.invalidEmailAndPasswordCombination();
 
@@ -303,8 +306,7 @@ void main() {
   group('when check if email is already in use', () {
     final email = EmailAddress('test@vethx.com');
 
-    Future<void> _emailIsAlreadyInUse(
-        PlatformException firebaseException) async {
+    Future<void> _emailIsAlreadyInUse(Exception firebaseException) async {
       // Arrange
       when(_mockFirebaseAuth.signInWithEmailAndPassword(
         email: email.getOrCrash(),
@@ -317,7 +319,8 @@ void main() {
         () async {
       //arrange
 
-      final firebaseException = PlatformException(code: 'user-disabled');
+      final firebaseException =
+          FirebaseException(code: 'user-disabled', plugin: '');
 
       const expectedFailure = AuthFailure.serverError();
 
@@ -335,7 +338,8 @@ void main() {
     test('should return already in use', () async {
       //arrange
 
-      final firebaseException = PlatformException(code: 'wrong-password');
+      final firebaseException =
+          FirebaseException(code: 'wrong-password', plugin: '');
 
       _emailIsAlreadyInUse(firebaseException);
 
@@ -351,7 +355,8 @@ void main() {
     test('should return not in use', () async {
       //arrange
 
-      final firebaseException = PlatformException(code: 'user-not-found');
+      final firebaseException =
+          FirebaseException(code: 'user-not-found', plugin: '');
 
       _emailIsAlreadyInUse(firebaseException);
 

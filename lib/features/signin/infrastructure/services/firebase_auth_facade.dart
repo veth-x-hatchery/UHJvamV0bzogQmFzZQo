@@ -24,18 +24,19 @@ class FirebaseAuthFacade implements IAuthFacade {
     required Password password,
   }) async {
     try {
-      return await _firebaseAuth
-          .createUserWithEmailAndPassword(
-            email: emailAddress.getOrCrash(),
-            password: password.getOrCrash(),
-          )
-          .then((_) => right(unit));
-    } on PlatformException catch (e) {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+        email: emailAddress.getOrCrash(),
+        password: password.getOrCrash(),
+      );
+      return right(unit);
+    } on FirebaseException catch (e) {
       if (e.code == 'email-already-in-use') {
         return left(const AuthFailure.emailAlreadyInUse());
       } else {
         return left(const AuthFailure.serverError());
       }
+    } on Exception catch (_) {
+      return left(const AuthFailure.serverError());
     }
   }
 
@@ -45,21 +46,19 @@ class FirebaseAuthFacade implements IAuthFacade {
     required Password password,
   }) async {
     try {
-      return await _firebaseAuth
-          .signInWithEmailAndPassword(
-            email: emailAddress.getOrCrash(),
-            password: password.getOrCrash(),
-          )
-          .then((_) => right(unit));
-    } on PlatformException catch (e, stacktrace) {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: emailAddress.getOrCrash(),
+        password: password.getOrCrash(),
+      );
+      return right(unit);
+    } on FirebaseException catch (e) {
       if (e.code == 'wrong-password' || e.code == 'user-not-found') {
         return left(const AuthFailure.invalidEmailAndPasswordCombination());
       } else {
-        // Todo(v): implement analytics
-        // Logger.e(e.message ?? 'signInWithEmailAndPassword',
-        //     ex: e, stacktrace: stacktrace);
         return left(const AuthFailure.serverError());
       }
+    } on Exception catch (_) {
+      return left(const AuthFailure.serverError());
     }
   }
 
@@ -78,12 +77,10 @@ class FirebaseAuthFacade implements IAuthFacade {
         accessToken: googleAuthentication.accessToken,
       );
 
-      return _firebaseAuth
-          .signInWithCredential(credential)
-          .then((_) => right(unit));
-    } on PlatformException catch (e, stacktrace) {
-      // Todo(v): implement analytics
-      // Logger.e(e.message ?? 'signInWithGoogle', ex: e, stacktrace: stacktrace);
+      await _firebaseAuth.signInWithCredential(credential);
+
+      return right(unit);
+    } on Exception catch (_) {
       return left(const AuthFailure.serverError());
     }
   }
@@ -92,24 +89,22 @@ class FirebaseAuthFacade implements IAuthFacade {
   Future<Either<AuthFailure, bool>> emailIsAlreadyInUse(
       EmailAddress emailAddress) async {
     try {
-      return await _firebaseAuth
-          .signInWithEmailAndPassword(
-            email: emailAddress.getOrCrash(),
-            password: randomPassword,
-          )
-          .then((_) => right(true));
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: emailAddress.getOrCrash(),
+        password: randomPassword,
+      );
+      return right(true);
       //Todo(v): Logout if works
-    } on PlatformException catch (e, stacktrace) {
+    } on FirebaseException catch (e) {
       if (e.code == 'wrong-password') {
         return right(true);
       } else if (e.code == 'user-not-found') {
         return right(false);
       } else {
-        // Todo(v): implement analytics
-        // Logger.e(e.message ?? 'signInWithEmailAndPassword',
-        //     ex: e, stacktrace: stacktrace);
         return left(const AuthFailure.serverError());
       }
+    } on Exception catch (_) {
+      return left(const AuthFailure.serverError());
     }
   }
 

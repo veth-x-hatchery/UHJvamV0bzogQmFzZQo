@@ -4,5 +4,5 @@ import 'package:vethx_beta/features/signin/sign_in_injection_container.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  signInDependenciesInjection();
+  await signInDependenciesInjection();
 }
