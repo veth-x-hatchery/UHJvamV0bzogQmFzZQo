@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
-import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
 
 class PasswordFormField extends StatefulWidget {
@@ -45,15 +45,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
           ),
         ),
         style: Theme.of(context).textTheme.bodyText1,
-        validator: (value) {
-          if (value == null) {
-            return 'invalid password';
-          }
-          validatePassword(value).fold(
-            (l) => 'invalid password',
-            (r) => null,
-          );
-        },
+        validator: (value) => Password(value).validation,
         onEditingComplete: widget.hidePassword,
         // onSaved: (input) => _gerenciador.senha = input!,
       ),

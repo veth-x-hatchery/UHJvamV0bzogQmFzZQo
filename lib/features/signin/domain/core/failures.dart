@@ -15,3 +15,12 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
     required T failedValue,
   }) = Empty<T>;
 }
+
+class FailureDetails<T> {
+  final String message;
+  final T? failedValue;
+  FailureDetails({
+    required this.message,
+    this.failedValue,
+  });
+}
