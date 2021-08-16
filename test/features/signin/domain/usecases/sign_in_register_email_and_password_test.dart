@@ -67,7 +67,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInRegisterEmailAndPasswordErrorMessages.unknowError,
+        message: SignInRegisterEmailAndPasswordErrorMessages.unavailable,
       );
 
       when(_mockAuthFacade.registerWithEmailAndPassword(

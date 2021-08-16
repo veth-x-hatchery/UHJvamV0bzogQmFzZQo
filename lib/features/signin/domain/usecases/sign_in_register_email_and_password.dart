@@ -38,13 +38,13 @@ class SignInRegisterEmailAndPassword extends UseCase<Unit, Params> {
     }
     return FailureDetails(
       failure: auth,
-      message: SignInRegisterEmailAndPasswordErrorMessages.unknowError,
+      message: SignInRegisterEmailAndPasswordErrorMessages.unavailable,
     );
   }
 }
 
 class SignInRegisterEmailAndPasswordErrorMessages {
-  static const unknowError = 'Unavailable';
+  static const unavailable = 'Unavailable';
   static const emailAlreadyInUse = 'This email is already in use';
 }
 

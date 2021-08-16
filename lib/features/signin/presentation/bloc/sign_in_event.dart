@@ -26,8 +26,8 @@ class SignInCheckEmail extends SignInEvent {
 }
 
 class SignInWithEmail extends SignInEvent {
-  final String email;
-  final String password;
+  final EmailAddress email;
+  final Password password;
   const SignInWithEmail({
     required this.email,
     required this.password,
@@ -37,8 +37,8 @@ class SignInWithEmail extends SignInEvent {
 }
 
 class SignInEmailRegister extends SignInEvent {
-  final String email;
-  final String password;
+  final EmailAddress email;
+  final Password password;
   const SignInEmailRegister({
     required this.email,
     required this.password,

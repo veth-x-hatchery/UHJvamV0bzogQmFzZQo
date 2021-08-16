@@ -4,11 +4,14 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
+import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart'
     as a;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart'
+    as b;
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart'
+    as c;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
 
@@ -17,7 +20,8 @@ part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final a.SignInCheckIfEmailIsInUse _checkIfEmailIsInUse;
-  final SignInWithEmailAndPassword _signInWithEmailAndPassword;
+  final b.SignInRegisterEmailAndPassword _signInRegisterEmailAndPassword;
+  final c.SignInWithEmailAndPassword _signInWithEmailAndPassword;
   final SignInWithGoogle _signInWithGoogle;
 
   final _signInPageRoutesController =
@@ -28,6 +32,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     this._checkIfEmailIsInUse,
     this._signInWithEmailAndPassword,
     this._signInWithGoogle,
+    this._signInRegisterEmailAndPassword,
   ) : super(SignInInitial());
 
   @override
@@ -35,6 +40,48 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     if (event is SignInCheckEmail) {
       yield* _checkEmail(event);
     }
+    if (event is SignInEmailRegister) {
+      yield* _register(event);
+    }
+    if (event is SignInWithEmail) {
+      yield* _signInWithEmail(event);
+    }
+  }
+
+  Stream<SignInState> _signInWithEmail(SignInWithEmail event) async* {
+    yield SignInLoading();
+    final usecase = await _signInWithEmailAndPassword.call(
+      c.Params(
+        credentials: Credentials(
+          user: event.email,
+          password: event.password,
+        ),
+      ),
+    );
+    yield usecase.fold(
+      _mapFailureToSignStateErrorMessage,
+      (_) {
+        return SignInAllowed();
+      },
+    );
+  }
+
+  Stream<SignInState> _register(SignInEmailRegister event) async* {
+    yield SignInLoading();
+    final usecase = await _signInRegisterEmailAndPassword.call(
+      b.Params(
+        credentials: Credentials(
+          user: event.email,
+          password: event.password,
+        ),
+      ),
+    );
+    yield usecase.fold(
+      _mapFailureToSignStateErrorMessage,
+      (_) {
+        return SignInAllowed();
+      },
+    );
   }
 
   Stream<SignInState> _checkEmail(SignInCheckEmail event) async* {

@@ -8,13 +8,15 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
     as _i5;
-import 'package:vethx_beta/features/signin/domain/core/usecase.dart' as _i8;
+import 'package:vethx_beta/features/signin/domain/core/usecase.dart' as _i9;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart'
     as _i3;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart'
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart'
     as _i6;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart'
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart'
     as _i7;
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart'
+    as _i8;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -45,12 +47,12 @@ class MockSignInCheckIfEmailIsInUse extends _i1.Mock
   String toString() => super.toString();
 }
 
-/// A class which mocks [SignInWithEmailAndPassword].
+/// A class which mocks [SignInRegisterEmailAndPassword].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInWithEmailAndPassword extends _i1.Mock
-    implements _i6.SignInWithEmailAndPassword {
-  MockSignInWithEmailAndPassword() {
+class MockSignInRegisterEmailAndPassword extends _i1.Mock
+    implements _i6.SignInRegisterEmailAndPassword {
+  MockSignInRegisterEmailAndPassword() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -65,17 +67,37 @@ class MockSignInWithEmailAndPassword extends _i1.Mock
   String toString() => super.toString();
 }
 
+/// A class which mocks [SignInWithEmailAndPassword].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSignInWithEmailAndPassword extends _i1.Mock
+    implements _i7.SignInWithEmailAndPassword {
+  MockSignInWithEmailAndPassword() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i2.Either<_i5.FailureDetails, _i2.Unit>> call(
+          _i7.Params? params) =>
+      (super.noSuchMethod(Invocation.method(#call, [params]),
+          returnValue: Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>.value(
+              _FakeEither_0<_i5.FailureDetails, _i2.Unit>())) as _i4
+          .Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>);
+  @override
+  String toString() => super.toString();
+}
+
 /// A class which mocks [SignInWithGoogle].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInWithGoogle extends _i1.Mock implements _i7.SignInWithGoogle {
+class MockSignInWithGoogle extends _i1.Mock implements _i8.SignInWithGoogle {
   MockSignInWithGoogle() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   _i4.Future<_i2.Either<_i5.FailureDetails, _i2.Unit>> call(
-          _i8.NoParams? params) =>
+          _i9.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
           returnValue: Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>.value(
               _FakeEither_0<_i5.FailureDetails, _i2.Unit>())) as _i4

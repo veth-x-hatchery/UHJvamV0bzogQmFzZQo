@@ -39,13 +39,13 @@ class SignInWithEmailAndPassword extends UseCase<Unit, Params> {
     }
     return FailureDetails(
       failure: auth,
-      message: SignInWithEmailAndPasswordErrorMessages.unknowError,
+      message: SignInWithEmailAndPasswordErrorMessages.unavailable,
     );
   }
 }
 
 class SignInWithEmailAndPasswordErrorMessages {
-  static const unknowError = 'Unavailable';
+  static const unavailable = 'Unavailable';
   static const invalidEmailAndPasswordCombination =
       'Invalid email and password combination';
 }
