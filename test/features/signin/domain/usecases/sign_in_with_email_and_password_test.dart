@@ -30,20 +30,16 @@ void main() {
 
   final emailTester = EmailAddress('test@vethx.com');
   final passwordTester = Password('dGVzdEB2ZXRoeC5jb20K');
-
   final credentials = Credentials(user: emailTester, password: passwordTester);
+
   group('sign in process', () {
-    test('should get user from the repository with the given credentials',
-        () async {
-      // emailAddress:
-      final signInWithEmailAndPassword =
-          _mockAuthFacade.signInWithEmailAndPassword(
+    test('should return success with the given credentials', () async {
+      // arrange
+
+      when(_mockAuthFacade.signInWithEmailAndPassword(
         emailAddress: emailTester,
         password: passwordTester,
-      );
-
-      when(signInWithEmailAndPassword)
-          .thenAnswer((_) async => const Right(unit));
+      )).thenAnswer((_) async => const Right(unit));
 
       // act
 
@@ -53,7 +49,10 @@ void main() {
 
       expect(result, const Right(unit));
 
-      verify(() => signInWithEmailAndPassword);
+      verify(_mockAuthFacade.signInWithEmailAndPassword(
+        emailAddress: emailTester,
+        password: passwordTester,
+      ));
 
       verifyNoMoreInteractions(_mockSignInRepository);
     });
