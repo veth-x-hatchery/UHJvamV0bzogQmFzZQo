@@ -22,14 +22,12 @@ void main() {
     );
   });
 
-  const emailTester = 'test@vethx.com';
-  const user = User(email: emailTester);
   group('sign in process', () {
-    test('should get user from the repository with google sign in', () async {
+    test('should return success with google sign in', () async {
       // arrange
 
-      when(_mockSignInRepository.signInWithGoogle())
-          .thenAnswer((_) async => const Right(user));
+      when(_mockAuthFacade.signInWithGoogle())
+          .thenAnswer((_) async => const Right(unit));
 
       // act
 
@@ -37,9 +35,9 @@ void main() {
 
       // assert
 
-      expect(result, const Right(user));
+      expect(result, const Right(unit));
 
-      verify(_mockSignInRepository.signInWithGoogle());
+      verify(_mockAuthFacade.signInWithGoogle());
 
       verifyNoMoreInteractions(_mockSignInRepository);
     });
