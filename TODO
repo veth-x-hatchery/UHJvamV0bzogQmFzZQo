@@ -1,3 +1,22 @@
+1 - Sign in with Google
 
+	1 - Escrever os testes no BLoC
 
-1 - Verificar se o GoTo esta enviando o parametro EMAIL
+2 - Desabilitar o Facebook
+
+3 - Criar o BLoC auth_bloc.dart
+
+	1 - Escrever os testes no modo TDD
+
+	2 - Direcionar para uma pagina HOME
+
+4 - Escrever os testes de Integracao com DRIVER
+
+5 - Adicionar um SPLASH durante o carregamento das dependencias
+
+	1 - Get_It
+	2 - Firebase
+	3 - ETC...
+
+		Liberar o app a partir deste carregamento...
+
