@@ -4,6 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/error/failures.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
@@ -175,9 +176,7 @@ void main() {
         const errorMessage = InvalidEmailFailure.invalidEmail;
 
         when(_mockSignInCheckIfEmailIsInUse.call(any))
-            .thenAnswer((_) async => const Left(InvalidEmailFailure(
-                  message: errorMessage,
-                )));
+            .thenAnswer((_) async => const Left(AuthFailure.serverError()));
 
         // act
         _bloc.add(SignInCheckEmail(
@@ -189,7 +188,7 @@ void main() {
 
         final expected = [
           SignInLoading(),
-          const SignInError(message: errorMessage),
+          const SignInError(),
         ];
 
         await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -203,9 +202,7 @@ void main() {
         const errorMessage = InvalidEmailFailure.invalidEmptyEmail;
 
         when(_mockSignInCheckIfEmailIsInUse.call(any))
-            .thenAnswer((_) async => const Left(InvalidEmailFailure(
-                  message: errorMessage,
-                )));
+            .thenAnswer((_) async => const Left(AuthFailure.serverError()));
 
         // act
         _bloc.add(SignInCheckEmail(
@@ -217,7 +214,7 @@ void main() {
 
         final expected = [
           SignInLoading(),
-          const SignInError(message: errorMessage),
+          const SignInError(),
         ];
 
         await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -230,8 +227,8 @@ void main() {
         // arrange
         const errorMessage = UseCasesDefaultMessages.error;
 
-        when(_mockSignInCheckIfEmailIsInUse.call(any)).thenAnswer(
-            (_) async => const Left(ServerFailure(message: errorMessage)));
+        when(_mockSignInCheckIfEmailIsInUse.call(any))
+            .thenAnswer((_) async => const Left(AuthFailure.serverError()));
 
         // act
         _bloc.add(SignInCheckEmail(

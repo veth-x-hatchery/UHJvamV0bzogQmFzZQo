@@ -12,14 +12,12 @@ import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.da
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart'
     as _i6;
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
-    as _i11;
+    as _i10;
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart'
     as _i3;
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart'
-    as _i10;
-import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart'
     as _i9;
-import 'package:vethx_beta/features/signin/presentation/utils/custom_validators.dart'
+import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart'
     as _i8;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -112,75 +110,52 @@ class MockISignInRepository extends _i1.Mock implements _i3.ISignInRepository {
   String toString() => super.toString();
 }
 
-/// A class which mocks [CustomValidators].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockCustomValidators extends _i1.Mock implements _i8.CustomValidators {
-  MockCustomValidators() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i2.Either<_i8.InvalidEmailFailure, String> emailAnalysis(String? value) =>
-      (super.noSuchMethod(Invocation.method(#emailAnalysis, [value]),
-              returnValue: _FakeEither_0<_i8.InvalidEmailFailure, String>())
-          as _i2.Either<_i8.InvalidEmailFailure, String>);
-  @override
-  _i2.Either<_i5.Failure, String> passwordAnalysis(String? value) =>
-      (super.noSuchMethod(Invocation.method(#passwordAnalysis, [value]),
-              returnValue: _FakeEither_0<_i5.Failure, String>())
-          as _i2.Either<_i5.Failure, String>);
-  @override
-  String toString() => super.toString();
-}
-
 /// A class which mocks [IAuthFacade].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIAuthFacade extends _i1.Mock implements _i9.IAuthFacade {
+class MockIAuthFacade extends _i1.Mock implements _i8.IAuthFacade {
   MockIAuthFacade() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i10.AuthFailure, bool>> emailIsAlreadyInUse(
-          _i11.EmailAddress? emailAddress) =>
+  _i4.Future<_i2.Either<_i9.AuthFailure, bool>> emailIsAlreadyInUse(
+          _i10.EmailAddress? emailAddress) =>
       (super.noSuchMethod(
               Invocation.method(#emailIsAlreadyInUse, [emailAddress]),
-              returnValue: Future<_i2.Either<_i10.AuthFailure, bool>>.value(
-                  _FakeEither_0<_i10.AuthFailure, bool>()))
-          as _i4.Future<_i2.Either<_i10.AuthFailure, bool>>);
+              returnValue: Future<_i2.Either<_i9.AuthFailure, bool>>.value(
+                  _FakeEither_0<_i9.AuthFailure, bool>()))
+          as _i4.Future<_i2.Either<_i9.AuthFailure, bool>>);
   @override
-  _i4.Future<_i2.Either<_i10.AuthFailure, _i2.Unit>>
+  _i4.Future<_i2.Either<_i9.AuthFailure, _i2.Unit>>
       registerWithEmailAndPassword(
-              {_i11.EmailAddress? emailAddress, _i11.Password? password}) =>
+              {_i10.EmailAddress? emailAddress, _i10.Password? password}) =>
           (super.noSuchMethod(
               Invocation.method(#registerWithEmailAndPassword, [],
                   {#emailAddress: emailAddress, #password: password}),
-              returnValue: Future<_i2.Either<_i10.AuthFailure, _i2.Unit>>.value(
-                  _FakeEither_0<_i10.AuthFailure, _i2.Unit>())) as _i4
-              .Future<_i2.Either<_i10.AuthFailure, _i2.Unit>>);
+              returnValue: Future<_i2.Either<_i9.AuthFailure, _i2.Unit>>.value(
+                  _FakeEither_0<_i9.AuthFailure, _i2.Unit>())) as _i4
+              .Future<_i2.Either<_i9.AuthFailure, _i2.Unit>>);
   @override
-  _i4.Future<_i2.Either<_i10.AuthFailure, _i2.Unit>> signInWithEmailAndPassword(
-          {_i11.EmailAddress? emailAddress, _i11.Password? password}) =>
+  _i4.Future<_i2.Either<_i9.AuthFailure, _i2.Unit>> signInWithEmailAndPassword(
+          {_i10.EmailAddress? emailAddress, _i10.Password? password}) =>
       (super.noSuchMethod(
               Invocation.method(#signInWithEmailAndPassword, [],
                   {#emailAddress: emailAddress, #password: password}),
-              returnValue: Future<_i2.Either<_i10.AuthFailure, _i2.Unit>>.value(
-                  _FakeEither_0<_i10.AuthFailure, _i2.Unit>()))
-          as _i4.Future<_i2.Either<_i10.AuthFailure, _i2.Unit>>);
+              returnValue: Future<_i2.Either<_i9.AuthFailure, _i2.Unit>>.value(
+                  _FakeEither_0<_i9.AuthFailure, _i2.Unit>()))
+          as _i4.Future<_i2.Either<_i9.AuthFailure, _i2.Unit>>);
   @override
-  _i4.Future<_i2.Either<_i10.AuthFailure, _i2.Unit>> signInWithGoogle() =>
+  _i4.Future<_i2.Either<_i9.AuthFailure, _i2.Unit>> signInWithGoogle() =>
       (super.noSuchMethod(Invocation.method(#signInWithGoogle, []),
-              returnValue: Future<_i2.Either<_i10.AuthFailure, _i2.Unit>>.value(
-                  _FakeEither_0<_i10.AuthFailure, _i2.Unit>()))
-          as _i4.Future<_i2.Either<_i10.AuthFailure, _i2.Unit>>);
+              returnValue: Future<_i2.Either<_i9.AuthFailure, _i2.Unit>>.value(
+                  _FakeEither_0<_i9.AuthFailure, _i2.Unit>()))
+          as _i4.Future<_i2.Either<_i9.AuthFailure, _i2.Unit>>);
   @override
-  _i4.Future<_i2.Either<_i10.AuthFailure, _i2.Unit>> signOut() =>
+  _i4.Future<void> signOut() =>
       (super.noSuchMethod(Invocation.method(#signOut, []),
-              returnValue: Future<_i2.Either<_i10.AuthFailure, _i2.Unit>>.value(
-                  _FakeEither_0<_i10.AuthFailure, _i2.Unit>()))
-          as _i4.Future<_i2.Either<_i10.AuthFailure, _i2.Unit>>);
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
   String toString() => super.toString();
 }

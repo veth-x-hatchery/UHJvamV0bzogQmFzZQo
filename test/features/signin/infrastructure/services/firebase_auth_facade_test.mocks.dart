@@ -328,30 +328,6 @@ class MockUserCredential extends _i1.Mock implements _i4.UserCredential {
   String toString() => super.toString();
 }
 
-/// A class which mocks [OAuthCredential].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockOAuthCredential extends _i1.Mock implements _i3.OAuthCredential {
-  MockOAuthCredential() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  String get providerId =>
-      (super.noSuchMethod(Invocation.getter(#providerId), returnValue: '')
-          as String);
-  @override
-  String get signInMethod =>
-      (super.noSuchMethod(Invocation.getter(#signInMethod), returnValue: '')
-          as String);
-  @override
-  Map<String, String?> asMap() =>
-      (super.noSuchMethod(Invocation.method(#asMap, []),
-          returnValue: <String, String?>{}) as Map<String, String?>);
-  @override
-  String toString() => super.toString();
-}
-
 /// A class which mocks [GoogleAuthProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
