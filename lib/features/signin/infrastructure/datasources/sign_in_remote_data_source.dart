@@ -31,6 +31,7 @@ abstract class ISignInRemoteSource extends IAuthFacade {
   Future<UserModel> signInAnonymously();
 
   /// Throws a [ServerException] for all error codes.
+  @override
   Future<void> signOut();
 }
 
