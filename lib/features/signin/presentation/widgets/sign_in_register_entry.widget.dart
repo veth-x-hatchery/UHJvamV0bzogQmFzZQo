@@ -13,7 +13,12 @@ import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/logo_text_loading.widget.dart';
 
 class SignInRegisterEntry extends StatefulWidget {
-  const SignInRegisterEntry({Key? key}) : super(key: key);
+  const SignInRegisterEntry({
+    Key? key,
+    this.email,
+  }) : super(key: key);
+
+  final String? email;
 
   @override
   _SignInRegisterEntryState createState() => _SignInRegisterEntryState();
@@ -56,7 +61,12 @@ class _SignInRegisterEntryState extends State<SignInRegisterEntry> {
 
   @override
   void initState() {
-    _emailFocusNode.requestFocus();
+    if (widget.email != null) {
+      _emailEditingController.text = widget.email!;
+      _passwordFocusNode.requestFocus();
+    } else {
+      _emailFocusNode.requestFocus();
+    }
     super.initState();
   }
 

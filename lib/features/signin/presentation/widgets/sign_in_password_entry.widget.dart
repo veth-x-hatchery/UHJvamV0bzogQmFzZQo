@@ -13,7 +13,9 @@ import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/logo_text_loading.widget.dart';
 
 class SignInPasswordEntry extends StatefulWidget {
-  const SignInPasswordEntry({Key? key}) : super(key: key);
+  const SignInPasswordEntry({Key? key, required this.email}) : super(key: key);
+
+  final String email;
 
   @override
   _SignInPasswordEntryState createState() => _SignInPasswordEntryState();

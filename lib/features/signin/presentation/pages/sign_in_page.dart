@@ -19,15 +19,20 @@ enum SignInPageRoutes {
 class SignInPageGoTo extends Equatable {
   final SignInPageRoutes from;
   final SignInPageRoutes to;
+  final Object? parameters;
 
-  const SignInPageGoTo({required this.from, required this.to});
+  const SignInPageGoTo({
+    required this.from,
+    required this.to,
+    this.parameters,
+  });
 
   @override
-  String toString() => 'Go from $from to $to';
+  String toString() =>
+      'Go from $from to $to ${parameters != null ? 'with $parameters' : ''}';
 
   @override
-  // TODO: implement props
-  List<Object?> get props => [from, to];
+  List<Object?> get props => [from, to, parameters];
 }
 
 class SignInPage extends StatefulWidget {
@@ -59,13 +64,16 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
       case SignInPageRoutes.passwordEntry:
         Navigator.pushReplacement(
           context,
-          SlideLeftRoute<void>(page: const SignInPasswordEntry()),
+          SlideLeftRoute<void>(
+            page: SignInPasswordEntry(email: page.parameters! as String),
+          ),
         );
         break;
       case SignInPageRoutes.registerEmailSignIn:
         Navigator.pushReplacement(
           context,
-          SlideLeftRoute<void>(page: const SignInRegisterEntry()),
+          SlideLeftRoute<void>(
+              page: SignInRegisterEntry(email: page.parameters as String?)),
         );
         break;
       case SignInPageRoutes.emailEntry:

@@ -41,12 +41,16 @@ void main() {
     expect(_bloc.state, equals(SignInInitial()));
   });
 
-  group('when sign in check user email', () {
+  group('when check email', () {
     final testEmail = EmailAddress('test@vethx.com');
 
-    Future<void> _assertSignInStatesAndNativation(bool isEmailAlreadyRegistered,
-        SignInPageGoTo signInPageGoTo, List<SignInState> statesExpected,
-        {bool goToExpected = true}) async {
+    Future<void> _assertSignInStatesAndNativation(
+      EmailAddress email,
+      bool isEmailAlreadyRegistered,
+      SignInPageGoTo signInPageGoTo,
+      List<SignInState> statesExpected, {
+      bool goToExpected = true,
+    }) async {
       // arrange
 
       when(_mockSignInCheckIfEmailIsInUse.call(any))
@@ -55,7 +59,7 @@ void main() {
       // act
       _bloc.add(SignInCheckEmail(
         fromPage: signInPageGoTo.from,
-        email: testEmail,
+        email: email,
       ));
 
       // assert later
@@ -76,13 +80,18 @@ void main() {
 
     group('comming from page [SignInPageRoutes.emailEntry]', () {
       test(
-        'should emit [SignInLoading, EmailNotFound] and go to page [SignInPageRoutes.registerEmailSignIn]',
+        'should emit [SignInLoading, EmailNotFound] and go to page [SignInPageRoutes.registerEmailSignIn] passing String email as parameter',
         () async {
           // arrange
           const isEmailAlreadyRegistered = false;
           const fromPage = SignInPageRoutes.emailEntry;
           const toPage = SignInPageRoutes.registerEmailSignIn;
-          const signInPageGoTo = SignInPageGoTo(from: fromPage, to: toPage);
+
+          final signInPageGoTo = SignInPageGoTo(
+            from: fromPage,
+            to: toPage,
+            parameters: testEmail.getOrCrash(),
+          );
 
           final statesExpected = [
             SignInLoading(),
@@ -90,6 +99,7 @@ void main() {
           ];
 
           await _assertSignInStatesAndNativation(
+            testEmail,
             isEmailAlreadyRegistered,
             signInPageGoTo,
             statesExpected,
@@ -104,7 +114,12 @@ void main() {
           const isEmailAlreadyRegistered = true;
           const fromPage = SignInPageRoutes.emailEntry;
           const toPage = SignInPageRoutes.passwordEntry;
-          const signInPageGoTo = SignInPageGoTo(from: fromPage, to: toPage);
+
+          final signInPageGoTo = SignInPageGoTo(
+            from: fromPage,
+            to: toPage,
+            parameters: testEmail.getOrCrash(),
+          );
 
           final statesExpected = [
             SignInLoading(),
@@ -112,153 +127,44 @@ void main() {
           ];
 
           await _assertSignInStatesAndNativation(
+            testEmail,
             isEmailAlreadyRegistered,
             signInPageGoTo,
             statesExpected,
-          );
-        },
-      );
-    });
-
-    group('comming from page [SignInPageRoutes.registerEmailSignIn]', () {
-      test(
-        'should just emit [SignInLoading, EmailAlreadyRegistered]',
-        () async {
-          // arrange
-          const isEmailAlreadyRegistered = true;
-          const fromPage = SignInPageRoutes.registerEmailSignIn;
-          const toPage = SignInPageRoutes.passwordEntry;
-          const signInPageGoTo = SignInPageGoTo(from: fromPage, to: toPage);
-
-          final statesExpected = [
-            SignInLoading(),
-            EmailAlreadyRegistered(),
-          ];
-
-          await _assertSignInStatesAndNativation(
-            isEmailAlreadyRegistered,
-            signInPageGoTo,
-            statesExpected,
-            goToExpected: false,
           );
         },
       );
 
       test(
-        'should just emit [SignInLoading, EmailNotFound]',
+        'should emit [SignInNotification(message: [CheckEmailErrorMessages.unavailable])] when email check fail',
         () async {
           // arrange
-          const isEmailAlreadyRegistered = false;
-          const fromPage = SignInPageRoutes.registerEmailSignIn;
-          const toPage = SignInPageRoutes.passwordEntry;
-          const signInPageGoTo = SignInPageGoTo(from: fromPage, to: toPage);
+          const throwFailure = AuthFailure.serverError();
 
-          final statesExpected = [
+          final failureDetails = FailureDetails(
+            failure: throwFailure,
+            message: CheckEmailErrorMessages.unavailable,
+          );
+
+          when(_mockSignInCheckIfEmailIsInUse.call(any))
+              .thenAnswer((_) async => Left(failureDetails));
+
+          // act
+          _bloc.add(SignInCheckEmail(
+            email: testEmail,
+            fromPage: SignInPageRoutes.emailEntry,
+          ));
+
+          // assert later
+
+          final expected = [
             SignInLoading(),
-            EmailNotFound(),
+            SignInNotification(message: failureDetails.message),
           ];
 
-          await _assertSignInStatesAndNativation(
-            isEmailAlreadyRegistered,
-            signInPageGoTo,
-            statesExpected,
-            goToExpected: false,
-          );
+          await expectLater(_bloc.stream, emitsInOrder(expected));
         },
       );
     });
-
-    test(
-      'should emit [SignInError(message: InvalidEmailFailure.invalidEmail)] when email is invalid',
-      () async {
-        // arrange
-        const throwFailure = AuthFailure.serverError();
-
-        final failureDetails = FailureDetails(
-          failure: throwFailure,
-          message: CheckEmailErrorMessages.unknowError,
-        );
-
-        when(_mockSignInCheckIfEmailIsInUse.call(any))
-            .thenAnswer((_) async => Left(failureDetails));
-
-        // act
-        _bloc.add(SignInCheckEmail(
-          email: testEmail,
-          fromPage: SignInPageRoutes.emailEntry,
-        ));
-
-        // assert later
-
-        final expected = [
-          SignInLoading(),
-          const SignInError(),
-        ];
-
-        await expectLater(_bloc.stream, emitsInOrder(expected));
-      },
-    );
-
-    test(
-      'should emit [SignInError(message: InvalidEmailFailure.invalidEmptyEmail)] when email is not given',
-      () async {
-        // arrange
-        const throwFailure = AuthFailure.serverError();
-
-        final failureDetails = FailureDetails(
-          failure: throwFailure,
-          message: CheckEmailErrorMessages.unknowError,
-        );
-
-        when(_mockSignInCheckIfEmailIsInUse.call(any))
-            .thenAnswer((_) async => Left(failureDetails));
-
-        // act
-        _bloc.add(SignInCheckEmail(
-          email: testEmail,
-          fromPage: SignInPageRoutes.emailEntry,
-        ));
-
-        // assert later
-
-        final expected = [
-          SignInLoading(),
-          const SignInError(),
-        ];
-
-        await expectLater(_bloc.stream, emitsInOrder(expected));
-      },
-    );
-
-    test(
-      'should emit [SignInError(message: [UseCasesDefaultMessages.error])] when email check fail',
-      () async {
-        // arrange
-        const throwFailure = AuthFailure.serverError();
-
-        final failureDetails = FailureDetails(
-          failure: throwFailure,
-          message: CheckEmailErrorMessages.unknowError,
-        );
-
-        when(_mockSignInCheckIfEmailIsInUse.call(any))
-            .thenAnswer((_) async => Left(failureDetails));
-
-        // act
-        _bloc.add(SignInCheckEmail(
-          email: testEmail,
-          fromPage: SignInPageRoutes.emailEntry,
-        ));
-
-        // assert later
-
-        final expected = [
-          SignInLoading(),
-          const SignInError(),
-        ];
-
-        await expectLater(_bloc.stream, emitsInOrder(expected));
-      },
-    );
   });
 }

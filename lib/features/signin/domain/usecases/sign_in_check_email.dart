@@ -29,7 +29,7 @@ class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
   FailureDetails _mapFailures(AuthFailure auth) {
     return FailureDetails(
       failure: auth,
-      message: CheckEmailErrorMessages.unknowError,
+      message: CheckEmailErrorMessages.unavailable,
     );
   }
 }
@@ -44,5 +44,6 @@ class Params extends Equatable {
 }
 
 class CheckEmailErrorMessages {
-  static const unknowError = 'Unavailable';
+  static const unavailable = 'Unavailable';
+  static const emailAlreadyRegistered = 'Email already registered';
 }

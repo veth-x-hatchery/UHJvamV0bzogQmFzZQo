@@ -6,31 +6,31 @@ part of 'sign_in_bloc.dart';
 /// - [SignInAllowed]
 /// - [SignInDenied]
 /// - [SignInCancelled]
-/// - [SignInError]
+/// - [SignInNotification]
 ///
 /// [SignInCheckEmail]
 /// - [EmailAlreadyRegistered]
 /// - [EmailNotFound]
-/// - [SignInError]
+/// - [SignInNotification]
 ///
 /// [SignInWithEmail]
 ///
 /// [SignInAnonimously]
 /// - [SignInAllowed]
 /// - [SignInDenied]
-/// - [SignInError]
+/// - [SignInNotification]
 ///
 /// [SignInEmailRegister]
 /// - [EmailAlreadyRegistered]
-/// - [SignInError]
+/// - [SignInNotification]
 ///
 /// [ForgotPasswordEvent]
 /// - [SignInEmailWithResetPasswordInstructionsSent]
-/// - [SignInError]
+/// - [SignInNotification]
 ///
 /// [ChangeTheGivenEmail]
 /// - [SignInGivenEmailChanged]
-/// - [SignInError]
+/// - [SignInNotification]
 
 abstract class SignInState extends Equatable {
   const SignInState();
@@ -48,9 +48,9 @@ class SignInDenied extends SignInState {}
 
 class SignInCancelled extends SignInState {}
 
-class SignInError extends SignInState {
+class SignInNotification extends SignInState {
   final String message;
-  const SignInError({this.message = UseCasesDefaultMessages.error});
+  const SignInNotification({this.message = UseCasesDefaultMessages.error});
   @override
   List<Object> get props => [message];
 }

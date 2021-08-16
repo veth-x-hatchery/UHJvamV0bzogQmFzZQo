@@ -60,7 +60,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: CheckEmailErrorMessages.unknowError,
+        message: CheckEmailErrorMessages.unavailable,
       );
 
       when(_mockAuthFacade.emailIsAlreadyInUse(email))
