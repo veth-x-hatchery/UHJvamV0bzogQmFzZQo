@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/api/api_setup.dart';
+import 'package:vethx_beta/core/network/network_info.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
@@ -16,15 +16,15 @@ import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_re
 import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/utils/custom_validators.dart';
 import 'package:vethx_beta/features/signin/presentation/utils/input_converter.dart';
+import 'package:vethx_beta/injection_container.dart';
 
-import '../../core/network/network_info.dart';
-
-Future<void> signInDependenciesInjection(GetIt sl) async {
+Future<void> signInDependenciesInjection() async {
   //! External
 
-  sl.registerLazySingleton(() async => SharedPreferences.getInstance());
+  final sharedPreferences = await SharedPreferences.getInstance();
+
+  sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 
   sl.registerLazySingleton(() => http.Client());
 
@@ -38,7 +38,8 @@ Future<void> signInDependenciesInjection(GetIt sl) async {
 
   sl.registerLazySingleton(() => InputConverter());
 
-  sl.registerLazySingleton<INetworkInfo>(() => NetworkInfo(sl()));
+  sl.registerLazySingleton<INetworkInfo>(
+      () => NetworkInfo(sl<InternetConnectionChecker>()));
 
   sl.registerLazySingleton<IApiSetup>(() => ApiSetupProduction());
 
@@ -63,7 +64,7 @@ Future<void> signInDependenciesInjection(GetIt sl) async {
   );
 
   sl.registerLazySingleton<ISignInLocalSource>(
-    () => SignInLocalSource(sl()),
+    () => SignInLocalSource(sl<SharedPreferences>()),
   );
 
   // Repository
@@ -76,21 +77,21 @@ Future<void> signInDependenciesInjection(GetIt sl) async {
   );
 
   // Use cases
-  sl.registerLazySingleton(
+  sl.registerLazySingleton<SignInCheckIfEmailIsInUse>(
     () => SignInCheckIfEmailIsInUse(
       sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
   );
 
-  sl.registerLazySingleton(
+  sl.registerLazySingleton<SignInWithEmailAndPassword>(
     () => SignInWithEmailAndPassword(
       sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
   );
 
-  sl.registerLazySingleton(
+  sl.registerLazySingleton<SignInWithGoogle>(
     () => SignInWithGoogle(
       sl<ISignInRepository>(),
       sl<IAuthFacade>(),
@@ -98,7 +99,7 @@ Future<void> signInDependenciesInjection(GetIt sl) async {
   );
 
   // Bloc
-  sl.registerFactory(
+  sl.registerFactory<SignInBloc>(
     () => SignInBloc(
       sl<SignInCheckIfEmailIsInUse>(),
       sl<SignInWithEmailAndPassword>(),
