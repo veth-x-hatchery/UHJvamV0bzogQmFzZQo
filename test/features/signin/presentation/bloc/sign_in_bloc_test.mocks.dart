@@ -6,9 +6,9 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:vethx_beta/features/signin/domain/core/usecase.dart' as _i8;
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart'
+import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
     as _i5;
+import 'package:vethx_beta/features/signin/domain/core/usecase.dart' as _i8;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart'
     as _i3;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart'
@@ -36,11 +36,11 @@ class MockSignInCheckIfEmailIsInUse extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.AuthFailure, bool>> call(_i3.Params? params) =>
+  _i4.Future<_i2.Either<_i5.FailureDetails, bool>> call(_i3.Params? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<_i2.Either<_i5.AuthFailure, bool>>.value(
-                  _FakeEither_0<_i5.AuthFailure, bool>()))
-          as _i4.Future<_i2.Either<_i5.AuthFailure, bool>>);
+              returnValue: Future<_i2.Either<_i5.FailureDetails, bool>>.value(
+                  _FakeEither_0<_i5.FailureDetails, bool>()))
+          as _i4.Future<_i2.Either<_i5.FailureDetails, bool>>);
   @override
   String toString() => super.toString();
 }
@@ -55,11 +55,12 @@ class MockSignInWithEmailAndPassword extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.AuthFailure, _i2.Unit>> call(_i6.Params? params) =>
+  _i4.Future<_i2.Either<_i5.FailureDetails, _i2.Unit>> call(
+          _i6.Params? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<_i2.Either<_i5.AuthFailure, _i2.Unit>>.value(
-                  _FakeEither_0<_i5.AuthFailure, _i2.Unit>()))
-          as _i4.Future<_i2.Either<_i5.AuthFailure, _i2.Unit>>);
+          returnValue: Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>.value(
+              _FakeEither_0<_i5.FailureDetails, _i2.Unit>())) as _i4
+          .Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>);
   @override
   String toString() => super.toString();
 }
@@ -73,12 +74,12 @@ class MockSignInWithGoogle extends _i1.Mock implements _i7.SignInWithGoogle {
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.AuthFailure, _i2.Unit>> call(
+  _i4.Future<_i2.Either<_i5.FailureDetails, _i2.Unit>> call(
           _i8.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<_i2.Either<_i5.AuthFailure, _i2.Unit>>.value(
-                  _FakeEither_0<_i5.AuthFailure, _i2.Unit>()))
-          as _i4.Future<_i2.Either<_i5.AuthFailure, _i2.Unit>>);
+          returnValue: Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>.value(
+              _FakeEither_0<_i5.FailureDetails, _i2.Unit>())) as _i4
+          .Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>);
   @override
   String toString() => super.toString();
 }

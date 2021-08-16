@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/error/failures.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
+import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
@@ -137,11 +139,15 @@ void main() {
 
     test('should return a server failure', () async {
       // arrange
+      const throwFailure = AuthFailure.serverError();
 
-      const expectedFailure = AuthFailure.serverError();
+      final failureDetails = FailureDetails(
+        failedValue: throwFailure,
+        message: '',
+      );
 
       when(_mockAuthFacade.emailIsAlreadyInUse(testEmail))
-          .thenAnswer((_) async => const Left(expectedFailure));
+          .thenAnswer((_) async => const Left(throwFailure));
 
       // act
 
@@ -150,7 +156,7 @@ void main() {
 
       // assert
 
-      expect(result, const Left(expectedFailure));
+      expect(result, left(failureDetails));
 
       verify(_mockAuthFacade.emailIsAlreadyInUse(testEmail));
 

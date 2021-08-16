@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
@@ -171,10 +172,15 @@ void main() {
       'should emit [SignInError(message: InvalidEmailFailure.invalidEmail)] when email is invalid',
       () async {
         // arrange
-        // const errorMessage = InvalidEmailFailure.invalidEmail;
+        const throwFailure = AuthFailure.serverError();
+
+        final failureDetails = FailureDetails(
+          failedValue: throwFailure,
+          message: '',
+        );
 
         when(_mockSignInCheckIfEmailIsInUse.call(any))
-            .thenAnswer((_) async => const Left(AuthFailure.serverError()));
+            .thenAnswer((_) async => Left(failureDetails));
 
         // act
         _bloc.add(SignInCheckEmail(
@@ -197,10 +203,15 @@ void main() {
       'should emit [SignInError(message: InvalidEmailFailure.invalidEmptyEmail)] when email is not given',
       () async {
         // arrange
-        // const errorMessage = InvalidEmailFailure.invalidEmptyEmail;
+        const throwFailure = AuthFailure.serverError();
+
+        final failureDetails = FailureDetails(
+          failedValue: throwFailure,
+          message: '',
+        );
 
         when(_mockSignInCheckIfEmailIsInUse.call(any))
-            .thenAnswer((_) async => const Left(AuthFailure.serverError()));
+            .thenAnswer((_) async => Left(failureDetails));
 
         // act
         _bloc.add(SignInCheckEmail(
@@ -223,10 +234,15 @@ void main() {
       'should emit [SignInError(message: [UseCasesDefaultMessages.error])] when email check fail',
       () async {
         // arrange
-        // const errorMessage = UseCasesDefaultMessages.error;
+        const throwFailure = AuthFailure.serverError();
+
+        final failureDetails = FailureDetails(
+          failedValue: throwFailure,
+          message: '',
+        );
 
         when(_mockSignInCheckIfEmailIsInUse.call(any))
-            .thenAnswer((_) async => const Left(AuthFailure.serverError()));
+            .thenAnswer((_) async => Left(failureDetails));
 
         // act
         _bloc.add(SignInCheckEmail(

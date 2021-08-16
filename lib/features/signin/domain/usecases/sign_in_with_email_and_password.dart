@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
@@ -16,11 +17,16 @@ class SignInWithEmailAndPassword extends UseCase<Unit, Params> {
   );
 
   @override
-  Future<Either<AuthFailure, Unit>> call(Params params) {
-    return _authFacade.signInWithEmailAndPassword(
-      emailAddress: params.credentials.user,
-      password: params.credentials.password,
-    );
+  Future<Either<FailureDetails, Unit>> call(Params params) {
+    return _authFacade
+        .signInWithEmailAndPassword(
+          emailAddress: params.credentials.user,
+          password: params.credentials.password,
+        )
+        .then((value) => value.fold(
+              (l) => left(FailureDetails(failedValue: l, message: '')),
+              (r) => right(unit),
+            ));
   }
 }
 

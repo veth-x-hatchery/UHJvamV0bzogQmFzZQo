@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 
 abstract class UseCase<Type, Params> {
-  Future<Either<AuthFailure, Type>> call(Params params);
+  Future<Either<FailureDetails, Type>> call(Params params);
 }
 
 class NoParams extends Equatable {

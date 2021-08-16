@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:vethx_beta/core/error/failures.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
 class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
@@ -18,8 +17,11 @@ class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
   );
 
   @override
-  Future<Either<AuthFailure, bool>> call(Params params) =>
-      _authFacade.emailIsAlreadyInUse(params.email);
+  Future<Either<FailureDetails, bool>> call(Params params) =>
+      _authFacade.emailIsAlreadyInUse(params.email).then((value) => value.fold(
+            (l) => left(FailureDetails(failedValue: l, message: '')),
+            (r) => right(r),
+          ));
 }
 
 class Params extends Equatable {

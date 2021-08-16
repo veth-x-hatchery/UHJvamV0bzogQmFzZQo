@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:vethx_beta/core/error/failures.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart'
     as a;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
@@ -61,7 +60,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   }
 
   // Todo(v): mensagem de erro...
-  SignInState _mapFailureToSignStateErrorMessage(AuthFailure failure) =>
+  SignInState _mapFailureToSignStateErrorMessage(FailureDetails failure) =>
       const SignInError();
 
   void goToPage(SignInPageGoTo page) {

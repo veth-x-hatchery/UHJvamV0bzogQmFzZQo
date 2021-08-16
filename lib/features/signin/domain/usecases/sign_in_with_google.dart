@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
@@ -14,7 +15,10 @@ class SignInWithGoogle extends UseCase<Unit, NoParams> {
   );
 
   @override
-  Future<Either<AuthFailure, Unit>> call(NoParams params) {
-    return _authFacade.signInWithGoogle();
+  Future<Either<FailureDetails, Unit>> call(NoParams params) {
+    return _authFacade.signInWithGoogle().then((value) => value.fold(
+          (l) => left(FailureDetails(failedValue: l, message: '')),
+          (r) => right(unit),
+        ));
   }
 }
