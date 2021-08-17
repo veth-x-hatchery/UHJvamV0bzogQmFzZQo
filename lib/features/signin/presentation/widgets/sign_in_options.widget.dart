@@ -38,44 +38,48 @@ class _SignInOptionsState extends State<SignInOptions> {
 
   @override
   Widget build(BuildContext context) {
-    return FormColumn(
-      children: [
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        LogoTextLoading(
-            size: SizeConfig.screenHeight * 0.25, loading: _loading),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        SignInButton(
-          assetName: 'assets/images/google-logo.png',
-          text: 'Sign in with Google',
-          textColor: Colors.black87,
-          color: Colors.white,
-          // ignore: avoid_returning_null_for_void
-          // onPressed: () =>
-          //     BlocProvider.of<SignInBloc>(context).add(const SignInEvent.signInWithGoogleEvent()),
-        ),
-        // SizedBox(height: SizeConfig.defaultEdgeSpace),
-        // SignInButton(
-        //   assetName: 'assets/images/facebook-logo.png',
-        //   text: 'Sign in with Facebook',
-        //   textColor: Colors.white,
-        //   color: const Color(0xFF334D92),
-        //   // ignore: avoid_returning_null_for_void
-        //   onPressed: _signIn,
-        // ),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        SignInButton(
-          assetName: 'assets/images/mail-logo.png',
-          text: 'Sign in with email',
-          textColor: Colors.white,
-          color: Colors.teal[700],
-          onPressed: () => BlocProvider.of<SignInBloc>(context).goToPage(
-            const SignInPageGoTo(
-              from: SignInPageRoutes.signInOptions,
-              to: SignInPageRoutes.emailEntry,
+    return BlocBuilder<SignInBloc, SignInState>(
+      builder: (context, state) {
+        final _loading = state == const SignInState.loading();
+        return FormColumn(
+          children: [
+            SizedBox(height: SizeConfig.defaultEdgeSpace),
+            LogoTextLoading(
+                size: SizeConfig.screenHeight * 0.25, loading: _loading),
+            SizedBox(height: SizeConfig.defaultEdgeSpace),
+            SignInButton(
+              assetName: 'assets/images/google-logo.png',
+              text: 'Sign in with Google',
+              textColor: Colors.black87,
+              color: Colors.white,
+              onPressed: () => BlocProvider.of<SignInBloc>(context)
+                  .add(const SignInEvent.signInWithGoogleEvent()),
             ),
-          ),
-        ),
-      ],
+            // SizedBox(height: SizeConfig.defaultEdgeSpace),
+            // SignInButton(
+            //   assetName: 'assets/images/facebook-logo.png',
+            //   text: 'Sign in with Facebook',
+            //   textColor: Colors.white,
+            //   color: const Color(0xFF334D92),
+            //   // ignore: avoid_returning_null_for_void
+            //   onPressed: _signIn,
+            // ),
+            SizedBox(height: SizeConfig.defaultEdgeSpace),
+            SignInButton(
+              assetName: 'assets/images/mail-logo.png',
+              text: 'Sign in with email',
+              textColor: Colors.white,
+              color: Colors.teal[700],
+              onPressed: () => BlocProvider.of<SignInBloc>(context).goToPage(
+                const SignInPageGoTo(
+                  from: SignInPageRoutes.signInOptions,
+                  to: SignInPageRoutes.emailEntry,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
