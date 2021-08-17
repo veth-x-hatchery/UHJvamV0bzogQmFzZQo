@@ -5,7 +5,7 @@ import 'package:vethx_beta/core/blocs/app_state.dart';
 import 'package:vethx_beta/core/blocs/core_business_logic.dart';
 import 'package:vethx_beta/core/blocs/core_services.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/injection_container.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 import 'injection_container.dart' as di;

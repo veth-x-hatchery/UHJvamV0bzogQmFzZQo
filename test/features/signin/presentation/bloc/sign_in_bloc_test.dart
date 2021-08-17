@@ -9,7 +9,7 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.d
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
 
 import 'sign_in_bloc_test.mocks.dart';
