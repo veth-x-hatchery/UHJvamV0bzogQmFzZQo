@@ -123,7 +123,7 @@ void main() {
 
           final statesExpected = [
             const SignInState.loading(),
-            const SignInState.emailNotFound(),
+            const SignInState.emailAlreadyRegistered(),
           ];
 
           await _assertSignInStatesAndNativation(
@@ -269,7 +269,7 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(SignInEvent.emailRegisterEvent(
+      _bloc.add(SignInEvent.signInWithEmailEvent(
         email: email,
         password: password,
       ));
@@ -297,7 +297,7 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(SignInEvent.emailRegisterEvent(
+      _bloc.add(SignInEvent.signInWithEmailEvent(
         email: email,
         password: password,
       ));
@@ -319,7 +319,7 @@ void main() {
           .thenAnswer((_) async => const Right(unit));
 
       // act
-      _bloc.add(SignInEvent.emailRegisterEvent(
+      _bloc.add(SignInEvent.signInWithEmailEvent(
         email: email,
         password: password,
       ));
