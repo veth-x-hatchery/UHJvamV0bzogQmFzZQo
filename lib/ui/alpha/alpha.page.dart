@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
+import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
 import 'package:vethx_beta/ui/widgets/transitions/slide_route.dart';
@@ -19,7 +20,7 @@ class AlphaPage extends StatelessWidget {
           initial: (_) {},
           authenticated: (_) => Navigator.pushReplacement(
             context,
-            SlideLeftRoute<void>(page: const SignInPage()),
+            SlideTopRoute<void>(page: const HomePage()),
           ),
           unauthenticated: (_) => Navigator.pushReplacement(
             context,
