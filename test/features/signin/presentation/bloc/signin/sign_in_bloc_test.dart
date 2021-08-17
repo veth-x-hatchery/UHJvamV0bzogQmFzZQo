@@ -5,16 +5,19 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
+import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
 
 import 'sign_in_bloc_test.mocks.dart';
 
 @GenerateMocks([
+  AuthBloc,
   SignInCheckIfEmailIsInUse,
   SignInRegisterEmailAndPassword,
   SignInWithEmailAndPassword,
@@ -23,6 +26,7 @@ import 'sign_in_bloc_test.mocks.dart';
 void main() {
   late SignInBloc _bloc;
 
+  late MockAuthBloc _authBloc;
   late MockSignInWithEmailAndPassword _mockSignInWithEmailAndPassword;
   late MockSignInWithGoogle _mockSignInWithGoogle;
   late MockSignInCheckIfEmailIsInUse _mockSignInCheckIfEmailIsInUse;
@@ -33,11 +37,14 @@ void main() {
     _mockSignInWithEmailAndPassword = MockSignInWithEmailAndPassword();
     _mockSignInWithGoogle = MockSignInWithGoogle();
     _mockSignInRegisterEmailAndPassword = MockSignInRegisterEmailAndPassword();
+    _authBloc = MockAuthBloc();
+
     _bloc = SignInBloc(
       _mockSignInCheckIfEmailIsInUse,
       _mockSignInWithEmailAndPassword,
       _mockSignInWithGoogle,
       _mockSignInRegisterEmailAndPassword,
+      _authBloc,
     );
   });
 
@@ -405,6 +412,29 @@ void main() {
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
+    });
+  });
+
+  group('when auth changes accours', () {
+    test('should notify Auth BLoC when sign in is allowed', () async {
+      // arrange
+
+      when(_mockSignInWithGoogle.call(any))
+          .thenAnswer((_) async => const Right(unit));
+
+      // act
+      _bloc.add(const SignInEvent.signInWithGoogleEvent());
+
+      // assert later
+
+      final expected = [
+        const SignInState.loading(),
+        const SignInState.signInAllowed(),
+      ];
+
+      await expectLater(_bloc.stream, emitsInOrder(expected)).then((_) {
+        verify(_authBloc.add(const AuthEvent.authCheckRequested())).called(1);
+      });
     });
   });
 }

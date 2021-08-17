@@ -5,12 +5,11 @@ import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 
 import 'auth_bloc_test.mocks.dart';
 
-@GenerateMocks([
-  IAuthFacade,
-])
+@GenerateMocks([IAuthFacade])
 void main() {
   late AuthBloc _bloc;
   late MockIAuthFacade _mockIAuthFacade;
@@ -19,6 +18,10 @@ void main() {
     _mockIAuthFacade = MockIAuthFacade();
     _bloc = AuthBloc(_mockIAuthFacade);
   });
+
+  // tearDown(() {
+  //   _bloc.close();
+  // });
 
   group('when check logged user request', () {
     test('should return that there is no user logged in', () async {

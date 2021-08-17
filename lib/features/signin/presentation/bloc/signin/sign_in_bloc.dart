@@ -15,6 +15,7 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_emai
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart'
     as c;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
 
 part 'sign_in_event.dart';
@@ -32,12 +33,26 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       StreamController<SignInPageGoTo>.broadcast();
   Stream<SignInPageGoTo> get goTo => _signInPageRoutesController.stream;
 
+  final AuthBloc _authBloc;
+
   SignInBloc(
     this._checkIfEmailIsInUse,
     this._signInWithEmailAndPassword,
     this._signInWithGoogle,
     this._signInRegisterEmailAndPassword,
+    this._authBloc,
   ) : super(const SignInState.initial());
+
+  @override
+  void emit(SignInState state) {
+    if ([
+      const SignInState.signInAllowed(),
+      const SignInState.signInDenied(),
+    ].contains(state)) {
+      _authBloc.add(const AuthEvent.authCheckRequested());
+    }
+    super.emit(state);
+  }
 
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {

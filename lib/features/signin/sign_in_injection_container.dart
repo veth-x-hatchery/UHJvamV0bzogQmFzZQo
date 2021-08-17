@@ -111,10 +111,7 @@ Future<void> signInDependenciesInjection() async {
   // Bloc
 
   sl.registerFactory<AuthBloc>(
-    () => AuthBloc(
-      sl<IAuthFacade>(),
-      sl<SignInBloc>(),
-    ),
+    () => AuthBloc(sl<IAuthFacade>()),
   );
 
   sl.registerFactory<SignInBloc>(
@@ -123,6 +120,7 @@ Future<void> signInDependenciesInjection() async {
       sl<SignInWithEmailAndPassword>(),
       sl<SignInWithGoogle>(),
       sl<SignInRegisterEmailAndPassword>(),
+      sl<AuthBloc>(),
     ),
   );
 

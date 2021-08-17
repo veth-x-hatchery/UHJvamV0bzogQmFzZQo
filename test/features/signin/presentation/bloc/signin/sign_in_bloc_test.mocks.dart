@@ -4,19 +4,30 @@
 
 import 'dart:async' as _i4;
 
+import 'package:bloc/bloc.dart' as _i15;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
-    as _i5;
-import 'package:vethx_beta/features/signin/domain/core/usecase.dart' as _i9;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart'
-    as _i3;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart'
+    as _i10;
+import 'package:vethx_beta/features/signin/domain/core/usecase.dart' as _i14;
+import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart'
     as _i6;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart'
-    as _i7;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart'
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
     as _i8;
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart'
+    as _i7;
+import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart'
+    as _i5;
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart'
+    as _i9;
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart'
+    as _i11;
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart'
+    as _i12;
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart'
+    as _i13;
+import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
+    as _i3;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -28,21 +39,80 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.d
 
 class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 
+class _FakeAuthState_1 extends _i1.Fake implements _i3.AuthState {}
+
+class _FakeStreamSubscription_2<T> extends _i1.Fake
+    implements _i4.StreamSubscription<T> {}
+
+/// A class which mocks [IAuthFacade].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIAuthFacade extends _i1.Mock implements _i5.IAuthFacade {
+  MockIAuthFacade() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i6.User?> getSignedInUser() =>
+      (super.noSuchMethod(Invocation.method(#getSignedInUser, []),
+          returnValue: Future<_i6.User?>.value()) as _i4.Future<_i6.User?>);
+  @override
+  _i4.Future<_i2.Either<_i7.AuthFailure, bool>> emailIsAlreadyInUse(
+          _i8.EmailAddress? emailAddress) =>
+      (super.noSuchMethod(
+              Invocation.method(#emailIsAlreadyInUse, [emailAddress]),
+              returnValue: Future<_i2.Either<_i7.AuthFailure, bool>>.value(
+                  _FakeEither_0<_i7.AuthFailure, bool>()))
+          as _i4.Future<_i2.Either<_i7.AuthFailure, bool>>);
+  @override
+  _i4.Future<_i2.Either<_i7.AuthFailure, _i2.Unit>>
+      registerWithEmailAndPassword(
+              {_i8.EmailAddress? emailAddress, _i8.Password? password}) =>
+          (super.noSuchMethod(
+              Invocation.method(#registerWithEmailAndPassword, [],
+                  {#emailAddress: emailAddress, #password: password}),
+              returnValue: Future<_i2.Either<_i7.AuthFailure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.AuthFailure, _i2.Unit>())) as _i4
+              .Future<_i2.Either<_i7.AuthFailure, _i2.Unit>>);
+  @override
+  _i4.Future<_i2.Either<_i7.AuthFailure, _i2.Unit>> signInWithEmailAndPassword(
+          {_i8.EmailAddress? emailAddress, _i8.Password? password}) =>
+      (super.noSuchMethod(
+              Invocation.method(#signInWithEmailAndPassword, [],
+                  {#emailAddress: emailAddress, #password: password}),
+              returnValue: Future<_i2.Either<_i7.AuthFailure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.AuthFailure, _i2.Unit>()))
+          as _i4.Future<_i2.Either<_i7.AuthFailure, _i2.Unit>>);
+  @override
+  _i4.Future<_i2.Either<_i7.AuthFailure, _i2.Unit>> signInWithGoogle() =>
+      (super.noSuchMethod(Invocation.method(#signInWithGoogle, []),
+              returnValue: Future<_i2.Either<_i7.AuthFailure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.AuthFailure, _i2.Unit>()))
+          as _i4.Future<_i2.Either<_i7.AuthFailure, _i2.Unit>>);
+  @override
+  _i4.Future<void> signOut() =>
+      (super.noSuchMethod(Invocation.method(#signOut, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  String toString() => super.toString();
+}
+
 /// A class which mocks [SignInCheckIfEmailIsInUse].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSignInCheckIfEmailIsInUse extends _i1.Mock
-    implements _i3.SignInCheckIfEmailIsInUse {
+    implements _i9.SignInCheckIfEmailIsInUse {
   MockSignInCheckIfEmailIsInUse() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.FailureDetails, bool>> call(_i3.Params? params) =>
+  _i4.Future<_i2.Either<_i10.FailureDetails, bool>> call(_i9.Params? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<_i2.Either<_i5.FailureDetails, bool>>.value(
-                  _FakeEither_0<_i5.FailureDetails, bool>()))
-          as _i4.Future<_i2.Either<_i5.FailureDetails, bool>>);
+              returnValue: Future<_i2.Either<_i10.FailureDetails, bool>>.value(
+                  _FakeEither_0<_i10.FailureDetails, bool>()))
+          as _i4.Future<_i2.Either<_i10.FailureDetails, bool>>);
   @override
   String toString() => super.toString();
 }
@@ -51,18 +121,18 @@ class MockSignInCheckIfEmailIsInUse extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSignInRegisterEmailAndPassword extends _i1.Mock
-    implements _i6.SignInRegisterEmailAndPassword {
+    implements _i11.SignInRegisterEmailAndPassword {
   MockSignInRegisterEmailAndPassword() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.FailureDetails, _i2.Unit>> call(
-          _i6.Params? params) =>
+  _i4.Future<_i2.Either<_i10.FailureDetails, _i2.Unit>> call(
+          _i11.Params? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>.value(
-              _FakeEither_0<_i5.FailureDetails, _i2.Unit>())) as _i4
-          .Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>);
+          returnValue: Future<_i2.Either<_i10.FailureDetails, _i2.Unit>>.value(
+              _FakeEither_0<_i10.FailureDetails, _i2.Unit>())) as _i4
+          .Future<_i2.Either<_i10.FailureDetails, _i2.Unit>>);
   @override
   String toString() => super.toString();
 }
@@ -71,18 +141,18 @@ class MockSignInRegisterEmailAndPassword extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSignInWithEmailAndPassword extends _i1.Mock
-    implements _i7.SignInWithEmailAndPassword {
+    implements _i12.SignInWithEmailAndPassword {
   MockSignInWithEmailAndPassword() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.FailureDetails, _i2.Unit>> call(
-          _i7.Params? params) =>
+  _i4.Future<_i2.Either<_i10.FailureDetails, _i2.Unit>> call(
+          _i12.Params? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>.value(
-              _FakeEither_0<_i5.FailureDetails, _i2.Unit>())) as _i4
-          .Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>);
+          returnValue: Future<_i2.Either<_i10.FailureDetails, _i2.Unit>>.value(
+              _FakeEither_0<_i10.FailureDetails, _i2.Unit>())) as _i4
+          .Future<_i2.Either<_i10.FailureDetails, _i2.Unit>>);
   @override
   String toString() => super.toString();
 }
@@ -90,18 +160,111 @@ class MockSignInWithEmailAndPassword extends _i1.Mock
 /// A class which mocks [SignInWithGoogle].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInWithGoogle extends _i1.Mock implements _i8.SignInWithGoogle {
+class MockSignInWithGoogle extends _i1.Mock implements _i13.SignInWithGoogle {
   MockSignInWithGoogle() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.FailureDetails, _i2.Unit>> call(
-          _i9.NoParams? params) =>
+  _i4.Future<_i2.Either<_i10.FailureDetails, _i2.Unit>> call(
+          _i14.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>.value(
-              _FakeEither_0<_i5.FailureDetails, _i2.Unit>())) as _i4
-          .Future<_i2.Either<_i5.FailureDetails, _i2.Unit>>);
+          returnValue: Future<_i2.Either<_i10.FailureDetails, _i2.Unit>>.value(
+              _FakeEither_0<_i10.FailureDetails, _i2.Unit>())) as _i4
+          .Future<_i2.Either<_i10.FailureDetails, _i2.Unit>>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [AuthBloc].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthBloc extends _i1.Mock implements _i3.AuthBloc {
+  MockAuthBloc() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.AuthState get state => (super.noSuchMethod(Invocation.getter(#state),
+      returnValue: _FakeAuthState_1()) as _i3.AuthState);
+  @override
+  _i4.Stream<_i3.AuthState> get stream => (super.noSuchMethod(
+      Invocation.getter(#stream),
+      returnValue: Stream<_i3.AuthState>.empty()) as _i4.Stream<_i3.AuthState>);
+  @override
+  _i4.Stream<_i3.AuthState> mapEventToState(_i3.AuthEvent? event) =>
+      (super.noSuchMethod(Invocation.method(#mapEventToState, [event]),
+              returnValue: Stream<_i3.AuthState>.empty())
+          as _i4.Stream<_i3.AuthState>);
+  @override
+  _i4.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
+      returnValue: Future<void>.value(),
+      returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  void add(_i3.AuthEvent? event) =>
+      super.noSuchMethod(Invocation.method(#add, [event]),
+          returnValueForMissingStub: null);
+  @override
+  void onEvent(_i3.AuthEvent? event) =>
+      super.noSuchMethod(Invocation.method(#onEvent, [event]),
+          returnValueForMissingStub: null);
+  @override
+  _i4.Stream<_i15.Transition<_i3.AuthEvent, _i3.AuthState>> transformEvents(
+          _i4.Stream<_i3.AuthEvent>? events,
+          _i15.TransitionFunction<_i3.AuthEvent, _i3.AuthState>?
+              transitionFn) =>
+      (super.noSuchMethod(
+              Invocation.method(#transformEvents, [events, transitionFn]),
+              returnValue:
+                  Stream<_i15.Transition<_i3.AuthEvent, _i3.AuthState>>.empty())
+          as _i4.Stream<_i15.Transition<_i3.AuthEvent, _i3.AuthState>>);
+  @override
+  void emit(_i3.AuthState? state) =>
+      super.noSuchMethod(Invocation.method(#emit, [state]),
+          returnValueForMissingStub: null);
+  @override
+  void onTransition(
+          _i15.Transition<_i3.AuthEvent, _i3.AuthState>? transition) =>
+      super.noSuchMethod(Invocation.method(#onTransition, [transition]),
+          returnValueForMissingStub: null);
+  @override
+  _i4.Stream<
+      _i15.Transition<_i3.AuthEvent, _i3.AuthState>> transformTransitions(
+          _i4.Stream<_i15.Transition<_i3.AuthEvent, _i3.AuthState>>?
+              transitions) =>
+      (super.noSuchMethod(
+              Invocation.method(#transformTransitions, [transitions]),
+              returnValue:
+                  Stream<_i15.Transition<_i3.AuthEvent, _i3.AuthState>>.empty())
+          as _i4.Stream<_i15.Transition<_i3.AuthEvent, _i3.AuthState>>);
+  @override
+  _i4.StreamSubscription<_i3.AuthState> listen(
+          void Function(_i3.AuthState)? onData,
+          {Function? onError,
+          void Function()? onDone,
+          bool? cancelOnError}) =>
+      (super.noSuchMethod(
+              Invocation.method(#listen, [
+                onData
+              ], {
+                #onError: onError,
+                #onDone: onDone,
+                #cancelOnError: cancelOnError
+              }),
+              returnValue: _FakeStreamSubscription_2<_i3.AuthState>())
+          as _i4.StreamSubscription<_i3.AuthState>);
+  @override
+  void onChange(_i15.Change<_i3.AuthState>? change) =>
+      super.noSuchMethod(Invocation.method(#onChange, [change]),
+          returnValueForMissingStub: null);
+  @override
+  void addError(Object? error, [StackTrace? stackTrace]) =>
+      super.noSuchMethod(Invocation.method(#addError, [error, stackTrace]),
+          returnValueForMissingStub: null);
+  @override
+  void onError(Object? error, StackTrace? stackTrace) =>
+      super.noSuchMethod(Invocation.method(#onError, [error, stackTrace]),
+          returnValueForMissingStub: null);
   @override
   String toString() => super.toString();
 }
