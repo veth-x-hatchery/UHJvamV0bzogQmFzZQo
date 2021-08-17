@@ -17,6 +17,7 @@ import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_re
 import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/injection_container.dart';
 
@@ -108,6 +109,13 @@ Future<void> signInDependenciesInjection() async {
   );
 
   // Bloc
+
+  sl.registerFactory<AuthBloc>(
+    () => AuthBloc(
+      sl<IAuthFacade>(),
+    ),
+  );
+
   sl.registerFactory<SignInBloc>(
     () => SignInBloc(
       sl<SignInCheckIfEmailIsInUse>(),
