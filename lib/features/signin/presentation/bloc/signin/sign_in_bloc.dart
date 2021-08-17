@@ -15,7 +15,8 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_an
     as c;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/navigation/navigation_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
 part 'sign_in_event.dart';
@@ -30,7 +31,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final SignInWithGoogle _signInWithGoogle;
 
   final AuthBloc _authBloc;
-  final NavigationBloc _navigation;
+  final NavigationCubit _navigation;
 
   SignInBloc(
     this._checkIfEmailIsInUse,

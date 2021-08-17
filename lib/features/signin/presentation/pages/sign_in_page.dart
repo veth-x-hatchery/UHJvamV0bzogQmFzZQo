@@ -2,37 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/navigation/navigation_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/transitions/slide_route.dart';
 
-class SignInPage extends StatefulWidget {
+class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
 
   @override
-  _SignInPageState createState() => _SignInPageState();
-
-  static Widget create(BuildContext context) {
-    return const SignInPage();
-  }
-}
-
-class _SignInPageState extends State<SignInPage> {
-  @override
-  void didChangeDependencies() {
-    FocusScope.of(context).unfocus();
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocListener<NavigationBloc, NavigationState>(
+    FocusScope.of(context).unfocus();
+    return BlocListener<NavigationCubit, NavigationState>(
       listener: (context, state) {
-        Logger.i('SignInPage -> NavigationBloc -> $state');
+        Logger.i('SignInPage -> NavigationCubit -> $state');
         state.when(
           initial: () {},
-          goTo: _goTo,
+          goTo: (asdf) => _goTo(context, asdf),
         );
       },
       child: _scaffold(
@@ -66,7 +52,7 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  void _goTo(SignInPageGoTo page) {
+  void _goTo(BuildContext context, SignInPageGoTo page) {
     switch (page.to) {
       case SignInPageRoutes.passwordEntry:
         Navigator.pushReplacement(

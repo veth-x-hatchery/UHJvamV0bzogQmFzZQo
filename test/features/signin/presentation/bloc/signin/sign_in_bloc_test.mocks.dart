@@ -20,7 +20,7 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.d
     as _i12;
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
     as _i2;
-import 'package:vethx_beta/features/signin/presentation/bloc/navigation/navigation_bloc.dart'
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
     as _i4;
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart'
     as _i7;
@@ -132,11 +132,11 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
   String toString() => super.toString();
 }
 
-/// A class which mocks [NavigationBloc].
+/// A class which mocks [NavigationCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigationBloc extends _i1.Mock implements _i4.NavigationBloc {
-  MockNavigationBloc() {
+class MockNavigationCubit extends _i1.Mock implements _i4.NavigationCubit {
+  MockNavigationCubit() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -150,59 +150,9 @@ class MockNavigationBloc extends _i1.Mock implements _i4.NavigationBloc {
               returnValue: Stream<_i4.NavigationState>.empty())
           as _i3.Stream<_i4.NavigationState>);
   @override
-  _i3.Stream<_i4.NavigationState> mapEventToState(_i4.NavigationEvent? event) =>
-      (super.noSuchMethod(Invocation.method(#mapEventToState, [event]),
-              returnValue: Stream<_i4.NavigationState>.empty())
-          as _i3.Stream<_i4.NavigationState>);
-  @override
-  void goTo(_i7.SignInPageGoTo? params) =>
-      super.noSuchMethod(Invocation.method(#goTo, [params]),
+  void goTo(_i7.SignInPageGoTo? parameters) =>
+      super.noSuchMethod(Invocation.method(#goTo, [parameters]),
           returnValueForMissingStub: null);
-  @override
-  void add(_i4.NavigationEvent? event) =>
-      super.noSuchMethod(Invocation.method(#add, [event]),
-          returnValueForMissingStub: null);
-  @override
-  void onEvent(_i4.NavigationEvent? event) =>
-      super.noSuchMethod(Invocation.method(#onEvent, [event]),
-          returnValueForMissingStub: null);
-  @override
-  _i3.Stream<
-      _i6.Transition<_i4.NavigationEvent, _i4.NavigationState>> transformEvents(
-          _i3.Stream<_i4.NavigationEvent>? events,
-          _i6.TransitionFunction<_i4.NavigationEvent, _i4.NavigationState>?
-              transitionFn) =>
-      (super.noSuchMethod(
-              Invocation.method(#transformEvents, [events, transitionFn]),
-              returnValue:
-                  Stream<_i6.Transition<_i4.NavigationEvent, _i4.NavigationState>>.empty())
-          as _i3.Stream<
-              _i6.Transition<_i4.NavigationEvent, _i4.NavigationState>>);
-  @override
-  void emit(_i4.NavigationState? state) =>
-      super.noSuchMethod(Invocation.method(#emit, [state]),
-          returnValueForMissingStub: null);
-  @override
-  void onTransition(
-          _i6.Transition<_i4.NavigationEvent, _i4.NavigationState>?
-              transition) =>
-      super.noSuchMethod(Invocation.method(#onTransition, [transition]),
-          returnValueForMissingStub: null);
-  @override
-  _i3.Stream<
-      _i6.Transition<_i4.NavigationEvent, _i4.NavigationState>> transformTransitions(
-          _i3.Stream<_i6.Transition<_i4.NavigationEvent, _i4.NavigationState>>?
-              transitions) =>
-      (super.noSuchMethod(
-              Invocation.method(#transformTransitions, [transitions]),
-              returnValue:
-                  Stream<_i6.Transition<_i4.NavigationEvent, _i4.NavigationState>>.empty())
-          as _i3.Stream<
-              _i6.Transition<_i4.NavigationEvent, _i4.NavigationState>>);
-  @override
-  _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
   @override
   _i3.StreamSubscription<_i4.NavigationState> listen(
           void Function(_i4.NavigationState)? onData,
@@ -220,6 +170,10 @@ class MockNavigationBloc extends _i1.Mock implements _i4.NavigationBloc {
               returnValue: _FakeStreamSubscription_1<_i4.NavigationState>())
           as _i3.StreamSubscription<_i4.NavigationState>);
   @override
+  void emit(_i4.NavigationState? state) =>
+      super.noSuchMethod(Invocation.method(#emit, [state]),
+          returnValueForMissingStub: null);
+  @override
   void onChange(_i6.Change<_i4.NavigationState>? change) =>
       super.noSuchMethod(Invocation.method(#onChange, [change]),
           returnValueForMissingStub: null);
@@ -231,6 +185,10 @@ class MockNavigationBloc extends _i1.Mock implements _i4.NavigationBloc {
   void onError(Object? error, StackTrace? stackTrace) =>
       super.noSuchMethod(Invocation.method(#onError, [error, stackTrace]),
           returnValueForMissingStub: null);
+  @override
+  _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
+      returnValue: Future<void>.value(),
+      returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
   @override
   String toString() => super.toString();
 }

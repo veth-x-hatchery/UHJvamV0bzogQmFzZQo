@@ -196,8 +196,6 @@ abstract class _$GoToCopyWith<$Res> {
   factory _$GoToCopyWith(_GoTo value, $Res Function(_GoTo) then) =
       __$GoToCopyWithImpl<$Res>;
   $Res call({SignInPageGoTo params});
-
-  $SignInPageGoToCopyWith<$Res> get params;
 }
 
 /// @nodoc
@@ -219,13 +217,6 @@ class __$GoToCopyWithImpl<$Res> extends _$NavigationStateCopyWithImpl<$Res>
           : params // ignore: cast_nullable_to_non_nullable
               as SignInPageGoTo,
     ));
-  }
-
-  @override
-  $SignInPageGoToCopyWith<$Res> get params {
-    return $SignInPageGoToCopyWith<$Res>(_value.params, (value) {
-      return _then(_value.copyWith(params: value));
-    });
   }
 }
 

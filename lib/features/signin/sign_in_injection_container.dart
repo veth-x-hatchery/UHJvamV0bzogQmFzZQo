@@ -19,7 +19,8 @@ import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/navigation/navigation_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/injection_container.dart';
 
 Future<void> signInDependenciesInjection() async {
@@ -110,8 +111,8 @@ Future<void> signInDependenciesInjection() async {
   );
 
   // Bloc
-  sl.registerLazySingleton<NavigationBloc>(
-    () => NavigationBloc(),
+  sl.registerLazySingleton<NavigationCubit>(
+    () => NavigationCubit(),
   );
 
   sl.registerFactory<AuthBloc>(
@@ -125,7 +126,7 @@ Future<void> signInDependenciesInjection() async {
       sl<SignInWithGoogle>(),
       sl<SignInRegisterEmailAndPassword>(),
       sl<AuthBloc>(),
-      sl<NavigationBloc>(),
+      sl<NavigationCubit>(),
     ),
   );
 

@@ -11,14 +11,14 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_an
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/navigation/navigation_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
 import 'sign_in_bloc_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
-  NavigationBloc,
+  NavigationCubit,
   SignInCheckIfEmailIsInUse,
   SignInRegisterEmailAndPassword,
   SignInWithEmailAndPassword,
@@ -32,7 +32,7 @@ void main() {
   late MockSignInWithGoogle _mockSignInWithGoogle;
   late MockSignInCheckIfEmailIsInUse _mockSignInCheckIfEmailIsInUse;
   late MockSignInRegisterEmailAndPassword _mockSignInRegisterEmailAndPassword;
-  late MockNavigationBloc _mockNavigation;
+  late MockNavigationCubit _mockNavigation;
 
   setUp(() {
     _mockSignInCheckIfEmailIsInUse = MockSignInCheckIfEmailIsInUse();
@@ -40,7 +40,7 @@ void main() {
     _mockSignInWithGoogle = MockSignInWithGoogle();
     _mockSignInRegisterEmailAndPassword = MockSignInRegisterEmailAndPassword();
     _authBloc = MockAuthBloc();
-    _mockNavigation = MockNavigationBloc();
+    _mockNavigation = MockNavigationCubit();
 
     _bloc = SignInBloc(
       _mockSignInCheckIfEmailIsInUse,
@@ -81,8 +81,7 @@ void main() {
       // assert later
 
       await expectLater(_bloc.stream, emitsInOrder(statesExpected)).then(
-        (_) => verify(_mockNavigation.goTo(signInPageGoTo))
-            .called(goToExpected ? 1 : 0),
+        (_) => verify(_mockNavigation.goTo(any)).called(goToExpected ? 1 : 0),
       );
     }
 

@@ -1,7 +1,3 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'sign_in_go_to.freezed.dart';
-
 enum SignInPageRoutes {
   signInOptions,
   emailEntry,
@@ -9,11 +5,14 @@ enum SignInPageRoutes {
   registerEmailSignIn,
 }
 
-@freezed
-class SignInPageGoTo with _$SignInPageGoTo {
-  factory SignInPageGoTo({
-    required SignInPageRoutes from,
-    required SignInPageRoutes to,
-    Object? parameters,
-  }) = _SignInPageGoTo;
+class SignInPageGoTo {
+  final SignInPageRoutes from;
+  final SignInPageRoutes to;
+  final Object? parameters;
+
+  SignInPageGoTo({
+    required this.from,
+    required this.to,
+    this.parameters,
+  });
 }
