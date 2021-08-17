@@ -1,34 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
 
-class PasswordFormField extends StatefulWidget {
-  const PasswordFormField({
+class FieldPassword extends StatefulWidget {
+  const FieldPassword({
     Key? key,
     required this.passwordFormKey,
     required this.passwordFocusNode,
-    required this.hidePassword,
-    this.hint,
+    required this.validatePassword,
+    required this.controller,
+    this.dica,
   }) : super(key: key);
 
   final GlobalKey<FormState> passwordFormKey;
   final FocusNode passwordFocusNode;
-  final void Function() hidePassword;
-  final String? hint;
+  final void Function() validatePassword;
+  final String? dica;
+  final TextEditingController controller;
 
   @override
-  _PasswordFormFieldState createState() => _PasswordFormFieldState();
+  _FieldPasswordState createState() => _FieldPasswordState();
 }
 
-class _PasswordFormFieldState extends State<PasswordFormField> {
+class _FieldPasswordState extends State<FieldPassword> {
   bool _hidePassword = true;
   @override
   Widget build(BuildContext context) {
     return Form(
       key: widget.passwordFormKey,
       child: TextFormField(
-        // initialValue: _gerenciador.senha,
+        controller: widget.controller,
         focusNode: widget.passwordFocusNode,
         autofocus: true,
         keyboardType: TextInputType.text,
@@ -45,9 +46,10 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
           ),
         ),
         style: Theme.of(context).textTheme.bodyText1,
-        validator: (value) => Password(value).validation,
-        onEditingComplete: widget.hidePassword,
-        // onSaved: (input) => _gerenciador.senha = input!,
+        validator: (value) {
+          return null;
+        },
+        onEditingComplete: widget.validatePassword,
       ),
     );
   }

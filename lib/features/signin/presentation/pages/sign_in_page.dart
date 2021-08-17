@@ -64,7 +64,9 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
         Navigator.pushReplacement(
           context,
           SlideLeftRoute<void>(
-            page: SignInPasswordEntry(email: page.parameters! as String),
+            page: _scaffold(
+              child: FormPassword(informedEmail: page.parameters! as String),
+            ),
           ),
         );
         break;
@@ -72,16 +74,22 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
         Navigator.pushReplacement(
           context,
           SlideLeftRoute<void>(
-              page: SignInRegisterEntry(email: page.parameters as String?)),
+              page: _scaffold(
+                  child: FormRegisterEmailSignIn(
+                      informedEmail: page.parameters as String?))),
         );
         break;
       case SignInPageRoutes.emailEntry:
       default:
         page.from == SignInPageRoutes.signInOptions
             ? Navigator.push(
-                context, SlideLeftRoute<void>(page: const SignInEmailEntry()))
+                context,
+                SlideLeftRoute<void>(
+                    page: _scaffold(child: const FormRegisterEmailSignIn())))
             : Navigator.pushReplacement(
-                context, SlideLeftRoute<void>(page: const SignInEmailEntry()));
+                context,
+                SlideLeftRoute<void>(
+                    page: _scaffold(child: const FormRegisterEmailSignIn())));
         break;
     }
   }
@@ -102,12 +110,16 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    return _scaffold(child: const SignInOptions());
+  }
+
+  Scaffold _scaffold({required Widget child}) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),
-      body: const SignInOptions(),
+      body: child,
     );
   }
 }

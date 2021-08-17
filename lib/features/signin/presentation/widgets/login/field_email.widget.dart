@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
 
-class EmailFormField extends StatelessWidget {
-  const EmailFormField({
+class FiedEmail extends StatelessWidget {
+  const FiedEmail({
     Key? key,
     required this.emailFormKey,
     required this.emailFocusNode,
-    required this.emailEditingController,
-    required this.emailValidate,
+    required this.validateEmail,
+    required this.controller,
   }) : super(key: key);
 
   final GlobalKey<FormState> emailFormKey;
   final FocusNode emailFocusNode;
-  final void Function() emailValidate;
-  final TextEditingController emailEditingController;
+  final void Function() validateEmail;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: emailFormKey,
       child: TextFormField(
-        controller: emailEditingController,
+        controller: controller,
         // initialValue: _gerenciador.email,
         focusNode: emailFocusNode,
         autofocus: true,
@@ -32,9 +31,10 @@ class EmailFormField extends StatelessWidget {
           hintText: Texts.emailHint,
         ),
         style: Theme.of(context).textTheme.bodyText1,
-        validator: (value) => EmailAddress(value).validation,
-        onEditingComplete: emailValidate,
-        // onSaved: (input) => _gerenciador.email = input!,
+        validator: (value) {
+          return null;
+        },
+        onEditingComplete: validateEmail,
       ),
     );
   }
