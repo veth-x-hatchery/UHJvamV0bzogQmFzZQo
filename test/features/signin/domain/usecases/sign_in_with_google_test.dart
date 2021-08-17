@@ -43,6 +43,31 @@ void main() {
       verifyNoMoreInteractions(_mockSignInRepository);
     });
 
+    test('should return cancelled by user failure', () async {
+      // arrange
+      const throwFailure = AuthFailure.cancelledByUser();
+
+      final failureDetails = FailureDetails(
+        failure: throwFailure,
+        message: SignInWithGoogleErrorMessages.cancelledByUser,
+      );
+
+      when(_mockAuthFacade.signInWithGoogle())
+          .thenAnswer((_) async => const Left(throwFailure));
+
+      // act
+
+      final result = await _signInUseCase.call(NoParams());
+
+      // assert
+
+      expect(result, left(failureDetails));
+
+      verify(_mockAuthFacade.signInWithGoogle());
+
+      verifyNoMoreInteractions(_mockSignInRepository);
+    });
+
     test('should return a server failure', () async {
       // arrange
       const throwFailure = AuthFailure.serverError();

@@ -15,14 +15,19 @@ class SignInWithGoogle extends UseCase<Unit, NoParams> {
   );
 
   @override
-  Future<Either<FailureDetails, Unit>> call(NoParams params) {
-    return _authFacade.signInWithGoogle().then((value) => value.fold(
-          (l) => left(_mapFailures(l)),
-          (r) => right(unit),
-        ));
-  }
+  Future<Either<FailureDetails, Unit>> call(NoParams params) =>
+      _authFacade.signInWithGoogle().then((result) => result.fold(
+            (l) => left(_mapFailures(l)),
+            (r) => right(unit),
+          ));
 
   FailureDetails _mapFailures(AuthFailure auth) {
+    if (auth == const AuthFailure.cancelledByUser()) {
+      return FailureDetails(
+        failure: auth,
+        message: SignInWithGoogleErrorMessages.cancelledByUser,
+      );
+    }
     return FailureDetails(
       failure: auth,
       message: SignInWithGoogleErrorMessages.unknowError,
@@ -32,4 +37,5 @@ class SignInWithGoogle extends UseCase<Unit, NoParams> {
 
 class SignInWithGoogleErrorMessages {
   static const unknowError = 'Unavailable';
+  static const cancelledByUser = 'Cancelled by user';
 }
