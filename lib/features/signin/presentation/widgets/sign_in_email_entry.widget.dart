@@ -27,7 +27,7 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
   Future<void> _validateEmail() async {
     if (_emailFormKey.currentState!.validate()) {
       _emailFormKey.currentState!.save();
-      // BlocProvider.of<SignInBloc>(context).add(SignInCheckEmailEvent(
+      // BlocProvider.of<SignInBloc>(context).add(SignInEvent.checkEmailEvent(
       //   fromPage: SignInPageRoutes.emailEntry,
       //   email: EmailAddress(_emailEditingController.text),
       // ));

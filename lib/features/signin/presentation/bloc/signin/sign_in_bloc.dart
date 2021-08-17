@@ -50,16 +50,16 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   }
 
   Stream<SignInState> _google(SignInWithGoogleEvent event) async* {
-    yield SignInLoading();
+    yield const SignInState.loading();
     final usecase = await _signInWithGoogle.call(NoParams());
     yield usecase.fold(
       _mapFailureToSignStateErrorMessage,
-      (_) => SignInAllowed(),
+      (_) => const SignInState.signInAllowed(),
     );
   }
 
   Stream<SignInState> _signInWithEmail(SignInWithEmailEvent event) async* {
-    yield SignInLoading();
+    yield const SignInState.loading();
     final usecase = await _signInWithEmailAndPassword.call(
       c.Params(
         credentials: Credentials(
@@ -70,14 +70,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     );
     yield usecase.fold(
       _mapFailureToSignStateErrorMessage,
-      (_) {
-        return SignInAllowed();
-      },
+      (_) => const SignInState.signInAllowed(),
     );
   }
 
   Stream<SignInState> _register(EmailRegisterEvent event) async* {
-    yield SignInLoading();
+    yield const SignInState.loading();
     final usecase = await _signInRegisterEmailAndPassword.call(
       b.Params(
         credentials: Credentials(
@@ -88,14 +86,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     );
     yield usecase.fold(
       _mapFailureToSignStateErrorMessage,
-      (_) {
-        return SignInAllowed();
-      },
+      (_) => const SignInState.signInAllowed(),
     );
   }
 
   Stream<SignInState> _checkEmail(CheckEmailEvent event) async* {
-    yield SignInLoading();
+    yield const SignInState.loading();
     final usecase =
         await _checkIfEmailIsInUse.call(a.Params(email: event.email));
     yield usecase.fold(
@@ -110,17 +106,18 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
             parameters: event.email.getOrCrash(),
           ));
         }
-
-        return emailIsInUse ? EmailAlreadyRegistered() : EmailNotFound();
+        return emailIsInUse
+            ? const SignInState.emailAlreadyRegistered()
+            : const SignInState.emailNotFound();
       },
     );
   }
 
   SignInState _mapFailureToSignStateErrorMessage(FailureDetails failure) {
     if (failure.failure == const AuthFailure.cancelledByUser()) {
-      return SignInCancelled();
+      return const SignInState.signInCancelled();
     }
-    return SignInNotification(message: failure.message);
+    return SignInState.signInNotification(message: failure.message);
   }
 
   void goToPage(SignInPageGoTo page) {

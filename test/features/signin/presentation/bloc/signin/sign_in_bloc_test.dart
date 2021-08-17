@@ -43,7 +43,7 @@ void main() {
 
   test('initialState should be SignInInitial', () {
     // assert
-    expect(_bloc.state, equals(SignInInitial()));
+    expect(_bloc.state, equals(const SignInState.initial()));
   });
 
   group('when check email', () {
@@ -62,7 +62,7 @@ void main() {
           .thenAnswer((_) async => Right(isEmailAlreadyRegistered));
 
       // act
-      _bloc.add(SignInCheckEmailEvent(
+      _bloc.add(SignInEvent.checkEmailEvent(
         fromPage: signInPageGoTo.from,
         email: email,
       ));
@@ -94,8 +94,8 @@ void main() {
           );
 
           final statesExpected = [
-            SignInLoading(),
-            EmailNotFound(),
+            const SignInState.loading(),
+            const SignInState.emailNotFound(),
           ];
 
           await _assertSignInStatesAndNativation(
@@ -122,8 +122,8 @@ void main() {
           );
 
           final statesExpected = [
-            SignInLoading(),
-            EmailAlreadyRegistered(),
+            const SignInState.loading(),
+            const SignInState.emailNotFound(),
           ];
 
           await _assertSignInStatesAndNativation(
@@ -136,7 +136,7 @@ void main() {
       );
 
       test(
-        'should emit [SignInNotification(message: [CheckEmailErrorMessages.unavailable])] when email check fail',
+        'should emit [SignInState.signInNotification(message: [CheckEmailErrorMessages.unavailable])] when email check fail',
         () async {
           // arrange
           const throwFailure = AuthFailure.serverError();
@@ -150,7 +150,7 @@ void main() {
               .thenAnswer((_) async => Left(failureDetails));
 
           // act
-          _bloc.add(SignInCheckEmailEvent(
+          _bloc.add(SignInEvent.checkEmailEvent(
             email: testEmail,
             fromPage: SignInPageRoutes.emailEntry,
           ));
@@ -158,8 +158,8 @@ void main() {
           // assert later
 
           final expected = [
-            SignInLoading(),
-            SignInNotification(message: failureDetails.message),
+            const SignInState.loading(),
+            SignInState.signInNotification(message: failureDetails.message),
           ];
 
           await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -185,7 +185,7 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(SignInEmailRegisterEvent(
+      _bloc.add(SignInEvent.emailRegisterEvent(
         email: email,
         password: password,
       ));
@@ -193,8 +193,8 @@ void main() {
       // assert later
 
       final expected = [
-        SignInLoading(),
-        SignInNotification(message: failureDetails.message),
+        const SignInState.loading(),
+        SignInState.signInNotification(message: failureDetails.message),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -213,7 +213,7 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(SignInEmailRegisterEvent(
+      _bloc.add(SignInEvent.emailRegisterEvent(
         email: email,
         password: password,
       ));
@@ -221,8 +221,8 @@ void main() {
       // assert later
 
       final expected = [
-        SignInLoading(),
-        SignInNotification(message: failureDetails.message),
+        const SignInState.loading(),
+        SignInState.signInNotification(message: failureDetails.message),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -235,7 +235,7 @@ void main() {
           .thenAnswer((_) async => const Right(unit));
 
       // act
-      _bloc.add(SignInEmailRegisterEvent(
+      _bloc.add(SignInEvent.emailRegisterEvent(
         email: email,
         password: password,
       ));
@@ -243,8 +243,8 @@ void main() {
       // assert later
 
       final expected = [
-        SignInLoading(),
-        SignInAllowed(),
+        const SignInState.loading(),
+        const SignInState.signInAllowed(),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -269,7 +269,7 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(SignInWithEmailEvent(
+      _bloc.add(SignInEvent.emailRegisterEvent(
         email: email,
         password: password,
       ));
@@ -277,8 +277,8 @@ void main() {
       // assert later
 
       final expected = [
-        SignInLoading(),
-        SignInNotification(message: failureDetails.message),
+        const SignInState.loading(),
+        SignInState.signInNotification(message: failureDetails.message),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -297,7 +297,7 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(SignInWithEmailEvent(
+      _bloc.add(SignInEvent.emailRegisterEvent(
         email: email,
         password: password,
       ));
@@ -305,8 +305,8 @@ void main() {
       // assert later
 
       final expected = [
-        SignInLoading(),
-        SignInNotification(message: failureDetails.message),
+        const SignInState.loading(),
+        SignInState.signInNotification(message: failureDetails.message),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -319,7 +319,7 @@ void main() {
           .thenAnswer((_) async => const Right(unit));
 
       // act
-      _bloc.add(SignInWithEmailEvent(
+      _bloc.add(SignInEvent.emailRegisterEvent(
         email: email,
         password: password,
       ));
@@ -327,8 +327,8 @@ void main() {
       // assert later
 
       final expected = [
-        SignInLoading(),
-        SignInAllowed(),
+        const SignInState.loading(),
+        const SignInState.signInAllowed(),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -351,13 +351,13 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(SignInWithGoogleEvent());
+      _bloc.add(const SignInEvent.signInWithGoogleEvent());
 
       // assert later
 
       final expected = [
-        SignInLoading(),
-        SignInCancelled(),
+        const SignInState.loading(),
+        const SignInState.signInCancelled(),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -376,13 +376,13 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(SignInWithGoogleEvent());
+      _bloc.add(const SignInEvent.signInWithGoogleEvent());
 
       // assert later
 
       final expected = [
-        SignInLoading(),
-        SignInNotification(message: failureDetails.message),
+        const SignInState.loading(),
+        SignInState.signInNotification(message: failureDetails.message),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -395,13 +395,13 @@ void main() {
           .thenAnswer((_) async => const Right(unit));
 
       // act
-      _bloc.add(SignInWithGoogleEvent());
+      _bloc.add(const SignInEvent.signInWithGoogleEvent());
 
       // assert later
 
       final expected = [
-        SignInLoading(),
-        SignInAllowed(),
+        const SignInState.loading(),
+        const SignInState.signInAllowed(),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
