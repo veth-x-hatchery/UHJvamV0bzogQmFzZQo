@@ -27,10 +27,10 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
   Future<void> _validateEmail() async {
     if (_emailFormKey.currentState!.validate()) {
       _emailFormKey.currentState!.save();
-      BlocProvider.of<SignInBloc>(context).add(SignInCheckEmailEvent(
-        fromPage: SignInPageRoutes.emailEntry,
-        email: EmailAddress(_emailEditingController.text),
-      ));
+      // BlocProvider.of<SignInBloc>(context).add(SignInCheckEmailEvent(
+      //   fromPage: SignInPageRoutes.emailEntry,
+      //   email: EmailAddress(_emailEditingController.text),
+      // ));
     }
   }
 
@@ -65,7 +65,8 @@ class _SignInEmailEntryState extends State<SignInEmailEntry> {
       ),
       body: BlocBuilder<SignInBloc, SignInState>(
         builder: (context, state) {
-          final _loading = state == SignInLoading();
+          final _loading = true;
+          //state == SignInLoading();
           return FormColumn(
             children: [
               SizedBox(height: SizeConfig.defaultEdgeSpace),

@@ -6,6 +6,7 @@ import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart'
     as a;
@@ -18,6 +19,7 @@ import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart'
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';
+part 'sign_in_bloc.freezed.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final a.SignInCheckIfEmailIsInUse _checkIfEmailIsInUse;
@@ -34,22 +36,17 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     this._signInWithEmailAndPassword,
     this._signInWithGoogle,
     this._signInRegisterEmailAndPassword,
-  ) : super(_Initial());
+  ) : super(const SignInState.initial());
 
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
-    if (event is SignInCheckEmailEvent) {
-      yield* _checkEmail(event);
-    }
-    if (event is SignInEmailRegisterEvent) {
-      yield* _register(event);
-    }
-    if (event is SignInWithEmailEvent) {
-      yield* _signInWithEmail(event);
-    }
-    if (event is SignInWithGoogleEvent) {
-      yield* _google(event);
-    }
+    yield* event.map(
+      checkEmailEvent: _checkEmail,
+      emailRegisterEvent: _register,
+      signInWithEmailEvent: _signInWithEmail,
+      signInWithGoogleEvent: _google,
+      started: (_Started value) => Stream.value(const SignInState.initial()),
+    );
   }
 
   Stream<SignInState> _google(SignInWithGoogleEvent event) async* {
@@ -79,7 +76,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     );
   }
 
-  Stream<SignInState> _register(SignInEmailRegisterEvent event) async* {
+  Stream<SignInState> _register(EmailRegisterEvent event) async* {
     yield SignInLoading();
     final usecase = await _signInRegisterEmailAndPassword.call(
       b.Params(
@@ -97,7 +94,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     );
   }
 
-  Stream<SignInState> _checkEmail(SignInCheckEmailEvent event) async* {
+  Stream<SignInState> _checkEmail(CheckEmailEvent event) async* {
     yield SignInLoading();
     final usecase =
         await _checkIfEmailIsInUse.call(a.Params(email: event.email));

@@ -50,8 +50,8 @@ class _SignInOptionsState extends State<SignInOptions> {
           textColor: Colors.black87,
           color: Colors.white,
           // ignore: avoid_returning_null_for_void
-          onPressed: () =>
-              BlocProvider.of<SignInBloc>(context).add(SignInWithGoogleEvent()),
+          // onPressed: () =>
+          //     BlocProvider.of<SignInBloc>(context).add(SignInWithGoogleEvent()),
         ),
         // SizedBox(height: SizeConfig.defaultEdgeSpace),
         // SignInButton(
