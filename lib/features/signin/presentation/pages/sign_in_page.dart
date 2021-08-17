@@ -65,6 +65,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
           context,
           SlideLeftRoute<void>(
             page: _scaffold(
+              context,
               child: FormPassword(informedEmail: page.parameters! as String),
             ),
           ),
@@ -74,7 +75,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
         Navigator.pushReplacement(
           context,
           SlideLeftRoute<void>(
-              page: _scaffold(
+              page: _scaffold(context,
                   child: FormRegisterEmailSignIn(
                       informedEmail: page.parameters as String?))),
         );
@@ -85,11 +86,13 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
             ? Navigator.push(
                 context,
                 SlideLeftRoute<void>(
-                    page: _scaffold(child: const FormRegisterEmailSignIn())))
+                    page: _scaffold(context,
+                        child: const FormRegisterEmailSignIn())))
             : Navigator.pushReplacement(
                 context,
                 SlideLeftRoute<void>(
-                    page: _scaffold(child: const FormRegisterEmailSignIn())));
+                    page: _scaffold(context,
+                        child: const FormRegisterEmailSignIn())));
         break;
     }
   }
@@ -110,14 +113,31 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return _scaffold(child: const SignInOptions());
+    return _scaffold(
+      context,
+      child: const SignInOptions(),
+      leading: false,
+    );
   }
 
-  Scaffold _scaffold({required Widget child}) {
+  Scaffold _scaffold(
+    BuildContext context, {
+    required Widget child,
+    bool leading = true,
+  }) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
+        leading: leading
+            ? IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: Theme.of(context).primaryColor,
+                ),
+                onPressed: () => Navigator.maybePop(context),
+              )
+            : null,
       ),
       body: child,
     );
