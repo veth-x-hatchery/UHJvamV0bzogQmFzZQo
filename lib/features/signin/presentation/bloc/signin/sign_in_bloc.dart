@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart'
     as a;
@@ -35,7 +34,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     this._signInWithEmailAndPassword,
     this._signInWithGoogle,
     this._signInRegisterEmailAndPassword,
-  ) : super(SignInInitial());
+  ) : super(_Initial());
 
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
