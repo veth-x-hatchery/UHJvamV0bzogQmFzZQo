@@ -50,17 +50,18 @@ class _SignInOptionsState extends State<SignInOptions> {
           textColor: Colors.black87,
           color: Colors.white,
           // ignore: avoid_returning_null_for_void
-          onPressed: _signIn,
+          onPressed: () =>
+              BlocProvider.of<SignInBloc>(context).add(SignInWithGoogleEvent()),
         ),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        SignInButton(
-          assetName: 'assets/images/facebook-logo.png',
-          text: 'Sign in with Facebook',
-          textColor: Colors.white,
-          color: const Color(0xFF334D92),
-          // ignore: avoid_returning_null_for_void
-          onPressed: _signIn,
-        ),
+        // SizedBox(height: SizeConfig.defaultEdgeSpace),
+        // SignInButton(
+        //   assetName: 'assets/images/facebook-logo.png',
+        //   text: 'Sign in with Facebook',
+        //   textColor: Colors.white,
+        //   color: const Color(0xFF334D92),
+        //   // ignore: avoid_returning_null_for_void
+        //   onPressed: _signIn,
+        // ),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
         SignInButton(
           assetName: 'assets/images/mail-logo.png',
