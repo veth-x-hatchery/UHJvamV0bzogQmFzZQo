@@ -17,7 +17,6 @@ import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_re
 import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/utils/input_converter.dart';
 import 'package:vethx_beta/injection_container.dart';
 
 Future<void> signInDependenciesInjection() async {
@@ -36,8 +35,6 @@ Future<void> signInDependenciesInjection() async {
   sl.registerLazySingleton(() => GoogleSignIn());
 
   //! Core
-
-  sl.registerLazySingleton(() => InputConverter());
 
   sl.registerLazySingleton<INetworkInfo>(
       () => NetworkInfo(sl<InternetConnectionChecker>()));
