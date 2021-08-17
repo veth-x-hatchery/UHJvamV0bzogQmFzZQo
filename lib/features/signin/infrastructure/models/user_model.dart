@@ -7,13 +7,13 @@ enum SignInProviderUserAuthType {
   test,
 }
 
-class UserModel extends User {
+class UserModel  {
   final String authType;
 
   const UserModel({
     required this.authType,
     required String email,
-  }) : super(email: email);
+  }) );
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(

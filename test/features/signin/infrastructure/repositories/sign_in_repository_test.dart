@@ -40,7 +40,7 @@ void main() {
       () async {
         // arrange
 
-        const user = UserModel(authType: 'google', email: 'test@vethx.com');
+        final user = UserModel(authType: 'google', email: 'test@vethx.com');
 
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
 
@@ -61,7 +61,7 @@ void main() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       });
 
-      const user = UserModel(authType: 'google', email: 'test@vethx.com');
+      final user = UserModel(authType: 'google', email: 'test@vethx.com');
 
       test('should return current user from remote data source', () async {
         // arrange
@@ -76,7 +76,7 @@ void main() {
 
         verify(mockRemoteDataSource.currentUser());
 
-        expect(result, equals(const Right(user)));
+        expect(result, equals(Right(user)));
       });
 
       test(
@@ -129,7 +129,7 @@ void main() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
       });
 
-      const user = UserModel(authType: 'google', email: 'test@vethx.com');
+      final user = UserModel(authType: 'google', email: 'test@vethx.com');
 
       test(
         'should return last locally cached data when the cached data is present',
@@ -141,7 +141,7 @@ void main() {
           // assert
           verifyZeroInteractions(mockRemoteDataSource);
           verify(mockLocalDataSource.currentUser());
-          expect(result, equals(const Right(user)));
+          expect(result, equals(Right(user)));
         },
       );
 

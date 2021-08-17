@@ -69,6 +69,10 @@ class MockIAuthFacade extends _i1.Mock implements _i7.IAuthFacade {
   }
 
   @override
+  _i4.Future<_i6.User?> getSignedInUser() =>
+      (super.noSuchMethod(Invocation.method(#getSignedInUser, []),
+          returnValue: Future<_i6.User?>.value()) as _i4.Future<_i6.User?>);
+  @override
   _i4.Future<_i2.Either<_i8.AuthFailure, bool>> emailIsAlreadyInUse(
           _i9.EmailAddress? emailAddress) =>
       (super.noSuchMethod(

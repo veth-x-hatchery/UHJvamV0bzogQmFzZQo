@@ -12,6 +12,8 @@ import 'package:google_sign_in/google_sign_in.dart' as _i5;
 import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart'
     as _i7;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart'
+    as _i8;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -405,6 +407,19 @@ class MockGoogleSignInAccount extends _i1.Mock
 class MockGoogleSignInAuthentication extends _i1.Mock
     implements _i5.GoogleSignInAuthentication {
   MockGoogleSignInAuthentication() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [FirebaseUserMapper].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFirebaseUserMapper extends _i1.Mock
+    implements _i8.FirebaseUserMapper {
+  MockFirebaseUserMapper() {
     _i1.throwOnMissingStub(this);
   }
 

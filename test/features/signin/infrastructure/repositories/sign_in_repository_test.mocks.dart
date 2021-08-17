@@ -6,11 +6,13 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:vethx_beta/core/network/network_info.dart' as _i9;
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
-    as _i8;
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart'
+import 'package:vethx_beta/core/network/network_info.dart' as _i10;
+import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart'
     as _i7;
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
+    as _i9;
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart'
+    as _i8;
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart'
     as _i4;
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_remote_data_source.dart'
@@ -105,38 +107,42 @@ class MockISignInRemoteSource extends _i1.Mock
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
   @override
-  _i5.Future<_i3.Either<_i7.AuthFailure, bool>> emailIsAlreadyInUse(
-          _i8.EmailAddress? emailAddress) =>
+  _i5.Future<_i7.User?> getSignedInUser() =>
+      (super.noSuchMethod(Invocation.method(#getSignedInUser, []),
+          returnValue: Future<_i7.User?>.value()) as _i5.Future<_i7.User?>);
+  @override
+  _i5.Future<_i3.Either<_i8.AuthFailure, bool>> emailIsAlreadyInUse(
+          _i9.EmailAddress? emailAddress) =>
       (super.noSuchMethod(
               Invocation.method(#emailIsAlreadyInUse, [emailAddress]),
-              returnValue: Future<_i3.Either<_i7.AuthFailure, bool>>.value(
-                  _FakeEither_1<_i7.AuthFailure, bool>()))
-          as _i5.Future<_i3.Either<_i7.AuthFailure, bool>>);
+              returnValue: Future<_i3.Either<_i8.AuthFailure, bool>>.value(
+                  _FakeEither_1<_i8.AuthFailure, bool>()))
+          as _i5.Future<_i3.Either<_i8.AuthFailure, bool>>);
   @override
-  _i5.Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>
+  _i5.Future<_i3.Either<_i8.AuthFailure, _i3.Unit>>
       registerWithEmailAndPassword(
-              {_i8.EmailAddress? emailAddress, _i8.Password? password}) =>
+              {_i9.EmailAddress? emailAddress, _i9.Password? password}) =>
           (super.noSuchMethod(
               Invocation.method(#registerWithEmailAndPassword, [],
                   {#emailAddress: emailAddress, #password: password}),
-              returnValue: Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>.value(
-                  _FakeEither_1<_i7.AuthFailure, _i3.Unit>())) as _i5
-              .Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>);
+              returnValue: Future<_i3.Either<_i8.AuthFailure, _i3.Unit>>.value(
+                  _FakeEither_1<_i8.AuthFailure, _i3.Unit>())) as _i5
+              .Future<_i3.Either<_i8.AuthFailure, _i3.Unit>>);
   @override
-  _i5.Future<_i3.Either<_i7.AuthFailure, _i3.Unit>> signInWithEmailAndPassword(
-          {_i8.EmailAddress? emailAddress, _i8.Password? password}) =>
+  _i5.Future<_i3.Either<_i8.AuthFailure, _i3.Unit>> signInWithEmailAndPassword(
+          {_i9.EmailAddress? emailAddress, _i9.Password? password}) =>
       (super.noSuchMethod(
               Invocation.method(#signInWithEmailAndPassword, [],
                   {#emailAddress: emailAddress, #password: password}),
-              returnValue: Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>.value(
-                  _FakeEither_1<_i7.AuthFailure, _i3.Unit>()))
-          as _i5.Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>);
+              returnValue: Future<_i3.Either<_i8.AuthFailure, _i3.Unit>>.value(
+                  _FakeEither_1<_i8.AuthFailure, _i3.Unit>()))
+          as _i5.Future<_i3.Either<_i8.AuthFailure, _i3.Unit>>);
   @override
-  _i5.Future<_i3.Either<_i7.AuthFailure, _i3.Unit>> signInWithGoogle() =>
+  _i5.Future<_i3.Either<_i8.AuthFailure, _i3.Unit>> signInWithGoogle() =>
       (super.noSuchMethod(Invocation.method(#signInWithGoogle, []),
-              returnValue: Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>.value(
-                  _FakeEither_1<_i7.AuthFailure, _i3.Unit>()))
-          as _i5.Future<_i3.Either<_i7.AuthFailure, _i3.Unit>>);
+              returnValue: Future<_i3.Either<_i8.AuthFailure, _i3.Unit>>.value(
+                  _FakeEither_1<_i8.AuthFailure, _i3.Unit>()))
+          as _i5.Future<_i3.Either<_i8.AuthFailure, _i3.Unit>>);
   @override
   String toString() => super.toString();
 }
@@ -144,7 +150,7 @@ class MockISignInRemoteSource extends _i1.Mock
 /// A class which mocks [INetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockINetworkInfo extends _i1.Mock implements _i9.INetworkInfo {
+class MockINetworkInfo extends _i1.Mock implements _i10.INetworkInfo {
   MockINetworkInfo() {
     _i1.throwOnMissingStub(this);
   }
