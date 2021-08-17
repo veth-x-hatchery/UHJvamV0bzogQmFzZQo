@@ -9,6 +9,8 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
+import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart'
+    as domain;
 
 import 'firebase_auth_facade_test.mocks.dart';
 
@@ -20,6 +22,7 @@ import 'firebase_auth_facade_test.mocks.dart';
   GoogleSignInAccount,
   GoogleSignInAuthentication,
   FirebaseUserMapper,
+  User,
 ])
 void main() {
   late MockFirebaseAuth _mockFirebaseAuth;
@@ -28,6 +31,7 @@ void main() {
   late MockGoogleSignInAccount _mockGoogleSignInAccount;
   late MockGoogleSignInAuthentication _mockGoogleSignInAuthentication;
   late MockFirebaseUserMapper _mockFirebaseUserMapper;
+  late MockUser _mockFirebaseUser;
 
   late FirebaseAuthFacade _authFacade;
 
@@ -37,6 +41,7 @@ void main() {
     _mockGoogleSignIn = MockGoogleSignIn();
     _mockGoogleSignInAccount = MockGoogleSignInAccount();
     _mockGoogleSignInAuthentication = MockGoogleSignInAuthentication();
+    _mockFirebaseUser = MockUser();
     _mockFirebaseUserMapper = MockFirebaseUserMapper();
     _authFacade = FirebaseAuthFacade(
       _mockFirebaseAuth,
@@ -392,5 +397,47 @@ void main() {
     verify(_mockGoogleSignIn.signOut());
 
     verify(_mockFirebaseAuth.signOut());
+  });
+
+  group('when request for the signed user', () {
+    test('should return null', () async {
+      //arrange
+
+      when(_mockFirebaseAuth.currentUser).thenAnswer((_) => null);
+
+      when(_mockFirebaseUserMapper.toDomain(any)).thenAnswer((_) => null);
+
+      //act
+
+      final result = await _authFacade.getSignedInUser();
+
+      //assert
+
+      verify(_mockFirebaseAuth.currentUser);
+
+      expect(result, null);
+    });
+
+    test('should return a user', () async {
+      //arrange
+
+      when(_mockFirebaseAuth.currentUser).thenReturn(_mockFirebaseUser);
+
+      when(_mockFirebaseUserMapper.toDomain(_mockFirebaseUser))
+          .thenAnswer((_) => domain.User(
+                email: EmailAddress('email@valid.com'),
+                name: 'valid user',
+              ));
+
+      //act
+
+      final result = await _authFacade.getSignedInUser();
+
+      //assert
+
+      verify(_mockFirebaseAuth.currentUser);
+
+      expect(result != null, true);
+    });
   });
 }
