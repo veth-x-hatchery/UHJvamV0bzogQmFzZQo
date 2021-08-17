@@ -118,7 +118,7 @@ void main() {
   });
 
   group('get current user', () {
-    const user = UserModel(authType: 'google', email: 'test@vethx.com');
+    final user = UserModel(authType: 'google', email: 'test@vethx.com');
 
     test(
       'should perform a GET request on a URL being the endpoint and with application/json header',

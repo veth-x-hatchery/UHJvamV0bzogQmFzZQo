@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/notifications/messages.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in_button.widget.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
@@ -50,17 +50,18 @@ class _SignInOptionsState extends State<SignInOptions> {
           textColor: Colors.black87,
           color: Colors.white,
           // ignore: avoid_returning_null_for_void
-          onPressed: _signIn,
+          onPressed: () =>
+              BlocProvider.of<SignInBloc>(context).add(SignInWithGoogleEvent()),
         ),
-        SizedBox(height: SizeConfig.defaultEdgeSpace),
-        SignInButton(
-          assetName: 'assets/images/facebook-logo.png',
-          text: 'Sign in with Facebook',
-          textColor: Colors.white,
-          color: const Color(0xFF334D92),
-          // ignore: avoid_returning_null_for_void
-          onPressed: _signIn,
-        ),
+        // SizedBox(height: SizeConfig.defaultEdgeSpace),
+        // SignInButton(
+        //   assetName: 'assets/images/facebook-logo.png',
+        //   text: 'Sign in with Facebook',
+        //   textColor: Colors.white,
+        //   color: const Color(0xFF334D92),
+        //   // ignore: avoid_returning_null_for_void
+        //   onPressed: _signIn,
+        // ),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
         SignInButton(
           assetName: 'assets/images/mail-logo.png',

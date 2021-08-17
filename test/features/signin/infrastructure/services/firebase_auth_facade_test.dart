@@ -8,6 +8,7 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
 
 import 'firebase_auth_facade_test.mocks.dart';
 
@@ -18,6 +19,7 @@ import 'firebase_auth_facade_test.mocks.dart';
   GoogleAuthProvider,
   GoogleSignInAccount,
   GoogleSignInAuthentication,
+  FirebaseUserMapper,
 ])
 void main() {
   late MockFirebaseAuth _mockFirebaseAuth;
@@ -25,6 +27,7 @@ void main() {
   late MockUserCredential _mockUserCredential;
   late MockGoogleSignInAccount _mockGoogleSignInAccount;
   late MockGoogleSignInAuthentication _mockGoogleSignInAuthentication;
+  late MockFirebaseUserMapper _mockFirebaseUserMapper;
 
   late FirebaseAuthFacade _authFacade;
 
@@ -34,9 +37,11 @@ void main() {
     _mockGoogleSignIn = MockGoogleSignIn();
     _mockGoogleSignInAccount = MockGoogleSignInAccount();
     _mockGoogleSignInAuthentication = MockGoogleSignInAuthentication();
+    _mockFirebaseUserMapper = MockFirebaseUserMapper();
     _authFacade = FirebaseAuthFacade(
       _mockFirebaseAuth,
       _mockGoogleSignIn,
+      _mockFirebaseUserMapper,
     );
   });
 

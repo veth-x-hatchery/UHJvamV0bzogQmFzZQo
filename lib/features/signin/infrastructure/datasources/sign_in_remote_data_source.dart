@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
+import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
@@ -130,6 +131,12 @@ class SignInRemoteSource implements ISignInRemoteSource {
   @override
   Future<Either<AuthFailure, Unit>> signInWithGoogle() {
     // TODO: implement signInWithGoogle
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<User?> getSignedInUser() {
+    // TODO: implement getSignedInUser
     throw UnimplementedError();
   }
 }

@@ -16,7 +16,9 @@ import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_lo
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_remote_data_source.dart';
 import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/sign_in_bloc.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/injection_container.dart';
 
 Future<void> signInDependenciesInjection() async {
@@ -45,10 +47,13 @@ Future<void> signInDependenciesInjection() async {
 
   // Services
 
+  sl.registerLazySingleton<FirebaseUserMapper>(() => FirebaseUserMapper());
+
   sl.registerLazySingleton<IAuthFacade>(
     () => FirebaseAuthFacade(
       sl<FirebaseAuth>(),
       sl<GoogleSignIn>(),
+      sl<FirebaseUserMapper>(),
     ),
   );
 
@@ -104,6 +109,13 @@ Future<void> signInDependenciesInjection() async {
   );
 
   // Bloc
+
+  sl.registerFactory<AuthBloc>(
+    () => AuthBloc(
+      sl<IAuthFacade>(),
+    ),
+  );
+
   sl.registerFactory<SignInBloc>(
     () => SignInBloc(
       sl<SignInCheckIfEmailIsInUse>(),
