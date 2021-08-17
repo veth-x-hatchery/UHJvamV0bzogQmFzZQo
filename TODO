@@ -1,16 +1,16 @@
-1 - Sign in with Google
 
-	1 - Escrever os testes no BLoC
 
-2 - Desabilitar o Facebook
+0 - Criar um Logger.presentation()
+0 - Criar um Logger.domain()
+0 - Criar um Logger.infra()
 
-3 - Criar o BLoC auth_bloc.dart
-
-	1 - Escrever os testes no modo TDD
-
-	2 - Direcionar para uma pagina HOME
+1 - Validacao dos campos
+2 - Validacao das notificacoes
+3 - Validacao da transicao de telas
 
 4 - Escrever os testes de Integracao com DRIVER
+
+
 
 5 - Adicionar um SPLASH durante o carregamento das dependencias
 
