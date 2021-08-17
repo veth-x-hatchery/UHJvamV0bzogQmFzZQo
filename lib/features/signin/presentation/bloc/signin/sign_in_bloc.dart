@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
@@ -16,7 +15,8 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_an
     as c;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/navigation/navigation_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';
@@ -28,12 +28,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final b.SignInRegisterEmailAndPassword _signInRegisterEmailAndPassword;
   final c.SignInWithEmailAndPassword _signInWithEmailAndPassword;
   final SignInWithGoogle _signInWithGoogle;
-  // Streams to remove
-  final _signInPageRoutesController =
-      StreamController<SignInPageGoTo>.broadcast();
-  Stream<SignInPageGoTo> get goTo => _signInPageRoutesController.stream;
 
   final AuthBloc _authBloc;
+  final NavigationBloc _navigation;
 
   SignInBloc(
     this._checkIfEmailIsInUse,
@@ -41,6 +38,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     this._signInWithGoogle,
     this._signInRegisterEmailAndPassword,
     this._authBloc,
+    this._navigation,
   ) : super(const SignInState.initial());
 
   @override
@@ -114,7 +112,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       _mapFailureToSignStateErrorMessage,
       (emailIsInUse) {
         if (event.fromPage == SignInPageRoutes.emailEntry) {
-          goToPage(SignInPageGoTo(
+          _navigation.goTo(SignInPageGoTo(
             from: SignInPageRoutes.emailEntry,
             to: emailIsInUse
                 ? SignInPageRoutes.passwordEntry
@@ -134,16 +132,5 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       return const SignInState.signInCancelled();
     }
     return SignInState.signInNotification(message: failure.message);
-  }
-
-  void goToPage(SignInPageGoTo page) {
-    Logger.i('$page');
-    _signInPageRoutesController.add(page);
-  }
-
-  @override
-  Future<void> close() async {
-    await _signInPageRoutesController.close();
-    return super.close();
   }
 }

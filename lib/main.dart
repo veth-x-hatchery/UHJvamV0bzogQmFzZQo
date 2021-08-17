@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/navigation/navigation_bloc.dart';
 import 'package:vethx_beta/features/signin/sign_in_injection_container.dart';
 import 'package:vethx_beta/injection_container.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
@@ -27,6 +28,9 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (_) => sl<SignInBloc>(),
         ),
+        BlocProvider(
+          create: (_) => sl<NavigationBloc>(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

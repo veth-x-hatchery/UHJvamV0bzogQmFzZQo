@@ -1,10 +1,3 @@
-enum SignInPageRoutes {
-  signInOptions,
-  emailEntry,
-  passwordEntry,
-  registerEmailSignIn,
-}
-
 class SignInNavigationRoutes {
   static const String signIn = '/signIn';
   static const String signInOptions = '/signInOptions';

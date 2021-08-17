@@ -62,7 +62,7 @@ class _FormPasswordState extends State<FormPassword> {
           controller: _passwordTextEditingController,
           passwordFormKey: _passwordFormKey,
           passwordFocusNode: _passwordFocusNode,
-          validatePassword: () => _authenticate(() => Future.value()),
+          validatePassword: () => _authenticate(() => Future.value(false)),
         ),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
         CustomRaisedButton(
@@ -70,7 +70,7 @@ class _FormPasswordState extends State<FormPassword> {
             Texts.goToAccess,
             style: Theme.of(context).textTheme.button,
           ),
-          onPressed: () => _authenticate(() => Future.value()),
+          onPressed: () => _authenticate(() => Future.value(false)),
         ),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
         TextButton(

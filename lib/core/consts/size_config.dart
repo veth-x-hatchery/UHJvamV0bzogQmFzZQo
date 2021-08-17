@@ -56,7 +56,7 @@ class SizeConfig {
 
     edgeMaxSpace = const EdgeInsets.all(25.0);
 
-    isTablet = getDeviceType(_mediaQueryData) == DeviceScreenType.Tablet;
+    isTablet = getDeviceType(_mediaQueryData) == DeviceScreenType.tablet;
   }
 
   static EdgeInsetsGeometry get defaultEdgeInsetsAll =>
@@ -65,7 +65,7 @@ class SizeConfig {
   static double get defaultEdgeSpace => screenWidth * 0.05;
 }
 
-enum DeviceScreenType { Mobile, Tablet, Desktop }
+enum DeviceScreenType { mobile, tablet, desktop }
 
 class SizingInformation {
   const SizingInformation({
@@ -98,14 +98,14 @@ DeviceScreenType getDeviceType(MediaQueryData mediaQuery) {
   }
 
   if (deviceWidth > 950) {
-    return DeviceScreenType.Desktop;
+    return DeviceScreenType.desktop;
   }
 
   if (deviceWidth > 600) {
-    return DeviceScreenType.Tablet;
+    return DeviceScreenType.tablet;
   }
 
-  return DeviceScreenType.Mobile;
+  return DeviceScreenType.mobile;
 }
 
 // var sizingInformation = SizingInformation(

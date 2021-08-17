@@ -89,14 +89,14 @@ class _FormRegisterEmailSignInState extends State<FormRegisterEmailSignIn> {
           controller: _emailTextEditingController,
           emailFormKey: _emailFormKey,
           emailFocusNode: _emailFocusNode,
-          validateEmail: () => _validateEmail(() => Future.value()),
+          validateEmail: () => _validateEmail(() => Future.value(false)),
         ),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
         FieldPassword(
           controller: _passwordTextEditingController,
           passwordFormKey: _passwordFormKey,
           passwordFocusNode: _passwordFocusNode,
-          validatePassword: () => _authenticate(() => Future.value()),
+          validatePassword: () => _authenticate(() => Future.value(false)),
         ),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
         CustomRaisedButton(
@@ -105,8 +105,8 @@ class _FormRegisterEmailSignInState extends State<FormRegisterEmailSignIn> {
             style: Theme.of(context).textTheme.button,
           ),
           onPressed: () => _emailFocusNode.hasFocus
-              ? _validateEmail(() => Future.value())
-              : _authenticate(() => Future.value()),
+              ? _validateEmail(() => Future.value(false))
+              : _authenticate(() => Future.value(false)),
         ),
       ],
     );

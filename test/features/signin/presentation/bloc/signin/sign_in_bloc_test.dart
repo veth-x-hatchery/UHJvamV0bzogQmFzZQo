@@ -5,19 +5,20 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
-import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/navigation/navigation_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
 import 'sign_in_bloc_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
+  NavigationBloc,
   SignInCheckIfEmailIsInUse,
   SignInRegisterEmailAndPassword,
   SignInWithEmailAndPassword,
@@ -31,6 +32,7 @@ void main() {
   late MockSignInWithGoogle _mockSignInWithGoogle;
   late MockSignInCheckIfEmailIsInUse _mockSignInCheckIfEmailIsInUse;
   late MockSignInRegisterEmailAndPassword _mockSignInRegisterEmailAndPassword;
+  late MockNavigationBloc _mockNavigation;
 
   setUp(() {
     _mockSignInCheckIfEmailIsInUse = MockSignInCheckIfEmailIsInUse();
@@ -38,6 +40,7 @@ void main() {
     _mockSignInWithGoogle = MockSignInWithGoogle();
     _mockSignInRegisterEmailAndPassword = MockSignInRegisterEmailAndPassword();
     _authBloc = MockAuthBloc();
+    _mockNavigation = MockNavigationBloc();
 
     _bloc = SignInBloc(
       _mockSignInCheckIfEmailIsInUse,
@@ -45,6 +48,7 @@ void main() {
       _mockSignInWithGoogle,
       _mockSignInRegisterEmailAndPassword,
       _authBloc,
+      _mockNavigation,
     );
   });
 
@@ -76,13 +80,10 @@ void main() {
 
       // assert later
 
-      _bloc.goTo.listen(
-        (goTo) => goToExpected
-            ? expectLater(goTo, equals(signInPageGoTo))
-            : expectLater(goTo, null),
+      await expectLater(_bloc.stream, emitsInOrder(statesExpected)).then(
+        (_) => verify(_mockNavigation.goTo(signInPageGoTo))
+            .called(goToExpected ? 1 : 0),
       );
-
-      await expectLater(_bloc.stream, emitsInOrder(statesExpected));
     }
 
     group('comming from page [SignInPageRoutes.emailEntry]', () {
