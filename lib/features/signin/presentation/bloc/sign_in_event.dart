@@ -13,11 +13,11 @@ class SignInWithFacebookEvent extends SignInEvent {}
 
 class SignInAnonimously extends SignInEvent {}
 
-class SignInCheckEmail extends SignInEvent {
+class SignInCheckEmailEvent extends SignInEvent {
   final EmailAddress email;
   final SignInPageRoutes fromPage;
 
-  const SignInCheckEmail({
+  const SignInCheckEmailEvent({
     required this.fromPage,
     required this.email,
   });
@@ -25,10 +25,10 @@ class SignInCheckEmail extends SignInEvent {
   List<Object> get props => [email];
 }
 
-class SignInWithEmail extends SignInEvent {
+class SignInWithEmailEvent extends SignInEvent {
   final EmailAddress email;
   final Password password;
-  const SignInWithEmail({
+  const SignInWithEmailEvent({
     required this.email,
     required this.password,
   });
@@ -36,10 +36,10 @@ class SignInWithEmail extends SignInEvent {
   List<Object> get props => [email, password];
 }
 
-class SignInEmailRegister extends SignInEvent {
+class SignInEmailRegisterEvent extends SignInEvent {
   final EmailAddress email;
   final Password password;
-  const SignInEmailRegister({
+  const SignInEmailRegisterEvent({
     required this.email,
     required this.password,
   });
@@ -59,4 +59,4 @@ class ForgotPasswordEvent extends SignInEvent {
   List<Object> get props => [email];
 }
 
-class ChangeTheGivenEmail extends SignInEvent {}
+class ChangeTheGivenEmailEvent extends SignInEvent {}

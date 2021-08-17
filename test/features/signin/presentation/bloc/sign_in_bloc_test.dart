@@ -62,7 +62,7 @@ void main() {
           .thenAnswer((_) async => Right(isEmailAlreadyRegistered));
 
       // act
-      _bloc.add(SignInCheckEmail(
+      _bloc.add(SignInCheckEmailEvent(
         fromPage: signInPageGoTo.from,
         email: email,
       ));
@@ -150,7 +150,7 @@ void main() {
               .thenAnswer((_) async => Left(failureDetails));
 
           // act
-          _bloc.add(SignInCheckEmail(
+          _bloc.add(SignInCheckEmailEvent(
             email: testEmail,
             fromPage: SignInPageRoutes.emailEntry,
           ));
@@ -185,7 +185,7 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(SignInEmailRegister(
+      _bloc.add(SignInEmailRegisterEvent(
         email: email,
         password: password,
       ));
@@ -213,7 +213,7 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(SignInEmailRegister(
+      _bloc.add(SignInEmailRegisterEvent(
         email: email,
         password: password,
       ));
@@ -235,7 +235,7 @@ void main() {
           .thenAnswer((_) async => const Right(unit));
 
       // act
-      _bloc.add(SignInEmailRegister(
+      _bloc.add(SignInEmailRegisterEvent(
         email: email,
         password: password,
       ));
@@ -269,7 +269,7 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(SignInWithEmail(
+      _bloc.add(SignInWithEmailEvent(
         email: email,
         password: password,
       ));
@@ -297,7 +297,7 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(SignInWithEmail(
+      _bloc.add(SignInWithEmailEvent(
         email: email,
         password: password,
       ));
@@ -319,10 +319,83 @@ void main() {
           .thenAnswer((_) async => const Right(unit));
 
       // act
-      _bloc.add(SignInWithEmail(
+      _bloc.add(SignInWithEmailEvent(
         email: email,
         password: password,
       ));
+
+      // assert later
+
+      final expected = [
+        SignInLoading(),
+        SignInAllowed(),
+      ];
+
+      await expectLater(_bloc.stream, emitsInOrder(expected));
+    });
+  });
+
+  group('when sign in with google', () {
+    test(
+        'should return cancelled by user and go back to sign in options page normaly',
+        () async {
+      // arrange
+      const throwFailure = AuthFailure.cancelledByUser();
+
+      final failureDetails = FailureDetails(
+        failure: throwFailure,
+        message: SignInWithGoogleErrorMessages.cancelledByUser,
+      );
+
+      when(_mockSignInWithGoogle.call(any))
+          .thenAnswer((_) async => Left(failureDetails));
+
+      // act
+      _bloc.add(SignInWithGoogleEvent());
+
+      // assert later
+
+      final expected = [
+        SignInLoading(),
+        SignInCancelled(),
+      ];
+
+      await expectLater(_bloc.stream, emitsInOrder(expected));
+    });
+
+    test('should return unavailable notification', () async {
+      // arrange
+      const throwFailure = AuthFailure.serverError();
+
+      final failureDetails = FailureDetails(
+        failure: throwFailure,
+        message: SignInWithGoogleErrorMessages.unknowError,
+      );
+
+      when(_mockSignInWithGoogle.call(any))
+          .thenAnswer((_) async => Left(failureDetails));
+
+      // act
+      _bloc.add(SignInWithGoogleEvent());
+
+      // assert later
+
+      final expected = [
+        SignInLoading(),
+        SignInNotification(message: failureDetails.message),
+      ];
+
+      await expectLater(_bloc.stream, emitsInOrder(expected));
+    });
+
+    test('should sign in with success', () async {
+      // arrange
+
+      when(_mockSignInWithGoogle.call(any))
+          .thenAnswer((_) async => const Right(unit));
+
+      // act
+      _bloc.add(SignInWithGoogleEvent());
 
       // assert later
 

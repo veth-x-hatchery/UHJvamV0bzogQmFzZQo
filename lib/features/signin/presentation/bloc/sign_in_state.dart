@@ -8,19 +8,19 @@ part of 'sign_in_bloc.dart';
 /// - [SignInCancelled]
 /// - [SignInNotification]
 ///
-/// [SignInCheckEmail]
+/// [SignInCheckEmailEvent]
 /// - [EmailAlreadyRegistered]
 /// - [EmailNotFound]
 /// - [SignInNotification]
 ///
-/// [SignInWithEmail]
+/// [SignInWithEmailEvent]
 ///
 /// [SignInAnonimously]
 /// - [SignInAllowed]
 /// - [SignInDenied]
 /// - [SignInNotification]
 ///
-/// [SignInEmailRegister]
+/// [SignInEmailRegisterEvent]
 /// - [EmailAlreadyRegistered]
 /// - [SignInNotification]
 ///
@@ -28,7 +28,7 @@ part of 'sign_in_bloc.dart';
 /// - [SignInEmailWithResetPasswordInstructionsSent]
 /// - [SignInNotification]
 ///
-/// [ChangeTheGivenEmail]
+/// [ChangeTheGivenEmailEvent]
 /// - [SignInGivenEmailChanged]
 /// - [SignInNotification]
 
