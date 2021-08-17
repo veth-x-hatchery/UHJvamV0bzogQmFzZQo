@@ -1,4 +1,5 @@
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 
 enum SignInProviderUserAuthType {
   facebook,
@@ -7,13 +8,16 @@ enum SignInProviderUserAuthType {
   test,
 }
 
-class UserModel  {
+class UserModel extends User {
   final String authType;
 
-  const UserModel({
+  UserModel({
     required this.authType,
     required String email,
-  }) );
+  }) : super(
+          email: EmailAddress(email),
+          name: '',
+        );
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(

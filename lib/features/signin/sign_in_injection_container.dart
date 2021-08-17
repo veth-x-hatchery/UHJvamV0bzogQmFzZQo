@@ -12,6 +12,9 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.d
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_remote_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
@@ -54,6 +57,26 @@ Future<void> signInDependenciesInjection() async {
   );
 
   // Data sources
+
+  sl.registerLazySingleton<ISignInRemoteSource>(
+    () => SignInRemoteSource(
+      sl<http.Client>(),
+      sl<API>(),
+    ),
+  );
+
+  sl.registerLazySingleton<ISignInLocalSource>(
+    () => SignInLocalSource(sl<SharedPreferences>()),
+  );
+
+  // Repository
+  sl.registerLazySingleton<ISignInRepository>(
+    () => SignInRepository(
+      sl<ISignInRemoteSource>(),
+      sl<ISignInLocalSource>(),
+      sl<INetworkInfo>(),
+    ),
+  );
 
   // Use cases
   sl.registerLazySingleton<SignInCheckIfEmailIsInUse>(
