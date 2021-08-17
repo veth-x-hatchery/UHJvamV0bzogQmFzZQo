@@ -113,6 +113,7 @@ Future<void> signInDependenciesInjection() async {
   sl.registerFactory<AuthBloc>(
     () => AuthBloc(
       sl<IAuthFacade>(),
+      sl<SignInBloc>(),
     ),
   );
 

@@ -16,26 +16,6 @@ class SignInOptions extends StatefulWidget {
 }
 
 class _SignInOptionsState extends State<SignInOptions> {
-  bool _loading = false;
-
-  Future<void> _signIn() async {
-    if (_loading) {
-      return;
-    }
-    setState(() => _loading = !_loading);
-    await Future.delayed(const Duration(seconds: 1)).then((void _) {
-      vethxNotify(
-        context,
-        VethxNotification(
-          title: 'Sign In',
-          message: 'Not today my friend...',
-          type: VethxNotificationType.alert,
-        ),
-      );
-      setState(() => _loading = !_loading);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignInBloc, SignInState>(

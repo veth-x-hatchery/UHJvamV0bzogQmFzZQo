@@ -22,11 +22,12 @@ part 'sign_in_state.dart';
 part 'sign_in_bloc.freezed.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
+  // Use Cases
   final a.SignInCheckIfEmailIsInUse _checkIfEmailIsInUse;
   final b.SignInRegisterEmailAndPassword _signInRegisterEmailAndPassword;
   final c.SignInWithEmailAndPassword _signInWithEmailAndPassword;
   final SignInWithGoogle _signInWithGoogle;
-
+  // Streams to remove
   final _signInPageRoutesController =
       StreamController<SignInPageGoTo>.broadcast();
   Stream<SignInPageGoTo> get goTo => _signInPageRoutesController.stream;

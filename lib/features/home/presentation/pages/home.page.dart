@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
-import 'package:vethx_beta/injection_container.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.exit_to_app),
           onPressed: () {
-            sl<AuthBloc>().add(const AuthEvent.signedOut());
+            BlocProvider.of<AuthBloc>(context).add(const AuthEvent.signedOut());
           },
         ),
       ),

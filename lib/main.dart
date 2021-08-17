@@ -24,7 +24,9 @@ class App extends StatelessWidget {
           create: (_) =>
               sl<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
         ),
-        BlocProvider(create: (_) => sl<SignInBloc>()),
+        BlocProvider(
+          create: (_) => sl<SignInBloc>(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
