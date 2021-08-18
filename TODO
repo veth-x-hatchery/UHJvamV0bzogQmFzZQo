@@ -1,22 +1,17 @@
 
 
-0 - Criar um Logger.presentation()
-0 - Criar um Logger.domain()
-0 - Criar um Logger.infra()
+
+
+
+1 - Inject SignInBLoC with the SignInPage
 
 1 - Validacao dos campos
 2 - Validacao das notificacoes
 3 - Validacao da transicao de telas
-
 4 - Escrever os testes de Integracao com DRIVER
-
-
-
 5 - Adicionar um SPLASH durante o carregamento das dependencias
-
 	1 - Get_It
 	2 - Firebase
 	3 - ETC...
-
 		Liberar o app a partir deste carregamento...
 

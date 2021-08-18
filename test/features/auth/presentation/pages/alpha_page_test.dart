@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
@@ -29,12 +30,18 @@ void main() {
   late MockSignInBloc _mockSignInBloc;
   late MockNavigationCubit _mockNavigationCubit;
   late MockLoggingNavigationObserver _mockLoggingNavigationObserver;
+  late GetIt sl;
 
   setUp(() {
     _mockAuthBloc = MockAuthBloc();
     _mockSignInBloc = MockSignInBloc();
     _mockNavigationCubit = MockNavigationCubit();
     _mockLoggingNavigationObserver = MockLoggingNavigationObserver();
+
+    sl = GetIt.instance;
+    sl.registerFactory<AuthBloc>(() => _mockAuthBloc);
+    sl.registerFactory<SignInBloc>(() => _mockSignInBloc);
+    sl.registerLazySingleton<NavigationCubit>(() => _mockNavigationCubit);
   });
 
   void _authState(AuthState state) {
@@ -56,14 +63,15 @@ void main() {
     await tester.pumpWidget(
       MultiBlocProvider(
         providers: [
-          BlocProvider<AuthBloc>(
-            create: (_) => _mockAuthBloc,
+          BlocProvider(
+            create: (_) =>
+                sl<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
           ),
-          BlocProvider<SignInBloc>(
-            create: (_) => _mockSignInBloc,
+          BlocProvider(
+            create: (_) => sl<SignInBloc>(),
           ),
-          BlocProvider<NavigationCubit>(
-            create: (_) => _mockNavigationCubit,
+          BlocProvider(
+            create: (_) => sl<NavigationCubit>(),
           )
         ],
         child: MaterialApp(
