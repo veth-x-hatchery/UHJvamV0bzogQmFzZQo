@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart'
     as domain;
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
@@ -37,9 +38,12 @@ class FirebaseAuthFacade implements IAuthFacade {
       if (e.code == 'email-already-in-use') {
         return left(const AuthFailure.emailAlreadyInUse());
       } else {
+        Logger.infrastructure(
+            'FirebaseAuthFacade.registerWithEmailAndPassword -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
-    } on Exception catch (_) {
+    } on Exception catch (ex, stack) {
+      Logger.infrastructure('IAuthFacade', exception: ex, stackTrace: stack);
       return left(const AuthFailure.serverError());
     }
   }
@@ -59,9 +63,12 @@ class FirebaseAuthFacade implements IAuthFacade {
       if (e.code == 'wrong-password' || e.code == 'user-not-found') {
         return left(const AuthFailure.invalidEmailAndPasswordCombination());
       } else {
+        Logger.infrastructure(
+            'FirebaseAuthFacade.signInWithEmailAndPassword -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
-    } on Exception catch (_) {
+    } on Exception catch (ex, stack) {
+      Logger.infrastructure('IAuthFacade', exception: ex, stackTrace: stack);
       return left(const AuthFailure.serverError());
     }
   }
@@ -84,7 +91,8 @@ class FirebaseAuthFacade implements IAuthFacade {
       await _firebaseAuth.signInWithCredential(credential);
 
       return right(unit);
-    } on Exception catch (_) {
+    } on Exception catch (ex, stack) {
+      Logger.infrastructure('IAuthFacade', exception: ex, stackTrace: stack);
       return left(const AuthFailure.serverError());
     }
   }
@@ -105,9 +113,12 @@ class FirebaseAuthFacade implements IAuthFacade {
       } else if (e.code == 'user-not-found') {
         return right(false);
       } else {
+        Logger.infrastructure(
+            'FirebaseAuthFacade.emailIsAlreadyInUse -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
-    } on Exception catch (_) {
+    } on Exception catch (ex, stack) {
+      Logger.infrastructure('IAuthFacade', exception: ex, stackTrace: stack);
       return left(const AuthFailure.serverError());
     }
   }
