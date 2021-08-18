@@ -2,13 +2,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/injection_container.dart';
 import 'package:vethx_beta/ui/widgets/transitions/slide_route.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
+
+  static Widget create(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => sl<SignInBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => sl<NavigationCubit>(),
+        )
+      ],
+      child: const SignInPage(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

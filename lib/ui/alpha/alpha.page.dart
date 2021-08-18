@@ -4,8 +4,6 @@ import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
 import 'package:vethx_beta/injection_container.dart';
 
@@ -15,19 +13,8 @@ class AlphaPage extends StatelessWidget {
   }) : super(key: key);
 
   static Widget create(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) =>
-              sl<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
-        ),
-        BlocProvider(
-          create: (_) => sl<SignInBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => sl<NavigationCubit>(),
-        )
-      ],
+    return BlocProvider(
+      create: (_) => sl<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
       child: const AlphaPage(),
     );
   }
@@ -41,7 +28,7 @@ class AlphaPage extends StatelessWidget {
         return state.map(
           initial: (_) => _PageWidget(),
           authenticated: (_) => const HomePage(),
-          unauthenticated: (_) => const SignInPage(),
+          unauthenticated: (_) => SignInPage.create(context),
         );
       },
       // child: _PageWidget(),
