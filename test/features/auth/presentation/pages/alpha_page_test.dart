@@ -10,6 +10,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
+import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import 'alpha_page_test.mocks.dart';
 
@@ -47,10 +48,6 @@ void main() {
     when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
   }
 
-  // Define a test. The TestWidgets function also provides a WidgetTester
-  // to work with. The WidgetTester allows you to build and interact
-  // with widgets in the test environment.
-
   Future<void> _pumpWidgetAlphaPage(WidgetTester tester) async {
     await tester.pumpWidget(
       MultiBlocProvider(
@@ -70,7 +67,7 @@ void main() {
           onGenerateRoute: NavigationRoutes.onGenerateRoute,
           routes: NavigationRoutes.routes(),
           // initialRoute: NavigationRoutes.alpha,
-          // navigatorObservers: [LoggingNavigationObserver()],
+          navigatorObservers: [LoggingNavigationObserver()],
           theme: ThemeData(primarySwatch: Colors.blue),
           home: const AlphaPage(),
         ),
@@ -78,24 +75,100 @@ void main() {
     );
   }
 
-  testWidgets('Alpha Page unauthenticate start redering the sign in page',
-      (WidgetTester tester) async {
-    // Arrange
+  group('when starting the app', () {
+    testWidgets('shoud return unauthenticate redering the sign in page',
+        (WidgetTester tester) async {
+      // Arrange
 
-    _authState(const AuthState.unauthenticated());
+      _authState(const AuthState.unauthenticated());
 
-    _navigationState(const NavigationState.initial());
+      _navigationState(const NavigationState.initial());
 
-    _signInState(const SignInState.initial());
+      _signInState(const SignInState.initial());
 
-    // Act
+      // Act
 
-    await _pumpWidgetAlphaPage(tester);
+      await _pumpWidgetAlphaPage(tester);
 
-    // Assert
+      // Assert
 
-    expect(find.text(Texts.signInPageTitle), findsOneWidget);
+      expect(find.text(Texts.signInPageTitle), findsOneWidget);
 
-    expect(find.byType(SignInOptions), findsOneWidget);
+      expect(find.byType(SignInOptions), findsOneWidget);
+    });
+  });
+
+  group('when calling methods', () {
+    testWidgets('should show the loading indicator',
+        (WidgetTester tester) async {
+      // Arrange
+
+      _authState(const AuthState.unauthenticated());
+
+      _navigationState(const NavigationState.initial());
+
+      _signInState(const SignInState.loading());
+
+      // Act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      // Assert
+
+      expect(find.byType(GenericProgressIndicator), findsOneWidget);
+    });
+  });
+
+  group('when signing with google', () {
+    testWidgets('should find the correct button option', (tester) async {
+      // Arrange
+
+      _authState(const AuthState.unauthenticated());
+
+      _navigationState(const NavigationState.initial());
+
+      _signInState(const SignInState.initial());
+
+      // Act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      final googleSignInButton =
+          find.byKey(const Key(SignInPageKeys.signInWithGoogleButton));
+
+      // Assert
+
+      expect(googleSignInButton, findsOneWidget);
+    });
+
+    testWidgets('should emit the correct event when press the button',
+        (tester) async {
+      // Arrange
+
+      _authState(const AuthState.unauthenticated());
+
+      _navigationState(const NavigationState.initial());
+
+      _signInState(const SignInState.loading());
+
+      await _pumpWidgetAlphaPage(tester);
+
+      final googleSignInButton =
+          find.byKey(const Key(SignInPageKeys.signInWithGoogleButton));
+
+      // Act
+
+      await tester.tap(googleSignInButton);
+
+      // Assert
+
+      verify(_mockSignInBloc.add(const SignInEvent.signInWithGoogleEvent()))
+          .called(1);
+
+      // Assert
+
+      await expectLater(
+          _mockSignInBloc.stream, emitsInOrder([const SignInState.loading()]));
+    });
   });
 }

@@ -20,6 +20,8 @@ class Texts {
 
   static const String signInPageTitle = 'Sign-In';
   static const String signInRegisterEntryTitle = 'Register';
+  static const String signInWithGoogle = 'Sign In With Google';
+  static const String signInWithEmail = 'Sign in with email';
 
   //! Error Messages
   static const String errorTroubleFriendlyMessage = 'Ops...';
