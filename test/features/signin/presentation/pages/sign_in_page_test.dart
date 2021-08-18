@@ -9,6 +9,7 @@ import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
@@ -24,19 +25,19 @@ import 'sign_in_page_test.mocks.dart';
 void main() {
   late MockAuthBloc _mockAuthBloc;
   late MockSignInBloc _mockSignInBloc;
-  late MockNavigationCubit _mockNavigationCubit;
+  late NavigationCubit _navigationCubit;
   late MockLoggingNavigationObserver _mockLoggingNavigationObserver;
   late GetIt sl;
 
   setUp(() {
     _mockAuthBloc = MockAuthBloc();
     _mockSignInBloc = MockSignInBloc();
-    _mockNavigationCubit = MockNavigationCubit();
+    _navigationCubit = NavigationCubit();
     _mockLoggingNavigationObserver = MockLoggingNavigationObserver();
     sl = GetIt.instance;
     sl.registerFactory<AuthBloc>(() => _mockAuthBloc);
     sl.registerFactory<SignInBloc>(() => _mockSignInBloc);
-    sl.registerLazySingleton<NavigationCubit>(() => _mockNavigationCubit);
+    sl.registerLazySingleton<NavigationCubit>(() => _navigationCubit);
   });
 
   tearDown(() => sl.reset());
@@ -47,8 +48,8 @@ void main() {
   }
 
   void _navigationState(NavigationState state) {
-    when(_mockNavigationCubit.state).thenReturn(state);
-    when(_mockNavigationCubit.stream).thenAnswer((_) => Stream.value(state));
+    when(_navigationCubit.state).thenReturn(state);
+    when(_navigationCubit.stream).thenAnswer((_) => Stream.value(state));
   }
 
   void _signInState(SignInState state) {
@@ -92,6 +93,23 @@ void main() {
       expect(find.text(Texts.signInPageTitle), findsOneWidget);
 
       expect(find.byType(SignInOptions), findsOneWidget);
+    });
+  });
+
+  group('when receiving navigation events', () {
+    test('should go to the form password page', () {
+      // arrange
+
+      // act
+
+      _navigationCubit.goTo(SignInPageGoTo(
+        from: SignInPageRoutes.registerEmailSignIn,
+        to: SignInPageRoutes.passwordEntry,
+      ));
+
+      // assert
+
+      verify(_mockLoggingNavigationObserver.didReplace()).called(1);
     });
   });
 }

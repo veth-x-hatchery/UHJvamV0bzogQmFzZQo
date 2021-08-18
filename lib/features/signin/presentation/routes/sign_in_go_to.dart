@@ -15,4 +15,8 @@ class SignInPageGoTo {
     required this.to,
     this.parameters,
   });
+
+  @override
+  String toString() =>
+      'from: $from -> to: $to ${parameters != null ? 'with $parameters' : ''}';
 }
