@@ -37,12 +37,13 @@ void main() {
     _mockSignInBloc = MockSignInBloc();
     _mockNavigationCubit = MockNavigationCubit();
     _mockLoggingNavigationObserver = MockLoggingNavigationObserver();
-
     sl = GetIt.instance;
     sl.registerFactory<AuthBloc>(() => _mockAuthBloc);
     sl.registerFactory<SignInBloc>(() => _mockSignInBloc);
     sl.registerLazySingleton<NavigationCubit>(() => _mockNavigationCubit);
   });
+
+  tearDown(() => sl.reset());
 
   void _authState(AuthState state) {
     when(_mockAuthBloc.state).thenReturn(state);
