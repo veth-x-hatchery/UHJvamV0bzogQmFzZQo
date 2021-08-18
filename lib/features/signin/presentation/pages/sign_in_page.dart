@@ -18,7 +18,7 @@ class SignInPage extends StatelessWidget {
         Logger.presentation('SignInPage -> NavigationCubit -> $state');
         state.when(
           initial: () {},
-          goTo: (asdf) => _goTo(context, asdf),
+          goTo: (_) => _goTo(context, _),
         );
       },
       child: _scaffold(

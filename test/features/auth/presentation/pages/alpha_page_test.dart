@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
 import 'alpha_page_test.mocks.dart';
@@ -78,27 +80,22 @@ void main() {
 
   testWidgets('Alpha Page unauthenticate start redering the sign in page',
       (WidgetTester tester) async {
+    // Arrange
+
     _authState(const AuthState.unauthenticated());
 
     _navigationState(const NavigationState.initial());
 
     _signInState(const SignInState.initial());
 
-    // Create the widget by telling the tester to build it.
+    // Act
+
     await _pumpWidgetAlphaPage(tester);
 
-    /// Schedules a frame and triggers a rebuild of the widget (Duration)
-    // tester.pump();
+    // Assert
 
-    // /// Waits for all animations to complete.
-    // tester.pumpAndSettle();
+    expect(find.text(Texts.signInPageTitle), findsOneWidget);
 
-    // // Create the Finders.
-    // final titleFinder = find.text('T');
-    // final messageFinder = find.text('M');
-    // // Use the `findsOneWidget` matcher provided by flutter_test to
-    // // verify that the Text widgets appear exactly once in the widget tree.
-    // expect(titleFinder, findsOneWidget);
-    // expect(messageFinder, findsOneWidget);
+    expect(find.byType(SignInOptions), findsOneWidget);
   });
 }
