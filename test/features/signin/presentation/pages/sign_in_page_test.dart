@@ -5,18 +5,14 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
-import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
-import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
-import 'alpha_page_test.mocks.dart';
+import 'sign_in_page_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
@@ -98,17 +94,36 @@ void main() {
 
       expect(find.text(Texts.signInPageTitle), findsOneWidget);
 
-      expect(find.byType(SignInPage), findsOneWidget);
+      expect(find.byType(SignInOptions), findsOneWidget);
     });
+  });
 
-    testWidgets('shoud return authenticated redering the home page',
+  group('when calling methods', () {
+    testWidgets('should show the loading indicator',
         (WidgetTester tester) async {
       // Arrange
 
-      _authState(AuthState.authenticated(User(
-        email: EmailAddress('test@test.com'),
-        name: 'test',
-      )));
+      _authState(const AuthState.unauthenticated());
+
+      _navigationState(const NavigationState.initial());
+
+      _signInState(const SignInState.loading());
+
+      // Act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      // Assert
+
+      expect(find.byType(GenericProgressIndicator), findsOneWidget);
+    });
+  });
+
+  group('when signing with google', () {
+    testWidgets('should find the correct button option', (tester) async {
+      // Arrange
+
+      _authState(const AuthState.unauthenticated());
 
       _navigationState(const NavigationState.initial());
 
@@ -118,28 +133,42 @@ void main() {
 
       await _pumpWidgetAlphaPage(tester);
 
+      final googleSignInButton =
+          find.byKey(const Key(SignInPageKeys.signInWithGoogleButton));
+
       // Assert
 
-      expect(find.byType(HomePage), findsOneWidget);
+      expect(googleSignInButton, findsOneWidget);
     });
 
-    testWidgets('shoud return a loading indicator',
-        (WidgetTester tester) async {
+    testWidgets('should emit the correct event when press the button',
+        (tester) async {
       // Arrange
 
-      _authState(const AuthState.initial());
+      _authState(const AuthState.unauthenticated());
 
       _navigationState(const NavigationState.initial());
 
-      _signInState(const SignInState.initial());
-
-      // Act
+      _signInState(const SignInState.loading());
 
       await _pumpWidgetAlphaPage(tester);
 
+      final googleSignInButton =
+          find.byKey(const Key(SignInPageKeys.signInWithGoogleButton));
+
+      // Act
+
+      await tester.tap(googleSignInButton);
+
       // Assert
 
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      verify(_mockSignInBloc.add(const SignInEvent.signInWithGoogleEvent()))
+          .called(1);
+
+      // Assert
+
+      await expectLater(
+          _mockSignInBloc.stream, emitsInOrder([const SignInState.loading()]));
     });
   });
 }
