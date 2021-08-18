@@ -91,7 +91,7 @@ void main() {
   });
 
   group('when receiving navigation events', () {
-    testWidgets('should go to the form password page',
+    testWidgets('should go from email page to password page',
         (WidgetTester tester) async {
       // Arrange
 
@@ -106,7 +106,7 @@ void main() {
       // act
 
       _navigationCubit.goTo(SignInPageGoTo.passwordPage(
-        from: SignInPageRoutes.registerEmailSignIn,
+        from: SignInPageRoutes.emailEntry,
         email: 'teste@teste.com',
       ));
 
@@ -117,6 +117,59 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(FormPassword), findsOneWidget);
+    });
+
+    testWidgets('should go from email page to register page',
+        (WidgetTester tester) async {
+      // Arrange
+
+      _authState(const AuthState.unauthenticated());
+
+      _signInState(const SignInState.initial());
+
+      // Act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      // act
+
+      _navigationCubit
+          .goTo(SignInPageGoTo.emailPage(from: SignInPageRoutes.emailEntry));
+
+      // assert
+
+      verify(_mockNavigationObserver.didPush(any, any)).called(1);
+
+      await tester.pumpAndSettle();
+
+      expect(find.byType(FormRegisterEmailSignIn), findsOneWidget);
+    });
+
+    testWidgets('should go from any page to email page',
+        (WidgetTester tester) async {
+      // Arrange
+
+      _authState(const AuthState.unauthenticated());
+
+      _signInState(const SignInState.initial());
+
+      // Act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      // act
+
+      _navigationCubit.goTo(
+        SignInPageGoTo.emailPage(from: SignInPageRoutes.signInOptions),
+      );
+
+      // assert
+
+      verify(_mockNavigationObserver.didPush(any, any)).called(1);
+
+      await tester.pumpAndSettle();
+
+      expect(find.byType(FormRegisterEmailSignIn), findsOneWidget);
     });
   });
 }
