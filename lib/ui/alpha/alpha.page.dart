@@ -16,7 +16,7 @@ class AlphaPage extends StatelessWidget {
     SizeConfig().init(context);
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        Logger.i('AlphaPage -> $state');
+        Logger.presentation('AlphaPage -> $state');
         return state.map(
           initial: (_) => _PageWidget(),
           authenticated: (_) => const HomePage(),

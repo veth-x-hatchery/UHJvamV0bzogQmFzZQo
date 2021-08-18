@@ -11,7 +11,7 @@ class NavigationCubit extends Cubit<NavigationState> {
   NavigationCubit() : super(const NavigationState.initial());
 
   void goTo(SignInPageGoTo parameters) {
-    Logger.i('NavigationCubit -> $parameters');
+    Logger.presentation('NavigationCubit -> $parameters');
     emit(NavigationState.goTo(parameters));
   }
 }

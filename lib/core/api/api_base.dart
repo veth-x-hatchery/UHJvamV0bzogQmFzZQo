@@ -26,10 +26,13 @@ class APIBase {
     }
   }
 
-  Future<String> atualizarToken() async {
+  Future<String> tokenRefresh() async {
     final authorizacao = await servicoDeCache.get(key: CacheKeys.authorizacao);
     if (authorizacao == null) {
-      Logger.i('APIBase, atualizarToken() => authorizacao == null');
+      Logger.i(
+        'APIBase, tokenRefresh() => authorizacao == null',
+        layer: ArchitectureLayer.infrastructure,
+      );
       throw Exception('Falha na autenticacao');
     }
     final auth = authorizacao.split(':');
@@ -49,7 +52,7 @@ class APIBase {
     if (token != null) {
       return token;
     }
-    return atualizarToken();
+    return tokenRefresh();
   }
 
   Future<String> realizarAutenticacao(

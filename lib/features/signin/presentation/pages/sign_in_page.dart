@@ -15,7 +15,7 @@ class SignInPage extends StatelessWidget {
     FocusScope.of(context).unfocus();
     return BlocListener<NavigationCubit, NavigationState>(
       listener: (context, state) {
-        Logger.i('SignInPage -> NavigationCubit -> $state');
+        Logger.presentation('SignInPage -> NavigationCubit -> $state');
         state.when(
           initial: () {},
           goTo: (asdf) => _goTo(context, asdf),
