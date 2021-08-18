@@ -310,6 +310,10 @@ class MockLoggingNavigationObserver extends _i1.Mock
               #didReplace, [], {#newRoute: newRoute, #oldRoute: oldRoute}),
           returnValueForMissingStub: null);
   @override
+  bool debugObservingRoute(_i9.PageRoute<dynamic>? route) =>
+      (super.noSuchMethod(Invocation.method(#debugObservingRoute, [route]),
+          returnValue: false) as bool);
+  @override
   void subscribe(_i9.RouteAware? routeAware, _i9.PageRoute<dynamic>? route) =>
       super.noSuchMethod(Invocation.method(#subscribe, [routeAware, route]),
           returnValueForMissingStub: null);

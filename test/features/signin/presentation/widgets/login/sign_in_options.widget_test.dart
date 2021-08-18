@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
@@ -42,7 +41,6 @@ void main() {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: NavigationRoutes.onGenerateRoute,
         routes: NavigationRoutes.routes(),
-        navigatorObservers: [LoggingNavigationObserver()],
         theme: ThemeData(primarySwatch: Colors.blue),
         home: MultiBlocProvider(
           providers: [

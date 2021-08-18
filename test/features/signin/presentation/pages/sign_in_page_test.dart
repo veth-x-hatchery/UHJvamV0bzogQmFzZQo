@@ -14,36 +14,27 @@ import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
 import 'sign_in_page_test.mocks.dart';
 
-// class MockNavigatorObservererUNSAFE extends Mock implements NavigatorObserver {}
-
 @GenerateMocks([
   AuthBloc,
   SignInBloc,
   NavigationCubit,
-  MaterialPageRoute,
-  NavigatorObserver,
+], customMocks: [
+  MockSpec<NavigatorObserver>(returnNullOnMissingStub: true)
 ])
 void main() {
   late MockAuthBloc _mockAuthBloc;
   late MockSignInBloc _mockSignInBloc;
   late NavigationCubit _navigationCubit;
 
-  late MockNavigatorObserverer _mockLoggingNavigationObserver;
-
-  late MockMaterialPageRoute _mockMaterialPageRoute;
+  late MockNavigatorObserver _mockNavigationObserver;
 
   late GetIt sl;
 
-  late GlobalKey<NavigatorState> _navigatorKey;
-
   setUp(() {
-    _navigatorKey = GlobalKey<NavigatorState>();
-    _mockMaterialPageRoute = MockMaterialPageRoute();
-
     _mockAuthBloc = MockAuthBloc();
     _mockSignInBloc = MockSignInBloc();
     _navigationCubit = NavigationCubit();
-    _mockLoggingNavigationObserver = MockNavigatorObserverer();
+    _mockNavigationObserver = MockNavigatorObserver();
 
     sl = GetIt.instance;
     sl.registerFactory<AuthBloc>(() => _mockAuthBloc);
@@ -66,12 +57,10 @@ void main() {
   Future<void> _pumpWidgetAlphaPage(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
-        navigatorKey: _navigatorKey,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: NavigationRoutes.onGenerateRoute,
         routes: NavigationRoutes.routes(),
-        // initialRoute: NavigationRoutes.alpha,
-        navigatorObservers: [_mockLoggingNavigationObserver],
+        navigatorObservers: [_mockNavigationObserver],
         theme: ThemeData(primarySwatch: Colors.blue),
         home: Builder(builder: (context) {
           return AlphaPage.create(context);
@@ -116,9 +105,6 @@ void main() {
 
       // act
 
-      when(_mockLoggingNavigationObserver.navigator)
-          .thenReturn(_navigatorKey.currentState);
-
       _navigationCubit.goTo(SignInPageGoTo(
         from: SignInPageRoutes.registerEmailSignIn,
         to: SignInPageRoutes.passwordEntry,
@@ -127,9 +113,7 @@ void main() {
 
       // assert
 
-      // verify(_mockLoggingNavigationObserver.didPush(
-      //         _mockMaterialPageRoute, any))
-      //     .called(1);
+      verify(_mockNavigationObserver.didPush(any, any)).called(1);
 
       await tester.pumpAndSettle();
 
