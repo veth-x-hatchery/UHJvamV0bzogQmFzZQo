@@ -62,28 +62,16 @@ void main() {
 
   Future<void> _pumpWidgetAlphaPage(WidgetTester tester) async {
     await tester.pumpWidget(
-      MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) =>
-                sl<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
-          ),
-          BlocProvider(
-            create: (_) => sl<SignInBloc>(),
-          ),
-          BlocProvider(
-            create: (_) => sl<NavigationCubit>(),
-          )
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          onGenerateRoute: NavigationRoutes.onGenerateRoute,
-          routes: NavigationRoutes.routes(),
-          // initialRoute: NavigationRoutes.alpha,
-          navigatorObservers: [LoggingNavigationObserver()],
-          theme: ThemeData(primarySwatch: Colors.blue),
-          home: const AlphaPage(),
-        ),
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: NavigationRoutes.onGenerateRoute,
+        routes: NavigationRoutes.routes(),
+        // initialRoute: NavigationRoutes.alpha,
+        navigatorObservers: [LoggingNavigationObserver()],
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: Builder(builder: (context) {
+          return AlphaPage.create(context);
+        }),
       ),
     );
   }
