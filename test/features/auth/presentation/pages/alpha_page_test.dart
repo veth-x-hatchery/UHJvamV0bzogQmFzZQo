@@ -30,24 +30,26 @@ void main() {
     _mockLoggingNavigationObserver = MockLoggingNavigationObserver();
   });
 
+  void _authState(AuthState state) {
+    when(_mockAuthBloc.state).thenReturn(state);
+    when(_mockAuthBloc.stream).thenAnswer((_) => Stream.value(state));
+  }
+
+  void _navigationState(NavigationState state) {
+    when(_mockNavigationCubit.state).thenReturn(state);
+    when(_mockNavigationCubit.stream).thenAnswer((_) => Stream.value(state));
+  }
+
+  void _signInState(SignInState state) {
+    when(_mockSignInBloc.state).thenReturn(state);
+    when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
+  }
+
   // Define a test. The TestWidgets function also provides a WidgetTester
   // to work with. The WidgetTester allows you to build and interact
   // with widgets in the test environment.
 
-  Future<void> _asdf(WidgetTester tester) async {
-    when(_mockAuthBloc.state).thenReturn(const AuthState.unauthenticated());
-    when(_mockAuthBloc.stream)
-        .thenAnswer((_) => Stream.value(const AuthState.unauthenticated()));
-
-    when(_mockNavigationCubit.state)
-        .thenReturn(const NavigationState.initial());
-    when(_mockNavigationCubit.stream)
-        .thenAnswer((_) => Stream.value(const NavigationState.initial()));
-
-    when(_mockSignInBloc.state).thenReturn(const SignInState.initial());
-    when(_mockSignInBloc.stream)
-        .thenAnswer((_) => Stream.value(const SignInState.initial()));
-
+  Future<void> _pumpWidgetAlphaPage(WidgetTester tester) async {
     await tester.pumpWidget(
       MultiBlocProvider(
         providers: [
@@ -66,7 +68,7 @@ void main() {
           onGenerateRoute: NavigationRoutes.onGenerateRoute,
           routes: NavigationRoutes.routes(),
           // initialRoute: NavigationRoutes.alpha,
-          navigatorObservers: [LoggingNavigationObserver()],
+          // navigatorObservers: [LoggingNavigationObserver()],
           theme: ThemeData(primarySwatch: Colors.blue),
           home: const AlphaPage(),
         ),
@@ -74,10 +76,16 @@ void main() {
     );
   }
 
-  testWidgets('Alpha Page start redering the Sign In Page',
+  testWidgets('Alpha Page unauthenticate start redering the sign in page',
       (WidgetTester tester) async {
+    _authState(const AuthState.unauthenticated());
+
+    _navigationState(const NavigationState.initial());
+
+    _signInState(const SignInState.initial());
+
     // Create the widget by telling the tester to build it.
-    await _asdf(tester);
+    await _pumpWidgetAlphaPage(tester);
 
     /// Schedules a frame and triggers a rebuild of the widget (Duration)
     // tester.pump();
