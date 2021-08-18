@@ -45,10 +45,7 @@ class _SignInOptionsState extends State<SignInOptions> {
               textColor: Colors.white,
               color: Colors.teal[700],
               onPressed: () => BlocProvider.of<NavigationCubit>(context).goTo(
-                SignInPageGoTo(
-                  from: SignInPageRoutes.signInOptions,
-                  to: SignInPageRoutes.emailEntry,
-                ),
+                SignInPageGoTo.emailPage(from: SignInPageRoutes.signInOptions),
               ),
             ),
           ],

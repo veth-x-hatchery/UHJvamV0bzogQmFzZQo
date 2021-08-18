@@ -112,13 +112,18 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       _mapFailureToSignStateErrorMessage,
       (emailIsInUse) {
         if (event.fromPage == SignInPageRoutes.emailEntry) {
-          _navigation.goTo(SignInPageGoTo(
-            from: SignInPageRoutes.emailEntry,
-            to: emailIsInUse
-                ? SignInPageRoutes.passwordEntry
-                : SignInPageRoutes.registerEmailSignIn,
-            parameters: event.email.getOrCrash(),
-          ));
+          final email = event.email.getOrCrash();
+          if (emailIsInUse) {
+            _navigation.goTo(SignInPageGoTo.passwordPage(
+              from: event.fromPage,
+              email: email,
+            ));
+          } else {
+            _navigation.goTo(SignInPageGoTo.registerPage(
+              from: event.fromPage,
+              email: email,
+            ));
+          }
         }
         return emailIsInUse
             ? const SignInState.emailAlreadyRegistered()

@@ -90,14 +90,14 @@ void main() {
         'should emit [SignInLoading, EmailNotFound] and go to page [SignInPageRoutes.registerEmailSignIn] passing String email as parameter',
         () async {
           // arrange
-          const isEmailAlreadyRegistered = false;
-          const fromPage = SignInPageRoutes.emailEntry;
-          const toPage = SignInPageRoutes.registerEmailSignIn;
 
-          final signInPageGoTo = SignInPageGoTo(
+          const isEmailAlreadyRegistered = false;
+
+          const fromPage = SignInPageRoutes.emailEntry;
+
+          final signInPageGoTo = SignInPageGoTo.registerPage(
             from: fromPage,
-            to: toPage,
-            parameters: testEmail.getOrCrash(),
+            email: testEmail.getOrCrash(),
           );
 
           final statesExpected = [
@@ -118,20 +118,22 @@ void main() {
         'should emit [SignInLoading, EmailAlreadyRegistered] and go to page [SignInPageRoutes.passwordEntry]',
         () async {
           // arrange
-          const isEmailAlreadyRegistered = true;
-          const fromPage = SignInPageRoutes.emailEntry;
-          const toPage = SignInPageRoutes.passwordEntry;
 
-          final signInPageGoTo = SignInPageGoTo(
+          const isEmailAlreadyRegistered = true;
+
+          const fromPage = SignInPageRoutes.emailEntry;
+
+          final signInPageGoTo = SignInPageGoTo.passwordPage(
             from: fromPage,
-            to: toPage,
-            parameters: testEmail.getOrCrash(),
+            email: testEmail.getOrCrash(),
           );
 
           final statesExpected = [
             const SignInState.loading(),
             const SignInState.emailAlreadyRegistered(),
           ];
+
+          // act && assert
 
           await _assertSignInStatesAndNativation(
             testEmail,

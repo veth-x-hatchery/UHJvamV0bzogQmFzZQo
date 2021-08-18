@@ -105,10 +105,9 @@ void main() {
 
       // act
 
-      _navigationCubit.goTo(SignInPageGoTo(
+      _navigationCubit.goTo(SignInPageGoTo.passwordPage(
         from: SignInPageRoutes.registerEmailSignIn,
-        to: SignInPageRoutes.passwordEntry,
-        parameters: 'teste@teste.com',
+        email: 'teste@teste.com',
       ));
 
       // assert
