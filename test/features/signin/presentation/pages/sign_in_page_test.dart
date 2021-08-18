@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
@@ -25,13 +26,20 @@ void main() {
   late MockSignInBloc _mockSignInBloc;
   late MockNavigationCubit _mockNavigationCubit;
   late MockLoggingNavigationObserver _mockLoggingNavigationObserver;
+  late GetIt sl;
 
   setUp(() {
     _mockAuthBloc = MockAuthBloc();
     _mockSignInBloc = MockSignInBloc();
     _mockNavigationCubit = MockNavigationCubit();
     _mockLoggingNavigationObserver = MockLoggingNavigationObserver();
+    sl = GetIt.instance;
+    sl.registerFactory<AuthBloc>(() => _mockAuthBloc);
+    sl.registerFactory<SignInBloc>(() => _mockSignInBloc);
+    sl.registerLazySingleton<NavigationCubit>(() => _mockNavigationCubit);
   });
+
+  tearDown(() => sl.reset());
 
   void _authState(AuthState state) {
     when(_mockAuthBloc.state).thenReturn(state);
@@ -50,27 +58,16 @@ void main() {
 
   Future<void> _pumpWidgetAlphaPage(WidgetTester tester) async {
     await tester.pumpWidget(
-      MultiBlocProvider(
-        providers: [
-          BlocProvider<AuthBloc>(
-            create: (_) => _mockAuthBloc,
-          ),
-          BlocProvider<SignInBloc>(
-            create: (_) => _mockSignInBloc,
-          ),
-          BlocProvider<NavigationCubit>(
-            create: (_) => _mockNavigationCubit,
-          )
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          onGenerateRoute: NavigationRoutes.onGenerateRoute,
-          routes: NavigationRoutes.routes(),
-          // initialRoute: NavigationRoutes.alpha,
-          navigatorObservers: [LoggingNavigationObserver()],
-          theme: ThemeData(primarySwatch: Colors.blue),
-          home: const AlphaPage(),
-        ),
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: NavigationRoutes.onGenerateRoute,
+        routes: NavigationRoutes.routes(),
+        // initialRoute: NavigationRoutes.alpha,
+        navigatorObservers: [LoggingNavigationObserver()],
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: Builder(builder: (context) {
+          return AlphaPage.create(context);
+        }),
       ),
     );
   }

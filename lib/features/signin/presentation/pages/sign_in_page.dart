@@ -37,15 +37,11 @@ class SignInPage extends StatelessWidget {
           goTo: (_) => _goTo(context, _),
         );
       },
-      child: _scaffold(
-        context,
-        child: const SignInOptions(),
-        leading: false,
-      ),
+      child: _page(context, child: const SignInOptions(), leading: false),
     );
   }
 
-  Scaffold _scaffold(
+  Scaffold _page(
     BuildContext context, {
     required Widget child,
     bool leading = true,
@@ -74,7 +70,7 @@ class SignInPage extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           SlideLeftRoute<void>(
-            page: _scaffold(
+            page: _page(
               context,
               child: FormPassword(informedEmail: page.parameters! as String),
             ),
@@ -85,7 +81,7 @@ class SignInPage extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           SlideLeftRoute<void>(
-              page: _scaffold(context,
+              page: _page(context,
                   child: FormRegisterEmailSignIn(
                       informedEmail: page.parameters as String?))),
         );
@@ -96,12 +92,12 @@ class SignInPage extends StatelessWidget {
             ? Navigator.push(
                 context,
                 SlideLeftRoute<void>(
-                    page: _scaffold(context,
-                        child: const FormRegisterEmailSignIn())))
+                    page:
+                        _page(context, child: const FormRegisterEmailSignIn())))
             : Navigator.pushReplacement(
                 context,
                 SlideLeftRoute<void>(
-                    page: _scaffold(context,
+                    page: _page(context,
                         child: const FormRegisterEmailSignIn())));
         break;
     }
