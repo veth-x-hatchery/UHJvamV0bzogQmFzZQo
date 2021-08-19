@@ -6,6 +6,7 @@ export 'login/form_sign_in.widget.dart';
 export 'login/sign_in_button.widget.dart';
 export 'login/sign_in_options.widget.dart';
 export 'login/sign_in_options.widget.dart';
+export 'login/sign_in_scaffold.widget.dart';
 
 class SignInPageKeys {
   static const signInWithGoogleButton = 'signInWithGoogleButton';

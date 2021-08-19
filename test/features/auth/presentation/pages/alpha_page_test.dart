@@ -12,7 +12,7 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options_page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
@@ -95,7 +95,7 @@ void main() {
 
       expect(find.text(Texts.signInPageTitle), findsOneWidget);
 
-      expect(find.byType(SignInPage), findsOneWidget);
+      expect(find.byType(SignInOptionsPage), findsOneWidget);
     });
 
     testWidgets('shoud return authenticated redering the home page',
