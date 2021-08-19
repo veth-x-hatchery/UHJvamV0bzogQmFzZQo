@@ -54,36 +54,28 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
-      child: BlocBuilder<SignInBloc, SignInState>(
-        builder: (context, state) {
-          final _loading = state == const SignInState.loading();
-          return FormColumn(
-            children: [
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              LogoTextLoading(
-                size: SizeConfig.screenHeight * 0.25,
-                loading: _loading,
-              ),
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              FiedEmail(
-                key: const Key(SignInPageKeys.signInEmailPageEmailTextField),
-                controller: _emailTextEditingController,
-                emailFormKey: _emailFormKey,
-                emailFocusNode: _emailFocusNode,
-                validateEmail: _validateEmail,
-              ),
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              CustomRaisedButton(
-                key: const Key(SignInPageKeys.signInEmailPageValidateButton),
-                onPressed: _validateEmail,
-                child: Text(
-                  Texts.goToNextStep,
-                  style: Theme.of(context).textTheme.button,
-                ),
-              ),
-            ],
-          );
-        },
+      child: FormColumn(
+        children: [
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          SignInLoader(size: SizeConfig.screenHeight * 0.25),
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          FiedEmail(
+            key: const Key(SignInPageKeys.signInEmailPageEmailTextField),
+            controller: _emailTextEditingController,
+            emailFormKey: _emailFormKey,
+            emailFocusNode: _emailFocusNode,
+            validateEmail: _validateEmail,
+          ),
+          SizedBox(height: SizeConfig.defaultEdgeSpace),
+          CustomRaisedButton(
+            key: const Key(SignInPageKeys.signInEmailPageValidateButton),
+            onPressed: _validateEmail,
+            child: Text(
+              Texts.goToNextStep,
+              style: Theme.of(context).textTheme.button,
+            ),
+          ),
+        ],
       ),
     );
   }

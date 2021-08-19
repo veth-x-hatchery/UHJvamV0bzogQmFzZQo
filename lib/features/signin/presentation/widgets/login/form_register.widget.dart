@@ -79,10 +79,10 @@ class _FormRegisterState extends State<FormRegister> {
     return FormColumn(
       children: [
         SizedBox(height: SizeConfig.defaultEdgeSpace),
-        LogoTextLoading(
-            title: Texts.signInRegisterEntryTitle,
-            size: SizeConfig.screenHeight * 0.25,
-            loading: false),
+        SignInLoader(
+          title: Texts.signInRegisterEntryTitle,
+          size: SizeConfig.screenHeight * 0.25,
+        ),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
         FiedEmail(
           controller: _emailTextEditingController,

@@ -54,13 +54,15 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
-    yield* event.map(
-      checkEmailEvent: _checkEmail,
-      emailRegisterEvent: _register,
-      signInWithEmailEvent: _signInWithEmail,
-      signInWithGoogleEvent: _google,
-      started: (_Started value) => Stream.value(const SignInState.initial()),
-    );
+    if (state != const SignInState.loading()) {
+      yield* event.map(
+        checkEmailEvent: _checkEmail,
+        emailRegisterEvent: _register,
+        signInWithEmailEvent: _signInWithEmail,
+        signInWithGoogleEvent: _google,
+        started: (_Started value) => Stream.value(const SignInState.initial()),
+      );
+    }
   }
 
   Stream<SignInState> _google(SignInWithGoogleEvent event) async* {
