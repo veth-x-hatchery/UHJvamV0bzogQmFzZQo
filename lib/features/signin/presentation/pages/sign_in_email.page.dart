@@ -6,6 +6,9 @@ class SignInEmailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return signInScaffold(context, child: const FormEmail());
+    return signInScaffold(
+      context,
+      child: const FormEmail(),
+    );
   }
 }

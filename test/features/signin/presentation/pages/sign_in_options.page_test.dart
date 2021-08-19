@@ -12,7 +12,7 @@ import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dar
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
-import 'sign_in_options_page_test.mocks.dart';
+import 'sign_in_options.page_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,

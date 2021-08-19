@@ -4,7 +4,7 @@ import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options_page.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/injection_container.dart';
 
 class AlphaPage extends StatelessWidget {

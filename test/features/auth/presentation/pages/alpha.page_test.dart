@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
@@ -12,12 +11,10 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options_page.dart';
-import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
-import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
-import 'alpha_page_test.mocks.dart';
+import 'alpha.page_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,

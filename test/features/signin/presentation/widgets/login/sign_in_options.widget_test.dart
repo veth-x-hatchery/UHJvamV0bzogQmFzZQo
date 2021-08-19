@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
+import '../../../../../helpers/widgets/pumpWidget.widget.dart';
 import 'sign_in_options.widget_test.mocks.dart';
 
 @GenerateMocks([
@@ -51,10 +51,7 @@ void main() {
               create: (_) => _mockNavigationCubit,
             )
           ],
-          child: Builder(builder: (context) {
-            SizeConfig().init(context);
-            return const SignInOptions();
-          }),
+          child: setupToPump(const SignInOptions()),
         ),
       ),
     );
