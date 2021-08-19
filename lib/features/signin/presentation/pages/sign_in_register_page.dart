@@ -102,6 +102,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
             ),
             SizedBox(height: SizeConfig.defaultEdgeSpace),
             FiedEmail(
+              key: const Key(SignInPageKeys.signInRegisterPageEmailTextField),
               controller: _emailTextEditingController,
               emailFormKey: _emailFormKey,
               emailFocusNode: _emailFocusNode,
@@ -109,6 +110,8 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
             ),
             SizedBox(height: SizeConfig.defaultEdgeSpace),
             FieldPassword(
+              key:
+                  const Key(SignInPageKeys.signInRegisterPagePasswordTextField),
               controller: _passwordTextEditingController,
               passwordFormKey: _passwordFormKey,
               passwordFocusNode: _passwordFocusNode,
@@ -116,6 +119,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
             ),
             SizedBox(height: SizeConfig.defaultEdgeSpace),
             CustomRaisedButton(
+              key: const Key(SignInPageKeys.signInRegisterPageValidateButton),
               child: Text(
                 Texts.goToNextStep,
                 style: Theme.of(context).textTheme.button,
