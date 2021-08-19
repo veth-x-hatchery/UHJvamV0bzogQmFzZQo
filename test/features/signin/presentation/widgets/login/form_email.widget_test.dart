@@ -102,6 +102,28 @@ void main() {
     verifyNever(_mockSignInBloc.add(any));
   });
 
+  testWidgets('when user enters a invalid email then no events are emitted',
+      (tester) async {
+    // arrange
+
+    when(_mockSignInBloc.stream)
+        .thenAnswer((_) => Stream.value(const SignInState.initial()));
+
+    await _pumpEmailForm(tester);
+
+    await tester.enterText(_emailInput(), 'invalidemail');
+
+    // Act
+
+    await tester.tap(_validationButton());
+
+    await tester.pump();
+
+    // assert
+
+    verifyNever(_mockSignInBloc.add(any));
+  });
+
   testWidgets('when user enters a correct email then SignInBLoC is called',
       (tester) async {
     // arrange
