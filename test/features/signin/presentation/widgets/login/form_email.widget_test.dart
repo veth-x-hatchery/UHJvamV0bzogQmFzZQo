@@ -33,6 +33,24 @@ void main() {
     );
   }
 
+  Finder _emailInput() {
+    // arrange
+    final emailInput =
+        find.byKey(const Key(SignInPageKeys.signInEmailPageEmailTextField));
+    // Act && Assert
+    expect(emailInput, findsOneWidget);
+    return emailInput;
+  }
+
+  Finder _validationButton() {
+    // arrange
+    final validationButton =
+        find.byKey(const Key(SignInPageKeys.signInEmailPageValidateButton));
+    // Act && Assert
+    expect(validationButton, findsOneWidget);
+    return validationButton;
+  }
+
   testWidgets('should find the validation button', (tester) async {
     // arrange
 
@@ -73,12 +91,9 @@ void main() {
 
     await _pumpEmailForm(tester);
 
-    final validationButton =
-        find.byKey(const Key(SignInPageKeys.signInEmailPageValidateButton));
-
     // Act
 
-    await tester.tap(validationButton);
+    await tester.tap(_validationButton());
 
     await tester.pump();
 
@@ -87,8 +102,7 @@ void main() {
     verifyNever(_mockSignInBloc.add(any));
   });
 
-  testWidgets(
-      'when user enters a correct email then _mockSignInBloc.add is called',
+  testWidgets('when user enters a correct email then SignInBLoC is called',
       (tester) async {
     // arrange
 
@@ -97,19 +111,11 @@ void main() {
 
     await _pumpEmailForm(tester);
 
-    final emailInput =
-        find.byKey(const Key(SignInPageKeys.signInEmailPageEmailTextField));
-
-    expect(emailInput, findsOneWidget);
-
-    await tester.enterText(emailInput, 'teste@teste.com');
-
-    final nextButton =
-        find.byKey(const Key(SignInPageKeys.signInEmailPageValidateButton));
+    await tester.enterText(_emailInput(), 'teste@teste.com');
 
     // Act
 
-    await tester.tap(nextButton);
+    await tester.tap(_validationButton());
 
     await tester.pump();
 
