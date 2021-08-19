@@ -178,7 +178,7 @@ void main() {
     verifyNever(_mockSignInBloc.add(any));
   });
 
-  testWidgets('when user enters a correct email then SignInBLoC is called',
+  testWidgets('when user enters a invalid password then no events are emitted',
       (tester) async {
     // arrange
 
@@ -186,7 +186,33 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(_emailInput(), 'teste@teste.com');
+    await tester.enterText(_emailInput(), 'valid@email.com');
+
+    await tester.enterText(_passwordInput(), '1234');
+
+    // Act
+
+    await tester.tap(_validationButton());
+
+    await tester.pump();
+
+    // assert
+
+    verifyNever(_mockSignInBloc.add(any));
+  });
+
+  testWidgets(
+      'when user enters valid email and password then SignInBLoC is called',
+      (tester) async {
+    // arrange
+
+    _signInState(const SignInState.initial());
+
+    await _pumpPage(tester);
+
+    await tester.enterText(_emailInput(), 'valid@email.com');
+
+    await tester.enterText(_passwordInput(), 'dmFsaWRAZW1haWwuY29tCg');
 
     // Act
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -40,23 +41,28 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
   final _passwordFocusNode = FocusNode();
   final _passwordTextEditingController = TextEditingController();
 
-  Future<void> _validateEmail(Future<bool> Function() managerMethod) async {
+  bool _validateEmail() {
     if (_emailFormKey.currentState != null) {
       if (_emailFormKey.currentState!.validate()) {
         _emailFormKey.currentState!.save();
-        if (await managerMethod()) {
-          _passwordFocusNode.requestFocus();
-        }
+        _passwordFocusNode.requestFocus();
+        return true;
       }
     }
+    return false;
   }
 
-  Future<void> _authenticate(Future<bool> Function() managerMethod) async {
-    if (_passwordFormKey.currentState != null) {
-      if (_passwordFormKey.currentState!.validate()) {
-        _passwordFormKey.currentState!.save();
-        if (await managerMethod()) {
-          await Navigator.of(context).maybePop();
+  void _authenticate() {
+    if (_validateEmail()) {
+      if (_passwordFormKey.currentState != null) {
+        if (_passwordFormKey.currentState!.validate()) {
+          _passwordFormKey.currentState!.save();
+          BlocProvider.of<SignInBloc>(context).add(
+            SignInEvent.signInWithEmailEvent(
+              email: EmailAddress(_emailTextEditingController.text),
+              password: Password(_passwordTextEditingController.text),
+            ),
+          );
         }
       }
     }
@@ -64,7 +70,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
 
   @override
   void initState() {
-    if (widget.email != null) {
+    if (widget.email != null && EmailAddress(widget.email).isValid()) {
       _emailTextEditingController.text = widget.email!;
       _passwordFocusNode.requestFocus();
     } else {
@@ -106,7 +112,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
               controller: _emailTextEditingController,
               emailFormKey: _emailFormKey,
               emailFocusNode: _emailFocusNode,
-              validateEmail: () => _validateEmail(() => Future.value(false)),
+              validateEmail: () => _validateEmail(),
             ),
             SizedBox(height: SizeConfig.defaultEdgeSpace),
             FieldPassword(
@@ -115,7 +121,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
               controller: _passwordTextEditingController,
               passwordFormKey: _passwordFormKey,
               passwordFocusNode: _passwordFocusNode,
-              validatePassword: () => _authenticate(() => Future.value(false)),
+              validatePassword: () => _authenticate(),
             ),
             SizedBox(height: SizeConfig.defaultEdgeSpace),
             CustomRaisedButton(
@@ -124,9 +130,8 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                 Texts.goToNextStep,
                 style: Theme.of(context).textTheme.button,
               ),
-              onPressed: () => _emailFocusNode.hasFocus
-                  ? _validateEmail(() => Future.value(false))
-                  : _authenticate(() => Future.value(false)),
+              onPressed: () =>
+                  _emailFocusNode.hasFocus ? _validateEmail() : _authenticate(),
             ),
           ],
         );
