@@ -37,7 +37,34 @@ class SignInOptionsPage extends StatelessWidget {
         Logger.presentation('SignInPage -> NavigationCubit -> $state');
         state.when(
           initial: () {},
-          goTo: (_) => _goTo(context, _),
+          goTo: (page) {
+            switch (page.to) {
+              case SignInPageRoutes.passwordEntry:
+                Navigator.pushReplacement(
+                  context,
+                  SlideLeftRoute<void>(
+                    page: SignInPasswordPage(email: page.parameters! as String),
+                  ),
+                );
+                break;
+              case SignInPageRoutes.registerEmailSignIn:
+                Navigator.pushReplacement(
+                  context,
+                  SlideLeftRoute<void>(
+                      page: SignInRegisterPage(
+                          email: page.parameters as String?)),
+                );
+                break;
+              case SignInPageRoutes.emailEntry:
+              default:
+                page.from == SignInPageRoutes.signInOptions
+                    ? Navigator.push(context,
+                        SlideLeftRoute<void>(page: const SignInEmailPage()))
+                    : Navigator.pushReplacement(context,
+                        SlideLeftRoute<void>(page: const SignInEmailPage()));
+                break;
+            }
+          },
         );
       },
       child: signInScaffold(
@@ -46,33 +73,5 @@ class SignInOptionsPage extends StatelessWidget {
         leading: false,
       ),
     );
-  }
-
-  void _goTo(BuildContext context, SignInPageGoTo page) {
-    switch (page.to) {
-      case SignInPageRoutes.passwordEntry:
-        Navigator.pushReplacement(
-          context,
-          SlideLeftRoute<void>(
-            page: SignInPasswordPage(email: page.parameters! as String),
-          ),
-        );
-        break;
-      case SignInPageRoutes.registerEmailSignIn:
-        Navigator.pushReplacement(
-          context,
-          SlideLeftRoute<void>(
-              page: SignInRegisterPage(email: page.parameters as String?)),
-        );
-        break;
-      case SignInPageRoutes.emailEntry:
-      default:
-        page.from == SignInPageRoutes.signInOptions
-            ? Navigator.push(
-                context, SlideLeftRoute<void>(page: const SignInEmailPage()))
-            : Navigator.pushReplacement(
-                context, SlideLeftRoute<void>(page: const SignInEmailPage()));
-        break;
-    }
   }
 }

@@ -11,9 +11,6 @@ class SignInPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return signInScaffold(
-      context,
-      child: FormPassword(informedEmail: email),
-    );
+    return signInScaffold(context, child: FormPassword(informedEmail: email));
   }
 }

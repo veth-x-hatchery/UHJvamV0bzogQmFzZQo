@@ -7,8 +7,8 @@ import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/logo_text_loading.widget.dart';
 
-class FormRegisterEmailSignIn extends StatefulWidget {
-  const FormRegisterEmailSignIn({
+class FormRegister extends StatefulWidget {
+  const FormRegister({
     Key? key,
     this.informedEmail,
   }) : super(key: key);
@@ -16,11 +16,10 @@ class FormRegisterEmailSignIn extends StatefulWidget {
   final String? informedEmail;
 
   @override
-  _FormRegisterEmailSignInState createState() =>
-      _FormRegisterEmailSignInState();
+  _FormRegisterState createState() => _FormRegisterState();
 }
 
-class _FormRegisterEmailSignInState extends State<FormRegisterEmailSignIn> {
+class _FormRegisterState extends State<FormRegister> {
   final _emailFormKey = GlobalKey<FormState>();
   final _emailFocusNode = FocusNode();
   final _emailTextEditingController = TextEditingController();

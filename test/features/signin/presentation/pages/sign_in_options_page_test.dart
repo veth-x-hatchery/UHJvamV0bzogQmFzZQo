@@ -133,8 +133,10 @@ void main() {
 
       // act
 
-      _navigationCubit
-          .goTo(SignInPageGoTo.emailPage(from: SignInPageRoutes.emailEntry));
+      _navigationCubit.goTo(SignInPageGoTo.registerPage(
+        from: SignInPageRoutes.emailEntry,
+        email: 'test@test.com',
+      ));
 
       // assert
 
@@ -142,7 +144,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.byType(FormRegisterEmailSignIn), findsOneWidget);
+      expect(find.byType(FormRegister), findsOneWidget);
     });
 
     testWidgets('should go from any page to email page',
@@ -169,7 +171,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.byType(FormRegisterEmailSignIn), findsOneWidget);
+      expect(find.byType(FormEmail), findsOneWidget);
     });
   });
 }
