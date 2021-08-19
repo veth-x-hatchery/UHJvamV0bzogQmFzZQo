@@ -24,7 +24,10 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInPasswordPage.create(signInBloc: _mockSignInBloc),
+            body: SignInPasswordPage.create(
+              signInBloc: _mockSignInBloc,
+              email: 'test@test.com',
+            ),
           ),
         ),
       ),
@@ -132,7 +135,7 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(_passwordInput(), 'invalidpassword');
+    await tester.enterText(_passwordInput(), '1234');
 
     // Act
 

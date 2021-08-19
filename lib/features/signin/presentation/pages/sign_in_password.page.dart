@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -9,11 +10,11 @@ import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 
 class SignInPasswordPage extends StatefulWidget {
-  final String? email;
+  final String email;
 
   const SignInPasswordPage({
     Key? key,
-    this.email,
+    required this.email,
   }) : super(key: key);
 
   @override
@@ -22,10 +23,11 @@ class SignInPasswordPage extends StatefulWidget {
   static Widget create({
     BuildContext? context,
     required SignInBloc signInBloc,
+    required String email,
   }) {
     return BlocProvider(
       create: (_) => signInBloc,
-      child: const SignInPasswordPage(),
+      child: SignInPasswordPage(email: email),
     );
   }
 }
@@ -49,13 +51,16 @@ class _SignInPasswordPageState extends State<SignInPasswordPage> {
     super.dispose();
   }
 
-  Future<void> _authenticate(Future<bool> Function() managerMethod) async {
+  Future<void> _authenticate() async {
     if (_passwordFormKey.currentState != null) {
       if (_passwordFormKey.currentState!.validate()) {
         _passwordFormKey.currentState!.save();
-        if (await managerMethod()) {
-          await Navigator.of(context).maybePop();
-        }
+        BlocProvider.of<SignInBloc>(context).add(
+          SignInEvent.signInWithEmailEvent(
+            email: EmailAddress(widget.email),
+            password: Password(_passwordTextEditingController.text),
+          ),
+        );
       }
     }
   }
@@ -64,46 +69,51 @@ class _SignInPasswordPageState extends State<SignInPasswordPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
-      child: FormColumn(
-        children: [
-          SizedBox(height: SizeConfig.defaultEdgeSpace),
-          SignInLoader(
-            size: SizeConfig.screenHeight * 0.25,
-            loading: false,
-          ),
-          SizedBox(height: SizeConfig.defaultEdgeSpace),
-          FieldPassword(
-            key: const Key(SignInPageKeys.signInPasswordPagePasswordTextField),
-            controller: _passwordTextEditingController,
-            passwordFormKey: _passwordFormKey,
-            passwordFocusNode: _passwordFocusNode,
-            validatePassword: () => _authenticate(() => Future.value(false)),
-          ),
-          SizedBox(height: SizeConfig.defaultEdgeSpace),
-          CustomRaisedButton(
-            child: Text(
-              Texts.goToAccess,
-              style: Theme.of(context).textTheme.button,
+      child: BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
+        final isLoading = state == const SignInState.loading();
+        return FormColumn(
+          children: [
+            SizedBox(height: SizeConfig.defaultEdgeSpace),
+            SignInLoader(
+              size: SizeConfig.screenHeight * 0.25,
+              loading: isLoading,
             ),
-            onPressed: () => _authenticate(() => Future.value(false)),
-          ),
-          SizedBox(height: SizeConfig.defaultEdgeSpace),
-          TextButton(
-            child: Text(
-              Texts.forgotMyPassword,
-              style: Theme.of(context).textTheme.button,
+            SizedBox(height: SizeConfig.defaultEdgeSpace),
+            FieldPassword(
+              key:
+                  const Key(SignInPageKeys.signInPasswordPagePasswordTextField),
+              controller: _passwordTextEditingController,
+              passwordFormKey: _passwordFormKey,
+              passwordFocusNode: _passwordFocusNode,
+              validatePassword: isLoading ? () {} : () => _authenticate(),
             ),
-            onPressed: () => {},
-          ),
-          TextButton(
-            child: Text(
-              Texts.changeEmail,
-              style: Theme.of(context).textTheme.button,
+            SizedBox(height: SizeConfig.defaultEdgeSpace),
+            CustomRaisedButton(
+              key: const Key(SignInPageKeys.signInPasswordPageValidateButton),
+              onPressed: isLoading ? () {} : () => _authenticate(),
+              child: Text(
+                Texts.goToAccess,
+                style: Theme.of(context).textTheme.button,
+              ),
             ),
-            onPressed: () => {},
-          ),
-        ],
-      ),
+            SizedBox(height: SizeConfig.defaultEdgeSpace),
+            TextButton(
+              onPressed: isLoading ? () {} : () => {},
+              child: Text(
+                Texts.forgotMyPassword,
+                style: Theme.of(context).textTheme.button,
+              ),
+            ),
+            TextButton(
+              onPressed: isLoading ? () {} : () => {},
+              child: Text(
+                Texts.changeEmail,
+                style: Theme.of(context).textTheme.button,
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }
