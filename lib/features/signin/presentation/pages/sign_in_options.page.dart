@@ -47,7 +47,9 @@ class SignInOptionsPage extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   SlideLeftRoute<void>(
-                    page: SignInPasswordPage(email: page.parameters! as String),
+                    page: SignInPasswordPage.create(
+                        signInBloc: BlocProvider.of<SignInBloc>(context),
+                        email: page.parameters! as String),
                   ),
                 );
                 break;
@@ -55,7 +57,8 @@ class SignInOptionsPage extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   SlideLeftRoute<void>(
-                      page: SignInRegisterPage(
+                      page: SignInRegisterPage.create(
+                          signInBloc: BlocProvider.of<SignInBloc>(context),
                           email: page.parameters as String?)),
                 );
                 break;
