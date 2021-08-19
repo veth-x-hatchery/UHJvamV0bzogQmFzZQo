@@ -16,7 +16,6 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_an
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
 part 'sign_in_event.dart';
@@ -113,13 +112,18 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       _mapFailureToSignStateErrorMessage,
       (emailIsInUse) {
         if (event.fromPage == SignInPageRoutes.emailEntry) {
-          _navigation.goTo(SignInPageGoTo(
-            from: SignInPageRoutes.emailEntry,
-            to: emailIsInUse
-                ? SignInPageRoutes.passwordEntry
-                : SignInPageRoutes.registerEmailSignIn,
-            parameters: event.email.getOrCrash(),
-          ));
+          final email = event.email.getOrCrash();
+          if (emailIsInUse) {
+            _navigation.goTo(SignInPageGoTo.passwordPage(
+              from: event.fromPage,
+              email: email,
+            ));
+          } else {
+            _navigation.goTo(SignInPageGoTo.registerPage(
+              from: event.fromPage,
+              email: email,
+            ));
+          }
         }
         return emailIsInUse
             ? const SignInState.emailAlreadyRegistered()

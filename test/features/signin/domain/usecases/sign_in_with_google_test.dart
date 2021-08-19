@@ -10,15 +10,15 @@ import 'sign_in_with_email_and_password_test.mocks.dart';
 
 void main() {
   late SignInWithGoogle _signInUseCase;
-  late MockISignInRepository _mockSignInRepository;
+  // late MockISignInRepository _mockSignInRepository;
   late MockIAuthFacade _mockAuthFacade;
 
   setUp(() {
-    _mockSignInRepository = MockISignInRepository();
+    // _mockSignInRepository = MockISignInRepository();
     _mockAuthFacade = MockIAuthFacade();
 
     _signInUseCase = SignInWithGoogle(
-      _mockSignInRepository,
+      // _mockSignInRepository,
       _mockAuthFacade,
     );
   });
@@ -40,7 +40,7 @@ void main() {
 
       verify(_mockAuthFacade.signInWithGoogle());
 
-      verifyNoMoreInteractions(_mockSignInRepository);
+      // verifyNoMoreInteractions(_mockSignInRepository);
     });
 
     test('should return cancelled by user failure', () async {
@@ -65,7 +65,7 @@ void main() {
 
       verify(_mockAuthFacade.signInWithGoogle());
 
-      verifyNoMoreInteractions(_mockSignInRepository);
+      // verifyNoMoreInteractions(_mockSignInRepository);
     });
 
     test('should return a server failure', () async {
@@ -90,7 +90,7 @@ void main() {
 
       verify(_mockAuthFacade.signInWithGoogle());
 
-      verifyNoMoreInteractions(_mockSignInRepository);
+      // verifyNoMoreInteractions(_mockSignInRepository);
     });
   });
 }

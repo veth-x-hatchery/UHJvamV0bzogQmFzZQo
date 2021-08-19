@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_page.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/navigation.dart';
-import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
 // ignore: avoid_classes_with_only_static_members
@@ -16,9 +15,11 @@ class NavigationRoutes {
         'Class: App, Method: onGenerateRoute: name ${settings.name}, arguments ${settings.arguments}');
     switch (settings.name) {
       case SignInNavigationRoutes.signIn:
-        return MaterialPageRoute<void>(builder: (_) => const SignInPage());
+        return MaterialPageRoute<void>(
+            builder: (_) => const SignInOptionsPage());
       case SignInNavigationRoutes.signInOptions:
-        return MaterialPageRoute<void>(builder: (_) => const SignInOptions());
+        return MaterialPageRoute<void>(
+            builder: (_) => const SignInOptionsPage());
       case slash:
       default:
         return MaterialPageRoute<void>(builder: (_) => const AlphaPage());
@@ -27,7 +28,7 @@ class NavigationRoutes {
 
   static Map<String, WidgetBuilder> routes() => <String, WidgetBuilder>{
         SignInNavigationRoutes.signIn: (BuildContext context) =>
-            const SignInPage(),
+            const SignInOptionsPage(),
       };
 }
 
