@@ -8,7 +8,7 @@ import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dar
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
-import 'package:vethx_beta/ui/widgets/shared/forms/logo_text_loading.widget.dart';
+import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 
 class SignInEmailPage extends StatefulWidget {
   const SignInEmailPage({Key? key}) : super(key: key);
@@ -54,31 +54,36 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
-      child: FormColumn(
-        children: [
-          SizedBox(height: SizeConfig.defaultEdgeSpace),
-          LogoTextLoading(
-            size: SizeConfig.screenHeight * 0.25,
-            loading: false,
-          ),
-          SizedBox(height: SizeConfig.defaultEdgeSpace),
-          FiedEmail(
-            key: const Key(SignInPageKeys.signInEmailPageEmailTextField),
-            controller: _emailTextEditingController,
-            emailFormKey: _emailFormKey,
-            emailFocusNode: _emailFocusNode,
-            validateEmail: _validateEmail,
-          ),
-          SizedBox(height: SizeConfig.defaultEdgeSpace),
-          CustomRaisedButton(
-            key: const Key(SignInPageKeys.signInEmailPageValidateButton),
-            onPressed: _validateEmail,
-            child: Text(
-              Texts.goToNextStep,
-              style: Theme.of(context).textTheme.button,
-            ),
-          ),
-        ],
+      child: BlocBuilder<SignInBloc, SignInState>(
+        builder: (context, state) {
+          final _loading = state == const SignInState.loading();
+          return FormColumn(
+            children: [
+              SizedBox(height: SizeConfig.defaultEdgeSpace),
+              LogoTextLoading(
+                size: SizeConfig.screenHeight * 0.25,
+                loading: _loading,
+              ),
+              SizedBox(height: SizeConfig.defaultEdgeSpace),
+              FiedEmail(
+                key: const Key(SignInPageKeys.signInEmailPageEmailTextField),
+                controller: _emailTextEditingController,
+                emailFormKey: _emailFormKey,
+                emailFocusNode: _emailFocusNode,
+                validateEmail: _validateEmail,
+              ),
+              SizedBox(height: SizeConfig.defaultEdgeSpace),
+              CustomRaisedButton(
+                key: const Key(SignInPageKeys.signInEmailPageValidateButton),
+                onPressed: _validateEmail,
+                child: Text(
+                  Texts.goToNextStep,
+                  style: Theme.of(context).textTheme.button,
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

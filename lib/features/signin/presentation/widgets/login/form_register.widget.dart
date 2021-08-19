@@ -5,7 +5,7 @@ import 'package:vethx_beta/features/signin/presentation/widgets/login/field_emai
 import 'package:vethx_beta/features/signin/presentation/widgets/login/field_password.widget.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
-import 'package:vethx_beta/ui/widgets/shared/forms/logo_text_loading.widget.dart';
+import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 
 class FormRegister extends StatefulWidget {
   const FormRegister({

@@ -4,7 +4,7 @@ import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/field_password.widget.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
-import 'package:vethx_beta/ui/widgets/shared/forms/logo_text_loading.widget.dart';
+import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 
 class FormPassword extends StatefulWidget {
   const FormPassword({

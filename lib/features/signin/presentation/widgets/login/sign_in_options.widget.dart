@@ -8,7 +8,7 @@ import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dar
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_button.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
-import 'package:vethx_beta/ui/widgets/shared/forms/logo_text_loading.widget.dart';
+import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 
 class SignInOptions extends StatefulWidget {
   const SignInOptions({Key? key}) : super(key: key);
