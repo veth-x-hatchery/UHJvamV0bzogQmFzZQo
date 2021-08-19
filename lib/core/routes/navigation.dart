@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/navigation.dart';
-import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
 // ignore: avoid_classes_with_only_static_members
