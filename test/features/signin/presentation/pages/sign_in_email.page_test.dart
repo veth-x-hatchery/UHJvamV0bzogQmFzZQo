@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_email.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
@@ -24,10 +26,7 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: BlocProvider<SignInBloc>(
-              create: (context) => _mockSignInBloc,
-              child: const SignInEmailPage(),
-            ),
+            body: SignInEmailPage.create(signInBloc: _mockSignInBloc),
           ),
         ),
       ),
@@ -95,6 +94,19 @@ void main() {
     expect(emailInput, findsOneWidget);
   });
 
+  testWidgets('when receive loading event then should show a circular progress',
+      (tester) async {
+    // Arrange
+
+    _signInState(const SignInState.loading());
+
+    await _pumpPage(tester);
+
+    // Act && Assert
+
+    expect(find.byType(GenericProgressIndicator), findsOneWidget);
+  });
+
   testWidgets("when user doesn't enter the email then no events are emitted",
       (tester) async {
     // arrange
@@ -120,9 +132,6 @@ void main() {
 
     _signInState(const SignInState.initial());
 
-    when(_mockSignInBloc.stream)
-        .thenAnswer((_) => Stream.value(const SignInState.initial()));
-
     await _pumpPage(tester);
 
     await tester.enterText(_emailInput(), 'invalidemail');
@@ -143,9 +152,6 @@ void main() {
     // arrange
 
     _signInState(const SignInState.initial());
-
-    when(_mockSignInBloc.stream)
-        .thenAnswer((_) => Stream.value(const SignInState.initial()));
 
     await _pumpPage(tester);
 
