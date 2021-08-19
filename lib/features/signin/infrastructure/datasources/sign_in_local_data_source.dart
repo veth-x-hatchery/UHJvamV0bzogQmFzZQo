@@ -16,32 +16,32 @@ abstract class ISignInLocalSource {
   Future<void> signOut();
 }
 
-class SignInLocalSource implements ISignInLocalSource {
-  final SharedPreferences _sharedPreferences;
+// class SignInLocalSource implements ISignInLocalSource {
+//   final SharedPreferences _sharedPreferences;
 
-  SignInLocalSource(this._sharedPreferences);
+//   SignInLocalSource(this._sharedPreferences);
 
-  @override
-  Future<void> cacheCurrentUser(UserModel user) {
-    return _sharedPreferences.setString(
-      CACHED_CURRENT_USER,
-      json.encode(user.toJson()),
-    );
-  }
+//   @override
+//   Future<void> cacheCurrentUser(UserModel user) {
+//     return _sharedPreferences.setString(
+//       CACHED_CURRENT_USER,
+//       json.encode(user.toJson()),
+//     );
+//   }
 
-  @override
-  Future<UserModel> currentUser() {
-    final jsonString = _sharedPreferences.getString(CACHED_CURRENT_USER);
-    if (jsonString == null) {
-      throw CacheException();
-    }
-    return Future.value(
-        UserModel.fromJson(json.decode(jsonString) as Map<String, dynamic>));
-  }
+//   @override
+//   Future<UserModel> currentUser() {
+//     final jsonString = _sharedPreferences.getString(CACHED_CURRENT_USER);
+//     if (jsonString == null) {
+//       throw CacheException();
+//     }
+//     return Future.value(
+//         UserModel.fromJson(json.decode(jsonString) as Map<String, dynamic>));
+//   }
 
-  @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
-  }
-}
+//   @override
+//   Future<void> signOut() {
+//     // TODO: implement signOut
+//     throw UnimplementedError();
+//   }
+// }

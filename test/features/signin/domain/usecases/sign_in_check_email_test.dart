@@ -4,7 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
+// import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
@@ -12,21 +12,21 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.d
 import 'sign_in_check_email_test.mocks.dart';
 
 @GenerateMocks([
-  ISignInRepository,
+  // ISignInRepository,
   IAuthFacade,
 ])
 void main() {
   late SignInCheckIfEmailIsInUse _signInCheckIfEmailIsInUse;
 
-  late MockISignInRepository _mockSignInRepository;
+  // late MockISignInRepository _mockSignInRepository;
   late MockIAuthFacade _mockAuthFacade;
 
   setUp(() {
-    _mockSignInRepository = MockISignInRepository();
+    // _mockSignInRepository = MockISignInRepository();
     _mockAuthFacade = MockIAuthFacade();
 
     _signInCheckIfEmailIsInUse = SignInCheckIfEmailIsInUse(
-      _mockSignInRepository,
+      // _mockSignInRepository,
       _mockAuthFacade,
     );
   });
@@ -51,7 +51,7 @@ void main() {
 
       verify(_mockAuthFacade.emailIsAlreadyInUse(email));
 
-      verifyNoMoreInteractions(_mockSignInRepository);
+      // verifyNoMoreInteractions(_mockSignInRepository);
     });
 
     test('should return a server failure', () async {
@@ -77,7 +77,7 @@ void main() {
 
       verify(_mockAuthFacade.emailIsAlreadyInUse(email));
 
-      verifyNoMoreInteractions(_mockSignInRepository);
+      // verifyNoMoreInteractions(_mockSignInRepository);
     });
   });
 }

@@ -36,107 +36,107 @@ abstract class ISignInRemoteSource extends IAuthFacade {
   Future<void> signOut();
 }
 
-class SignInRemoteSource implements ISignInRemoteSource {
-  final http.Client _http;
-  final API _api;
+// class SignInRemoteSource implements ISignInRemoteSource {
+//   final http.Client _http;
+//   final API _api;
 
-  SignInRemoteSource(this._http, this._api);
+//   SignInRemoteSource(this._http, this._api);
 
-  @override
-  Future<UserModel> createUserWithEmailAndPassword(
-      String email, String password) {
-    // TODO: implement createUserWithEmailAndPassword
-    throw UnimplementedError();
-  }
+//   @override
+//   Future<UserModel> createUserWithEmailAndPassword(
+//       String email, String password) {
+//     // TODO: implement createUserWithEmailAndPassword
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Future<UserModel> currentUser() async {
-    final response = await _http.get(
-      _api.endpointUri(Endpoint.signInCurrentUser),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    );
+//   @override
+//   Future<UserModel> currentUser() async {
+//     final response = await _http.get(
+//       _api.endpointUri(Endpoint.signInCurrentUser),
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     );
 
-    if (response.statusCode == 200) {
-      return UserModel.fromJson(
-          json.decode(response.body) as Map<String, dynamic>);
-    } else {
-      throw ServerException();
-    }
-  }
+//     if (response.statusCode == 200) {
+//       return UserModel.fromJson(
+//           json.decode(response.body) as Map<String, dynamic>);
+//     } else {
+//       throw ServerException();
+//     }
+//   }
 
-  @override
-  Future<void> passwordReset(String email) {
-    // TODO: implement passwordReset
-    throw UnimplementedError();
-  }
+//   @override
+//   Future<void> passwordReset(String email) {
+//     // TODO: implement passwordReset
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Future<UserModel> signInAnonymously() {
-    // TODO: implement signInAnonymously
-    throw UnimplementedError();
-  }
+//   @override
+//   Future<UserModel> signInAnonymously() {
+//     // TODO: implement signInAnonymously
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
-  }
+//   @override
+//   Future<void> signOut() {
+//     // TODO: implement signOut
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Future<bool> emailAlreadyRegistered(String email) async {
-    final response = await _http.get(_api.endpointUri(
-      Endpoint.checkEmail,
-      queryParameters: <String, String>{'email': email},
-    ));
+//   @override
+//   Future<bool> emailAlreadyRegistered(String email) async {
+//     final response = await _http.get(_api.endpointUri(
+//       Endpoint.checkEmail,
+//       queryParameters: <String, String>{'email': email},
+//     ));
 
-    if (![
-      HttpStatus.found,
-      HttpStatus.notFound,
-    ].contains(response.statusCode)) {
-      throw ServerException();
-    }
+//     if (![
+//       HttpStatus.found,
+//       HttpStatus.notFound,
+//     ].contains(response.statusCode)) {
+//       throw ServerException();
+//     }
 
-    return Future.value(response.statusCode == HttpStatus.found);
-  }
+//     return Future.value(response.statusCode == HttpStatus.found);
+//   }
 
-  @override
-  Future<Either<AuthFailure, bool>> emailIsAlreadyInUse(
-      EmailAddress emailAddress) {
-    // TODO: implement emailIsAlreadyInUse
-    throw UnimplementedError();
-  }
+//   @override
+//   Future<Either<AuthFailure, bool>> emailIsAlreadyInUse(
+//       EmailAddress emailAddress) {
+//     // TODO: implement emailIsAlreadyInUse
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
-      {required EmailAddress emailAddress, required Password password}) {
-    // TODO: implement registerWithEmailAndPassword
-    throw UnimplementedError();
-  }
+//   @override
+//   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
+//       {required EmailAddress emailAddress, required Password password}) {
+//     // TODO: implement registerWithEmailAndPassword
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword(
-      {required EmailAddress emailAddress, required Password password}) {
-    // TODO: implement signInWithEmailAndPassword
-    throw UnimplementedError();
-  }
+//   @override
+//   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword(
+//       {required EmailAddress emailAddress, required Password password}) {
+//     // TODO: implement signInWithEmailAndPassword
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Future<UserModel> signInWithFacebook() {
-    // TODO: implement signInWithFacebook
-    throw UnimplementedError();
-  }
+//   @override
+//   Future<UserModel> signInWithFacebook() {
+//     // TODO: implement signInWithFacebook
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Future<Either<AuthFailure, Unit>> signInWithGoogle() {
-    // TODO: implement signInWithGoogle
-    throw UnimplementedError();
-  }
+//   @override
+//   Future<Either<AuthFailure, Unit>> signInWithGoogle() {
+//     // TODO: implement signInWithGoogle
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Future<User?> getSignedInUser() {
-    // TODO: implement getSignedInUser
-    throw UnimplementedError();
-  }
-}
+//   @override
+//   Future<User?> getSignedInUser() {
+//     // TODO: implement getSignedInUser
+//     throw UnimplementedError();
+//   }
+// }
