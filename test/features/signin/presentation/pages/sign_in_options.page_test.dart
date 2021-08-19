@@ -171,7 +171,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.byType(FormEmail), findsOneWidget);
+      expect(find.byType(FiedEmail), findsOneWidget);
     });
   });
 }
