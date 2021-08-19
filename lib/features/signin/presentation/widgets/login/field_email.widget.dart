@@ -3,8 +3,8 @@ import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
 
-class FiedEmail extends StatelessWidget {
-  const FiedEmail({
+class FieldEmail extends StatelessWidget {
+  const FieldEmail({
     Key? key,
     required this.emailFormKey,
     required this.emailFocusNode,
@@ -23,7 +23,6 @@ class FiedEmail extends StatelessWidget {
       key: emailFormKey,
       child: TextFormField(
         controller: controller,
-        // initialValue: _gerenciador.email,
         focusNode: emailFocusNode,
         autofocus: true,
         keyboardType: TextInputType.emailAddress,

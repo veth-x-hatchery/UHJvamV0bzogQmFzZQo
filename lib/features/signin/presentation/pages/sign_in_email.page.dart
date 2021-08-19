@@ -74,7 +74,7 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
                 loading: isLoading,
               ),
               SizedBox(height: SizeConfig.defaultEdgeSpace),
-              FiedEmail(
+              FieldEmail(
                 key: const Key(SignInPageKeys.signInEmailPageEmailTextField),
                 controller: _emailTextEditingController,
                 emailFormKey: _emailFormKey,

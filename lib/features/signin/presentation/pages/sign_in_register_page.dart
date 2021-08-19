@@ -107,7 +107,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
               loading: isLoading,
             ),
             SizedBox(height: SizeConfig.defaultEdgeSpace),
-            FiedEmail(
+            FieldEmail(
               key: const Key(SignInPageKeys.signInRegisterPageEmailTextField),
               controller: _emailTextEditingController,
               emailFormKey: _emailFormKey,
