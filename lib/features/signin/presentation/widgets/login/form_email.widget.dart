@@ -6,6 +6,8 @@ import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/logo_text_loading.widget.dart';
 
+import '../sign_in.widgets.dart';
+
 class FormEmail extends StatefulWidget {
   const FormEmail({Key? key}) : super(key: key);
 
@@ -59,6 +61,7 @@ class _FormEmailState extends State<FormEmail> {
         ),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
         CustomRaisedButton(
+          key: const Key(SignInPageKeys.signInEmailPageNextButton),
           child: Text(
             Texts.goToNextStep,
             style: Theme.of(context).textTheme.button,

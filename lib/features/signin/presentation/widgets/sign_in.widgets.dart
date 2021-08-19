@@ -9,5 +9,9 @@ export 'login/sign_in_options.widget.dart';
 export 'login/sign_in_scaffold.widget.dart';
 
 class SignInPageKeys {
+  //! sign in options
   static const signInWithGoogleButton = 'signInWithGoogleButton';
+  static const signInWithEmail = 'signInWithEmail';
+  //! sign in email page
+  static const signInEmailPageNextButton = 'signInEmailPageNextButton';
 }

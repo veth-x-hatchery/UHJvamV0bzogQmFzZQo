@@ -40,6 +40,7 @@ class _SignInOptionsState extends State<SignInOptions> {
             ),
             SizedBox(height: SizeConfig.defaultEdgeSpace),
             SignInButton(
+              key: const Key(SignInPageKeys.signInWithEmail),
               assetName: 'assets/images/mail-logo.png',
               text: Texts.signInWithEmail,
               textColor: Colors.white,
