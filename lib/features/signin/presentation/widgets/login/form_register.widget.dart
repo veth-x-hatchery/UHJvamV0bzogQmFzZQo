@@ -82,6 +82,7 @@ class _FormRegisterState extends State<FormRegister> {
         SignInLoader(
           title: Texts.signInRegisterEntryTitle,
           size: SizeConfig.screenHeight * 0.25,
+          loading: false,
         ),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
         FiedEmail(

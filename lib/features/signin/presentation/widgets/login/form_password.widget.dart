@@ -54,7 +54,10 @@ class _FormPasswordState extends State<FormPassword> {
     return FormColumn(
       children: [
         SizedBox(height: SizeConfig.defaultEdgeSpace),
-        SignInLoader(size: SizeConfig.screenHeight * 0.25),
+        SignInLoader(
+          size: SizeConfig.screenHeight * 0.25,
+          loading: false,
+        ),
         SizedBox(height: SizeConfig.defaultEdgeSpace),
         FieldPassword(
           controller: _passwordTextEditingController,

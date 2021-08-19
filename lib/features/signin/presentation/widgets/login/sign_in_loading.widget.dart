@@ -6,11 +6,13 @@ class SignInLoader extends StatelessWidget {
   const SignInLoader({
     Key? key,
     required this.size,
+    required this.loading,
     this.title,
   }) : super(key: key);
 
   final double size;
   final String? title;
+  final bool loading;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class SignInLoader extends StatelessWidget {
     return SizedBox(
       height: size,
       child: Center(
-        child: false
+        child: loading
             ? const GenericProgressIndicator()
             : Text(
                 title ?? Texts.signInPageTitle,

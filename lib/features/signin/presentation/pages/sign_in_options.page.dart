@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vethx_beta/core/consts/size_config.dart';
+import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
@@ -8,14 +10,16 @@ import 'package:vethx_beta/features/signin/presentation/pages/sign_in_email.page
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_password.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
+import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/injection_container.dart';
+import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_beta/ui/widgets/transitions/slide_route.dart';
 
 class SignInOptionsPage extends StatelessWidget {
   const SignInOptionsPage({Key? key}) : super(key: key);
 
-  static Widget create(BuildContext context) {
+  static Widget create({BuildContext? context}) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -56,12 +60,15 @@ class SignInOptionsPage extends StatelessWidget {
                 );
                 break;
               case SignInPageRoutes.emailEntry:
-              default:
+                final emailPage = SignInEmailPage.create(
+                    signInBloc: BlocProvider.of<SignInBloc>(context));
                 page.from == SignInPageRoutes.signInOptions
-                    ? Navigator.push(context,
-                        SlideLeftRoute<void>(page: const SignInEmailPage()))
-                    : Navigator.pushReplacement(context,
-                        SlideLeftRoute<void>(page: const SignInEmailPage()));
+                    ? Navigator.push(
+                        context, SlideLeftRoute<void>(page: emailPage))
+                    : Navigator.pushReplacement(
+                        context, SlideLeftRoute<void>(page: emailPage));
+                break;
+              default:
                 break;
             }
           },
@@ -69,7 +76,42 @@ class SignInOptionsPage extends StatelessWidget {
       },
       child: signInScaffold(
         context,
-        child: const SignInOptions(),
+        child: BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
+          final isLoading = state == const SignInState.loading();
+          return FormColumn(
+            children: [
+              SizedBox(height: SizeConfig.defaultEdgeSpace),
+              SignInLoader(
+                size: SizeConfig.screenHeight * 0.25,
+                loading: isLoading,
+              ),
+              SizedBox(height: SizeConfig.defaultEdgeSpace),
+              SignInButton(
+                key: const Key(SignInPageKeys.signInWithGoogleButton),
+                assetName: 'assets/images/google-logo.png',
+                text: Texts.signInWithGoogle,
+                textColor: Colors.black87,
+                color: Colors.white,
+                onPressed: () => BlocProvider.of<SignInBloc>(context)
+                    .add(const SignInEvent.signInWithGoogleEvent()),
+              ),
+              SizedBox(height: SizeConfig.defaultEdgeSpace),
+              SignInButton(
+                key: const Key(SignInPageKeys.signInWithEmail),
+                assetName: 'assets/images/mail-logo.png',
+                text: Texts.signInWithEmail,
+                textColor: Colors.white,
+                color: Colors.teal[700],
+                onPressed: isLoading
+                    ? () => {}
+                    : () => BlocProvider.of<NavigationCubit>(context).goTo(
+                          SignInPageGoTo.emailPage(
+                              from: SignInPageRoutes.signInOptions),
+                        ),
+              ),
+            ],
+          );
+        }),
         leading: false,
       ),
     );

@@ -34,6 +34,11 @@ void main() {
     );
   }
 
+  void _signInState(SignInState state) {
+    when(_mockSignInBloc.state).thenReturn(state);
+    when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
+  }
+
   Finder _emailInput() {
     // arrange
     final emailInput =
@@ -55,6 +60,8 @@ void main() {
   testWidgets('should find the validation button', (tester) async {
     // arrange
 
+    _signInState(const SignInState.initial());
+
     await _pumpPage(tester);
 
     final validationButton =
@@ -71,6 +78,8 @@ void main() {
 
   testWidgets('should find the email input', (tester) async {
     // arrange
+
+    _signInState(const SignInState.initial());
 
     await _pumpPage(tester);
 
@@ -90,6 +99,8 @@ void main() {
       (tester) async {
     // arrange
 
+    _signInState(const SignInState.initial());
+
     await _pumpPage(tester);
 
     // Act
@@ -106,6 +117,8 @@ void main() {
   testWidgets('when user enters a invalid email then no events are emitted',
       (tester) async {
     // arrange
+
+    _signInState(const SignInState.initial());
 
     when(_mockSignInBloc.stream)
         .thenAnswer((_) => Stream.value(const SignInState.initial()));
@@ -128,6 +141,8 @@ void main() {
   testWidgets('when user enters a correct email then SignInBLoC is called',
       (tester) async {
     // arrange
+
+    _signInState(const SignInState.initial());
 
     when(_mockSignInBloc.stream)
         .thenAnswer((_) => Stream.value(const SignInState.initial()));

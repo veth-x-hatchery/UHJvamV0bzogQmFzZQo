@@ -28,7 +28,7 @@ class AlphaPage extends StatelessWidget {
         return state.map(
           initial: (_) => _PageWidget(),
           authenticated: (_) => const HomePage(),
-          unauthenticated: (_) => SignInOptionsPage.create(context),
+          unauthenticated: (_) => SignInOptionsPage.create(),
         );
       },
       // child: _PageWidget(),
