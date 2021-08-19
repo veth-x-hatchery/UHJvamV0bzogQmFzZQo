@@ -102,6 +102,7 @@ void main() {
 
       // assert
 
+      // Todo(v): Research
       // verify(_mockNavigationObserver.didPush(any, any)).called(1);
 
       await tester.pumpAndSettle();
@@ -128,6 +129,7 @@ void main() {
 
       // assert
 
+      // Todo(v): Research
       // verify(_mockNavigationObserver.didPush(any, any)).called(1);
 
       await tester.pumpAndSettle();
@@ -153,7 +155,8 @@ void main() {
 
       // assert
 
-      // // verify(_mockNavigationObserver.didPush(any, any)).called(1);
+      // Todo(v): Research
+      // verify(_mockNavigationObserver.didPush(any, any)).called(1);
 
       await tester.pumpAndSettle();
 
@@ -268,6 +271,8 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(SignInEmailPage), findsOneWidget);
+
+      // Todo(v): Research
       // verify(_mockNavigationObserver.didPush(any, any)).called(1);
     });
   });
