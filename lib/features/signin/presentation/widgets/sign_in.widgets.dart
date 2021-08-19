@@ -13,5 +13,6 @@ class SignInPageKeys {
   static const signInWithGoogleButton = 'signInWithGoogleButton';
   static const signInWithEmail = 'signInWithEmail';
   //! sign in email page
-  static const signInEmailPageNextButton = 'signInEmailPageNextButton';
+  static const signInEmailPageValidateButton = 'signInEmailPageValidateButton';
+  static const signInEmailPageEmailTextField = 'signInEmailPageEmailTextField';
 }

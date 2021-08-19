@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
 
 class FiedEmail extends StatelessWidget {
@@ -31,9 +32,7 @@ class FiedEmail extends StatelessWidget {
           hintText: Texts.emailHint,
         ),
         style: Theme.of(context).textTheme.bodyText1,
-        validator: (value) {
-          return null;
-        },
+        validator: (value) => EmailAddress(value).validation,
         onEditingComplete: validateEmail,
       ),
     );
