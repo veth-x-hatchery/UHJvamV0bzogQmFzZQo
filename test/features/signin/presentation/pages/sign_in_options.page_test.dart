@@ -155,7 +155,7 @@ void main() {
 
       // // verify(_mockNavigationObserver.didPush(any, any)).called(1);
 
-      // await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
       expect(find.byType(SignInEmailPage), findsOneWidget);
     });
@@ -264,6 +264,8 @@ void main() {
             NavigationState.goTo(SignInPageGoTo.emailPage(
                 from: SignInPageRoutes.signInOptions)));
       });
+
+      await tester.pumpAndSettle();
 
       expect(find.byType(SignInEmailPage), findsOneWidget);
       // verify(_mockNavigationObserver.didPush(any, any)).called(1);
