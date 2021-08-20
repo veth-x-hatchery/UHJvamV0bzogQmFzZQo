@@ -3,16 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
-import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
 import 'sign_in_bloc_test.mocks.dart';
 
@@ -36,6 +31,7 @@ void main() {
     _bloc = SignInBloc(
       _authBloc,
       _mockNavigation,
+      _mockSignInWithGoogle,
     );
   });
 

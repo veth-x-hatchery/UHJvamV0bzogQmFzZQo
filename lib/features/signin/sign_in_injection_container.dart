@@ -135,12 +135,9 @@ Future<void> signInDependenciesInjection() async {
 
   sl.registerFactory<SignInBloc>(
     () => SignInBloc(
-      sl<SignInCheckIfEmailIsInUse>(),
-      sl<SignInWithEmailAndPassword>(),
-      sl<SignInWithGoogle>(),
-      sl<SignInRegisterEmailAndPassword>(),
       sl<AuthBloc>(),
       sl<NavigationCubit>(),
+      sl<SignInWithGoogle>(),
     ),
   );
 

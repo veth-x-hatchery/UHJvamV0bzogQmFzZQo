@@ -16,10 +16,9 @@ part 'sign_in_state.dart';
 part 'sign_in_bloc.freezed.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  // Use Cases
-  final SignInWithGoogle _signInWithGoogle;
   final AuthBloc _authBloc;
   final NavigationCubit _navigation;
+  final SignInWithGoogle _signInWithGoogle;
 
   SignInBloc(
     this._authBloc,
@@ -40,20 +39,20 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
-    yield event.map(
-      signInWithGoogleEvent: _google,
-      signInWithEmailEvent: (e) => const SignInState.initial(),
-      started: (_Started value) => const SignInState.initial(),
-    );
-  }
-
-  Stream<SignInState> _google(SignInWithGoogleEvent event) async* {
-    yield const SignInState.loading();
-    final usecase = await _signInWithGoogle.call(const NoParams());
-    yield usecase.fold(
-      _mapFailureToSignStateErrorMessage,
-      (_) => const SignInState.signInAllowed(),
-    );
+    yield* event.map(signInWithGoogleEvent: (e) async* {
+      yield const SignInState.loading();
+      final result = await _signInWithGoogle.call(const NoParams());
+      yield result.fold(
+        _mapFailureToSignStateErrorMessage,
+        (_) => const SignInState.signInAllowed(),
+      );
+    }, signInWithEmailEvent: (e) async* {
+      _navigation
+          .goTo(SignInPageGoTo.emailPage(from: SignInPageRoutes.signInOptions));
+      yield const SignInState.initial();
+    }, started: (_) async* {
+      yield const SignInState.initial();
+    });
   }
 
   SignInState _mapFailureToSignStateErrorMessage(FailureDetails failure) {

@@ -9,15 +9,9 @@ import 'package:dartz/dartz.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
     as _i9;
-import 'package:vethx_beta/features/signin/domain/core/usecase.dart' as _i13;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart'
-    as _i8;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart'
-    as _i10;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart'
-    as _i11;
+import 'package:vethx_beta/features/signin/domain/core/usecase.dart' as _i10;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart'
-    as _i12;
+    as _i8;
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
     as _i2;
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
@@ -193,76 +187,17 @@ class MockNavigationCubit extends _i1.Mock implements _i4.NavigationCubit {
   String toString() => super.toString();
 }
 
-/// A class which mocks [SignInCheckIfEmailIsInUse].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockSignInCheckIfEmailIsInUse extends _i1.Mock
-    implements _i8.SignInCheckIfEmailIsInUse {
-  MockSignInCheckIfEmailIsInUse() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i3.Future<_i5.Either<_i9.FailureDetails, bool>> call(_i8.Params? params) =>
-      (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<_i5.Either<_i9.FailureDetails, bool>>.value(
-                  _FakeEither_3<_i9.FailureDetails, bool>()))
-          as _i3.Future<_i5.Either<_i9.FailureDetails, bool>>);
-  @override
-  String toString() => super.toString();
-}
-
-/// A class which mocks [SignInRegisterEmailAndPassword].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockSignInRegisterEmailAndPassword extends _i1.Mock
-    implements _i10.SignInRegisterEmailAndPassword {
-  MockSignInRegisterEmailAndPassword() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i3.Future<_i5.Either<_i9.FailureDetails, _i5.Unit>> call(
-          _i10.Params? params) =>
-      (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<_i5.Either<_i9.FailureDetails, _i5.Unit>>.value(
-              _FakeEither_3<_i9.FailureDetails, _i5.Unit>())) as _i3
-          .Future<_i5.Either<_i9.FailureDetails, _i5.Unit>>);
-  @override
-  String toString() => super.toString();
-}
-
-/// A class which mocks [SignInWithEmailAndPassword].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockSignInWithEmailAndPassword extends _i1.Mock
-    implements _i11.SignInWithEmailAndPassword {
-  MockSignInWithEmailAndPassword() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i3.Future<_i5.Either<_i9.FailureDetails, _i5.Unit>> call(
-          _i11.Params? params) =>
-      (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<_i5.Either<_i9.FailureDetails, _i5.Unit>>.value(
-              _FakeEither_3<_i9.FailureDetails, _i5.Unit>())) as _i3
-          .Future<_i5.Either<_i9.FailureDetails, _i5.Unit>>);
-  @override
-  String toString() => super.toString();
-}
-
 /// A class which mocks [SignInWithGoogle].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInWithGoogle extends _i1.Mock implements _i12.SignInWithGoogle {
+class MockSignInWithGoogle extends _i1.Mock implements _i8.SignInWithGoogle {
   MockSignInWithGoogle() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   _i3.Future<_i5.Either<_i9.FailureDetails, _i5.Unit>> call(
-          _i13.NoParams? params) =>
+          _i10.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
           returnValue: Future<_i5.Either<_i9.FailureDetails, _i5.Unit>>.value(
               _FakeEither_3<_i9.FailureDetails, _i5.Unit>())) as _i3
