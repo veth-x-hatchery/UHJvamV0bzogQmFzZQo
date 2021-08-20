@@ -1,7 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_password.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -11,12 +14,12 @@ import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
 import 'sign_in_password.page_test.mocks.dart';
 
-@GenerateMocks([SignInBloc])
+@GenerateMocks([SignInPasswordBloc])
 void main() {
-  late MockSignInBloc _mockSignInBloc;
+  late MockSignInPasswordBloc _mockBloc;
 
   setUp(() {
-    _mockSignInBloc = MockSignInBloc();
+    _mockBloc = MockSignInPasswordBloc();
   });
 
   Future<void> _pumpPage(WidgetTester tester) async {
@@ -24,10 +27,7 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInPasswordPage.create(
-              signInBloc: _mockSignInBloc,
-              email: 'test@test.com',
-            ),
+            body: SignInPasswordPage.create(bloc: _mockBloc),
           ),
         ),
       ),
@@ -35,8 +35,8 @@ void main() {
   }
 
   void _signInState(SignInState state) {
-    when(_mockSignInBloc.state).thenReturn(state);
-    when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
+    when(_mockBloc.state).thenReturn(state);
+    when(_mockBloc.stream).thenAnswer((_) => Stream.value(state));
   }
 
   Finder _passwordInput() {
@@ -55,6 +55,19 @@ void main() {
     // Act && Assert
     expect(validationButton, findsOneWidget);
     return validationButton;
+  }
+
+  /// Form uses BLoC state to realize validations
+  void _prepareFormValidationValues({
+    String? value,
+  }) {
+    final emailVO = Password(value);
+    final state = SignInPasswordState(
+      password: emailVO,
+      isLoading: false,
+      authFailureOrSuccessOption: none(),
+    );
+    when(_mockBloc.state).thenReturn(state);
   }
 
   testWidgets('should find the validation button', (tester) async {
@@ -124,7 +137,7 @@ void main() {
 
     // assert
 
-    verifyNever(_mockSignInBloc.add(any));
+    verifyNever(_mockBloc.add(any));
   });
 
   testWidgets('when user enters a invalid password then no events are emitted',
@@ -145,7 +158,7 @@ void main() {
 
     // assert
 
-    verifyNever(_mockSignInBloc.add(any));
+    verifyNever(_mockBloc.add(any));
   });
 
   testWidgets('when user enters a correct password then SignInBLoC is called',
@@ -166,6 +179,6 @@ void main() {
 
     // assert
 
-    verify(_mockSignInBloc.add(any)).called(1);
+    verify(_mockBloc.add(any)).called(1);
   });
 }

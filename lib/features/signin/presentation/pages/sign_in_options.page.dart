@@ -5,6 +5,7 @@ import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
@@ -53,8 +54,7 @@ class SignInOptionsPage extends StatelessWidget {
                   context,
                   SlideLeftRoute<void>(
                     page: SignInPasswordPage.create(
-                        signInBloc: BlocProvider.of<SignInBloc>(context),
-                        email: page.parameters! as String),
+                        bloc: BlocProvider.of<SignInPasswordBloc>(context)),
                   ),
                 );
                 break;
