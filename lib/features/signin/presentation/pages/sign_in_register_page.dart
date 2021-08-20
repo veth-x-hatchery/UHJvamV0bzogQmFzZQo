@@ -7,6 +7,8 @@ import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_re
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
+import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
+import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 
 class SignInRegisterPage extends StatefulWidget {
   final String? email;
@@ -96,7 +98,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
         builder: (context, state) {
           return Form(
             key: _formKey,
-            child: ListView(
+            child: FormColumn(
               children: [
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 SignInLoader(
@@ -105,28 +107,21 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                   loading: state.isLoading,
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
-                TextFormField(
+                FieldEmail(
                   controller: _emailTextEditingController,
                   focusNode: _emailFocusNode,
                   key: const Key(
                       SignInPageKeys.signInRegisterPageEmailTextField),
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.email),
-                    labelText: 'Email',
-                  ),
-                  autocorrect: false,
                   onChanged: (value) =>
                       bloc.add(SignInRegisterEvent.emailChanged(value)),
                   validator: (_) => current.email.validation,
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
-                TextFormField(
+                FieldPassword(
                   controller: _passwordTextEditingController,
                   focusNode: _passwordFocusNode,
                   key: const Key(
                       SignInPageKeys.signInRegisterPagePasswordTextField),
-                  obscureText: true,
-                  autocorrect: false,
                   onChanged: (value) =>
                       bloc.add(SignInRegisterEvent.passwordChanged(value)),
                   validator: (_) => current.password.validation,
