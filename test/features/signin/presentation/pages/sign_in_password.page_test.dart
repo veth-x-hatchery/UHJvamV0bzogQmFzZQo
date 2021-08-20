@@ -5,7 +5,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_password.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
@@ -34,7 +33,7 @@ void main() {
     );
   }
 
-  void _signInState(SignInState state) {
+  void _signInState(SignInPasswordState state) {
     when(_mockBloc.state).thenReturn(state);
     when(_mockBloc.stream).thenAnswer((_) => Stream.value(state));
   }
@@ -73,7 +72,7 @@ void main() {
   testWidgets('should find the validation button', (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInPasswordState.initial());
 
     await _pumpPage(tester);
 
@@ -92,7 +91,7 @@ void main() {
   testWidgets('should find the password input', (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInPasswordState.initial());
 
     await _pumpPage(tester);
 
@@ -112,7 +111,11 @@ void main() {
       (tester) async {
     // Arrange
 
-    _signInState(const SignInState.loading());
+    _signInState(SignInPasswordState(
+      isLoading: true,
+      password: Password(''),
+      authFailureOrSuccessOption: none(),
+    ));
 
     await _pumpPage(tester);
 
@@ -125,11 +128,13 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInPasswordState.initial());
 
     await _pumpPage(tester);
 
     // Act
+
+    _prepareFormValidationValues();
 
     await tester.tap(_validationButton());
 
@@ -144,13 +149,17 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInPasswordState.initial());
 
     await _pumpPage(tester);
 
-    await tester.enterText(_passwordInput(), '1234');
+    const invalidPassword = '1234';
+
+    await tester.enterText(_passwordInput(), invalidPassword);
 
     // Act
+
+    _prepareFormValidationValues(value: invalidPassword);
 
     await tester.tap(_validationButton());
 
@@ -165,11 +174,15 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInPasswordState.initial());
 
     await _pumpPage(tester);
 
-    await tester.enterText(_passwordInput(), 'teste@teste.com');
+    const validPassword = 'dmFsaWRwYXNzd29yZAo';
+
+    await tester.enterText(_passwordInput(), validPassword);
+
+    _prepareFormValidationValues(value: validPassword);
 
     // Act
 
