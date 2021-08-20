@@ -27,6 +27,9 @@ class SignInOptionsPage extends StatelessWidget {
           create: (_) => sl<SignInBloc>(),
         ),
         BlocProvider(
+          create: (_) => sl<SignInRegisterBloc>(),
+        ),
+        BlocProvider(
           create: (_) => sl<NavigationCubit>(),
         )
       ],

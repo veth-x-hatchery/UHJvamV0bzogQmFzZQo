@@ -12,12 +12,10 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.d
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
-import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
-import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_remote_data_source.dart';
-import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/injection_container.dart';
@@ -116,6 +114,10 @@ Future<void> signInDependenciesInjection() async {
 
   sl.registerFactory<AuthBloc>(
     () => AuthBloc(sl<IAuthFacade>()),
+  );
+
+  sl.registerFactory<SignInRegisterBloc>(
+    () => SignInRegisterBloc(sl<SignInRegisterEmailAndPassword>()),
   );
 
   sl.registerFactory<SignInBloc>(

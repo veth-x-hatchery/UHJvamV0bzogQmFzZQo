@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -33,25 +32,27 @@ class SignInRegisterPage extends StatefulWidget {
 }
 
 class _SignInRegisterPageState extends State<SignInRegisterPage> {
-  final _emailFormKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+
   final _emailFocusNode = FocusNode();
   final _emailTextEditingController = TextEditingController();
 
-  final _passwordFormKey = GlobalKey<FormState>();
   final _passwordFocusNode = FocusNode();
   final _passwordTextEditingController = TextEditingController();
 
+  SignInRegisterBloc get bloc => BlocProvider.of<SignInRegisterBloc>(context);
+  SignInRegisterState get current => bloc.state;
+
   void _validateForm() {
-    if (_emailFormKey.currentState?.validate() == true) {
-      BlocProvider.of<SignInRegisterBloc>(context)
-          .add(const SignInRegisterEvent.registerWithEmailAndPasswordPressed());
+    if (_formKey.currentState?.validate() == true) {
+      bloc.add(const SignInRegisterEvent.registerWithEmailAndPasswordPressed());
     }
   }
 
   @override
   void initState() {
-    if (widget.email != null && EmailAddress(widget.email).isValid()) {
-      _emailTextEditingController.text = widget.email!;
+    if (current.email.isValid()) {
+      _emailTextEditingController.text = current.email.getOrCrash();
       _passwordFocusNode.requestFocus();
     } else {
       _emailFocusNode.requestFocus();
@@ -61,11 +62,11 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
 
   @override
   void dispose() {
-    _emailFormKey.currentState?.dispose();
+    _formKey.currentState?.dispose();
+
     _emailFocusNode.dispose();
     _emailTextEditingController.dispose();
 
-    _passwordFormKey.currentState?.dispose();
     _passwordFocusNode.dispose();
     _passwordTextEditingController.dispose();
 
@@ -94,7 +95,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
         },
         builder: (context, state) {
           return Form(
-            key: _emailFormKey,
+            key: _formKey,
             child: ListView(
               children: [
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
@@ -115,19 +116,8 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                   ),
                   autocorrect: false,
                   onChanged: (value) =>
-                      BlocProvider.of<SignInRegisterBloc>(context)
-                          .add(SignInRegisterEvent.emailChanged(value)),
-                  validator: (_) => BlocProvider.of<SignInRegisterBloc>(context)
-                      .state
-                      .email
-                      .value
-                      .fold(
-                        (f) => f.maybeMap(
-                          invalidEmail: (_) => 'Invalid email',
-                          orElse: () => null,
-                        ),
-                        (_) => null,
-                      ),
+                      bloc.add(SignInRegisterEvent.emailChanged(value)),
+                  validator: (_) => current.email.validation,
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 TextFormField(
@@ -138,25 +128,14 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                   obscureText: true,
                   autocorrect: false,
                   onChanged: (value) =>
-                      BlocProvider.of<SignInRegisterBloc>(context)
-                          .add(SignInRegisterEvent.passwordChanged(value)),
-                  validator: (_) => BlocProvider.of<SignInRegisterBloc>(context)
-                      .state
-                      .password
-                      .value
-                      .fold(
-                        (f) => f.maybeMap(
-                          shortPassword: (_) => 'Short password',
-                          orElse: () => null,
-                        ),
-                        (_) => null,
-                      ),
+                      bloc.add(SignInRegisterEvent.passwordChanged(value)),
+                  validator: (_) => current.password.validation,
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 CustomRaisedButton(
                   key: const Key(
                       SignInPageKeys.signInRegisterPageValidateButton),
-                  onPressed: _validateForm,
+                  onPressed: () => _validateForm(),
                   child: Text(
                     Texts.goToNextStep,
                     style: Theme.of(context).textTheme.button,
