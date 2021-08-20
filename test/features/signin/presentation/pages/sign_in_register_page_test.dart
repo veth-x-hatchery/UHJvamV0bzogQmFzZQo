@@ -1,25 +1,25 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_email.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
-import 'sign_in_email.page_test.mocks.dart';
+import 'sign_in_register_page_test.mocks.dart';
 
-@GenerateMocks([SignInBloc])
+@GenerateMocks([SignInRegisterBloc])
 void main() {
-  late MockSignInBloc _mockSignInBloc;
+  late MockSignInRegisterBloc _mockSignInBloc;
 
   setUp(() {
-    _mockSignInBloc = MockSignInBloc();
+    _mockSignInBloc = MockSignInRegisterBloc();
   });
 
   Future<void> _pumpPage(WidgetTester tester) async {
@@ -34,7 +34,7 @@ void main() {
     );
   }
 
-  void _signInState(SignInState state) {
+  void _signInState(SignInRegisterState state) {
     when(_mockSignInBloc.state).thenReturn(state);
     when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
   }
@@ -70,7 +70,7 @@ void main() {
     testWidgets('should find the validation button', (tester) async {
       // arrange
 
-      _signInState(const SignInState.initial());
+      _signInState(SignInRegisterState.initial());
 
       await _pumpPage(tester);
 
@@ -89,7 +89,7 @@ void main() {
     testWidgets('should find the email input', (tester) async {
       // arrange
 
-      _signInState(const SignInState.initial());
+      _signInState(SignInRegisterState.initial());
 
       await _pumpPage(tester);
 
@@ -108,7 +108,7 @@ void main() {
     testWidgets('should find the password input', (tester) async {
       // arrange
 
-      _signInState(const SignInState.initial());
+      _signInState(SignInRegisterState.initial());
 
       await _pumpPage(tester);
 
@@ -129,7 +129,12 @@ void main() {
       (tester) async {
     // Arrange
 
-    _signInState(const SignInState.loading());
+    _signInState(SignInRegisterState(
+      email: EmailAddress('email'),
+      password: Password('password'),
+      isLoading: true,
+      authFailureOrSuccessOption: none(),
+    ));
 
     await _pumpPage(tester);
 
@@ -142,7 +147,12 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInRegisterState(
+      email: EmailAddress(''),
+      password: Password('password'),
+      isLoading: true,
+      authFailureOrSuccessOption: none(),
+    ));
 
     await _pumpPage(tester);
 
@@ -161,7 +171,7 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInRegisterState.initial());
 
     await _pumpPage(tester);
 
@@ -182,7 +192,7 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInRegisterState.initial());
 
     await _pumpPage(tester);
 
@@ -206,7 +216,7 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInRegisterState.initial());
 
     await _pumpPage(tester);
 

@@ -5,7 +5,6 @@ import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
@@ -23,7 +22,7 @@ class SignInRegisterPage extends StatefulWidget {
 
   static Widget create({
     BuildContext? context,
-    required SignInBloc signInBloc,
+    required SignInRegisterBloc signInBloc,
     String? email,
   }) {
     return BlocProvider(
@@ -41,6 +40,13 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
   final _passwordFormKey = GlobalKey<FormState>();
   final _passwordFocusNode = FocusNode();
   final _passwordTextEditingController = TextEditingController();
+
+  void _validateForm() {
+    if (_emailFormKey.currentState?.validate() == true) {
+      BlocProvider.of<SignInRegisterBloc>(context)
+          .add(const SignInRegisterEvent.registerWithEmailAndPasswordPressed());
+    }
+  }
 
   @override
   void initState() {
@@ -88,6 +94,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
         },
         builder: (context, state) {
           return Form(
+            key: _emailFormKey,
             child: ListView(
               children: [
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
@@ -98,6 +105,8 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 TextFormField(
+                  controller: _emailTextEditingController,
+                  focusNode: _emailFocusNode,
                   key: const Key(
                       SignInPageKeys.signInRegisterPageEmailTextField),
                   decoration: const InputDecoration(
@@ -122,9 +131,10 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 TextFormField(
+                  controller: _passwordTextEditingController,
+                  focusNode: _passwordFocusNode,
                   key: const Key(
                       SignInPageKeys.signInRegisterPagePasswordTextField),
-                  controller: _passwordTextEditingController,
                   obscureText: true,
                   autocorrect: false,
                   onChanged: (value) =>
@@ -146,13 +156,11 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                 CustomRaisedButton(
                   key: const Key(
                       SignInPageKeys.signInRegisterPageValidateButton),
+                  onPressed: _validateForm,
                   child: Text(
                     Texts.goToNextStep,
                     style: Theme.of(context).textTheme.button,
                   ),
-                  onPressed: () => BlocProvider.of<SignInRegisterBloc>(context)
-                      .add(const SignInRegisterEvent
-                          .registerWithEmailAndPasswordPressed()),
                 ),
               ],
             ),
