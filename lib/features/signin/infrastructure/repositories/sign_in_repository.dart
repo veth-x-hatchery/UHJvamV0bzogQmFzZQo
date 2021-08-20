@@ -34,7 +34,7 @@
 //         return Right(user);
 //       } on ServerException {
 //         return const Left(
-//             ServerFailure(message: SignInRepositoryDefaultMessages.error));
+//             Failure.serverFailure(message: SignInRepositoryDefaultMessages.error));
 //       }
 //     } else {
 //       try {
@@ -43,7 +43,7 @@
 //       } on CacheException {
 //         // ignore: prefer_const_constructors
 //         return Left(
-//           const CacheFailure(message: SignInRepositoryDefaultMessages.error),
+//           const Failure.cacheFailure(message: SignInRepositoryDefaultMessages.error),
 //         );
 //       }
 //     }

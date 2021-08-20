@@ -1,15 +1,12 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 
-class User extends Equatable {
-  final EmailAddress email;
-  final String name;
+part 'user_entity.freezed.dart';
 
-  const User({
-    required this.email,
-    required this.name,
-  });
-
-  @override
-  List<Object?> get props => [email];
+@freezed
+class User with _$User {
+  const factory User({
+    required EmailAddress email,
+    required String name,
+  }) = _User;
 }

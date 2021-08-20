@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-// import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
+
+part 'sign_in_check_email.freezed.dart';
 
 class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
   // final ISignInRepository _signInRepository;
@@ -34,13 +35,11 @@ class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
   }
 }
 
-class Params extends Equatable {
-  final EmailAddress email;
-
-  const Params({required this.email});
-
-  @override
-  List<Object?> get props => [email];
+@freezed
+class Params with _$Params {
+  const factory Params({
+    required EmailAddress email,
+  }) = _Params;
 }
 
 class CheckEmailErrorMessages {

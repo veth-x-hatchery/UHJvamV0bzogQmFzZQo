@@ -21,43 +21,31 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  # Value equality
-  equatable: ^2.0.3
+  cloud_firestore: ^2.4.0
+  cupertino_icons: ^1.0.2
+  dartz: ^0.10.0-nullsafety.2
+  firebase_auth: ^3.0.1
+  firebase_core: ^1.4.0
   flutter:
     sdk: flutter
-  # Bloc for state management
   flutter_bloc: ^7.1.0
-  # Service locator
-  get_it: ^7.2.0
-  # Http
-  http: ^0.13.3
-  # Remote API
-  internet_connection_checker: ^0.0.1+2
-  # Local cache
-  shared_preferences: ^2.0.6
-  # Functional programming thingies
-  dartz: ^0.10.0-nullsafety.2
   freezed_annotation: ^0.14.3
-  # guid generator
-  uuid: ^3.0.4
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-
-  # Firebase
-  firebase_core: ^1.4.0
-  firebase_auth: ^3.0.1
+  get_it: ^7.2.0
   google_sign_in: ^5.0.7
-  cloud_firestore: ^2.4.0
+  http: ^0.13.3
+  internet_connection_checker: ^0.0.1+2
+  shared_preferences: ^2.0.6
+  uuid: ^3.0.4
   
 dev_dependencies:
+  analyzer: ^2.1.0
   build_runner: ^2.1.1
   flutter_test:
     sdk: flutter
-  mockito: ^5.0.14
   freezed: ^0.14.5
   json_serializable: ^5.0.0
   lint: ^1.5.3
+  mockito: ^5.0.14
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

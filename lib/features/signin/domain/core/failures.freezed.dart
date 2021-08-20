@@ -159,25 +159,15 @@ class _$InvalidEmailCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$InvalidEmail<T>
-    with DiagnosticableTreeMixin
-    implements InvalidEmail<T> {
+class _$InvalidEmail<T> implements InvalidEmail<T> {
   const _$InvalidEmail({required this.failedValue});
 
   @override
   final T failedValue;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ValueFailure<$T>.invalidEmail(failedValue: $failedValue)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ValueFailure<$T>.invalidEmail'))
-      ..add(DiagnosticsProperty('failedValue', failedValue));
   }
 
   @override
@@ -314,25 +304,15 @@ class _$ShortPasswordCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$ShortPassword<T>
-    with DiagnosticableTreeMixin
-    implements ShortPassword<T> {
+class _$ShortPassword<T> implements ShortPassword<T> {
   const _$ShortPassword({required this.failedValue});
 
   @override
   final T failedValue;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ValueFailure<$T>.shortPassword(failedValue: $failedValue)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ValueFailure<$T>.shortPassword'))
-      ..add(DiagnosticsProperty('failedValue', failedValue));
   }
 
   @override
@@ -466,23 +446,15 @@ class _$EmptyCopyWithImpl<T, $Res> extends _$ValueFailureCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$Empty<T> with DiagnosticableTreeMixin implements Empty<T> {
+class _$Empty<T> implements Empty<T> {
   const _$Empty({required this.failedValue});
 
   @override
   final T failedValue;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ValueFailure<$T>.empty(failedValue: $failedValue)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ValueFailure<$T>.empty'))
-      ..add(DiagnosticsProperty('failedValue', failedValue));
   }
 
   @override
