@@ -1,10 +1,11 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_email.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
@@ -13,12 +14,12 @@ import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
 import 'sign_in_email.page_test.mocks.dart';
 
-@GenerateMocks([SignInBloc])
+@GenerateMocks([SignInEmailBloc])
 void main() {
-  late MockSignInBloc _mockSignInBloc;
+  late MockSignInEmailBloc _mockMockSignInEmailBloc;
 
   setUp(() {
-    _mockSignInBloc = MockSignInBloc();
+    _mockMockSignInEmailBloc = MockSignInEmailBloc();
   });
 
   Future<void> _pumpPage(WidgetTester tester) async {
@@ -26,16 +27,17 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInEmailPage.create(signInBloc: _mockSignInBloc),
+            body: SignInEmailPage.create(bloc: _mockMockSignInEmailBloc),
           ),
         ),
       ),
     );
   }
 
-  void _signInState(SignInState state) {
-    when(_mockSignInBloc.state).thenReturn(state);
-    when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
+  void _signInState(SignInEmailState state) {
+    when(_mockMockSignInEmailBloc.state).thenReturn(state);
+    when(_mockMockSignInEmailBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
   }
 
   Finder _emailInput() {
@@ -56,10 +58,23 @@ void main() {
     return validationButton;
   }
 
+  /// Form uses BLoC state to realize validations
+  void _prepareFormValidationValues({
+    String? email,
+  }) {
+    final emailVO = EmailAddress(email);
+    final state = SignInEmailState(
+      email: emailVO,
+      isLoading: false,
+      authFailureOrSuccessOption: none(),
+    );
+    when(_mockMockSignInEmailBloc.state).thenReturn(state);
+  }
+
   testWidgets('should find the validation button', (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInEmailState.initial());
 
     await _pumpPage(tester);
 
@@ -78,7 +93,7 @@ void main() {
   testWidgets('should find the email input', (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInEmailState.initial());
 
     await _pumpPage(tester);
 
@@ -98,7 +113,11 @@ void main() {
       (tester) async {
     // Arrange
 
-    _signInState(const SignInState.loading());
+    _signInState(SignInEmailState(
+      email: EmailAddress('test@test.com'),
+      isLoading: true,
+      authFailureOrSuccessOption: none(),
+    ));
 
     await _pumpPage(tester);
 
@@ -111,30 +130,35 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInEmailState.initial());
 
     await _pumpPage(tester);
 
     // Act
 
-    await tester.tap(_validationButton());
+    _prepareFormValidationValues();
 
-    await tester.pump();
+    await tester.tap(_validationButton());
 
     // assert
 
-    verifyNever(_mockSignInBloc.add(any));
+    verifyNever(_mockMockSignInEmailBloc
+        .add(const SignInEmailEvent.analyseEmailPressed()));
   });
 
   testWidgets('when user enters a invalid email then no events are emitted',
       (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInEmailState.initial());
 
     await _pumpPage(tester);
 
-    await tester.enterText(_emailInput(), 'invalidemail');
+    const invalidEmail = 'invalidemail';
+
+    await tester.enterText(_emailInput(), invalidEmail);
+
+    _prepareFormValidationValues(email: invalidEmail);
 
     // Act
 
@@ -144,14 +168,15 @@ void main() {
 
     // assert
 
-    verifyNever(_mockSignInBloc.add(any));
+    verifyNever(_mockMockSignInEmailBloc
+        .add(const SignInEmailEvent.analyseEmailPressed()));
   });
 
   testWidgets('when user enters a correct email then SignInBLoC is called',
       (tester) async {
     // arrange
 
-    _signInState(const SignInState.initial());
+    _signInState(SignInEmailState.initial());
 
     await _pumpPage(tester);
 
@@ -165,6 +190,6 @@ void main() {
 
     // assert
 
-    verify(_mockSignInBloc.add(any)).called(1);
+    verify(_mockMockSignInEmailBloc.add(any)).called(1);
   });
 }
