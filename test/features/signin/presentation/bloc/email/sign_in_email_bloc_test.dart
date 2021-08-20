@@ -7,9 +7,8 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 
-import 'register_bloc_test.mocks.dart';
+import 'sign_in_email_bloc_test.mocks.dart';
 
 @GenerateMocks([SignInCheckIfEmailIsInUse])
 void main() {
@@ -49,14 +48,17 @@ void main() {
       () async {
     // arrange
 
-    const email = 'test';
+    const email = 'test@test.com';
+
+    final valueObject = EmailAddress(email);
 
     when(_mockSignInWithEmailAndPassword.call(any))
-        .thenAnswer((_) => Future.value(const Right(unit)));
+        .thenAnswer((_) => Future.value(right(true)));
 
     // act
 
     _bloc.add(const SignInEmailEvent.emailChanged(email));
+
     _bloc.add(const SignInEmailEvent.analyseEmailPressed());
 
     // assert
@@ -65,22 +67,17 @@ void main() {
         emitsInOrder(
           [
             SignInEmailState(
-              email: EmailAddress(email),
+              email: valueObject,
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInEmailState(
-              email: EmailAddress(email),
-              isLoading: false,
-              authFailureOrSuccessOption: none(),
-            ),
-            SignInEmailState(
-              email: EmailAddress(email),
+              email: valueObject,
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInEmailState(
-              email: EmailAddress(email),
+              email: valueObject,
               isLoading: false,
               authFailureOrSuccessOption: none(),
             )
@@ -97,23 +94,20 @@ void main() {
     const email = 'test';
 
     when(_mockSignInWithEmailAndPassword.call(any))
-        .thenAnswer((_) => Future.value(const Right(unit)));
+        .thenAnswer((_) => Future.value(right(true)));
 
     // act
 
     _bloc.add(const SignInEmailEvent.emailChanged(email));
+
     _bloc.add(const SignInEmailEvent.analyseEmailPressed());
 
     // assert
+
     await expectLater(
         _bloc.stream,
         emitsInOrder(
           [
-            SignInEmailState(
-              email: EmailAddress(email),
-              isLoading: false,
-              authFailureOrSuccessOption: none(),
-            ),
             SignInEmailState(
               email: EmailAddress(email),
               isLoading: false,
@@ -136,8 +130,7 @@ void main() {
   test('when confirmation occour then should emit an failure detais', () async {
     // arrange
 
-    const email = 'test';
-    const password = '1234';
+    const email = 'test@test.com';
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidEmailAndPasswordCombination(),
       message: CheckEmailErrorMessages.emailAlreadyRegistered,
@@ -149,6 +142,7 @@ void main() {
     // act
 
     _bloc.add(const SignInEmailEvent.emailChanged(email));
+
     _bloc.add(const SignInEmailEvent.analyseEmailPressed());
 
     // assert
@@ -156,11 +150,6 @@ void main() {
         _bloc.stream,
         emitsInOrder(
           [
-            SignInEmailState(
-              email: EmailAddress(email),
-              isLoading: false,
-              authFailureOrSuccessOption: none(),
-            ),
             SignInEmailState(
               email: EmailAddress(email),
               isLoading: false,

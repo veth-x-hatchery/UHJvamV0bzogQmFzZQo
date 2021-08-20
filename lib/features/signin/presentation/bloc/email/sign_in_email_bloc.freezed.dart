@@ -336,7 +336,7 @@ class _$SignInEmailStateTearOff {
   _EmailState call(
       {required EmailAddress email,
       required bool isLoading,
-      required Option<Either<FailureDetails, bool>>
+      required Option<Either<FailureDetails, Unit>>
           authFailureOrSuccessOption}) {
     return _EmailState(
       email: email,
@@ -353,7 +353,7 @@ const $SignInEmailState = _$SignInEmailStateTearOff();
 mixin _$SignInEmailState {
   EmailAddress get email => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  Option<Either<FailureDetails, bool>> get authFailureOrSuccessOption =>
+  Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -369,7 +369,7 @@ abstract class $SignInEmailStateCopyWith<$Res> {
   $Res call(
       {EmailAddress email,
       bool isLoading,
-      Option<Either<FailureDetails, bool>> authFailureOrSuccessOption});
+      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -399,7 +399,7 @@ class _$SignInEmailStateCopyWithImpl<$Res>
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<FailureDetails, bool>>,
+              as Option<Either<FailureDetails, Unit>>,
     ));
   }
 }
@@ -414,7 +414,7 @@ abstract class _$EmailStateCopyWith<$Res>
   $Res call(
       {EmailAddress email,
       bool isLoading,
-      Option<Either<FailureDetails, bool>> authFailureOrSuccessOption});
+      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -446,7 +446,7 @@ class __$EmailStateCopyWithImpl<$Res>
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<FailureDetails, bool>>,
+              as Option<Either<FailureDetails, Unit>>,
     ));
   }
 }
@@ -464,7 +464,7 @@ class _$_EmailState implements _EmailState {
   @override
   final bool isLoading;
   @override
-  final Option<Either<FailureDetails, bool>> authFailureOrSuccessOption;
+  final Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption;
 
   @override
   String toString() {
@@ -504,7 +504,7 @@ abstract class _EmailState implements SignInEmailState {
   const factory _EmailState(
       {required EmailAddress email,
       required bool isLoading,
-      required Option<Either<FailureDetails, bool>>
+      required Option<Either<FailureDetails, Unit>>
           authFailureOrSuccessOption}) = _$_EmailState;
 
   @override
@@ -512,7 +512,7 @@ abstract class _EmailState implements SignInEmailState {
   @override
   bool get isLoading => throw _privateConstructorUsedError;
   @override
-  Option<Either<FailureDetails, bool>> get authFailureOrSuccessOption =>
+  Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

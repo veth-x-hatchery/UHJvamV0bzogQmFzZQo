@@ -33,13 +33,12 @@ class SignInEmailBloc extends Bloc<SignInEmailEvent, SignInEmailState> {
           isLoading: true,
           authFailureOrSuccessOption: none(),
         );
-        final result = await _signInCheckIfEmailIsInUse.call(Params(
-          email: state.email,
-        ));
+        final result =
+            await _signInCheckIfEmailIsInUse.call(Params(email: state.email));
         yield state.copyWith(
           isLoading: false,
           authFailureOrSuccessOption: result.fold(
-            (l) => some(result), // Todo(v): Simplify it
+            (l) => optionOf(left(l)), // Todo(v): Simplify it
             (r) => none(),
           ),
         );
