@@ -167,7 +167,8 @@ void main() {
 
     // assert
 
-    verifyNever(_mockBloc.add(any));
+    verifyNever(
+        _mockBloc.add(const SignInPasswordEvent.analysePasswordPressed()));
   });
 
   testWidgets('when user enters a correct password then SignInBLoC is called',
