@@ -7,7 +7,6 @@ import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_re
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
-import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 
 class SignInRegisterPage extends StatefulWidget {
@@ -23,11 +22,11 @@ class SignInRegisterPage extends StatefulWidget {
 
   static Widget create({
     BuildContext? context,
-    required SignInRegisterBloc signInBloc,
+    required SignInRegisterBloc bloc,
     String? email,
   }) {
     return BlocProvider(
-      create: (_) => signInBloc,
+      create: (_) => bloc,
       child: SignInRegisterPage(email: email),
     );
   }
@@ -86,10 +85,10 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
             (either) {
               either.fold(
                 (failure) {
-                  Logger.presentation('RegisterBloc $state: $failure');
+                  Logger.presentation('SignInRegisterBloc $state: $failure');
                 },
                 (_) {
-                  Logger.presentation('RegisterBloc $state');
+                  Logger.presentation('SignInRegisterBloc $state');
                 },
               );
             },
@@ -125,12 +124,13 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                   onChanged: (value) =>
                       bloc.add(SignInRegisterEvent.passwordChanged(value)),
                   validator: (_) => current.password.validation,
+                  onEditingComplete: state.isLoading ? () {} : _validateForm,
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 CustomRaisedButton(
                   key: const Key(
                       SignInPageKeys.signInRegisterPageValidateButton),
-                  onPressed: () => _validateForm(),
+                  onPressed: state.isLoading ? () {} : () => _validateForm(),
                   child: Text(
                     Texts.goToNextStep,
                     style: Theme.of(context).textTheme.button,

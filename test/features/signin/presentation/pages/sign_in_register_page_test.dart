@@ -26,7 +26,7 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInRegisterPage.create(signInBloc: _mockSignInBloc),
+            body: SignInRegisterPage.create(bloc: _mockSignInBloc),
           ),
         ),
       ),
