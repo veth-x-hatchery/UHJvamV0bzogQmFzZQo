@@ -19,34 +19,21 @@ import 'sign_in_bloc_test.mocks.dart';
 @GenerateMocks([
   AuthBloc,
   NavigationCubit,
-  SignInCheckIfEmailIsInUse,
-  SignInRegisterEmailAndPassword,
-  SignInWithEmailAndPassword,
   SignInWithGoogle,
 ])
 void main() {
   late SignInBloc _bloc;
 
   late MockAuthBloc _authBloc;
-  late MockSignInWithEmailAndPassword _mockSignInWithEmailAndPassword;
-  late MockSignInWithGoogle _mockSignInWithGoogle;
-  late MockSignInCheckIfEmailIsInUse _mockSignInCheckIfEmailIsInUse;
-  late MockSignInRegisterEmailAndPassword _mockSignInRegisterEmailAndPassword;
   late MockNavigationCubit _mockNavigation;
+  late MockSignInWithGoogle _mockSignInWithGoogle;
 
   setUp(() {
-    _mockSignInCheckIfEmailIsInUse = MockSignInCheckIfEmailIsInUse();
-    _mockSignInWithEmailAndPassword = MockSignInWithEmailAndPassword();
-    _mockSignInWithGoogle = MockSignInWithGoogle();
-    _mockSignInRegisterEmailAndPassword = MockSignInRegisterEmailAndPassword();
     _authBloc = MockAuthBloc();
     _mockNavigation = MockNavigationCubit();
+    _mockSignInWithGoogle = MockSignInWithGoogle();
 
     _bloc = SignInBloc(
-      _mockSignInCheckIfEmailIsInUse,
-      _mockSignInWithEmailAndPassword,
-      _mockSignInWithGoogle,
-      _mockSignInRegisterEmailAndPassword,
       _authBloc,
       _mockNavigation,
     );
@@ -55,293 +42,6 @@ void main() {
   test('initialState should be SignInInitial', () {
     // assert
     expect(_bloc.state, equals(const SignInState.initial()));
-  });
-
-  group('when check email', () {
-    final testEmail = EmailAddress('test@vethx.com');
-
-    Future<void> _assertSignInStatesAndNativation(
-      EmailAddress email,
-      bool isEmailAlreadyRegistered,
-      SignInPageGoTo signInPageGoTo,
-      List<SignInState> statesExpected, {
-      bool goToExpected = true,
-    }) async {
-      // arrange
-
-      when(_mockSignInCheckIfEmailIsInUse.call(any))
-          .thenAnswer((_) async => Right(isEmailAlreadyRegistered));
-
-      // act
-      _bloc.add(SignInEvent.checkEmailEvent(
-        fromPage: signInPageGoTo.from,
-        email: email,
-      ));
-
-      // assert later
-
-      await expectLater(_bloc.stream, emitsInOrder(statesExpected)).then(
-        (_) => verify(_mockNavigation.goTo(any)).called(goToExpected ? 1 : 0),
-      );
-    }
-
-    group('comming from page [SignInPageRoutes.emailEntry]', () {
-      test(
-        'should emit [SignInLoading, EmailNotFound] and go to page [SignInPageRoutes.registerEmailSignIn] passing String email as parameter',
-        () async {
-          // arrange
-
-          const isEmailAlreadyRegistered = false;
-
-          const fromPage = SignInPageRoutes.emailEntry;
-
-          final signInPageGoTo = SignInPageGoTo.registerPage(
-            from: fromPage,
-            email: testEmail.getOrCrash(),
-          );
-
-          final statesExpected = [
-            const SignInState.loading(),
-            const SignInState.emailNotFound(),
-          ];
-
-          await _assertSignInStatesAndNativation(
-            testEmail,
-            isEmailAlreadyRegistered,
-            signInPageGoTo,
-            statesExpected,
-          );
-        },
-      );
-
-      test(
-        'should emit [SignInLoading, EmailAlreadyRegistered] and go to page [SignInPageRoutes.passwordEntry]',
-        () async {
-          // arrange
-
-          const isEmailAlreadyRegistered = true;
-
-          const fromPage = SignInPageRoutes.emailEntry;
-
-          final signInPageGoTo = SignInPageGoTo.passwordPage(
-            from: fromPage,
-            email: testEmail.getOrCrash(),
-          );
-
-          final statesExpected = [
-            const SignInState.loading(),
-            const SignInState.emailAlreadyRegistered(),
-          ];
-
-          // act && assert
-
-          await _assertSignInStatesAndNativation(
-            testEmail,
-            isEmailAlreadyRegistered,
-            signInPageGoTo,
-            statesExpected,
-          );
-        },
-      );
-
-      test(
-        'should emit [SignInState.signInNotification(message: [CheckEmailErrorMessages.unavailable])] when email check fail',
-        () async {
-          // arrange
-          const throwFailure = AuthFailure.serverError();
-
-          final failureDetails = FailureDetails(
-            failure: throwFailure,
-            message: CheckEmailErrorMessages.unavailable,
-          );
-
-          when(_mockSignInCheckIfEmailIsInUse.call(any))
-              .thenAnswer((_) async => Left(failureDetails));
-
-          // act
-          _bloc.add(SignInEvent.checkEmailEvent(
-            email: testEmail,
-            fromPage: SignInPageRoutes.emailEntry,
-          ));
-
-          // assert later
-
-          final expected = [
-            const SignInState.loading(),
-            SignInState.signInNotification(message: failureDetails.message),
-          ];
-
-          await expectLater(_bloc.stream, emitsInOrder(expected));
-        },
-      );
-    });
-  });
-
-  group('when register with email and password', () {
-    final email = EmailAddress('test@vethx.com');
-    final password = Password('Nsd@#7DASBd(nasd=ASD*&@#');
-
-    test('should return email already in use', () async {
-      // arrange
-      const throwFailure = AuthFailure.emailAlreadyInUse();
-
-      final failureDetails = FailureDetails(
-        failure: throwFailure,
-        message: SignInRegisterEmailAndPasswordErrorMessages.emailAlreadyInUse,
-      );
-
-      when(_mockSignInRegisterEmailAndPassword.call(any))
-          .thenAnswer((_) async => Left(failureDetails));
-
-      // act
-      _bloc.add(SignInEvent.emailRegisterEvent(
-        email: email,
-        password: password,
-      ));
-
-      // assert later
-
-      final expected = [
-        const SignInState.loading(),
-        SignInState.signInNotification(message: failureDetails.message),
-      ];
-
-      await expectLater(_bloc.stream, emitsInOrder(expected));
-    });
-
-    test('should return unavailable notification', () async {
-      // arrange
-      const throwFailure = AuthFailure.serverError();
-
-      final failureDetails = FailureDetails(
-        failure: throwFailure,
-        message: SignInRegisterEmailAndPasswordErrorMessages.unavailable,
-      );
-
-      when(_mockSignInRegisterEmailAndPassword.call(any))
-          .thenAnswer((_) async => Left(failureDetails));
-
-      // act
-      _bloc.add(SignInEvent.emailRegisterEvent(
-        email: email,
-        password: password,
-      ));
-
-      // assert later
-
-      final expected = [
-        const SignInState.loading(),
-        SignInState.signInNotification(message: failureDetails.message),
-      ];
-
-      await expectLater(_bloc.stream, emitsInOrder(expected));
-    });
-
-    test('should emit [SignInAllowed]', () async {
-      // arrange
-
-      when(_mockSignInRegisterEmailAndPassword.call(any))
-          .thenAnswer((_) async => const Right(unit));
-
-      // act
-      _bloc.add(SignInEvent.emailRegisterEvent(
-        email: email,
-        password: password,
-      ));
-
-      // assert later
-
-      final expected = [
-        const SignInState.loading(),
-        const SignInState.signInAllowed(),
-      ];
-
-      await expectLater(_bloc.stream, emitsInOrder(expected));
-    });
-  });
-
-  group('when logging with email and password', () {
-    final email = EmailAddress('test@vethx.com');
-    final password = Password('Nsd@#7DASBd(nasd=ASD*&@#');
-
-    test('should return invalid email and password combination', () async {
-      // arrange
-      const throwFailure = AuthFailure.invalidEmailAndPasswordCombination();
-
-      final failureDetails = FailureDetails(
-        failure: throwFailure,
-        message: SignInWithEmailAndPasswordErrorMessages
-            .invalidEmailAndPasswordCombination,
-      );
-
-      when(_mockSignInWithEmailAndPassword.call(any))
-          .thenAnswer((_) async => Left(failureDetails));
-
-      // act
-      _bloc.add(SignInEvent.signInWithEmailEvent(
-        email: email,
-        password: password,
-      ));
-
-      // assert later
-
-      final expected = [
-        const SignInState.loading(),
-        SignInState.signInNotification(message: failureDetails.message),
-      ];
-
-      await expectLater(_bloc.stream, emitsInOrder(expected));
-    });
-
-    test('should return unavailable notification', () async {
-      // arrange
-      const throwFailure = AuthFailure.serverError();
-
-      final failureDetails = FailureDetails(
-        failure: throwFailure,
-        message: SignInWithEmailAndPasswordErrorMessages.unavailable,
-      );
-
-      when(_mockSignInWithEmailAndPassword.call(any))
-          .thenAnswer((_) async => Left(failureDetails));
-
-      // act
-      _bloc.add(SignInEvent.signInWithEmailEvent(
-        email: email,
-        password: password,
-      ));
-
-      // assert later
-
-      final expected = [
-        const SignInState.loading(),
-        SignInState.signInNotification(message: failureDetails.message),
-      ];
-
-      await expectLater(_bloc.stream, emitsInOrder(expected));
-    });
-
-    test('should emit [SignInAllowed]', () async {
-      // arrange
-
-      when(_mockSignInWithEmailAndPassword.call(any))
-          .thenAnswer((_) async => const Right(unit));
-
-      // act
-      _bloc.add(SignInEvent.signInWithEmailEvent(
-        email: email,
-        password: password,
-      ));
-
-      // assert later
-
-      final expected = [
-        const SignInState.loading(),
-        const SignInState.signInAllowed(),
-      ];
-
-      await expectLater(_bloc.stream, emitsInOrder(expected));
-    });
   });
 
   group('when sign in with google', () {
@@ -415,9 +115,7 @@ void main() {
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
     });
-  });
 
-  group('when auth changes accours', () {
     test('should notify Auth BLoC when sign in is allowed', () async {
       // arrange
 
