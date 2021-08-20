@@ -6,6 +6,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
 part 'sign_in_email_event.dart';
 part 'sign_in_email_state.dart';
@@ -13,9 +15,12 @@ part 'sign_in_email_bloc.freezed.dart';
 
 class SignInEmailBloc extends Bloc<SignInEmailEvent, SignInEmailState> {
   final SignInCheckIfEmailIsInUse _signInCheckIfEmailIsInUse;
+  final NavigationCubit _navigation;
 
-  SignInEmailBloc(this._signInCheckIfEmailIsInUse)
-      : super(SignInEmailState.initial());
+  SignInEmailBloc(
+    this._signInCheckIfEmailIsInUse,
+    this._navigation,
+  ) : super(SignInEmailState.initial());
 
   @override
   Stream<SignInEmailState> mapEventToState(
@@ -39,7 +44,14 @@ class SignInEmailBloc extends Bloc<SignInEmailEvent, SignInEmailState> {
           isLoading: false,
           authFailureOrSuccessOption: result.fold(
             (l) => optionOf(left(l)), // Todo(v): Simplify it
-            (r) => none(),
+            (isAlreadyInUse) {
+              _navigation.goTo(isAlreadyInUse
+                  ? SignInPageGoTo.passwordPage(
+                      from: SignInPageRoutes.emailEntry)
+                  : SignInPageGoTo.registerPage(
+                      from: SignInPageRoutes.emailEntry));
+              return none();
+            },
           ),
         );
       },

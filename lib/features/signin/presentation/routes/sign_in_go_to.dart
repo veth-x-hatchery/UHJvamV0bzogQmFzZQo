@@ -18,7 +18,7 @@ class SignInPageGoTo {
 
   factory SignInPageGoTo.passwordPage({
     required SignInPageRoutes from,
-    required String email,
+    String? email,
   }) =>
       SignInPageGoTo._internal(
         to: SignInPageRoutes.passwordEntry,
@@ -28,7 +28,7 @@ class SignInPageGoTo {
 
   factory SignInPageGoTo.registerPage({
     required SignInPageRoutes from,
-    required String email,
+    String? email,
   }) =>
       SignInPageGoTo._internal(
         to: SignInPageRoutes.registerEmailSignIn,

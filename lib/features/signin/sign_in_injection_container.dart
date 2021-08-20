@@ -123,7 +123,10 @@ Future<void> signInDependenciesInjection() async {
   );
 
   sl.registerFactory<SignInEmailBloc>(
-    () => SignInEmailBloc(sl<SignInCheckIfEmailIsInUse>()),
+    () => SignInEmailBloc(
+      sl<SignInCheckIfEmailIsInUse>(),
+      sl<NavigationCubit>(),
+    ),
   );
 
   sl.registerFactory<SignInPasswordBloc>(

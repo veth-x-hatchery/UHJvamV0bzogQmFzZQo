@@ -7,17 +7,26 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 
 import 'sign_in_email_bloc_test.mocks.dart';
 
-@GenerateMocks([SignInCheckIfEmailIsInUse])
+@GenerateMocks([
+  NavigationCubit,
+  SignInCheckIfEmailIsInUse,
+])
 void main() {
   late SignInEmailBloc _bloc;
   late MockSignInCheckIfEmailIsInUse _mockSignInWithEmailAndPassword;
+  late MockNavigationCubit _mockNavigation;
 
   setUp(() {
     _mockSignInWithEmailAndPassword = MockSignInCheckIfEmailIsInUse();
-    _bloc = SignInEmailBloc(_mockSignInWithEmailAndPassword);
+    _mockNavigation = MockNavigationCubit();
+    _bloc = SignInEmailBloc(
+      _mockSignInWithEmailAndPassword,
+      _mockNavigation,
+    );
   });
 
   test('when email changes occour then should emit correct state', () async {
