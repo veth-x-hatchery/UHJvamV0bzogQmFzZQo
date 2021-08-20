@@ -177,4 +177,45 @@ void main() {
           ],
         ));
   });
+
+  test('when confirmation occour then should go to other page', () async {
+    // arrange
+
+    const email = 'test@test.com';
+
+    when(_mockSignInWithEmailAndPassword.call(any))
+        .thenAnswer((_) => Future.value(right(true)));
+
+    // act
+
+    _bloc.add(const SignInEmailEvent.emailChanged(email));
+
+    _bloc.add(const SignInEmailEvent.analyseEmailPressed());
+
+    // assert
+
+    await expectLater(
+        _bloc.stream,
+        emitsInOrder(
+          [
+            SignInEmailState(
+              email: EmailAddress(email),
+              isLoading: false,
+              authFailureOrSuccessOption: none(),
+            ),
+            SignInEmailState(
+              email: EmailAddress(email),
+              isLoading: true,
+              authFailureOrSuccessOption: none(),
+            ),
+            SignInEmailState(
+              email: EmailAddress(email),
+              isLoading: false,
+              authFailureOrSuccessOption: none(),
+            )
+          ],
+        )).then(
+      (_) => verify(_mockNavigation.goTo(any)).called(1),
+    );
+  });
 }
