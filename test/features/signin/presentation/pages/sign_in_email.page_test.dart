@@ -1,7 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_email.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -55,6 +58,19 @@ void main() {
     return validationButton;
   }
 
+  /// Form uses BLoC state to realize validations
+  void _prepareFormValidationValues({
+    String? email,
+  }) {
+    final emailVO = EmailAddress(email);
+    final state = SignInEmailState(
+      email: emailVO,
+      isLoading: false,
+      authFailureOrSuccessOption: none(),
+    );
+    when(_mockMockSignInEmailBloc.state).thenReturn(state);
+  }
+
   testWidgets('should find the validation button', (tester) async {
     // arrange
 
@@ -97,7 +113,11 @@ void main() {
       (tester) async {
     // Arrange
 
-    // _signInState(const SignInEmailState.loading());
+    _signInState(SignInEmailState(
+      email: EmailAddress('test@test.com'),
+      isLoading: true,
+      authFailureOrSuccessOption: none(),
+    ));
 
     await _pumpPage(tester);
 
@@ -116,13 +136,14 @@ void main() {
 
     // Act
 
-    await tester.tap(_validationButton());
+    _prepareFormValidationValues();
 
-    await tester.pump();
+    await tester.tap(_validationButton());
 
     // assert
 
-    verifyNever(_mockMockSignInEmailBloc.add(any));
+    verifyNever(_mockMockSignInEmailBloc
+        .add(const SignInEmailEvent.analyseEmailPressed()));
   });
 
   testWidgets('when user enters a invalid email then no events are emitted',
@@ -133,7 +154,11 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(_emailInput(), 'invalidemail');
+    const invalidEmail = 'invalidemail';
+
+    await tester.enterText(_emailInput(), invalidEmail);
+
+    _prepareFormValidationValues(email: invalidEmail);
 
     // Act
 
@@ -143,7 +168,8 @@ void main() {
 
     // assert
 
-    verifyNever(_mockMockSignInEmailBloc.add(any));
+    verifyNever(_mockMockSignInEmailBloc
+        .add(const SignInEmailEvent.analyseEmailPressed()));
   });
 
   testWidgets('when user enters a correct email then SignInBLoC is called',
