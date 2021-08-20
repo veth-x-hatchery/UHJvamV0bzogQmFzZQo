@@ -37,6 +37,12 @@ class SignInRegisterEmailAndPassword extends UseCase<Unit, Params> {
         message: SignInRegisterEmailAndPasswordErrorMessages.emailAlreadyInUse,
       );
     }
+    if (auth == const AuthFailure.invalidEmailAndPasswordCombination()) {
+      return FailureDetails(
+        failure: auth,
+        message: SignInRegisterEmailAndPasswordErrorMessages.emailAlreadyInUse,
+      );
+    }
     return FailureDetails(
       failure: auth,
       message: SignInRegisterEmailAndPasswordErrorMessages.unavailable,
@@ -47,6 +53,8 @@ class SignInRegisterEmailAndPassword extends UseCase<Unit, Params> {
 class SignInRegisterEmailAndPasswordErrorMessages {
   static const unavailable = 'Unavailable';
   static const emailAlreadyInUse = 'This email is already in use';
+  static const invalidEmailAndPasswordCombination =
+      'Invalid email and password combination';
 }
 
 @freezed

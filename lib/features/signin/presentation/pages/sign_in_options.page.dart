@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_email.page.dart';
@@ -24,6 +25,9 @@ class SignInOptionsPage extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => sl<SignInBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => sl<SignInRegisterBloc>(),
         ),
         BlocProvider(
           create: (_) => sl<NavigationCubit>(),
@@ -58,7 +62,8 @@ class SignInOptionsPage extends StatelessWidget {
                   context,
                   SlideLeftRoute<void>(
                       page: SignInRegisterPage.create(
-                          signInBloc: BlocProvider.of<SignInBloc>(context),
+                          signInBloc:
+                              BlocProvider.of<SignInRegisterBloc>(context),
                           email: page.parameters as String?)),
                 );
                 break;

@@ -77,9 +77,8 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
               FieldEmail(
                 key: const Key(SignInPageKeys.signInEmailPageEmailTextField),
                 controller: _emailTextEditingController,
-                emailFormKey: _emailFormKey,
-                emailFocusNode: _emailFocusNode,
-                validateEmail: isLoading ? () {} : _validateEmail,
+                focusNode: _emailFocusNode,
+                onEditingComplete: isLoading ? () {} : _validateEmail,
               ),
               SizedBox(height: SizeConfig.defaultEdgeSpace),
               CustomRaisedButton(

@@ -83,9 +83,8 @@ class _SignInPasswordPageState extends State<SignInPasswordPage> {
               key:
                   const Key(SignInPageKeys.signInPasswordPagePasswordTextField),
               controller: _passwordTextEditingController,
-              passwordFormKey: _passwordFormKey,
-              passwordFocusNode: _passwordFocusNode,
-              validatePassword: isLoading ? () {} : () => _authenticate(),
+              focusNode: _passwordFocusNode,
+              onEditingComplete: isLoading ? () {} : () => _authenticate(),
             ),
             SizedBox(height: SizeConfig.defaultEdgeSpace),
             CustomRaisedButton(

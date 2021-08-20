@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
+import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
+import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 
 class SignInRegisterPage extends StatefulWidget {
@@ -22,7 +23,7 @@ class SignInRegisterPage extends StatefulWidget {
 
   static Widget create({
     BuildContext? context,
-    required SignInBloc signInBloc,
+    required SignInRegisterBloc signInBloc,
     String? email,
   }) {
     return BlocProvider(
@@ -33,45 +34,27 @@ class SignInRegisterPage extends StatefulWidget {
 }
 
 class _SignInRegisterPageState extends State<SignInRegisterPage> {
-  final _emailFormKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+
   final _emailFocusNode = FocusNode();
   final _emailTextEditingController = TextEditingController();
 
-  final _passwordFormKey = GlobalKey<FormState>();
   final _passwordFocusNode = FocusNode();
   final _passwordTextEditingController = TextEditingController();
 
-  bool _validateEmail() {
-    if (_emailFormKey.currentState != null) {
-      if (_emailFormKey.currentState!.validate()) {
-        _emailFormKey.currentState!.save();
-        _passwordFocusNode.requestFocus();
-        return true;
-      }
-    }
-    return false;
-  }
+  SignInRegisterBloc get bloc => BlocProvider.of<SignInRegisterBloc>(context);
+  SignInRegisterState get current => bloc.state;
 
-  void _authenticate() {
-    if (_validateEmail()) {
-      if (_passwordFormKey.currentState != null) {
-        if (_passwordFormKey.currentState!.validate()) {
-          _passwordFormKey.currentState!.save();
-          BlocProvider.of<SignInBloc>(context).add(
-            SignInEvent.signInWithEmailEvent(
-              email: EmailAddress(_emailTextEditingController.text),
-              password: Password(_passwordTextEditingController.text),
-            ),
-          );
-        }
-      }
+  void _validateForm() {
+    if (_formKey.currentState?.validate() == true) {
+      bloc.add(const SignInRegisterEvent.registerWithEmailAndPasswordPressed());
     }
   }
 
   @override
   void initState() {
-    if (widget.email != null && EmailAddress(widget.email).isValid()) {
-      _emailTextEditingController.text = widget.email!;
+    if (current.email.isValid()) {
+      _emailTextEditingController.text = current.email.getOrCrash();
       _passwordFocusNode.requestFocus();
     } else {
       _emailFocusNode.requestFocus();
@@ -81,11 +64,11 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
 
   @override
   void dispose() {
-    _emailFormKey.currentState?.dispose();
+    _formKey.currentState?.dispose();
+
     _emailFocusNode.dispose();
     _emailTextEditingController.dispose();
 
-    _passwordFormKey.currentState?.dispose();
     _passwordFocusNode.dispose();
     _passwordTextEditingController.dispose();
 
@@ -96,46 +79,68 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
-      child: BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
-        final isLoading = state == const SignInState.loading();
-        return FormColumn(
-          children: [
-            SizedBox(height: SizeConfig.defaultEdgeSpace),
-            SignInLoader(
-              title: Texts.signInRegisterEntryTitle,
-              size: SizeConfig.screenHeight * 0.25,
-              loading: isLoading,
+      child: BlocConsumer<SignInRegisterBloc, SignInRegisterState>(
+        listener: (context, state) {
+          state.authFailureOrSuccessOption.fold(
+            () {},
+            (either) {
+              either.fold(
+                (failure) {
+                  Logger.presentation('RegisterBloc $state: $failure');
+                },
+                (_) {
+                  Logger.presentation('RegisterBloc $state');
+                },
+              );
+            },
+          );
+        },
+        builder: (context, state) {
+          return Form(
+            key: _formKey,
+            child: FormColumn(
+              children: [
+                SizedBox(height: SizeConfig.defaultEdgeSpace),
+                SignInLoader(
+                  title: Texts.signInRegisterEntryTitle,
+                  size: SizeConfig.screenHeight * 0.25,
+                  loading: state.isLoading,
+                ),
+                SizedBox(height: SizeConfig.defaultEdgeSpace),
+                FieldEmail(
+                  controller: _emailTextEditingController,
+                  focusNode: _emailFocusNode,
+                  key: const Key(
+                      SignInPageKeys.signInRegisterPageEmailTextField),
+                  onChanged: (value) =>
+                      bloc.add(SignInRegisterEvent.emailChanged(value)),
+                  validator: (_) => current.email.validation,
+                ),
+                SizedBox(height: SizeConfig.defaultEdgeSpace),
+                FieldPassword(
+                  controller: _passwordTextEditingController,
+                  focusNode: _passwordFocusNode,
+                  key: const Key(
+                      SignInPageKeys.signInRegisterPagePasswordTextField),
+                  onChanged: (value) =>
+                      bloc.add(SignInRegisterEvent.passwordChanged(value)),
+                  validator: (_) => current.password.validation,
+                ),
+                SizedBox(height: SizeConfig.defaultEdgeSpace),
+                CustomRaisedButton(
+                  key: const Key(
+                      SignInPageKeys.signInRegisterPageValidateButton),
+                  onPressed: () => _validateForm(),
+                  child: Text(
+                    Texts.goToNextStep,
+                    style: Theme.of(context).textTheme.button,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: SizeConfig.defaultEdgeSpace),
-            FieldEmail(
-              key: const Key(SignInPageKeys.signInRegisterPageEmailTextField),
-              controller: _emailTextEditingController,
-              emailFormKey: _emailFormKey,
-              emailFocusNode: _emailFocusNode,
-              validateEmail: () => _validateEmail(),
-            ),
-            SizedBox(height: SizeConfig.defaultEdgeSpace),
-            FieldPassword(
-              key:
-                  const Key(SignInPageKeys.signInRegisterPagePasswordTextField),
-              controller: _passwordTextEditingController,
-              passwordFormKey: _passwordFormKey,
-              passwordFocusNode: _passwordFocusNode,
-              validatePassword: () => _authenticate(),
-            ),
-            SizedBox(height: SizeConfig.defaultEdgeSpace),
-            CustomRaisedButton(
-              key: const Key(SignInPageKeys.signInRegisterPageValidateButton),
-              child: Text(
-                Texts.goToNextStep,
-                style: Theme.of(context).textTheme.button,
-              ),
-              onPressed: () =>
-                  _emailFocusNode.hasFocus ? _validateEmail() : _authenticate(),
-            ),
-          ],
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }
