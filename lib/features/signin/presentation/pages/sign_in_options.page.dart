@@ -29,11 +29,17 @@ class SignInOptionsPage extends StatelessWidget {
           create: (_) => sl<SignInBloc>(),
         ),
         BlocProvider(
+          create: (_) => sl<NavigationCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => sl<SignInEmailBloc>(),
+        ),
+        BlocProvider(
           create: (_) => sl<SignInRegisterBloc>(),
         ),
         BlocProvider(
-          create: (_) => sl<NavigationCubit>(),
-        )
+          create: (_) => sl<SignInPasswordBloc>(),
+        ),
       ],
       child: const SignInOptionsPage(),
     );

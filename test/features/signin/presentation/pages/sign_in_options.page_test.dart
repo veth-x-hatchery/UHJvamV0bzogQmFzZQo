@@ -5,6 +5,9 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_email.page.dart';
@@ -16,16 +19,24 @@ import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
+
 import 'sign_in_options.page_test.mocks.dart';
 
 @GenerateMocks([
   SignInBloc,
+  SignInEmailBloc,
+  SignInRegisterBloc,
+  SignInPasswordBloc,
   NavigationCubit,
 ], customMocks: [
   MockSpec<NavigatorObserver>(returnNullOnMissingStub: true)
 ])
 void main() {
   late MockSignInBloc _mockSignInBloc;
+  late MockSignInEmailBloc _mockMockSignInEmailBloc;
+  late MockSignInRegisterBloc _mockMockSignInRegisterBloc;
+  late MockSignInPasswordBloc _mockMockSignInPasswordBloc;
+
   late NavigationCubit _navigationCubit;
 
   late MockNavigatorObserver _mockNavigationObserver;
@@ -34,11 +45,20 @@ void main() {
 
   setUp(() {
     _mockSignInBloc = MockSignInBloc();
+    _mockMockSignInEmailBloc = MockSignInEmailBloc();
+    _mockMockSignInRegisterBloc = MockSignInRegisterBloc();
+    _mockMockSignInPasswordBloc = MockSignInPasswordBloc();
+
     _navigationCubit = NavigationCubit();
     _mockNavigationObserver = MockNavigatorObserver();
 
     sl = GetIt.instance;
+
     sl.registerFactory<SignInBloc>(() => _mockSignInBloc);
+    sl.registerFactory<SignInEmailBloc>(() => _mockMockSignInEmailBloc);
+    sl.registerFactory<SignInRegisterBloc>(() => _mockMockSignInRegisterBloc);
+    sl.registerFactory<SignInPasswordBloc>(() => _mockMockSignInPasswordBloc);
+
     sl.registerLazySingleton<NavigationCubit>(() => _navigationCubit);
   });
 
@@ -47,6 +67,31 @@ void main() {
   void _signInState(SignInState state) {
     when(_mockSignInBloc.state).thenReturn(state);
     when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
+  }
+
+  void _SignInEmailState(SignInEmailState state) {
+    when(_mockMockSignInEmailBloc.state).thenReturn(state);
+    when(_mockMockSignInEmailBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
+  }
+
+  void _SignInRegisterState(SignInRegisterState state) {
+    when(_mockMockSignInRegisterBloc.state).thenReturn(state);
+    when(_mockMockSignInRegisterBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
+  }
+
+  void _SignInPasswordState(SignInPasswordState state) {
+    when(_mockMockSignInPasswordBloc.state).thenReturn(state);
+    when(_mockMockSignInPasswordBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
+  }
+
+  void _setInitialState() {
+    _signInState(const SignInState.initial());
+    _SignInEmailState(SignInEmailState.initial());
+    _SignInRegisterState(SignInRegisterState.initial());
+    _SignInPasswordState(SignInPasswordState.initial());
   }
 
   Future<void> _pumpPage(WidgetTester tester) async {
@@ -70,7 +115,7 @@ void main() {
         (WidgetTester tester) async {
       // Arrange
 
-      _signInState(const SignInState.initial());
+      _setInitialState();
 
       // Act
 
@@ -87,7 +132,7 @@ void main() {
         (WidgetTester tester) async {
       // Arrange
 
-      _signInState(const SignInState.initial());
+      _setInitialState();
 
       // Act
 
@@ -114,7 +159,7 @@ void main() {
         (WidgetTester tester) async {
       // Arrange
 
-      _signInState(const SignInState.initial());
+      _setInitialState();
 
       // Act
 
@@ -141,7 +186,7 @@ void main() {
         (WidgetTester tester) async {
       // Arrange
 
-      _signInState(const SignInState.initial());
+      _setInitialState();
 
       // Act
 
@@ -185,7 +230,7 @@ void main() {
     testWidgets('should find the correct button option', (tester) async {
       // Arrange
 
-      _signInState(const SignInState.initial());
+      _setInitialState();
 
       // Act
 
@@ -230,7 +275,7 @@ void main() {
     testWidgets('should find the correct button option', (tester) async {
       // Arrange
 
-      _signInState(const SignInState.initial());
+      _setInitialState();
 
       // Act
 
@@ -248,7 +293,7 @@ void main() {
         (tester) async {
       // Arrange
 
-      _signInState(const SignInState.initial());
+      _setInitialState();
 
       await _pumpPage(tester);
 
