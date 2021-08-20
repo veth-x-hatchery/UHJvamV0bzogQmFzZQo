@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'register_bloc.dart';
+part of 'sign_in_register_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,8 +14,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$RegisterEventTearOff {
-  const _$RegisterEventTearOff();
+class _$SignInRegisterEventTearOff {
+  const _$SignInRegisterEventTearOff();
 
   EmailChanged emailChanged(String emailStr) {
     return EmailChanged(
@@ -35,10 +35,10 @@ class _$RegisterEventTearOff {
 }
 
 /// @nodoc
-const $RegisterEvent = _$RegisterEventTearOff();
+const $SignInRegisterEvent = _$SignInRegisterEventTearOff();
 
 /// @nodoc
-mixin _$RegisterEvent {
+mixin _$SignInRegisterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String emailStr) emailChanged,
@@ -89,20 +89,20 @@ mixin _$RegisterEvent {
 }
 
 /// @nodoc
-abstract class $RegisterEventCopyWith<$Res> {
-  factory $RegisterEventCopyWith(
-          RegisterEvent value, $Res Function(RegisterEvent) then) =
-      _$RegisterEventCopyWithImpl<$Res>;
+abstract class $SignInRegisterEventCopyWith<$Res> {
+  factory $SignInRegisterEventCopyWith(
+          SignInRegisterEvent value, $Res Function(SignInRegisterEvent) then) =
+      _$SignInRegisterEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$RegisterEventCopyWithImpl<$Res>
-    implements $RegisterEventCopyWith<$Res> {
-  _$RegisterEventCopyWithImpl(this._value, this._then);
+class _$SignInRegisterEventCopyWithImpl<$Res>
+    implements $SignInRegisterEventCopyWith<$Res> {
+  _$SignInRegisterEventCopyWithImpl(this._value, this._then);
 
-  final RegisterEvent _value;
+  final SignInRegisterEvent _value;
   // ignore: unused_field
-  final $Res Function(RegisterEvent) _then;
+  final $Res Function(SignInRegisterEvent) _then;
 }
 
 /// @nodoc
@@ -114,7 +114,8 @@ abstract class $EmailChangedCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$EmailChangedCopyWithImpl<$Res> extends _$RegisterEventCopyWithImpl<$Res>
+class _$EmailChangedCopyWithImpl<$Res>
+    extends _$SignInRegisterEventCopyWithImpl<$Res>
     implements $EmailChangedCopyWith<$Res> {
   _$EmailChangedCopyWithImpl(
       EmailChanged _value, $Res Function(EmailChanged) _then)
@@ -146,7 +147,7 @@ class _$EmailChanged implements EmailChanged {
 
   @override
   String toString() {
-    return 'RegisterEvent.emailChanged(emailStr: $emailStr)';
+    return 'SignInRegisterEvent.emailChanged(emailStr: $emailStr)';
   }
 
   @override
@@ -239,7 +240,7 @@ class _$EmailChanged implements EmailChanged {
   }
 }
 
-abstract class EmailChanged implements RegisterEvent {
+abstract class EmailChanged implements SignInRegisterEvent {
   const factory EmailChanged(String emailStr) = _$EmailChanged;
 
   String get emailStr => throw _privateConstructorUsedError;
@@ -258,7 +259,7 @@ abstract class $PasswordChangedCopyWith<$Res> {
 
 /// @nodoc
 class _$PasswordChangedCopyWithImpl<$Res>
-    extends _$RegisterEventCopyWithImpl<$Res>
+    extends _$SignInRegisterEventCopyWithImpl<$Res>
     implements $PasswordChangedCopyWith<$Res> {
   _$PasswordChangedCopyWithImpl(
       PasswordChanged _value, $Res Function(PasswordChanged) _then)
@@ -290,7 +291,7 @@ class _$PasswordChanged implements PasswordChanged {
 
   @override
   String toString() {
-    return 'RegisterEvent.passwordChanged(passwordStr: $passwordStr)';
+    return 'SignInRegisterEvent.passwordChanged(passwordStr: $passwordStr)';
   }
 
   @override
@@ -383,7 +384,7 @@ class _$PasswordChanged implements PasswordChanged {
   }
 }
 
-abstract class PasswordChanged implements RegisterEvent {
+abstract class PasswordChanged implements SignInRegisterEvent {
   const factory PasswordChanged(String passwordStr) = _$PasswordChanged;
 
   String get passwordStr => throw _privateConstructorUsedError;
@@ -402,7 +403,7 @@ abstract class $RegisterWithEmailAndPasswordPressedCopyWith<$Res> {
 
 /// @nodoc
 class _$RegisterWithEmailAndPasswordPressedCopyWithImpl<$Res>
-    extends _$RegisterEventCopyWithImpl<$Res>
+    extends _$SignInRegisterEventCopyWithImpl<$Res>
     implements $RegisterWithEmailAndPasswordPressedCopyWith<$Res> {
   _$RegisterWithEmailAndPasswordPressedCopyWithImpl(
       RegisterWithEmailAndPasswordPressed _value,
@@ -422,7 +423,7 @@ class _$RegisterWithEmailAndPasswordPressed
 
   @override
   String toString() {
-    return 'RegisterEvent.registerWithEmailAndPasswordPressed()';
+    return 'SignInRegisterEvent.registerWithEmailAndPasswordPressed()';
   }
 
   @override
@@ -506,14 +507,15 @@ class _$RegisterWithEmailAndPasswordPressed
   }
 }
 
-abstract class RegisterWithEmailAndPasswordPressed implements RegisterEvent {
+abstract class RegisterWithEmailAndPasswordPressed
+    implements SignInRegisterEvent {
   const factory RegisterWithEmailAndPasswordPressed() =
       _$RegisterWithEmailAndPasswordPressed;
 }
 
 /// @nodoc
-class _$RegisterStateTearOff {
-  const _$RegisterStateTearOff();
+class _$SignInRegisterStateTearOff {
+  const _$SignInRegisterStateTearOff();
 
   _RegisterState call(
       {required EmailAddress email,
@@ -531,10 +533,10 @@ class _$RegisterStateTearOff {
 }
 
 /// @nodoc
-const $RegisterState = _$RegisterStateTearOff();
+const $SignInRegisterState = _$SignInRegisterStateTearOff();
 
 /// @nodoc
-mixin _$RegisterState {
+mixin _$SignInRegisterState {
   EmailAddress get email => throw _privateConstructorUsedError;
   Password get password => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
@@ -542,15 +544,15 @@ mixin _$RegisterState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $RegisterStateCopyWith<RegisterState> get copyWith =>
+  $SignInRegisterStateCopyWith<SignInRegisterState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RegisterStateCopyWith<$Res> {
-  factory $RegisterStateCopyWith(
-          RegisterState value, $Res Function(RegisterState) then) =
-      _$RegisterStateCopyWithImpl<$Res>;
+abstract class $SignInRegisterStateCopyWith<$Res> {
+  factory $SignInRegisterStateCopyWith(
+          SignInRegisterState value, $Res Function(SignInRegisterState) then) =
+      _$SignInRegisterStateCopyWithImpl<$Res>;
   $Res call(
       {EmailAddress email,
       Password password,
@@ -559,13 +561,13 @@ abstract class $RegisterStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RegisterStateCopyWithImpl<$Res>
-    implements $RegisterStateCopyWith<$Res> {
-  _$RegisterStateCopyWithImpl(this._value, this._then);
+class _$SignInRegisterStateCopyWithImpl<$Res>
+    implements $SignInRegisterStateCopyWith<$Res> {
+  _$SignInRegisterStateCopyWithImpl(this._value, this._then);
 
-  final RegisterState _value;
+  final SignInRegisterState _value;
   // ignore: unused_field
-  final $Res Function(RegisterState) _then;
+  final $Res Function(SignInRegisterState) _then;
 
   @override
   $Res call({
@@ -597,7 +599,7 @@ class _$RegisterStateCopyWithImpl<$Res>
 
 /// @nodoc
 abstract class _$RegisterStateCopyWith<$Res>
-    implements $RegisterStateCopyWith<$Res> {
+    implements $SignInRegisterStateCopyWith<$Res> {
   factory _$RegisterStateCopyWith(
           _RegisterState value, $Res Function(_RegisterState) then) =
       __$RegisterStateCopyWithImpl<$Res>;
@@ -611,7 +613,7 @@ abstract class _$RegisterStateCopyWith<$Res>
 
 /// @nodoc
 class __$RegisterStateCopyWithImpl<$Res>
-    extends _$RegisterStateCopyWithImpl<$Res>
+    extends _$SignInRegisterStateCopyWithImpl<$Res>
     implements _$RegisterStateCopyWith<$Res> {
   __$RegisterStateCopyWithImpl(
       _RegisterState _value, $Res Function(_RegisterState) _then)
@@ -668,7 +670,7 @@ class _$_RegisterState implements _RegisterState {
 
   @override
   String toString() {
-    return 'RegisterState(email: $email, password: $password, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'SignInRegisterState(email: $email, password: $password, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -704,7 +706,7 @@ class _$_RegisterState implements _RegisterState {
       __$RegisterStateCopyWithImpl<_RegisterState>(this, _$identity);
 }
 
-abstract class _RegisterState implements RegisterState {
+abstract class _RegisterState implements SignInRegisterState {
   const factory _RegisterState(
       {required EmailAddress email,
       required Password password,

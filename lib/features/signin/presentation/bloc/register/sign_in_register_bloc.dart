@@ -8,19 +8,20 @@ import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.da
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart';
 
-part 'register_event.dart';
-part 'register_state.dart';
-part 'register_bloc.freezed.dart';
+part 'sign_in_register_event.dart';
+part 'sign_in_register_state.dart';
+part 'sign_in_register_bloc.freezed.dart';
 
-class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
+class SignInRegisterBloc
+    extends Bloc<SignInRegisterEvent, SignInRegisterState> {
   final SignInRegisterEmailAndPassword _signInRegisterEmailAndPassword;
 
-  RegisterBloc(this._signInRegisterEmailAndPassword)
-      : super(RegisterState.initial());
+  SignInRegisterBloc(this._signInRegisterEmailAndPassword)
+      : super(SignInRegisterState.initial());
 
   @override
-  Stream<RegisterState> mapEventToState(
-    RegisterEvent event,
+  Stream<SignInRegisterState> mapEventToState(
+    SignInRegisterEvent event,
   ) async* {
     yield* event.map(
       emailChanged: (e) async* {

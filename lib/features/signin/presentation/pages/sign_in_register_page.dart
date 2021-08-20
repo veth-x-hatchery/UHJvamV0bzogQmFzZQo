@@ -4,7 +4,7 @@ import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/register/bloc/register_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -70,7 +70,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
-      child: BlocConsumer<RegisterBloc, RegisterState>(
+      child: BlocConsumer<SignInRegisterBloc, SignInRegisterState>(
         listener: (context, state) {
           state.authFailureOrSuccessOption.fold(
             () {},
@@ -105,9 +105,10 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                     labelText: 'Email',
                   ),
                   autocorrect: false,
-                  onChanged: (value) => BlocProvider.of<RegisterBloc>(context)
-                      .add(RegisterEvent.emailChanged(value)),
-                  validator: (_) => BlocProvider.of<RegisterBloc>(context)
+                  onChanged: (value) =>
+                      BlocProvider.of<SignInRegisterBloc>(context)
+                          .add(SignInRegisterEvent.emailChanged(value)),
+                  validator: (_) => BlocProvider.of<SignInRegisterBloc>(context)
                       .state
                       .email
                       .value
@@ -126,9 +127,10 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                   controller: _passwordTextEditingController,
                   obscureText: true,
                   autocorrect: false,
-                  onChanged: (value) => BlocProvider.of<RegisterBloc>(context)
-                      .add(RegisterEvent.passwordChanged(value)),
-                  validator: (_) => BlocProvider.of<RegisterBloc>(context)
+                  onChanged: (value) =>
+                      BlocProvider.of<SignInRegisterBloc>(context)
+                          .add(SignInRegisterEvent.passwordChanged(value)),
+                  validator: (_) => BlocProvider.of<SignInRegisterBloc>(context)
                       .state
                       .password
                       .value
@@ -148,8 +150,8 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                     Texts.goToNextStep,
                     style: Theme.of(context).textTheme.button,
                   ),
-                  onPressed: () => BlocProvider.of<RegisterBloc>(context).add(
-                      const RegisterEvent
+                  onPressed: () => BlocProvider.of<SignInRegisterBloc>(context)
+                      .add(const SignInRegisterEvent
                           .registerWithEmailAndPasswordPressed()),
                 ),
               ],
