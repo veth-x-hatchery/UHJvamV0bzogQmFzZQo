@@ -93,7 +93,7 @@ Future<void> signInDependenciesInjection() async {
 
   sl.registerLazySingleton<SignInWithSecret>(
     () => SignInWithSecret(
-      // sl<ISignInRepository>(),
+      sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
   );
