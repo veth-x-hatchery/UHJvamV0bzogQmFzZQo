@@ -15,12 +15,12 @@ part 'sign_in_event.dart';
 part 'sign_in_state.dart';
 part 'sign_in_bloc.freezed.dart';
 
-class SignInBloc extends Bloc<SignInEvent, SignInState> {
+class SignInOptionsBloc extends Bloc<SignInEvent, SignInState> {
   final AuthBloc _authBloc;
   final NavigationCubit _navigation;
   final SignInWithGoogle _signInWithGoogle;
 
-  SignInBloc(
+  SignInOptionsBloc(
     this._authBloc,
     this._navigation,
     this._signInWithGoogle,

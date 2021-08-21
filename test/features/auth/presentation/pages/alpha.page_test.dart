@@ -18,25 +18,25 @@ import 'alpha.page_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
-  SignInBloc,
+  SignInOptionsBloc,
   NavigationCubit,
   LoggingNavigationObserver,
 ])
 void main() {
   late MockAuthBloc _mockAuthBloc;
-  late MockSignInBloc _mockSignInBloc;
+  late MockSignInOptionsBloc _mockSignInBloc;
   late MockNavigationCubit _mockNavigationCubit;
   late MockLoggingNavigationObserver _mockLoggingNavigationObserver;
   late GetIt sl;
 
   setUp(() {
     _mockAuthBloc = MockAuthBloc();
-    _mockSignInBloc = MockSignInBloc();
+    _mockSignInBloc = MockSignInOptionsBloc();
     _mockNavigationCubit = MockNavigationCubit();
     _mockLoggingNavigationObserver = MockLoggingNavigationObserver();
     sl = GetIt.instance;
     sl.registerFactory<AuthBloc>(() => _mockAuthBloc);
-    sl.registerFactory<SignInBloc>(() => _mockSignInBloc);
+    sl.registerFactory<SignInOptionsBloc>(() => _mockSignInBloc);
     sl.registerLazySingleton<NavigationCubit>(() => _mockNavigationCubit);
   });
 

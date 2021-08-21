@@ -26,7 +26,7 @@ class SignInOptionsPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => sl<SignInBloc>(),
+          create: (_) => sl<SignInOptionsBloc>(),
         ),
         BlocProvider(
           create: (_) => sl<NavigationCubit>(),
@@ -90,7 +90,8 @@ class SignInOptionsPage extends StatelessWidget {
       },
       child: signInScaffold(
         context,
-        child: BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
+        child: BlocBuilder<SignInOptionsBloc, SignInState>(
+            builder: (context, state) {
           final isLoading = state == const SignInState.loading();
           return FormColumn(
             children: [
@@ -106,7 +107,7 @@ class SignInOptionsPage extends StatelessWidget {
                 text: Texts.signInWithGoogle,
                 textColor: Colors.black87,
                 color: Colors.white,
-                onPressed: () => BlocProvider.of<SignInBloc>(context)
+                onPressed: () => BlocProvider.of<SignInOptionsBloc>(context)
                     .add(const SignInEvent.signInWithGoogleEvent()),
               ),
               SizedBox(height: SizeConfig.defaultEdgeSpace),

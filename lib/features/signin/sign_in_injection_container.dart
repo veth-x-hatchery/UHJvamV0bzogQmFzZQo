@@ -136,8 +136,8 @@ Future<void> signInDependenciesInjection() async {
     ),
   );
 
-  sl.registerFactory<SignInBloc>(
-    () => SignInBloc(
+  sl.registerFactory<SignInOptionsBloc>(
+    () => SignInOptionsBloc(
       sl<AuthBloc>(),
       sl<NavigationCubit>(),
       sl<SignInWithGoogle>(),

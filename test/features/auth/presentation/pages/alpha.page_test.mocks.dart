@@ -124,11 +124,11 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
   String toString() => super.toString();
 }
 
-/// A class which mocks [SignInBloc].
+/// A class which mocks [SignInOptionsBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInBloc extends _i1.Mock implements _i4.SignInBloc {
-  MockSignInBloc() {
+class MockSignInOptionsBloc extends _i1.Mock implements _i4.SignInOptionsBloc {
+  MockSignInOptionsBloc() {
     _i1.throwOnMissingStub(this);
   }
 

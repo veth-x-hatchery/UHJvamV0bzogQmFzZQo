@@ -5,6 +5,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
@@ -23,7 +25,7 @@ import '../../../../helpers/widgets/pumpWidget.widget.dart';
 import 'sign_in_options.page_test.mocks.dart';
 
 @GenerateMocks([
-  SignInBloc,
+  SignInOptionsBloc,
   SignInEmailBloc,
   SignInRegisterBloc,
   SignInPasswordBloc,
@@ -32,19 +34,16 @@ import 'sign_in_options.page_test.mocks.dart';
   MockSpec<NavigatorObserver>(returnNullOnMissingStub: true)
 ])
 void main() {
-  late MockSignInBloc _mockSignInBloc;
   late MockSignInEmailBloc _mockMockSignInEmailBloc;
   late MockSignInRegisterBloc _mockMockSignInRegisterBloc;
   late MockSignInPasswordBloc _mockMockSignInPasswordBloc;
-
-  late NavigationCubit _navigationCubit;
-
   late MockNavigatorObserver _mockNavigationObserver;
 
+  late MockSignInOptionsBloc _mockSignInBloc;
+  late NavigationCubit _navigationCubit;
   late GetIt sl;
 
   setUp(() {
-    _mockSignInBloc = MockSignInBloc();
     _mockMockSignInEmailBloc = MockSignInEmailBloc();
     _mockMockSignInRegisterBloc = MockSignInRegisterBloc();
     _mockMockSignInPasswordBloc = MockSignInPasswordBloc();
@@ -52,9 +51,11 @@ void main() {
     _navigationCubit = NavigationCubit();
     _mockNavigationObserver = MockNavigatorObserver();
 
+    _mockSignInBloc = MockSignInOptionsBloc();
+
     sl = GetIt.instance;
 
-    sl.registerFactory<SignInBloc>(() => _mockSignInBloc);
+    sl.registerFactory<SignInOptionsBloc>(() => _mockSignInBloc);
     sl.registerFactory<SignInEmailBloc>(() => _mockMockSignInEmailBloc);
     sl.registerFactory<SignInRegisterBloc>(() => _mockMockSignInRegisterBloc);
     sl.registerFactory<SignInPasswordBloc>(() => _mockMockSignInPasswordBloc);

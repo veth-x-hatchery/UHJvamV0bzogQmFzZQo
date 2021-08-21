@@ -44,11 +44,11 @@ class _FakeSignInPasswordState_4 extends _i1.Fake
 
 class _FakeNavigationState_5 extends _i1.Fake implements _i7.NavigationState {}
 
-/// A class which mocks [SignInBloc].
+/// A class which mocks [SignInOptionsBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInBloc extends _i1.Mock implements _i2.SignInBloc {
-  MockSignInBloc() {
+class MockSignInOptionsBloc extends _i1.Mock implements _i2.SignInOptionsBloc {
+  MockSignInOptionsBloc() {
     _i1.throwOnMissingStub(this);
   }
 

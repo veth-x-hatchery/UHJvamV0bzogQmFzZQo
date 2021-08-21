@@ -17,7 +17,7 @@ import 'sign_in_bloc_test.mocks.dart';
   SignInWithGoogle,
 ])
 void main() {
-  late SignInBloc _bloc;
+  late SignInOptionsBloc _bloc;
 
   late MockAuthBloc _authBloc;
   late MockNavigationCubit _mockNavigation;
@@ -28,7 +28,7 @@ void main() {
     _mockNavigation = MockNavigationCubit();
     _mockSignInWithGoogle = MockSignInWithGoogle();
 
-    _bloc = SignInBloc(
+    _bloc = SignInOptionsBloc(
       _authBloc,
       _mockNavigation,
       _mockSignInWithGoogle,
