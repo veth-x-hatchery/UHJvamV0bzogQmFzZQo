@@ -57,9 +57,9 @@ class SignInOptionsPage extends StatelessWidget {
           goTo: (page) {
             switch (page.to) {
               case SignInPageRoutes.alpha:
-                Navigator.popUntil(context,
-                    (route) => route.settings.name == NavigationRoutes.alpha);
-                Navigator.pop(context);
+                // Navigator.popUntil(context,
+                //     (route) => route.settings.name == NavigationRoutes.alpha);
+                // Navigator.pop(context);
                 break;
               case SignInPageRoutes.secretEntry:
                 Navigator.pushReplacement(
