@@ -6,12 +6,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/api/api_setup.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
+import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 // import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
@@ -67,30 +70,30 @@ Future<void> signInDependenciesInjection() async {
   //   ),
   // );
 
-  // sl.registerLazySingleton<ISignInLocalSource>(
-  //   () => SignInLocalSource(sl<SharedPreferences>()),
-  // );
+  sl.registerLazySingleton<ISignInLocalSource>(
+    () => SignInLocalSource(sl<SharedPreferences>()),
+  );
 
   // Repository
-  // sl.registerLazySingleton<ISignInRepository>(
-  //   () => SignInRepository(
-  //     sl<ISignInRemoteSource>(),
-  //     sl<ISignInLocalSource>(),
-  //     sl<INetworkInfo>(),
-  //   ),
-  // );
+  sl.registerLazySingleton<ISignInRepository>(
+    () => SignInRepository(
+      // sl<ISignInRemoteSource>(),
+      sl<ISignInLocalSource>(),
+      sl<INetworkInfo>(),
+    ),
+  );
 
   // Use cases
   sl.registerLazySingleton<SignInCredentialCheck>(
     () => SignInCredentialCheck(
-      // sl<ISignInRepository>(),
+      sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
   );
 
   sl.registerLazySingleton<SignInWithSecret>(
     () => SignInWithSecret(
-      // sl<ISignInRepository>(),
+      sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
   );
@@ -132,6 +135,7 @@ Future<void> signInDependenciesInjection() async {
   sl.registerFactory<SignInSecretBloc>(
     () => SignInSecretBloc(
       sl<AuthBloc>(),
+      sl<NavigationCubit>(),
       sl<SignInWithSecret>(),
     ),
   );

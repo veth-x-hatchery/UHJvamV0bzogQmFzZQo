@@ -6,10 +6,13 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:vethx_beta/core/error/failures.dart' as _i9;
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart'
     as _i5;
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
     as _i7;
+import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart'
+    as _i8;
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart'
     as _i6;
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart'
@@ -78,6 +81,31 @@ class MockIAuthFacade extends _i1.Mock implements _i3.IAuthFacade {
       (super.noSuchMethod(Invocation.method(#signOut, []),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [ISignInRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockISignInRepository extends _i1.Mock implements _i8.ISignInRepository {
+  MockISignInRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i2.Either<_i9.Failure, _i7.Credential>> cachedCredential() =>
+      (super.noSuchMethod(Invocation.method(#cachedCredential, []),
+          returnValue: Future<_i2.Either<_i9.Failure, _i7.Credential>>.value(
+              _FakeEither_0<_i9.Failure, _i7.Credential>())) as _i4
+          .Future<_i2.Either<_i9.Failure, _i7.Credential>>);
+  @override
+  _i4.Future<_i2.Either<_i9.Failure, void>> cacheCredential(
+          _i7.Credential? credential) =>
+      (super.noSuchMethod(Invocation.method(#cacheCredential, [credential]),
+              returnValue: Future<_i2.Either<_i9.Failure, void>>.value(
+                  _FakeEither_0<_i9.Failure, void>()))
+          as _i4.Future<_i2.Either<_i9.Failure, void>>);
   @override
   String toString() => super.toString();
 }

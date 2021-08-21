@@ -8,6 +8,7 @@ part 'auth_failure.freezed.dart';
 /// User enters an invalid combination of credential and secret
 @freezed
 abstract class AuthFailure with _$AuthFailure {
+  const factory AuthFailure.invalidCachedCredential() = InvalidCachedCredential;
   const factory AuthFailure.cancelledByUser() = CancelledByUser;
   const factory AuthFailure.serverError() = ServerError;
   const factory AuthFailure.credentialAlreadyInUse() = CredentialAlreadyInUse;
