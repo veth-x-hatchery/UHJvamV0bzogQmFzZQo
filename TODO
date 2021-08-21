@@ -7,7 +7,7 @@
 
 1 - Validacao dos campos
 2 - Validacao das notificacoes
-3 - Validacao da transicao de telas
+		3 - Validacao da transicao de telas
 4 - Escrever os testes de Integracao com DRIVER
 5 - Adicionar um SPLASH durante o carregamento das dependencias
 	1 - Get_It
@@ -16,11 +16,12 @@
 		Liberar o app a partir deste carregamento...
 
 
-1 - email -> credential
-2 - password -> secret
-	find . -name '*password*' -print0 | xargs -0 -n1 bash -c 'mv "$0" "${0/password/secret}"'
-3 - renomear arquivos e pastas
-4 - renomear variaveis e objetos
+					1 - email -> credential
+					2 - password -> secret
+						find . -name '*password*' -print0 | xargs -0 -n1 bash -c 'mv "$0" "${0/password/secret}"'
+					3 - renomear arquivos e pastas
+					4 - renomear variaveis e objetos
+
 5 - armazenar o usuario apos a validacao
 
 	1 - check credentials
