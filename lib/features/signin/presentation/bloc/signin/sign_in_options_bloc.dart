@@ -11,9 +11,9 @@ import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
-part 'sign_in_event.dart';
-part 'sign_in_state.dart';
-part 'sign_in_bloc.freezed.dart';
+part 'sign_in_options_event.dart';
+part 'sign_in_options_state.dart';
+part 'sign_in_options_bloc.freezed.dart';
 
 class SignInOptionsBloc extends Bloc<SignInEvent, SignInState> {
   final AuthBloc _authBloc;

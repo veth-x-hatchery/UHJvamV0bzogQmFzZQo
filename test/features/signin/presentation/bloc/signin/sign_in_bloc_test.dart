@@ -6,7 +6,7 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 
 import 'sign_in_bloc_test.mocks.dart';

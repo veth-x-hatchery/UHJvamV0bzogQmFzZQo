@@ -18,7 +18,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart
 import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/injection_container.dart';
 

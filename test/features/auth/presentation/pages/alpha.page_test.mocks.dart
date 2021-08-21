@@ -10,7 +10,7 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/core/routes/navigation.dart' as _i8;
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
     as _i2;
-import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_bloc.dart'
+import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_options_bloc.dart'
     as _i4;
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
     as _i5;

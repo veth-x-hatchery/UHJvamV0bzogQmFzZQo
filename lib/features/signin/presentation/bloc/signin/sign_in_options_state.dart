@@ -1,4 +1,4 @@
-part of 'sign_in_bloc.dart';
+part of 'sign_in_options_bloc.dart';
 
 @freezed
 class SignInState with _$SignInState {
