@@ -38,6 +38,9 @@ void main() {
     test('should return user is registered', () async {
       // arrange
 
+      when(_mockSignInRepository.cacheCredential(credential))
+          .thenAnswer((_) async => const Right(null));
+
       when(_mockAuthFacade.credentialIsAlreadyInUse(credential))
           .thenAnswer((_) async => const Right(true));
 
