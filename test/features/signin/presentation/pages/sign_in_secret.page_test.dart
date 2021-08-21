@@ -188,10 +188,9 @@ void main() {
 
     await tester.tap(_validationButton());
 
-    await tester.pump();
-
     // assert
 
-    verify(_mockBloc.add(any)).called(1);
+    verify(_mockBloc.add(const SignInSecretEvent.analyseSecretPressed()))
+        .called(1);
   });
 }

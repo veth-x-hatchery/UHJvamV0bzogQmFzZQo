@@ -26,7 +26,7 @@ class SignInCredentialPage extends StatefulWidget {
 }
 
 class _SignInCredentialPageState extends State<SignInCredentialPage> {
-  final _credentialFormKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final _credentialFocusNode = FocusNode();
   final _credentialTextEditingController = TextEditingController();
 
@@ -43,16 +43,19 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
   @override
   void dispose() {
     _credentialTextEditingController.dispose();
-    _credentialFormKey.currentState?.dispose();
+    _formKey.currentState?.dispose();
     _credentialFocusNode.dispose();
     super.dispose();
   }
 
   Future<void> _validateCredential() async {
-    _credentialFormKey.currentState?.save();
-    Logger.presentation(
-        '_validateCredential ${_credentialFormKey.currentState?.validate()} | ${_credentialTextEditingController.text} | ${current.credential.validation}');
-    if (_credentialFormKey.currentState?.validate() == true) {
+    // ignore: leading_newlines_in_multiline_strings
+    Logger.presentation('''\n
+        FormKey:    ${_formKey.currentState?.validate()}
+        Controller: ${_credentialTextEditingController.text}
+        Validation: ${current.credential.validation}
+        ''');
+    if (_formKey.currentState?.validate() == true) {
       bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
     }
   }
@@ -78,9 +81,8 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
           );
         },
         builder: (context, state) {
-          Logger.presentation('BlocConsumer $state');
           return Form(
-            key: _credentialFormKey,
+            key: _formKey,
             child: FormColumn(
               children: [
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
