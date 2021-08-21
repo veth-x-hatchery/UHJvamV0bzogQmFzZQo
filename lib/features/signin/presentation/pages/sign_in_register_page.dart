@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -10,11 +11,11 @@ import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 
 class SignInRegisterPage extends StatefulWidget {
-  final String? email;
+  final String? credential;
 
   const SignInRegisterPage({
     Key? key,
-    this.email,
+    this.credential,
   }) : super(key: key);
 
   @override
@@ -27,7 +28,7 @@ class SignInRegisterPage extends StatefulWidget {
   }) {
     return BlocProvider(
       create: (_) => bloc,
-      child: SignInRegisterPage(email: email),
+      child: SignInRegisterPage(credential: email),
     );
   }
 }
@@ -52,9 +53,12 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
 
   @override
   void initState() {
-    if (current.email.isValid()) {
-      _emailTextEditingController.text = current.email.getOrCrash();
-      _passwordFocusNode.requestFocus();
+    if (widget.credential != null) {
+      final credential = EmailAddress(widget.credential);
+      if (credential.isValid()) {
+        _emailTextEditingController.text = credential.getOrCrash();
+        _passwordFocusNode.requestFocus();
+      }
     } else {
       _emailFocusNode.requestFocus();
     }

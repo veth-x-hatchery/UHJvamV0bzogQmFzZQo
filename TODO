@@ -15,3 +15,27 @@
 	3 - ETC...
 		Liberar o app a partir deste carregamento...
 
+
+1 - email -> credential
+2 - password -> secret
+3 - renomear arquivos e pastas
+4 - renomear variaveis e objetos
+5 - armazenar o usuario apos a validacao
+
+	1 - check credentials
+	
+		1 - nao precisa ser "is already in use" -> valid or invalid + error reasons
+	
+	2 - armazenar em cache com local data source
+	
+	3 - quando for validar a SENHA
+	
+		1 - Verificar se existe uma credencial TEMPORARIA salva
+		2 - SE NAO tiver
+			1 - EXCEPTION no data source
+			2 - FAILURE no repositorio
+			3 - Failure detalis no use case
+			4 - redirecionamento para a tela de CREDENCIAIS (email)
+6 - Validar o fluxo
+
+	
