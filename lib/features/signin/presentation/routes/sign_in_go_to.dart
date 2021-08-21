@@ -42,12 +42,6 @@ class SignInPageGoTo {
         to: SignInPageRoutes.credentialEntry,
       );
 
-  factory SignInPageGoTo.signInOptions({required SignInPageRoutes from}) =>
-      SignInPageGoTo._internal(
-        from: from,
-        to: SignInPageRoutes.signInOptions,
-      );
-
   @override
   String toString() =>
       'from: $from -> to: $to ${parameters != null ? 'with $parameters' : ''}';

@@ -17,4 +17,42 @@ void main() {
 
     expect(result.credential.getOrCrash(), 'test@test.com');
   });
+
+  test('should compare with success', () {
+    // arrange && act
+
+    final result1 = User(
+      credential: Credential('test@test.com'),
+      name: 'Tester',
+    );
+
+    final result2 = User(
+      credential: Credential('test@test.com'),
+      name: 'Tester',
+    );
+
+    // assert
+
+    expect(result1, result2);
+  });
+
+  test('should copy with success', () {
+    // arrange && act
+
+    final result1 = User(
+      credential: Credential('test@test.com'),
+      name: 'Tester',
+    );
+
+    final result2 = User(
+      credential: Credential('test@test.com'),
+      name: 'Tester',
+    ).copyWith(name: 'Tester 2');
+
+    // assert
+
+    expect(result2.name, 'Tester 2');
+
+    expect(result1.credential, result2.credential);
+  });
 }
