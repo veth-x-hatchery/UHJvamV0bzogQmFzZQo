@@ -7,15 +7,15 @@ abstract class IAuthFacade {
   Future<User?> getSignedInUser();
 
   Future<Either<AuthFailure, bool>> credentialIsAlreadyInUse(
-      CredentialAddress credentialAddress);
+      Credential credentialAddress);
 
   Future<Either<AuthFailure, Unit>> registerWithCredentialAndSecret({
-    required CredentialAddress credentialAddress,
+    required Credential credentialAddress,
     required Secret secret,
   });
 
   Future<Either<AuthFailure, Unit>> signInWithCredentialAndSecret({
-    required CredentialAddress credentialAddress,
+    required Credential credentialAddress,
     required Secret secret,
   });
 

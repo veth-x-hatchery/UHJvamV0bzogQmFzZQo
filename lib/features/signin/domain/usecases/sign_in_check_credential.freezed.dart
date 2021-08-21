@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ParamsTearOff {
   const _$ParamsTearOff();
 
-  _Params call({required CredentialAddress credential}) {
+  _Params call({required Credential credential}) {
     return _Params(
       credential: credential,
     );
@@ -29,7 +29,7 @@ const $Params = _$ParamsTearOff();
 
 /// @nodoc
 mixin _$Params {
-  CredentialAddress get credential => throw _privateConstructorUsedError;
+  Credential get credential => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ParamsCopyWith<Params> get copyWith => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ mixin _$Params {
 abstract class $ParamsCopyWith<$Res> {
   factory $ParamsCopyWith(Params value, $Res Function(Params) then) =
       _$ParamsCopyWithImpl<$Res>;
-  $Res call({CredentialAddress credential});
+  $Res call({Credential credential});
 }
 
 /// @nodoc
@@ -58,7 +58,7 @@ class _$ParamsCopyWithImpl<$Res> implements $ParamsCopyWith<$Res> {
       credential: credential == freezed
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
-              as CredentialAddress,
+              as Credential,
     ));
   }
 }
@@ -68,7 +68,7 @@ abstract class _$ParamsCopyWith<$Res> implements $ParamsCopyWith<$Res> {
   factory _$ParamsCopyWith(_Params value, $Res Function(_Params) then) =
       __$ParamsCopyWithImpl<$Res>;
   @override
-  $Res call({CredentialAddress credential});
+  $Res call({Credential credential});
 }
 
 /// @nodoc
@@ -88,7 +88,7 @@ class __$ParamsCopyWithImpl<$Res> extends _$ParamsCopyWithImpl<$Res>
       credential: credential == freezed
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
-              as CredentialAddress,
+              as Credential,
     ));
   }
 }
@@ -99,7 +99,7 @@ class _$_Params implements _Params {
   const _$_Params({required this.credential});
 
   @override
-  final CredentialAddress credential;
+  final Credential credential;
 
   @override
   String toString() {
@@ -126,10 +126,10 @@ class _$_Params implements _Params {
 }
 
 abstract class _Params implements Params {
-  const factory _Params({required CredentialAddress credential}) = _$_Params;
+  const factory _Params({required Credential credential}) = _$_Params;
 
   @override
-  CredentialAddress get credential => throw _privateConstructorUsedError;
+  Credential get credential => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ParamsCopyWith<_Params> get copyWith => throw _privateConstructorUsedError;

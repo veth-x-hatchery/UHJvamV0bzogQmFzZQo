@@ -30,7 +30,7 @@ void main() {
     );
   });
 
-  final credentialTester = CredentialAddress('test@vethx.com');
+  final credentialTester = Credential('test@vethx.com');
   final secretTester = Secret('dGVzdEB2ZXRoeC5jb20K');
   final credentials = Credentials(user: credentialTester, secret: secretTester);
 

@@ -338,7 +338,7 @@ class _$SignInCredentialStateTearOff {
   const _$SignInCredentialStateTearOff();
 
   _CredentialState call(
-      {required CredentialAddress credential,
+      {required Credential credential,
       required bool isLoading,
       required Option<Either<FailureDetails, Unit>>
           authFailureOrSuccessOption}) {
@@ -355,7 +355,7 @@ const $SignInCredentialState = _$SignInCredentialStateTearOff();
 
 /// @nodoc
 mixin _$SignInCredentialState {
-  CredentialAddress get credential => throw _privateConstructorUsedError;
+  Credential get credential => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -371,7 +371,7 @@ abstract class $SignInCredentialStateCopyWith<$Res> {
           $Res Function(SignInCredentialState) then) =
       _$SignInCredentialStateCopyWithImpl<$Res>;
   $Res call(
-      {CredentialAddress credential,
+      {Credential credential,
       bool isLoading,
       Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
 }
@@ -395,7 +395,7 @@ class _$SignInCredentialStateCopyWithImpl<$Res>
       credential: credential == freezed
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
-              as CredentialAddress,
+              as Credential,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -416,7 +416,7 @@ abstract class _$CredentialStateCopyWith<$Res>
       __$CredentialStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {CredentialAddress credential,
+      {Credential credential,
       bool isLoading,
       Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
 }
@@ -442,7 +442,7 @@ class __$CredentialStateCopyWithImpl<$Res>
       credential: credential == freezed
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
-              as CredentialAddress,
+              as Credential,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -464,7 +464,7 @@ class _$_CredentialState implements _CredentialState {
       required this.authFailureOrSuccessOption});
 
   @override
-  final CredentialAddress credential;
+  final Credential credential;
   @override
   final bool isLoading;
   @override
@@ -507,13 +507,13 @@ class _$_CredentialState implements _CredentialState {
 
 abstract class _CredentialState implements SignInCredentialState {
   const factory _CredentialState(
-      {required CredentialAddress credential,
+      {required Credential credential,
       required bool isLoading,
       required Option<Either<FailureDetails, Unit>>
           authFailureOrSuccessOption}) = _$_CredentialState;
 
   @override
-  CredentialAddress get credential => throw _privateConstructorUsedError;
+  Credential get credential => throw _privateConstructorUsedError;
   @override
   bool get isLoading => throw _privateConstructorUsedError;
   @override

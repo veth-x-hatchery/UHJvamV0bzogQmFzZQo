@@ -45,8 +45,8 @@ void main() {
     test('should return the authenticated user', () async {
       // arrange
 
-      final user = User(
-          credential: CredentialAddress('test@vethx.com'), name: 'Vethx Test');
+      final user =
+          User(credential: Credential('test@vethx.com'), name: 'Vethx Test');
 
       when(_mockIAuthFacade.getSignedInUser())
           .thenAnswer((_) => Future.value(user));

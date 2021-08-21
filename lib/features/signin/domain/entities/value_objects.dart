@@ -13,12 +13,12 @@ class CredentialAddressMessageErrors {
   static const invalidCredential = 'Invalid Credential';
 }
 
-class CredentialAddress extends ValueObject<String> {
+class Credential extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory CredentialAddress(String? input) {
-    return CredentialAddress._(
+  factory Credential(String? input) {
+    return Credential._(
       validateStringNullOrEmpty(input).flatMap(validateCredentialAddress),
     );
   }
@@ -33,7 +33,7 @@ class CredentialAddress extends ValueObject<String> {
         (_) => null,
       );
 
-  const CredentialAddress._(this.value);
+  const Credential._(this.value);
 }
 
 class Secret extends ValueObject<String> {

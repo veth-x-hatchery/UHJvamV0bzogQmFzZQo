@@ -25,7 +25,7 @@ class FirebaseAuthFacade implements IAuthFacade {
 
   @override
   Future<Either<AuthFailure, Unit>> registerWithCredentialAndSecret({
-    required CredentialAddress credentialAddress,
+    required Credential credentialAddress,
     required Secret secret,
   }) async {
     try {
@@ -50,7 +50,7 @@ class FirebaseAuthFacade implements IAuthFacade {
 
   @override
   Future<Either<AuthFailure, Unit>> signInWithCredentialAndSecret({
-    required CredentialAddress credentialAddress,
+    required Credential credentialAddress,
     required Secret secret,
   }) async {
     try {
@@ -99,7 +99,7 @@ class FirebaseAuthFacade implements IAuthFacade {
 
   @override
   Future<Either<AuthFailure, bool>> credentialIsAlreadyInUse(
-      CredentialAddress credentialAddress) async {
+      Credential credentialAddress) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
         email: credentialAddress.getOrCrash(),

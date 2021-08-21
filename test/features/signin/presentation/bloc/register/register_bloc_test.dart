@@ -37,7 +37,7 @@ void main() {
         _bloc.stream,
         emitsInOrder([
           SignInRegisterState(
-            credential: CredentialAddress(credential),
+            credential: Credential(credential),
             secret: Secret(''),
             isLoading: false,
             authFailureOrSuccessOption: none(),
@@ -60,7 +60,7 @@ void main() {
         _bloc.stream,
         emitsInOrder([
           SignInRegisterState(
-            credential: CredentialAddress(''),
+            credential: Credential(''),
             secret: Secret(secret),
             isLoading: false,
             authFailureOrSuccessOption: none(),
@@ -93,25 +93,25 @@ void main() {
         emitsInOrder(
           [
             SignInRegisterState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               secret: Secret(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               secret: Secret(secret),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
@@ -145,25 +145,25 @@ void main() {
         emitsInOrder(
           [
             SignInRegisterState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               secret: Secret(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               secret: Secret(secret),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
@@ -199,25 +199,25 @@ void main() {
         emitsInOrder(
           [
             SignInRegisterState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               secret: Secret(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               secret: Secret(secret),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: some(Left(expectedFailure)),

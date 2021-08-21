@@ -30,7 +30,7 @@ class SignInCredentialBloc
     yield* event.map(
       credentialChanged: (e) async* {
         yield state.copyWith(
-          credential: CredentialAddress(e.credentialStr),
+          credential: Credential(e.credentialStr),
           authFailureOrSuccessOption: none(),
         );
       },

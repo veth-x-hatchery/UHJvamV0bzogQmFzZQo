@@ -32,7 +32,7 @@ void main() {
   });
 
   group('when check user credential is already registered', () {
-    final credential = CredentialAddress('test@vethx.com');
+    final credential = Credential('test@vethx.com');
 
     test('should return user is registered', () async {
       // arrange

@@ -55,7 +55,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
   @override
   void initState() {
     if (widget.credential != null) {
-      final credential = CredentialAddress(widget.credential);
+      final credential = Credential(widget.credential);
       if (credential.isValid()) {
         _credentialTextEditingController.text = credential.getOrCrash();
         _secretFocusNode.requestFocus();

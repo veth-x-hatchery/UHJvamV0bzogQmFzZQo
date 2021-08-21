@@ -43,7 +43,7 @@ class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
             secret: state.secret,
             // Todo(v): Remove it! User and Secret cannot cohabited same space in time.
             // Todo(v): User and Secret -> replace credential and secret
-            user: CredentialAddress(''),
+            user: Credential(''),
           ),
         ));
         yield state.copyWith(

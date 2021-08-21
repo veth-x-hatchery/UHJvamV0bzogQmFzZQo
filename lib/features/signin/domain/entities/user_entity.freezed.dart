@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$UserTearOff {
   const _$UserTearOff();
 
-  _User call({required CredentialAddress credential, required String name}) {
+  _User call({required Credential credential, required String name}) {
     return _User(
       credential: credential,
       name: name,
@@ -30,7 +30,7 @@ const $User = _$UserTearOff();
 
 /// @nodoc
 mixin _$User {
-  CredentialAddress get credential => throw _privateConstructorUsedError;
+  Credential get credential => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -41,7 +41,7 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
-  $Res call({CredentialAddress credential, String name});
+  $Res call({Credential credential, String name});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       credential: credential == freezed
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
-              as CredentialAddress,
+              as Credential,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -75,7 +75,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) then) =
       __$UserCopyWithImpl<$Res>;
   @override
-  $Res call({CredentialAddress credential, String name});
+  $Res call({Credential credential, String name});
 }
 
 /// @nodoc
@@ -96,7 +96,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       credential: credential == freezed
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
-              as CredentialAddress,
+              as Credential,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -111,7 +111,7 @@ class _$_User implements _User {
   const _$_User({required this.credential, required this.name});
 
   @override
-  final CredentialAddress credential;
+  final Credential credential;
   @override
   final String name;
 
@@ -144,11 +144,11 @@ class _$_User implements _User {
 }
 
 abstract class _User implements User {
-  const factory _User(
-      {required CredentialAddress credential, required String name}) = _$_User;
+  const factory _User({required Credential credential, required String name}) =
+      _$_User;
 
   @override
-  CredentialAddress get credential => throw _privateConstructorUsedError;
+  Credential get credential => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
   @override

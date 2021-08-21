@@ -520,7 +520,7 @@ class _$SignInRegisterStateTearOff {
   const _$SignInRegisterStateTearOff();
 
   _RegisterState call(
-      {required CredentialAddress credential,
+      {required Credential credential,
       required Secret secret,
       required bool isLoading,
       required Option<Either<FailureDetails, Unit>>
@@ -539,7 +539,7 @@ const $SignInRegisterState = _$SignInRegisterStateTearOff();
 
 /// @nodoc
 mixin _$SignInRegisterState {
-  CredentialAddress get credential => throw _privateConstructorUsedError;
+  Credential get credential => throw _privateConstructorUsedError;
   Secret get secret => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
@@ -556,7 +556,7 @@ abstract class $SignInRegisterStateCopyWith<$Res> {
           SignInRegisterState value, $Res Function(SignInRegisterState) then) =
       _$SignInRegisterStateCopyWithImpl<$Res>;
   $Res call(
-      {CredentialAddress credential,
+      {Credential credential,
       Secret secret,
       bool isLoading,
       Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
@@ -582,7 +582,7 @@ class _$SignInRegisterStateCopyWithImpl<$Res>
       credential: credential == freezed
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
-              as CredentialAddress,
+              as Credential,
       secret: secret == freezed
           ? _value.secret
           : secret // ignore: cast_nullable_to_non_nullable
@@ -607,7 +607,7 @@ abstract class _$RegisterStateCopyWith<$Res>
       __$RegisterStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {CredentialAddress credential,
+      {Credential credential,
       Secret secret,
       bool isLoading,
       Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
@@ -635,7 +635,7 @@ class __$RegisterStateCopyWithImpl<$Res>
       credential: credential == freezed
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
-              as CredentialAddress,
+              as Credential,
       secret: secret == freezed
           ? _value.secret
           : secret // ignore: cast_nullable_to_non_nullable
@@ -662,7 +662,7 @@ class _$_RegisterState implements _RegisterState {
       required this.authFailureOrSuccessOption});
 
   @override
-  final CredentialAddress credential;
+  final Credential credential;
   @override
   final Secret secret;
   @override
@@ -710,14 +710,14 @@ class _$_RegisterState implements _RegisterState {
 
 abstract class _RegisterState implements SignInRegisterState {
   const factory _RegisterState(
-      {required CredentialAddress credential,
+      {required Credential credential,
       required Secret secret,
       required bool isLoading,
       required Option<Either<FailureDetails, Unit>>
           authFailureOrSuccessOption}) = _$_RegisterState;
 
   @override
-  CredentialAddress get credential => throw _privateConstructorUsedError;
+  Credential get credential => throw _privateConstructorUsedError;
   @override
   Secret get secret => throw _privateConstructorUsedError;
   @override

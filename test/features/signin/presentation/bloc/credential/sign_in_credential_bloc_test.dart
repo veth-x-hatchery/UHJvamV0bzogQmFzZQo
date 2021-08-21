@@ -45,7 +45,7 @@ void main() {
         _bloc.stream,
         emitsInOrder([
           SignInCredentialState(
-            credential: CredentialAddress(credential),
+            credential: Credential(credential),
             isLoading: false,
             authFailureOrSuccessOption: none(),
           )
@@ -60,7 +60,7 @@ void main() {
 
     const credential = 'test@test.com';
 
-    final valueObject = CredentialAddress(credential);
+    final valueObject = Credential(credential);
 
     when(_mockSignInWithCredentialAndSecret.call(any))
         .thenAnswer((_) => Future.value(right(true)));
@@ -119,17 +119,17 @@ void main() {
         emitsInOrder(
           [
             SignInCredentialState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInCredentialState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInCredentialState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             )
@@ -161,17 +161,17 @@ void main() {
         emitsInOrder(
           [
             SignInCredentialState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInCredentialState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInCredentialState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               isLoading: false,
               authFailureOrSuccessOption: some(Left(expectedFailure)),
             )
@@ -200,17 +200,17 @@ void main() {
         emitsInOrder(
           [
             SignInCredentialState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInCredentialState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInCredentialState(
-              credential: CredentialAddress(credential),
+              credential: Credential(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             )

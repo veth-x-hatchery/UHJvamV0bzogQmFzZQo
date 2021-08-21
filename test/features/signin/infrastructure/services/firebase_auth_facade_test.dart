@@ -51,7 +51,7 @@ void main() {
   });
 
   group('when [FirebaseAuthFacade.registerWithCredentialAndSecret]', () {
-    final credential = CredentialAddress('test@vethx.com');
+    final credential = Credential('test@vethx.com');
 
     final secret = Secret('dGVzdEB2ZXRoeC5jb20K');
 
@@ -141,7 +141,7 @@ void main() {
   });
 
   group('when [FirebaseAuthFacade.signInWithCredentialAndSecret]', () {
-    final credential = CredentialAddress('test@vethx.com');
+    final credential = Credential('test@vethx.com');
 
     final secret = Secret('dGVzdEB2ZXRoeC5jb20K');
 
@@ -316,7 +316,7 @@ void main() {
   });
 
   group('when check if credential is already in use', () {
-    final credential = CredentialAddress('test@vethx.com');
+    final credential = Credential('test@vethx.com');
 
     Future<void> _credentialIsAlreadyInUse(Exception firebaseException) async {
       // Arrange
@@ -427,7 +427,7 @@ void main() {
 
       when(_mockFirebaseUserMapper.toDomain(_mockFirebaseUser))
           .thenAnswer((_) => domain.User(
-                credential: CredentialAddress('credential@valid.com'),
+                credential: Credential('credential@valid.com'),
                 name: 'valid user',
               ));
 

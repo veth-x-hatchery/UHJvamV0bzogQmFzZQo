@@ -76,7 +76,7 @@ void main() {
     String? credential,
     String? secret,
   }) {
-    final credentialVO = CredentialAddress(credential);
+    final credentialVO = Credential(credential);
     final secretVO = Secret(secret);
     final state = SignInRegisterState(
       credential: credentialVO,
@@ -151,7 +151,7 @@ void main() {
     // Arrange
 
     _signInState(SignInRegisterState(
-      credential: CredentialAddress(validCredential),
+      credential: Credential(validCredential),
       secret: Secret(validSecret),
       isLoading: true,
       authFailureOrSuccessOption: none(),

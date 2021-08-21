@@ -5,7 +5,7 @@ class SignInEvent with _$SignInEvent {
   const factory SignInEvent.started() = _Started;
 
   const factory SignInEvent.signInWithCredentialEvent({
-    required CredentialAddress credential,
+    required Credential credential,
     required Secret secret,
   }) = SignInWithCredentialEvent;
 

@@ -38,7 +38,7 @@ class SignInCheckIfCredentialIsInUse extends UseCase<bool, Params> {
 @freezed
 class Params with _$Params {
   const factory Params({
-    required CredentialAddress credential,
+    required Credential credential,
   }) = _Params;
 }
 

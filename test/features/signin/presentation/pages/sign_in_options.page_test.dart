@@ -94,6 +94,7 @@ void main() {
     _SignInCredentialState(SignInCredentialState.initial());
     _SignInRegisterState(SignInRegisterState.initial());
     _SignInSecretState(SignInSecretState.initial());
+    _SignInSecretState(SignInSecretState.initial());
   }
 
   Future<void> _pumpPage(WidgetTester tester) async {

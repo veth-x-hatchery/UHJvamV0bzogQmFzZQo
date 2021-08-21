@@ -62,7 +62,7 @@ void main() {
   void _prepareFormValidationValues({
     String? credential,
   }) {
-    final credentialVO = CredentialAddress(credential);
+    final credentialVO = Credential(credential);
     final state = SignInCredentialState(
       credential: credentialVO,
       isLoading: false,
@@ -114,7 +114,7 @@ void main() {
     // Arrange
 
     _signInState(SignInCredentialState(
-      credential: CredentialAddress('test@test.com'),
+      credential: Credential('test@test.com'),
       isLoading: true,
       authFailureOrSuccessOption: none(),
     ));

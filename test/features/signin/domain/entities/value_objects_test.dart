@@ -18,7 +18,7 @@ void main() {
 
       // act
 
-      final credentialAddress = CredentialAddress(credential);
+      final credentialAddress = Credential(credential);
 
       // assert
 
@@ -34,7 +34,7 @@ void main() {
 
       // act
 
-      final credentialAddress = CredentialAddress(inValidCredential);
+      final credentialAddress = Credential(inValidCredential);
 
       // assert
 
@@ -52,7 +52,7 @@ void main() {
 
       // act
 
-      final credentialAddress = CredentialAddress(validCredential);
+      final credentialAddress = Credential(validCredential);
 
       // assert
 
@@ -68,7 +68,7 @@ void main() {
 
       // act
 
-      final credentialAddress = CredentialAddress('invalid-credential');
+      final credentialAddress = Credential('invalid-credential');
 
       // assert
 

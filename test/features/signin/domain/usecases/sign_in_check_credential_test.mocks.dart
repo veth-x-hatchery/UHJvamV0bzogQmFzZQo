@@ -39,7 +39,7 @@ class MockIAuthFacade extends _i1.Mock implements _i3.IAuthFacade {
           returnValue: Future<_i5.User?>.value()) as _i4.Future<_i5.User?>);
   @override
   _i4.Future<_i2.Either<_i6.AuthFailure, bool>> credentialIsAlreadyInUse(
-          _i7.CredentialAddress? credentialAddress) =>
+          _i7.Credential? credentialAddress) =>
       (super.noSuchMethod(
               Invocation.method(#credentialIsAlreadyInUse, [credentialAddress]),
               returnValue: Future<_i2.Either<_i6.AuthFailure, bool>>.value(
@@ -48,7 +48,7 @@ class MockIAuthFacade extends _i1.Mock implements _i3.IAuthFacade {
   @override
   _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>
       registerWithCredentialAndSecret(
-              {_i7.CredentialAddress? credentialAddress, _i7.Secret? secret}) =>
+              {_i7.Credential? credentialAddress, _i7.Secret? secret}) =>
           (super.noSuchMethod(
               Invocation.method(#registerWithCredentialAndSecret, [], {
                 #credentialAddress: credentialAddress,
@@ -60,7 +60,7 @@ class MockIAuthFacade extends _i1.Mock implements _i3.IAuthFacade {
   @override
   _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>
       signInWithCredentialAndSecret(
-              {_i7.CredentialAddress? credentialAddress, _i7.Secret? secret}) =>
+              {_i7.Credential? credentialAddress, _i7.Secret? secret}) =>
           (super.noSuchMethod(
               Invocation.method(#signInWithCredentialAndSecret, [],
                   {#credentialAddress: credentialAddress, #secret: secret}),
