@@ -49,6 +49,9 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
   }
 
   Future<void> _validateCredential() async {
+    _credentialFormKey.currentState?.save();
+    Logger.presentation(
+        '_validateCredential ${_credentialFormKey.currentState?.validate()} | ${_credentialTextEditingController.text} | ${current.credential.validation}');
     if (_credentialFormKey.currentState?.validate() == true) {
       bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
     }
@@ -75,36 +78,40 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
           );
         },
         builder: (context, state) {
-          return FormColumn(
-            children: [
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              SignInLoader(
-                size: SizeConfig.screenHeight * 0.25,
-                loading: state.isLoading,
-              ),
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              FieldCredential(
-                key: const Key(
-                    SignInPageKeys.signInCredentialPageCredentialTextField),
-                controller: _credentialTextEditingController,
-                focusNode: _credentialFocusNode,
-                onEditingComplete:
-                    state.isLoading ? () {} : _validateCredential,
-                onChanged: (value) =>
-                    bloc.add(SignInCredentialEvent.credentialChanged(value)),
-                validator: (_) => current.credential.validation,
-              ),
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              CustomRaisedButton(
-                key: const Key(
-                    SignInPageKeys.signInCredentialPageValidateButton),
-                onPressed: state.isLoading ? () {} : _validateCredential,
-                child: Text(
-                  Texts.goToNextStep,
-                  style: Theme.of(context).textTheme.button,
+          Logger.presentation('BlocConsumer $state');
+          return Form(
+            key: _credentialFormKey,
+            child: FormColumn(
+              children: [
+                SizedBox(height: SizeConfig.defaultEdgeSpace),
+                SignInLoader(
+                  size: SizeConfig.screenHeight * 0.25,
+                  loading: state.isLoading,
                 ),
-              ),
-            ],
+                SizedBox(height: SizeConfig.defaultEdgeSpace),
+                FieldCredential(
+                  key: const Key(
+                      SignInPageKeys.signInCredentialPageCredentialTextField),
+                  controller: _credentialTextEditingController,
+                  focusNode: _credentialFocusNode,
+                  onEditingComplete: () =>
+                      state.isLoading ? {} : _validateCredential(),
+                  onChanged: (value) =>
+                      bloc.add(SignInCredentialEvent.credentialChanged(value)),
+                  validator: (_) => current.credential.validation,
+                ),
+                SizedBox(height: SizeConfig.defaultEdgeSpace),
+                CustomRaisedButton(
+                  key: const Key(
+                      SignInPageKeys.signInCredentialPageValidateButton),
+                  onPressed: () => state.isLoading ? {} : _validateCredential(),
+                  child: Text(
+                    Texts.goToNextStep,
+                    style: Theme.of(context).textTheme.button,
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),

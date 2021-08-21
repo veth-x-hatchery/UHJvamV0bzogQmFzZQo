@@ -108,7 +108,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_User implements _User {
-  const _$_User({required this.credential, required this.name});
+  _$_User({required this.credential, required this.name});
 
   @override
   final Credential credential;
@@ -144,7 +144,7 @@ class _$_User implements _User {
 }
 
 abstract class _User implements User {
-  const factory _User({required Credential credential, required String name}) =
+  factory _User({required Credential credential, required String name}) =
       _$_User;
 
   @override

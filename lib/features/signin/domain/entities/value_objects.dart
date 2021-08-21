@@ -3,14 +3,9 @@ import 'package:vethx_beta/features/signin/domain/core/failures.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
 
-class SecretMessageErrors {
-  static const empty = 'Informe your secret';
-  static const shortSecret = 'Your secret must be more than 6 chars';
-}
-
 class CredentialAddressMessageErrors {
-  static const empty = 'Informe your secret';
-  static const invalidCredential = 'Invalid Credential';
+  static const empty = 'Inform your email';
+  static const invalidCredential = 'Inform email';
 }
 
 class Credential extends ValueObject<String> {
@@ -34,6 +29,11 @@ class Credential extends ValueObject<String> {
       );
 
   const Credential._(this.value);
+}
+
+class SecretMessageErrors {
+  static const empty = 'Inform your password';
+  static const shortSecret = 'Your password must be more than 6 chars';
 }
 
 class Secret extends ValueObject<String> {
