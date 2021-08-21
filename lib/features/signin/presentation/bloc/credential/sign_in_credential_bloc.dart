@@ -47,7 +47,7 @@ class SignInCredentialBloc
             (l) => optionOf(left(l)), // Todo(v): Simplify it
             (isAlreadyInUse) {
               _navigation.goTo(isAlreadyInUse
-                  ? SignInPageGoTo.passwordPage(
+                  ? SignInPageGoTo.secretPage(
                       from: SignInPageRoutes.credentialEntry)
                   : SignInPageGoTo.registerPage(
                       from: SignInPageRoutes.credentialEntry));

@@ -23,15 +23,15 @@ class _$SignInRegisterEventTearOff {
     );
   }
 
-  PasswordChanged passwordChanged(String passwordStr) {
-    return PasswordChanged(
-      passwordStr,
+  SecretChanged secretChanged(String secretStr) {
+    return SecretChanged(
+      secretStr,
     );
   }
 
-  RegisterWithCredentialAndPasswordPressed
-      registerWithCredentialAndPasswordPressed() {
-    return const RegisterWithCredentialAndPasswordPressed();
+  RegisterWithCredentialAndSecretPressed
+      registerWithCredentialAndSecretPressed() {
+    return const RegisterWithCredentialAndSecretPressed();
   }
 }
 
@@ -43,47 +43,47 @@ mixin _$SignInRegisterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String credentialStr) credentialChanged,
-    required TResult Function(String passwordStr) passwordChanged,
-    required TResult Function() registerWithCredentialAndPasswordPressed,
+    required TResult Function(String secretStr) secretChanged,
+    required TResult Function() registerWithCredentialAndSecretPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function(String passwordStr)? passwordChanged,
-    TResult Function()? registerWithCredentialAndPasswordPressed,
+    TResult Function(String secretStr)? secretChanged,
+    TResult Function()? registerWithCredentialAndSecretPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function(String passwordStr)? passwordChanged,
-    TResult Function()? registerWithCredentialAndPasswordPressed,
+    TResult Function(String secretStr)? secretChanged,
+    TResult Function()? registerWithCredentialAndSecretPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CredentialChanged value) credentialChanged,
-    required TResult Function(PasswordChanged value) passwordChanged,
-    required TResult Function(RegisterWithCredentialAndPasswordPressed value)
-        registerWithCredentialAndPasswordPressed,
+    required TResult Function(SecretChanged value) secretChanged,
+    required TResult Function(RegisterWithCredentialAndSecretPressed value)
+        registerWithCredentialAndSecretPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(PasswordChanged value)? passwordChanged,
-    TResult Function(RegisterWithCredentialAndPasswordPressed value)?
-        registerWithCredentialAndPasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(RegisterWithCredentialAndSecretPressed value)?
+        registerWithCredentialAndSecretPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(PasswordChanged value)? passwordChanged,
-    TResult Function(RegisterWithCredentialAndPasswordPressed value)?
-        registerWithCredentialAndPasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(RegisterWithCredentialAndSecretPressed value)?
+        registerWithCredentialAndSecretPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -173,8 +173,8 @@ class _$CredentialChanged implements CredentialChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String credentialStr) credentialChanged,
-    required TResult Function(String passwordStr) passwordChanged,
-    required TResult Function() registerWithCredentialAndPasswordPressed,
+    required TResult Function(String secretStr) secretChanged,
+    required TResult Function() registerWithCredentialAndSecretPressed,
   }) {
     return credentialChanged(credentialStr);
   }
@@ -183,8 +183,8 @@ class _$CredentialChanged implements CredentialChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function(String passwordStr)? passwordChanged,
-    TResult Function()? registerWithCredentialAndPasswordPressed,
+    TResult Function(String secretStr)? secretChanged,
+    TResult Function()? registerWithCredentialAndSecretPressed,
   }) {
     return credentialChanged?.call(credentialStr);
   }
@@ -193,8 +193,8 @@ class _$CredentialChanged implements CredentialChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function(String passwordStr)? passwordChanged,
-    TResult Function()? registerWithCredentialAndPasswordPressed,
+    TResult Function(String secretStr)? secretChanged,
+    TResult Function()? registerWithCredentialAndSecretPressed,
     required TResult orElse(),
   }) {
     if (credentialChanged != null) {
@@ -207,9 +207,9 @@ class _$CredentialChanged implements CredentialChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CredentialChanged value) credentialChanged,
-    required TResult Function(PasswordChanged value) passwordChanged,
-    required TResult Function(RegisterWithCredentialAndPasswordPressed value)
-        registerWithCredentialAndPasswordPressed,
+    required TResult Function(SecretChanged value) secretChanged,
+    required TResult Function(RegisterWithCredentialAndSecretPressed value)
+        registerWithCredentialAndSecretPressed,
   }) {
     return credentialChanged(this);
   }
@@ -218,9 +218,9 @@ class _$CredentialChanged implements CredentialChanged {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(PasswordChanged value)? passwordChanged,
-    TResult Function(RegisterWithCredentialAndPasswordPressed value)?
-        registerWithCredentialAndPasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(RegisterWithCredentialAndSecretPressed value)?
+        registerWithCredentialAndSecretPressed,
   }) {
     return credentialChanged?.call(this);
   }
@@ -229,9 +229,9 @@ class _$CredentialChanged implements CredentialChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(PasswordChanged value)? passwordChanged,
-    TResult Function(RegisterWithCredentialAndPasswordPressed value)?
-        registerWithCredentialAndPasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(RegisterWithCredentialAndSecretPressed value)?
+        registerWithCredentialAndSecretPressed,
     required TResult orElse(),
   }) {
     if (credentialChanged != null) {
@@ -251,32 +251,32 @@ abstract class CredentialChanged implements SignInRegisterEvent {
 }
 
 /// @nodoc
-abstract class $PasswordChangedCopyWith<$Res> {
-  factory $PasswordChangedCopyWith(
-          PasswordChanged value, $Res Function(PasswordChanged) then) =
-      _$PasswordChangedCopyWithImpl<$Res>;
-  $Res call({String passwordStr});
+abstract class $SecretChangedCopyWith<$Res> {
+  factory $SecretChangedCopyWith(
+          SecretChanged value, $Res Function(SecretChanged) then) =
+      _$SecretChangedCopyWithImpl<$Res>;
+  $Res call({String secretStr});
 }
 
 /// @nodoc
-class _$PasswordChangedCopyWithImpl<$Res>
+class _$SecretChangedCopyWithImpl<$Res>
     extends _$SignInRegisterEventCopyWithImpl<$Res>
-    implements $PasswordChangedCopyWith<$Res> {
-  _$PasswordChangedCopyWithImpl(
-      PasswordChanged _value, $Res Function(PasswordChanged) _then)
-      : super(_value, (v) => _then(v as PasswordChanged));
+    implements $SecretChangedCopyWith<$Res> {
+  _$SecretChangedCopyWithImpl(
+      SecretChanged _value, $Res Function(SecretChanged) _then)
+      : super(_value, (v) => _then(v as SecretChanged));
 
   @override
-  PasswordChanged get _value => super._value as PasswordChanged;
+  SecretChanged get _value => super._value as SecretChanged;
 
   @override
   $Res call({
-    Object? passwordStr = freezed,
+    Object? secretStr = freezed,
   }) {
-    return _then(PasswordChanged(
-      passwordStr == freezed
-          ? _value.passwordStr
-          : passwordStr // ignore: cast_nullable_to_non_nullable
+    return _then(SecretChanged(
+      secretStr == freezed
+          ? _value.secretStr
+          : secretStr // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -284,65 +284,65 @@ class _$PasswordChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PasswordChanged implements PasswordChanged {
-  const _$PasswordChanged(this.passwordStr);
+class _$SecretChanged implements SecretChanged {
+  const _$SecretChanged(this.secretStr);
 
   @override
-  final String passwordStr;
+  final String secretStr;
 
   @override
   String toString() {
-    return 'SignInRegisterEvent.passwordChanged(passwordStr: $passwordStr)';
+    return 'SignInRegisterEvent.secretChanged(secretStr: $secretStr)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is PasswordChanged &&
-            (identical(other.passwordStr, passwordStr) ||
+        (other is SecretChanged &&
+            (identical(other.secretStr, secretStr) ||
                 const DeepCollectionEquality()
-                    .equals(other.passwordStr, passwordStr)));
+                    .equals(other.secretStr, secretStr)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(passwordStr);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(secretStr);
 
   @JsonKey(ignore: true)
   @override
-  $PasswordChangedCopyWith<PasswordChanged> get copyWith =>
-      _$PasswordChangedCopyWithImpl<PasswordChanged>(this, _$identity);
+  $SecretChangedCopyWith<SecretChanged> get copyWith =>
+      _$SecretChangedCopyWithImpl<SecretChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String credentialStr) credentialChanged,
-    required TResult Function(String passwordStr) passwordChanged,
-    required TResult Function() registerWithCredentialAndPasswordPressed,
+    required TResult Function(String secretStr) secretChanged,
+    required TResult Function() registerWithCredentialAndSecretPressed,
   }) {
-    return passwordChanged(passwordStr);
+    return secretChanged(secretStr);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function(String passwordStr)? passwordChanged,
-    TResult Function()? registerWithCredentialAndPasswordPressed,
+    TResult Function(String secretStr)? secretChanged,
+    TResult Function()? registerWithCredentialAndSecretPressed,
   }) {
-    return passwordChanged?.call(passwordStr);
+    return secretChanged?.call(secretStr);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function(String passwordStr)? passwordChanged,
-    TResult Function()? registerWithCredentialAndPasswordPressed,
+    TResult Function(String secretStr)? secretChanged,
+    TResult Function()? registerWithCredentialAndSecretPressed,
     required TResult orElse(),
   }) {
-    if (passwordChanged != null) {
-      return passwordChanged(passwordStr);
+    if (secretChanged != null) {
+      return secretChanged(secretStr);
     }
     return orElse();
   }
@@ -351,87 +351,87 @@ class _$PasswordChanged implements PasswordChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CredentialChanged value) credentialChanged,
-    required TResult Function(PasswordChanged value) passwordChanged,
-    required TResult Function(RegisterWithCredentialAndPasswordPressed value)
-        registerWithCredentialAndPasswordPressed,
+    required TResult Function(SecretChanged value) secretChanged,
+    required TResult Function(RegisterWithCredentialAndSecretPressed value)
+        registerWithCredentialAndSecretPressed,
   }) {
-    return passwordChanged(this);
+    return secretChanged(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(PasswordChanged value)? passwordChanged,
-    TResult Function(RegisterWithCredentialAndPasswordPressed value)?
-        registerWithCredentialAndPasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(RegisterWithCredentialAndSecretPressed value)?
+        registerWithCredentialAndSecretPressed,
   }) {
-    return passwordChanged?.call(this);
+    return secretChanged?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(PasswordChanged value)? passwordChanged,
-    TResult Function(RegisterWithCredentialAndPasswordPressed value)?
-        registerWithCredentialAndPasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(RegisterWithCredentialAndSecretPressed value)?
+        registerWithCredentialAndSecretPressed,
     required TResult orElse(),
   }) {
-    if (passwordChanged != null) {
-      return passwordChanged(this);
+    if (secretChanged != null) {
+      return secretChanged(this);
     }
     return orElse();
   }
 }
 
-abstract class PasswordChanged implements SignInRegisterEvent {
-  const factory PasswordChanged(String passwordStr) = _$PasswordChanged;
+abstract class SecretChanged implements SignInRegisterEvent {
+  const factory SecretChanged(String secretStr) = _$SecretChanged;
 
-  String get passwordStr => throw _privateConstructorUsedError;
+  String get secretStr => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PasswordChangedCopyWith<PasswordChanged> get copyWith =>
+  $SecretChangedCopyWith<SecretChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RegisterWithCredentialAndPasswordPressedCopyWith<$Res> {
-  factory $RegisterWithCredentialAndPasswordPressedCopyWith(
-          RegisterWithCredentialAndPasswordPressed value,
-          $Res Function(RegisterWithCredentialAndPasswordPressed) then) =
-      _$RegisterWithCredentialAndPasswordPressedCopyWithImpl<$Res>;
+abstract class $RegisterWithCredentialAndSecretPressedCopyWith<$Res> {
+  factory $RegisterWithCredentialAndSecretPressedCopyWith(
+          RegisterWithCredentialAndSecretPressed value,
+          $Res Function(RegisterWithCredentialAndSecretPressed) then) =
+      _$RegisterWithCredentialAndSecretPressedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$RegisterWithCredentialAndPasswordPressedCopyWithImpl<$Res>
+class _$RegisterWithCredentialAndSecretPressedCopyWithImpl<$Res>
     extends _$SignInRegisterEventCopyWithImpl<$Res>
-    implements $RegisterWithCredentialAndPasswordPressedCopyWith<$Res> {
-  _$RegisterWithCredentialAndPasswordPressedCopyWithImpl(
-      RegisterWithCredentialAndPasswordPressed _value,
-      $Res Function(RegisterWithCredentialAndPasswordPressed) _then)
-      : super(_value,
-            (v) => _then(v as RegisterWithCredentialAndPasswordPressed));
+    implements $RegisterWithCredentialAndSecretPressedCopyWith<$Res> {
+  _$RegisterWithCredentialAndSecretPressedCopyWithImpl(
+      RegisterWithCredentialAndSecretPressed _value,
+      $Res Function(RegisterWithCredentialAndSecretPressed) _then)
+      : super(
+            _value, (v) => _then(v as RegisterWithCredentialAndSecretPressed));
 
   @override
-  RegisterWithCredentialAndPasswordPressed get _value =>
-      super._value as RegisterWithCredentialAndPasswordPressed;
+  RegisterWithCredentialAndSecretPressed get _value =>
+      super._value as RegisterWithCredentialAndSecretPressed;
 }
 
 /// @nodoc
 
-class _$RegisterWithCredentialAndPasswordPressed
-    implements RegisterWithCredentialAndPasswordPressed {
-  const _$RegisterWithCredentialAndPasswordPressed();
+class _$RegisterWithCredentialAndSecretPressed
+    implements RegisterWithCredentialAndSecretPressed {
+  const _$RegisterWithCredentialAndSecretPressed();
 
   @override
   String toString() {
-    return 'SignInRegisterEvent.registerWithCredentialAndPasswordPressed()';
+    return 'SignInRegisterEvent.registerWithCredentialAndSecretPressed()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is RegisterWithCredentialAndPasswordPressed);
+        (other is RegisterWithCredentialAndSecretPressed);
   }
 
   @override
@@ -441,32 +441,32 @@ class _$RegisterWithCredentialAndPasswordPressed
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String credentialStr) credentialChanged,
-    required TResult Function(String passwordStr) passwordChanged,
-    required TResult Function() registerWithCredentialAndPasswordPressed,
+    required TResult Function(String secretStr) secretChanged,
+    required TResult Function() registerWithCredentialAndSecretPressed,
   }) {
-    return registerWithCredentialAndPasswordPressed();
+    return registerWithCredentialAndSecretPressed();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function(String passwordStr)? passwordChanged,
-    TResult Function()? registerWithCredentialAndPasswordPressed,
+    TResult Function(String secretStr)? secretChanged,
+    TResult Function()? registerWithCredentialAndSecretPressed,
   }) {
-    return registerWithCredentialAndPasswordPressed?.call();
+    return registerWithCredentialAndSecretPressed?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function(String passwordStr)? passwordChanged,
-    TResult Function()? registerWithCredentialAndPasswordPressed,
+    TResult Function(String secretStr)? secretChanged,
+    TResult Function()? registerWithCredentialAndSecretPressed,
     required TResult orElse(),
   }) {
-    if (registerWithCredentialAndPasswordPressed != null) {
-      return registerWithCredentialAndPasswordPressed();
+    if (registerWithCredentialAndSecretPressed != null) {
+      return registerWithCredentialAndSecretPressed();
     }
     return orElse();
   }
@@ -475,44 +475,44 @@ class _$RegisterWithCredentialAndPasswordPressed
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CredentialChanged value) credentialChanged,
-    required TResult Function(PasswordChanged value) passwordChanged,
-    required TResult Function(RegisterWithCredentialAndPasswordPressed value)
-        registerWithCredentialAndPasswordPressed,
+    required TResult Function(SecretChanged value) secretChanged,
+    required TResult Function(RegisterWithCredentialAndSecretPressed value)
+        registerWithCredentialAndSecretPressed,
   }) {
-    return registerWithCredentialAndPasswordPressed(this);
+    return registerWithCredentialAndSecretPressed(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(PasswordChanged value)? passwordChanged,
-    TResult Function(RegisterWithCredentialAndPasswordPressed value)?
-        registerWithCredentialAndPasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(RegisterWithCredentialAndSecretPressed value)?
+        registerWithCredentialAndSecretPressed,
   }) {
-    return registerWithCredentialAndPasswordPressed?.call(this);
+    return registerWithCredentialAndSecretPressed?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(PasswordChanged value)? passwordChanged,
-    TResult Function(RegisterWithCredentialAndPasswordPressed value)?
-        registerWithCredentialAndPasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(RegisterWithCredentialAndSecretPressed value)?
+        registerWithCredentialAndSecretPressed,
     required TResult orElse(),
   }) {
-    if (registerWithCredentialAndPasswordPressed != null) {
-      return registerWithCredentialAndPasswordPressed(this);
+    if (registerWithCredentialAndSecretPressed != null) {
+      return registerWithCredentialAndSecretPressed(this);
     }
     return orElse();
   }
 }
 
-abstract class RegisterWithCredentialAndPasswordPressed
+abstract class RegisterWithCredentialAndSecretPressed
     implements SignInRegisterEvent {
-  const factory RegisterWithCredentialAndPasswordPressed() =
-      _$RegisterWithCredentialAndPasswordPressed;
+  const factory RegisterWithCredentialAndSecretPressed() =
+      _$RegisterWithCredentialAndSecretPressed;
 }
 
 /// @nodoc
@@ -521,13 +521,13 @@ class _$SignInRegisterStateTearOff {
 
   _RegisterState call(
       {required CredentialAddress credential,
-      required Password password,
+      required Secret secret,
       required bool isLoading,
       required Option<Either<FailureDetails, Unit>>
           authFailureOrSuccessOption}) {
     return _RegisterState(
       credential: credential,
-      password: password,
+      secret: secret,
       isLoading: isLoading,
       authFailureOrSuccessOption: authFailureOrSuccessOption,
     );
@@ -540,7 +540,7 @@ const $SignInRegisterState = _$SignInRegisterStateTearOff();
 /// @nodoc
 mixin _$SignInRegisterState {
   CredentialAddress get credential => throw _privateConstructorUsedError;
-  Password get password => throw _privateConstructorUsedError;
+  Secret get secret => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -557,7 +557,7 @@ abstract class $SignInRegisterStateCopyWith<$Res> {
       _$SignInRegisterStateCopyWithImpl<$Res>;
   $Res call(
       {CredentialAddress credential,
-      Password password,
+      Secret secret,
       bool isLoading,
       Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
 }
@@ -574,7 +574,7 @@ class _$SignInRegisterStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? credential = freezed,
-    Object? password = freezed,
+    Object? secret = freezed,
     Object? isLoading = freezed,
     Object? authFailureOrSuccessOption = freezed,
   }) {
@@ -583,10 +583,10 @@ class _$SignInRegisterStateCopyWithImpl<$Res>
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
               as CredentialAddress,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as Password,
+      secret: secret == freezed
+          ? _value.secret
+          : secret // ignore: cast_nullable_to_non_nullable
+              as Secret,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -608,7 +608,7 @@ abstract class _$RegisterStateCopyWith<$Res>
   @override
   $Res call(
       {CredentialAddress credential,
-      Password password,
+      Secret secret,
       bool isLoading,
       Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
 }
@@ -627,7 +627,7 @@ class __$RegisterStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? credential = freezed,
-    Object? password = freezed,
+    Object? secret = freezed,
     Object? isLoading = freezed,
     Object? authFailureOrSuccessOption = freezed,
   }) {
@@ -636,10 +636,10 @@ class __$RegisterStateCopyWithImpl<$Res>
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
               as CredentialAddress,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as Password,
+      secret: secret == freezed
+          ? _value.secret
+          : secret // ignore: cast_nullable_to_non_nullable
+              as Secret,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -657,14 +657,14 @@ class __$RegisterStateCopyWithImpl<$Res>
 class _$_RegisterState implements _RegisterState {
   const _$_RegisterState(
       {required this.credential,
-      required this.password,
+      required this.secret,
       required this.isLoading,
       required this.authFailureOrSuccessOption});
 
   @override
   final CredentialAddress credential;
   @override
-  final Password password;
+  final Secret secret;
   @override
   final bool isLoading;
   @override
@@ -672,7 +672,7 @@ class _$_RegisterState implements _RegisterState {
 
   @override
   String toString() {
-    return 'SignInRegisterState(credential: $credential, password: $password, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'SignInRegisterState(credential: $credential, secret: $secret, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -682,9 +682,8 @@ class _$_RegisterState implements _RegisterState {
             (identical(other.credential, credential) ||
                 const DeepCollectionEquality()
                     .equals(other.credential, credential)) &&
-            (identical(other.password, password) ||
-                const DeepCollectionEquality()
-                    .equals(other.password, password)) &&
+            (identical(other.secret, secret) ||
+                const DeepCollectionEquality().equals(other.secret, secret)) &&
             (identical(other.isLoading, isLoading) ||
                 const DeepCollectionEquality()
                     .equals(other.isLoading, isLoading)) &&
@@ -699,7 +698,7 @@ class _$_RegisterState implements _RegisterState {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(credential) ^
-      const DeepCollectionEquality().hash(password) ^
+      const DeepCollectionEquality().hash(secret) ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(authFailureOrSuccessOption);
 
@@ -712,7 +711,7 @@ class _$_RegisterState implements _RegisterState {
 abstract class _RegisterState implements SignInRegisterState {
   const factory _RegisterState(
       {required CredentialAddress credential,
-      required Password password,
+      required Secret secret,
       required bool isLoading,
       required Option<Either<FailureDetails, Unit>>
           authFailureOrSuccessOption}) = _$_RegisterState;
@@ -720,7 +719,7 @@ abstract class _RegisterState implements SignInRegisterState {
   @override
   CredentialAddress get credential => throw _privateConstructorUsedError;
   @override
-  Password get password => throw _privateConstructorUsedError;
+  Secret get secret => throw _privateConstructorUsedError;
   @override
   bool get isLoading => throw _privateConstructorUsedError;
   @override

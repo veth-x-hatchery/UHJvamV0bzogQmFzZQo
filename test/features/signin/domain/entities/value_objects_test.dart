@@ -79,53 +79,52 @@ void main() {
     });
   });
 
-  group('when validate Password', () {
+  group('when validate Secret', () {
     test('should return [ValueFailure.empty]', () {
       // arrange
 
-      const String password = '';
+      const String secret = '';
 
       // act
 
-      final result = Password(password);
+      final result = Secret(secret);
 
       // assert
 
-      expect(
-          result.value, left(const ValueFailure.empty(failedValue: password)));
+      expect(result.value, left(const ValueFailure.empty(failedValue: secret)));
 
-      expect(result.validation, PasswordMessageErrors.empty);
+      expect(result.validation, SecretMessageErrors.empty);
     });
 
-    test('should return [ValueFailure.shortPassword]', () {
+    test('should return [ValueFailure.shortSecret]', () {
       // arrange
 
-      const String password = '1234';
+      const String secret = '1234';
 
       // act
 
-      final result = Password(password);
+      final result = Secret(secret);
 
       // assert
 
       expect(result.value,
-          left(const ValueFailure.shortPassword(failedValue: password)));
+          left(const ValueFailure.shortSecret(failedValue: secret)));
 
-      expect(result.validation, PasswordMessageErrors.shortPassword);
+      expect(result.validation, SecretMessageErrors.shortSecret);
     });
 
     test('should validate credential with success', () {
       // arrange
 
-      const String password = 'dmFsdWVfdmFsaWRhdG9yc190ZXN0LmRhcnQK';
+      const String secret = 'dmFsdWVfdmFsaWRhdG9yc190ZXN0LmRhcnQK';
 
       // act
 
-      final result = Password(password);
+      final result = Secret(secret);
 
       // assert
 
-      expect(result.value, right(password));
+      expect(result.value, right(secret));
 
       expect(result.validation, null);
     });
@@ -137,7 +136,7 @@ void main() {
 
       // act
 
-      final result = Password('0');
+      final result = Secret('0');
 
       // assert
 

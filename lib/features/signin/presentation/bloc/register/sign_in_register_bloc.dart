@@ -6,7 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
 
 part 'sign_in_register_event.dart';
 part 'sign_in_register_state.dart';
@@ -14,10 +14,9 @@ part 'sign_in_register_bloc.freezed.dart';
 
 class SignInRegisterBloc
     extends Bloc<SignInRegisterEvent, SignInRegisterState> {
-  final SignInRegisterCredentialAndPassword
-      _signInRegisterCredentialAndPassword;
+  final SignInRegisterCredentialAndSecret _signInRegisterCredentialAndSecret;
 
-  SignInRegisterBloc(this._signInRegisterCredentialAndPassword)
+  SignInRegisterBloc(this._signInRegisterCredentialAndSecret)
       : super(SignInRegisterState.initial());
 
   @override
@@ -31,22 +30,22 @@ class SignInRegisterBloc
           authFailureOrSuccessOption: none(),
         );
       },
-      passwordChanged: (e) async* {
+      secretChanged: (e) async* {
         yield state.copyWith(
-          password: Password(e.passwordStr),
+          secret: Secret(e.secretStr),
           authFailureOrSuccessOption: none(),
         );
       },
-      registerWithCredentialAndPasswordPressed: (e) async* {
+      registerWithCredentialAndSecretPressed: (e) async* {
         yield state.copyWith(
           isLoading: true,
           authFailureOrSuccessOption: none(),
         );
-        final result = await _signInRegisterCredentialAndPassword.call(
+        final result = await _signInRegisterCredentialAndSecret.call(
           Params(
               credentials: Credentials(
             user: state.credential,
-            password: state.password,
+            secret: state.secret,
           )),
         );
         yield state.copyWith(

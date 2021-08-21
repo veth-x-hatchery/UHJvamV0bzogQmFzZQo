@@ -23,8 +23,8 @@ class _$ValueFailureTearOff {
     );
   }
 
-  ShortPassword<T> shortPassword<T>({required T failedValue}) {
-    return ShortPassword<T>(
+  ShortSecret<T> shortSecret<T>({required T failedValue}) {
+    return ShortSecret<T>(
       failedValue: failedValue,
     );
   }
@@ -46,21 +46,21 @@ mixin _$ValueFailure<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T failedValue) invalidCredential,
-    required TResult Function(T failedValue) shortPassword,
+    required TResult Function(T failedValue) shortSecret,
     required TResult Function(T failedValue) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(T failedValue)? invalidCredential,
-    TResult Function(T failedValue)? shortPassword,
+    TResult Function(T failedValue)? shortSecret,
     TResult Function(T failedValue)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T failedValue)? invalidCredential,
-    TResult Function(T failedValue)? shortPassword,
+    TResult Function(T failedValue)? shortSecret,
     TResult Function(T failedValue)? empty,
     required TResult orElse(),
   }) =>
@@ -68,21 +68,21 @@ mixin _$ValueFailure<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(InvalidCredential<T> value) invalidCredential,
-    required TResult Function(ShortPassword<T> value) shortPassword,
+    required TResult Function(ShortSecret<T> value) shortSecret,
     required TResult Function(Empty<T> value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(InvalidCredential<T> value)? invalidCredential,
-    TResult Function(ShortPassword<T> value)? shortPassword,
+    TResult Function(ShortSecret<T> value)? shortSecret,
     TResult Function(Empty<T> value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InvalidCredential<T> value)? invalidCredential,
-    TResult Function(ShortPassword<T> value)? shortPassword,
+    TResult Function(ShortSecret<T> value)? shortSecret,
     TResult Function(Empty<T> value)? empty,
     required TResult orElse(),
   }) =>
@@ -193,7 +193,7 @@ class _$InvalidCredential<T> implements InvalidCredential<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T failedValue) invalidCredential,
-    required TResult Function(T failedValue) shortPassword,
+    required TResult Function(T failedValue) shortSecret,
     required TResult Function(T failedValue) empty,
   }) {
     return invalidCredential(failedValue);
@@ -203,7 +203,7 @@ class _$InvalidCredential<T> implements InvalidCredential<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(T failedValue)? invalidCredential,
-    TResult Function(T failedValue)? shortPassword,
+    TResult Function(T failedValue)? shortSecret,
     TResult Function(T failedValue)? empty,
   }) {
     return invalidCredential?.call(failedValue);
@@ -213,7 +213,7 @@ class _$InvalidCredential<T> implements InvalidCredential<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T failedValue)? invalidCredential,
-    TResult Function(T failedValue)? shortPassword,
+    TResult Function(T failedValue)? shortSecret,
     TResult Function(T failedValue)? empty,
     required TResult orElse(),
   }) {
@@ -227,7 +227,7 @@ class _$InvalidCredential<T> implements InvalidCredential<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(InvalidCredential<T> value) invalidCredential,
-    required TResult Function(ShortPassword<T> value) shortPassword,
+    required TResult Function(ShortSecret<T> value) shortSecret,
     required TResult Function(Empty<T> value) empty,
   }) {
     return invalidCredential(this);
@@ -237,7 +237,7 @@ class _$InvalidCredential<T> implements InvalidCredential<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(InvalidCredential<T> value)? invalidCredential,
-    TResult Function(ShortPassword<T> value)? shortPassword,
+    TResult Function(ShortSecret<T> value)? shortSecret,
     TResult Function(Empty<T> value)? empty,
   }) {
     return invalidCredential?.call(this);
@@ -247,7 +247,7 @@ class _$InvalidCredential<T> implements InvalidCredential<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InvalidCredential<T> value)? invalidCredential,
-    TResult Function(ShortPassword<T> value)? shortPassword,
+    TResult Function(ShortSecret<T> value)? shortSecret,
     TResult Function(Empty<T> value)? empty,
     required TResult orElse(),
   }) {
@@ -271,31 +271,31 @@ abstract class InvalidCredential<T> implements ValueFailure<T> {
 }
 
 /// @nodoc
-abstract class $ShortPasswordCopyWith<T, $Res>
+abstract class $ShortSecretCopyWith<T, $Res>
     implements $ValueFailureCopyWith<T, $Res> {
-  factory $ShortPasswordCopyWith(
-          ShortPassword<T> value, $Res Function(ShortPassword<T>) then) =
-      _$ShortPasswordCopyWithImpl<T, $Res>;
+  factory $ShortSecretCopyWith(
+          ShortSecret<T> value, $Res Function(ShortSecret<T>) then) =
+      _$ShortSecretCopyWithImpl<T, $Res>;
   @override
   $Res call({T failedValue});
 }
 
 /// @nodoc
-class _$ShortPasswordCopyWithImpl<T, $Res>
+class _$ShortSecretCopyWithImpl<T, $Res>
     extends _$ValueFailureCopyWithImpl<T, $Res>
-    implements $ShortPasswordCopyWith<T, $Res> {
-  _$ShortPasswordCopyWithImpl(
-      ShortPassword<T> _value, $Res Function(ShortPassword<T>) _then)
-      : super(_value, (v) => _then(v as ShortPassword<T>));
+    implements $ShortSecretCopyWith<T, $Res> {
+  _$ShortSecretCopyWithImpl(
+      ShortSecret<T> _value, $Res Function(ShortSecret<T>) _then)
+      : super(_value, (v) => _then(v as ShortSecret<T>));
 
   @override
-  ShortPassword<T> get _value => super._value as ShortPassword<T>;
+  ShortSecret<T> get _value => super._value as ShortSecret<T>;
 
   @override
   $Res call({
     Object? failedValue = freezed,
   }) {
-    return _then(ShortPassword<T>(
+    return _then(ShortSecret<T>(
       failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
@@ -306,21 +306,21 @@ class _$ShortPasswordCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$ShortPassword<T> implements ShortPassword<T> {
-  const _$ShortPassword({required this.failedValue});
+class _$ShortSecret<T> implements ShortSecret<T> {
+  const _$ShortSecret({required this.failedValue});
 
   @override
   final T failedValue;
 
   @override
   String toString() {
-    return 'ValueFailure<$T>.shortPassword(failedValue: $failedValue)';
+    return 'ValueFailure<$T>.shortSecret(failedValue: $failedValue)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is ShortPassword<T> &&
+        (other is ShortSecret<T> &&
             (identical(other.failedValue, failedValue) ||
                 const DeepCollectionEquality()
                     .equals(other.failedValue, failedValue)));
@@ -332,39 +332,39 @@ class _$ShortPassword<T> implements ShortPassword<T> {
 
   @JsonKey(ignore: true)
   @override
-  $ShortPasswordCopyWith<T, ShortPassword<T>> get copyWith =>
-      _$ShortPasswordCopyWithImpl<T, ShortPassword<T>>(this, _$identity);
+  $ShortSecretCopyWith<T, ShortSecret<T>> get copyWith =>
+      _$ShortSecretCopyWithImpl<T, ShortSecret<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T failedValue) invalidCredential,
-    required TResult Function(T failedValue) shortPassword,
+    required TResult Function(T failedValue) shortSecret,
     required TResult Function(T failedValue) empty,
   }) {
-    return shortPassword(failedValue);
+    return shortSecret(failedValue);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(T failedValue)? invalidCredential,
-    TResult Function(T failedValue)? shortPassword,
+    TResult Function(T failedValue)? shortSecret,
     TResult Function(T failedValue)? empty,
   }) {
-    return shortPassword?.call(failedValue);
+    return shortSecret?.call(failedValue);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T failedValue)? invalidCredential,
-    TResult Function(T failedValue)? shortPassword,
+    TResult Function(T failedValue)? shortSecret,
     TResult Function(T failedValue)? empty,
     required TResult orElse(),
   }) {
-    if (shortPassword != null) {
-      return shortPassword(failedValue);
+    if (shortSecret != null) {
+      return shortSecret(failedValue);
     }
     return orElse();
   }
@@ -373,45 +373,45 @@ class _$ShortPassword<T> implements ShortPassword<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(InvalidCredential<T> value) invalidCredential,
-    required TResult Function(ShortPassword<T> value) shortPassword,
+    required TResult Function(ShortSecret<T> value) shortSecret,
     required TResult Function(Empty<T> value) empty,
   }) {
-    return shortPassword(this);
+    return shortSecret(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(InvalidCredential<T> value)? invalidCredential,
-    TResult Function(ShortPassword<T> value)? shortPassword,
+    TResult Function(ShortSecret<T> value)? shortSecret,
     TResult Function(Empty<T> value)? empty,
   }) {
-    return shortPassword?.call(this);
+    return shortSecret?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InvalidCredential<T> value)? invalidCredential,
-    TResult Function(ShortPassword<T> value)? shortPassword,
+    TResult Function(ShortSecret<T> value)? shortSecret,
     TResult Function(Empty<T> value)? empty,
     required TResult orElse(),
   }) {
-    if (shortPassword != null) {
-      return shortPassword(this);
+    if (shortSecret != null) {
+      return shortSecret(this);
     }
     return orElse();
   }
 }
 
-abstract class ShortPassword<T> implements ValueFailure<T> {
-  const factory ShortPassword({required T failedValue}) = _$ShortPassword<T>;
+abstract class ShortSecret<T> implements ValueFailure<T> {
+  const factory ShortSecret({required T failedValue}) = _$ShortSecret<T>;
 
   @override
   T get failedValue => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  $ShortPasswordCopyWith<T, ShortPassword<T>> get copyWith =>
+  $ShortSecretCopyWith<T, ShortSecret<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -481,7 +481,7 @@ class _$Empty<T> implements Empty<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T failedValue) invalidCredential,
-    required TResult Function(T failedValue) shortPassword,
+    required TResult Function(T failedValue) shortSecret,
     required TResult Function(T failedValue) empty,
   }) {
     return empty(failedValue);
@@ -491,7 +491,7 @@ class _$Empty<T> implements Empty<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(T failedValue)? invalidCredential,
-    TResult Function(T failedValue)? shortPassword,
+    TResult Function(T failedValue)? shortSecret,
     TResult Function(T failedValue)? empty,
   }) {
     return empty?.call(failedValue);
@@ -501,7 +501,7 @@ class _$Empty<T> implements Empty<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T failedValue)? invalidCredential,
-    TResult Function(T failedValue)? shortPassword,
+    TResult Function(T failedValue)? shortSecret,
     TResult Function(T failedValue)? empty,
     required TResult orElse(),
   }) {
@@ -515,7 +515,7 @@ class _$Empty<T> implements Empty<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(InvalidCredential<T> value) invalidCredential,
-    required TResult Function(ShortPassword<T> value) shortPassword,
+    required TResult Function(ShortSecret<T> value) shortSecret,
     required TResult Function(Empty<T> value) empty,
   }) {
     return empty(this);
@@ -525,7 +525,7 @@ class _$Empty<T> implements Empty<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(InvalidCredential<T> value)? invalidCredential,
-    TResult Function(ShortPassword<T> value)? shortPassword,
+    TResult Function(ShortSecret<T> value)? shortSecret,
     TResult Function(Empty<T> value)? empty,
   }) {
     return empty?.call(this);
@@ -535,7 +535,7 @@ class _$Empty<T> implements Empty<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InvalidCredential<T> value)? invalidCredential,
-    TResult Function(ShortPassword<T> value)? shortPassword,
+    TResult Function(ShortSecret<T> value)? shortSecret,
     TResult Function(Empty<T> value)? empty,
     required TResult orElse(),
   }) {

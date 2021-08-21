@@ -6,13 +6,13 @@ import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.da
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
-part 'sign_in_with_credential_and_password.freezed.dart';
+part 'sign_in_with_credential_and_secret.freezed.dart';
 
-class SignInWithCredentialAndPassword extends UseCase<Unit, Params> {
+class SignInWithCredentialAndSecret extends UseCase<Unit, Params> {
   // final ISignInRepository _signInRepository;
   final IAuthFacade _authFacade;
 
-  SignInWithCredentialAndPassword(
+  SignInWithCredentialAndSecret(
     // this._signInRepository,
     this._authFacade,
   );
@@ -20,9 +20,9 @@ class SignInWithCredentialAndPassword extends UseCase<Unit, Params> {
   @override
   Future<Either<FailureDetails, Unit>> call(Params params) {
     return _authFacade
-        .signInWithCredentialAndPassword(
+        .signInWithCredentialAndSecret(
           credentialAddress: params.credentials.user,
-          password: params.credentials.password,
+          secret: params.credentials.secret,
         )
         .then((value) => value.fold(
               (l) => left(_mapFailures(l)),
@@ -31,24 +31,24 @@ class SignInWithCredentialAndPassword extends UseCase<Unit, Params> {
   }
 
   FailureDetails _mapFailures(AuthFailure auth) {
-    if (auth == const AuthFailure.invalidCredentialAndPasswordCombination()) {
+    if (auth == const AuthFailure.invalidCredentialAndSecretCombination()) {
       return FailureDetails(
         failure: auth,
-        message: SignInWithCredentialAndPasswordErrorMessages
-            .invalidCredentialAndPasswordCombination,
+        message: SignInWithCredentialAndSecretErrorMessages
+            .invalidCredentialAndSecretCombination,
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInWithCredentialAndPasswordErrorMessages.unavailable,
+      message: SignInWithCredentialAndSecretErrorMessages.unavailable,
     );
   }
 }
 
-class SignInWithCredentialAndPasswordErrorMessages {
+class SignInWithCredentialAndSecretErrorMessages {
   static const unavailable = 'Unavailable';
-  static const invalidCredentialAndPasswordCombination =
-      'Invalid credential and password combination';
+  static const invalidCredentialAndSecretCombination =
+      'Invalid credential and secret combination';
 }
 
 @freezed

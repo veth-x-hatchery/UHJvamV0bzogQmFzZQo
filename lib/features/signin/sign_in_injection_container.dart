@@ -9,16 +9,16 @@ import 'package:vethx_beta/core/network/network_info.dart';
 // import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_password.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_credential_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_credential_and_secret.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/injection_container.dart';
 
@@ -88,8 +88,8 @@ Future<void> signInDependenciesInjection() async {
     ),
   );
 
-  sl.registerLazySingleton<SignInWithCredentialAndPassword>(
-    () => SignInWithCredentialAndPassword(
+  sl.registerLazySingleton<SignInWithCredentialAndSecret>(
+    () => SignInWithCredentialAndSecret(
       // sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
@@ -102,8 +102,8 @@ Future<void> signInDependenciesInjection() async {
     ),
   );
 
-  sl.registerLazySingleton<SignInRegisterCredentialAndPassword>(
-    () => SignInRegisterCredentialAndPassword(
+  sl.registerLazySingleton<SignInRegisterCredentialAndSecret>(
+    () => SignInRegisterCredentialAndSecret(
       // sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
@@ -119,7 +119,7 @@ Future<void> signInDependenciesInjection() async {
   );
 
   sl.registerFactory<SignInRegisterBloc>(
-    () => SignInRegisterBloc(sl<SignInRegisterCredentialAndPassword>()),
+    () => SignInRegisterBloc(sl<SignInRegisterCredentialAndSecret>()),
   );
 
   sl.registerFactory<SignInCredentialBloc>(
@@ -129,10 +129,10 @@ Future<void> signInDependenciesInjection() async {
     ),
   );
 
-  sl.registerFactory<SignInPasswordBloc>(
-    () => SignInPasswordBloc(
+  sl.registerFactory<SignInSecretBloc>(
+    () => SignInSecretBloc(
       sl<AuthBloc>(),
-      sl<SignInWithCredentialAndPassword>(),
+      sl<SignInWithCredentialAndSecret>(),
     ),
   );
 

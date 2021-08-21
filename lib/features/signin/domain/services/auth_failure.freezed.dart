@@ -29,9 +29,9 @@ class _$AuthFailureTearOff {
     return const CredentialAlreadyInUse();
   }
 
-  InvalidCredentialAndPasswordCombination
-      invalidCredentialAndPasswordCombination() {
-    return const InvalidCredentialAndPasswordCombination();
+  InvalidCredentialAndSecretCombination
+      invalidCredentialAndSecretCombination() {
+    return const InvalidCredentialAndSecretCombination();
   }
 }
 
@@ -45,7 +45,7 @@ mixin _$AuthFailure {
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() credentialAlreadyInUse,
-    required TResult Function() invalidCredentialAndPasswordCombination,
+    required TResult Function() invalidCredentialAndSecretCombination,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,7 +53,7 @@ mixin _$AuthFailure {
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndPasswordCombination,
+    TResult Function()? invalidCredentialAndSecretCombination,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,7 +61,7 @@ mixin _$AuthFailure {
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndPasswordCombination,
+    TResult Function()? invalidCredentialAndSecretCombination,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -71,8 +71,8 @@ mixin _$AuthFailure {
     required TResult Function(ServerError value) serverError,
     required TResult Function(CredentialAlreadyInUse value)
         credentialAlreadyInUse,
-    required TResult Function(InvalidCredentialAndPasswordCombination value)
-        invalidCredentialAndPasswordCombination,
+    required TResult Function(InvalidCredentialAndSecretCombination value)
+        invalidCredentialAndSecretCombination,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,8 +80,8 @@ mixin _$AuthFailure {
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndPasswordCombination value)?
-        invalidCredentialAndPasswordCombination,
+    TResult Function(InvalidCredentialAndSecretCombination value)?
+        invalidCredentialAndSecretCombination,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,8 +89,8 @@ mixin _$AuthFailure {
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndPasswordCombination value)?
-        invalidCredentialAndPasswordCombination,
+    TResult Function(InvalidCredentialAndSecretCombination value)?
+        invalidCredentialAndSecretCombination,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -155,7 +155,7 @@ class _$CancelledByUser implements CancelledByUser {
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() credentialAlreadyInUse,
-    required TResult Function() invalidCredentialAndPasswordCombination,
+    required TResult Function() invalidCredentialAndSecretCombination,
   }) {
     return cancelledByUser();
   }
@@ -166,7 +166,7 @@ class _$CancelledByUser implements CancelledByUser {
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndPasswordCombination,
+    TResult Function()? invalidCredentialAndSecretCombination,
   }) {
     return cancelledByUser?.call();
   }
@@ -177,7 +177,7 @@ class _$CancelledByUser implements CancelledByUser {
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndPasswordCombination,
+    TResult Function()? invalidCredentialAndSecretCombination,
     required TResult orElse(),
   }) {
     if (cancelledByUser != null) {
@@ -193,8 +193,8 @@ class _$CancelledByUser implements CancelledByUser {
     required TResult Function(ServerError value) serverError,
     required TResult Function(CredentialAlreadyInUse value)
         credentialAlreadyInUse,
-    required TResult Function(InvalidCredentialAndPasswordCombination value)
-        invalidCredentialAndPasswordCombination,
+    required TResult Function(InvalidCredentialAndSecretCombination value)
+        invalidCredentialAndSecretCombination,
   }) {
     return cancelledByUser(this);
   }
@@ -205,8 +205,8 @@ class _$CancelledByUser implements CancelledByUser {
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndPasswordCombination value)?
-        invalidCredentialAndPasswordCombination,
+    TResult Function(InvalidCredentialAndSecretCombination value)?
+        invalidCredentialAndSecretCombination,
   }) {
     return cancelledByUser?.call(this);
   }
@@ -217,8 +217,8 @@ class _$CancelledByUser implements CancelledByUser {
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndPasswordCombination value)?
-        invalidCredentialAndPasswordCombination,
+    TResult Function(InvalidCredentialAndSecretCombination value)?
+        invalidCredentialAndSecretCombination,
     required TResult orElse(),
   }) {
     if (cancelledByUser != null) {
@@ -274,7 +274,7 @@ class _$ServerError implements ServerError {
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() credentialAlreadyInUse,
-    required TResult Function() invalidCredentialAndPasswordCombination,
+    required TResult Function() invalidCredentialAndSecretCombination,
   }) {
     return serverError();
   }
@@ -285,7 +285,7 @@ class _$ServerError implements ServerError {
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndPasswordCombination,
+    TResult Function()? invalidCredentialAndSecretCombination,
   }) {
     return serverError?.call();
   }
@@ -296,7 +296,7 @@ class _$ServerError implements ServerError {
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndPasswordCombination,
+    TResult Function()? invalidCredentialAndSecretCombination,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -312,8 +312,8 @@ class _$ServerError implements ServerError {
     required TResult Function(ServerError value) serverError,
     required TResult Function(CredentialAlreadyInUse value)
         credentialAlreadyInUse,
-    required TResult Function(InvalidCredentialAndPasswordCombination value)
-        invalidCredentialAndPasswordCombination,
+    required TResult Function(InvalidCredentialAndSecretCombination value)
+        invalidCredentialAndSecretCombination,
   }) {
     return serverError(this);
   }
@@ -324,8 +324,8 @@ class _$ServerError implements ServerError {
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndPasswordCombination value)?
-        invalidCredentialAndPasswordCombination,
+    TResult Function(InvalidCredentialAndSecretCombination value)?
+        invalidCredentialAndSecretCombination,
   }) {
     return serverError?.call(this);
   }
@@ -336,8 +336,8 @@ class _$ServerError implements ServerError {
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndPasswordCombination value)?
-        invalidCredentialAndPasswordCombination,
+    TResult Function(InvalidCredentialAndSecretCombination value)?
+        invalidCredentialAndSecretCombination,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -394,7 +394,7 @@ class _$CredentialAlreadyInUse implements CredentialAlreadyInUse {
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() credentialAlreadyInUse,
-    required TResult Function() invalidCredentialAndPasswordCombination,
+    required TResult Function() invalidCredentialAndSecretCombination,
   }) {
     return credentialAlreadyInUse();
   }
@@ -405,7 +405,7 @@ class _$CredentialAlreadyInUse implements CredentialAlreadyInUse {
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndPasswordCombination,
+    TResult Function()? invalidCredentialAndSecretCombination,
   }) {
     return credentialAlreadyInUse?.call();
   }
@@ -416,7 +416,7 @@ class _$CredentialAlreadyInUse implements CredentialAlreadyInUse {
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndPasswordCombination,
+    TResult Function()? invalidCredentialAndSecretCombination,
     required TResult orElse(),
   }) {
     if (credentialAlreadyInUse != null) {
@@ -432,8 +432,8 @@ class _$CredentialAlreadyInUse implements CredentialAlreadyInUse {
     required TResult Function(ServerError value) serverError,
     required TResult Function(CredentialAlreadyInUse value)
         credentialAlreadyInUse,
-    required TResult Function(InvalidCredentialAndPasswordCombination value)
-        invalidCredentialAndPasswordCombination,
+    required TResult Function(InvalidCredentialAndSecretCombination value)
+        invalidCredentialAndSecretCombination,
   }) {
     return credentialAlreadyInUse(this);
   }
@@ -444,8 +444,8 @@ class _$CredentialAlreadyInUse implements CredentialAlreadyInUse {
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndPasswordCombination value)?
-        invalidCredentialAndPasswordCombination,
+    TResult Function(InvalidCredentialAndSecretCombination value)?
+        invalidCredentialAndSecretCombination,
   }) {
     return credentialAlreadyInUse?.call(this);
   }
@@ -456,8 +456,8 @@ class _$CredentialAlreadyInUse implements CredentialAlreadyInUse {
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndPasswordCombination value)?
-        invalidCredentialAndPasswordCombination,
+    TResult Function(InvalidCredentialAndSecretCombination value)?
+        invalidCredentialAndSecretCombination,
     required TResult orElse(),
   }) {
     if (credentialAlreadyInUse != null) {
@@ -472,43 +472,42 @@ abstract class CredentialAlreadyInUse implements AuthFailure {
 }
 
 /// @nodoc
-abstract class $InvalidCredentialAndPasswordCombinationCopyWith<$Res> {
-  factory $InvalidCredentialAndPasswordCombinationCopyWith(
-          InvalidCredentialAndPasswordCombination value,
-          $Res Function(InvalidCredentialAndPasswordCombination) then) =
-      _$InvalidCredentialAndPasswordCombinationCopyWithImpl<$Res>;
+abstract class $InvalidCredentialAndSecretCombinationCopyWith<$Res> {
+  factory $InvalidCredentialAndSecretCombinationCopyWith(
+          InvalidCredentialAndSecretCombination value,
+          $Res Function(InvalidCredentialAndSecretCombination) then) =
+      _$InvalidCredentialAndSecretCombinationCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$InvalidCredentialAndPasswordCombinationCopyWithImpl<$Res>
+class _$InvalidCredentialAndSecretCombinationCopyWithImpl<$Res>
     extends _$AuthFailureCopyWithImpl<$Res>
-    implements $InvalidCredentialAndPasswordCombinationCopyWith<$Res> {
-  _$InvalidCredentialAndPasswordCombinationCopyWithImpl(
-      InvalidCredentialAndPasswordCombination _value,
-      $Res Function(InvalidCredentialAndPasswordCombination) _then)
-      : super(
-            _value, (v) => _then(v as InvalidCredentialAndPasswordCombination));
+    implements $InvalidCredentialAndSecretCombinationCopyWith<$Res> {
+  _$InvalidCredentialAndSecretCombinationCopyWithImpl(
+      InvalidCredentialAndSecretCombination _value,
+      $Res Function(InvalidCredentialAndSecretCombination) _then)
+      : super(_value, (v) => _then(v as InvalidCredentialAndSecretCombination));
 
   @override
-  InvalidCredentialAndPasswordCombination get _value =>
-      super._value as InvalidCredentialAndPasswordCombination;
+  InvalidCredentialAndSecretCombination get _value =>
+      super._value as InvalidCredentialAndSecretCombination;
 }
 
 /// @nodoc
 
-class _$InvalidCredentialAndPasswordCombination
-    implements InvalidCredentialAndPasswordCombination {
-  const _$InvalidCredentialAndPasswordCombination();
+class _$InvalidCredentialAndSecretCombination
+    implements InvalidCredentialAndSecretCombination {
+  const _$InvalidCredentialAndSecretCombination();
 
   @override
   String toString() {
-    return 'AuthFailure.invalidCredentialAndPasswordCombination()';
+    return 'AuthFailure.invalidCredentialAndSecretCombination()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is InvalidCredentialAndPasswordCombination);
+        (other is InvalidCredentialAndSecretCombination);
   }
 
   @override
@@ -520,9 +519,9 @@ class _$InvalidCredentialAndPasswordCombination
     required TResult Function() cancelledByUser,
     required TResult Function() serverError,
     required TResult Function() credentialAlreadyInUse,
-    required TResult Function() invalidCredentialAndPasswordCombination,
+    required TResult Function() invalidCredentialAndSecretCombination,
   }) {
-    return invalidCredentialAndPasswordCombination();
+    return invalidCredentialAndSecretCombination();
   }
 
   @override
@@ -531,9 +530,9 @@ class _$InvalidCredentialAndPasswordCombination
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndPasswordCombination,
+    TResult Function()? invalidCredentialAndSecretCombination,
   }) {
-    return invalidCredentialAndPasswordCombination?.call();
+    return invalidCredentialAndSecretCombination?.call();
   }
 
   @override
@@ -542,11 +541,11 @@ class _$InvalidCredentialAndPasswordCombination
     TResult Function()? cancelledByUser,
     TResult Function()? serverError,
     TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndPasswordCombination,
+    TResult Function()? invalidCredentialAndSecretCombination,
     required TResult orElse(),
   }) {
-    if (invalidCredentialAndPasswordCombination != null) {
-      return invalidCredentialAndPasswordCombination();
+    if (invalidCredentialAndSecretCombination != null) {
+      return invalidCredentialAndSecretCombination();
     }
     return orElse();
   }
@@ -558,10 +557,10 @@ class _$InvalidCredentialAndPasswordCombination
     required TResult Function(ServerError value) serverError,
     required TResult Function(CredentialAlreadyInUse value)
         credentialAlreadyInUse,
-    required TResult Function(InvalidCredentialAndPasswordCombination value)
-        invalidCredentialAndPasswordCombination,
+    required TResult Function(InvalidCredentialAndSecretCombination value)
+        invalidCredentialAndSecretCombination,
   }) {
-    return invalidCredentialAndPasswordCombination(this);
+    return invalidCredentialAndSecretCombination(this);
   }
 
   @override
@@ -570,10 +569,10 @@ class _$InvalidCredentialAndPasswordCombination
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndPasswordCombination value)?
-        invalidCredentialAndPasswordCombination,
+    TResult Function(InvalidCredentialAndSecretCombination value)?
+        invalidCredentialAndSecretCombination,
   }) {
-    return invalidCredentialAndPasswordCombination?.call(this);
+    return invalidCredentialAndSecretCombination?.call(this);
   }
 
   @override
@@ -582,18 +581,18 @@ class _$InvalidCredentialAndPasswordCombination
     TResult Function(CancelledByUser value)? cancelledByUser,
     TResult Function(ServerError value)? serverError,
     TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndPasswordCombination value)?
-        invalidCredentialAndPasswordCombination,
+    TResult Function(InvalidCredentialAndSecretCombination value)?
+        invalidCredentialAndSecretCombination,
     required TResult orElse(),
   }) {
-    if (invalidCredentialAndPasswordCombination != null) {
-      return invalidCredentialAndPasswordCombination(this);
+    if (invalidCredentialAndSecretCombination != null) {
+      return invalidCredentialAndSecretCombination(this);
     }
     return orElse();
   }
 }
 
-abstract class InvalidCredentialAndPasswordCombination implements AuthFailure {
-  const factory InvalidCredentialAndPasswordCombination() =
-      _$InvalidCredentialAndPasswordCombination;
+abstract class InvalidCredentialAndSecretCombination implements AuthFailure {
+  const factory InvalidCredentialAndSecretCombination() =
+      _$InvalidCredentialAndSecretCombination;
 }

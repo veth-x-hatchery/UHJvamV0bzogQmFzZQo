@@ -17,14 +17,14 @@ import 'sign_in_credential_bloc_test.mocks.dart';
 ])
 void main() {
   late SignInCredentialBloc _bloc;
-  late MockSignInCheckIfCredentialIsInUse _mockSignInWithCredentialAndPassword;
+  late MockSignInCheckIfCredentialIsInUse _mockSignInWithCredentialAndSecret;
   late MockNavigationCubit _mockNavigation;
 
   setUp(() {
-    _mockSignInWithCredentialAndPassword = MockSignInCheckIfCredentialIsInUse();
+    _mockSignInWithCredentialAndSecret = MockSignInCheckIfCredentialIsInUse();
     _mockNavigation = MockNavigationCubit();
     _bloc = SignInCredentialBloc(
-      _mockSignInWithCredentialAndPassword,
+      _mockSignInWithCredentialAndSecret,
       _mockNavigation,
     );
   });
@@ -62,7 +62,7 @@ void main() {
 
     final valueObject = CredentialAddress(credential);
 
-    when(_mockSignInWithCredentialAndPassword.call(any))
+    when(_mockSignInWithCredentialAndSecret.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act
@@ -103,7 +103,7 @@ void main() {
 
     const credential = 'test';
 
-    when(_mockSignInWithCredentialAndPassword.call(any))
+    when(_mockSignInWithCredentialAndSecret.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act
@@ -142,11 +142,11 @@ void main() {
 
     const credential = 'test@test.com';
     final expectedFailure = FailureDetails(
-      failure: const AuthFailure.invalidCredentialAndPasswordCombination(),
+      failure: const AuthFailure.invalidCredentialAndSecretCombination(),
       message: CheckCredentialErrorMessages.credentialAlreadyRegistered,
     );
 
-    when(_mockSignInWithCredentialAndPassword.call(any))
+    when(_mockSignInWithCredentialAndSecret.call(any))
         .thenAnswer((_) => Future.value(Left(expectedFailure)));
 
     // act
@@ -184,7 +184,7 @@ void main() {
 
     const credential = 'test@test.com';
 
-    when(_mockSignInWithCredentialAndPassword.call(any))
+    when(_mockSignInWithCredentialAndSecret.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act
