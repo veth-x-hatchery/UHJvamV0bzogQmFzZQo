@@ -17,28 +17,28 @@ import 'sign_in_check_credential_test.mocks.dart';
   IAuthFacade,
 ])
 void main() {
-  late SignInRegisterCredentialAndPassword _signInUseCase;
+  late SignInRegisterCredentialAndSecret _signInUseCase;
   // late MockISignInRepository _mockSignInRepository;
   late MockIAuthFacade _mockAuthFacade;
 
   setUp(() {
     // _mockSignInRepository = MockISignInRepository();
     _mockAuthFacade = MockIAuthFacade();
-    _signInUseCase = SignInRegisterCredentialAndPassword(
+    _signInUseCase = SignInRegisterCredentialAndSecret(
       // _mockSignInRepository,
       _mockAuthFacade,
     );
   });
 
   final credentialTester = CredentialAddress('test@vethx.com');
-  final secretTester = Password('dGVzdEB2ZXRoeC5jb20K');
+  final secretTester = Secret('dGVzdEB2ZXRoeC5jb20K');
   final credentials = Credentials(user: credentialTester, secret: secretTester);
 
   group('when register with credential and secret', () {
     test('should return success with the given credentials', () async {
       // arrange
 
-      when(_mockAuthFacade.registerWithCredentialAndPassword(
+      when(_mockAuthFacade.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       )).thenAnswer((_) async => const Right(unit));
@@ -53,7 +53,7 @@ void main() {
 
       expect(result, const Right(unit));
 
-      verify(_mockAuthFacade.registerWithCredentialAndPassword(
+      verify(_mockAuthFacade.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       ));
@@ -67,10 +67,10 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInRegisterCredentialAndPasswordErrorMessages.unavailable,
+        message: SignInRegisterCredentialAndSecretErrorMessages.unavailable,
       );
 
-      when(_mockAuthFacade.registerWithCredentialAndPassword(
+      when(_mockAuthFacade.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       )).thenAnswer((_) async => const Left(throwFailure));
@@ -84,7 +84,7 @@ void main() {
 
       expect(result, left(failureDetails));
 
-      verify(_mockAuthFacade.registerWithCredentialAndPassword(
+      verify(_mockAuthFacade.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       ));
@@ -98,11 +98,11 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInRegisterCredentialAndPasswordErrorMessages
+        message: SignInRegisterCredentialAndSecretErrorMessages
             .credentialAlreadyInUse,
       );
 
-      when(_mockAuthFacade.registerWithCredentialAndPassword(
+      when(_mockAuthFacade.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       )).thenAnswer((_) async => const Left(throwFailure));
@@ -116,7 +116,7 @@ void main() {
 
       expect(result, left(failureDetails));
 
-      verify(_mockAuthFacade.registerWithCredentialAndPassword(
+      verify(_mockAuthFacade.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       ));

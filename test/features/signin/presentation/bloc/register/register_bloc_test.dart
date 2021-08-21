@@ -10,16 +10,15 @@ import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_re
 
 import 'register_bloc_test.mocks.dart';
 
-@GenerateMocks([SignInRegisterCredentialAndPassword])
+@GenerateMocks([SignInRegisterCredentialAndSecret])
 void main() {
   late SignInRegisterBloc _bloc;
-  late MockSignInRegisterCredentialAndPassword
-      _mockSignInWithCredentialAndPassword;
+  late MockSignInRegisterCredentialAndSecret _mockSignInWithCredentialAndSecret;
 
   setUp(() {
-    _mockSignInWithCredentialAndPassword =
-        MockSignInRegisterCredentialAndPassword();
-    _bloc = SignInRegisterBloc(_mockSignInWithCredentialAndPassword);
+    _mockSignInWithCredentialAndSecret =
+        MockSignInRegisterCredentialAndSecret();
+    _bloc = SignInRegisterBloc(_mockSignInWithCredentialAndSecret);
   });
 
   test('when credential changes occour then should emit correct state',
@@ -39,7 +38,7 @@ void main() {
         emitsInOrder([
           SignInRegisterState(
             credential: CredentialAddress(credential),
-            secret: Password(''),
+            secret: Secret(''),
             isLoading: false,
             authFailureOrSuccessOption: none(),
           )
@@ -62,7 +61,7 @@ void main() {
         emitsInOrder([
           SignInRegisterState(
             credential: CredentialAddress(''),
-            secret: Password(secret),
+            secret: Secret(secret),
             isLoading: false,
             authFailureOrSuccessOption: none(),
           )
@@ -78,7 +77,7 @@ void main() {
     const credential = 'test';
     const secret = '1234';
 
-    when(_mockSignInWithCredentialAndPassword.call(any))
+    when(_mockSignInWithCredentialAndSecret.call(any))
         .thenAnswer((_) => Future.value(const Right(unit)));
 
     // act
@@ -86,7 +85,7 @@ void main() {
     _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
     _bloc.add(const SignInRegisterEvent.secretChanged(secret));
     _bloc.add(
-        const SignInRegisterEvent.registerWithCredentialAndPasswordPressed());
+        const SignInRegisterEvent.registerWithCredentialAndSecretPressed());
 
     // assert
     await expectLater(
@@ -95,25 +94,25 @@ void main() {
           [
             SignInRegisterState(
               credential: CredentialAddress(credential),
-              secret: Password(''),
+              secret: Secret(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
               credential: CredentialAddress(credential),
-              secret: Password(secret),
+              secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
               credential: CredentialAddress(credential),
-              secret: Password(secret),
+              secret: Secret(secret),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
               credential: CredentialAddress(credential),
-              secret: Password(secret),
+              secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             )
@@ -130,7 +129,7 @@ void main() {
     const credential = 'test';
     const secret = '1234';
 
-    when(_mockSignInWithCredentialAndPassword.call(any))
+    when(_mockSignInWithCredentialAndSecret.call(any))
         .thenAnswer((_) => Future.value(const Right(unit)));
 
     // act
@@ -138,7 +137,7 @@ void main() {
     _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
     _bloc.add(const SignInRegisterEvent.secretChanged(secret));
     _bloc.add(
-        const SignInRegisterEvent.registerWithCredentialAndPasswordPressed());
+        const SignInRegisterEvent.registerWithCredentialAndSecretPressed());
 
     // assert
     await expectLater(
@@ -147,25 +146,25 @@ void main() {
           [
             SignInRegisterState(
               credential: CredentialAddress(credential),
-              secret: Password(''),
+              secret: Secret(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
               credential: CredentialAddress(credential),
-              secret: Password(secret),
+              secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
               credential: CredentialAddress(credential),
-              secret: Password(secret),
+              secret: Secret(secret),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
               credential: CredentialAddress(credential),
-              secret: Password(secret),
+              secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             )
@@ -179,12 +178,12 @@ void main() {
     const credential = 'test';
     const secret = '1234';
     final expectedFailure = FailureDetails(
-      failure: const AuthFailure.invalidCredentialAndPasswordCombination(),
-      message: SignInRegisterCredentialAndPasswordErrorMessages
-          .invalidCredentialAndPasswordCombination,
+      failure: const AuthFailure.invalidCredentialAndSecretCombination(),
+      message: SignInRegisterCredentialAndSecretErrorMessages
+          .invalidCredentialAndSecretCombination,
     );
 
-    when(_mockSignInWithCredentialAndPassword.call(any))
+    when(_mockSignInWithCredentialAndSecret.call(any))
         .thenAnswer((_) => Future.value(Left(expectedFailure)));
 
     // act
@@ -192,7 +191,7 @@ void main() {
     _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
     _bloc.add(const SignInRegisterEvent.secretChanged(secret));
     _bloc.add(
-        const SignInRegisterEvent.registerWithCredentialAndPasswordPressed());
+        const SignInRegisterEvent.registerWithCredentialAndSecretPressed());
 
     // assert
     await expectLater(
@@ -201,25 +200,25 @@ void main() {
           [
             SignInRegisterState(
               credential: CredentialAddress(credential),
-              secret: Password(''),
+              secret: Secret(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
               credential: CredentialAddress(credential),
-              secret: Password(secret),
+              secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
               credential: CredentialAddress(credential),
-              secret: Password(secret),
+              secret: Secret(secret),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
               credential: CredentialAddress(credential),
-              secret: Password(secret),
+              secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: some(Left(expectedFailure)),
             )

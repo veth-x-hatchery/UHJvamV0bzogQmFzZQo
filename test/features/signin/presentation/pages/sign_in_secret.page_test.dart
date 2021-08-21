@@ -13,12 +13,12 @@ import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
 import 'sign_in_secret.page_test.mocks.dart';
 
-@GenerateMocks([SignInPasswordBloc])
+@GenerateMocks([SignInSecretBloc])
 void main() {
-  late MockSignInPasswordBloc _mockBloc;
+  late MockSignInSecretBloc _mockBloc;
 
   setUp(() {
-    _mockBloc = MockSignInPasswordBloc();
+    _mockBloc = MockSignInSecretBloc();
   });
 
   Future<void> _pumpPage(WidgetTester tester) async {
@@ -26,22 +26,22 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInPasswordPage.create(bloc: _mockBloc),
+            body: SignInSecretPage.create(bloc: _mockBloc),
           ),
         ),
       ),
     );
   }
 
-  void _signInState(SignInPasswordState state) {
+  void _signInState(SignInSecretState state) {
     when(_mockBloc.state).thenReturn(state);
     when(_mockBloc.stream).thenAnswer((_) => Stream.value(state));
   }
 
   Finder _secretInput() {
     // arrange
-    final secretInput = find
-        .byKey(const Key(SignInPageKeys.signInPasswordPagePasswordTextField));
+    final secretInput =
+        find.byKey(const Key(SignInPageKeys.signInSecretPageSecretTextField));
     // Act && Assert
     expect(secretInput, findsOneWidget);
     return secretInput;
@@ -50,7 +50,7 @@ void main() {
   Finder _validationButton() {
     // arrange
     final validationButton =
-        find.byKey(const Key(SignInPageKeys.signInPasswordPageValidateButton));
+        find.byKey(const Key(SignInPageKeys.signInSecretPageValidateButton));
     // Act && Assert
     expect(validationButton, findsOneWidget);
     return validationButton;
@@ -60,8 +60,8 @@ void main() {
   void _prepareFormValidationValues({
     String? value,
   }) {
-    final credentialVO = Password(value);
-    final state = SignInPasswordState(
+    final credentialVO = Secret(value);
+    final state = SignInSecretState(
       secret: credentialVO,
       isLoading: false,
       authFailureOrSuccessOption: none(),
@@ -72,12 +72,12 @@ void main() {
   testWidgets('should find the validation button', (tester) async {
     // arrange
 
-    _signInState(SignInPasswordState.initial());
+    _signInState(SignInSecretState.initial());
 
     await _pumpPage(tester);
 
     final validationButton =
-        find.byKey(const Key(SignInPageKeys.signInPasswordPageValidateButton));
+        find.byKey(const Key(SignInPageKeys.signInSecretPageValidateButton));
 
     // Act
 
@@ -91,12 +91,12 @@ void main() {
   testWidgets('should find the secret input', (tester) async {
     // arrange
 
-    _signInState(SignInPasswordState.initial());
+    _signInState(SignInSecretState.initial());
 
     await _pumpPage(tester);
 
-    final secretInput = find
-        .byKey(const Key(SignInPageKeys.signInPasswordPagePasswordTextField));
+    final secretInput =
+        find.byKey(const Key(SignInPageKeys.signInSecretPageSecretTextField));
 
     // Act
 
@@ -111,9 +111,9 @@ void main() {
       (tester) async {
     // Arrange
 
-    _signInState(SignInPasswordState(
+    _signInState(SignInSecretState(
       isLoading: true,
-      secret: Password(''),
+      secret: Secret(''),
       authFailureOrSuccessOption: none(),
     ));
 
@@ -128,7 +128,7 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(SignInPasswordState.initial());
+    _signInState(SignInSecretState.initial());
 
     await _pumpPage(tester);
 
@@ -149,17 +149,17 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(SignInPasswordState.initial());
+    _signInState(SignInSecretState.initial());
 
     await _pumpPage(tester);
 
-    const invalidPassword = '1234';
+    const invalidSecret = '1234';
 
-    await tester.enterText(_secretInput(), invalidPassword);
+    await tester.enterText(_secretInput(), invalidSecret);
 
     // Act
 
-    _prepareFormValidationValues(value: invalidPassword);
+    _prepareFormValidationValues(value: invalidSecret);
 
     await tester.tap(_validationButton());
 
@@ -167,23 +167,22 @@ void main() {
 
     // assert
 
-    verifyNever(
-        _mockBloc.add(const SignInPasswordEvent.analysePasswordPressed()));
+    verifyNever(_mockBloc.add(const SignInSecretEvent.analyseSecretPressed()));
   });
 
   testWidgets('when user enters a correct secret then SignInBLoC is called',
       (tester) async {
     // arrange
 
-    _signInState(SignInPasswordState.initial());
+    _signInState(SignInSecretState.initial());
 
     await _pumpPage(tester);
 
-    const validPassword = 'dmFsaWRwYXNzd29yZAo';
+    const validSecret = 'dmFsaWRwYXNzd29yZAo';
 
-    await tester.enterText(_secretInput(), validPassword);
+    await tester.enterText(_secretInput(), validSecret);
 
-    _prepareFormValidationValues(value: validPassword);
+    _prepareFormValidationValues(value: validSecret);
 
     // Act
 

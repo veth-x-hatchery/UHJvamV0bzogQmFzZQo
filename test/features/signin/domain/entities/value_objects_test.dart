@@ -79,7 +79,7 @@ void main() {
     });
   });
 
-  group('when validate Password', () {
+  group('when validate Secret', () {
     test('should return [ValueFailure.empty]', () {
       // arrange
 
@@ -87,30 +87,30 @@ void main() {
 
       // act
 
-      final result = Password(secret);
+      final result = Secret(secret);
 
       // assert
 
       expect(result.value, left(const ValueFailure.empty(failedValue: secret)));
 
-      expect(result.validation, PasswordMessageErrors.empty);
+      expect(result.validation, SecretMessageErrors.empty);
     });
 
-    test('should return [ValueFailure.shortPassword]', () {
+    test('should return [ValueFailure.shortSecret]', () {
       // arrange
 
       const String secret = '1234';
 
       // act
 
-      final result = Password(secret);
+      final result = Secret(secret);
 
       // assert
 
       expect(result.value,
-          left(const ValueFailure.shortPassword(failedValue: secret)));
+          left(const ValueFailure.shortSecret(failedValue: secret)));
 
-      expect(result.validation, PasswordMessageErrors.shortPassword);
+      expect(result.validation, SecretMessageErrors.shortSecret);
     });
 
     test('should validate credential with success', () {
@@ -120,7 +120,7 @@ void main() {
 
       // act
 
-      final result = Password(secret);
+      final result = Secret(secret);
 
       // assert
 
@@ -136,7 +136,7 @@ void main() {
 
       // act
 
-      final result = Password('0');
+      final result = Secret('0');
 
       // assert
 

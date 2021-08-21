@@ -21,12 +21,12 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_cred
 
 class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 
-/// A class which mocks [SignInRegisterCredentialAndPassword].
+/// A class which mocks [SignInRegisterCredentialAndSecret].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInRegisterCredentialAndPassword extends _i1.Mock
-    implements _i3.SignInRegisterCredentialAndPassword {
-  MockSignInRegisterCredentialAndPassword() {
+class MockSignInRegisterCredentialAndSecret extends _i1.Mock
+    implements _i3.SignInRegisterCredentialAndSecret {
+  MockSignInRegisterCredentialAndSecret() {
     _i1.throwOnMissingStub(this);
   }
 

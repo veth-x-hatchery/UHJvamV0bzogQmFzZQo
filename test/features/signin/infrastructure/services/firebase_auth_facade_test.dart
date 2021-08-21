@@ -50,25 +50,25 @@ void main() {
     );
   });
 
-  group('when [FirebaseAuthFacade.registerWithCredentialAndPassword]', () {
+  group('when [FirebaseAuthFacade.registerWithCredentialAndSecret]', () {
     final credential = CredentialAddress('test@vethx.com');
 
-    final secret = Password('dGVzdEB2ZXRoeC5jb20K');
+    final secret = Secret('dGVzdEB2ZXRoeC5jb20K');
 
-    Future<void> _registerWithCredentialAndPassword(
+    Future<void> _registerWithCredentialAndSecret(
       Exception firebaseException,
       AuthFailure expectedFailure,
     ) async {
       // Arrange
 
-      when(_mockFirebaseAuth.signInWithEmailAndPassword(
+      when(_mockFirebaseAuth.signInWithEmailAndSecret(
         email: credential.getOrCrash(),
         secret: secret.getOrCrash(),
       )).thenThrow(firebaseException);
 
       // act
 
-      final result = await _authFacade.registerWithCredentialAndPassword(
+      final result = await _authFacade.registerWithCredentialAndSecret(
         credentialAddress: credential,
         secret: secret,
       );
@@ -90,7 +90,7 @@ void main() {
 
         // act && assert
 
-        await _registerWithCredentialAndPassword(
+        await _registerWithCredentialAndSecret(
           firebaseException,
           expectedFailure,
         );
@@ -109,7 +109,7 @@ void main() {
 
         // act && assert
 
-        await _registerWithCredentialAndPassword(
+        await _registerWithCredentialAndSecret(
           firebaseException,
           expectedFailure,
         );
@@ -120,7 +120,7 @@ void main() {
       // Arrange
 
       when(
-        _mockFirebaseAuth.signInWithEmailAndPassword(
+        _mockFirebaseAuth.signInWithEmailAndSecret(
           email: credential.getOrCrash(),
           secret: secret.getOrCrash(),
         ),
@@ -129,7 +129,7 @@ void main() {
 
       // act
 
-      final result = await _authFacade.registerWithCredentialAndPassword(
+      final result = await _authFacade.registerWithCredentialAndSecret(
         credentialAddress: credential,
         secret: secret,
       );
@@ -140,25 +140,25 @@ void main() {
     });
   });
 
-  group('when [FirebaseAuthFacade.signInWithCredentialAndPassword]', () {
+  group('when [FirebaseAuthFacade.signInWithCredentialAndSecret]', () {
     final credential = CredentialAddress('test@vethx.com');
 
-    final secret = Password('dGVzdEB2ZXRoeC5jb20K');
+    final secret = Secret('dGVzdEB2ZXRoeC5jb20K');
 
-    Future<void> _signInWithCredentialAndPassword(
+    Future<void> _signInWithCredentialAndSecret(
       Exception firebaseException,
       AuthFailure expectedFailure,
     ) async {
       // Arrange
 
-      when(_mockFirebaseAuth.signInWithEmailAndPassword(
+      when(_mockFirebaseAuth.signInWithEmailAndSecret(
         email: credential.getOrCrash(),
         secret: secret.getOrCrash(),
       )).thenThrow(firebaseException);
 
       // act
 
-      final result = await _authFacade.signInWithCredentialAndPassword(
+      final result = await _authFacade.signInWithCredentialAndSecret(
         credentialAddress: credential,
         secret: secret,
       );
@@ -169,7 +169,7 @@ void main() {
     }
 
     test(
-        'should return [AuthFailure.invalidCredentialAndPasswordCombination()] when Firebase throw [wrong-secret]',
+        'should return [AuthFailure.invalidCredentialAndSecretCombination()] when Firebase throw [wrong-secret]',
         () async {
       // arrange
 
@@ -177,18 +177,18 @@ void main() {
           FirebaseException(code: 'wrong-secret', plugin: '');
 
       const expectedFailure =
-          AuthFailure.invalidCredentialAndPasswordCombination();
+          AuthFailure.invalidCredentialAndSecretCombination();
 
       // act && assert
 
-      await _signInWithCredentialAndPassword(
+      await _signInWithCredentialAndSecret(
         firebaseException,
         expectedFailure,
       );
     });
 
     test(
-        'should return [AuthFailure.invalidCredentialAndPasswordCombination()] when Firebase throw [user-not-found]',
+        'should return [AuthFailure.invalidCredentialAndSecretCombination()] when Firebase throw [user-not-found]',
         () async {
       // arrange
 
@@ -196,11 +196,11 @@ void main() {
           FirebaseException(code: 'user-not-found', plugin: '');
 
       const expectedFailure =
-          AuthFailure.invalidCredentialAndPasswordCombination();
+          AuthFailure.invalidCredentialAndSecretCombination();
 
       // act && assert
 
-      await _signInWithCredentialAndPassword(
+      await _signInWithCredentialAndSecret(
         firebaseException,
         expectedFailure,
       );
@@ -217,7 +217,7 @@ void main() {
 
         // act && assert
 
-        await _signInWithCredentialAndPassword(
+        await _signInWithCredentialAndSecret(
           firebaseException,
           expectedFailure,
         );
@@ -228,7 +228,7 @@ void main() {
       // Arrange
 
       when(
-        _mockFirebaseAuth.signInWithEmailAndPassword(
+        _mockFirebaseAuth.signInWithEmailAndSecret(
           email: credential.getOrCrash(),
           secret: secret.getOrCrash(),
         ),
@@ -237,7 +237,7 @@ void main() {
 
       // act
 
-      final result = await _authFacade.signInWithCredentialAndPassword(
+      final result = await _authFacade.signInWithCredentialAndSecret(
         credentialAddress: credential,
         secret: secret,
       );
@@ -320,9 +320,9 @@ void main() {
 
     Future<void> _credentialIsAlreadyInUse(Exception firebaseException) async {
       // Arrange
-      when(_mockFirebaseAuth.signInWithEmailAndPassword(
+      when(_mockFirebaseAuth.signInWithEmailAndSecret(
         email: credential.getOrCrash(),
-        secret: _authFacade.randomPassword,
+        secret: _authFacade.randomSecret,
       )).thenThrow(firebaseException);
     }
 

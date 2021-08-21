@@ -49,8 +49,8 @@ void main() {
 
   Finder _secretInput() {
     // arrange
-    final secretInput = find
-        .byKey(const Key(SignInPageKeys.signInRegisterPagePasswordTextField));
+    final secretInput =
+        find.byKey(const Key(SignInPageKeys.signInRegisterPageSecretTextField));
     // Act && Assert
     // expect(secretInput, findsOneWidget);
     return secretInput;
@@ -66,10 +66,10 @@ void main() {
   }
 
   const validCredential = 'test@test.com';
-  const validPassword = 'dmFsaWRwYXNzd29yZAo';
+  const validSecret = 'dmFsaWRwYXNzd29yZAo';
 
   const invalidCredential = 'invalidcredential';
-  const invalidPassword = '1234';
+  const invalidSecret = '1234';
 
   /// Form uses BLoC state to realize validations
   void _prepareFormValidationValues({
@@ -77,7 +77,7 @@ void main() {
     String? secret,
   }) {
     final credentialVO = CredentialAddress(credential);
-    final secretVO = Password(secret);
+    final secretVO = Secret(secret);
     final state = SignInRegisterState(
       credential: credentialVO,
       secret: secretVO,
@@ -134,7 +134,7 @@ void main() {
       await _pumpPage(tester);
 
       final credentialInput = find
-          .byKey(const Key(SignInPageKeys.signInRegisterPagePasswordTextField));
+          .byKey(const Key(SignInPageKeys.signInRegisterPageSecretTextField));
 
       // Act
 
@@ -152,7 +152,7 @@ void main() {
 
     _signInState(SignInRegisterState(
       credential: CredentialAddress(validCredential),
-      secret: Password(validPassword),
+      secret: Secret(validSecret),
       isLoading: true,
       authFailureOrSuccessOption: none(),
     ));
@@ -206,7 +206,7 @@ void main() {
     // assert
 
     verifyNever(_mockSignInBloc.add(
-        const SignInRegisterEvent.registerWithCredentialAndPasswordPressed()));
+        const SignInRegisterEvent.registerWithCredentialAndSecretPressed()));
   });
 
   testWidgets('when user enters a invalid secret then no events are emitted',
@@ -219,10 +219,10 @@ void main() {
 
     await tester.enterText(_credentialInput(), validCredential);
 
-    await tester.enterText(_secretInput(), invalidPassword);
+    await tester.enterText(_secretInput(), invalidSecret);
 
     _prepareFormValidationValues(
-        credential: validCredential, secret: invalidPassword);
+        credential: validCredential, secret: invalidSecret);
 
     // Act
 
@@ -231,7 +231,7 @@ void main() {
     // assert
 
     verifyNever(_mockSignInBloc.add(
-        const SignInRegisterEvent.registerWithCredentialAndPasswordPressed()));
+        const SignInRegisterEvent.registerWithCredentialAndSecretPressed()));
   });
 
   testWidgets(
@@ -245,10 +245,10 @@ void main() {
 
     await tester.enterText(_credentialInput(), validCredential);
 
-    await tester.enterText(_secretInput(), validPassword);
+    await tester.enterText(_secretInput(), validSecret);
 
     _prepareFormValidationValues(
-        credential: validCredential, secret: validPassword);
+        credential: validCredential, secret: validSecret);
 
     // Act
 
@@ -256,8 +256,8 @@ void main() {
 
     // assert
 
-    verify(_mockSignInBloc.add(const SignInRegisterEvent
-            .registerWithCredentialAndPasswordPressed()))
+    verify(_mockSignInBloc.add(
+            const SignInRegisterEvent.registerWithCredentialAndSecretPressed()))
         .called(1);
   });
 }

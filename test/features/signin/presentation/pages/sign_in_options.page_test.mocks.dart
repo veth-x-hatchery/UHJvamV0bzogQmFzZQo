@@ -39,8 +39,8 @@ class _FakeSignInCredentialState_2 extends _i1.Fake
 class _FakeSignInRegisterState_3 extends _i1.Fake
     implements _i5.SignInRegisterState {}
 
-class _FakeSignInPasswordState_4 extends _i1.Fake
-    implements _i6.SignInPasswordState {}
+class _FakeSignInSecretState_4 extends _i1.Fake
+    implements _i6.SignInSecretState {}
 
 class _FakeNavigationState_5 extends _i1.Fake implements _i7.NavigationState {}
 
@@ -343,78 +343,77 @@ class MockSignInRegisterBloc extends _i1.Mock
   String toString() => super.toString();
 }
 
-/// A class which mocks [SignInPasswordBloc].
+/// A class which mocks [SignInSecretBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInPasswordBloc extends _i1.Mock
-    implements _i6.SignInPasswordBloc {
-  MockSignInPasswordBloc() {
+class MockSignInSecretBloc extends _i1.Mock implements _i6.SignInSecretBloc {
+  MockSignInSecretBloc() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.SignInPasswordState get state => (super.noSuchMethod(
-      Invocation.getter(#state),
-      returnValue: _FakeSignInPasswordState_4()) as _i6.SignInPasswordState);
+  _i6.SignInSecretState get state =>
+      (super.noSuchMethod(Invocation.getter(#state),
+          returnValue: _FakeSignInSecretState_4()) as _i6.SignInSecretState);
   @override
-  _i3.Stream<_i6.SignInPasswordState> get stream =>
+  _i3.Stream<_i6.SignInSecretState> get stream =>
       (super.noSuchMethod(Invocation.getter(#stream),
-              returnValue: Stream<_i6.SignInPasswordState>.empty())
-          as _i3.Stream<_i6.SignInPasswordState>);
+              returnValue: Stream<_i6.SignInSecretState>.empty())
+          as _i3.Stream<_i6.SignInSecretState>);
   @override
-  _i3.Stream<_i6.SignInPasswordState> mapEventToState(
-          _i6.SignInPasswordEvent? event) =>
+  _i3.Stream<_i6.SignInSecretState> mapEventToState(
+          _i6.SignInSecretEvent? event) =>
       (super.noSuchMethod(Invocation.method(#mapEventToState, [event]),
-              returnValue: Stream<_i6.SignInPasswordState>.empty())
-          as _i3.Stream<_i6.SignInPasswordState>);
+              returnValue: Stream<_i6.SignInSecretState>.empty())
+          as _i3.Stream<_i6.SignInSecretState>);
   @override
-  void add(_i6.SignInPasswordEvent? event) =>
+  void add(_i6.SignInSecretEvent? event) =>
       super.noSuchMethod(Invocation.method(#add, [event]),
           returnValueForMissingStub: null);
   @override
-  void onEvent(_i6.SignInPasswordEvent? event) =>
+  void onEvent(_i6.SignInSecretEvent? event) =>
       super.noSuchMethod(Invocation.method(#onEvent, [event]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<_i8.Transition<_i6.SignInPasswordEvent, _i6.SignInPasswordState>>
+  _i3.Stream<_i8.Transition<_i6.SignInSecretEvent, _i6.SignInSecretState>>
       transformEvents(
-              _i3.Stream<_i6.SignInPasswordEvent>? events,
-              _i8.TransitionFunction<_i6.SignInPasswordEvent, _i6.SignInPasswordState>?
+              _i3.Stream<_i6.SignInSecretEvent>? events,
+              _i8.TransitionFunction<_i6.SignInSecretEvent, _i6.SignInSecretState>?
                   transitionFn) =>
           (super.noSuchMethod(
                   Invocation.method(#transformEvents, [events, transitionFn]),
                   returnValue:
-                      Stream<_i8.Transition<_i6.SignInPasswordEvent, _i6.SignInPasswordState>>.empty())
+                      Stream<_i8.Transition<_i6.SignInSecretEvent, _i6.SignInSecretState>>.empty())
               as _i3.Stream<
-                  _i8.Transition<_i6.SignInPasswordEvent, _i6.SignInPasswordState>>);
+                  _i8.Transition<_i6.SignInSecretEvent, _i6.SignInSecretState>>);
   @override
-  void emit(_i6.SignInPasswordState? state) =>
+  void emit(_i6.SignInSecretState? state) =>
       super.noSuchMethod(Invocation.method(#emit, [state]),
           returnValueForMissingStub: null);
   @override
   void onTransition(
-          _i8.Transition<_i6.SignInPasswordEvent, _i6.SignInPasswordState>?
+          _i8.Transition<_i6.SignInSecretEvent, _i6.SignInSecretState>?
               transition) =>
       super.noSuchMethod(Invocation.method(#onTransition, [transition]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<_i8.Transition<_i6.SignInPasswordEvent, _i6.SignInPasswordState>>
+  _i3.Stream<_i8.Transition<_i6.SignInSecretEvent, _i6.SignInSecretState>>
       transformTransitions(
-              _i3.Stream<_i8.Transition<_i6.SignInPasswordEvent, _i6.SignInPasswordState>>?
+              _i3.Stream<_i8.Transition<_i6.SignInSecretEvent, _i6.SignInSecretState>>?
                   transitions) =>
           (super.noSuchMethod(
                   Invocation.method(#transformTransitions, [transitions]),
                   returnValue:
-                      Stream<_i8.Transition<_i6.SignInPasswordEvent, _i6.SignInPasswordState>>.empty())
+                      Stream<_i8.Transition<_i6.SignInSecretEvent, _i6.SignInSecretState>>.empty())
               as _i3.Stream<
-                  _i8.Transition<_i6.SignInPasswordEvent, _i6.SignInPasswordState>>);
+                  _i8.Transition<_i6.SignInSecretEvent, _i6.SignInSecretState>>);
   @override
   _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
       returnValue: Future<void>.value(),
       returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
   @override
-  _i3.StreamSubscription<_i6.SignInPasswordState> listen(
-          void Function(_i6.SignInPasswordState)? onData,
+  _i3.StreamSubscription<_i6.SignInSecretState> listen(
+          void Function(_i6.SignInSecretState)? onData,
           {Function? onError,
           void Function()? onDone,
           bool? cancelOnError}) =>
@@ -426,10 +425,10 @@ class MockSignInPasswordBloc extends _i1.Mock
                 #onDone: onDone,
                 #cancelOnError: cancelOnError
               }),
-              returnValue: _FakeStreamSubscription_1<_i6.SignInPasswordState>())
-          as _i3.StreamSubscription<_i6.SignInPasswordState>);
+              returnValue: _FakeStreamSubscription_1<_i6.SignInSecretState>())
+          as _i3.StreamSubscription<_i6.SignInSecretState>);
   @override
-  void onChange(_i8.Change<_i6.SignInPasswordState>? change) =>
+  void onChange(_i8.Change<_i6.SignInSecretState>? change) =>
       super.noSuchMethod(Invocation.method(#onChange, [change]),
           returnValueForMissingStub: null);
   @override

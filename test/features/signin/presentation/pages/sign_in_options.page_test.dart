@@ -25,7 +25,7 @@ import 'sign_in_options.page_test.mocks.dart';
   SignInOptionsBloc,
   SignInCredentialBloc,
   SignInRegisterBloc,
-  SignInPasswordBloc,
+  SignInSecretBloc,
   NavigationCubit,
 ], customMocks: [
   MockSpec<NavigatorObserver>(returnNullOnMissingStub: true)
@@ -33,7 +33,7 @@ import 'sign_in_options.page_test.mocks.dart';
 void main() {
   late MockSignInCredentialBloc _mockMockSignInCredentialBloc;
   late MockSignInRegisterBloc _mockMockSignInRegisterBloc;
-  late MockSignInPasswordBloc _mockMockSignInPasswordBloc;
+  late MockSignInSecretBloc _mockMockSignInSecretBloc;
   late MockNavigatorObserver _mockNavigationObserver;
 
   late MockSignInOptionsBloc _mockSignInBloc;
@@ -43,7 +43,7 @@ void main() {
   setUp(() {
     _mockMockSignInCredentialBloc = MockSignInCredentialBloc();
     _mockMockSignInRegisterBloc = MockSignInRegisterBloc();
-    _mockMockSignInPasswordBloc = MockSignInPasswordBloc();
+    _mockMockSignInSecretBloc = MockSignInSecretBloc();
 
     _navigationCubit = NavigationCubit();
     _mockNavigationObserver = MockNavigatorObserver();
@@ -56,7 +56,7 @@ void main() {
     sl.registerFactory<SignInCredentialBloc>(
         () => _mockMockSignInCredentialBloc);
     sl.registerFactory<SignInRegisterBloc>(() => _mockMockSignInRegisterBloc);
-    sl.registerFactory<SignInPasswordBloc>(() => _mockMockSignInPasswordBloc);
+    sl.registerFactory<SignInSecretBloc>(() => _mockMockSignInSecretBloc);
 
     sl.registerLazySingleton<NavigationCubit>(() => _navigationCubit);
   });
@@ -83,9 +83,9 @@ void main() {
   }
 
   // ignore: non_constant_identifier_names
-  void _SignInPasswordState(SignInPasswordState state) {
-    when(_mockMockSignInPasswordBloc.state).thenReturn(state);
-    when(_mockMockSignInPasswordBloc.stream)
+  void _SignInSecretState(SignInSecretState state) {
+    when(_mockMockSignInSecretBloc.state).thenReturn(state);
+    when(_mockMockSignInSecretBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
@@ -93,7 +93,7 @@ void main() {
     _signInState(const SignInState.initial());
     _SignInCredentialState(SignInCredentialState.initial());
     _SignInRegisterState(SignInRegisterState.initial());
-    _SignInPasswordState(SignInPasswordState.initial());
+    _SignInSecretState(SignInSecretState.initial());
   }
 
   Future<void> _pumpPage(WidgetTester tester) async {
@@ -154,7 +154,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.byType(SignInPasswordPage), findsOneWidget);
+      expect(find.byType(SignInSecretPage), findsOneWidget);
     });
 
     testWidgets('should go from credential page to register page',
