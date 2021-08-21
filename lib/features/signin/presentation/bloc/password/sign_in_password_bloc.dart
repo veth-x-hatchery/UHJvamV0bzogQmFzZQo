@@ -7,6 +7,7 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 
 part 'sign_in_password_event.dart';
 part 'sign_in_password_state.dart';
@@ -14,10 +15,13 @@ part 'sign_in_password_bloc.freezed.dart';
 
 class SignInPasswordBloc
     extends Bloc<SignInPasswordEvent, SignInPasswordState> {
+  final AuthBloc _authBloc;
   final SignInWithEmailAndPassword _signInWithEmailAndPassword;
 
-  SignInPasswordBloc(this._signInWithEmailAndPassword)
-      : super(SignInPasswordState.initial());
+  SignInPasswordBloc(
+    this._authBloc,
+    this._signInWithEmailAndPassword,
+  ) : super(SignInPasswordState.initial());
 
   @override
   Stream<SignInPasswordState> mapEventToState(
@@ -47,7 +51,10 @@ class SignInPasswordBloc
           isLoading: false,
           authFailureOrSuccessOption: result.fold(
             (l) => optionOf(left(l)), // Todo(v): Simplify it
-            (r) => none(),
+            (r) {
+              _authBloc.add(const AuthEvent.authCheckRequested());
+              return none();
+            },
           ),
         );
       },

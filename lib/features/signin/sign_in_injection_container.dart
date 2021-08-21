@@ -130,7 +130,10 @@ Future<void> signInDependenciesInjection() async {
   );
 
   sl.registerFactory<SignInPasswordBloc>(
-    () => SignInPasswordBloc(sl<SignInWithEmailAndPassword>()),
+    () => SignInPasswordBloc(
+      sl<AuthBloc>(),
+      sl<SignInWithEmailAndPassword>(),
+    ),
   );
 
   sl.registerFactory<SignInBloc>(

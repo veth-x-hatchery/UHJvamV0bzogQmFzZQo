@@ -6,18 +6,27 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
 
 import 'sign_in_password_bloc_test.mocks.dart';
 
-@GenerateMocks([SignInWithEmailAndPassword])
+@GenerateMocks([
+  AuthBloc,
+  SignInWithEmailAndPassword,
+])
 void main() {
   late SignInPasswordBloc _bloc;
+  late MockAuthBloc _mockAuthBloc;
   late MockSignInWithEmailAndPassword _mockSignInWithEmailAndPassword;
 
   setUp(() {
+    _mockAuthBloc = MockAuthBloc();
     _mockSignInWithEmailAndPassword = MockSignInWithEmailAndPassword();
-    _bloc = SignInPasswordBloc(_mockSignInWithEmailAndPassword);
+    _bloc = SignInPasswordBloc(
+      _mockAuthBloc,
+      _mockSignInWithEmailAndPassword,
+    );
   });
 
   test('when password changes occour then should emit correct state', () async {
@@ -48,7 +57,7 @@ void main() {
       () async {
     // arrange
 
-    const password = 'test@test.com';
+    const password = 'dmFsaWRwYXNzd29yZAo';
 
     final valueObject = Password(password);
 
@@ -130,7 +139,7 @@ void main() {
   test('when confirmation occour then should emit an failure detais', () async {
     // arrange
 
-    const password = 'test@test.com';
+    const password = 'dmFsaWRwYXNzd29yZAo';
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidEmailAndPasswordCombination(),
       message: SignInWithEmailAndPasswordErrorMessages
@@ -168,5 +177,46 @@ void main() {
             )
           ],
         ));
+  });
+
+  test('should notify Auth BLoC when sign in is allowed', () async {
+    // arrange
+
+    const password = 'dmFsaWRwYXNzd29yZAo';
+
+    final valueObject = Password(password);
+
+    when(_mockSignInWithEmailAndPassword.call(any))
+        .thenAnswer((_) => Future.value(right(unit)));
+
+    // act
+
+    _bloc.add(const SignInPasswordEvent.passwordChanged(password));
+
+    _bloc.add(const SignInPasswordEvent.analysePasswordPressed());
+
+    // assert
+    await expectLater(
+      _bloc.stream,
+      emitsInOrder([
+        SignInPasswordState(
+          password: valueObject,
+          isLoading: false,
+          authFailureOrSuccessOption: none(),
+        ),
+        SignInPasswordState(
+          password: valueObject,
+          isLoading: true,
+          authFailureOrSuccessOption: none(),
+        ),
+        SignInPasswordState(
+          password: valueObject,
+          isLoading: false,
+          authFailureOrSuccessOption: none(),
+        )
+      ]),
+    ).then((_) {
+      verify(_mockAuthBloc.add(const AuthEvent.authCheckRequested())).called(1);
+    });
   });
 }
