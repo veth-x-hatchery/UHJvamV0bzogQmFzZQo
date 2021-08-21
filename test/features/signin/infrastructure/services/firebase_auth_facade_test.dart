@@ -211,7 +211,8 @@ void main() {
       () async {
         // arrange
 
-        final firebaseException = PlatformException(code: 'user-disabled');
+        final firebaseException =
+            FirebaseException(code: 'user-disabled', plugin: '');
 
         const expectedFailure = AuthFailure.serverError();
 
@@ -362,6 +363,32 @@ void main() {
       // assert
 
       expect(result, right(true));
+    });
+
+    test('should return already in use and log out', () async {
+      //arrange
+
+      when(_mockGoogleSignIn.signOut())
+          .thenAnswer((_) => Future.value(_mockGoogleSignInAccount));
+
+      when(_mockFirebaseAuth.signOut()).thenAnswer((_) => Future.value());
+
+      when(_mockFirebaseAuth.signInWithEmailAndPassword(
+        email: credential.getOrCrash(),
+        password: _authFacade.randomSecret,
+      )).thenAnswer((_) => Future.value(_mockUserCredential));
+
+      //act
+
+      final result = await _authFacade.credentialIsAlreadyInUse(credential);
+
+      // assert
+
+      expect(result, right(true));
+
+      verify(_mockGoogleSignIn.signOut()).called(1);
+
+      verify(_mockFirebaseAuth.signOut()).called(1);
     });
 
     test('should return not in use', () async {

@@ -42,9 +42,6 @@ class FirebaseAuthFacade implements IAuthFacade {
             'FirebaseAuthFacade.registerWithCredentialAndSecret -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
-    } on Exception catch (ex, stack) {
-      Logger.infrastructure('IAuthFacade', exception: ex, stackTrace: stack);
-      return left(const AuthFailure.serverError());
     }
   }
 
@@ -67,9 +64,6 @@ class FirebaseAuthFacade implements IAuthFacade {
             'FirebaseAuthFacade.signInWithCredentialAndSecret -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
-    } on Exception catch (ex, stack) {
-      Logger.infrastructure('IAuthFacade', exception: ex, stackTrace: stack);
-      return left(const AuthFailure.serverError());
     }
   }
 
@@ -105,8 +99,8 @@ class FirebaseAuthFacade implements IAuthFacade {
         email: credentialAddress.getOrCrash(),
         password: randomSecret,
       );
+      signOut();
       return right(true);
-      //Todo(v): Logout if works
     } on FirebaseException catch (e) {
       if (e.code == 'wrong-password') {
         return right(true);
@@ -117,9 +111,6 @@ class FirebaseAuthFacade implements IAuthFacade {
             'FirebaseAuthFacade.credentialIsAlreadyInUse -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
-    } on Exception catch (ex, stack) {
-      Logger.infrastructure('IAuthFacade', exception: ex, stackTrace: stack);
-      return left(const AuthFailure.serverError());
     }
   }
 
