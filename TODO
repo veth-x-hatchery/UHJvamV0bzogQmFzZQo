@@ -17,8 +17,8 @@
 
 
 1 - email -> credential
-	find . -name '*email*' -print0 | xargs -0 -n1 bash -c 'mv "$0" "${0/email/credential}"'
 2 - password -> secret
+	find . -name '*password*' -print0 | xargs -0 -n1 bash -c 'mv "$0" "${0/password/secret}"'
 3 - renomear arquivos e pastas
 4 - renomear variaveis e objetos
 5 - armazenar o usuario apos a validacao
