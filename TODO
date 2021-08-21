@@ -16,8 +16,8 @@
 		Liberar o app a partir deste carregamento...
 
 
-1 - credential -> credential
-	find . -name '*credential*' -print0 | xargs -0 -n1 bash -c 'mv "$0" "${0/credential/credential}"'
+1 - email -> credential
+	find . -name '*email*' -print0 | xargs -0 -n1 bash -c 'mv "$0" "${0/email/credential}"'
 2 - password -> secret
 3 - renomear arquivos e pastas
 4 - renomear variaveis e objetos
@@ -36,7 +36,7 @@
 			1 - EXCEPTION no data source
 			2 - FAILURE no repositorio
 			3 - Failure detalis no use case
-			4 - redirecionamento para a tela de CREDENCIAIS (credential)
+			4 - redirecionamento para a tela de CREDENCIAIS (email)
 6 - Validar o fluxo
 
 	
