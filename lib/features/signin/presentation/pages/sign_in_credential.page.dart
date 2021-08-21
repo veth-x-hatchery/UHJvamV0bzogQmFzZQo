@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
@@ -26,29 +26,29 @@ class SignInEmailPage extends StatefulWidget {
 }
 
 class _SignInEmailPageState extends State<SignInEmailPage> {
-  final _emailFormKey = GlobalKey<FormState>();
-  final _emailFocusNode = FocusNode();
-  final _emailTextEditingController = TextEditingController();
+  final _credentialFormKey = GlobalKey<FormState>();
+  final _credentialFocusNode = FocusNode();
+  final _credentialTextEditingController = TextEditingController();
 
   SignInEmailBloc get bloc => BlocProvider.of<SignInEmailBloc>(context);
   SignInEmailState get current => bloc.state;
 
   @override
   void initState() {
-    _emailFocusNode.requestFocus();
+    _credentialFocusNode.requestFocus();
     super.initState();
   }
 
   @override
   void dispose() {
-    _emailTextEditingController.dispose();
-    _emailFormKey.currentState?.dispose();
-    _emailFocusNode.dispose();
+    _credentialTextEditingController.dispose();
+    _credentialFormKey.currentState?.dispose();
+    _credentialFocusNode.dispose();
     super.dispose();
   }
 
   Future<void> _validateEmail() async {
-    if (_emailFormKey.currentState?.validate() == true) {
+    if (_credentialFormKey.currentState?.validate() == true) {
       bloc.add(const SignInEmailEvent.analyseEmailPressed());
     }
   }
@@ -84,12 +84,12 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
               SizedBox(height: SizeConfig.defaultEdgeSpace),
               FieldEmail(
                 key: const Key(SignInPageKeys.signInEmailPageEmailTextField),
-                controller: _emailTextEditingController,
-                focusNode: _emailFocusNode,
+                controller: _credentialTextEditingController,
+                focusNode: _credentialFocusNode,
                 onEditingComplete: state.isLoading ? () {} : _validateEmail,
                 onChanged: (value) =>
-                    bloc.add(SignInEmailEvent.emailChanged(value)),
-                validator: (_) => current.email.validation,
+                    bloc.add(SignInEmailEvent.credentialChanged(value)),
+                validator: (_) => current.credential.validation,
               ),
               SizedBox(height: SizeConfig.defaultEdgeSpace),
               CustomRaisedButton(

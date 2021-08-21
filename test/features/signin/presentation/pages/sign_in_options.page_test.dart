@@ -5,12 +5,12 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_email.page.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_password.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
@@ -129,7 +129,7 @@ void main() {
   });
 
   group('when receiving navigation events', () {
-    testWidgets('should go from email page to password page',
+    testWidgets('should go from credential page to password page',
         (WidgetTester tester) async {
       // Arrange
 
@@ -142,8 +142,8 @@ void main() {
       // act
 
       _navigationCubit.goTo(SignInPageGoTo.passwordPage(
-        from: SignInPageRoutes.emailEntry,
-        email: 'teste@teste.com',
+        from: SignInPageRoutes.credentialEntry,
+        credential: 'teste@teste.com',
       ));
 
       // assert
@@ -156,7 +156,7 @@ void main() {
       expect(find.byType(SignInPasswordPage), findsOneWidget);
     });
 
-    testWidgets('should go from email page to register page',
+    testWidgets('should go from credential page to register page',
         (WidgetTester tester) async {
       // Arrange
 
@@ -169,8 +169,8 @@ void main() {
       // act
 
       _navigationCubit.goTo(SignInPageGoTo.registerPage(
-        from: SignInPageRoutes.emailEntry,
-        email: 'test@test.com',
+        from: SignInPageRoutes.credentialEntry,
+        credential: 'test@test.com',
       ));
 
       // assert
@@ -183,7 +183,7 @@ void main() {
       expect(find.byType(SignInRegisterPage), findsOneWidget);
     });
 
-    testWidgets('should go from any page to email page',
+    testWidgets('should go from any page to credential page',
         (WidgetTester tester) async {
       // Arrange
 
@@ -196,7 +196,7 @@ void main() {
       // act
 
       _navigationCubit.goTo(
-        SignInPageGoTo.emailPage(from: SignInPageRoutes.signInOptions),
+        SignInPageGoTo.credentialPage(from: SignInPageRoutes.signInOptions),
       );
 
       // assert
@@ -272,7 +272,7 @@ void main() {
     });
   });
 
-  group('when sign in with email', () {
+  group('when sign in with credential', () {
     testWidgets('should find the correct button option', (tester) async {
       // Arrange
 
@@ -282,12 +282,12 @@ void main() {
 
       await _pumpPage(tester);
 
-      final emailSignInButton =
+      final credentialSignInButton =
           find.byKey(const Key(SignInPageKeys.signInWithEmail));
 
       // Assert
 
-      expect(emailSignInButton, findsOneWidget);
+      expect(credentialSignInButton, findsOneWidget);
     });
 
     testWidgets('should emit the correct event when press the button',
@@ -298,19 +298,19 @@ void main() {
 
       await _pumpPage(tester);
 
-      final emailSignInButton =
+      final credentialSignInButton =
           find.byKey(const Key(SignInPageKeys.signInWithEmail));
 
       // Act
 
-      await tester.tap(emailSignInButton);
+      await tester.tap(credentialSignInButton);
 
       // Assert
 
       _navigationCubit.stream.listen((value) {
         expect(
             value,
-            NavigationState.goTo(SignInPageGoTo.emailPage(
+            NavigationState.goTo(SignInPageGoTo.credentialPage(
                 from: SignInPageRoutes.signInOptions)));
       });
 

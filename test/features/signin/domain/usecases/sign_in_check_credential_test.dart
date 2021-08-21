@@ -7,9 +7,9 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 // import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
 
-import 'sign_in_check_email_test.mocks.dart';
+import 'sign_in_check_credential_test.mocks.dart';
 
 @GenerateMocks([
   // ISignInRepository,
@@ -31,25 +31,25 @@ void main() {
     );
   });
 
-  group('when check user email is already registered', () {
-    final email = EmailAddress('test@vethx.com');
+  group('when check user credential is already registered', () {
+    final credential = EmailAddress('test@vethx.com');
 
     test('should return user is registered', () async {
       // arrange
 
-      when(_mockAuthFacade.emailIsAlreadyInUse(email))
+      when(_mockAuthFacade.credentialIsAlreadyInUse(credential))
           .thenAnswer((_) async => const Right(true));
 
       // act
 
       final result =
-          await _signInCheckIfEmailIsInUse.call(Params(email: email));
+          await _signInCheckIfEmailIsInUse.call(Params(credential: credential));
 
       // assert
 
       expect(result, const Right(true));
 
-      verify(_mockAuthFacade.emailIsAlreadyInUse(email));
+      verify(_mockAuthFacade.credentialIsAlreadyInUse(credential));
 
       // verifyNoMoreInteractions(_mockSignInRepository);
     });
@@ -63,19 +63,19 @@ void main() {
         message: CheckEmailErrorMessages.unavailable,
       );
 
-      when(_mockAuthFacade.emailIsAlreadyInUse(email))
+      when(_mockAuthFacade.credentialIsAlreadyInUse(credential))
           .thenAnswer((_) async => const Left(throwFailure));
 
       // act
 
       final result =
-          await _signInCheckIfEmailIsInUse.call(Params(email: email));
+          await _signInCheckIfEmailIsInUse.call(Params(credential: credential));
 
       // assert
 
       expect(result, left(failureDetails));
 
-      verify(_mockAuthFacade.emailIsAlreadyInUse(email));
+      verify(_mockAuthFacade.credentialIsAlreadyInUse(credential));
 
       // verifyNoMoreInteractions(_mockSignInRepository);
     });

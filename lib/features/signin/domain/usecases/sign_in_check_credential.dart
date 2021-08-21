@@ -6,7 +6,7 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
-part 'sign_in_check_email.freezed.dart';
+part 'sign_in_check_credential.freezed.dart';
 
 class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
   // final ISignInRepository _signInRepository;
@@ -20,7 +20,7 @@ class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
 
   @override
   Future<Either<FailureDetails, bool>> call(Params params) =>
-      _authFacade.emailIsAlreadyInUse(params.email).then(
+      _authFacade.credentialIsAlreadyInUse(params.credential).then(
             (value) => value.fold(
               (l) => left(_mapFailures(l)),
               (r) => right(r),
@@ -38,11 +38,11 @@ class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
 @freezed
 class Params with _$Params {
   const factory Params({
-    required EmailAddress email,
+    required EmailAddress credential,
   }) = _Params;
 }
 
 class CheckEmailErrorMessages {
   static const unavailable = 'Unavailable';
-  static const emailAlreadyRegistered = 'Email already registered';
+  static const credentialAlreadyRegistered = 'Email already registered';
 }

@@ -6,7 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_credential_and_password.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 
 part 'sign_in_password_event.dart';
@@ -43,7 +43,7 @@ class SignInPasswordBloc
           credentials: Credentials(
             password: state.password,
             // Todo(v): Remove it! User and Password cannot cohabited same space in time.
-            // Todo(v): User and Secret -> replace email and password
+            // Todo(v): User and Secret -> replace credential and password
             user: EmailAddress(''),
           ),
         ));

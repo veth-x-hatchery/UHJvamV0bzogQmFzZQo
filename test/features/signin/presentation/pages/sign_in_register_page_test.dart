@@ -38,13 +38,13 @@ void main() {
     when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
   }
 
-  Finder _emailInput() {
+  Finder _credentialInput() {
     // arrange
-    final emailInput =
+    final credentialInput =
         find.byKey(const Key(SignInPageKeys.signInRegisterPageEmailTextField));
     // Act && Assert
-    // expect(emailInput, findsOneWidget);
-    return emailInput;
+    // expect(credentialInput, findsOneWidget);
+    return credentialInput;
   }
 
   Finder _passwordInput() {
@@ -68,18 +68,18 @@ void main() {
   const validEmail = 'test@test.com';
   const validPassword = 'dmFsaWRwYXNzd29yZAo';
 
-  const invalidEmail = 'invalidemail';
+  const invalidEmail = 'invalidcredential';
   const invalidPassword = '1234';
 
   /// Form uses BLoC state to realize validations
   void _prepareFormValidationValues({
-    String? email,
+    String? credential,
     String? password,
   }) {
-    final emailVO = EmailAddress(email);
+    final credentialVO = EmailAddress(credential);
     final passwordVO = Password(password);
     final state = SignInRegisterState(
-      email: emailVO,
+      credential: credentialVO,
       password: passwordVO,
       isLoading: false,
       authFailureOrSuccessOption: none(),
@@ -107,23 +107,23 @@ void main() {
       expect(validationButton, findsOneWidget);
     });
 
-    testWidgets('should find the email input', (tester) async {
+    testWidgets('should find the credential input', (tester) async {
       // arrange
 
       _signInState(SignInRegisterState.initial());
 
       await _pumpPage(tester);
 
-      final emailInput = find
+      final credentialInput = find
           .byKey(const Key(SignInPageKeys.signInRegisterPageEmailTextField));
 
       // Act
 
-      await tester.tap(emailInput);
+      await tester.tap(credentialInput);
 
       // assert
 
-      expect(emailInput, findsOneWidget);
+      expect(credentialInput, findsOneWidget);
     });
 
     testWidgets('should find the password input', (tester) async {
@@ -133,16 +133,16 @@ void main() {
 
       await _pumpPage(tester);
 
-      final emailInput = find
+      final credentialInput = find
           .byKey(const Key(SignInPageKeys.signInRegisterPagePasswordTextField));
 
       // Act
 
-      await tester.tap(emailInput);
+      await tester.tap(credentialInput);
 
       // assert
 
-      expect(emailInput, findsOneWidget);
+      expect(credentialInput, findsOneWidget);
     });
   });
 
@@ -151,7 +151,7 @@ void main() {
     // Arrange
 
     _signInState(SignInRegisterState(
-      email: EmailAddress(validEmail),
+      credential: EmailAddress(validEmail),
       password: Password(validPassword),
       isLoading: true,
       authFailureOrSuccessOption: none(),
@@ -164,7 +164,8 @@ void main() {
     expect(find.byType(GenericProgressIndicator), findsOneWidget);
   });
 
-  testWidgets("when user doesn't enter the email then no events are emitted",
+  testWidgets(
+      "when user doesn't enter the credential then no events are emitted",
       (tester) async {
     // arrange
 
@@ -185,7 +186,8 @@ void main() {
     verifyNever(_mockSignInBloc.add(any));
   });
 
-  testWidgets('when user enters a invalid email then no events are emitted',
+  testWidgets(
+      'when user enters a invalid credential then no events are emitted',
       (tester) async {
     // arrange
 
@@ -193,9 +195,9 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(_emailInput(), invalidEmail);
+    await tester.enterText(_credentialInput(), invalidEmail);
 
-    _prepareFormValidationValues(email: invalidEmail);
+    _prepareFormValidationValues(credential: invalidEmail);
 
     // Act
 
@@ -215,11 +217,12 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(_emailInput(), validEmail);
+    await tester.enterText(_credentialInput(), validEmail);
 
     await tester.enterText(_passwordInput(), invalidPassword);
 
-    _prepareFormValidationValues(email: validEmail, password: invalidPassword);
+    _prepareFormValidationValues(
+        credential: validEmail, password: invalidPassword);
 
     // Act
 
@@ -232,7 +235,7 @@ void main() {
   });
 
   testWidgets(
-      'when user enters valid email and password then SignInBLoC is called',
+      'when user enters valid credential and password then SignInBLoC is called',
       (tester) async {
     // arrange
 
@@ -240,11 +243,12 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(_emailInput(), validEmail);
+    await tester.enterText(_credentialInput(), validEmail);
 
     await tester.enterText(_passwordInput(), validPassword);
 
-    _prepareFormValidationValues(email: validEmail, password: validPassword);
+    _prepareFormValidationValues(
+        credential: validEmail, password: validPassword);
 
     // Act
 

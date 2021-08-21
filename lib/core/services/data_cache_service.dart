@@ -4,7 +4,7 @@ enum CacheKeys {
   token,
   usuario,
   pushNotification,
-  emailVoucher,
+  credentialVoucher,
   authorizacao,
   empresasUsuario,
 }
@@ -14,7 +14,7 @@ class CacheService {
     CacheKeys.token: 'key_accesstoken',
     CacheKeys.usuario: 'key_profileUser',
     CacheKeys.pushNotification: 'key_ProfilePushToken',
-    CacheKeys.emailVoucher: 'key_voucherEmail',
+    CacheKeys.credentialVoucher: 'key_voucherEmail',
     CacheKeys.authorizacao: '9ada5718-2383-45c3-8185-e86993ed171d',
     CacheKeys.empresasUsuario: '788afc2a-1ab9-4429-ac7e-db80629df61d',
   };

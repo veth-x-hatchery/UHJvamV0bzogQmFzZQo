@@ -25,18 +25,18 @@ class FirebaseAuthFacade implements IAuthFacade {
 
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
-    required EmailAddress emailAddress,
+    required EmailAddress credentialAddress,
     required Password password,
   }) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
-        email: emailAddress.getOrCrash(),
+        credential: credentialAddress.getOrCrash(),
         password: password.getOrCrash(),
       );
       return right(unit);
     } on FirebaseException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        return left(const AuthFailure.emailAlreadyInUse());
+      if (e.code == 'credential-already-in-use') {
+        return left(const AuthFailure.credentialAlreadyInUse());
       } else {
         Logger.infrastructure(
             'FirebaseAuthFacade.registerWithEmailAndPassword -> ${e.code}');
@@ -50,12 +50,12 @@ class FirebaseAuthFacade implements IAuthFacade {
 
   @override
   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({
-    required EmailAddress emailAddress,
+    required EmailAddress credentialAddress,
     required Password password,
   }) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
-        email: emailAddress.getOrCrash(),
+        credential: credentialAddress.getOrCrash(),
         password: password.getOrCrash(),
       );
       return right(unit);
@@ -98,11 +98,11 @@ class FirebaseAuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, bool>> emailIsAlreadyInUse(
-      EmailAddress emailAddress) async {
+  Future<Either<AuthFailure, bool>> credentialIsAlreadyInUse(
+      EmailAddress credentialAddress) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
-        email: emailAddress.getOrCrash(),
+        credential: credentialAddress.getOrCrash(),
         password: randomPassword,
       );
       return right(true);
@@ -114,7 +114,7 @@ class FirebaseAuthFacade implements IAuthFacade {
         return right(false);
       } else {
         Logger.infrastructure(
-            'FirebaseAuthFacade.emailIsAlreadyInUse -> ${e.code}');
+            'FirebaseAuthFacade.credentialIsAlreadyInUse -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
     } on Exception catch (ex, stack) {

@@ -37,7 +37,7 @@
 //         .thenAnswer((_) async => http.Response('Something went wrong', 404));
 //   }
 
-//   group('check if email is already registered', () {
+//   group('check if credential is already registered', () {
 //     const String registeredEmail = 'alreadyregistered@veth-x.com';
 //     const String notRegisteredEmail = 'notregistered@veth-x.com';
 
@@ -48,7 +48,7 @@
 
 //         final uri = _api.endpointUri(
 //           Endpoint.checkEmail,
-//           queryParameters: <String, String>{'email': registeredEmail},
+//           queryParameters: <String, String>{'credential': registeredEmail},
 //         );
 
 //         when(_mockHttpClient.get(uri, headers: anyNamed('headers'))).thenAnswer(
@@ -58,7 +58,7 @@
 //         // act
 
 //         final result =
-//             await _dataSource.emailAlreadyRegistered(registeredEmail);
+//             await _dataSource.credentialAlreadyRegistered(registeredEmail);
 
 //         // assert
 
@@ -75,7 +75,7 @@
 
 //         final uri = _api.endpointUri(
 //           Endpoint.checkEmail,
-//           queryParameters: <String, String>{'email': notRegisteredEmail},
+//           queryParameters: <String, String>{'credential': notRegisteredEmail},
 //         );
 
 //         when(_mockHttpClient.get(uri, headers: anyNamed('headers'))).thenAnswer(
@@ -85,7 +85,7 @@
 //         // act
 
 //         final result =
-//             await _dataSource.emailAlreadyRegistered(notRegisteredEmail);
+//             await _dataSource.credentialAlreadyRegistered(notRegisteredEmail);
 
 //         // assert
 
@@ -101,7 +101,7 @@
 //         // arrange
 //         final uri = _api.endpointUri(
 //           Endpoint.checkEmail,
-//           queryParameters: <String, String>{'email': notRegisteredEmail},
+//           queryParameters: <String, String>{'credential': notRegisteredEmail},
 //         );
 
 //         when(_mockHttpClient.get(uri, headers: anyNamed('headers'))).thenAnswer(
@@ -109,7 +109,7 @@
 //                 http.Response('Something went wrong', HttpStatus.badRequest));
 
 //         // act
-//         final call = _dataSource.emailAlreadyRegistered;
+//         final call = _dataSource.credentialAlreadyRegistered;
 //         // assert
 //         expect(() => call(notRegisteredEmail),
 //             throwsA(const TypeMatcher<ServerException>()));
@@ -118,7 +118,7 @@
 //   });
 
 //   group('get current user', () {
-//     final user = UserModel(authType: 'google', email: 'test@vethx.com');
+//     final user = UserModel(authType: 'google', credential: 'test@vethx.com');
 
 //     test(
 //       'should perform a GET request on a URL being the endpoint and with application/json header',

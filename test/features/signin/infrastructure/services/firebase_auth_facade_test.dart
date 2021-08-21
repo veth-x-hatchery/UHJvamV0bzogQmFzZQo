@@ -51,7 +51,7 @@ void main() {
   });
 
   group('when [FirebaseAuthFacade.registerWithEmailAndPassword]', () {
-    final email = EmailAddress('test@vethx.com');
+    final credential = EmailAddress('test@vethx.com');
 
     final password = Password('dGVzdEB2ZXRoeC5jb20K');
 
@@ -62,14 +62,14 @@ void main() {
       // Arrange
 
       when(_mockFirebaseAuth.createUserWithEmailAndPassword(
-        email: email.getOrCrash(),
+        credential: credential.getOrCrash(),
         password: password.getOrCrash(),
       )).thenThrow(firebaseException);
 
       // act
 
       final result = await _authFacade.registerWithEmailAndPassword(
-        emailAddress: email,
+        credentialAddress: credential,
         password: password,
       );
 
@@ -79,14 +79,14 @@ void main() {
     }
 
     test(
-      'should return [AuthFailure.emailAlreadyInUse()] when firebase throw the exception code [email-already-in-use]',
+      'should return [AuthFailure.credentialAlreadyInUse()] when firebase throw the exception code [credential-already-in-use]',
       () async {
         // arrange
 
         final firebaseException =
-            FirebaseException(code: 'email-already-in-use', plugin: '');
+            FirebaseException(code: 'credential-already-in-use', plugin: '');
 
-        const expectedFailure = AuthFailure.emailAlreadyInUse();
+        const expectedFailure = AuthFailure.credentialAlreadyInUse();
 
         // act && assert
 
@@ -103,7 +103,7 @@ void main() {
         // arrange
 
         final firebaseException =
-            FirebaseException(code: 'invalid-email', plugin: '');
+            FirebaseException(code: 'invalid-credential', plugin: '');
 
         const expectedFailure = AuthFailure.serverError();
 
@@ -121,7 +121,7 @@ void main() {
 
       when(
         _mockFirebaseAuth.createUserWithEmailAndPassword(
-          email: email.getOrCrash(),
+          credential: credential.getOrCrash(),
           password: password.getOrCrash(),
         ),
       ).thenAnswer(
@@ -130,7 +130,7 @@ void main() {
       // act
 
       final result = await _authFacade.registerWithEmailAndPassword(
-        emailAddress: email,
+        credentialAddress: credential,
         password: password,
       );
 
@@ -141,7 +141,7 @@ void main() {
   });
 
   group('when [FirebaseAuthFacade.signInWithEmailAndPassword]', () {
-    final email = EmailAddress('test@vethx.com');
+    final credential = EmailAddress('test@vethx.com');
 
     final password = Password('dGVzdEB2ZXRoeC5jb20K');
 
@@ -152,14 +152,14 @@ void main() {
       // Arrange
 
       when(_mockFirebaseAuth.signInWithEmailAndPassword(
-        email: email.getOrCrash(),
+        credential: credential.getOrCrash(),
         password: password.getOrCrash(),
       )).thenThrow(firebaseException);
 
       // act
 
       final result = await _authFacade.signInWithEmailAndPassword(
-        emailAddress: email,
+        credentialAddress: credential,
         password: password,
       );
 
@@ -227,7 +227,7 @@ void main() {
 
       when(
         _mockFirebaseAuth.signInWithEmailAndPassword(
-          email: email.getOrCrash(),
+          credential: credential.getOrCrash(),
           password: password.getOrCrash(),
         ),
       ).thenAnswer(
@@ -236,7 +236,7 @@ void main() {
       // act
 
       final result = await _authFacade.signInWithEmailAndPassword(
-        emailAddress: email,
+        credentialAddress: credential,
         password: password,
       );
 
@@ -313,13 +313,13 @@ void main() {
     });
   });
 
-  group('when check if email is already in use', () {
-    final email = EmailAddress('test@vethx.com');
+  group('when check if credential is already in use', () {
+    final credential = EmailAddress('test@vethx.com');
 
-    Future<void> _emailIsAlreadyInUse(Exception firebaseException) async {
+    Future<void> _credentialIsAlreadyInUse(Exception firebaseException) async {
       // Arrange
       when(_mockFirebaseAuth.signInWithEmailAndPassword(
-        email: email.getOrCrash(),
+        credential: credential.getOrCrash(),
         password: _authFacade.randomPassword,
       )).thenThrow(firebaseException);
     }
@@ -334,11 +334,11 @@ void main() {
 
       const expectedFailure = AuthFailure.serverError();
 
-      _emailIsAlreadyInUse(firebaseException);
+      _credentialIsAlreadyInUse(firebaseException);
 
       //act
 
-      final result = await _authFacade.emailIsAlreadyInUse(email);
+      final result = await _authFacade.credentialIsAlreadyInUse(credential);
 
       // assert
 
@@ -351,11 +351,11 @@ void main() {
       final firebaseException =
           FirebaseException(code: 'wrong-password', plugin: '');
 
-      _emailIsAlreadyInUse(firebaseException);
+      _credentialIsAlreadyInUse(firebaseException);
 
       //act
 
-      final result = await _authFacade.emailIsAlreadyInUse(email);
+      final result = await _authFacade.credentialIsAlreadyInUse(credential);
 
       // assert
 
@@ -368,11 +368,11 @@ void main() {
       final firebaseException =
           FirebaseException(code: 'user-not-found', plugin: '');
 
-      _emailIsAlreadyInUse(firebaseException);
+      _credentialIsAlreadyInUse(firebaseException);
 
       //act
 
-      final result = await _authFacade.emailIsAlreadyInUse(email);
+      final result = await _authFacade.credentialIsAlreadyInUse(credential);
 
       // assert
 
@@ -425,7 +425,7 @@ void main() {
 
       when(_mockFirebaseUserMapper.toDomain(_mockFirebaseUser))
           .thenAnswer((_) => domain.User(
-                email: EmailAddress('email@valid.com'),
+                credential: EmailAddress('credential@valid.com'),
                 name: 'valid user',
               ));
 

@@ -24,10 +24,10 @@ class FieldEmail extends StatelessWidget {
       controller: controller,
       focusNode: focusNode,
       autofocus: true,
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.credentialAddress,
       decoration: vethxInputDecoration(
         context,
-        hintText: Texts.emailHint,
+        hintText: Texts.credentialHint,
       ),
       style: Theme.of(context).textTheme.bodyText1,
       validator: validator,

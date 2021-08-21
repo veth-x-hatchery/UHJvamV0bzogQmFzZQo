@@ -6,7 +6,7 @@ import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.da
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
-part 'sign_in_with_email_and_password.freezed.dart';
+part 'sign_in_with_credential_and_password.freezed.dart';
 
 class SignInWithEmailAndPassword extends UseCase<Unit, Params> {
   // final ISignInRepository _signInRepository;
@@ -21,7 +21,7 @@ class SignInWithEmailAndPassword extends UseCase<Unit, Params> {
   Future<Either<FailureDetails, Unit>> call(Params params) {
     return _authFacade
         .signInWithEmailAndPassword(
-          emailAddress: params.credentials.user,
+          credentialAddress: params.credentials.user,
           password: params.credentials.password,
         )
         .then((value) => value.fold(
@@ -48,7 +48,7 @@ class SignInWithEmailAndPassword extends UseCase<Unit, Params> {
 class SignInWithEmailAndPasswordErrorMessages {
   static const unavailable = 'Unavailable';
   static const invalidEmailAndPasswordCombination =
-      'Invalid email and password combination';
+      'Invalid credential and password combination';
 }
 
 @freezed

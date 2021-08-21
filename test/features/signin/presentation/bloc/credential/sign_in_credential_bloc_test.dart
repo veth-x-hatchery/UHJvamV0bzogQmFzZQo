@@ -5,11 +5,11 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 
-import 'sign_in_email_bloc_test.mocks.dart';
+import 'sign_in_credential_bloc_test.mocks.dart';
 
 @GenerateMocks([
   NavigationCubit,
@@ -29,14 +29,15 @@ void main() {
     );
   });
 
-  test('when email changes occour then should emit correct state', () async {
+  test('when credential changes occour then should emit correct state',
+      () async {
     // arrange
 
-    const email = 'test';
+    const credential = 'test';
 
     // act
 
-    _bloc.add(const SignInEmailEvent.emailChanged(email));
+    _bloc.add(const SignInEmailEvent.credentialChanged(credential));
 
     // assert
 
@@ -44,7 +45,7 @@ void main() {
         _bloc.stream,
         emitsInOrder([
           SignInEmailState(
-            email: EmailAddress(email),
+            credential: EmailAddress(credential),
             isLoading: false,
             authFailureOrSuccessOption: none(),
           )
@@ -57,16 +58,16 @@ void main() {
       () async {
     // arrange
 
-    const email = 'test@test.com';
+    const credential = 'test@test.com';
 
-    final valueObject = EmailAddress(email);
+    final valueObject = EmailAddress(credential);
 
     when(_mockSignInWithEmailAndPassword.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act
 
-    _bloc.add(const SignInEmailEvent.emailChanged(email));
+    _bloc.add(const SignInEmailEvent.credentialChanged(credential));
 
     _bloc.add(const SignInEmailEvent.analyseEmailPressed());
 
@@ -76,17 +77,17 @@ void main() {
         emitsInOrder(
           [
             SignInEmailState(
-              email: valueObject,
+              credential: valueObject,
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInEmailState(
-              email: valueObject,
+              credential: valueObject,
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInEmailState(
-              email: valueObject,
+              credential: valueObject,
               isLoading: false,
               authFailureOrSuccessOption: none(),
             )
@@ -100,14 +101,14 @@ void main() {
       () async {
     // arrange
 
-    const email = 'test';
+    const credential = 'test';
 
     when(_mockSignInWithEmailAndPassword.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act
 
-    _bloc.add(const SignInEmailEvent.emailChanged(email));
+    _bloc.add(const SignInEmailEvent.credentialChanged(credential));
 
     _bloc.add(const SignInEmailEvent.analyseEmailPressed());
 
@@ -118,17 +119,17 @@ void main() {
         emitsInOrder(
           [
             SignInEmailState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInEmailState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInEmailState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             )
@@ -139,10 +140,10 @@ void main() {
   test('when confirmation occour then should emit an failure detais', () async {
     // arrange
 
-    const email = 'test@test.com';
+    const credential = 'test@test.com';
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidEmailAndPasswordCombination(),
-      message: CheckEmailErrorMessages.emailAlreadyRegistered,
+      message: CheckEmailErrorMessages.credentialAlreadyRegistered,
     );
 
     when(_mockSignInWithEmailAndPassword.call(any))
@@ -150,7 +151,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInEmailEvent.emailChanged(email));
+    _bloc.add(const SignInEmailEvent.credentialChanged(credential));
 
     _bloc.add(const SignInEmailEvent.analyseEmailPressed());
 
@@ -160,17 +161,17 @@ void main() {
         emitsInOrder(
           [
             SignInEmailState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInEmailState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInEmailState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               isLoading: false,
               authFailureOrSuccessOption: some(Left(expectedFailure)),
             )
@@ -181,14 +182,14 @@ void main() {
   test('when confirmation occour then should go to other page', () async {
     // arrange
 
-    const email = 'test@test.com';
+    const credential = 'test@test.com';
 
     when(_mockSignInWithEmailAndPassword.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act
 
-    _bloc.add(const SignInEmailEvent.emailChanged(email));
+    _bloc.add(const SignInEmailEvent.credentialChanged(credential));
 
     _bloc.add(const SignInEmailEvent.analyseEmailPressed());
 
@@ -199,17 +200,17 @@ void main() {
         emitsInOrder(
           [
             SignInEmailState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInEmailState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInEmailState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             )

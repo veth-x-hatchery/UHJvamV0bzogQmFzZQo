@@ -7,7 +7,7 @@ import 'dart:async' as _i3;
 import 'package:bloc/bloc.dart' as _i8;
 import 'package:flutter/src/widgets/navigator.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart'
+import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart'
     as _i4;
 import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart'
     as _i6;

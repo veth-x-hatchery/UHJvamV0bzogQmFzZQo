@@ -8,9 +8,9 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 // import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_password.dart';
 
-import 'sign_in_check_email_test.mocks.dart';
+import 'sign_in_check_credential_test.mocks.dart';
 
 @GenerateMocks([
   // ISignInRepository,
@@ -30,16 +30,17 @@ void main() {
     );
   });
 
-  final emailTester = EmailAddress('test@vethx.com');
+  final credentialTester = EmailAddress('test@vethx.com');
   final passwordTester = Password('dGVzdEB2ZXRoeC5jb20K');
-  final credentials = Credentials(user: emailTester, password: passwordTester);
+  final credentials =
+      Credentials(user: credentialTester, password: passwordTester);
 
-  group('when register with email and password', () {
+  group('when register with credential and password', () {
     test('should return success with the given credentials', () async {
       // arrange
 
       when(_mockAuthFacade.registerWithEmailAndPassword(
-        emailAddress: emailTester,
+        credentialAddress: credentialTester,
         password: passwordTester,
       )).thenAnswer((_) async => const Right(unit));
 
@@ -54,7 +55,7 @@ void main() {
       expect(result, const Right(unit));
 
       verify(_mockAuthFacade.registerWithEmailAndPassword(
-        emailAddress: emailTester,
+        credentialAddress: credentialTester,
         password: passwordTester,
       ));
 
@@ -71,7 +72,7 @@ void main() {
       );
 
       when(_mockAuthFacade.registerWithEmailAndPassword(
-        emailAddress: emailTester,
+        credentialAddress: credentialTester,
         password: passwordTester,
       )).thenAnswer((_) async => const Left(throwFailure));
 
@@ -85,24 +86,25 @@ void main() {
       expect(result, left(failureDetails));
 
       verify(_mockAuthFacade.registerWithEmailAndPassword(
-        emailAddress: emailTester,
+        credentialAddress: credentialTester,
         password: passwordTester,
       ));
 
       // verifyNoMoreInteractions(_mockSignInRepository);
     });
 
-    test('should return that email is already in use', () async {
+    test('should return that credential is already in use', () async {
       // arrange
-      const throwFailure = AuthFailure.emailAlreadyInUse();
+      const throwFailure = AuthFailure.credentialAlreadyInUse();
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInRegisterEmailAndPasswordErrorMessages.emailAlreadyInUse,
+        message:
+            SignInRegisterEmailAndPasswordErrorMessages.credentialAlreadyInUse,
       );
 
       when(_mockAuthFacade.registerWithEmailAndPassword(
-        emailAddress: emailTester,
+        credentialAddress: credentialTester,
         password: passwordTester,
       )).thenAnswer((_) async => const Left(throwFailure));
 
@@ -116,7 +118,7 @@ void main() {
       expect(result, left(failureDetails));
 
       verify(_mockAuthFacade.registerWithEmailAndPassword(
-        emailAddress: emailTester,
+        credentialAddress: credentialTester,
         password: passwordTester,
       ));
 

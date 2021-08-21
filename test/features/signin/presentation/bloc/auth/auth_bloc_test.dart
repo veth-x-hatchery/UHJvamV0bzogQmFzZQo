@@ -46,7 +46,7 @@ void main() {
       // arrange
 
       final user =
-          User(email: EmailAddress('test@vethx.com'), name: 'Vethx Test');
+          User(credential: EmailAddress('test@vethx.com'), name: 'Vethx Test');
 
       when(_mockIAuthFacade.getSignedInUser())
           .thenAnswer((_) => Future.value(user));

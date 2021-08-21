@@ -4,14 +4,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_email.page.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
-import 'sign_in_email.page_test.mocks.dart';
+import 'sign_in_credential.page_test.mocks.dart';
 
 @GenerateMocks([SignInEmailBloc])
 void main() {
@@ -39,13 +39,13 @@ void main() {
         .thenAnswer((_) => Stream.value(state));
   }
 
-  Finder _emailInput() {
+  Finder _credentialInput() {
     // arrange
-    final emailInput =
+    final credentialInput =
         find.byKey(const Key(SignInPageKeys.signInEmailPageEmailTextField));
     // Act && Assert
-    expect(emailInput, findsOneWidget);
-    return emailInput;
+    expect(credentialInput, findsOneWidget);
+    return credentialInput;
   }
 
   Finder _validationButton() {
@@ -59,11 +59,11 @@ void main() {
 
   /// Form uses BLoC state to realize validations
   void _prepareFormValidationValues({
-    String? email,
+    String? credential,
   }) {
-    final emailVO = EmailAddress(email);
+    final credentialVO = EmailAddress(credential);
     final state = SignInEmailState(
-      email: emailVO,
+      credential: credentialVO,
       isLoading: false,
       authFailureOrSuccessOption: none(),
     );
@@ -89,23 +89,23 @@ void main() {
     expect(validationButton, findsOneWidget);
   });
 
-  testWidgets('should find the email input', (tester) async {
+  testWidgets('should find the credential input', (tester) async {
     // arrange
 
     _signInState(SignInEmailState.initial());
 
     await _pumpPage(tester);
 
-    final emailInput =
+    final credentialInput =
         find.byKey(const Key(SignInPageKeys.signInEmailPageEmailTextField));
 
     // Act
 
-    await tester.tap(emailInput);
+    await tester.tap(credentialInput);
 
     // assert
 
-    expect(emailInput, findsOneWidget);
+    expect(credentialInput, findsOneWidget);
   });
 
   testWidgets('when receive loading event then should show a circular progress',
@@ -113,7 +113,7 @@ void main() {
     // Arrange
 
     _signInState(SignInEmailState(
-      email: EmailAddress('test@test.com'),
+      credential: EmailAddress('test@test.com'),
       isLoading: true,
       authFailureOrSuccessOption: none(),
     ));
@@ -125,7 +125,8 @@ void main() {
     expect(find.byType(GenericProgressIndicator), findsOneWidget);
   });
 
-  testWidgets("when user doesn't enter the email then no events are emitted",
+  testWidgets(
+      "when user doesn't enter the credential then no events are emitted",
       (tester) async {
     // arrange
 
@@ -145,7 +146,8 @@ void main() {
         .add(const SignInEmailEvent.analyseEmailPressed()));
   });
 
-  testWidgets('when user enters a invalid email then no events are emitted',
+  testWidgets(
+      'when user enters a invalid credential then no events are emitted',
       (tester) async {
     // arrange
 
@@ -153,11 +155,11 @@ void main() {
 
     await _pumpPage(tester);
 
-    const invalidEmail = 'invalidemail';
+    const invalidEmail = 'invalidcredential';
 
-    await tester.enterText(_emailInput(), invalidEmail);
+    await tester.enterText(_credentialInput(), invalidEmail);
 
-    _prepareFormValidationValues(email: invalidEmail);
+    _prepareFormValidationValues(credential: invalidEmail);
 
     // Act
 
@@ -171,7 +173,7 @@ void main() {
         .add(const SignInEmailEvent.analyseEmailPressed()));
   });
 
-  testWidgets('when user enters a correct email then SignInBLoC is called',
+  testWidgets('when user enters a correct credential then SignInBLoC is called',
       (tester) async {
     // arrange
 
@@ -179,7 +181,7 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(_emailInput(), 'teste@teste.com');
+    await tester.enterText(_credentialInput(), 'teste@teste.com');
 
     // Act
 

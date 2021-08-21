@@ -36,7 +36,7 @@ class APIBase {
       throw Exception('Falha na autenticacao');
     }
     final auth = authorizacao.split(':');
-    return realizarAutenticacao(email: auth[0], senha: auth[1]);
+    return realizarAutenticacao(credential: auth[0], senha: auth[1]);
   }
 
   Future limparCache() async {
@@ -56,14 +56,14 @@ class APIBase {
   }
 
   Future<String> realizarAutenticacao(
-      {required String email, required String senha}) async {
+      {required String credential, required String senha}) async {
     await verificarConexaoComInternet();
 
     final data = <String, dynamic>{};
 
     data['grant_type'] = 'password';
     data['tipo'] = 'cliente';
-    data['username'] = email;
+    data['username'] = credential;
     data['password'] = senha;
 
     final response = await client.post(
@@ -81,7 +81,7 @@ class APIBase {
         await servicoDeCache.write(
             key: CacheKeys.authorizacao,
             obj:
-                '$email:$senha'); // Todo(v): Criptografar Encrypter(AES(key, mode: AESMode.cbc));
+                '$credential:$senha'); // Todo(v): Criptografar Encrypter(AES(key, mode: AESMode.cbc));
         return accessToken;
       }
     }

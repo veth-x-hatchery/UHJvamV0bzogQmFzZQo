@@ -1,7 +1,8 @@
-part of 'sign_in_email_bloc.dart';
+part of 'sign_in_credential_bloc.dart';
 
 @freezed
 class SignInEmailEvent with _$SignInEmailEvent {
-  const factory SignInEmailEvent.emailChanged(String emailStr) = EmailChanged;
+  const factory SignInEmailEvent.credentialChanged(String credentialStr) =
+      EmailChanged;
   const factory SignInEmailEvent.analyseEmailPressed() = AnalyseEmailPressed;
 }

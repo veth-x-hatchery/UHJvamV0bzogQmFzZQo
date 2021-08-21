@@ -13,14 +13,14 @@
 
 // abstract class ISignInRemoteSource extends IAuthFacade {
 //   /// Throws a [ServerException] for all error codes.
-//   Future<bool> emailAlreadyRegistered(String email);
+//   Future<bool> credentialAlreadyRegistered(String credential);
 
 //   /// Throws a [ServerException] for all error codes.
 //   Future<UserModel> createUserWithEmailAndPassword(
-//       String email, String password);
+//       String credential, String password);
 
 //   /// Throws a [ServerException] for all error codes.
-//   Future<void> passwordReset(String email);
+//   Future<void> passwordReset(String credential);
 
 //   /// Throws a [ServerException] for all error codes.
 //   Future<UserModel> signInWithFacebook();
@@ -44,7 +44,7 @@
 
 // //   @override
 // //   Future<UserModel> createUserWithEmailAndPassword(
-// //       String email, String password) {
+// //       String credential, String password) {
 // //     // TODO: implement createUserWithEmailAndPassword
 // //     throw UnimplementedError();
 // //   }
@@ -67,7 +67,7 @@
 // //   }
 
 // //   @override
-// //   Future<void> passwordReset(String email) {
+// //   Future<void> passwordReset(String credential) {
 // //     // TODO: implement passwordReset
 // //     throw UnimplementedError();
 // //   }
@@ -85,10 +85,10 @@
 // //   }
 
 // //   @override
-// //   Future<bool> emailAlreadyRegistered(String email) async {
+// //   Future<bool> credentialAlreadyRegistered(String credential) async {
 // //     final response = await _http.get(_api.endpointUri(
 // //       Endpoint.checkEmail,
-// //       queryParameters: <String, String>{'email': email},
+// //       queryParameters: <String, String>{'credential': credential},
 // //     ));
 
 // //     if (![
@@ -102,22 +102,22 @@
 // //   }
 
 // //   @override
-// //   Future<Either<AuthFailure, bool>> emailIsAlreadyInUse(
-// //       EmailAddress emailAddress) {
-// //     // TODO: implement emailIsAlreadyInUse
+// //   Future<Either<AuthFailure, bool>> credentialIsAlreadyInUse(
+// //       EmailAddress credentialAddress) {
+// //     // TODO: implement credentialIsAlreadyInUse
 // //     throw UnimplementedError();
 // //   }
 
 // //   @override
 // //   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
-// //       {required EmailAddress emailAddress, required Password password}) {
+// //       {required EmailAddress credentialAddress, required Password password}) {
 // //     // TODO: implement registerWithEmailAndPassword
 // //     throw UnimplementedError();
 // //   }
 
 // //   @override
 // //   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword(
-// //       {required EmailAddress emailAddress, required Password password}) {
+// //       {required EmailAddress credentialAddress, required Password password}) {
 // //     // TODO: implement signInWithEmailAndPassword
 // //     throw UnimplementedError();
 // //   }

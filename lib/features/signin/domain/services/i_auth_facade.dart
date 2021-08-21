@@ -6,16 +6,16 @@ import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 abstract class IAuthFacade {
   Future<User?> getSignedInUser();
 
-  Future<Either<AuthFailure, bool>> emailIsAlreadyInUse(
-      EmailAddress emailAddress);
+  Future<Either<AuthFailure, bool>> credentialIsAlreadyInUse(
+      EmailAddress credentialAddress);
 
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
-    required EmailAddress emailAddress,
+    required EmailAddress credentialAddress,
     required Password password,
   });
 
   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({
-    required EmailAddress emailAddress,
+    required EmailAddress credentialAddress,
     required Password password,
   });
 

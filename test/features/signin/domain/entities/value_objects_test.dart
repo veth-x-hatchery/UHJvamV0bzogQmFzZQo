@@ -14,18 +14,18 @@ void main() {
         () {
       // arrange
 
-      const String email = '';
+      const String credential = '';
 
       // act
 
-      final emailAddress = EmailAddress(email);
+      final credentialAddress = EmailAddress(credential);
 
       // assert
 
-      expect(emailAddress.value,
-          left(const ValueFailure.empty(failedValue: email)));
+      expect(credentialAddress.value,
+          left(const ValueFailure.empty(failedValue: credential)));
 
-      expect(emailAddress.validation, EmailAddressMessageErrors.empty);
+      expect(credentialAddress.validation, EmailAddressMessageErrors.empty);
     });
 
     test('should return [ValueFailure.invalidEmail]', () {
@@ -33,28 +33,29 @@ void main() {
 
       // act
 
-      final emailAddress = EmailAddress(inValidEmail);
+      final credentialAddress = EmailAddress(inValidEmail);
 
       // assert
 
-      expect(emailAddress.value,
+      expect(credentialAddress.value,
           left(const ValueFailure.invalidEmail(failedValue: inValidEmail)));
 
-      expect(emailAddress.validation, EmailAddressMessageErrors.invalidEmail);
+      expect(
+          credentialAddress.validation, EmailAddressMessageErrors.invalidEmail);
     });
 
-    test('should validate email with success', () {
+    test('should validate credential with success', () {
       // arrange
 
       // act
 
-      final emailAddress = EmailAddress(validEmail);
+      final credentialAddress = EmailAddress(validEmail);
 
       // assert
 
-      expect(emailAddress.value, right(validEmail));
+      expect(credentialAddress.value, right(validEmail));
 
-      expect(emailAddress.validation, null);
+      expect(credentialAddress.validation, null);
     });
 
     test(
@@ -64,14 +65,14 @@ void main() {
 
       // act
 
-      final emailAddress = EmailAddress('invalid-email');
+      final credentialAddress = EmailAddress('invalid-credential');
 
       // assert
 
-      expect(emailAddress.getOrCrash,
+      expect(credentialAddress.getOrCrash,
           throwsA(const TypeMatcher<UnexpectedValueError>()));
 
-      // expect(emailAddress.validation, null);
+      // expect(credentialAddress.validation, null);
     });
   });
 
@@ -110,7 +111,7 @@ void main() {
       expect(result.validation, PasswordMessageErrors.shortPassword);
     });
 
-    test('should validate email with success', () {
+    test('should validate credential with success', () {
       // arrange
 
       const String password = 'dmFsdWVfdmFsaWRhdG9yc190ZXN0LmRhcnQK';

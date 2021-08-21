@@ -40,7 +40,7 @@
 //       () async {
 //         // arrange
 
-//         final user = UserModel(authType: 'google', email: 'test@vethx.com');
+//         final user = UserModel(authType: 'google', credential: 'test@vethx.com');
 
 //         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
 
@@ -61,7 +61,7 @@
 //         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
 //       });
 
-//       final user = UserModel(authType: 'google', email: 'test@vethx.com');
+//       final user = UserModel(authType: 'google', credential: 'test@vethx.com');
 
 //       test('should return current user from remote data source', () async {
 //         // arrange
@@ -129,7 +129,7 @@
 //         when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
 //       });
 
-//       final user = UserModel(authType: 'google', email: 'test@vethx.com');
+//       final user = UserModel(authType: 'google', credential: 'test@vethx.com');
 
 //       test(
 //         'should return last locally cached data when the cached data is present',

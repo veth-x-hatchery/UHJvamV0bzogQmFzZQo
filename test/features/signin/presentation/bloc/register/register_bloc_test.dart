@@ -5,7 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_password.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 
 import 'register_bloc_test.mocks.dart';
@@ -20,14 +20,15 @@ void main() {
     _bloc = SignInRegisterBloc(_mockSignInWithEmailAndPassword);
   });
 
-  test('when email changes occour then should emit correct state', () async {
+  test('when credential changes occour then should emit correct state',
+      () async {
     // arrange
 
-    const email = 'test';
+    const credential = 'test';
 
     // act
 
-    _bloc.add(const SignInRegisterEvent.emailChanged(email));
+    _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
 
     // assert
 
@@ -35,7 +36,7 @@ void main() {
         _bloc.stream,
         emitsInOrder([
           SignInRegisterState(
-            email: EmailAddress(email),
+            credential: EmailAddress(credential),
             password: Password(''),
             isLoading: false,
             authFailureOrSuccessOption: none(),
@@ -58,7 +59,7 @@ void main() {
         _bloc.stream,
         emitsInOrder([
           SignInRegisterState(
-            email: EmailAddress(''),
+            credential: EmailAddress(''),
             password: Password(password),
             isLoading: false,
             authFailureOrSuccessOption: none(),
@@ -72,7 +73,7 @@ void main() {
       () async {
     // arrange
 
-    const email = 'test';
+    const credential = 'test';
     const password = '1234';
 
     when(_mockSignInWithEmailAndPassword.call(any))
@@ -80,7 +81,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInRegisterEvent.emailChanged(email));
+    _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
     _bloc.add(const SignInRegisterEvent.passwordChanged(password));
     _bloc.add(const SignInRegisterEvent.registerWithEmailAndPasswordPressed());
 
@@ -90,25 +91,25 @@ void main() {
         emitsInOrder(
           [
             SignInRegisterState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               password: Password(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               password: Password(password),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               password: Password(password),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               password: Password(password),
               isLoading: false,
               authFailureOrSuccessOption: none(),
@@ -123,7 +124,7 @@ void main() {
       () async {
     // arrange
 
-    const email = 'test';
+    const credential = 'test';
     const password = '1234';
 
     when(_mockSignInWithEmailAndPassword.call(any))
@@ -131,7 +132,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInRegisterEvent.emailChanged(email));
+    _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
     _bloc.add(const SignInRegisterEvent.passwordChanged(password));
     _bloc.add(const SignInRegisterEvent.registerWithEmailAndPasswordPressed());
 
@@ -141,25 +142,25 @@ void main() {
         emitsInOrder(
           [
             SignInRegisterState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               password: Password(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               password: Password(password),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               password: Password(password),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               password: Password(password),
               isLoading: false,
               authFailureOrSuccessOption: none(),
@@ -171,7 +172,7 @@ void main() {
   test('when confirmation occour then should emit an failure detais', () async {
     // arrange
 
-    const email = 'test';
+    const credential = 'test';
     const password = '1234';
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidEmailAndPasswordCombination(),
@@ -184,7 +185,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInRegisterEvent.emailChanged(email));
+    _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
     _bloc.add(const SignInRegisterEvent.passwordChanged(password));
     _bloc.add(const SignInRegisterEvent.registerWithEmailAndPasswordPressed());
 
@@ -194,25 +195,25 @@ void main() {
         emitsInOrder(
           [
             SignInRegisterState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               password: Password(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               password: Password(password),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               password: Password(password),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              email: EmailAddress(email),
+              credential: EmailAddress(credential),
               password: Password(password),
               isLoading: false,
               authFailureOrSuccessOption: some(Left(expectedFailure)),

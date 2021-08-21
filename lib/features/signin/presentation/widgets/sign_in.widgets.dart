@@ -1,4 +1,4 @@
-export 'login/field_email.widget.dart';
+export 'login/field_credential.widget.dart';
 export 'login/field_password.widget.dart';
 export 'login/sign_in_button.widget.dart';
 export 'login/sign_in_scaffold.widget.dart';
@@ -9,7 +9,7 @@ class SignInPageKeys {
   static const signInWithGoogleButton = 'signInWithGoogleButton';
   static const signInWithEmail = 'signInWithEmail';
 
-  //! sign in email page
+  //! sign in credential page
 
   static const signInEmailPageValidateButton = 'signInEmailPageValidateButton';
   static const signInEmailPageEmailTextField = 'signInEmailPageEmailTextField';

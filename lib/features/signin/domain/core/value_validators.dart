@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures.dart';
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
-  const emailRegex =
+  const credentialRegex =
       r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
-  if (RegExp(emailRegex).hasMatch(input)) {
+  if (RegExp(credentialRegex).hasMatch(input)) {
     return right(input);
   } else {
     return left(ValueFailure.invalidEmail(failedValue: input));
