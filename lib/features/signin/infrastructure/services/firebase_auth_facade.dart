@@ -29,7 +29,7 @@ class FirebaseAuthFacade implements IAuthFacade {
     required Secret secret,
   }) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      await _firebaseAuth.createUserWithEmailAndPassword(
         email: credentialAddress.getOrCrash(),
         password: secret.getOrCrash(),
       );
