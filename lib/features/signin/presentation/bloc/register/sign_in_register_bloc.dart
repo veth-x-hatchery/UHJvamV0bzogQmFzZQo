@@ -7,6 +7,7 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 
 part 'sign_in_register_event.dart';
 part 'sign_in_register_state.dart';
@@ -15,9 +16,12 @@ part 'sign_in_register_bloc.freezed.dart';
 class SignInRegisterBloc
     extends Bloc<SignInRegisterEvent, SignInRegisterState> {
   final SignInRegisterCredentialAndSecret _signInRegisterCredentialAndSecret;
+  final AuthBloc _authBloc;
 
-  SignInRegisterBloc(this._signInRegisterCredentialAndSecret)
-      : super(SignInRegisterState.initial());
+  SignInRegisterBloc(
+    this._authBloc,
+    this._signInRegisterCredentialAndSecret,
+  ) : super(SignInRegisterState.initial());
 
   @override
   Stream<SignInRegisterState> mapEventToState(
@@ -51,8 +55,11 @@ class SignInRegisterBloc
         yield state.copyWith(
           isLoading: false,
           authFailureOrSuccessOption: result.fold(
-            (l) => some(result), // Todo(v): Simplify it
-            (r) => none(),
+            (l) => some(result),
+            (r) {
+              _authBloc.add(const AuthEvent.authCheckRequested());
+              return none();
+            },
           ),
         );
       },

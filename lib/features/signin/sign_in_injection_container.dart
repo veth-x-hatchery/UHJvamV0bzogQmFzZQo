@@ -121,14 +121,17 @@ Future<void> signInDependenciesInjection() async {
     () => AuthBloc(sl<IAuthFacade>()),
   );
 
-  sl.registerFactory<SignInRegisterBloc>(
-    () => SignInRegisterBloc(sl<SignInRegisterCredentialAndSecret>()),
-  );
-
   sl.registerFactory<SignInCredentialBloc>(
     () => SignInCredentialBloc(
       sl<SignInCredentialCheck>(),
       sl<NavigationCubit>(),
+    ),
+  );
+
+  sl.registerFactory<SignInRegisterBloc>(
+    () => SignInRegisterBloc(
+      sl<AuthBloc>(),
+      sl<SignInRegisterCredentialAndSecret>(),
     ),
   );
 
