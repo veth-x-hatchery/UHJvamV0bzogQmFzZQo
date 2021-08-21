@@ -21,31 +21,19 @@ class SignInLocalSource implements ISignInLocalSource {
 
   @override
   Future<void> cacheCredential(Credential credential) async {
-    try {
-      final result = await _sharedPreferences.setString(
-          cached_credential_key, credential.getOrCrash());
-      if (result) {
-        throw CacheException();
-      }
-    } on Exception catch (e, s) {
-      Logger.infrastructure('SignInLocalSource -> cacheCredential',
-          exception: e, stackTrace: s);
+    final result = await _sharedPreferences.setString(
+        cached_credential_key, credential.getOrCrash());
+    if (!result) {
       throw CacheException();
     }
   }
 
   @override
   Future<Credential> cachedCredential() {
-    try {
-      final value = _sharedPreferences.getString(cached_credential_key);
-      if (value == null) {
-        throw CacheException();
-      }
-      return Future.value(Credential(value));
-    } on Exception catch (e, s) {
-      Logger.infrastructure('SignInLocalSource -> cachedCredential',
-          exception: e, stackTrace: s);
+    final value = _sharedPreferences.getString(cached_credential_key);
+    if (value == null) {
       throw CacheException();
     }
+    return Future.value(Credential(value));
   }
 }

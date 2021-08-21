@@ -1,79 +1,102 @@
-// import 'dart:convert';
+import 'dart:convert';
 
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:mockito/annotations.dart';
-// import 'package:mockito/mockito.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:vethx_beta/core/error/exceptions.dart';
-// import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
-// import 'package:vethx_beta/features/signin/infrastructure/models/user_model.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vethx_beta/core/error/exceptions.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
 
-// import '../../../../fixtures/fixture_reader.dart';
+import 'sign_in_local_data_source_test.mocks.dart';
 
-// import 'sign_in_local_data_source_test.mocks.dart';
+@GenerateMocks([
+  SharedPreferences,
+])
+void main() {
+  late SignInLocalSource dataSource;
+  late MockSharedPreferences mockSharedPreferences;
 
-// @GenerateMocks([SharedPreferences])
-// void main() {
-//   // late SignInLocalSource dataSource;
-//   late MockSharedPreferences mockSharedPreferences;
+  setUp(() {
+    mockSharedPreferences = MockSharedPreferences();
+    dataSource = SignInLocalSource(mockSharedPreferences);
+  });
 
-//   setUp(() {
-//     mockSharedPreferences = MockSharedPreferences();
-//     // dataSource = SignInLocalSource(mockSharedPreferences);
-//   });
+  group('when dealing with cache credential', () {
+    final credential = Credential('test@test.com');
 
-//   group('get current user', () {
-//     final user = UserModel.fromJson(json
-//         .decode(fixture('cached_user_google.json')) as Map<String, dynamic>);
+    test(
+      'should return current credential from SharedPreferences when there is one in the cache',
+      () async {
+        // arrange
 
-//     test(
-//       'should return current user from SharedPreferences when there is one in the cache',
-//       () async {
-//         // arrange
-//         when(mockSharedPreferences.getString(any))
-//             .thenReturn(fixture('cached_user_google.json'));
-//         // act
-//         final result = await dataSource.currentUser();
-//         // assert
-//         verify(mockSharedPreferences.getString(CACHED_CURRENT_USER));
-//         expect(result, equals(user));
-//       },
-//     );
+        when(mockSharedPreferences.getString(any))
+            .thenReturn(credential.getOrCrash());
 
-//     test(
-//       'should throw a CacheExeption when there is not a cached value',
-//       () async {
-//         // arrange
-//         when(mockSharedPreferences.getString(any)).thenReturn(null);
-//         // act
-//         final call = dataSource.currentUser;
-//         // assert
-//         expect(() => call(), throwsA(const TypeMatcher<CacheException>()));
-//       },
-//     );
-//   });
+        // act
 
-//   // group('cache current user', () {
-//   //   final user = UserModel(
-//   //     credential: 'test@vethx.com',
-//   //     authType: 'google',
-//   //   );
+        final result = await dataSource.cachedCredential();
 
-//   //   test(
-//   //     'should call SharedPreferences to cache the data',
-//   //     () async {
-//   //       // arrange
-//   //       when(mockSharedPreferences.setString(any, any))
-//   //           .thenAnswer((_) async => true);
-//   //       // act
-//   //       await dataSource.cacheCurrentUser(user);
-//   //       // assert
-//   //       final expectedJsonString = json.encode(user.toJson());
-//   //       verify(mockSharedPreferences.setString(
-//   //         CACHED_CURRENT_USER,
-//   //         expectedJsonString,
-//   //       ));
-//   //     },
-//   //   );
-//   // });
-// }
+        // assert
+
+        verify(mockSharedPreferences
+            .getString(SignInLocalSource.cached_credential_key));
+
+        expect(result, equals(credential));
+      },
+    );
+
+    test(
+      'should throw a CacheExeption when there is not a cached value',
+      () async {
+        // arrange
+
+        when(mockSharedPreferences.getString(any)).thenReturn(null);
+
+        // act
+
+        final call = dataSource.cachedCredential;
+
+        // assert
+
+        expect(() => call(), throwsA(const TypeMatcher<CacheException>()));
+      },
+    );
+
+    test(
+      'should call SharedPreferences to cache the data',
+      () async {
+        // arrange
+
+        when(mockSharedPreferences.setString(any, any))
+            .thenAnswer((_) async => true);
+
+        // act
+
+        await dataSource.cacheCredential(credential);
+
+        // assert
+
+        verify(mockSharedPreferences.setString(
+          SignInLocalSource.cached_credential_key,
+          credential.getOrCrash(),
+        ));
+      },
+    );
+
+    test(
+      'should throw CacheExeption when call SharedPreferences to cache the data',
+      () async {
+        // arrange
+
+        when(mockSharedPreferences.setString(any, any))
+            .thenAnswer((_) async => false);
+
+        // act && assert
+
+        expect(() => dataSource.cacheCredential(credential),
+            throwsA(const TypeMatcher<CacheException>()));
+      },
+    );
+  });
+}
