@@ -3,9 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
-import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-// import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
@@ -30,23 +28,22 @@ void main() {
     );
   });
 
-  final credentialTester = Credential('test@vethx.com');
-  final secretTester = Secret('dGVzdEB2ZXRoeC5jb20K');
-  final credentials = Credentials(user: credentialTester, secret: secretTester);
+  final credential = Credential('test@vethx.com');
+  final secret = Secret('dGVzdEB2ZXRoeC5jb20K');
 
   group('then sign in with credential and secret', () {
     test('should return success with the given credentials', () async {
       // arrange
 
       when(_mockAuthFacade.signInWithCredentialAndSecret(
-        credentialAddress: credentialTester,
-        secret: secretTester,
+        credentialAddress: credential,
+        secret: secret,
       )).thenAnswer((_) async => const Right(unit));
 
       // act
 
       final result = await _signInUseCase.call(
-        Params(credentials: credentials),
+        Params(secret: secret),
       );
 
       // assert
@@ -54,8 +51,8 @@ void main() {
       expect(result, const Right(unit));
 
       verify(_mockAuthFacade.signInWithCredentialAndSecret(
-        credentialAddress: credentialTester,
-        secret: secretTester,
+        credentialAddress: credential,
+        secret: secret,
       ));
 
       // verifyNoMoreInteractions(_mockSignInRepository);
@@ -71,22 +68,22 @@ void main() {
       );
 
       when(_mockAuthFacade.signInWithCredentialAndSecret(
-        credentialAddress: credentialTester,
-        secret: secretTester,
+        credentialAddress: credential,
+        secret: secret,
       )).thenAnswer((_) async => const Left(throwFailure));
 
       // act
 
       final result = await _signInUseCase.call(
-        Params(credentials: credentials),
+        Params(secret: secret),
       );
       // assert
 
       expect(result, left(failureDetails));
 
       verify(_mockAuthFacade.signInWithCredentialAndSecret(
-        credentialAddress: credentialTester,
-        secret: secretTester,
+        credentialAddress: credential,
+        secret: secret,
       ));
 
       // verifyNoMoreInteractions(_mockSignInRepository);
@@ -103,22 +100,22 @@ void main() {
       );
 
       when(_mockAuthFacade.signInWithCredentialAndSecret(
-        credentialAddress: credentialTester,
-        secret: secretTester,
+        credentialAddress: credential,
+        secret: secret,
       )).thenAnswer((_) async => const Left(throwFailure));
 
       // act
 
       final result = await _signInUseCase.call(
-        Params(credentials: credentials),
+        Params(secret: secret),
       );
       // assert
 
       expect(result, left(failureDetails));
 
       verify(_mockAuthFacade.signInWithCredentialAndSecret(
-        credentialAddress: credentialTester,
-        secret: secretTester,
+        credentialAddress: credential,
+        secret: secret,
       ));
 
       // verifyNoMoreInteractions(_mockSignInRepository);

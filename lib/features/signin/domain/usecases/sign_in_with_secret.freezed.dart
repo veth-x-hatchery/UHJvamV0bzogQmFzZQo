@@ -17,9 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ParamsTearOff {
   const _$ParamsTearOff();
 
-  _Params call({required Credentials credentials}) {
+  _Params call({required Secret secret}) {
     return _Params(
-      credentials: credentials,
+      secret: secret,
     );
   }
 }
@@ -29,7 +29,7 @@ const $Params = _$ParamsTearOff();
 
 /// @nodoc
 mixin _$Params {
-  Credentials get credentials => throw _privateConstructorUsedError;
+  Secret get secret => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ParamsCopyWith<Params> get copyWith => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ mixin _$Params {
 abstract class $ParamsCopyWith<$Res> {
   factory $ParamsCopyWith(Params value, $Res Function(Params) then) =
       _$ParamsCopyWithImpl<$Res>;
-  $Res call({Credentials credentials});
+  $Res call({Secret secret});
 }
 
 /// @nodoc
@@ -52,13 +52,13 @@ class _$ParamsCopyWithImpl<$Res> implements $ParamsCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? credentials = freezed,
+    Object? secret = freezed,
   }) {
     return _then(_value.copyWith(
-      credentials: credentials == freezed
-          ? _value.credentials
-          : credentials // ignore: cast_nullable_to_non_nullable
-              as Credentials,
+      secret: secret == freezed
+          ? _value.secret
+          : secret // ignore: cast_nullable_to_non_nullable
+              as Secret,
     ));
   }
 }
@@ -68,7 +68,7 @@ abstract class _$ParamsCopyWith<$Res> implements $ParamsCopyWith<$Res> {
   factory _$ParamsCopyWith(_Params value, $Res Function(_Params) then) =
       __$ParamsCopyWithImpl<$Res>;
   @override
-  $Res call({Credentials credentials});
+  $Res call({Secret secret});
 }
 
 /// @nodoc
@@ -82,13 +82,13 @@ class __$ParamsCopyWithImpl<$Res> extends _$ParamsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? credentials = freezed,
+    Object? secret = freezed,
   }) {
     return _then(_Params(
-      credentials: credentials == freezed
-          ? _value.credentials
-          : credentials // ignore: cast_nullable_to_non_nullable
-              as Credentials,
+      secret: secret == freezed
+          ? _value.secret
+          : secret // ignore: cast_nullable_to_non_nullable
+              as Secret,
     ));
   }
 }
@@ -96,28 +96,27 @@ class __$ParamsCopyWithImpl<$Res> extends _$ParamsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Params implements _Params {
-  const _$_Params({required this.credentials});
+  const _$_Params({required this.secret});
 
   @override
-  final Credentials credentials;
+  final Secret secret;
 
   @override
   String toString() {
-    return 'Params(credentials: $credentials)';
+    return 'Params(secret: $secret)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Params &&
-            (identical(other.credentials, credentials) ||
-                const DeepCollectionEquality()
-                    .equals(other.credentials, credentials)));
+            (identical(other.secret, secret) ||
+                const DeepCollectionEquality().equals(other.secret, secret)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(credentials);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(secret);
 
   @JsonKey(ignore: true)
   @override
@@ -126,10 +125,10 @@ class _$_Params implements _Params {
 }
 
 abstract class _Params implements Params {
-  const factory _Params({required Credentials credentials}) = _$_Params;
+  const factory _Params({required Secret secret}) = _$_Params;
 
   @override
-  Credentials get credentials => throw _privateConstructorUsedError;
+  Secret get secret => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ParamsCopyWith<_Params> get copyWith => throw _privateConstructorUsedError;

@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
@@ -21,8 +22,8 @@ class SignInWithSecret extends UseCase<Unit, Params> {
   Future<Either<FailureDetails, Unit>> call(Params params) {
     return _authFacade
         .signInWithCredentialAndSecret(
-          credentialAddress: params.credentials.user,
-          secret: params.credentials.secret,
+          credentialAddress: Credential('test@vethx.com'),
+          secret: params.secret,
         )
         .then((value) => value.fold(
               (l) => left(_mapFailures(l)),
@@ -54,6 +55,6 @@ class SignInWithSecretErrorMessages {
 @freezed
 class Params with _$Params {
   const factory Params({
-    required Credentials credentials,
+    required Secret secret,
   }) = _Params;
 }

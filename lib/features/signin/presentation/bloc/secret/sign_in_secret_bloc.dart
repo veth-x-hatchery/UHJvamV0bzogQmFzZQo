@@ -38,14 +38,8 @@ class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
           isLoading: true,
           authFailureOrSuccessOption: none(),
         );
-        final result = await _signInWithCredentialAndSecret.call(Params(
-          credentials: Credentials(
-            secret: state.secret,
-            // Todo(v): Remove it! User and Secret cannot cohabited same space in time.
-            // Todo(v): User and Secret -> replace credential and secret
-            user: Credential(''),
-          ),
-        ));
+        final result = await _signInWithCredentialAndSecret
+            .call(Params(secret: state.secret));
         yield state.copyWith(
           isLoading: false,
           authFailureOrSuccessOption: result.fold(
