@@ -119,12 +119,11 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
   String toString() => super.toString();
 }
 
-/// A class which mocks [SignInWithCredentialAndSecret].
+/// A class which mocks [SignInWithSecret].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInWithCredentialAndSecret extends _i1.Mock
-    implements _i6.SignInWithCredentialAndSecret {
-  MockSignInWithCredentialAndSecret() {
+class MockSignInWithSecret extends _i1.Mock implements _i6.SignInWithSecret {
+  MockSignInWithSecret() {
     _i1.throwOnMissingStub(this);
   }
 

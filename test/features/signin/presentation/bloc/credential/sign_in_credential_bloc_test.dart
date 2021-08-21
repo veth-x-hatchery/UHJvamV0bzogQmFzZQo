@@ -17,14 +17,14 @@ import 'sign_in_credential_bloc_test.mocks.dart';
 ])
 void main() {
   late SignInCredentialBloc _bloc;
-  late MockSignInCredentialCheck _mockSignInWithCredentialAndSecret;
+  late MockSignInCredentialCheck _mockSignInWithSecret;
   late MockNavigationCubit _mockNavigation;
 
   setUp(() {
-    _mockSignInWithCredentialAndSecret = MockSignInCredentialCheck();
+    _mockSignInWithSecret = MockSignInCredentialCheck();
     _mockNavigation = MockNavigationCubit();
     _bloc = SignInCredentialBloc(
-      _mockSignInWithCredentialAndSecret,
+      _mockSignInWithSecret,
       _mockNavigation,
     );
   });
@@ -62,7 +62,7 @@ void main() {
 
     final valueObject = Credential(credential);
 
-    when(_mockSignInWithCredentialAndSecret.call(any))
+    when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act
@@ -103,7 +103,7 @@ void main() {
 
     const credential = 'test';
 
-    when(_mockSignInWithCredentialAndSecret.call(any))
+    when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act
@@ -146,7 +146,7 @@ void main() {
       message: CheckCredentialErrorMessages.credentialAlreadyRegistered,
     );
 
-    when(_mockSignInWithCredentialAndSecret.call(any))
+    when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(Left(expectedFailure)));
 
     // act
@@ -184,7 +184,7 @@ void main() {
 
     const credential = 'test@test.com';
 
-    when(_mockSignInWithCredentialAndSecret.call(any))
+    when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act

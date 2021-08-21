@@ -13,12 +13,11 @@ import 'register_bloc_test.mocks.dart';
 @GenerateMocks([SignInRegisterCredentialAndSecret])
 void main() {
   late SignInRegisterBloc _bloc;
-  late MockSignInRegisterCredentialAndSecret _mockSignInWithCredentialAndSecret;
+  late MockSignInRegisterCredentialAndSecret _mockSignInWithSecret;
 
   setUp(() {
-    _mockSignInWithCredentialAndSecret =
-        MockSignInRegisterCredentialAndSecret();
-    _bloc = SignInRegisterBloc(_mockSignInWithCredentialAndSecret);
+    _mockSignInWithSecret = MockSignInRegisterCredentialAndSecret();
+    _bloc = SignInRegisterBloc(_mockSignInWithSecret);
   });
 
   test('when credential changes occour then should emit correct state',
@@ -77,7 +76,7 @@ void main() {
     const credential = 'test';
     const secret = '1234';
 
-    when(_mockSignInWithCredentialAndSecret.call(any))
+    when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(const Right(unit)));
 
     // act
@@ -129,7 +128,7 @@ void main() {
     const credential = 'test';
     const secret = '1234';
 
-    when(_mockSignInWithCredentialAndSecret.call(any))
+    when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(const Right(unit)));
 
     // act
@@ -183,7 +182,7 @@ void main() {
           .invalidCredentialAndSecretCombination,
     );
 
-    when(_mockSignInWithCredentialAndSecret.call(any))
+    when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(Left(expectedFailure)));
 
     // act

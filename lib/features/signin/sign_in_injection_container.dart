@@ -88,8 +88,8 @@ Future<void> signInDependenciesInjection() async {
     ),
   );
 
-  sl.registerLazySingleton<SignInWithCredentialAndSecret>(
-    () => SignInWithCredentialAndSecret(
+  sl.registerLazySingleton<SignInWithSecret>(
+    () => SignInWithSecret(
       // sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
@@ -132,7 +132,7 @@ Future<void> signInDependenciesInjection() async {
   sl.registerFactory<SignInSecretBloc>(
     () => SignInSecretBloc(
       sl<AuthBloc>(),
-      sl<SignInWithCredentialAndSecret>(),
+      sl<SignInWithSecret>(),
     ),
   );
 

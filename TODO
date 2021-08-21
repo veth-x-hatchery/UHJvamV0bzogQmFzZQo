@@ -22,22 +22,56 @@
 					3 - renomear arquivos e pastas
 					4 - renomear variaveis e objetos
 
-5 - armazenar o usuario apos a validacao
+1 - Criar mais um caso de uso
 
-	1 - check credentials
+	1 - SignInCacheLogInIntention
 	
-		1 - nao precisa ser "is already in use" -> valid or invalid + error reasons
+		1 - Criar o repositorio:
+		
+			1 - Criar o medodo "SaveCredential"
+			
+		2 - Criar o datasource:
+		
+			1 - Criar o metodo CacheCredential
+			
+				1 - Por enquanto vai fazer um UPDATE no objeto
+				
+	** Testes:
 	
-	2 - armazenar em cache com local data source
+		1 - Exception -> Failure -> Generalista
+		
+			Retornar uma mensagem de indisponibilidade
+			
+			Logger.infrastructure
+		
+		2 - Retornar sucesso
 	
-	3 - quando for validar a SENHA
-	
-		1 - Verificar se existe uma credencial TEMPORARIA salva
-		2 - SE NAO tiver
-			1 - EXCEPTION no data source
-			2 - FAILURE no repositorio
-			3 - Failure detalis no use case
-			4 - redirecionamento para a tela de CREDENCIAIS (email)
-6 - Validar o fluxo
+2 - Atualizar o SignInWithSecret
 
+	1 - Criar mais um metodo no repositorio
+	
+		1 - GetCredential
+	
+	2 - Criar mais um medoto no datasource
+	
+		1 - CachedCredential
+	
+	** Testes:
+	
+		1 - Exception -> Failure -> Generalista
+		
+			Retornar uma mensagem de indisponibilidade
+			
+			Logger.infrastructure
+		
+		2 - Not Found Exception -> Failure Not Cached
+		
+			Retornar uma mensagem :Credenciais invalidas
+			
+			Redirecionar para a tela de Credencial
+			
+		
+			
+		
+	
 	

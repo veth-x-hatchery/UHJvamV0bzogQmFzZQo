@@ -15,7 +15,7 @@ part 'sign_in_secret_bloc.freezed.dart';
 
 class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
   final AuthBloc _authBloc;
-  final SignInWithCredentialAndSecret _signInWithCredentialAndSecret;
+  final SignInWithSecret _signInWithCredentialAndSecret;
 
   SignInSecretBloc(
     this._authBloc,

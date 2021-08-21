@@ -17,14 +17,14 @@ import 'sign_in_check_credential_test.mocks.dart';
   IAuthFacade,
 ])
 void main() {
-  late SignInWithCredentialAndSecret _signInUseCase;
+  late SignInWithSecret _signInUseCase;
   // late MockISignInRepository _mockSignInRepository;
   late MockIAuthFacade _mockAuthFacade;
 
   setUp(() {
     // _mockSignInRepository = MockISignInRepository();
     _mockAuthFacade = MockIAuthFacade();
-    _signInUseCase = SignInWithCredentialAndSecret(
+    _signInUseCase = SignInWithSecret(
       // _mockSignInRepository,
       _mockAuthFacade,
     );
@@ -67,7 +67,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInWithCredentialAndSecretErrorMessages.unavailable,
+        message: SignInWithSecretErrorMessages.unavailable,
       );
 
       when(_mockAuthFacade.signInWithCredentialAndSecret(
@@ -98,8 +98,8 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInWithCredentialAndSecretErrorMessages
-            .invalidCredentialAndSecretCombination,
+        message:
+            SignInWithSecretErrorMessages.invalidCredentialAndSecretCombination,
       );
 
       when(_mockAuthFacade.signInWithCredentialAndSecret(

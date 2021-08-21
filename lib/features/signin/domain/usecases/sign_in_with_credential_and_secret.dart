@@ -8,11 +8,11 @@ import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
 part 'sign_in_with_credential_and_secret.freezed.dart';
 
-class SignInWithCredentialAndSecret extends UseCase<Unit, Params> {
+class SignInWithSecret extends UseCase<Unit, Params> {
   // final ISignInRepository _signInRepository;
   final IAuthFacade _authFacade;
 
-  SignInWithCredentialAndSecret(
+  SignInWithSecret(
     // this._signInRepository,
     this._authFacade,
   );
@@ -34,18 +34,18 @@ class SignInWithCredentialAndSecret extends UseCase<Unit, Params> {
     if (auth == const AuthFailure.invalidCredentialAndSecretCombination()) {
       return FailureDetails(
         failure: auth,
-        message: SignInWithCredentialAndSecretErrorMessages
-            .invalidCredentialAndSecretCombination,
+        message:
+            SignInWithSecretErrorMessages.invalidCredentialAndSecretCombination,
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInWithCredentialAndSecretErrorMessages.unavailable,
+      message: SignInWithSecretErrorMessages.unavailable,
     );
   }
 }
 
-class SignInWithCredentialAndSecretErrorMessages {
+class SignInWithSecretErrorMessages {
   static const unavailable = 'Unavailable';
   static const invalidCredentialAndSecretCombination =
       'Invalid credential and secret combination';

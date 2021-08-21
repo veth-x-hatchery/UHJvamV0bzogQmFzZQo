@@ -13,19 +13,19 @@ import 'sign_in_secret_bloc_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
-  SignInWithCredentialAndSecret,
+  SignInWithSecret,
 ])
 void main() {
   late SignInSecretBloc _bloc;
   late MockAuthBloc _mockAuthBloc;
-  late MockSignInWithCredentialAndSecret _mockSignInWithCredentialAndSecret;
+  late MockSignInWithSecret _mockSignInWithSecret;
 
   setUp(() {
     _mockAuthBloc = MockAuthBloc();
-    _mockSignInWithCredentialAndSecret = MockSignInWithCredentialAndSecret();
+    _mockSignInWithSecret = MockSignInWithSecret();
     _bloc = SignInSecretBloc(
       _mockAuthBloc,
-      _mockSignInWithCredentialAndSecret,
+      _mockSignInWithSecret,
     );
   });
 
@@ -61,7 +61,7 @@ void main() {
 
     final valueObject = Secret(secret);
 
-    when(_mockSignInWithCredentialAndSecret.call(any))
+    when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(right(unit)));
 
     // act
@@ -102,7 +102,7 @@ void main() {
 
     const secret = 'test';
 
-    when(_mockSignInWithCredentialAndSecret.call(any))
+    when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(right(unit)));
 
     // act
@@ -142,11 +142,11 @@ void main() {
     const secret = 'dmFsaWRwYXNzd29yZAo';
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
-      message: SignInWithCredentialAndSecretErrorMessages
-          .invalidCredentialAndSecretCombination,
+      message:
+          SignInWithSecretErrorMessages.invalidCredentialAndSecretCombination,
     );
 
-    when(_mockSignInWithCredentialAndSecret.call(any))
+    when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(Left(expectedFailure)));
 
     // act
@@ -186,7 +186,7 @@ void main() {
 
     final valueObject = Secret(secret);
 
-    when(_mockSignInWithCredentialAndSecret.call(any))
+    when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(right(unit)));
 
     // act
