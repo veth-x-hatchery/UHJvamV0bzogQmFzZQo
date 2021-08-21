@@ -8,7 +8,7 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 // import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_credential_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_credential_and_secret.dart';
 
 import 'sign_in_check_credential_test.mocks.dart';
 
@@ -31,17 +31,16 @@ void main() {
   });
 
   final credentialTester = CredentialAddress('test@vethx.com');
-  final passwordTester = Password('dGVzdEB2ZXRoeC5jb20K');
-  final credentials =
-      Credentials(user: credentialTester, password: passwordTester);
+  final secretTester = Password('dGVzdEB2ZXRoeC5jb20K');
+  final credentials = Credentials(user: credentialTester, secret: secretTester);
 
-  group('then sign in with credential and password', () {
+  group('then sign in with credential and secret', () {
     test('should return success with the given credentials', () async {
       // arrange
 
       when(_mockAuthFacade.signInWithCredentialAndPassword(
         credentialAddress: credentialTester,
-        password: passwordTester,
+        secret: secretTester,
       )).thenAnswer((_) async => const Right(unit));
 
       // act
@@ -56,7 +55,7 @@ void main() {
 
       verify(_mockAuthFacade.signInWithCredentialAndPassword(
         credentialAddress: credentialTester,
-        password: passwordTester,
+        secret: secretTester,
       ));
 
       // verifyNoMoreInteractions(_mockSignInRepository);
@@ -73,7 +72,7 @@ void main() {
 
       when(_mockAuthFacade.signInWithCredentialAndPassword(
         credentialAddress: credentialTester,
-        password: passwordTester,
+        secret: secretTester,
       )).thenAnswer((_) async => const Left(throwFailure));
 
       // act
@@ -87,13 +86,13 @@ void main() {
 
       verify(_mockAuthFacade.signInWithCredentialAndPassword(
         credentialAddress: credentialTester,
-        password: passwordTester,
+        secret: secretTester,
       ));
 
       // verifyNoMoreInteractions(_mockSignInRepository);
     });
 
-    test('should return invalid credential and password combination', () async {
+    test('should return invalid credential and secret combination', () async {
       // arrange
       const throwFailure =
           AuthFailure.invalidCredentialAndPasswordCombination();
@@ -106,7 +105,7 @@ void main() {
 
       when(_mockAuthFacade.signInWithCredentialAndPassword(
         credentialAddress: credentialTester,
-        password: passwordTester,
+        secret: secretTester,
       )).thenAnswer((_) async => const Left(throwFailure));
 
       // act
@@ -120,7 +119,7 @@ void main() {
 
       verify(_mockAuthFacade.signInWithCredentialAndPassword(
         credentialAddress: credentialTester,
-        password: passwordTester,
+        secret: secretTester,
       ));
 
       // verifyNoMoreInteractions(_mockSignInRepository);

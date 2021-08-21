@@ -49,10 +49,10 @@ class MockIAuthFacade extends _i1.Mock implements _i3.IAuthFacade {
   _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>
       registerWithCredentialAndPassword(
               {_i7.CredentialAddress? credentialAddress,
-              _i7.Password? password}) =>
+              _i7.Password? secret}) =>
           (super.noSuchMethod(
               Invocation.method(#registerWithCredentialAndPassword, [],
-                  {#credentialAddress: credentialAddress, #password: password}),
+                  {#credentialAddress: credentialAddress, #secret: secret}),
               returnValue: Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>.value(
                   _FakeEither_0<_i6.AuthFailure, _i2.Unit>())) as _i4
               .Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>);
@@ -60,11 +60,11 @@ class MockIAuthFacade extends _i1.Mock implements _i3.IAuthFacade {
   _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>
       signInWithCredentialAndPassword(
               {_i7.CredentialAddress? credentialAddress,
-              _i7.Password? password}) =>
+              _i7.Password? secret}) =>
           (super.noSuchMethod(
               Invocation.method(#signInWithCredentialAndPassword, [], {
                 #credentialAddress: credentialAddress,
-                #password: password
+                #secret: secret
               }),
               returnValue: Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>.value(
                   _FakeEither_0<_i6.AuthFailure, _i2.Unit>())) as _i4

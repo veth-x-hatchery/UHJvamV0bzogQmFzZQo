@@ -47,13 +47,13 @@ void main() {
     return credentialInput;
   }
 
-  Finder _passwordInput() {
+  Finder _secretInput() {
     // arrange
-    final passwordInput = find
+    final secretInput = find
         .byKey(const Key(SignInPageKeys.signInRegisterPagePasswordTextField));
     // Act && Assert
-    // expect(passwordInput, findsOneWidget);
-    return passwordInput;
+    // expect(secretInput, findsOneWidget);
+    return secretInput;
   }
 
   Finder _validationButton() {
@@ -74,13 +74,13 @@ void main() {
   /// Form uses BLoC state to realize validations
   void _prepareFormValidationValues({
     String? credential,
-    String? password,
+    String? secret,
   }) {
     final credentialVO = CredentialAddress(credential);
-    final passwordVO = Password(password);
+    final secretVO = Password(secret);
     final state = SignInRegisterState(
       credential: credentialVO,
-      password: passwordVO,
+      secret: secretVO,
       isLoading: false,
       authFailureOrSuccessOption: none(),
     );
@@ -126,7 +126,7 @@ void main() {
       expect(credentialInput, findsOneWidget);
     });
 
-    testWidgets('should find the password input', (tester) async {
+    testWidgets('should find the secret input', (tester) async {
       // arrange
 
       _signInState(SignInRegisterState.initial());
@@ -152,7 +152,7 @@ void main() {
 
     _signInState(SignInRegisterState(
       credential: CredentialAddress(validCredential),
-      password: Password(validPassword),
+      secret: Password(validPassword),
       isLoading: true,
       authFailureOrSuccessOption: none(),
     ));
@@ -209,7 +209,7 @@ void main() {
         const SignInRegisterEvent.registerWithCredentialAndPasswordPressed()));
   });
 
-  testWidgets('when user enters a invalid password then no events are emitted',
+  testWidgets('when user enters a invalid secret then no events are emitted',
       (tester) async {
     // arrange
 
@@ -219,10 +219,10 @@ void main() {
 
     await tester.enterText(_credentialInput(), validCredential);
 
-    await tester.enterText(_passwordInput(), invalidPassword);
+    await tester.enterText(_secretInput(), invalidPassword);
 
     _prepareFormValidationValues(
-        credential: validCredential, password: invalidPassword);
+        credential: validCredential, secret: invalidPassword);
 
     // Act
 
@@ -235,7 +235,7 @@ void main() {
   });
 
   testWidgets(
-      'when user enters valid credential and password then SignInBLoC is called',
+      'when user enters valid credential and secret then SignInBLoC is called',
       (tester) async {
     // arrange
 
@@ -245,10 +245,10 @@ void main() {
 
     await tester.enterText(_credentialInput(), validCredential);
 
-    await tester.enterText(_passwordInput(), validPassword);
+    await tester.enterText(_secretInput(), validPassword);
 
     _prepareFormValidationValues(
-        credential: validCredential, password: validPassword);
+        credential: validCredential, secret: validPassword);
 
     // Act
 

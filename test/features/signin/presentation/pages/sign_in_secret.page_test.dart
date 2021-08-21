@@ -4,14 +4,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_password.page.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
-import 'sign_in_password.page_test.mocks.dart';
+import 'sign_in_secret.page_test.mocks.dart';
 
 @GenerateMocks([SignInPasswordBloc])
 void main() {
@@ -38,13 +38,13 @@ void main() {
     when(_mockBloc.stream).thenAnswer((_) => Stream.value(state));
   }
 
-  Finder _passwordInput() {
+  Finder _secretInput() {
     // arrange
-    final passwordInput = find
+    final secretInput = find
         .byKey(const Key(SignInPageKeys.signInPasswordPagePasswordTextField));
     // Act && Assert
-    expect(passwordInput, findsOneWidget);
-    return passwordInput;
+    expect(secretInput, findsOneWidget);
+    return secretInput;
   }
 
   Finder _validationButton() {
@@ -62,7 +62,7 @@ void main() {
   }) {
     final credentialVO = Password(value);
     final state = SignInPasswordState(
-      password: credentialVO,
+      secret: credentialVO,
       isLoading: false,
       authFailureOrSuccessOption: none(),
     );
@@ -88,23 +88,23 @@ void main() {
     expect(validationButton, findsOneWidget);
   });
 
-  testWidgets('should find the password input', (tester) async {
+  testWidgets('should find the secret input', (tester) async {
     // arrange
 
     _signInState(SignInPasswordState.initial());
 
     await _pumpPage(tester);
 
-    final passwordInput = find
+    final secretInput = find
         .byKey(const Key(SignInPageKeys.signInPasswordPagePasswordTextField));
 
     // Act
 
-    await tester.tap(passwordInput);
+    await tester.tap(secretInput);
 
     // assert
 
-    expect(passwordInput, findsOneWidget);
+    expect(secretInput, findsOneWidget);
   });
 
   testWidgets('when receive loading event then should show a circular progress',
@@ -113,7 +113,7 @@ void main() {
 
     _signInState(SignInPasswordState(
       isLoading: true,
-      password: Password(''),
+      secret: Password(''),
       authFailureOrSuccessOption: none(),
     ));
 
@@ -124,7 +124,7 @@ void main() {
     expect(find.byType(GenericProgressIndicator), findsOneWidget);
   });
 
-  testWidgets("when user doesn't enter the password then no events are emitted",
+  testWidgets("when user doesn't enter the secret then no events are emitted",
       (tester) async {
     // arrange
 
@@ -145,7 +145,7 @@ void main() {
     verifyNever(_mockBloc.add(any));
   });
 
-  testWidgets('when user enters a invalid password then no events are emitted',
+  testWidgets('when user enters a invalid secret then no events are emitted',
       (tester) async {
     // arrange
 
@@ -155,7 +155,7 @@ void main() {
 
     const invalidPassword = '1234';
 
-    await tester.enterText(_passwordInput(), invalidPassword);
+    await tester.enterText(_secretInput(), invalidPassword);
 
     // Act
 
@@ -171,7 +171,7 @@ void main() {
         _mockBloc.add(const SignInPasswordEvent.analysePasswordPressed()));
   });
 
-  testWidgets('when user enters a correct password then SignInBLoC is called',
+  testWidgets('when user enters a correct secret then SignInBLoC is called',
       (tester) async {
     // arrange
 
@@ -181,7 +181,7 @@ void main() {
 
     const validPassword = 'dmFsaWRwYXNzd29yZAo';
 
-    await tester.enterText(_passwordInput(), validPassword);
+    await tester.enterText(_secretInput(), validPassword);
 
     _prepareFormValidationValues(value: validPassword);
 

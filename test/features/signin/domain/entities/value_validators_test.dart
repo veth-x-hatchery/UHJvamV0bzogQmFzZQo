@@ -54,24 +54,24 @@ void main() {
     });
   });
 
-  group('when validate password', () {
+  group('when validate secret', () {
     test('should return [ValueFailure.shortPassword]', () {
       // arrange
-      const String password = '12345';
+      const String secret = '12345';
       // act
-      final validation = validatePassword(password);
+      final validation = validatePassword(secret);
       // assert
       expect(validation,
-          left(const ValueFailure.shortPassword(failedValue: password)));
+          left(const ValueFailure.shortPassword(failedValue: secret)));
     });
 
-    test('should validate password with success', () {
+    test('should validate secret with success', () {
       // arrange
-      const String password = 'dmFsdWVfdmFsaWRhdG9yc190ZXN0LmRhcnQK';
+      const String secret = 'dmFsdWVfdmFsaWRhdG9yc190ZXN0LmRhcnQK';
       // act
-      final validation = validatePassword(password);
+      final validation = validatePassword(secret);
       // assert
-      expect(validation, right(password));
+      expect(validation, right(secret));
     });
   });
 }

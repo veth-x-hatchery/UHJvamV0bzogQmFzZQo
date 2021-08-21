@@ -53,7 +53,7 @@ void main() {
   group('when [FirebaseAuthFacade.registerWithCredentialAndPassword]', () {
     final credential = CredentialAddress('test@vethx.com');
 
-    final password = Password('dGVzdEB2ZXRoeC5jb20K');
+    final secret = Password('dGVzdEB2ZXRoeC5jb20K');
 
     Future<void> _registerWithCredentialAndPassword(
       Exception firebaseException,
@@ -63,14 +63,14 @@ void main() {
 
       when(_mockFirebaseAuth.signInWithEmailAndPassword(
         email: credential.getOrCrash(),
-        password: password.getOrCrash(),
+        secret: secret.getOrCrash(),
       )).thenThrow(firebaseException);
 
       // act
 
       final result = await _authFacade.registerWithCredentialAndPassword(
         credentialAddress: credential,
-        password: password,
+        secret: secret,
       );
 
       // assert
@@ -122,7 +122,7 @@ void main() {
       when(
         _mockFirebaseAuth.signInWithEmailAndPassword(
           email: credential.getOrCrash(),
-          password: password.getOrCrash(),
+          secret: secret.getOrCrash(),
         ),
       ).thenAnswer(
           (_) => Future<MockUserCredential>.value(_mockUserCredential));
@@ -131,7 +131,7 @@ void main() {
 
       final result = await _authFacade.registerWithCredentialAndPassword(
         credentialAddress: credential,
-        password: password,
+        secret: secret,
       );
 
       // assert
@@ -143,7 +143,7 @@ void main() {
   group('when [FirebaseAuthFacade.signInWithCredentialAndPassword]', () {
     final credential = CredentialAddress('test@vethx.com');
 
-    final password = Password('dGVzdEB2ZXRoeC5jb20K');
+    final secret = Password('dGVzdEB2ZXRoeC5jb20K');
 
     Future<void> _signInWithCredentialAndPassword(
       Exception firebaseException,
@@ -153,14 +153,14 @@ void main() {
 
       when(_mockFirebaseAuth.signInWithEmailAndPassword(
         email: credential.getOrCrash(),
-        password: password.getOrCrash(),
+        secret: secret.getOrCrash(),
       )).thenThrow(firebaseException);
 
       // act
 
       final result = await _authFacade.signInWithCredentialAndPassword(
         credentialAddress: credential,
-        password: password,
+        secret: secret,
       );
 
       // assert
@@ -169,12 +169,12 @@ void main() {
     }
 
     test(
-        'should return [AuthFailure.invalidCredentialAndPasswordCombination()] when Firebase throw [wrong-password]',
+        'should return [AuthFailure.invalidCredentialAndPasswordCombination()] when Firebase throw [wrong-secret]',
         () async {
       // arrange
 
       final firebaseException =
-          FirebaseException(code: 'wrong-password', plugin: '');
+          FirebaseException(code: 'wrong-secret', plugin: '');
 
       const expectedFailure =
           AuthFailure.invalidCredentialAndPasswordCombination();
@@ -230,7 +230,7 @@ void main() {
       when(
         _mockFirebaseAuth.signInWithEmailAndPassword(
           email: credential.getOrCrash(),
-          password: password.getOrCrash(),
+          secret: secret.getOrCrash(),
         ),
       ).thenAnswer(
           (_) => Future<MockUserCredential>.value(_mockUserCredential));
@@ -239,7 +239,7 @@ void main() {
 
       final result = await _authFacade.signInWithCredentialAndPassword(
         credentialAddress: credential,
-        password: password,
+        secret: secret,
       );
 
       // assert
@@ -286,7 +286,7 @@ void main() {
       _setUpSignInWithGoogle();
 
       when(_mockFirebaseAuth.signInWithCredential(any))
-          .thenThrow(PlatformException(code: 'wrong-password'));
+          .thenThrow(PlatformException(code: 'wrong-secret'));
 
       //act
 
@@ -322,7 +322,7 @@ void main() {
       // Arrange
       when(_mockFirebaseAuth.signInWithEmailAndPassword(
         email: credential.getOrCrash(),
-        password: _authFacade.randomPassword,
+        secret: _authFacade.randomPassword,
       )).thenThrow(firebaseException);
     }
 
@@ -351,7 +351,7 @@ void main() {
       //arrange
 
       final firebaseException =
-          FirebaseException(code: 'wrong-password', plugin: '');
+          FirebaseException(code: 'wrong-secret', plugin: '');
 
       _credentialIsAlreadyInUse(firebaseException);
 

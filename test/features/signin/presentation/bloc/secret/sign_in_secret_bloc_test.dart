@@ -5,11 +5,11 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_credential_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_credential_and_secret.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 
-import 'sign_in_password_bloc_test.mocks.dart';
+import 'sign_in_secret_bloc_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
@@ -30,14 +30,14 @@ void main() {
     );
   });
 
-  test('when password changes occour then should emit correct state', () async {
+  test('when secret changes occour then should emit correct state', () async {
     // arrange
 
-    const password = 'test';
+    const secret = 'test';
 
     // act
 
-    _bloc.add(const SignInPasswordEvent.passwordChanged(password));
+    _bloc.add(const SignInPasswordEvent.secretChanged(secret));
 
     // assert
 
@@ -45,7 +45,7 @@ void main() {
         _bloc.stream,
         emitsInOrder([
           SignInPasswordState(
-            password: Password(password),
+            secret: Password(secret),
             isLoading: false,
             authFailureOrSuccessOption: none(),
           )
@@ -58,16 +58,16 @@ void main() {
       () async {
     // arrange
 
-    const password = 'dmFsaWRwYXNzd29yZAo';
+    const secret = 'dmFsaWRwYXNzd29yZAo';
 
-    final valueObject = Password(password);
+    final valueObject = Password(secret);
 
     when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(right(unit)));
 
     // act
 
-    _bloc.add(const SignInPasswordEvent.passwordChanged(password));
+    _bloc.add(const SignInPasswordEvent.secretChanged(secret));
 
     _bloc.add(const SignInPasswordEvent.analysePasswordPressed());
 
@@ -77,17 +77,17 @@ void main() {
         emitsInOrder(
           [
             SignInPasswordState(
-              password: valueObject,
+              secret: valueObject,
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInPasswordState(
-              password: valueObject,
+              secret: valueObject,
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInPasswordState(
-              password: valueObject,
+              secret: valueObject,
               isLoading: false,
               authFailureOrSuccessOption: none(),
             )
@@ -101,14 +101,14 @@ void main() {
       () async {
     // arrange
 
-    const password = 'test';
+    const secret = 'test';
 
     when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(right(unit)));
 
     // act
 
-    _bloc.add(const SignInPasswordEvent.passwordChanged(password));
+    _bloc.add(const SignInPasswordEvent.secretChanged(secret));
 
     _bloc.add(const SignInPasswordEvent.analysePasswordPressed());
 
@@ -119,17 +119,17 @@ void main() {
         emitsInOrder(
           [
             SignInPasswordState(
-              password: Password(password),
+              secret: Password(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInPasswordState(
-              password: Password(password),
+              secret: Password(secret),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInPasswordState(
-              password: Password(password),
+              secret: Password(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             )
@@ -140,7 +140,7 @@ void main() {
   test('when confirmation occour then should emit an failure detais', () async {
     // arrange
 
-    const password = 'dmFsaWRwYXNzd29yZAo';
+    const secret = 'dmFsaWRwYXNzd29yZAo';
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndPasswordCombination(),
       message: SignInWithCredentialAndPasswordErrorMessages
@@ -152,7 +152,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInPasswordEvent.passwordChanged(password));
+    _bloc.add(const SignInPasswordEvent.secretChanged(secret));
 
     _bloc.add(const SignInPasswordEvent.analysePasswordPressed());
 
@@ -162,17 +162,17 @@ void main() {
         emitsInOrder(
           [
             SignInPasswordState(
-              password: Password(password),
+              secret: Password(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInPasswordState(
-              password: Password(password),
+              secret: Password(secret),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInPasswordState(
-              password: Password(password),
+              secret: Password(secret),
               isLoading: false,
               authFailureOrSuccessOption: some(Left(expectedFailure)),
             )
@@ -183,16 +183,16 @@ void main() {
   test('should notify Auth BLoC when sign in is allowed', () async {
     // arrange
 
-    const password = 'dmFsaWRwYXNzd29yZAo';
+    const secret = 'dmFsaWRwYXNzd29yZAo';
 
-    final valueObject = Password(password);
+    final valueObject = Password(secret);
 
     when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(right(unit)));
 
     // act
 
-    _bloc.add(const SignInPasswordEvent.passwordChanged(password));
+    _bloc.add(const SignInPasswordEvent.secretChanged(secret));
 
     _bloc.add(const SignInPasswordEvent.analysePasswordPressed());
 
@@ -201,17 +201,17 @@ void main() {
       _bloc.stream,
       emitsInOrder([
         SignInPasswordState(
-          password: valueObject,
+          secret: valueObject,
           isLoading: false,
           authFailureOrSuccessOption: none(),
         ),
         SignInPasswordState(
-          password: valueObject,
+          secret: valueObject,
           isLoading: true,
           authFailureOrSuccessOption: none(),
         ),
         SignInPasswordState(
-          password: valueObject,
+          secret: valueObject,
           isLoading: false,
           authFailureOrSuccessOption: none(),
         )

@@ -7,12 +7,12 @@ import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_password.page.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -130,7 +130,7 @@ void main() {
   });
 
   group('when receiving navigation events', () {
-    testWidgets('should go from credential page to password page',
+    testWidgets('should go from credential page to secret page',
         (WidgetTester tester) async {
       // Arrange
 
@@ -142,7 +142,7 @@ void main() {
 
       // act
 
-      _navigationCubit.goTo(SignInPageGoTo.passwordPage(
+      _navigationCubit.goTo(SignInPageGoTo.secretPage(
         from: SignInPageRoutes.credentialEntry,
         credential: 'teste@teste.com',
       ));
