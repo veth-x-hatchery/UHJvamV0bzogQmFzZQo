@@ -1,47 +1,51 @@
-// import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vethx_beta/core/error/exceptions.dart';
+import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:vethx_beta/core/error/exceptions.dart';
-// import 'package:vethx_beta/features/signin/infrastructure/models/user_model.dart';
+abstract class ISignInLocalSource {
+  /// Throws [CacheException] when transaction fail.
+  Future<void> cacheCredential(Credential credential);
 
-// // ignore: constant_identifier_names
-// const String CACHED_CURRENT_USER = 'CACHED_CURRENT_USER';
+  /// Throws [CacheException] if no cached data is present.
+  Future<Credential> cachedCredential();
+}
 
-// abstract class ISignInLocalSource {
-//   /// Throws [CacheException] if no cached data is present.
-//   Future<UserModel> currentUser();
+class SignInLocalSource implements ISignInLocalSource {
+  // ignore: constant_identifier_names
+  static const String cached_credential_key = 'CACHED_CREDENTIAL';
 
-//   Future<void> cacheCurrentUser(UserModel user);
+  final SharedPreferences _sharedPreferences;
 
-//   Future<void> signOut();
-// }
+  SignInLocalSource(this._sharedPreferences);
 
-// // class SignInLocalSource implements ISignInLocalSource {
-// //   final SharedPreferences _sharedPreferences;
+  @override
+  Future<void> cacheCredential(Credential credential) async {
+    try {
+      final result = await _sharedPreferences.setString(
+          cached_credential_key, credential.getOrCrash());
+      if (result) {
+        throw CacheException();
+      }
+    } on Exception catch (e, s) {
+      Logger.infrastructure('SignInLocalSource -> cacheCredential',
+          exception: e, stackTrace: s);
+      throw CacheException();
+    }
+  }
 
-// //   SignInLocalSource(this._sharedPreferences);
-
-// //   @override
-// //   Future<void> cacheCurrentUser(UserModel user) {
-// //     return _sharedPreferences.setString(
-// //       CACHED_CURRENT_USER,
-// //       json.encode(user.toJson()),
-// //     );
-// //   }
-
-// //   @override
-// //   Future<UserModel> currentUser() {
-// //     final jsonString = _sharedPreferences.getString(CACHED_CURRENT_USER);
-// //     if (jsonString == null) {
-// //       throw CacheException();
-// //     }
-// //     return Future.value(
-// //         UserModel.fromJson(json.decode(jsonString) as Map<String, dynamic>));
-// //   }
-
-// //   @override
-// //   Future<void> signOut() {
-// //     // TODO: implement signOut
-// //     throw UnimplementedError();
-// //   }
-// // }
+  @override
+  Future<Credential> cachedCredential() {
+    try {
+      final value = _sharedPreferences.getString(cached_credential_key);
+      if (value == null) {
+        throw CacheException();
+      }
+      return Future.value(Credential(value));
+    } on Exception catch (e, s) {
+      Logger.infrastructure('SignInLocalSource -> cachedCredential',
+          exception: e, stackTrace: s);
+      throw CacheException();
+    }
+  }
+}
