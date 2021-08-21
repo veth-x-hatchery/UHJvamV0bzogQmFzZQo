@@ -29,9 +29,9 @@ class FirebaseAuthFacade implements IAuthFacade {
     required Secret secret,
   }) async {
     try {
-      await _firebaseAuth.signInWithEmailAndSecret(
+      await _firebaseAuth.signInWithEmailAndPassword(
         email: credentialAddress.getOrCrash(),
-        secret: secret.getOrCrash(),
+        password: secret.getOrCrash(),
       );
       return right(unit);
     } on FirebaseException catch (e) {
@@ -54,9 +54,9 @@ class FirebaseAuthFacade implements IAuthFacade {
     required Secret secret,
   }) async {
     try {
-      await _firebaseAuth.signInWithEmailAndSecret(
+      await _firebaseAuth.signInWithEmailAndPassword(
         email: credentialAddress.getOrCrash(),
-        secret: secret.getOrCrash(),
+        password: secret.getOrCrash(),
       );
       return right(unit);
     } on FirebaseException catch (e) {
@@ -101,14 +101,14 @@ class FirebaseAuthFacade implements IAuthFacade {
   Future<Either<AuthFailure, bool>> credentialIsAlreadyInUse(
       CredentialAddress credentialAddress) async {
     try {
-      await _firebaseAuth.signInWithEmailAndSecret(
+      await _firebaseAuth.signInWithEmailAndPassword(
         email: credentialAddress.getOrCrash(),
-        secret: randomSecret,
+        password: randomSecret,
       );
       return right(true);
       //Todo(v): Logout if works
     } on FirebaseException catch (e) {
-      if (e.code == 'wrong-secret') {
+      if (e.code == 'wrong-password') {
         return right(true);
       } else if (e.code == 'user-not-found') {
         return right(false);
