@@ -185,6 +185,32 @@ void main() {
       expect(find.byType(SignInRegisterPage), findsOneWidget);
     });
 
+    testWidgets('should go from secret page to credential page',
+        (WidgetTester tester) async {
+      // Arrange
+
+      _setInitialState();
+
+      // Act
+
+      await _pumpPage(tester);
+
+      // act
+
+      _navigationCubit.goTo(
+        SignInPageGoTo.credentialPage(from: SignInPageRoutes.secretEntry),
+      );
+
+      // assert
+
+      // Todo(v): Research
+      // verify(_mockNavigationObserver.didPush(any, any)).called(1);
+
+      await tester.pumpAndSettle();
+
+      expect(find.byType(SignInCredentialPage), findsOneWidget);
+    });
+
     testWidgets('should go from any page to credential page',
         (WidgetTester tester) async {
       // Arrange

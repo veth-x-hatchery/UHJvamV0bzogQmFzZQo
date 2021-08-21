@@ -80,7 +80,7 @@ class SignInOptionsPage extends StatelessWidget {
                     ? Navigator.push(
                         context, SlideLeftRoute<void>(page: credentialPage))
                     : Navigator.pushReplacement(
-                        context, SlideLeftRoute<void>(page: credentialPage));
+                        context, SlideRightRoute<void>(page: credentialPage));
                 break;
               default:
                 break;

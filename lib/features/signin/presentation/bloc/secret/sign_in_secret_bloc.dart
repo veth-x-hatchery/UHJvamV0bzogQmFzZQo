@@ -18,12 +18,12 @@ part 'sign_in_secret_bloc.freezed.dart';
 class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
   final AuthBloc _authBloc;
   final NavigationCubit _navigation;
-  final SignInWithSecret _signInWithCredentialAndSecret;
+  final SignInWithSecret _signInWithSecret;
 
   SignInSecretBloc(
     this._authBloc,
     this._navigation,
-    this._signInWithCredentialAndSecret,
+    this._signInWithSecret,
   ) : super(SignInSecretState.initial());
 
   @override
@@ -42,8 +42,8 @@ class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
           isLoading: true,
           authFailureOrSuccessOption: none(),
         );
-        final result = await _signInWithCredentialAndSecret
-            .call(Params(secret: state.secret));
+        final result =
+            await _signInWithSecret.call(Params(secret: state.secret));
         yield state.copyWith(
           isLoading: false,
           authFailureOrSuccessOption: result.fold(
