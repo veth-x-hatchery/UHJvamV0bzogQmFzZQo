@@ -6,7 +6,7 @@ import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.da
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
-part 'sign_in_with_credential_and_secret.freezed.dart';
+part 'sign_in_with_secret.freezed.dart';
 
 class SignInWithSecret extends UseCase<Unit, Params> {
   // final ISignInRepository _signInRepository;

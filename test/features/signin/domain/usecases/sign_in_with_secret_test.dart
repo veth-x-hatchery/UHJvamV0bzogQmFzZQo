@@ -8,7 +8,7 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 // import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_credential_and_secret.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 
 import 'sign_in_check_credential_test.mocks.dart';
 

@@ -6,7 +6,7 @@ import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 
-import 'sign_in_with_credential_and_secret_test.mocks.dart';
+import 'sign_in_with_secret_test.mocks.dart';
 
 void main() {
   late SignInWithGoogle _signInUseCase;

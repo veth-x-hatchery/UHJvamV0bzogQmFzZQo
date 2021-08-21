@@ -6,7 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_credential_and_secret.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 
 part 'sign_in_secret_event.dart';

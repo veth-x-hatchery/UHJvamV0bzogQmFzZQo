@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
     as _i7;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_credential_and_secret.dart'
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart'
     as _i6;
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
     as _i2;
