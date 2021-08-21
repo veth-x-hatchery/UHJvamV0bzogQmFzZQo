@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
@@ -45,13 +47,17 @@ void main() {
     );
   }
 
-  void _initialState() {
+  void _mockUseCase({
+    bool failure = false,
+  }) {
     when(_mockSignInCredentialCheck.call(any)).thenAnswer((_) {
-      return Future.value(right(true));
+      return Future.value(failure
+          ? left(FailureDetails(
+              failure: const AuthFailure.serverError(),
+              message: CheckCredentialErrorMessages.unavailable,
+            ))
+          : right(true));
     });
-    when(_mockNavigationCubit.goTo(any)).thenReturn(null);
-    // when(_block.state).thenReturn(state);
-    // when(_block.stream).thenAnswer((_) => Stream.value(state));
   }
 
   Finder _credentialInput() {
@@ -75,8 +81,6 @@ void main() {
   testWidgets('should find the validation button', (tester) async {
     // arrange
 
-    _initialState();
-
     await _pumpPage(tester);
 
     final validationButton = find
@@ -93,8 +97,6 @@ void main() {
 
   testWidgets('should find the credential input', (tester) async {
     // arrange
-
-    _initialState();
 
     await _pumpPage(tester);
 
@@ -127,21 +129,16 @@ void main() {
 
     await tester.tap(input);
 
+    ///https://github.com/flutter/flutter/issues/88236
     await tester.enterText(input, 'test@test.com');
 
-    ///https://github.com/flutter/flutter/issues/88236
-
-    await tester.tap(input);
-
-    // // Act
+    // Act
 
     await tester.tap(_validationButton());
 
-    // await tester.pump();
+    // Assert
 
-    // // Assert
-
-    // expectLater(find.byType(GenericProgressIndicator), findsOneWidget);
+    expectLater(find.byType(GenericProgressIndicator), findsOneWidget);
   });
 
   testWidgets(
@@ -149,20 +146,27 @@ void main() {
       (tester) async {
     // arrange
 
-    _initialState();
+    _mockUseCase(failure: true);
+
+    when(_mockNavigationCubit.goTo(any)).thenReturn(null);
 
     await _pumpPage(tester);
 
-    // Act
+    final input = _credentialInput();
 
-    // _prepareFormValidationValues();
+    await tester.tap(input);
+
+    ///https://github.com/flutter/flutter/issues/88236
+    await tester.enterText(input, '');
+
+    // Act
 
     await tester.tap(_validationButton());
 
     // assert
-
-    verifyNever(
-        _block.add(const SignInCredentialEvent.analyseCredentialPressed()));
+    // nao foi emitido nenhum evento ou estado
+    // talvez seja necessario criar um MOCK apenas para estes cenarios e usar ele no PUMP...
+    expect(true, false);
   });
 
   testWidgets(
@@ -170,15 +174,9 @@ void main() {
       (tester) async {
     // arrange
 
-    _initialState();
-
     await _pumpPage(tester);
 
-    const invalidCredential = 'invalidcredential';
-
-    await tester.enterText(_credentialInput(), invalidCredential);
-
-    // _prepareFormValidationValues(value: invalidCredential);
+    await tester.enterText(_credentialInput(), 'invalidcredential');
 
     // Act
 
@@ -195,8 +193,6 @@ void main() {
   testWidgets('when user enters a correct credential then SignInBLoC is called',
       (tester) async {
     // arrange
-
-    _initialState();
 
     await _pumpPage(tester);
 
