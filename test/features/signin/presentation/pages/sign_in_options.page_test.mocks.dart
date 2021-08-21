@@ -11,10 +11,10 @@ import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_
     as _i4;
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart'
     as _i2;
-import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart'
-    as _i6;
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart'
     as _i5;
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart'
+    as _i6;
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
     as _i7;
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart'

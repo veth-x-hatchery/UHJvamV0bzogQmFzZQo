@@ -61,9 +61,9 @@ void main() {
     ) async {
       // Arrange
 
-      when(_mockFirebaseAuth.signInWithEmailAndSecret(
+      when(_mockFirebaseAuth.signInWithEmailAndPassword(
         email: credential.getOrCrash(),
-        secret: secret.getOrCrash(),
+        password: secret.getOrCrash(),
       )).thenThrow(firebaseException);
 
       // act
@@ -120,9 +120,9 @@ void main() {
       // Arrange
 
       when(
-        _mockFirebaseAuth.signInWithEmailAndSecret(
+        _mockFirebaseAuth.signInWithEmailAndPassword(
           email: credential.getOrCrash(),
-          secret: secret.getOrCrash(),
+          password: secret.getOrCrash(),
         ),
       ).thenAnswer(
           (_) => Future<MockUserCredential>.value(_mockUserCredential));
@@ -151,9 +151,9 @@ void main() {
     ) async {
       // Arrange
 
-      when(_mockFirebaseAuth.signInWithEmailAndSecret(
+      when(_mockFirebaseAuth.signInWithEmailAndPassword(
         email: credential.getOrCrash(),
-        secret: secret.getOrCrash(),
+        password: secret.getOrCrash(),
       )).thenThrow(firebaseException);
 
       // act
@@ -228,9 +228,9 @@ void main() {
       // Arrange
 
       when(
-        _mockFirebaseAuth.signInWithEmailAndSecret(
+        _mockFirebaseAuth.signInWithEmailAndPassword(
           email: credential.getOrCrash(),
-          secret: secret.getOrCrash(),
+          password: secret.getOrCrash(),
         ),
       ).thenAnswer(
           (_) => Future<MockUserCredential>.value(_mockUserCredential));
@@ -320,9 +320,9 @@ void main() {
 
     Future<void> _credentialIsAlreadyInUse(Exception firebaseException) async {
       // Arrange
-      when(_mockFirebaseAuth.signInWithEmailAndSecret(
+      when(_mockFirebaseAuth.signInWithEmailAndPassword(
         email: credential.getOrCrash(),
-        secret: _authFacade.randomSecret,
+        password: _authFacade.randomSecret,
       )).thenThrow(firebaseException);
     }
 
@@ -351,7 +351,7 @@ void main() {
       //arrange
 
       final firebaseException =
-          FirebaseException(code: 'wrong-secret', plugin: '');
+          FirebaseException(code: 'wrong-password', plugin: '');
 
       _credentialIsAlreadyInUse(firebaseException);
 
