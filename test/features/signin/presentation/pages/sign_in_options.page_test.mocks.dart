@@ -13,7 +13,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_pa
     as _i6;
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart'
     as _i5;
-import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_options_bloc.dart'
+import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart'
     as _i2;
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
     as _i7;

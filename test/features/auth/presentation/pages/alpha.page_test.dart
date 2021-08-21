@@ -9,7 +9,7 @@ import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_options_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
@@ -26,14 +26,12 @@ void main() {
   late MockAuthBloc _mockAuthBloc;
   late MockSignInOptionsBloc _mockSignInBloc;
   late MockNavigationCubit _mockNavigationCubit;
-  late MockLoggingNavigationObserver _mockLoggingNavigationObserver;
   late GetIt sl;
 
   setUp(() {
     _mockAuthBloc = MockAuthBloc();
     _mockSignInBloc = MockSignInOptionsBloc();
     _mockNavigationCubit = MockNavigationCubit();
-    _mockLoggingNavigationObserver = MockLoggingNavigationObserver();
     sl = GetIt.instance;
     sl.registerFactory<AuthBloc>(() => _mockAuthBloc);
     sl.registerFactory<SignInOptionsBloc>(() => _mockSignInBloc);

@@ -6,9 +6,9 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/signin/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_email.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
@@ -19,7 +19,6 @@ import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
-
 import 'sign_in_options.page_test.mocks.dart';
 
 @GenerateMocks([
@@ -68,18 +67,21 @@ void main() {
     when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
   }
 
+  // ignore: non_constant_identifier_names
   void _SignInEmailState(SignInEmailState state) {
     when(_mockMockSignInEmailBloc.state).thenReturn(state);
     when(_mockMockSignInEmailBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
+  // ignore: non_constant_identifier_names
   void _SignInRegisterState(SignInRegisterState state) {
     when(_mockMockSignInRegisterBloc.state).thenReturn(state);
     when(_mockMockSignInRegisterBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
+  // ignore: non_constant_identifier_names
   void _SignInPasswordState(SignInPasswordState state) {
     when(_mockMockSignInPasswordBloc.state).thenReturn(state);
     when(_mockMockSignInPasswordBloc.stream)
