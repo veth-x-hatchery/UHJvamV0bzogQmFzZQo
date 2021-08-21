@@ -26,12 +26,12 @@ class FirebaseAuthFacade implements IAuthFacade {
   @override
   Future<Either<AuthFailure, Unit>> registerWithCredentialAndPassword({
     required CredentialAddress credentialAddress,
-    required Password password,
+    required Password secret,
   }) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
         email: credentialAddress.getOrCrash(),
-        password: password.getOrCrash(),
+        secret: secret.getOrCrash(),
       );
       return right(unit);
     } on FirebaseException catch (e) {
@@ -51,16 +51,16 @@ class FirebaseAuthFacade implements IAuthFacade {
   @override
   Future<Either<AuthFailure, Unit>> signInWithCredentialAndPassword({
     required CredentialAddress credentialAddress,
-    required Password password,
+    required Password secret,
   }) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
         email: credentialAddress.getOrCrash(),
-        password: password.getOrCrash(),
+        secret: secret.getOrCrash(),
       );
       return right(unit);
     } on FirebaseException catch (e) {
-      if (e.code == 'wrong-password' || e.code == 'user-not-found') {
+      if (e.code == 'wrong-secret' || e.code == 'user-not-found') {
         return left(
             const AuthFailure.invalidCredentialAndPasswordCombination());
       } else {
@@ -104,12 +104,12 @@ class FirebaseAuthFacade implements IAuthFacade {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
         email: credentialAddress.getOrCrash(),
-        password: randomPassword,
+        secret: randomPassword,
       );
       return right(true);
       //Todo(v): Logout if works
     } on FirebaseException catch (e) {
-      if (e.code == 'wrong-password') {
+      if (e.code == 'wrong-secret') {
         return right(true);
       } else if (e.code == 'user-not-found') {
         return right(false);

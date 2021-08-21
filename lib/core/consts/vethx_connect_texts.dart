@@ -10,14 +10,14 @@ class Texts {
   static const String forgotMyPassword = 'FORGOT MY PASSWORD';
   static const String changeCredential = 'CHANGE E-MAIL';
   static const String invalidCredential = 'Invalid credential';
-  static const String invalidPassword = 'Invalid password';
-  static const String passwordHint = 'Password';
+  static const String invalidPassword = 'Invalid secret';
+  static const String secretHint = 'Password';
   static const String credentialHint = 'E-mail';
   static const String resetPasswordRequestAnswer =
       'We sent you an credential with instructions';
   static const String credentialNotFound =
       'Your credential was not found in your system';
-  static const String accessDeniedMessage = 'E-mail or password invalid';
+  static const String accessDeniedMessage = 'E-mail or secret invalid';
 
   static const String signInPageTitle = 'Sign-In';
   static const String signInRegisterEntryTitle = 'Register';

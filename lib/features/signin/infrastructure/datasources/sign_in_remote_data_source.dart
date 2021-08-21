@@ -17,10 +17,10 @@
 
 //   /// Throws a [ServerException] for all error codes.
 //   Future<UserModel> signInWithEmailAndPassword(
-//       String credential, String password);
+//       String credential, String secret);
 
 //   /// Throws a [ServerException] for all error codes.
-//   Future<void> passwordReset(String credential);
+//   Future<void> secretReset(String credential);
 
 //   /// Throws a [ServerException] for all error codes.
 //   Future<UserModel> signInWithFacebook();
@@ -44,7 +44,7 @@
 
 // //   @override
 // //   Future<UserModel> signInWithEmailAndPassword(
-// //       String credential, String password) {
+// //       String credential, String secret) {
 // //     // TODO: implement signInWithEmailAndPassword
 // //     throw UnimplementedError();
 // //   }
@@ -67,8 +67,8 @@
 // //   }
 
 // //   @override
-// //   Future<void> passwordReset(String credential) {
-// //     // TODO: implement passwordReset
+// //   Future<void> secretReset(String credential) {
+// //     // TODO: implement secretReset
 // //     throw UnimplementedError();
 // //   }
 
@@ -110,14 +110,14 @@
 
 // //   @override
 // //   Future<Either<AuthFailure, Unit>> registerWithCredentialAndPassword(
-// //       {required CredentialAddress credentialAddress, required Password password}) {
+// //       {required CredentialAddress credentialAddress, required Password secret}) {
 // //     // TODO: implement registerWithCredentialAndPassword
 // //     throw UnimplementedError();
 // //   }
 
 // //   @override
 // //   Future<Either<AuthFailure, Unit>> signInWithCredentialAndPassword(
-// //       {required CredentialAddress credentialAddress, required Password password}) {
+// //       {required CredentialAddress credentialAddress, required Password secret}) {
 // //     // TODO: implement signInWithCredentialAndPassword
 // //     throw UnimplementedError();
 // //   }

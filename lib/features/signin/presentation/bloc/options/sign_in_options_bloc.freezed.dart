@@ -22,10 +22,10 @@ class _$SignInEventTearOff {
   }
 
   SignInWithCredentialEvent signInWithCredentialEvent(
-      {required CredentialAddress credential, required Password password}) {
+      {required CredentialAddress credential, required Password secret}) {
     return SignInWithCredentialEvent(
       credential: credential,
-      password: password,
+      secret: secret,
     );
   }
 
@@ -42,7 +42,7 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(CredentialAddress credential, Password password)
+    required TResult Function(CredentialAddress credential, Password secret)
         signInWithCredentialEvent,
     required TResult Function() signInWithGoogleEvent,
   }) =>
@@ -50,7 +50,7 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(CredentialAddress credential, Password password)?
+    TResult Function(CredentialAddress credential, Password secret)?
         signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
   }) =>
@@ -58,7 +58,7 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(CredentialAddress credential, Password password)?
+    TResult Function(CredentialAddress credential, Password secret)?
         signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
     required TResult orElse(),
@@ -146,7 +146,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(CredentialAddress credential, Password password)
+    required TResult Function(CredentialAddress credential, Password secret)
         signInWithCredentialEvent,
     required TResult Function() signInWithGoogleEvent,
   }) {
@@ -157,7 +157,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(CredentialAddress credential, Password password)?
+    TResult Function(CredentialAddress credential, Password secret)?
         signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
   }) {
@@ -168,7 +168,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(CredentialAddress credential, Password password)?
+    TResult Function(CredentialAddress credential, Password secret)?
         signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
     required TResult orElse(),
@@ -227,7 +227,7 @@ abstract class $SignInWithCredentialEventCopyWith<$Res> {
   factory $SignInWithCredentialEventCopyWith(SignInWithCredentialEvent value,
           $Res Function(SignInWithCredentialEvent) then) =
       _$SignInWithCredentialEventCopyWithImpl<$Res>;
-  $Res call({CredentialAddress credential, Password password});
+  $Res call({CredentialAddress credential, Password secret});
 }
 
 /// @nodoc
@@ -245,16 +245,16 @@ class _$SignInWithCredentialEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? credential = freezed,
-    Object? password = freezed,
+    Object? secret = freezed,
   }) {
     return _then(SignInWithCredentialEvent(
       credential: credential == freezed
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
               as CredentialAddress,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
+      secret: secret == freezed
+          ? _value.secret
+          : secret // ignore: cast_nullable_to_non_nullable
               as Password,
     ));
   }
@@ -264,16 +264,16 @@ class _$SignInWithCredentialEventCopyWithImpl<$Res>
 
 class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
   const _$SignInWithCredentialEvent(
-      {required this.credential, required this.password});
+      {required this.credential, required this.secret});
 
   @override
   final CredentialAddress credential;
   @override
-  final Password password;
+  final Password secret;
 
   @override
   String toString() {
-    return 'SignInEvent.signInWithCredentialEvent(credential: $credential, password: $password)';
+    return 'SignInEvent.signInWithCredentialEvent(credential: $credential, secret: $secret)';
   }
 
   @override
@@ -283,16 +283,15 @@ class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
             (identical(other.credential, credential) ||
                 const DeepCollectionEquality()
                     .equals(other.credential, credential)) &&
-            (identical(other.password, password) ||
-                const DeepCollectionEquality()
-                    .equals(other.password, password)));
+            (identical(other.secret, secret) ||
+                const DeepCollectionEquality().equals(other.secret, secret)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(credential) ^
-      const DeepCollectionEquality().hash(password);
+      const DeepCollectionEquality().hash(secret);
 
   @JsonKey(ignore: true)
   @override
@@ -304,35 +303,35 @@ class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(CredentialAddress credential, Password password)
+    required TResult Function(CredentialAddress credential, Password secret)
         signInWithCredentialEvent,
     required TResult Function() signInWithGoogleEvent,
   }) {
-    return signInWithCredentialEvent(credential, password);
+    return signInWithCredentialEvent(credential, secret);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(CredentialAddress credential, Password password)?
+    TResult Function(CredentialAddress credential, Password secret)?
         signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
   }) {
-    return signInWithCredentialEvent?.call(credential, password);
+    return signInWithCredentialEvent?.call(credential, secret);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(CredentialAddress credential, Password password)?
+    TResult Function(CredentialAddress credential, Password secret)?
         signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
     required TResult orElse(),
   }) {
     if (signInWithCredentialEvent != null) {
-      return signInWithCredentialEvent(credential, password);
+      return signInWithCredentialEvent(credential, secret);
     }
     return orElse();
   }
@@ -379,10 +378,10 @@ class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
 abstract class SignInWithCredentialEvent implements SignInEvent {
   const factory SignInWithCredentialEvent(
       {required CredentialAddress credential,
-      required Password password}) = _$SignInWithCredentialEvent;
+      required Password secret}) = _$SignInWithCredentialEvent;
 
   CredentialAddress get credential => throw _privateConstructorUsedError;
-  Password get password => throw _privateConstructorUsedError;
+  Password get secret => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $SignInWithCredentialEventCopyWith<SignInWithCredentialEvent> get copyWith =>
       throw _privateConstructorUsedError;
@@ -429,7 +428,7 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(CredentialAddress credential, Password password)
+    required TResult Function(CredentialAddress credential, Password secret)
         signInWithCredentialEvent,
     required TResult Function() signInWithGoogleEvent,
   }) {
@@ -440,7 +439,7 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(CredentialAddress credential, Password password)?
+    TResult Function(CredentialAddress credential, Password secret)?
         signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
   }) {
@@ -451,7 +450,7 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(CredentialAddress credential, Password password)?
+    TResult Function(CredentialAddress credential, Password secret)?
         signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
     required TResult orElse(),

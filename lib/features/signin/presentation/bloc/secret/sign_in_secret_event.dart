@@ -1,8 +1,8 @@
-part of 'sign_in_password_bloc.dart';
+part of 'sign_in_secret_bloc.dart';
 
 @freezed
 class SignInPasswordEvent with _$SignInPasswordEvent {
-  const factory SignInPasswordEvent.passwordChanged(String passwordStr) =
+  const factory SignInPasswordEvent.secretChanged(String secretStr) =
       PasswordChanged;
   const factory SignInPasswordEvent.analysePasswordPressed() =
       AnalysePasswordPressed;

@@ -4,12 +4,12 @@ import 'package:vethx_beta/features/signin/domain/core/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
 
 class PasswordMessageErrors {
-  static const empty = 'Informe your password';
-  static const shortPassword = 'Your password must be more than 6 chars';
+  static const empty = 'Informe your secret';
+  static const shortPassword = 'Your secret must be more than 6 chars';
 }
 
 class CredentialAddressMessageErrors {
-  static const empty = 'Informe your password';
+  static const empty = 'Informe your secret';
   static const invalidCredential = 'Invalid Credential';
 }
 

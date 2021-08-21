@@ -37,7 +37,7 @@ class _FieldPasswordState extends State<FieldPassword> {
       obscureText: _hidePassword,
       decoration: vethxInputDecoration(
         context,
-        hintText: Texts.passwordHint,
+        hintText: Texts.secretHint,
         suffixIcon: IconButton(
           icon: Icon(
             _hidePassword ? Icons.visibility : Icons.visibility_off,

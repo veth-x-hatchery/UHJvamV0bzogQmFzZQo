@@ -11,12 +11,12 @@ abstract class IAuthFacade {
 
   Future<Either<AuthFailure, Unit>> registerWithCredentialAndPassword({
     required CredentialAddress credentialAddress,
-    required Password password,
+    required Password secret,
   });
 
   Future<Either<AuthFailure, Unit>> signInWithCredentialAndPassword({
     required CredentialAddress credentialAddress,
-    required Password password,
+    required Password secret,
   });
 
   Future<Either<AuthFailure, Unit>> signInWithGoogle();

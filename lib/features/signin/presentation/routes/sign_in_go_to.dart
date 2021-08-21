@@ -1,7 +1,7 @@
 enum SignInPageRoutes {
   signInOptions,
   credentialEntry,
-  passwordEntry,
+  secretEntry,
   registerCredentialSignIn,
 }
 
@@ -16,12 +16,12 @@ class SignInPageGoTo {
     this.parameters,
   });
 
-  factory SignInPageGoTo.passwordPage({
+  factory SignInPageGoTo.secretPage({
     required SignInPageRoutes from,
     String? credential,
   }) =>
       SignInPageGoTo._internal(
-        to: SignInPageRoutes.passwordEntry,
+        to: SignInPageRoutes.secretEntry,
         from: from,
         parameters: credential,
       );

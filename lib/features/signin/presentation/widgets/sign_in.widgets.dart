@@ -1,5 +1,5 @@
 export 'login/field_credential.widget.dart';
-export 'login/field_password.widget.dart';
+export 'login/field_secret.widget.dart';
 export 'login/sign_in_button.widget.dart';
 export 'login/sign_in_scaffold.widget.dart';
 
@@ -16,7 +16,7 @@ class SignInPageKeys {
   static const signInCredentialPageCredentialTextField =
       'signInCredentialPageCredentialTextField';
 
-  //! sign in password page
+  //! sign in secret page
 
   static const String signInPasswordPagePasswordTextField =
       'signInPasswordPagePasswordTextField';

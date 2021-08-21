@@ -6,7 +6,7 @@ class SignInEvent with _$SignInEvent {
 
   const factory SignInEvent.signInWithCredentialEvent({
     required CredentialAddress credential,
-    required Password password,
+    required Password secret,
   }) = SignInWithCredentialEvent;
 
   const factory SignInEvent.signInWithGoogleEvent() = SignInWithGoogleEvent;

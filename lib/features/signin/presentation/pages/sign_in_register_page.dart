@@ -39,8 +39,8 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
   final _credentialFocusNode = FocusNode();
   final _credentialTextEditingController = TextEditingController();
 
-  final _passwordFocusNode = FocusNode();
-  final _passwordTextEditingController = TextEditingController();
+  final _secretFocusNode = FocusNode();
+  final _secretTextEditingController = TextEditingController();
 
   SignInRegisterBloc get bloc => BlocProvider.of<SignInRegisterBloc>(context);
   SignInRegisterState get current => bloc.state;
@@ -58,7 +58,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
       final credential = CredentialAddress(widget.credential);
       if (credential.isValid()) {
         _credentialTextEditingController.text = credential.getOrCrash();
-        _passwordFocusNode.requestFocus();
+        _secretFocusNode.requestFocus();
       }
     } else {
       _credentialFocusNode.requestFocus();
@@ -73,8 +73,8 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
     _credentialFocusNode.dispose();
     _credentialTextEditingController.dispose();
 
-    _passwordFocusNode.dispose();
-    _passwordTextEditingController.dispose();
+    _secretFocusNode.dispose();
+    _secretTextEditingController.dispose();
 
     super.dispose();
   }
@@ -122,13 +122,13 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 FieldPassword(
-                  controller: _passwordTextEditingController,
-                  focusNode: _passwordFocusNode,
+                  controller: _secretTextEditingController,
+                  focusNode: _secretFocusNode,
                   key: const Key(
                       SignInPageKeys.signInRegisterPagePasswordTextField),
                   onChanged: (value) =>
-                      bloc.add(SignInRegisterEvent.passwordChanged(value)),
-                  validator: (_) => current.password.validation,
+                      bloc.add(SignInRegisterEvent.secretChanged(value)),
+                  validator: (_) => current.secret.validation,
                   onEditingComplete: state.isLoading ? () {} : _validateForm,
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),

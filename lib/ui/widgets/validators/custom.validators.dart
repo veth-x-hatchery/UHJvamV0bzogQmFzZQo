@@ -17,7 +17,7 @@ class NonEmptyStringValidator implements StringValidator {
 
 class CredentialAndPasswordValidators {
   final StringValidator credentialValidator = NonEmptyStringValidator();
-  final StringValidator passwordValidator = NonEmptyStringValidator();
+  final StringValidator secretValidator = NonEmptyStringValidator();
   final StringValidator confirmPasswordValidator = NonEmptyStringValidator();
 
   final String invalidCredentialTextErrorText = Texts.invalidCredential;
