@@ -48,7 +48,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
   void _validateForm() {
     if (_formKey.currentState?.validate() == true) {
       bloc.add(
-          const SignInRegisterEvent.registerWithCredentialAndPasswordPressed());
+          const SignInRegisterEvent.registerWithCredentialAndSecretPressed());
     }
   }
 
@@ -121,11 +121,11 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                   validator: (_) => current.credential.validation,
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
-                FieldPassword(
+                FieldSecret(
                   controller: _secretTextEditingController,
                   focusNode: _secretFocusNode,
                   key: const Key(
-                      SignInPageKeys.signInRegisterPagePasswordTextField),
+                      SignInPageKeys.signInRegisterPageSecretTextField),
                   onChanged: (value) =>
                       bloc.add(SignInRegisterEvent.secretChanged(value)),
                   validator: (_) => current.secret.validation,

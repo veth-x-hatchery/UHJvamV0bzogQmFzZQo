@@ -38,7 +38,7 @@ class SignInOptionsPage extends StatelessWidget {
           create: (_) => sl<SignInRegisterBloc>(),
         ),
         BlocProvider(
-          create: (_) => sl<SignInPasswordBloc>(),
+          create: (_) => sl<SignInSecretBloc>(),
         ),
       ],
       child: const SignInOptionsPage(),
@@ -59,8 +59,8 @@ class SignInOptionsPage extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   SlideLeftRoute<void>(
-                    page: SignInPasswordPage.create(
-                        bloc: BlocProvider.of<SignInPasswordBloc>(context)),
+                    page: SignInSecretPage.create(
+                        bloc: BlocProvider.of<SignInSecretBloc>(context)),
                   ),
                 );
                 break;

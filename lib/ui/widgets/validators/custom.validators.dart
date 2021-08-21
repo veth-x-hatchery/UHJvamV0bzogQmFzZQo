@@ -15,13 +15,13 @@ class NonEmptyStringValidator implements StringValidator {
   }
 }
 
-class CredentialAndPasswordValidators {
+class CredentialAndSecretValidators {
   final StringValidator credentialValidator = NonEmptyStringValidator();
   final StringValidator secretValidator = NonEmptyStringValidator();
-  final StringValidator confirmPasswordValidator = NonEmptyStringValidator();
+  final StringValidator confirmSecretValidator = NonEmptyStringValidator();
 
   final String invalidCredentialTextErrorText = Texts.invalidCredential;
-  final String invalidPasswordTextErrorText = Texts.invalidPassword;
+  final String invalidSecretTextErrorText = Texts.invalidSecret;
 }
 
 class DecimalTextInputFormatter extends TextInputFormatter {

@@ -5,7 +5,7 @@ class SignInRegisterEvent with _$SignInRegisterEvent {
   const factory SignInRegisterEvent.credentialChanged(String credentialStr) =
       CredentialChanged;
   const factory SignInRegisterEvent.secretChanged(String secretStr) =
-      PasswordChanged;
-  const factory SignInRegisterEvent.registerWithCredentialAndPasswordPressed() =
-      RegisterWithCredentialAndPasswordPressed;
+      SecretChanged;
+  const factory SignInRegisterEvent.registerWithCredentialAndSecretPressed() =
+      RegisterWithCredentialAndSecretPressed;
 }

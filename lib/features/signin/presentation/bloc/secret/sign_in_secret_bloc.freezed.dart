@@ -14,107 +14,106 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$SignInPasswordEventTearOff {
-  const _$SignInPasswordEventTearOff();
+class _$SignInSecretEventTearOff {
+  const _$SignInSecretEventTearOff();
 
-  PasswordChanged secretChanged(String secretStr) {
-    return PasswordChanged(
+  SecretChanged secretChanged(String secretStr) {
+    return SecretChanged(
       secretStr,
     );
   }
 
-  AnalysePasswordPressed analysePasswordPressed() {
-    return const AnalysePasswordPressed();
+  AnalyseSecretPressed analyseSecretPressed() {
+    return const AnalyseSecretPressed();
   }
 }
 
 /// @nodoc
-const $SignInPasswordEvent = _$SignInPasswordEventTearOff();
+const $SignInSecretEvent = _$SignInSecretEventTearOff();
 
 /// @nodoc
-mixin _$SignInPasswordEvent {
+mixin _$SignInSecretEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String secretStr) secretChanged,
-    required TResult Function() analysePasswordPressed,
+    required TResult Function() analyseSecretPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String secretStr)? secretChanged,
-    TResult Function()? analysePasswordPressed,
+    TResult Function()? analyseSecretPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String secretStr)? secretChanged,
-    TResult Function()? analysePasswordPressed,
+    TResult Function()? analyseSecretPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(PasswordChanged value) secretChanged,
-    required TResult Function(AnalysePasswordPressed value)
-        analysePasswordPressed,
+    required TResult Function(SecretChanged value) secretChanged,
+    required TResult Function(AnalyseSecretPressed value) analyseSecretPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(PasswordChanged value)? secretChanged,
-    TResult Function(AnalysePasswordPressed value)? analysePasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(AnalyseSecretPressed value)? analyseSecretPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(PasswordChanged value)? secretChanged,
-    TResult Function(AnalysePasswordPressed value)? analysePasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(AnalyseSecretPressed value)? analyseSecretPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SignInPasswordEventCopyWith<$Res> {
-  factory $SignInPasswordEventCopyWith(
-          SignInPasswordEvent value, $Res Function(SignInPasswordEvent) then) =
-      _$SignInPasswordEventCopyWithImpl<$Res>;
+abstract class $SignInSecretEventCopyWith<$Res> {
+  factory $SignInSecretEventCopyWith(
+          SignInSecretEvent value, $Res Function(SignInSecretEvent) then) =
+      _$SignInSecretEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$SignInPasswordEventCopyWithImpl<$Res>
-    implements $SignInPasswordEventCopyWith<$Res> {
-  _$SignInPasswordEventCopyWithImpl(this._value, this._then);
+class _$SignInSecretEventCopyWithImpl<$Res>
+    implements $SignInSecretEventCopyWith<$Res> {
+  _$SignInSecretEventCopyWithImpl(this._value, this._then);
 
-  final SignInPasswordEvent _value;
+  final SignInSecretEvent _value;
   // ignore: unused_field
-  final $Res Function(SignInPasswordEvent) _then;
+  final $Res Function(SignInSecretEvent) _then;
 }
 
 /// @nodoc
-abstract class $PasswordChangedCopyWith<$Res> {
-  factory $PasswordChangedCopyWith(
-          PasswordChanged value, $Res Function(PasswordChanged) then) =
-      _$PasswordChangedCopyWithImpl<$Res>;
+abstract class $SecretChangedCopyWith<$Res> {
+  factory $SecretChangedCopyWith(
+          SecretChanged value, $Res Function(SecretChanged) then) =
+      _$SecretChangedCopyWithImpl<$Res>;
   $Res call({String secretStr});
 }
 
 /// @nodoc
-class _$PasswordChangedCopyWithImpl<$Res>
-    extends _$SignInPasswordEventCopyWithImpl<$Res>
-    implements $PasswordChangedCopyWith<$Res> {
-  _$PasswordChangedCopyWithImpl(
-      PasswordChanged _value, $Res Function(PasswordChanged) _then)
-      : super(_value, (v) => _then(v as PasswordChanged));
+class _$SecretChangedCopyWithImpl<$Res>
+    extends _$SignInSecretEventCopyWithImpl<$Res>
+    implements $SecretChangedCopyWith<$Res> {
+  _$SecretChangedCopyWithImpl(
+      SecretChanged _value, $Res Function(SecretChanged) _then)
+      : super(_value, (v) => _then(v as SecretChanged));
 
   @override
-  PasswordChanged get _value => super._value as PasswordChanged;
+  SecretChanged get _value => super._value as SecretChanged;
 
   @override
   $Res call({
     Object? secretStr = freezed,
   }) {
-    return _then(PasswordChanged(
+    return _then(SecretChanged(
       secretStr == freezed
           ? _value.secretStr
           : secretStr // ignore: cast_nullable_to_non_nullable
@@ -125,21 +124,21 @@ class _$PasswordChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PasswordChanged implements PasswordChanged {
-  const _$PasswordChanged(this.secretStr);
+class _$SecretChanged implements SecretChanged {
+  const _$SecretChanged(this.secretStr);
 
   @override
   final String secretStr;
 
   @override
   String toString() {
-    return 'SignInPasswordEvent.secretChanged(secretStr: $secretStr)';
+    return 'SignInSecretEvent.secretChanged(secretStr: $secretStr)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is PasswordChanged &&
+        (other is SecretChanged &&
             (identical(other.secretStr, secretStr) ||
                 const DeepCollectionEquality()
                     .equals(other.secretStr, secretStr)));
@@ -151,14 +150,14 @@ class _$PasswordChanged implements PasswordChanged {
 
   @JsonKey(ignore: true)
   @override
-  $PasswordChangedCopyWith<PasswordChanged> get copyWith =>
-      _$PasswordChangedCopyWithImpl<PasswordChanged>(this, _$identity);
+  $SecretChangedCopyWith<SecretChanged> get copyWith =>
+      _$SecretChangedCopyWithImpl<SecretChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String secretStr) secretChanged,
-    required TResult Function() analysePasswordPressed,
+    required TResult Function() analyseSecretPressed,
   }) {
     return secretChanged(secretStr);
   }
@@ -167,7 +166,7 @@ class _$PasswordChanged implements PasswordChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String secretStr)? secretChanged,
-    TResult Function()? analysePasswordPressed,
+    TResult Function()? analyseSecretPressed,
   }) {
     return secretChanged?.call(secretStr);
   }
@@ -176,7 +175,7 @@ class _$PasswordChanged implements PasswordChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String secretStr)? secretChanged,
-    TResult Function()? analysePasswordPressed,
+    TResult Function()? analyseSecretPressed,
     required TResult orElse(),
   }) {
     if (secretChanged != null) {
@@ -188,9 +187,8 @@ class _$PasswordChanged implements PasswordChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(PasswordChanged value) secretChanged,
-    required TResult Function(AnalysePasswordPressed value)
-        analysePasswordPressed,
+    required TResult Function(SecretChanged value) secretChanged,
+    required TResult Function(AnalyseSecretPressed value) analyseSecretPressed,
   }) {
     return secretChanged(this);
   }
@@ -198,8 +196,8 @@ class _$PasswordChanged implements PasswordChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(PasswordChanged value)? secretChanged,
-    TResult Function(AnalysePasswordPressed value)? analysePasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(AnalyseSecretPressed value)? analyseSecretPressed,
   }) {
     return secretChanged?.call(this);
   }
@@ -207,8 +205,8 @@ class _$PasswordChanged implements PasswordChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(PasswordChanged value)? secretChanged,
-    TResult Function(AnalysePasswordPressed value)? analysePasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(AnalyseSecretPressed value)? analyseSecretPressed,
     required TResult orElse(),
   }) {
     if (secretChanged != null) {
@@ -218,47 +216,47 @@ class _$PasswordChanged implements PasswordChanged {
   }
 }
 
-abstract class PasswordChanged implements SignInPasswordEvent {
-  const factory PasswordChanged(String secretStr) = _$PasswordChanged;
+abstract class SecretChanged implements SignInSecretEvent {
+  const factory SecretChanged(String secretStr) = _$SecretChanged;
 
   String get secretStr => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PasswordChangedCopyWith<PasswordChanged> get copyWith =>
+  $SecretChangedCopyWith<SecretChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AnalysePasswordPressedCopyWith<$Res> {
-  factory $AnalysePasswordPressedCopyWith(AnalysePasswordPressed value,
-          $Res Function(AnalysePasswordPressed) then) =
-      _$AnalysePasswordPressedCopyWithImpl<$Res>;
+abstract class $AnalyseSecretPressedCopyWith<$Res> {
+  factory $AnalyseSecretPressedCopyWith(AnalyseSecretPressed value,
+          $Res Function(AnalyseSecretPressed) then) =
+      _$AnalyseSecretPressedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AnalysePasswordPressedCopyWithImpl<$Res>
-    extends _$SignInPasswordEventCopyWithImpl<$Res>
-    implements $AnalysePasswordPressedCopyWith<$Res> {
-  _$AnalysePasswordPressedCopyWithImpl(AnalysePasswordPressed _value,
-      $Res Function(AnalysePasswordPressed) _then)
-      : super(_value, (v) => _then(v as AnalysePasswordPressed));
+class _$AnalyseSecretPressedCopyWithImpl<$Res>
+    extends _$SignInSecretEventCopyWithImpl<$Res>
+    implements $AnalyseSecretPressedCopyWith<$Res> {
+  _$AnalyseSecretPressedCopyWithImpl(
+      AnalyseSecretPressed _value, $Res Function(AnalyseSecretPressed) _then)
+      : super(_value, (v) => _then(v as AnalyseSecretPressed));
 
   @override
-  AnalysePasswordPressed get _value => super._value as AnalysePasswordPressed;
+  AnalyseSecretPressed get _value => super._value as AnalyseSecretPressed;
 }
 
 /// @nodoc
 
-class _$AnalysePasswordPressed implements AnalysePasswordPressed {
-  const _$AnalysePasswordPressed();
+class _$AnalyseSecretPressed implements AnalyseSecretPressed {
+  const _$AnalyseSecretPressed();
 
   @override
   String toString() {
-    return 'SignInPasswordEvent.analysePasswordPressed()';
+    return 'SignInSecretEvent.analyseSecretPressed()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is AnalysePasswordPressed);
+    return identical(this, other) || (other is AnalyseSecretPressed);
   }
 
   @override
@@ -268,29 +266,29 @@ class _$AnalysePasswordPressed implements AnalysePasswordPressed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String secretStr) secretChanged,
-    required TResult Function() analysePasswordPressed,
+    required TResult Function() analyseSecretPressed,
   }) {
-    return analysePasswordPressed();
+    return analyseSecretPressed();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String secretStr)? secretChanged,
-    TResult Function()? analysePasswordPressed,
+    TResult Function()? analyseSecretPressed,
   }) {
-    return analysePasswordPressed?.call();
+    return analyseSecretPressed?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String secretStr)? secretChanged,
-    TResult Function()? analysePasswordPressed,
+    TResult Function()? analyseSecretPressed,
     required TResult orElse(),
   }) {
-    if (analysePasswordPressed != null) {
-      return analysePasswordPressed();
+    if (analyseSecretPressed != null) {
+      return analyseSecretPressed();
     }
     return orElse();
   }
@@ -298,50 +296,49 @@ class _$AnalysePasswordPressed implements AnalysePasswordPressed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(PasswordChanged value) secretChanged,
-    required TResult Function(AnalysePasswordPressed value)
-        analysePasswordPressed,
+    required TResult Function(SecretChanged value) secretChanged,
+    required TResult Function(AnalyseSecretPressed value) analyseSecretPressed,
   }) {
-    return analysePasswordPressed(this);
+    return analyseSecretPressed(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(PasswordChanged value)? secretChanged,
-    TResult Function(AnalysePasswordPressed value)? analysePasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(AnalyseSecretPressed value)? analyseSecretPressed,
   }) {
-    return analysePasswordPressed?.call(this);
+    return analyseSecretPressed?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(PasswordChanged value)? secretChanged,
-    TResult Function(AnalysePasswordPressed value)? analysePasswordPressed,
+    TResult Function(SecretChanged value)? secretChanged,
+    TResult Function(AnalyseSecretPressed value)? analyseSecretPressed,
     required TResult orElse(),
   }) {
-    if (analysePasswordPressed != null) {
-      return analysePasswordPressed(this);
+    if (analyseSecretPressed != null) {
+      return analyseSecretPressed(this);
     }
     return orElse();
   }
 }
 
-abstract class AnalysePasswordPressed implements SignInPasswordEvent {
-  const factory AnalysePasswordPressed() = _$AnalysePasswordPressed;
+abstract class AnalyseSecretPressed implements SignInSecretEvent {
+  const factory AnalyseSecretPressed() = _$AnalyseSecretPressed;
 }
 
 /// @nodoc
-class _$SignInPasswordStateTearOff {
-  const _$SignInPasswordStateTearOff();
+class _$SignInSecretStateTearOff {
+  const _$SignInSecretStateTearOff();
 
-  _PasswordState call(
-      {required Password secret,
+  _SecretState call(
+      {required Secret secret,
       required bool isLoading,
       required Option<Either<FailureDetails, Unit>>
           authFailureOrSuccessOption}) {
-    return _PasswordState(
+    return _SecretState(
       secret: secret,
       isLoading: isLoading,
       authFailureOrSuccessOption: authFailureOrSuccessOption,
@@ -350,39 +347,39 @@ class _$SignInPasswordStateTearOff {
 }
 
 /// @nodoc
-const $SignInPasswordState = _$SignInPasswordStateTearOff();
+const $SignInSecretState = _$SignInSecretStateTearOff();
 
 /// @nodoc
-mixin _$SignInPasswordState {
-  Password get secret => throw _privateConstructorUsedError;
+mixin _$SignInSecretState {
+  Secret get secret => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SignInPasswordStateCopyWith<SignInPasswordState> get copyWith =>
+  $SignInSecretStateCopyWith<SignInSecretState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SignInPasswordStateCopyWith<$Res> {
-  factory $SignInPasswordStateCopyWith(
-          SignInPasswordState value, $Res Function(SignInPasswordState) then) =
-      _$SignInPasswordStateCopyWithImpl<$Res>;
+abstract class $SignInSecretStateCopyWith<$Res> {
+  factory $SignInSecretStateCopyWith(
+          SignInSecretState value, $Res Function(SignInSecretState) then) =
+      _$SignInSecretStateCopyWithImpl<$Res>;
   $Res call(
-      {Password secret,
+      {Secret secret,
       bool isLoading,
       Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
-class _$SignInPasswordStateCopyWithImpl<$Res>
-    implements $SignInPasswordStateCopyWith<$Res> {
-  _$SignInPasswordStateCopyWithImpl(this._value, this._then);
+class _$SignInSecretStateCopyWithImpl<$Res>
+    implements $SignInSecretStateCopyWith<$Res> {
+  _$SignInSecretStateCopyWithImpl(this._value, this._then);
 
-  final SignInPasswordState _value;
+  final SignInSecretState _value;
   // ignore: unused_field
-  final $Res Function(SignInPasswordState) _then;
+  final $Res Function(SignInSecretState) _then;
 
   @override
   $Res call({
@@ -394,7 +391,7 @@ class _$SignInPasswordStateCopyWithImpl<$Res>
       secret: secret == freezed
           ? _value.secret
           : secret // ignore: cast_nullable_to_non_nullable
-              as Password,
+              as Secret,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -408,28 +405,28 @@ class _$SignInPasswordStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$PasswordStateCopyWith<$Res>
-    implements $SignInPasswordStateCopyWith<$Res> {
-  factory _$PasswordStateCopyWith(
-          _PasswordState value, $Res Function(_PasswordState) then) =
-      __$PasswordStateCopyWithImpl<$Res>;
+abstract class _$SecretStateCopyWith<$Res>
+    implements $SignInSecretStateCopyWith<$Res> {
+  factory _$SecretStateCopyWith(
+          _SecretState value, $Res Function(_SecretState) then) =
+      __$SecretStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Password secret,
+      {Secret secret,
       bool isLoading,
       Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
-class __$PasswordStateCopyWithImpl<$Res>
-    extends _$SignInPasswordStateCopyWithImpl<$Res>
-    implements _$PasswordStateCopyWith<$Res> {
-  __$PasswordStateCopyWithImpl(
-      _PasswordState _value, $Res Function(_PasswordState) _then)
-      : super(_value, (v) => _then(v as _PasswordState));
+class __$SecretStateCopyWithImpl<$Res>
+    extends _$SignInSecretStateCopyWithImpl<$Res>
+    implements _$SecretStateCopyWith<$Res> {
+  __$SecretStateCopyWithImpl(
+      _SecretState _value, $Res Function(_SecretState) _then)
+      : super(_value, (v) => _then(v as _SecretState));
 
   @override
-  _PasswordState get _value => super._value as _PasswordState;
+  _SecretState get _value => super._value as _SecretState;
 
   @override
   $Res call({
@@ -437,11 +434,11 @@ class __$PasswordStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? authFailureOrSuccessOption = freezed,
   }) {
-    return _then(_PasswordState(
+    return _then(_SecretState(
       secret: secret == freezed
           ? _value.secret
           : secret // ignore: cast_nullable_to_non_nullable
-              as Password,
+              as Secret,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -456,14 +453,14 @@ class __$PasswordStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PasswordState implements _PasswordState {
-  const _$_PasswordState(
+class _$_SecretState implements _SecretState {
+  const _$_SecretState(
       {required this.secret,
       required this.isLoading,
       required this.authFailureOrSuccessOption});
 
   @override
-  final Password secret;
+  final Secret secret;
   @override
   final bool isLoading;
   @override
@@ -471,13 +468,13 @@ class _$_PasswordState implements _PasswordState {
 
   @override
   String toString() {
-    return 'SignInPasswordState(secret: $secret, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'SignInSecretState(secret: $secret, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PasswordState &&
+        (other is _SecretState &&
             (identical(other.secret, secret) ||
                 const DeepCollectionEquality().equals(other.secret, secret)) &&
             (identical(other.isLoading, isLoading) ||
@@ -499,19 +496,19 @@ class _$_PasswordState implements _PasswordState {
 
   @JsonKey(ignore: true)
   @override
-  _$PasswordStateCopyWith<_PasswordState> get copyWith =>
-      __$PasswordStateCopyWithImpl<_PasswordState>(this, _$identity);
+  _$SecretStateCopyWith<_SecretState> get copyWith =>
+      __$SecretStateCopyWithImpl<_SecretState>(this, _$identity);
 }
 
-abstract class _PasswordState implements SignInPasswordState {
-  const factory _PasswordState(
-      {required Password secret,
+abstract class _SecretState implements SignInSecretState {
+  const factory _SecretState(
+      {required Secret secret,
       required bool isLoading,
       required Option<Either<FailureDetails, Unit>>
-          authFailureOrSuccessOption}) = _$_PasswordState;
+          authFailureOrSuccessOption}) = _$_SecretState;
 
   @override
-  Password get secret => throw _privateConstructorUsedError;
+  Secret get secret => throw _privateConstructorUsedError;
   @override
   bool get isLoading => throw _privateConstructorUsedError;
   @override
@@ -519,6 +516,6 @@ abstract class _PasswordState implements SignInPasswordState {
       throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PasswordStateCopyWith<_PasswordState> get copyWith =>
+  _$SecretStateCopyWith<_SecretState> get copyWith =>
       throw _privateConstructorUsedError;
 }

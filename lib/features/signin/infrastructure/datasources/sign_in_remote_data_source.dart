@@ -16,7 +16,7 @@
 //   Future<bool> credentialAlreadyRegistered(String credential);
 
 //   /// Throws a [ServerException] for all error codes.
-//   Future<UserModel> signInWithEmailAndPassword(
+//   Future<UserModel> signInWithEmailAndSecret(
 //       String credential, String secret);
 
 //   /// Throws a [ServerException] for all error codes.
@@ -43,9 +43,9 @@
 // //   SignInRemoteSource(this._http, this._api);
 
 // //   @override
-// //   Future<UserModel> signInWithEmailAndPassword(
+// //   Future<UserModel> signInWithEmailAndSecret(
 // //       String credential, String secret) {
-// //     // TODO: implement signInWithEmailAndPassword
+// //     // TODO: implement signInWithEmailAndSecret
 // //     throw UnimplementedError();
 // //   }
 
@@ -109,16 +109,16 @@
 // //   }
 
 // //   @override
-// //   Future<Either<AuthFailure, Unit>> registerWithCredentialAndPassword(
-// //       {required CredentialAddress credentialAddress, required Password secret}) {
-// //     // TODO: implement registerWithCredentialAndPassword
+// //   Future<Either<AuthFailure, Unit>> registerWithCredentialAndSecret(
+// //       {required CredentialAddress credentialAddress, required Secret secret}) {
+// //     // TODO: implement registerWithCredentialAndSecret
 // //     throw UnimplementedError();
 // //   }
 
 // //   @override
-// //   Future<Either<AuthFailure, Unit>> signInWithCredentialAndPassword(
-// //       {required CredentialAddress credentialAddress, required Password secret}) {
-// //     // TODO: implement signInWithCredentialAndPassword
+// //   Future<Either<AuthFailure, Unit>> signInWithCredentialAndSecret(
+// //       {required CredentialAddress credentialAddress, required Secret secret}) {
+// //     // TODO: implement signInWithCredentialAndSecret
 // //     throw UnimplementedError();
 // //   }
 

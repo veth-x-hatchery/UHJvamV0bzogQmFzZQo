@@ -8,11 +8,11 @@ import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
 part 'sign_in_register_credential_and_secret.freezed.dart';
 
-class SignInRegisterCredentialAndPassword extends UseCase<Unit, Params> {
+class SignInRegisterCredentialAndSecret extends UseCase<Unit, Params> {
   // final ISignInRepository _signInRepository;
   final IAuthFacade _authFacade;
 
-  SignInRegisterCredentialAndPassword(
+  SignInRegisterCredentialAndSecret(
     // this._signInRepository,
     this._authFacade,
   );
@@ -20,7 +20,7 @@ class SignInRegisterCredentialAndPassword extends UseCase<Unit, Params> {
   @override
   Future<Either<FailureDetails, Unit>> call(Params params) {
     return _authFacade
-        .registerWithCredentialAndPassword(
+        .registerWithCredentialAndSecret(
           credentialAddress: params.credentials.user,
           secret: params.credentials.secret,
         )
@@ -34,28 +34,28 @@ class SignInRegisterCredentialAndPassword extends UseCase<Unit, Params> {
     if (auth == const AuthFailure.credentialAlreadyInUse()) {
       return FailureDetails(
         failure: auth,
-        message: SignInRegisterCredentialAndPasswordErrorMessages
+        message: SignInRegisterCredentialAndSecretErrorMessages
             .credentialAlreadyInUse,
       );
     }
-    if (auth == const AuthFailure.invalidCredentialAndPasswordCombination()) {
+    if (auth == const AuthFailure.invalidCredentialAndSecretCombination()) {
       return FailureDetails(
         failure: auth,
-        message: SignInRegisterCredentialAndPasswordErrorMessages
+        message: SignInRegisterCredentialAndSecretErrorMessages
             .credentialAlreadyInUse,
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInRegisterCredentialAndPasswordErrorMessages.unavailable,
+      message: SignInRegisterCredentialAndSecretErrorMessages.unavailable,
     );
   }
 }
 
-class SignInRegisterCredentialAndPasswordErrorMessages {
+class SignInRegisterCredentialAndSecretErrorMessages {
   static const unavailable = 'Unavailable';
   static const credentialAlreadyInUse = 'This credential is already in use';
-  static const invalidCredentialAndPasswordCombination =
+  static const invalidCredentialAndSecretCombination =
       'Invalid credential and secret combination';
 }
 

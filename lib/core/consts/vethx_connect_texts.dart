@@ -7,13 +7,13 @@ class Texts {
   static const String goToAccess = 'ACCESS';
 
   //! Login
-  static const String forgotMyPassword = 'FORGOT MY PASSWORD';
+  static const String forgotMySecret = 'FORGOT MY PASSWORD';
   static const String changeCredential = 'CHANGE E-MAIL';
   static const String invalidCredential = 'Invalid credential';
-  static const String invalidPassword = 'Invalid secret';
-  static const String secretHint = 'Password';
+  static const String invalidSecret = 'Invalid secret';
+  static const String secretHint = 'Secret';
   static const String credentialHint = 'E-mail';
-  static const String resetPasswordRequestAnswer =
+  static const String resetSecretRequestAnswer =
       'We sent you an credential with instructions';
   static const String credentialNotFound =
       'Your credential was not found in your system';

@@ -3,8 +3,8 @@ import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
 
-class FieldPassword extends StatefulWidget {
-  const FieldPassword({
+class FieldSecret extends StatefulWidget {
+  const FieldSecret({
     Key? key,
     this.focusNode,
     this.controller,
@@ -22,11 +22,11 @@ class FieldPassword extends StatefulWidget {
   final Function(String)? onChanged;
 
   @override
-  _FieldPasswordState createState() => _FieldPasswordState();
+  _FieldSecretState createState() => _FieldSecretState();
 }
 
-class _FieldPasswordState extends State<FieldPassword> {
-  bool _hidePassword = true;
+class _FieldSecretState extends State<FieldSecret> {
+  bool _hideSecret = true;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -34,20 +34,20 @@ class _FieldPasswordState extends State<FieldPassword> {
       focusNode: widget.focusNode,
       autofocus: true,
       keyboardType: TextInputType.text,
-      obscureText: _hidePassword,
+      obscureText: _hideSecret,
       decoration: vethxInputDecoration(
         context,
         hintText: Texts.secretHint,
         suffixIcon: IconButton(
           icon: Icon(
-            _hidePassword ? Icons.visibility : Icons.visibility_off,
+            _hideSecret ? Icons.visibility : Icons.visibility_off,
             color: Theme.of(context).primaryColor,
           ),
-          onPressed: () => setState(() => _hidePassword = !_hidePassword),
+          onPressed: () => setState(() => _hideSecret = !_hideSecret),
         ),
       ),
       style: Theme.of(context).textTheme.bodyText1,
-      validator: (value) => Password(value).validation,
+      validator: (value) => Secret(value).validation,
       onEditingComplete: widget.onEditingComplete,
       onChanged: widget.onChanged,
     );

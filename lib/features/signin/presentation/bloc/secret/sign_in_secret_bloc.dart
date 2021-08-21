@@ -13,36 +13,35 @@ part 'sign_in_secret_event.dart';
 part 'sign_in_secret_state.dart';
 part 'sign_in_secret_bloc.freezed.dart';
 
-class SignInPasswordBloc
-    extends Bloc<SignInPasswordEvent, SignInPasswordState> {
+class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
   final AuthBloc _authBloc;
-  final SignInWithCredentialAndPassword _signInWithCredentialAndPassword;
+  final SignInWithCredentialAndSecret _signInWithCredentialAndSecret;
 
-  SignInPasswordBloc(
+  SignInSecretBloc(
     this._authBloc,
-    this._signInWithCredentialAndPassword,
-  ) : super(SignInPasswordState.initial());
+    this._signInWithCredentialAndSecret,
+  ) : super(SignInSecretState.initial());
 
   @override
-  Stream<SignInPasswordState> mapEventToState(
-    SignInPasswordEvent event,
+  Stream<SignInSecretState> mapEventToState(
+    SignInSecretEvent event,
   ) async* {
     yield* event.map(
       secretChanged: (e) async* {
         yield state.copyWith(
-          secret: Password(e.secretStr),
+          secret: Secret(e.secretStr),
           authFailureOrSuccessOption: none(),
         );
       },
-      analysePasswordPressed: (e) async* {
+      analyseSecretPressed: (e) async* {
         yield state.copyWith(
           isLoading: true,
           authFailureOrSuccessOption: none(),
         );
-        final result = await _signInWithCredentialAndPassword.call(Params(
+        final result = await _signInWithCredentialAndSecret.call(Params(
           credentials: Credentials(
             secret: state.secret,
-            // Todo(v): Remove it! User and Password cannot cohabited same space in time.
+            // Todo(v): Remove it! User and Secret cannot cohabited same space in time.
             // Todo(v): User and Secret -> replace credential and secret
             user: CredentialAddress(''),
           ),

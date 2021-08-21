@@ -18,18 +18,18 @@ class SignInPageKeys {
 
   //! sign in secret page
 
-  static const String signInPasswordPagePasswordTextField =
-      'signInPasswordPagePasswordTextField';
+  static const String signInSecretPageSecretTextField =
+      'signInSecretPageSecretTextField';
 
-  static const String signInPasswordPageValidateButton =
-      'signInPasswordPageValidateButton';
+  static const String signInSecretPageValidateButton =
+      'signInSecretPageValidateButton';
 
   //! sign in register page
   static const String signInRegisterPageCredentialTextField =
       'signInRegisterPageCredentialTextField';
 
-  static const String signInRegisterPagePasswordTextField =
-      'signInRegisterPagePasswordTextField';
+  static const String signInRegisterPageSecretTextField =
+      'signInRegisterPageSecretTextField';
 
   static const String signInRegisterPageValidateButton =
       'signInRegisterPageValidateButton';

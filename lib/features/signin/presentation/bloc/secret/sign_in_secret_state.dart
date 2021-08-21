@@ -1,14 +1,14 @@
 part of 'sign_in_secret_bloc.dart';
 
 @freezed
-class SignInPasswordState with _$SignInPasswordState {
-  const factory SignInPasswordState({
-    required Password secret,
+class SignInSecretState with _$SignInSecretState {
+  const factory SignInSecretState({
+    required Secret secret,
     required bool isLoading,
     required Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
-  }) = _PasswordState;
-  factory SignInPasswordState.initial() => SignInPasswordState(
-        secret: Password(''),
+  }) = _SecretState;
+  factory SignInSecretState.initial() => SignInSecretState(
+        secret: Secret(''),
         isLoading: false,
         authFailureOrSuccessOption: none(),
       );

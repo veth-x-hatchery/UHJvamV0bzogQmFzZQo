@@ -8,30 +8,30 @@ import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 
-class SignInPasswordPage extends StatefulWidget {
-  const SignInPasswordPage({Key? key}) : super(key: key);
+class SignInSecretPage extends StatefulWidget {
+  const SignInSecretPage({Key? key}) : super(key: key);
 
   @override
-  State<SignInPasswordPage> createState() => _SignInPasswordPageState();
+  State<SignInSecretPage> createState() => _SignInSecretPageState();
 
   static Widget create({
     BuildContext? context,
-    required SignInPasswordBloc bloc,
+    required SignInSecretBloc bloc,
   }) {
     return BlocProvider(
       create: (_) => bloc,
-      child: const SignInPasswordPage(),
+      child: const SignInSecretPage(),
     );
   }
 }
 
-class _SignInPasswordPageState extends State<SignInPasswordPage> {
+class _SignInSecretPageState extends State<SignInSecretPage> {
   final _formKey = GlobalKey<FormState>();
   final _secretFocusNode = FocusNode();
   final _secretTextEditingController = TextEditingController();
 
-  SignInPasswordBloc get bloc => BlocProvider.of<SignInPasswordBloc>(context);
-  SignInPasswordState get current => bloc.state;
+  SignInSecretBloc get bloc => BlocProvider.of<SignInSecretBloc>(context);
+  SignInSecretState get current => bloc.state;
 
   @override
   void initState() {
@@ -51,7 +51,7 @@ class _SignInPasswordPageState extends State<SignInPasswordPage> {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        bloc.add(const SignInPasswordEvent.analysePasswordPressed());
+        bloc.add(const SignInSecretEvent.analyseSecretPressed());
       }
     }
   }
@@ -60,7 +60,7 @@ class _SignInPasswordPageState extends State<SignInPasswordPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
-      child: BlocBuilder<SignInPasswordBloc, SignInPasswordState>(
+      child: BlocBuilder<SignInSecretBloc, SignInSecretState>(
           builder: (context, state) {
         return FormColumn(
           children: [
@@ -70,20 +70,19 @@ class _SignInPasswordPageState extends State<SignInPasswordPage> {
               loading: state.isLoading,
             ),
             SizedBox(height: SizeConfig.defaultEdgeSpace),
-            FieldPassword(
-              key:
-                  const Key(SignInPageKeys.signInPasswordPagePasswordTextField),
+            FieldSecret(
+              key: const Key(SignInPageKeys.signInSecretPageSecretTextField),
               controller: _secretTextEditingController,
               focusNode: _secretFocusNode,
               onEditingComplete:
                   state.isLoading ? () {} : () => _authenticate(),
               onChanged: (value) =>
-                  bloc.add(SignInPasswordEvent.secretChanged(value)),
+                  bloc.add(SignInSecretEvent.secretChanged(value)),
               validator: (_) => current.secret.validation,
             ),
             SizedBox(height: SizeConfig.defaultEdgeSpace),
             CustomRaisedButton(
-              key: const Key(SignInPageKeys.signInPasswordPageValidateButton),
+              key: const Key(SignInPageKeys.signInSecretPageValidateButton),
               onPressed: state.isLoading ? () {} : () => _authenticate(),
               child: Text(
                 Texts.goToAccess,
@@ -94,7 +93,7 @@ class _SignInPasswordPageState extends State<SignInPasswordPage> {
             TextButton(
               onPressed: state.isLoading ? () {} : () => {},
               child: Text(
-                Texts.forgotMyPassword,
+                Texts.forgotMySecret,
                 style: Theme.of(context).textTheme.button,
               ),
             ),

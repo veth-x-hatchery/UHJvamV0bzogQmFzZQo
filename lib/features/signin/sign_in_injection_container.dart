@@ -88,8 +88,8 @@ Future<void> signInDependenciesInjection() async {
     ),
   );
 
-  sl.registerLazySingleton<SignInWithCredentialAndPassword>(
-    () => SignInWithCredentialAndPassword(
+  sl.registerLazySingleton<SignInWithCredentialAndSecret>(
+    () => SignInWithCredentialAndSecret(
       // sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
@@ -102,8 +102,8 @@ Future<void> signInDependenciesInjection() async {
     ),
   );
 
-  sl.registerLazySingleton<SignInRegisterCredentialAndPassword>(
-    () => SignInRegisterCredentialAndPassword(
+  sl.registerLazySingleton<SignInRegisterCredentialAndSecret>(
+    () => SignInRegisterCredentialAndSecret(
       // sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
@@ -119,7 +119,7 @@ Future<void> signInDependenciesInjection() async {
   );
 
   sl.registerFactory<SignInRegisterBloc>(
-    () => SignInRegisterBloc(sl<SignInRegisterCredentialAndPassword>()),
+    () => SignInRegisterBloc(sl<SignInRegisterCredentialAndSecret>()),
   );
 
   sl.registerFactory<SignInCredentialBloc>(
@@ -129,10 +129,10 @@ Future<void> signInDependenciesInjection() async {
     ),
   );
 
-  sl.registerFactory<SignInPasswordBloc>(
-    () => SignInPasswordBloc(
+  sl.registerFactory<SignInSecretBloc>(
+    () => SignInSecretBloc(
       sl<AuthBloc>(),
-      sl<SignInWithCredentialAndPassword>(),
+      sl<SignInWithCredentialAndSecret>(),
     ),
   );
 
