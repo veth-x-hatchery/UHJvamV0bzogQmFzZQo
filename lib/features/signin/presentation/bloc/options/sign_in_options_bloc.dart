@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
@@ -49,8 +48,6 @@ class SignInOptionsBloc extends Bloc<SignInOptionsEvent, SignInOptionsState> {
     }, signInWithCredentialEvent: (e) async* {
       _navigation.goTo(
           SignInPageGoTo.credentialPage(from: SignInPageRoutes.signInOptions));
-      yield const SignInOptionsState.initial();
-    }, started: (_) async* {
       yield const SignInOptionsState.initial();
     });
   }

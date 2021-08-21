@@ -7,8 +7,9 @@ class FirebaseUserMapper {
     return _ == null
         ? null
         : User(
-            name: _.displayName ?? _.email!.split('@').first,
-            credential: Credential(_.email),
+            name: _.displayName ??
+                (_.email == null ? 'Not found' : _.email!.split('@').first),
+            credential: Credential(_.email ?? 'notfound@notfound.com'),
           );
   }
 }

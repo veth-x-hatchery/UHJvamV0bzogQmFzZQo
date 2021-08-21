@@ -17,10 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SignInOptionsEventTearOff {
   const _$SignInOptionsEventTearOff();
 
-  _Started started() {
-    return const _Started();
-  }
-
   SignInWithCredentialEvent signInWithCredentialEvent() {
     return const SignInWithCredentialEvent();
   }
@@ -37,21 +33,18 @@ const $SignInOptionsEvent = _$SignInOptionsEventTearOff();
 mixin _$SignInOptionsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
     required TResult Function() signInWithCredentialEvent,
     required TResult Function() signInWithGoogleEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
     TResult Function()? signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
     TResult Function()? signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
     required TResult orElse(),
@@ -59,7 +52,6 @@ mixin _$SignInOptionsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
     required TResult Function(SignInWithCredentialEvent value)
         signInWithCredentialEvent,
     required TResult Function(SignInWithGoogleEvent value)
@@ -68,7 +60,6 @@ mixin _$SignInOptionsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
     TResult Function(SignInWithCredentialEvent value)?
         signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
@@ -76,7 +67,6 @@ mixin _$SignInOptionsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
     TResult Function(SignInWithCredentialEvent value)?
         signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
@@ -100,118 +90,6 @@ class _$SignInOptionsEventCopyWithImpl<$Res>
   final SignInOptionsEvent _value;
   // ignore: unused_field
   final $Res Function(SignInOptionsEvent) _then;
-}
-
-/// @nodoc
-abstract class _$StartedCopyWith<$Res> {
-  factory _$StartedCopyWith(_Started value, $Res Function(_Started) then) =
-      __$StartedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$StartedCopyWithImpl<$Res>
-    extends _$SignInOptionsEventCopyWithImpl<$Res>
-    implements _$StartedCopyWith<$Res> {
-  __$StartedCopyWithImpl(_Started _value, $Res Function(_Started) _then)
-      : super(_value, (v) => _then(v as _Started));
-
-  @override
-  _Started get _value => super._value as _Started;
-}
-
-/// @nodoc
-
-class _$_Started implements _Started {
-  const _$_Started();
-
-  @override
-  String toString() {
-    return 'SignInOptionsEvent.started()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Started);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() signInWithCredentialEvent,
-    required TResult Function() signInWithGoogleEvent,
-  }) {
-    return started();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? signInWithCredentialEvent,
-    TResult Function()? signInWithGoogleEvent,
-  }) {
-    return started?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? signInWithCredentialEvent,
-    TResult Function()? signInWithGoogleEvent,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(SignInWithCredentialEvent value)
-        signInWithCredentialEvent,
-    required TResult Function(SignInWithGoogleEvent value)
-        signInWithGoogleEvent,
-  }) {
-    return started(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(SignInWithCredentialEvent value)?
-        signInWithCredentialEvent,
-    TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
-  }) {
-    return started?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(SignInWithCredentialEvent value)?
-        signInWithCredentialEvent,
-    TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Started implements SignInOptionsEvent {
-  const factory _Started() = _$_Started;
 }
 
 /// @nodoc
@@ -255,7 +133,6 @@ class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
     required TResult Function() signInWithCredentialEvent,
     required TResult Function() signInWithGoogleEvent,
   }) {
@@ -265,7 +142,6 @@ class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
     TResult Function()? signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
   }) {
@@ -275,7 +151,6 @@ class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
     TResult Function()? signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
     required TResult orElse(),
@@ -289,7 +164,6 @@ class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
     required TResult Function(SignInWithCredentialEvent value)
         signInWithCredentialEvent,
     required TResult Function(SignInWithGoogleEvent value)
@@ -301,7 +175,6 @@ class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
     TResult Function(SignInWithCredentialEvent value)?
         signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
@@ -312,7 +185,6 @@ class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
     TResult Function(SignInWithCredentialEvent value)?
         signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
@@ -369,7 +241,6 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
     required TResult Function() signInWithCredentialEvent,
     required TResult Function() signInWithGoogleEvent,
   }) {
@@ -379,7 +250,6 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
     TResult Function()? signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
   }) {
@@ -389,7 +259,6 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
     TResult Function()? signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
     required TResult orElse(),
@@ -403,7 +272,6 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
     required TResult Function(SignInWithCredentialEvent value)
         signInWithCredentialEvent,
     required TResult Function(SignInWithGoogleEvent value)
@@ -415,7 +283,6 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
     TResult Function(SignInWithCredentialEvent value)?
         signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
@@ -426,7 +293,6 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
     TResult Function(SignInWithCredentialEvent value)?
         signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
