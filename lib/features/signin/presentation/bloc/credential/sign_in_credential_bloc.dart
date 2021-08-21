@@ -15,7 +15,7 @@ part 'sign_in_credential_bloc.freezed.dart';
 
 class SignInCredentialBloc
     extends Bloc<SignInCredentialEvent, SignInCredentialState> {
-  final SignInCheckIfCredentialIsInUse _signInCheckIfCredentialIsInUse;
+  final SignInCredentialCheck _signInCheckIfCredentialIsInUse;
   final NavigationCubit _navigation;
 
   SignInCredentialBloc(

@@ -81,8 +81,8 @@ Future<void> signInDependenciesInjection() async {
   // );
 
   // Use cases
-  sl.registerLazySingleton<SignInCheckIfCredentialIsInUse>(
-    () => SignInCheckIfCredentialIsInUse(
+  sl.registerLazySingleton<SignInCredentialCheck>(
+    () => SignInCredentialCheck(
       // sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
@@ -124,7 +124,7 @@ Future<void> signInDependenciesInjection() async {
 
   sl.registerFactory<SignInCredentialBloc>(
     () => SignInCredentialBloc(
-      sl<SignInCheckIfCredentialIsInUse>(),
+      sl<SignInCredentialCheck>(),
       sl<NavigationCubit>(),
     ),
   );

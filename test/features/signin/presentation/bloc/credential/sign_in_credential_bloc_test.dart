@@ -13,15 +13,15 @@ import 'sign_in_credential_bloc_test.mocks.dart';
 
 @GenerateMocks([
   NavigationCubit,
-  SignInCheckIfCredentialIsInUse,
+  SignInCredentialCheck,
 ])
 void main() {
   late SignInCredentialBloc _bloc;
-  late MockSignInCheckIfCredentialIsInUse _mockSignInWithCredentialAndSecret;
+  late MockSignInCredentialCheck _mockSignInWithCredentialAndSecret;
   late MockNavigationCubit _mockNavigation;
 
   setUp(() {
-    _mockSignInWithCredentialAndSecret = MockSignInCheckIfCredentialIsInUse();
+    _mockSignInWithCredentialAndSecret = MockSignInCredentialCheck();
     _mockNavigation = MockNavigationCubit();
     _bloc = SignInCredentialBloc(
       _mockSignInWithCredentialAndSecret,

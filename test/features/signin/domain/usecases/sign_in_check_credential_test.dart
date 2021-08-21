@@ -16,7 +16,7 @@ import 'sign_in_check_credential_test.mocks.dart';
   IAuthFacade,
 ])
 void main() {
-  late SignInCheckIfCredentialIsInUse _signInCheckIfCredentialIsInUse;
+  late SignInCredentialCheck _signInCheckIfCredentialIsInUse;
 
   // late MockISignInRepository _mockSignInRepository;
   late MockIAuthFacade _mockAuthFacade;
@@ -25,7 +25,7 @@ void main() {
     // _mockSignInRepository = MockISignInRepository();
     _mockAuthFacade = MockIAuthFacade();
 
-    _signInCheckIfCredentialIsInUse = SignInCheckIfCredentialIsInUse(
+    _signInCheckIfCredentialIsInUse = SignInCredentialCheck(
       // _mockSignInRepository,
       _mockAuthFacade,
     );

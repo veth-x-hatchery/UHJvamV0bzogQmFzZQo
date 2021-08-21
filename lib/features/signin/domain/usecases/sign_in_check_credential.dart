@@ -8,12 +8,12 @@ import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
 part 'sign_in_check_credential.freezed.dart';
 
-class SignInCheckIfCredentialIsInUse extends UseCase<bool, Params> {
+class SignInCredentialCheck extends UseCase<bool, Params> {
   // final ISignInRepository _signInRepository;
 
   final IAuthFacade _authFacade;
 
-  SignInCheckIfCredentialIsInUse(
+  SignInCredentialCheck(
     // this._signInRepository,
     this._authFacade,
   );
