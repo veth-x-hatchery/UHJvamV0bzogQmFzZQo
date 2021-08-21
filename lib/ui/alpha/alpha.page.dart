@@ -22,7 +22,10 @@ class AlphaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return BlocBuilder<AuthBloc, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state) {
+        Logger.presentation('AlphaPage -> AuthBloc: $state');
+      },
       builder: (context, state) {
         Logger.presentation('AlphaPage -> $state');
         return state.map(

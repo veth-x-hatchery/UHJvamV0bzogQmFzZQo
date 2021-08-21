@@ -21,6 +21,7 @@ class NavigationRoutes {
         return MaterialPageRoute<void>(
             builder: (_) => const SignInOptionsPage());
       case slash:
+      case alpha:
       default:
         return MaterialPageRoute<void>(builder: (_) => const AlphaPage());
     }

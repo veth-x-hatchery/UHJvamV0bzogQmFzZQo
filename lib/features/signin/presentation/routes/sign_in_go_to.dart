@@ -1,4 +1,5 @@
 enum SignInPageRoutes {
+  alpha,
   signInOptions,
   credentialEntry,
   secretEntry,
@@ -15,6 +16,12 @@ class SignInPageGoTo {
     required this.to,
     this.parameters,
   });
+
+  factory SignInPageGoTo.alpha({required SignInPageRoutes from}) =>
+      SignInPageGoTo._internal(
+        to: SignInPageRoutes.alpha,
+        from: from,
+      );
 
   factory SignInPageGoTo.secretPage({
     required SignInPageRoutes from,

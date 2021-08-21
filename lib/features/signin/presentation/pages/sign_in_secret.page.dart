@@ -64,56 +64,73 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
-      child: BlocBuilder<SignInSecretBloc, SignInSecretState>(
-          builder: (context, state) {
-        return Form(
-          key: _formKey,
-          child: FormColumn(
-            children: [
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              SignInLoader(
-                size: SizeConfig.screenHeight * 0.25,
-                loading: state.isLoading,
-              ),
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              FieldSecret(
-                key: const Key(SignInPageKeys.signInSecretPageSecretTextField),
-                controller: _secretTextEditingController,
-                focusNode: _secretFocusNode,
-                onEditingComplete:
-                    state.isLoading ? () {} : () => _authenticate(),
-                onChanged: (value) =>
-                    bloc.add(SignInSecretEvent.secretChanged(value)),
-                validator: (_) => current.secret.validation,
-              ),
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              CustomRaisedButton(
-                key: const Key(SignInPageKeys.signInSecretPageValidateButton),
-                onPressed: state.isLoading ? () {} : () => _authenticate(),
-                child: Text(
-                  Texts.goToAccess,
-                  style: Theme.of(context).textTheme.button,
+      child: BlocConsumer<SignInSecretBloc, SignInSecretState>(
+        listener: (context, state) {
+          state.authFailureOrSuccessOption.fold(
+            () {},
+            (either) {
+              either.fold(
+                (failure) {
+                  Logger.presentation('SignInSecretPage $state: $failure');
+                },
+                (_) {
+                  Logger.presentation('SignInSecretPage $state');
+                },
+              );
+            },
+          );
+        },
+        builder: (context, state) {
+          return Form(
+            key: _formKey,
+            child: FormColumn(
+              children: [
+                SizedBox(height: SizeConfig.defaultEdgeSpace),
+                SignInLoader(
+                  size: SizeConfig.screenHeight * 0.25,
+                  loading: state.isLoading,
                 ),
-              ),
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              TextButton(
-                onPressed: state.isLoading ? () {} : () => {},
-                child: Text(
-                  Texts.forgotMySecret,
-                  style: Theme.of(context).textTheme.button,
+                SizedBox(height: SizeConfig.defaultEdgeSpace),
+                FieldSecret(
+                  key:
+                      const Key(SignInPageKeys.signInSecretPageSecretTextField),
+                  controller: _secretTextEditingController,
+                  focusNode: _secretFocusNode,
+                  onEditingComplete:
+                      state.isLoading ? () {} : () => _authenticate(),
+                  onChanged: (value) =>
+                      bloc.add(SignInSecretEvent.secretChanged(value)),
+                  validator: (_) => current.secret.validation,
                 ),
-              ),
-              TextButton(
-                onPressed: state.isLoading ? () {} : () => {},
-                child: Text(
-                  Texts.changeCredential,
-                  style: Theme.of(context).textTheme.button,
+                SizedBox(height: SizeConfig.defaultEdgeSpace),
+                CustomRaisedButton(
+                  key: const Key(SignInPageKeys.signInSecretPageValidateButton),
+                  onPressed: state.isLoading ? () {} : () => _authenticate(),
+                  child: Text(
+                    Texts.goToAccess,
+                    style: Theme.of(context).textTheme.button,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      }),
+                SizedBox(height: SizeConfig.defaultEdgeSpace),
+                TextButton(
+                  onPressed: state.isLoading ? () {} : () => {},
+                  child: Text(
+                    Texts.forgotMySecret,
+                    style: Theme.of(context).textTheme.button,
+                  ),
+                ),
+                TextButton(
+                  onPressed: state.isLoading ? () {} : () => {},
+                  child: Text(
+                    Texts.changeCredential,
+                    style: Theme.of(context).textTheme.button,
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

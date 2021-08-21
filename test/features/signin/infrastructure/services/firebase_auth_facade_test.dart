@@ -120,7 +120,7 @@ void main() {
       // Arrange
 
       when(
-        _mockFirebaseAuth.signInWithEmailAndPassword(
+        _mockFirebaseAuth.createUserWithEmailAndPassword(
           email: credential.getOrCrash(),
           password: secret.getOrCrash(),
         ),

@@ -57,6 +57,8 @@ class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
             },
             (r) {
               _authBloc.add(const AuthEvent.authCheckRequested());
+              _navigation.goTo(SignInPageGoTo.credentialPage(
+                  from: SignInPageRoutes.secretEntry));
               return none();
             },
           ),
