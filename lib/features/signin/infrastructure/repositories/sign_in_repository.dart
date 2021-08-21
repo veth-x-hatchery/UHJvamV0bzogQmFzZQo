@@ -12,7 +12,10 @@ class SignInRepository implements ISignInRepository {
   final INetworkInfo _networkInfo;
   final ISignInLocalSource _localDataSource;
 
-  SignInRepository(this._localDataSource, this._networkInfo);
+  SignInRepository(
+    this._localDataSource,
+    this._networkInfo,
+  );
 
   @override
   Future<Either<Failure, void>> cacheCredential(Credential credential) async {
