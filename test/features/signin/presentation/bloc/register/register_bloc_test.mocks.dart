@@ -8,7 +8,7 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
     as _i5;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart'
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_password.dart'
     as _i3;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -21,12 +21,12 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_emai
 
 class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 
-/// A class which mocks [SignInRegisterEmailAndPassword].
+/// A class which mocks [SignInRegisterCredentialAndPassword].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInRegisterEmailAndPassword extends _i1.Mock
-    implements _i3.SignInRegisterEmailAndPassword {
-  MockSignInRegisterEmailAndPassword() {
+class MockSignInRegisterCredentialAndPassword extends _i1.Mock
+    implements _i3.SignInRegisterCredentialAndPassword {
+  MockSignInRegisterCredentialAndPassword() {
     _i1.throwOnMissingStub(this);
   }
 

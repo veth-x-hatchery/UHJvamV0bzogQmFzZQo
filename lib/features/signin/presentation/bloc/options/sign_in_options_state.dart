@@ -9,6 +9,7 @@ class SignInState with _$SignInState {
   const factory SignInState.signInCancelled() = _SignInCancelled;
   const factory SignInState.signInNotification({required String message}) =
       _SignInNotification;
-  const factory SignInState.emailAlreadyRegistered() = _EmailAlreadyRegistered;
-  const factory SignInState.emailNotFound() = _EmailNotFound;
+  const factory SignInState.credentialAlreadyRegistered() =
+      _CredentialAlreadyRegistered;
+  const factory SignInState.credentialNotFound() = _CredentialNotFound;
 }

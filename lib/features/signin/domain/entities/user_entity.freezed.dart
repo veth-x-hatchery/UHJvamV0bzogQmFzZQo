@@ -17,9 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$UserTearOff {
   const _$UserTearOff();
 
-  _User call({required EmailAddress email, required String name}) {
+  _User call({required CredentialAddress credential, required String name}) {
     return _User(
-      email: email,
+      credential: credential,
       name: name,
     );
   }
@@ -30,7 +30,7 @@ const $User = _$UserTearOff();
 
 /// @nodoc
 mixin _$User {
-  EmailAddress get email => throw _privateConstructorUsedError;
+  CredentialAddress get credential => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -41,7 +41,7 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
-  $Res call({EmailAddress email, String name});
+  $Res call({CredentialAddress credential, String name});
 }
 
 /// @nodoc
@@ -54,14 +54,14 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? email = freezed,
+    Object? credential = freezed,
     Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+      credential: credential == freezed
+          ? _value.credential
+          : credential // ignore: cast_nullable_to_non_nullable
+              as CredentialAddress,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -75,7 +75,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) then) =
       __$UserCopyWithImpl<$Res>;
   @override
-  $Res call({EmailAddress email, String name});
+  $Res call({CredentialAddress credential, String name});
 }
 
 /// @nodoc
@@ -89,14 +89,14 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? email = freezed,
+    Object? credential = freezed,
     Object? name = freezed,
   }) {
     return _then(_User(
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+      credential: credential == freezed
+          ? _value.credential
+          : credential // ignore: cast_nullable_to_non_nullable
+              as CredentialAddress,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -108,24 +108,25 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_User implements _User {
-  const _$_User({required this.email, required this.name});
+  const _$_User({required this.credential, required this.name});
 
   @override
-  final EmailAddress email;
+  final CredentialAddress credential;
   @override
   final String name;
 
   @override
   String toString() {
-    return 'User(email: $email, name: $name)';
+    return 'User(credential: $credential, name: $name)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _User &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.credential, credential) ||
+                const DeepCollectionEquality()
+                    .equals(other.credential, credential)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)));
   }
@@ -133,7 +134,7 @@ class _$_User implements _User {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(credential) ^
       const DeepCollectionEquality().hash(name);
 
   @JsonKey(ignore: true)
@@ -143,11 +144,11 @@ class _$_User implements _User {
 }
 
 abstract class _User implements User {
-  const factory _User({required EmailAddress email, required String name}) =
-      _$_User;
+  const factory _User(
+      {required CredentialAddress credential, required String name}) = _$_User;
 
   @override
-  EmailAddress get email => throw _privateConstructorUsedError;
+  CredentialAddress get credential => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
   @override

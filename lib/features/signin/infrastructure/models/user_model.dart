@@ -4,7 +4,7 @@
 // enum SignInProviderUserAuthType {
 //   facebook,
 //   google,
-//   email,
+//   credential,
 //   test,
 // }
 
@@ -13,15 +13,15 @@
 
 //   UserModel({
 //     required this.authType,
-//     required String email,
+//     required String credential,
 //   }) : super(
-//           email: EmailAddress(email),
+//           credential: CredentialAddress(credential),
 //           name: '',
 //         );
 
 //   factory UserModel.fromJson(Map<String, dynamic> json) {
 //     return UserModel(
-//       email: json['email'] as String,
+//       credential: json['credential'] as String,
 //       authType: json['authType'] as String,
 //     );
 //   }
@@ -34,16 +34,16 @@
 //         return SignInProviderUserAuthType.google;
 //       case 'test':
 //         return SignInProviderUserAuthType.test;
-//       case 'email':
+//       case 'credential':
 //       default:
-//         return SignInProviderUserAuthType.email;
+//         return SignInProviderUserAuthType.credential;
 //     }
 //   }
 
 //   Map<String, dynamic> toJson() {
 //     final Map<String, dynamic> data = <String, dynamic>{};
 //     data['authType'] = authType;
-//     data['email'] = email;
+//     data['credential'] = credential;
 //     return data;
 //   }
 // }

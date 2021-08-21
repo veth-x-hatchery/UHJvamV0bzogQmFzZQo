@@ -60,9 +60,9 @@ void main() {
   void _prepareFormValidationValues({
     String? value,
   }) {
-    final emailVO = Password(value);
+    final credentialVO = Password(value);
     final state = SignInPasswordState(
-      password: emailVO,
+      password: credentialVO,
       isLoading: false,
       authFailureOrSuccessOption: none(),
     );

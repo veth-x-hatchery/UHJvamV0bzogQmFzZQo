@@ -6,13 +6,13 @@ import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.da
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
-part 'sign_in_with_email_and_password.freezed.dart';
+part 'sign_in_with_credential_and_password.freezed.dart';
 
-class SignInWithEmailAndPassword extends UseCase<Unit, Params> {
+class SignInWithCredentialAndPassword extends UseCase<Unit, Params> {
   // final ISignInRepository _signInRepository;
   final IAuthFacade _authFacade;
 
-  SignInWithEmailAndPassword(
+  SignInWithCredentialAndPassword(
     // this._signInRepository,
     this._authFacade,
   );
@@ -20,8 +20,8 @@ class SignInWithEmailAndPassword extends UseCase<Unit, Params> {
   @override
   Future<Either<FailureDetails, Unit>> call(Params params) {
     return _authFacade
-        .signInWithEmailAndPassword(
-          emailAddress: params.credentials.user,
+        .signInWithCredentialAndPassword(
+          credentialAddress: params.credentials.user,
           password: params.credentials.password,
         )
         .then((value) => value.fold(
@@ -31,24 +31,24 @@ class SignInWithEmailAndPassword extends UseCase<Unit, Params> {
   }
 
   FailureDetails _mapFailures(AuthFailure auth) {
-    if (auth == const AuthFailure.invalidEmailAndPasswordCombination()) {
+    if (auth == const AuthFailure.invalidCredentialAndPasswordCombination()) {
       return FailureDetails(
         failure: auth,
-        message: SignInWithEmailAndPasswordErrorMessages
-            .invalidEmailAndPasswordCombination,
+        message: SignInWithCredentialAndPasswordErrorMessages
+            .invalidCredentialAndPasswordCombination,
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInWithEmailAndPasswordErrorMessages.unavailable,
+      message: SignInWithCredentialAndPasswordErrorMessages.unavailable,
     );
   }
 }
 
-class SignInWithEmailAndPasswordErrorMessages {
+class SignInWithCredentialAndPasswordErrorMessages {
   static const unavailable = 'Unavailable';
-  static const invalidEmailAndPasswordCombination =
-      'Invalid email and password combination';
+  static const invalidCredentialAndPasswordCombination =
+      'Invalid credential and password combination';
 }
 
 @freezed

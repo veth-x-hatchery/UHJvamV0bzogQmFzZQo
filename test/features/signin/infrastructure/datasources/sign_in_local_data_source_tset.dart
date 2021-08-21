@@ -55,7 +55,7 @@
 
 //   // group('cache current user', () {
 //   //   final user = UserModel(
-//   //     email: 'test@vethx.com',
+//   //     credential: 'test@vethx.com',
 //   //     authType: 'google',
 //   //   );
 

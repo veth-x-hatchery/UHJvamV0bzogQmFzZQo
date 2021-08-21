@@ -6,7 +6,7 @@
 // import '../../../../fixtures/fixture_reader.dart';
 
 // void main() {
-//   final user = UserModel(authType: 'google', email: 'test@vethx.com');
+//   final user = UserModel(authType: 'google', credential: 'test@vethx.com');
 
 //   group('fromJson', () {
 //     test(

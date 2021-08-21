@@ -24,11 +24,11 @@ class SignInRegisterPage extends StatefulWidget {
   static Widget create({
     BuildContext? context,
     required SignInRegisterBloc bloc,
-    String? email,
+    String? credential,
   }) {
     return BlocProvider(
       create: (_) => bloc,
-      child: SignInRegisterPage(credential: email),
+      child: SignInRegisterPage(credential: credential),
     );
   }
 }
@@ -36,8 +36,8 @@ class SignInRegisterPage extends StatefulWidget {
 class _SignInRegisterPageState extends State<SignInRegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _emailFocusNode = FocusNode();
-  final _emailTextEditingController = TextEditingController();
+  final _credentialFocusNode = FocusNode();
+  final _credentialTextEditingController = TextEditingController();
 
   final _passwordFocusNode = FocusNode();
   final _passwordTextEditingController = TextEditingController();
@@ -47,20 +47,21 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
 
   void _validateForm() {
     if (_formKey.currentState?.validate() == true) {
-      bloc.add(const SignInRegisterEvent.registerWithEmailAndPasswordPressed());
+      bloc.add(
+          const SignInRegisterEvent.registerWithCredentialAndPasswordPressed());
     }
   }
 
   @override
   void initState() {
     if (widget.credential != null) {
-      final credential = EmailAddress(widget.credential);
+      final credential = CredentialAddress(widget.credential);
       if (credential.isValid()) {
-        _emailTextEditingController.text = credential.getOrCrash();
+        _credentialTextEditingController.text = credential.getOrCrash();
         _passwordFocusNode.requestFocus();
       }
     } else {
-      _emailFocusNode.requestFocus();
+      _credentialFocusNode.requestFocus();
     }
     super.initState();
   }
@@ -69,8 +70,8 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
   void dispose() {
     _formKey.currentState?.dispose();
 
-    _emailFocusNode.dispose();
-    _emailTextEditingController.dispose();
+    _credentialFocusNode.dispose();
+    _credentialTextEditingController.dispose();
 
     _passwordFocusNode.dispose();
     _passwordTextEditingController.dispose();
@@ -110,14 +111,14 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                   loading: state.isLoading,
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
-                FieldEmail(
-                  controller: _emailTextEditingController,
-                  focusNode: _emailFocusNode,
+                FieldCredential(
+                  controller: _credentialTextEditingController,
+                  focusNode: _credentialFocusNode,
                   key: const Key(
-                      SignInPageKeys.signInRegisterPageEmailTextField),
+                      SignInPageKeys.signInRegisterPageCredentialTextField),
                   onChanged: (value) =>
-                      bloc.add(SignInRegisterEvent.emailChanged(value)),
-                  validator: (_) => current.email.validation,
+                      bloc.add(SignInRegisterEvent.credentialChanged(value)),
+                  validator: (_) => current.credential.validation,
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 FieldPassword(

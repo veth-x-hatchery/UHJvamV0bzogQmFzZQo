@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
     as _i7;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart'
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_credential_and_password.dart'
     as _i6;
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
     as _i2;
@@ -119,12 +119,12 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
   String toString() => super.toString();
 }
 
-/// A class which mocks [SignInWithEmailAndPassword].
+/// A class which mocks [SignInWithCredentialAndPassword].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInWithEmailAndPassword extends _i1.Mock
-    implements _i6.SignInWithEmailAndPassword {
-  MockSignInWithEmailAndPassword() {
+class MockSignInWithCredentialAndPassword extends _i1.Mock
+    implements _i6.SignInWithCredentialAndPassword {
+  MockSignInWithCredentialAndPassword() {
     _i1.throwOnMissingStub(this);
   }
 

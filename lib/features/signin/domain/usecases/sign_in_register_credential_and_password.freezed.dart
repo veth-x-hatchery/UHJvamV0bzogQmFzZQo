@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'sign_in_check_email.dart';
+part of 'sign_in_register_credential_and_password.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -17,9 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ParamsTearOff {
   const _$ParamsTearOff();
 
-  _Params call({required EmailAddress email}) {
+  _Params call({required Credentials credentials}) {
     return _Params(
-      email: email,
+      credentials: credentials,
     );
   }
 }
@@ -29,7 +29,7 @@ const $Params = _$ParamsTearOff();
 
 /// @nodoc
 mixin _$Params {
-  EmailAddress get email => throw _privateConstructorUsedError;
+  Credentials get credentials => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ParamsCopyWith<Params> get copyWith => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ mixin _$Params {
 abstract class $ParamsCopyWith<$Res> {
   factory $ParamsCopyWith(Params value, $Res Function(Params) then) =
       _$ParamsCopyWithImpl<$Res>;
-  $Res call({EmailAddress email});
+  $Res call({Credentials credentials});
 }
 
 /// @nodoc
@@ -52,13 +52,13 @@ class _$ParamsCopyWithImpl<$Res> implements $ParamsCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? email = freezed,
+    Object? credentials = freezed,
   }) {
     return _then(_value.copyWith(
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+      credentials: credentials == freezed
+          ? _value.credentials
+          : credentials // ignore: cast_nullable_to_non_nullable
+              as Credentials,
     ));
   }
 }
@@ -68,7 +68,7 @@ abstract class _$ParamsCopyWith<$Res> implements $ParamsCopyWith<$Res> {
   factory _$ParamsCopyWith(_Params value, $Res Function(_Params) then) =
       __$ParamsCopyWithImpl<$Res>;
   @override
-  $Res call({EmailAddress email});
+  $Res call({Credentials credentials});
 }
 
 /// @nodoc
@@ -82,13 +82,13 @@ class __$ParamsCopyWithImpl<$Res> extends _$ParamsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? email = freezed,
+    Object? credentials = freezed,
   }) {
     return _then(_Params(
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+      credentials: credentials == freezed
+          ? _value.credentials
+          : credentials // ignore: cast_nullable_to_non_nullable
+              as Credentials,
     ));
   }
 }
@@ -96,27 +96,28 @@ class __$ParamsCopyWithImpl<$Res> extends _$ParamsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Params implements _Params {
-  const _$_Params({required this.email});
+  const _$_Params({required this.credentials});
 
   @override
-  final EmailAddress email;
+  final Credentials credentials;
 
   @override
   String toString() {
-    return 'Params(email: $email)';
+    return 'Params(credentials: $credentials)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Params &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)));
+            (identical(other.credentials, credentials) ||
+                const DeepCollectionEquality()
+                    .equals(other.credentials, credentials)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(email);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(credentials);
 
   @JsonKey(ignore: true)
   @override
@@ -125,10 +126,10 @@ class _$_Params implements _Params {
 }
 
 abstract class _Params implements Params {
-  const factory _Params({required EmailAddress email}) = _$_Params;
+  const factory _Params({required Credentials credentials}) = _$_Params;
 
   @override
-  EmailAddress get email => throw _privateConstructorUsedError;
+  Credentials get credentials => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ParamsCopyWith<_Params> get copyWith => throw _privateConstructorUsedError;

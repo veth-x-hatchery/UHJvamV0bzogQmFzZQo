@@ -8,14 +8,14 @@ import 'package:vethx_beta/core/api/api_setup.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
 // import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_email.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_email_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_credential_and_password.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
@@ -81,15 +81,15 @@ Future<void> signInDependenciesInjection() async {
   // );
 
   // Use cases
-  sl.registerLazySingleton<SignInCheckIfEmailIsInUse>(
-    () => SignInCheckIfEmailIsInUse(
+  sl.registerLazySingleton<SignInCheckIfCredentialIsInUse>(
+    () => SignInCheckIfCredentialIsInUse(
       // sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
   );
 
-  sl.registerLazySingleton<SignInWithEmailAndPassword>(
-    () => SignInWithEmailAndPassword(
+  sl.registerLazySingleton<SignInWithCredentialAndPassword>(
+    () => SignInWithCredentialAndPassword(
       // sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
@@ -102,8 +102,8 @@ Future<void> signInDependenciesInjection() async {
     ),
   );
 
-  sl.registerLazySingleton<SignInRegisterEmailAndPassword>(
-    () => SignInRegisterEmailAndPassword(
+  sl.registerLazySingleton<SignInRegisterCredentialAndPassword>(
+    () => SignInRegisterCredentialAndPassword(
       // sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
@@ -119,12 +119,12 @@ Future<void> signInDependenciesInjection() async {
   );
 
   sl.registerFactory<SignInRegisterBloc>(
-    () => SignInRegisterBloc(sl<SignInRegisterEmailAndPassword>()),
+    () => SignInRegisterBloc(sl<SignInRegisterCredentialAndPassword>()),
   );
 
-  sl.registerFactory<SignInEmailBloc>(
-    () => SignInEmailBloc(
-      sl<SignInCheckIfEmailIsInUse>(),
+  sl.registerFactory<SignInCredentialBloc>(
+    () => SignInCredentialBloc(
+      sl<SignInCheckIfCredentialIsInUse>(),
       sl<NavigationCubit>(),
     ),
   );
@@ -132,7 +132,7 @@ Future<void> signInDependenciesInjection() async {
   sl.registerFactory<SignInPasswordBloc>(
     () => SignInPasswordBloc(
       sl<AuthBloc>(),
-      sl<SignInWithEmailAndPassword>(),
+      sl<SignInWithCredentialAndPassword>(),
     ),
   );
 

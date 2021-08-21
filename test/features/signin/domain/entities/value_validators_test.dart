@@ -33,24 +33,24 @@ void main() {
     });
   });
 
-  group('when validate email address', () {
-    test('should return [ValueFailure.invalidEmail]', () {
+  group('when validate credential address', () {
+    test('should return [ValueFailure.invalidCredential]', () {
       // arrange
-      const String email = '@asdf';
+      const String credential = '@asdf';
       // act
-      final emailAddress = validateEmailAddress(email);
+      final credentialAddress = validateCredentialAddress(credential);
       // assert
-      expect(emailAddress,
-          left(const ValueFailure.invalidEmail(failedValue: email)));
+      expect(credentialAddress,
+          left(const ValueFailure.invalidCredential(failedValue: credential)));
     });
 
-    test('should validate email with success', () {
+    test('should validate credential with success', () {
       // arrange
-      const String email = 'teste@vethx.com';
+      const String credential = 'teste@vethx.com';
       // act
-      final emailAddress = validateEmailAddress(email);
+      final credentialAddress = validateCredentialAddress(credential);
       // assert
-      expect(emailAddress, right(email));
+      expect(credentialAddress, right(credential));
     });
   });
 

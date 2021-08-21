@@ -6,7 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_email_and_password.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_password.dart';
 
 part 'sign_in_register_event.dart';
 part 'sign_in_register_state.dart';
@@ -14,9 +14,10 @@ part 'sign_in_register_bloc.freezed.dart';
 
 class SignInRegisterBloc
     extends Bloc<SignInRegisterEvent, SignInRegisterState> {
-  final SignInRegisterEmailAndPassword _signInRegisterEmailAndPassword;
+  final SignInRegisterCredentialAndPassword
+      _signInRegisterCredentialAndPassword;
 
-  SignInRegisterBloc(this._signInRegisterEmailAndPassword)
+  SignInRegisterBloc(this._signInRegisterCredentialAndPassword)
       : super(SignInRegisterState.initial());
 
   @override
@@ -24,9 +25,9 @@ class SignInRegisterBloc
     SignInRegisterEvent event,
   ) async* {
     yield* event.map(
-      emailChanged: (e) async* {
+      credentialChanged: (e) async* {
         yield state.copyWith(
-          email: EmailAddress(e.emailStr),
+          credential: CredentialAddress(e.credentialStr),
           authFailureOrSuccessOption: none(),
         );
       },
@@ -36,15 +37,15 @@ class SignInRegisterBloc
           authFailureOrSuccessOption: none(),
         );
       },
-      registerWithEmailAndPasswordPressed: (e) async* {
+      registerWithCredentialAndPasswordPressed: (e) async* {
         yield state.copyWith(
           isLoading: true,
           authFailureOrSuccessOption: none(),
         );
-        final result = await _signInRegisterEmailAndPassword.call(
+        final result = await _signInRegisterCredentialAndPassword.call(
           Params(
               credentials: Credentials(
-            user: state.email,
+            user: state.credential,
             password: state.password,
           )),
         );

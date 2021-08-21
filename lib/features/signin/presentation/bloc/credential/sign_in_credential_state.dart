@@ -1,16 +1,14 @@
-part of 'sign_in_register_bloc.dart';
+part of 'sign_in_credential_bloc.dart';
 
 @freezed
-class SignInRegisterState with _$SignInRegisterState {
-  const factory SignInRegisterState({
+class SignInCredentialState with _$SignInCredentialState {
+  const factory SignInCredentialState({
     required CredentialAddress credential,
-    required Password password,
     required bool isLoading,
     required Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
-  }) = _RegisterState;
-  factory SignInRegisterState.initial() => SignInRegisterState(
+  }) = _CredentialState;
+  factory SignInCredentialState.initial() => SignInCredentialState(
         credential: CredentialAddress(''),
-        password: Password(''),
         isLoading: false,
         authFailureOrSuccessOption: none(),
       );

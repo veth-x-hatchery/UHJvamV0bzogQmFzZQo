@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_email.page.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_password.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
@@ -32,7 +32,7 @@ class SignInOptionsPage extends StatelessWidget {
           create: (_) => sl<NavigationCubit>(),
         ),
         BlocProvider(
-          create: (_) => sl<SignInEmailBloc>(),
+          create: (_) => sl<SignInCredentialBloc>(),
         ),
         BlocProvider(
           create: (_) => sl<SignInRegisterBloc>(),
@@ -64,23 +64,23 @@ class SignInOptionsPage extends StatelessWidget {
                   ),
                 );
                 break;
-              case SignInPageRoutes.registerEmailSignIn:
+              case SignInPageRoutes.registerCredentialSignIn:
                 Navigator.pushReplacement(
                   context,
                   SlideLeftRoute<void>(
                       page: SignInRegisterPage.create(
                           bloc: BlocProvider.of<SignInRegisterBloc>(context),
-                          email: page.parameters as String?)),
+                          credential: page.parameters as String?)),
                 );
                 break;
-              case SignInPageRoutes.emailEntry:
-                final emailPage = SignInEmailPage.create(
-                    bloc: BlocProvider.of<SignInEmailBloc>(context));
+              case SignInPageRoutes.credentialEntry:
+                final credentialPage = SignInCredentialPage.create(
+                    bloc: BlocProvider.of<SignInCredentialBloc>(context));
                 page.from == SignInPageRoutes.signInOptions
                     ? Navigator.push(
-                        context, SlideLeftRoute<void>(page: emailPage))
+                        context, SlideLeftRoute<void>(page: credentialPage))
                     : Navigator.pushReplacement(
-                        context, SlideLeftRoute<void>(page: emailPage));
+                        context, SlideLeftRoute<void>(page: credentialPage));
                 break;
               default:
                 break;
@@ -112,15 +112,15 @@ class SignInOptionsPage extends StatelessWidget {
               ),
               SizedBox(height: SizeConfig.defaultEdgeSpace),
               SignInButton(
-                key: const Key(SignInPageKeys.signInWithEmail),
+                key: const Key(SignInPageKeys.signInWithCredential),
                 assetName: 'assets/images/mail-logo.png',
-                text: Texts.signInWithEmail,
+                text: Texts.signInWithCredential,
                 textColor: Colors.white,
                 color: Colors.teal[700],
                 onPressed: isLoading
                     ? () => {}
                     : () => BlocProvider.of<NavigationCubit>(context).goTo(
-                          SignInPageGoTo.emailPage(
+                          SignInPageGoTo.credentialPage(
                               from: SignInPageRoutes.signInOptions),
                         ),
               ),

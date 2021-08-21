@@ -21,10 +21,10 @@ class _$SignInEventTearOff {
     return const _Started();
   }
 
-  SignInWithEmailEvent signInWithEmailEvent(
-      {required EmailAddress email, required Password password}) {
-    return SignInWithEmailEvent(
-      email: email,
+  SignInWithCredentialEvent signInWithCredentialEvent(
+      {required CredentialAddress credential, required Password password}) {
+    return SignInWithCredentialEvent(
+      credential: credential,
       password: password,
     );
   }
@@ -42,24 +42,24 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(EmailAddress email, Password password)
-        signInWithEmailEvent,
+    required TResult Function(CredentialAddress credential, Password password)
+        signInWithCredentialEvent,
     required TResult Function() signInWithGoogleEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(EmailAddress email, Password password)?
-        signInWithEmailEvent,
+    TResult Function(CredentialAddress credential, Password password)?
+        signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(EmailAddress email, Password password)?
-        signInWithEmailEvent,
+    TResult Function(CredentialAddress credential, Password password)?
+        signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
     required TResult orElse(),
   }) =>
@@ -67,7 +67,8 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(SignInWithEmailEvent value) signInWithEmailEvent,
+    required TResult Function(SignInWithCredentialEvent value)
+        signInWithCredentialEvent,
     required TResult Function(SignInWithGoogleEvent value)
         signInWithGoogleEvent,
   }) =>
@@ -75,14 +76,16 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(SignInWithEmailEvent value)? signInWithEmailEvent,
+    TResult Function(SignInWithCredentialEvent value)?
+        signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(SignInWithEmailEvent value)? signInWithEmailEvent,
+    TResult Function(SignInWithCredentialEvent value)?
+        signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
     required TResult orElse(),
   }) =>
@@ -143,8 +146,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(EmailAddress email, Password password)
-        signInWithEmailEvent,
+    required TResult Function(CredentialAddress credential, Password password)
+        signInWithCredentialEvent,
     required TResult Function() signInWithGoogleEvent,
   }) {
     return started();
@@ -154,8 +157,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(EmailAddress email, Password password)?
-        signInWithEmailEvent,
+    TResult Function(CredentialAddress credential, Password password)?
+        signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
   }) {
     return started?.call();
@@ -165,8 +168,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(EmailAddress email, Password password)?
-        signInWithEmailEvent,
+    TResult Function(CredentialAddress credential, Password password)?
+        signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
     required TResult orElse(),
   }) {
@@ -180,7 +183,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(SignInWithEmailEvent value) signInWithEmailEvent,
+    required TResult Function(SignInWithCredentialEvent value)
+        signInWithCredentialEvent,
     required TResult Function(SignInWithGoogleEvent value)
         signInWithGoogleEvent,
   }) {
@@ -191,7 +195,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(SignInWithEmailEvent value)? signInWithEmailEvent,
+    TResult Function(SignInWithCredentialEvent value)?
+        signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
   }) {
     return started?.call(this);
@@ -201,7 +206,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(SignInWithEmailEvent value)? signInWithEmailEvent,
+    TResult Function(SignInWithCredentialEvent value)?
+        signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
     required TResult orElse(),
   }) {
@@ -217,34 +223,35 @@ abstract class _Started implements SignInEvent {
 }
 
 /// @nodoc
-abstract class $SignInWithEmailEventCopyWith<$Res> {
-  factory $SignInWithEmailEventCopyWith(SignInWithEmailEvent value,
-          $Res Function(SignInWithEmailEvent) then) =
-      _$SignInWithEmailEventCopyWithImpl<$Res>;
-  $Res call({EmailAddress email, Password password});
+abstract class $SignInWithCredentialEventCopyWith<$Res> {
+  factory $SignInWithCredentialEventCopyWith(SignInWithCredentialEvent value,
+          $Res Function(SignInWithCredentialEvent) then) =
+      _$SignInWithCredentialEventCopyWithImpl<$Res>;
+  $Res call({CredentialAddress credential, Password password});
 }
 
 /// @nodoc
-class _$SignInWithEmailEventCopyWithImpl<$Res>
+class _$SignInWithCredentialEventCopyWithImpl<$Res>
     extends _$SignInEventCopyWithImpl<$Res>
-    implements $SignInWithEmailEventCopyWith<$Res> {
-  _$SignInWithEmailEventCopyWithImpl(
-      SignInWithEmailEvent _value, $Res Function(SignInWithEmailEvent) _then)
-      : super(_value, (v) => _then(v as SignInWithEmailEvent));
+    implements $SignInWithCredentialEventCopyWith<$Res> {
+  _$SignInWithCredentialEventCopyWithImpl(SignInWithCredentialEvent _value,
+      $Res Function(SignInWithCredentialEvent) _then)
+      : super(_value, (v) => _then(v as SignInWithCredentialEvent));
 
   @override
-  SignInWithEmailEvent get _value => super._value as SignInWithEmailEvent;
+  SignInWithCredentialEvent get _value =>
+      super._value as SignInWithCredentialEvent;
 
   @override
   $Res call({
-    Object? email = freezed,
+    Object? credential = freezed,
     Object? password = freezed,
   }) {
-    return _then(SignInWithEmailEvent(
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+    return _then(SignInWithCredentialEvent(
+      credential: credential == freezed
+          ? _value.credential
+          : credential // ignore: cast_nullable_to_non_nullable
+              as CredentialAddress,
       password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -255,25 +262,27 @@ class _$SignInWithEmailEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SignInWithEmailEvent implements SignInWithEmailEvent {
-  const _$SignInWithEmailEvent({required this.email, required this.password});
+class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
+  const _$SignInWithCredentialEvent(
+      {required this.credential, required this.password});
 
   @override
-  final EmailAddress email;
+  final CredentialAddress credential;
   @override
   final Password password;
 
   @override
   String toString() {
-    return 'SignInEvent.signInWithEmailEvent(email: $email, password: $password)';
+    return 'SignInEvent.signInWithCredentialEvent(credential: $credential, password: $password)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is SignInWithEmailEvent &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)) &&
+        (other is SignInWithCredentialEvent &&
+            (identical(other.credential, credential) ||
+                const DeepCollectionEquality()
+                    .equals(other.credential, credential)) &&
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
                     .equals(other.password, password)));
@@ -282,48 +291,48 @@ class _$SignInWithEmailEvent implements SignInWithEmailEvent {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(credential) ^
       const DeepCollectionEquality().hash(password);
 
   @JsonKey(ignore: true)
   @override
-  $SignInWithEmailEventCopyWith<SignInWithEmailEvent> get copyWith =>
-      _$SignInWithEmailEventCopyWithImpl<SignInWithEmailEvent>(
+  $SignInWithCredentialEventCopyWith<SignInWithCredentialEvent> get copyWith =>
+      _$SignInWithCredentialEventCopyWithImpl<SignInWithCredentialEvent>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(EmailAddress email, Password password)
-        signInWithEmailEvent,
+    required TResult Function(CredentialAddress credential, Password password)
+        signInWithCredentialEvent,
     required TResult Function() signInWithGoogleEvent,
   }) {
-    return signInWithEmailEvent(email, password);
+    return signInWithCredentialEvent(credential, password);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(EmailAddress email, Password password)?
-        signInWithEmailEvent,
+    TResult Function(CredentialAddress credential, Password password)?
+        signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
   }) {
-    return signInWithEmailEvent?.call(email, password);
+    return signInWithCredentialEvent?.call(credential, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(EmailAddress email, Password password)?
-        signInWithEmailEvent,
+    TResult Function(CredentialAddress credential, Password password)?
+        signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
     required TResult orElse(),
   }) {
-    if (signInWithEmailEvent != null) {
-      return signInWithEmailEvent(email, password);
+    if (signInWithCredentialEvent != null) {
+      return signInWithCredentialEvent(credential, password);
     }
     return orElse();
   }
@@ -332,47 +341,50 @@ class _$SignInWithEmailEvent implements SignInWithEmailEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(SignInWithEmailEvent value) signInWithEmailEvent,
+    required TResult Function(SignInWithCredentialEvent value)
+        signInWithCredentialEvent,
     required TResult Function(SignInWithGoogleEvent value)
         signInWithGoogleEvent,
   }) {
-    return signInWithEmailEvent(this);
+    return signInWithCredentialEvent(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(SignInWithEmailEvent value)? signInWithEmailEvent,
+    TResult Function(SignInWithCredentialEvent value)?
+        signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
   }) {
-    return signInWithEmailEvent?.call(this);
+    return signInWithCredentialEvent?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(SignInWithEmailEvent value)? signInWithEmailEvent,
+    TResult Function(SignInWithCredentialEvent value)?
+        signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
     required TResult orElse(),
   }) {
-    if (signInWithEmailEvent != null) {
-      return signInWithEmailEvent(this);
+    if (signInWithCredentialEvent != null) {
+      return signInWithCredentialEvent(this);
     }
     return orElse();
   }
 }
 
-abstract class SignInWithEmailEvent implements SignInEvent {
-  const factory SignInWithEmailEvent(
-      {required EmailAddress email,
-      required Password password}) = _$SignInWithEmailEvent;
+abstract class SignInWithCredentialEvent implements SignInEvent {
+  const factory SignInWithCredentialEvent(
+      {required CredentialAddress credential,
+      required Password password}) = _$SignInWithCredentialEvent;
 
-  EmailAddress get email => throw _privateConstructorUsedError;
+  CredentialAddress get credential => throw _privateConstructorUsedError;
   Password get password => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SignInWithEmailEventCopyWith<SignInWithEmailEvent> get copyWith =>
+  $SignInWithCredentialEventCopyWith<SignInWithCredentialEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -417,8 +429,8 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(EmailAddress email, Password password)
-        signInWithEmailEvent,
+    required TResult Function(CredentialAddress credential, Password password)
+        signInWithCredentialEvent,
     required TResult Function() signInWithGoogleEvent,
   }) {
     return signInWithGoogleEvent();
@@ -428,8 +440,8 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(EmailAddress email, Password password)?
-        signInWithEmailEvent,
+    TResult Function(CredentialAddress credential, Password password)?
+        signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
   }) {
     return signInWithGoogleEvent?.call();
@@ -439,8 +451,8 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(EmailAddress email, Password password)?
-        signInWithEmailEvent,
+    TResult Function(CredentialAddress credential, Password password)?
+        signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
     required TResult orElse(),
   }) {
@@ -454,7 +466,8 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(SignInWithEmailEvent value) signInWithEmailEvent,
+    required TResult Function(SignInWithCredentialEvent value)
+        signInWithCredentialEvent,
     required TResult Function(SignInWithGoogleEvent value)
         signInWithGoogleEvent,
   }) {
@@ -465,7 +478,8 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(SignInWithEmailEvent value)? signInWithEmailEvent,
+    TResult Function(SignInWithCredentialEvent value)?
+        signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
   }) {
     return signInWithGoogleEvent?.call(this);
@@ -475,7 +489,8 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(SignInWithEmailEvent value)? signInWithEmailEvent,
+    TResult Function(SignInWithCredentialEvent value)?
+        signInWithCredentialEvent,
     TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
     required TResult orElse(),
   }) {
@@ -520,12 +535,12 @@ class _$SignInStateTearOff {
     );
   }
 
-  _EmailAlreadyRegistered emailAlreadyRegistered() {
-    return const _EmailAlreadyRegistered();
+  _CredentialAlreadyRegistered credentialAlreadyRegistered() {
+    return const _CredentialAlreadyRegistered();
   }
 
-  _EmailNotFound emailNotFound() {
-    return const _EmailNotFound();
+  _CredentialNotFound credentialNotFound() {
+    return const _CredentialNotFound();
   }
 }
 
@@ -542,8 +557,8 @@ mixin _$SignInState {
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
     required TResult Function(String message) signInNotification,
-    required TResult Function() emailAlreadyRegistered,
-    required TResult Function() emailNotFound,
+    required TResult Function() credentialAlreadyRegistered,
+    required TResult Function() credentialNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -554,8 +569,8 @@ mixin _$SignInState {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -566,8 +581,8 @@ mixin _$SignInState {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -579,9 +594,9 @@ mixin _$SignInState {
     required TResult Function(_SignInDenied value) signInDenied,
     required TResult Function(_SignInCancelled value) signInCancelled,
     required TResult Function(_SignInNotification value) signInNotification,
-    required TResult Function(_EmailAlreadyRegistered value)
-        emailAlreadyRegistered,
-    required TResult Function(_EmailNotFound value) emailNotFound,
+    required TResult Function(_CredentialAlreadyRegistered value)
+        credentialAlreadyRegistered,
+    required TResult Function(_CredentialNotFound value) credentialNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -592,8 +607,9 @@ mixin _$SignInState {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -604,8 +620,9 @@ mixin _$SignInState {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -670,8 +687,8 @@ class _$_Initial implements _Initial {
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
     required TResult Function(String message) signInNotification,
-    required TResult Function() emailAlreadyRegistered,
-    required TResult Function() emailNotFound,
+    required TResult Function() credentialAlreadyRegistered,
+    required TResult Function() credentialNotFound,
   }) {
     return initial();
   }
@@ -685,8 +702,8 @@ class _$_Initial implements _Initial {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
   }) {
     return initial?.call();
   }
@@ -700,8 +717,8 @@ class _$_Initial implements _Initial {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -719,9 +736,9 @@ class _$_Initial implements _Initial {
     required TResult Function(_SignInDenied value) signInDenied,
     required TResult Function(_SignInCancelled value) signInCancelled,
     required TResult Function(_SignInNotification value) signInNotification,
-    required TResult Function(_EmailAlreadyRegistered value)
-        emailAlreadyRegistered,
-    required TResult Function(_EmailNotFound value) emailNotFound,
+    required TResult Function(_CredentialAlreadyRegistered value)
+        credentialAlreadyRegistered,
+    required TResult Function(_CredentialNotFound value) credentialNotFound,
   }) {
     return initial(this);
   }
@@ -735,8 +752,9 @@ class _$_Initial implements _Initial {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
   }) {
     return initial?.call(this);
   }
@@ -750,8 +768,9 @@ class _$_Initial implements _Initial {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -810,8 +829,8 @@ class _$_SignInLoading implements _SignInLoading {
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
     required TResult Function(String message) signInNotification,
-    required TResult Function() emailAlreadyRegistered,
-    required TResult Function() emailNotFound,
+    required TResult Function() credentialAlreadyRegistered,
+    required TResult Function() credentialNotFound,
   }) {
     return loading();
   }
@@ -825,8 +844,8 @@ class _$_SignInLoading implements _SignInLoading {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
   }) {
     return loading?.call();
   }
@@ -840,8 +859,8 @@ class _$_SignInLoading implements _SignInLoading {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -859,9 +878,9 @@ class _$_SignInLoading implements _SignInLoading {
     required TResult Function(_SignInDenied value) signInDenied,
     required TResult Function(_SignInCancelled value) signInCancelled,
     required TResult Function(_SignInNotification value) signInNotification,
-    required TResult Function(_EmailAlreadyRegistered value)
-        emailAlreadyRegistered,
-    required TResult Function(_EmailNotFound value) emailNotFound,
+    required TResult Function(_CredentialAlreadyRegistered value)
+        credentialAlreadyRegistered,
+    required TResult Function(_CredentialNotFound value) credentialNotFound,
   }) {
     return loading(this);
   }
@@ -875,8 +894,9 @@ class _$_SignInLoading implements _SignInLoading {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
   }) {
     return loading?.call(this);
   }
@@ -890,8 +910,9 @@ class _$_SignInLoading implements _SignInLoading {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -950,8 +971,8 @@ class _$_SignInAllowed implements _SignInAllowed {
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
     required TResult Function(String message) signInNotification,
-    required TResult Function() emailAlreadyRegistered,
-    required TResult Function() emailNotFound,
+    required TResult Function() credentialAlreadyRegistered,
+    required TResult Function() credentialNotFound,
   }) {
     return signInAllowed();
   }
@@ -965,8 +986,8 @@ class _$_SignInAllowed implements _SignInAllowed {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
   }) {
     return signInAllowed?.call();
   }
@@ -980,8 +1001,8 @@ class _$_SignInAllowed implements _SignInAllowed {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
     required TResult orElse(),
   }) {
     if (signInAllowed != null) {
@@ -999,9 +1020,9 @@ class _$_SignInAllowed implements _SignInAllowed {
     required TResult Function(_SignInDenied value) signInDenied,
     required TResult Function(_SignInCancelled value) signInCancelled,
     required TResult Function(_SignInNotification value) signInNotification,
-    required TResult Function(_EmailAlreadyRegistered value)
-        emailAlreadyRegistered,
-    required TResult Function(_EmailNotFound value) emailNotFound,
+    required TResult Function(_CredentialAlreadyRegistered value)
+        credentialAlreadyRegistered,
+    required TResult Function(_CredentialNotFound value) credentialNotFound,
   }) {
     return signInAllowed(this);
   }
@@ -1015,8 +1036,9 @@ class _$_SignInAllowed implements _SignInAllowed {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
   }) {
     return signInAllowed?.call(this);
   }
@@ -1030,8 +1052,9 @@ class _$_SignInAllowed implements _SignInAllowed {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
     required TResult orElse(),
   }) {
     if (signInAllowed != null) {
@@ -1090,8 +1113,8 @@ class _$_SignInDenied implements _SignInDenied {
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
     required TResult Function(String message) signInNotification,
-    required TResult Function() emailAlreadyRegistered,
-    required TResult Function() emailNotFound,
+    required TResult Function() credentialAlreadyRegistered,
+    required TResult Function() credentialNotFound,
   }) {
     return signInDenied();
   }
@@ -1105,8 +1128,8 @@ class _$_SignInDenied implements _SignInDenied {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
   }) {
     return signInDenied?.call();
   }
@@ -1120,8 +1143,8 @@ class _$_SignInDenied implements _SignInDenied {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
     required TResult orElse(),
   }) {
     if (signInDenied != null) {
@@ -1139,9 +1162,9 @@ class _$_SignInDenied implements _SignInDenied {
     required TResult Function(_SignInDenied value) signInDenied,
     required TResult Function(_SignInCancelled value) signInCancelled,
     required TResult Function(_SignInNotification value) signInNotification,
-    required TResult Function(_EmailAlreadyRegistered value)
-        emailAlreadyRegistered,
-    required TResult Function(_EmailNotFound value) emailNotFound,
+    required TResult Function(_CredentialAlreadyRegistered value)
+        credentialAlreadyRegistered,
+    required TResult Function(_CredentialNotFound value) credentialNotFound,
   }) {
     return signInDenied(this);
   }
@@ -1155,8 +1178,9 @@ class _$_SignInDenied implements _SignInDenied {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
   }) {
     return signInDenied?.call(this);
   }
@@ -1170,8 +1194,9 @@ class _$_SignInDenied implements _SignInDenied {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
     required TResult orElse(),
   }) {
     if (signInDenied != null) {
@@ -1231,8 +1256,8 @@ class _$_SignInCancelled implements _SignInCancelled {
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
     required TResult Function(String message) signInNotification,
-    required TResult Function() emailAlreadyRegistered,
-    required TResult Function() emailNotFound,
+    required TResult Function() credentialAlreadyRegistered,
+    required TResult Function() credentialNotFound,
   }) {
     return signInCancelled();
   }
@@ -1246,8 +1271,8 @@ class _$_SignInCancelled implements _SignInCancelled {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
   }) {
     return signInCancelled?.call();
   }
@@ -1261,8 +1286,8 @@ class _$_SignInCancelled implements _SignInCancelled {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
     required TResult orElse(),
   }) {
     if (signInCancelled != null) {
@@ -1280,9 +1305,9 @@ class _$_SignInCancelled implements _SignInCancelled {
     required TResult Function(_SignInDenied value) signInDenied,
     required TResult Function(_SignInCancelled value) signInCancelled,
     required TResult Function(_SignInNotification value) signInNotification,
-    required TResult Function(_EmailAlreadyRegistered value)
-        emailAlreadyRegistered,
-    required TResult Function(_EmailNotFound value) emailNotFound,
+    required TResult Function(_CredentialAlreadyRegistered value)
+        credentialAlreadyRegistered,
+    required TResult Function(_CredentialNotFound value) credentialNotFound,
   }) {
     return signInCancelled(this);
   }
@@ -1296,8 +1321,9 @@ class _$_SignInCancelled implements _SignInCancelled {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
   }) {
     return signInCancelled?.call(this);
   }
@@ -1311,8 +1337,9 @@ class _$_SignInCancelled implements _SignInCancelled {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
     required TResult orElse(),
   }) {
     if (signInCancelled != null) {
@@ -1397,8 +1424,8 @@ class _$_SignInNotification implements _SignInNotification {
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
     required TResult Function(String message) signInNotification,
-    required TResult Function() emailAlreadyRegistered,
-    required TResult Function() emailNotFound,
+    required TResult Function() credentialAlreadyRegistered,
+    required TResult Function() credentialNotFound,
   }) {
     return signInNotification(message);
   }
@@ -1412,8 +1439,8 @@ class _$_SignInNotification implements _SignInNotification {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
   }) {
     return signInNotification?.call(message);
   }
@@ -1427,8 +1454,8 @@ class _$_SignInNotification implements _SignInNotification {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
     required TResult orElse(),
   }) {
     if (signInNotification != null) {
@@ -1446,9 +1473,9 @@ class _$_SignInNotification implements _SignInNotification {
     required TResult Function(_SignInDenied value) signInDenied,
     required TResult Function(_SignInCancelled value) signInCancelled,
     required TResult Function(_SignInNotification value) signInNotification,
-    required TResult Function(_EmailAlreadyRegistered value)
-        emailAlreadyRegistered,
-    required TResult Function(_EmailNotFound value) emailNotFound,
+    required TResult Function(_CredentialAlreadyRegistered value)
+        credentialAlreadyRegistered,
+    required TResult Function(_CredentialNotFound value) credentialNotFound,
   }) {
     return signInNotification(this);
   }
@@ -1462,8 +1489,9 @@ class _$_SignInNotification implements _SignInNotification {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
   }) {
     return signInNotification?.call(this);
   }
@@ -1477,8 +1505,9 @@ class _$_SignInNotification implements _SignInNotification {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
     required TResult orElse(),
   }) {
     if (signInNotification != null) {
@@ -1499,37 +1528,40 @@ abstract class _SignInNotification implements SignInState {
 }
 
 /// @nodoc
-abstract class _$EmailAlreadyRegisteredCopyWith<$Res> {
-  factory _$EmailAlreadyRegisteredCopyWith(_EmailAlreadyRegistered value,
-          $Res Function(_EmailAlreadyRegistered) then) =
-      __$EmailAlreadyRegisteredCopyWithImpl<$Res>;
+abstract class _$CredentialAlreadyRegisteredCopyWith<$Res> {
+  factory _$CredentialAlreadyRegisteredCopyWith(
+          _CredentialAlreadyRegistered value,
+          $Res Function(_CredentialAlreadyRegistered) then) =
+      __$CredentialAlreadyRegisteredCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$EmailAlreadyRegisteredCopyWithImpl<$Res>
+class __$CredentialAlreadyRegisteredCopyWithImpl<$Res>
     extends _$SignInStateCopyWithImpl<$Res>
-    implements _$EmailAlreadyRegisteredCopyWith<$Res> {
-  __$EmailAlreadyRegisteredCopyWithImpl(_EmailAlreadyRegistered _value,
-      $Res Function(_EmailAlreadyRegistered) _then)
-      : super(_value, (v) => _then(v as _EmailAlreadyRegistered));
+    implements _$CredentialAlreadyRegisteredCopyWith<$Res> {
+  __$CredentialAlreadyRegisteredCopyWithImpl(
+      _CredentialAlreadyRegistered _value,
+      $Res Function(_CredentialAlreadyRegistered) _then)
+      : super(_value, (v) => _then(v as _CredentialAlreadyRegistered));
 
   @override
-  _EmailAlreadyRegistered get _value => super._value as _EmailAlreadyRegistered;
+  _CredentialAlreadyRegistered get _value =>
+      super._value as _CredentialAlreadyRegistered;
 }
 
 /// @nodoc
 
-class _$_EmailAlreadyRegistered implements _EmailAlreadyRegistered {
-  const _$_EmailAlreadyRegistered();
+class _$_CredentialAlreadyRegistered implements _CredentialAlreadyRegistered {
+  const _$_CredentialAlreadyRegistered();
 
   @override
   String toString() {
-    return 'SignInState.emailAlreadyRegistered()';
+    return 'SignInState.credentialAlreadyRegistered()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _EmailAlreadyRegistered);
+    return identical(this, other) || (other is _CredentialAlreadyRegistered);
   }
 
   @override
@@ -1544,10 +1576,10 @@ class _$_EmailAlreadyRegistered implements _EmailAlreadyRegistered {
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
     required TResult Function(String message) signInNotification,
-    required TResult Function() emailAlreadyRegistered,
-    required TResult Function() emailNotFound,
+    required TResult Function() credentialAlreadyRegistered,
+    required TResult Function() credentialNotFound,
   }) {
-    return emailAlreadyRegistered();
+    return credentialAlreadyRegistered();
   }
 
   @override
@@ -1559,10 +1591,10 @@ class _$_EmailAlreadyRegistered implements _EmailAlreadyRegistered {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
   }) {
-    return emailAlreadyRegistered?.call();
+    return credentialAlreadyRegistered?.call();
   }
 
   @override
@@ -1574,12 +1606,12 @@ class _$_EmailAlreadyRegistered implements _EmailAlreadyRegistered {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
     required TResult orElse(),
   }) {
-    if (emailAlreadyRegistered != null) {
-      return emailAlreadyRegistered();
+    if (credentialAlreadyRegistered != null) {
+      return credentialAlreadyRegistered();
     }
     return orElse();
   }
@@ -1593,11 +1625,11 @@ class _$_EmailAlreadyRegistered implements _EmailAlreadyRegistered {
     required TResult Function(_SignInDenied value) signInDenied,
     required TResult Function(_SignInCancelled value) signInCancelled,
     required TResult Function(_SignInNotification value) signInNotification,
-    required TResult Function(_EmailAlreadyRegistered value)
-        emailAlreadyRegistered,
-    required TResult Function(_EmailNotFound value) emailNotFound,
+    required TResult Function(_CredentialAlreadyRegistered value)
+        credentialAlreadyRegistered,
+    required TResult Function(_CredentialNotFound value) credentialNotFound,
   }) {
-    return emailAlreadyRegistered(this);
+    return credentialAlreadyRegistered(this);
   }
 
   @override
@@ -1609,10 +1641,11 @@ class _$_EmailAlreadyRegistered implements _EmailAlreadyRegistered {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
   }) {
-    return emailAlreadyRegistered?.call(this);
+    return credentialAlreadyRegistered?.call(this);
   }
 
   @override
@@ -1624,52 +1657,54 @@ class _$_EmailAlreadyRegistered implements _EmailAlreadyRegistered {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
     required TResult orElse(),
   }) {
-    if (emailAlreadyRegistered != null) {
-      return emailAlreadyRegistered(this);
+    if (credentialAlreadyRegistered != null) {
+      return credentialAlreadyRegistered(this);
     }
     return orElse();
   }
 }
 
-abstract class _EmailAlreadyRegistered implements SignInState {
-  const factory _EmailAlreadyRegistered() = _$_EmailAlreadyRegistered;
+abstract class _CredentialAlreadyRegistered implements SignInState {
+  const factory _CredentialAlreadyRegistered() = _$_CredentialAlreadyRegistered;
 }
 
 /// @nodoc
-abstract class _$EmailNotFoundCopyWith<$Res> {
-  factory _$EmailNotFoundCopyWith(
-          _EmailNotFound value, $Res Function(_EmailNotFound) then) =
-      __$EmailNotFoundCopyWithImpl<$Res>;
+abstract class _$CredentialNotFoundCopyWith<$Res> {
+  factory _$CredentialNotFoundCopyWith(
+          _CredentialNotFound value, $Res Function(_CredentialNotFound) then) =
+      __$CredentialNotFoundCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$EmailNotFoundCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
-    implements _$EmailNotFoundCopyWith<$Res> {
-  __$EmailNotFoundCopyWithImpl(
-      _EmailNotFound _value, $Res Function(_EmailNotFound) _then)
-      : super(_value, (v) => _then(v as _EmailNotFound));
+class __$CredentialNotFoundCopyWithImpl<$Res>
+    extends _$SignInStateCopyWithImpl<$Res>
+    implements _$CredentialNotFoundCopyWith<$Res> {
+  __$CredentialNotFoundCopyWithImpl(
+      _CredentialNotFound _value, $Res Function(_CredentialNotFound) _then)
+      : super(_value, (v) => _then(v as _CredentialNotFound));
 
   @override
-  _EmailNotFound get _value => super._value as _EmailNotFound;
+  _CredentialNotFound get _value => super._value as _CredentialNotFound;
 }
 
 /// @nodoc
 
-class _$_EmailNotFound implements _EmailNotFound {
-  const _$_EmailNotFound();
+class _$_CredentialNotFound implements _CredentialNotFound {
+  const _$_CredentialNotFound();
 
   @override
   String toString() {
-    return 'SignInState.emailNotFound()';
+    return 'SignInState.credentialNotFound()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _EmailNotFound);
+    return identical(this, other) || (other is _CredentialNotFound);
   }
 
   @override
@@ -1684,10 +1719,10 @@ class _$_EmailNotFound implements _EmailNotFound {
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
     required TResult Function(String message) signInNotification,
-    required TResult Function() emailAlreadyRegistered,
-    required TResult Function() emailNotFound,
+    required TResult Function() credentialAlreadyRegistered,
+    required TResult Function() credentialNotFound,
   }) {
-    return emailNotFound();
+    return credentialNotFound();
   }
 
   @override
@@ -1699,10 +1734,10 @@ class _$_EmailNotFound implements _EmailNotFound {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
   }) {
-    return emailNotFound?.call();
+    return credentialNotFound?.call();
   }
 
   @override
@@ -1714,12 +1749,12 @@ class _$_EmailNotFound implements _EmailNotFound {
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
     TResult Function(String message)? signInNotification,
-    TResult Function()? emailAlreadyRegistered,
-    TResult Function()? emailNotFound,
+    TResult Function()? credentialAlreadyRegistered,
+    TResult Function()? credentialNotFound,
     required TResult orElse(),
   }) {
-    if (emailNotFound != null) {
-      return emailNotFound();
+    if (credentialNotFound != null) {
+      return credentialNotFound();
     }
     return orElse();
   }
@@ -1733,11 +1768,11 @@ class _$_EmailNotFound implements _EmailNotFound {
     required TResult Function(_SignInDenied value) signInDenied,
     required TResult Function(_SignInCancelled value) signInCancelled,
     required TResult Function(_SignInNotification value) signInNotification,
-    required TResult Function(_EmailAlreadyRegistered value)
-        emailAlreadyRegistered,
-    required TResult Function(_EmailNotFound value) emailNotFound,
+    required TResult Function(_CredentialAlreadyRegistered value)
+        credentialAlreadyRegistered,
+    required TResult Function(_CredentialNotFound value) credentialNotFound,
   }) {
-    return emailNotFound(this);
+    return credentialNotFound(this);
   }
 
   @override
@@ -1749,10 +1784,11 @@ class _$_EmailNotFound implements _EmailNotFound {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
   }) {
-    return emailNotFound?.call(this);
+    return credentialNotFound?.call(this);
   }
 
   @override
@@ -1764,17 +1800,18 @@ class _$_EmailNotFound implements _EmailNotFound {
     TResult Function(_SignInDenied value)? signInDenied,
     TResult Function(_SignInCancelled value)? signInCancelled,
     TResult Function(_SignInNotification value)? signInNotification,
-    TResult Function(_EmailAlreadyRegistered value)? emailAlreadyRegistered,
-    TResult Function(_EmailNotFound value)? emailNotFound,
+    TResult Function(_CredentialAlreadyRegistered value)?
+        credentialAlreadyRegistered,
+    TResult Function(_CredentialNotFound value)? credentialNotFound,
     required TResult orElse(),
   }) {
-    if (emailNotFound != null) {
-      return emailNotFound(this);
+    if (credentialNotFound != null) {
+      return credentialNotFound(this);
     }
     return orElse();
   }
 }
 
-abstract class _EmailNotFound implements SignInState {
-  const factory _EmailNotFound() = _$_EmailNotFound;
+abstract class _CredentialNotFound implements SignInState {
+  const factory _CredentialNotFound() = _$_CredentialNotFound;
 }

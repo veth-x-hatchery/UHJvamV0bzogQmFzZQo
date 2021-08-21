@@ -7,14 +7,14 @@ import 'dart:async' as _i3;
 import 'package:bloc/bloc.dart' as _i8;
 import 'package:flutter/src/widgets/navigator.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart'
+import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart'
     as _i4;
+import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart'
+    as _i2;
 import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart'
     as _i6;
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart'
     as _i5;
-import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart'
-    as _i2;
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
     as _i7;
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart'
@@ -33,8 +33,8 @@ class _FakeSignInState_0 extends _i1.Fake implements _i2.SignInState {}
 class _FakeStreamSubscription_1<T> extends _i1.Fake
     implements _i3.StreamSubscription<T> {}
 
-class _FakeSignInEmailState_2 extends _i1.Fake implements _i4.SignInEmailState {
-}
+class _FakeSignInCredentialState_2 extends _i1.Fake
+    implements _i4.SignInCredentialState {}
 
 class _FakeSignInRegisterState_3 extends _i1.Fake
     implements _i5.SignInRegisterState {}
@@ -139,77 +139,79 @@ class MockSignInOptionsBloc extends _i1.Mock implements _i2.SignInOptionsBloc {
   String toString() => super.toString();
 }
 
-/// A class which mocks [SignInEmailBloc].
+/// A class which mocks [SignInCredentialBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInEmailBloc extends _i1.Mock implements _i4.SignInEmailBloc {
-  MockSignInEmailBloc() {
+class MockSignInCredentialBloc extends _i1.Mock
+    implements _i4.SignInCredentialBloc {
+  MockSignInCredentialBloc() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.SignInEmailState get state =>
+  _i4.SignInCredentialState get state =>
       (super.noSuchMethod(Invocation.getter(#state),
-          returnValue: _FakeSignInEmailState_2()) as _i4.SignInEmailState);
+              returnValue: _FakeSignInCredentialState_2())
+          as _i4.SignInCredentialState);
   @override
-  _i3.Stream<_i4.SignInEmailState> get stream =>
+  _i3.Stream<_i4.SignInCredentialState> get stream =>
       (super.noSuchMethod(Invocation.getter(#stream),
-              returnValue: Stream<_i4.SignInEmailState>.empty())
-          as _i3.Stream<_i4.SignInEmailState>);
+              returnValue: Stream<_i4.SignInCredentialState>.empty())
+          as _i3.Stream<_i4.SignInCredentialState>);
   @override
-  _i3.Stream<_i4.SignInEmailState> mapEventToState(
-          _i4.SignInEmailEvent? event) =>
+  _i3.Stream<_i4.SignInCredentialState> mapEventToState(
+          _i4.SignInCredentialEvent? event) =>
       (super.noSuchMethod(Invocation.method(#mapEventToState, [event]),
-              returnValue: Stream<_i4.SignInEmailState>.empty())
-          as _i3.Stream<_i4.SignInEmailState>);
+              returnValue: Stream<_i4.SignInCredentialState>.empty())
+          as _i3.Stream<_i4.SignInCredentialState>);
   @override
-  void add(_i4.SignInEmailEvent? event) =>
+  void add(_i4.SignInCredentialEvent? event) =>
       super.noSuchMethod(Invocation.method(#add, [event]),
           returnValueForMissingStub: null);
   @override
-  void onEvent(_i4.SignInEmailEvent? event) =>
+  void onEvent(_i4.SignInCredentialEvent? event) =>
       super.noSuchMethod(Invocation.method(#onEvent, [event]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<
-      _i8.Transition<_i4.SignInEmailEvent, _i4.SignInEmailState>> transformEvents(
-          _i3.Stream<_i4.SignInEmailEvent>? events,
-          _i8.TransitionFunction<_i4.SignInEmailEvent, _i4.SignInEmailState>?
-              transitionFn) =>
-      (super.noSuchMethod(
+  _i3.Stream<_i8.Transition<_i4.SignInCredentialEvent, _i4.SignInCredentialState>>
+      transformEvents(
+              _i3.Stream<_i4.SignInCredentialEvent>? events,
+              _i8.TransitionFunction<_i4.SignInCredentialEvent,
+                      _i4.SignInCredentialState>?
+                  transitionFn) =>
+          (super.noSuchMethod(
               Invocation.method(#transformEvents, [events, transitionFn]),
               returnValue:
-                  Stream<_i8.Transition<_i4.SignInEmailEvent, _i4.SignInEmailState>>.empty())
-          as _i3.Stream<
-              _i8.Transition<_i4.SignInEmailEvent, _i4.SignInEmailState>>);
+                  Stream<_i8.Transition<_i4.SignInCredentialEvent, _i4.SignInCredentialState>>.empty()) as _i3
+              .Stream<_i8.Transition<_i4.SignInCredentialEvent, _i4.SignInCredentialState>>);
   @override
-  void emit(_i4.SignInEmailState? state) =>
+  void emit(_i4.SignInCredentialState? state) =>
       super.noSuchMethod(Invocation.method(#emit, [state]),
           returnValueForMissingStub: null);
   @override
   void onTransition(
-          _i8.Transition<_i4.SignInEmailEvent, _i4.SignInEmailState>?
+          _i8.Transition<_i4.SignInCredentialEvent, _i4.SignInCredentialState>?
               transition) =>
       super.noSuchMethod(Invocation.method(#onTransition, [transition]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<
-      _i8.Transition<_i4.SignInEmailEvent, _i4.SignInEmailState>> transformTransitions(
-          _i3.Stream<_i8.Transition<_i4.SignInEmailEvent, _i4.SignInEmailState>>?
-              transitions) =>
-      (super.noSuchMethod(
-              Invocation.method(#transformTransitions, [transitions]),
-              returnValue:
-                  Stream<_i8.Transition<_i4.SignInEmailEvent, _i4.SignInEmailState>>.empty())
-          as _i3.Stream<
-              _i8.Transition<_i4.SignInEmailEvent, _i4.SignInEmailState>>);
+  _i3.Stream<_i8.Transition<_i4.SignInCredentialEvent, _i4.SignInCredentialState>>
+      transformTransitions(
+              _i3.Stream<_i8.Transition<_i4.SignInCredentialEvent, _i4.SignInCredentialState>>?
+                  transitions) =>
+          (super.noSuchMethod(
+                  Invocation.method(#transformTransitions, [transitions]),
+                  returnValue:
+                      Stream<_i8.Transition<_i4.SignInCredentialEvent, _i4.SignInCredentialState>>.empty())
+              as _i3.Stream<
+                  _i8.Transition<_i4.SignInCredentialEvent, _i4.SignInCredentialState>>);
   @override
   _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
       returnValue: Future<void>.value(),
       returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
   @override
-  _i3.StreamSubscription<_i4.SignInEmailState> listen(
-          void Function(_i4.SignInEmailState)? onData,
+  _i3.StreamSubscription<_i4.SignInCredentialState> listen(
+          void Function(_i4.SignInCredentialState)? onData,
           {Function? onError,
           void Function()? onDone,
           bool? cancelOnError}) =>
@@ -221,10 +223,11 @@ class MockSignInEmailBloc extends _i1.Mock implements _i4.SignInEmailBloc {
                 #onDone: onDone,
                 #cancelOnError: cancelOnError
               }),
-              returnValue: _FakeStreamSubscription_1<_i4.SignInEmailState>())
-          as _i3.StreamSubscription<_i4.SignInEmailState>);
+              returnValue:
+                  _FakeStreamSubscription_1<_i4.SignInCredentialState>())
+          as _i3.StreamSubscription<_i4.SignInCredentialState>);
   @override
-  void onChange(_i8.Change<_i4.SignInEmailState>? change) =>
+  void onChange(_i8.Change<_i4.SignInCredentialState>? change) =>
       super.noSuchMethod(Invocation.method(#onChange, [change]),
           returnValueForMissingStub: null);
   @override

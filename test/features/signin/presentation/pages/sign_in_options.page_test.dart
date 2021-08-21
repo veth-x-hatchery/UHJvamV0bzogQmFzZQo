@@ -5,12 +5,12 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/email/sign_in_email_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_email.page.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_password.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
@@ -23,7 +23,7 @@ import 'sign_in_options.page_test.mocks.dart';
 
 @GenerateMocks([
   SignInOptionsBloc,
-  SignInEmailBloc,
+  SignInCredentialBloc,
   SignInRegisterBloc,
   SignInPasswordBloc,
   NavigationCubit,
@@ -31,7 +31,7 @@ import 'sign_in_options.page_test.mocks.dart';
   MockSpec<NavigatorObserver>(returnNullOnMissingStub: true)
 ])
 void main() {
-  late MockSignInEmailBloc _mockMockSignInEmailBloc;
+  late MockSignInCredentialBloc _mockMockSignInCredentialBloc;
   late MockSignInRegisterBloc _mockMockSignInRegisterBloc;
   late MockSignInPasswordBloc _mockMockSignInPasswordBloc;
   late MockNavigatorObserver _mockNavigationObserver;
@@ -41,7 +41,7 @@ void main() {
   late GetIt sl;
 
   setUp(() {
-    _mockMockSignInEmailBloc = MockSignInEmailBloc();
+    _mockMockSignInCredentialBloc = MockSignInCredentialBloc();
     _mockMockSignInRegisterBloc = MockSignInRegisterBloc();
     _mockMockSignInPasswordBloc = MockSignInPasswordBloc();
 
@@ -53,7 +53,8 @@ void main() {
     sl = GetIt.instance;
 
     sl.registerFactory<SignInOptionsBloc>(() => _mockSignInBloc);
-    sl.registerFactory<SignInEmailBloc>(() => _mockMockSignInEmailBloc);
+    sl.registerFactory<SignInCredentialBloc>(
+        () => _mockMockSignInCredentialBloc);
     sl.registerFactory<SignInRegisterBloc>(() => _mockMockSignInRegisterBloc);
     sl.registerFactory<SignInPasswordBloc>(() => _mockMockSignInPasswordBloc);
 
@@ -68,9 +69,9 @@ void main() {
   }
 
   // ignore: non_constant_identifier_names
-  void _SignInEmailState(SignInEmailState state) {
-    when(_mockMockSignInEmailBloc.state).thenReturn(state);
-    when(_mockMockSignInEmailBloc.stream)
+  void _SignInCredentialState(SignInCredentialState state) {
+    when(_mockMockSignInCredentialBloc.state).thenReturn(state);
+    when(_mockMockSignInCredentialBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
@@ -90,7 +91,7 @@ void main() {
 
   void _setInitialState() {
     _signInState(const SignInState.initial());
-    _SignInEmailState(SignInEmailState.initial());
+    _SignInCredentialState(SignInCredentialState.initial());
     _SignInRegisterState(SignInRegisterState.initial());
     _SignInPasswordState(SignInPasswordState.initial());
   }
@@ -129,7 +130,7 @@ void main() {
   });
 
   group('when receiving navigation events', () {
-    testWidgets('should go from email page to password page',
+    testWidgets('should go from credential page to password page',
         (WidgetTester tester) async {
       // Arrange
 
@@ -142,8 +143,8 @@ void main() {
       // act
 
       _navigationCubit.goTo(SignInPageGoTo.passwordPage(
-        from: SignInPageRoutes.emailEntry,
-        email: 'teste@teste.com',
+        from: SignInPageRoutes.credentialEntry,
+        credential: 'teste@teste.com',
       ));
 
       // assert
@@ -156,7 +157,7 @@ void main() {
       expect(find.byType(SignInPasswordPage), findsOneWidget);
     });
 
-    testWidgets('should go from email page to register page',
+    testWidgets('should go from credential page to register page',
         (WidgetTester tester) async {
       // Arrange
 
@@ -169,8 +170,8 @@ void main() {
       // act
 
       _navigationCubit.goTo(SignInPageGoTo.registerPage(
-        from: SignInPageRoutes.emailEntry,
-        email: 'test@test.com',
+        from: SignInPageRoutes.credentialEntry,
+        credential: 'test@test.com',
       ));
 
       // assert
@@ -183,7 +184,7 @@ void main() {
       expect(find.byType(SignInRegisterPage), findsOneWidget);
     });
 
-    testWidgets('should go from any page to email page',
+    testWidgets('should go from any page to credential page',
         (WidgetTester tester) async {
       // Arrange
 
@@ -196,7 +197,7 @@ void main() {
       // act
 
       _navigationCubit.goTo(
-        SignInPageGoTo.emailPage(from: SignInPageRoutes.signInOptions),
+        SignInPageGoTo.credentialPage(from: SignInPageRoutes.signInOptions),
       );
 
       // assert
@@ -206,7 +207,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.byType(SignInEmailPage), findsOneWidget);
+      expect(find.byType(SignInCredentialPage), findsOneWidget);
     });
   });
 
@@ -272,7 +273,7 @@ void main() {
     });
   });
 
-  group('when sign in with email', () {
+  group('when sign in with credential', () {
     testWidgets('should find the correct button option', (tester) async {
       // Arrange
 
@@ -282,12 +283,12 @@ void main() {
 
       await _pumpPage(tester);
 
-      final emailSignInButton =
-          find.byKey(const Key(SignInPageKeys.signInWithEmail));
+      final credentialSignInButton =
+          find.byKey(const Key(SignInPageKeys.signInWithCredential));
 
       // Assert
 
-      expect(emailSignInButton, findsOneWidget);
+      expect(credentialSignInButton, findsOneWidget);
     });
 
     testWidgets('should emit the correct event when press the button',
@@ -298,25 +299,25 @@ void main() {
 
       await _pumpPage(tester);
 
-      final emailSignInButton =
-          find.byKey(const Key(SignInPageKeys.signInWithEmail));
+      final credentialSignInButton =
+          find.byKey(const Key(SignInPageKeys.signInWithCredential));
 
       // Act
 
-      await tester.tap(emailSignInButton);
+      await tester.tap(credentialSignInButton);
 
       // Assert
 
       _navigationCubit.stream.listen((value) {
         expect(
             value,
-            NavigationState.goTo(SignInPageGoTo.emailPage(
+            NavigationState.goTo(SignInPageGoTo.credentialPage(
                 from: SignInPageRoutes.signInOptions)));
       });
 
       await tester.pumpAndSettle();
 
-      expect(find.byType(SignInEmailPage), findsOneWidget);
+      expect(find.byType(SignInCredentialPage), findsOneWidget);
 
       // Todo(v): Research
       // verify(_mockNavigationObserver.didPush(any, any)).called(1);

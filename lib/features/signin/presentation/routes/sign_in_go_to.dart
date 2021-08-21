@@ -1,8 +1,8 @@
 enum SignInPageRoutes {
   signInOptions,
-  emailEntry,
+  credentialEntry,
   passwordEntry,
-  registerEmailSignIn,
+  registerCredentialSignIn,
 }
 
 class SignInPageGoTo {
@@ -18,28 +18,28 @@ class SignInPageGoTo {
 
   factory SignInPageGoTo.passwordPage({
     required SignInPageRoutes from,
-    String? email,
+    String? credential,
   }) =>
       SignInPageGoTo._internal(
         to: SignInPageRoutes.passwordEntry,
         from: from,
-        parameters: email,
+        parameters: credential,
       );
 
   factory SignInPageGoTo.registerPage({
     required SignInPageRoutes from,
-    String? email,
+    String? credential,
   }) =>
       SignInPageGoTo._internal(
-        to: SignInPageRoutes.registerEmailSignIn,
+        to: SignInPageRoutes.registerCredentialSignIn,
         from: from,
-        parameters: email,
+        parameters: credential,
       );
 
-  factory SignInPageGoTo.emailPage({required SignInPageRoutes from}) =>
+  factory SignInPageGoTo.credentialPage({required SignInPageRoutes from}) =>
       SignInPageGoTo._internal(
         from: from,
-        to: SignInPageRoutes.emailEntry,
+        to: SignInPageRoutes.credentialEntry,
       );
 
   factory SignInPageGoTo.signInOptions({required SignInPageRoutes from}) =>

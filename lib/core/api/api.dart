@@ -3,7 +3,7 @@ import 'package:vethx_beta/core/api/api_setup.dart';
 enum Endpoint {
   //! SignIn
   signInCurrentUser,
-  checkEmail,
+  checkCredential,
 }
 
 class API {
@@ -30,6 +30,6 @@ class API {
   static final Map<Endpoint, String> _paths = {
     //! SignIn
     Endpoint.signInCurrentUser: 'signin/currentuser',
-    Endpoint.checkEmail: 'signin/checkEmail',
+    Endpoint.checkCredential: 'signin/checkCredential',
   };
 }

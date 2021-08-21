@@ -6,13 +6,13 @@ import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.da
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
-part 'sign_in_register_email_and_password.freezed.dart';
+part 'sign_in_register_credential_and_password.freezed.dart';
 
-class SignInRegisterEmailAndPassword extends UseCase<Unit, Params> {
+class SignInRegisterCredentialAndPassword extends UseCase<Unit, Params> {
   // final ISignInRepository _signInRepository;
   final IAuthFacade _authFacade;
 
-  SignInRegisterEmailAndPassword(
+  SignInRegisterCredentialAndPassword(
     // this._signInRepository,
     this._authFacade,
   );
@@ -20,8 +20,8 @@ class SignInRegisterEmailAndPassword extends UseCase<Unit, Params> {
   @override
   Future<Either<FailureDetails, Unit>> call(Params params) {
     return _authFacade
-        .registerWithEmailAndPassword(
-          emailAddress: params.credentials.user,
+        .registerWithCredentialAndPassword(
+          credentialAddress: params.credentials.user,
           password: params.credentials.password,
         )
         .then((value) => value.fold(
@@ -31,30 +31,32 @@ class SignInRegisterEmailAndPassword extends UseCase<Unit, Params> {
   }
 
   FailureDetails _mapFailures(AuthFailure auth) {
-    if (auth == const AuthFailure.emailAlreadyInUse()) {
+    if (auth == const AuthFailure.credentialAlreadyInUse()) {
       return FailureDetails(
         failure: auth,
-        message: SignInRegisterEmailAndPasswordErrorMessages.emailAlreadyInUse,
+        message: SignInRegisterCredentialAndPasswordErrorMessages
+            .credentialAlreadyInUse,
       );
     }
-    if (auth == const AuthFailure.invalidEmailAndPasswordCombination()) {
+    if (auth == const AuthFailure.invalidCredentialAndPasswordCombination()) {
       return FailureDetails(
         failure: auth,
-        message: SignInRegisterEmailAndPasswordErrorMessages.emailAlreadyInUse,
+        message: SignInRegisterCredentialAndPasswordErrorMessages
+            .credentialAlreadyInUse,
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInRegisterEmailAndPasswordErrorMessages.unavailable,
+      message: SignInRegisterCredentialAndPasswordErrorMessages.unavailable,
     );
   }
 }
 
-class SignInRegisterEmailAndPasswordErrorMessages {
+class SignInRegisterCredentialAndPasswordErrorMessages {
   static const unavailable = 'Unavailable';
-  static const emailAlreadyInUse = 'This email is already in use';
-  static const invalidEmailAndPasswordCombination =
-      'Invalid email and password combination';
+  static const credentialAlreadyInUse = 'This credential is already in use';
+  static const invalidCredentialAndPasswordCombination =
+      'Invalid credential and password combination';
 }
 
 @freezed
