@@ -1,13 +1,12 @@
 part of 'sign_in_options_bloc.dart';
 
 @freezed
-class SignInEvent with _$SignInEvent {
-  const factory SignInEvent.started() = _Started;
+class SignInOptionsEvent with _$SignInOptionsEvent {
+  const factory SignInOptionsEvent.started() = _Started;
 
-  const factory SignInEvent.signInWithCredentialEvent({
-    required Credential credential,
-    required Secret secret,
-  }) = SignInWithCredentialEvent;
+  const factory SignInOptionsEvent.signInWithCredentialEvent() =
+      SignInWithCredentialEvent;
 
-  const factory SignInEvent.signInWithGoogleEvent() = SignInWithGoogleEvent;
+  const factory SignInOptionsEvent.signInWithGoogleEvent() =
+      SignInWithGoogleEvent;
 }

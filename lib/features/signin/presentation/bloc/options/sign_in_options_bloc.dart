@@ -15,7 +15,7 @@ part 'sign_in_options_event.dart';
 part 'sign_in_options_state.dart';
 part 'sign_in_options_bloc.freezed.dart';
 
-class SignInOptionsBloc extends Bloc<SignInEvent, SignInState> {
+class SignInOptionsBloc extends Bloc<SignInOptionsEvent, SignInOptionsState> {
   final AuthBloc _authBloc;
   final NavigationCubit _navigation;
   final SignInWithGoogle _signInWithGoogle;
@@ -24,13 +24,13 @@ class SignInOptionsBloc extends Bloc<SignInEvent, SignInState> {
     this._authBloc,
     this._navigation,
     this._signInWithGoogle,
-  ) : super(const SignInState.initial());
+  ) : super(const SignInOptionsState.initial());
 
   @override
-  void emit(SignInState state) {
+  void emit(SignInOptionsState state) {
     if ([
-      const SignInState.signInAllowed(),
-      const SignInState.signInDenied(),
+      const SignInOptionsState.signInAllowed(),
+      const SignInOptionsState.signInDenied(),
     ].contains(state)) {
       _authBloc.add(const AuthEvent.authCheckRequested());
     }
@@ -38,27 +38,28 @@ class SignInOptionsBloc extends Bloc<SignInEvent, SignInState> {
   }
 
   @override
-  Stream<SignInState> mapEventToState(SignInEvent event) async* {
+  Stream<SignInOptionsState> mapEventToState(SignInOptionsEvent event) async* {
     yield* event.map(signInWithGoogleEvent: (e) async* {
-      yield const SignInState.loading();
+      yield const SignInOptionsState.loading();
       final result = await _signInWithGoogle.call(const NoParams());
       yield result.fold(
         _mapFailureToSignStateErrorMessage,
-        (_) => const SignInState.signInAllowed(),
+        (_) => const SignInOptionsState.signInAllowed(),
       );
     }, signInWithCredentialEvent: (e) async* {
       _navigation.goTo(
           SignInPageGoTo.credentialPage(from: SignInPageRoutes.signInOptions));
-      yield const SignInState.initial();
+      yield const SignInOptionsState.initial();
     }, started: (_) async* {
-      yield const SignInState.initial();
+      yield const SignInOptionsState.initial();
     });
   }
 
-  SignInState _mapFailureToSignStateErrorMessage(FailureDetails failure) {
+  SignInOptionsState _mapFailureToSignStateErrorMessage(
+      FailureDetails failure) {
     if (failure.failure == const AuthFailure.cancelledByUser()) {
-      return const SignInState.signInCancelled();
+      return const SignInOptionsState.signInCancelled();
     }
-    return SignInState.signInNotification(message: failure.message);
+    return SignInOptionsState.signInNotification(message: failure.message);
   }
 }

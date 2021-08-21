@@ -28,7 +28,8 @@ import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dar
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
-class _FakeSignInState_0 extends _i1.Fake implements _i2.SignInState {}
+class _FakeSignInOptionsState_0 extends _i1.Fake
+    implements _i2.SignInOptionsState {}
 
 class _FakeStreamSubscription_1<T> extends _i1.Fake
     implements _i3.StreamSubscription<T> {}
@@ -53,63 +54,68 @@ class MockSignInOptionsBloc extends _i1.Mock implements _i2.SignInOptionsBloc {
   }
 
   @override
-  _i2.SignInState get state => (super.noSuchMethod(Invocation.getter(#state),
-      returnValue: _FakeSignInState_0()) as _i2.SignInState);
+  _i2.SignInOptionsState get state =>
+      (super.noSuchMethod(Invocation.getter(#state),
+          returnValue: _FakeSignInOptionsState_0()) as _i2.SignInOptionsState);
   @override
-  _i3.Stream<_i2.SignInState> get stream =>
+  _i3.Stream<_i2.SignInOptionsState> get stream =>
       (super.noSuchMethod(Invocation.getter(#stream),
-              returnValue: Stream<_i2.SignInState>.empty())
-          as _i3.Stream<_i2.SignInState>);
+              returnValue: Stream<_i2.SignInOptionsState>.empty())
+          as _i3.Stream<_i2.SignInOptionsState>);
   @override
-  void emit(_i2.SignInState? state) =>
+  void emit(_i2.SignInOptionsState? state) =>
       super.noSuchMethod(Invocation.method(#emit, [state]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<_i2.SignInState> mapEventToState(_i2.SignInEvent? event) =>
+  _i3.Stream<_i2.SignInOptionsState> mapEventToState(
+          _i2.SignInOptionsEvent? event) =>
       (super.noSuchMethod(Invocation.method(#mapEventToState, [event]),
-              returnValue: Stream<_i2.SignInState>.empty())
-          as _i3.Stream<_i2.SignInState>);
+              returnValue: Stream<_i2.SignInOptionsState>.empty())
+          as _i3.Stream<_i2.SignInOptionsState>);
   @override
-  void add(_i2.SignInEvent? event) =>
+  void add(_i2.SignInOptionsEvent? event) =>
       super.noSuchMethod(Invocation.method(#add, [event]),
           returnValueForMissingStub: null);
   @override
-  void onEvent(_i2.SignInEvent? event) =>
+  void onEvent(_i2.SignInOptionsEvent? event) =>
       super.noSuchMethod(Invocation.method(#onEvent, [event]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<_i8.Transition<_i2.SignInEvent, _i2.SignInState>> transformEvents(
-          _i3.Stream<_i2.SignInEvent>? events,
-          _i8.TransitionFunction<_i2.SignInEvent, _i2.SignInState>?
-              transitionFn) =>
-      (super.noSuchMethod(
-              Invocation.method(#transformEvents, [events, transitionFn]),
-              returnValue: Stream<
-                  _i8.Transition<_i2.SignInEvent, _i2.SignInState>>.empty())
-          as _i3.Stream<_i8.Transition<_i2.SignInEvent, _i2.SignInState>>);
+  _i3.Stream<_i8.Transition<_i2.SignInOptionsEvent, _i2.SignInOptionsState>>
+      transformEvents(
+              _i3.Stream<_i2.SignInOptionsEvent>? events,
+              _i8.TransitionFunction<_i2.SignInOptionsEvent, _i2.SignInOptionsState>?
+                  transitionFn) =>
+          (super.noSuchMethod(
+                  Invocation.method(#transformEvents, [events, transitionFn]),
+                  returnValue:
+                      Stream<_i8.Transition<_i2.SignInOptionsEvent, _i2.SignInOptionsState>>.empty())
+              as _i3.Stream<
+                  _i8.Transition<_i2.SignInOptionsEvent, _i2.SignInOptionsState>>);
   @override
   void onTransition(
-          _i8.Transition<_i2.SignInEvent, _i2.SignInState>? transition) =>
+          _i8.Transition<_i2.SignInOptionsEvent, _i2.SignInOptionsState>?
+              transition) =>
       super.noSuchMethod(Invocation.method(#onTransition, [transition]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<_i8.Transition<_i2.SignInEvent, _i2.SignInState>>
+  _i3.Stream<_i8.Transition<_i2.SignInOptionsEvent, _i2.SignInOptionsState>>
       transformTransitions(
-              _i3
-                      .Stream<_i8.Transition<_i2.SignInEvent, _i2.SignInState>>?
+              _i3.Stream<_i8.Transition<_i2.SignInOptionsEvent, _i2.SignInOptionsState>>?
                   transitions) =>
           (super.noSuchMethod(
                   Invocation.method(#transformTransitions, [transitions]),
-                  returnValue: Stream<
-                      _i8.Transition<_i2.SignInEvent, _i2.SignInState>>.empty())
-              as _i3.Stream<_i8.Transition<_i2.SignInEvent, _i2.SignInState>>);
+                  returnValue:
+                      Stream<_i8.Transition<_i2.SignInOptionsEvent, _i2.SignInOptionsState>>.empty())
+              as _i3.Stream<
+                  _i8.Transition<_i2.SignInOptionsEvent, _i2.SignInOptionsState>>);
   @override
   _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
       returnValue: Future<void>.value(),
       returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
   @override
-  _i3.StreamSubscription<_i2.SignInState> listen(
-          void Function(_i2.SignInState)? onData,
+  _i3.StreamSubscription<_i2.SignInOptionsState> listen(
+          void Function(_i2.SignInOptionsState)? onData,
           {Function? onError,
           void Function()? onDone,
           bool? cancelOnError}) =>
@@ -121,10 +127,10 @@ class MockSignInOptionsBloc extends _i1.Mock implements _i2.SignInOptionsBloc {
                 #onDone: onDone,
                 #cancelOnError: cancelOnError
               }),
-              returnValue: _FakeStreamSubscription_1<_i2.SignInState>())
-          as _i3.StreamSubscription<_i2.SignInState>);
+              returnValue: _FakeStreamSubscription_1<_i2.SignInOptionsState>())
+          as _i3.StreamSubscription<_i2.SignInOptionsState>);
   @override
-  void onChange(_i8.Change<_i2.SignInState>? change) =>
+  void onChange(_i8.Change<_i2.SignInOptionsState>? change) =>
       super.noSuchMethod(Invocation.method(#onChange, [change]),
           returnValueForMissingStub: null);
   @override

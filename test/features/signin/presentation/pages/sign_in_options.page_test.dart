@@ -63,7 +63,7 @@ void main() {
 
   tearDown(() => sl.reset());
 
-  void _signInState(SignInState state) {
+  void _signInState(SignInOptionsState state) {
     when(_mockSignInBloc.state).thenReturn(state);
     when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
   }
@@ -90,7 +90,7 @@ void main() {
   }
 
   void _setInitialState() {
-    _signInState(const SignInState.initial());
+    _signInState(const SignInOptionsState.initial());
     _SignInCredentialState(SignInCredentialState.initial());
     _SignInRegisterState(SignInRegisterState.initial());
     _SignInSecretState(SignInSecretState.initial());
@@ -243,7 +243,7 @@ void main() {
         (WidgetTester tester) async {
       // Arrange
 
-      _signInState(const SignInState.loading());
+      _signInState(const SignInOptionsState.loading());
 
       // Act
 
@@ -277,7 +277,7 @@ void main() {
         (tester) async {
       // Arrange
 
-      _signInState(const SignInState.loading());
+      _signInState(const SignInOptionsState.loading());
 
       await _pumpPage(tester);
 
@@ -290,13 +290,14 @@ void main() {
 
       // Assert
 
-      verify(_mockSignInBloc.add(const SignInEvent.signInWithGoogleEvent()))
+      verify(_mockSignInBloc
+              .add(const SignInOptionsEvent.signInWithGoogleEvent()))
           .called(1);
 
       // Assert
 
-      await expectLater(
-          _mockSignInBloc.stream, emitsInOrder([const SignInState.loading()]));
+      await expectLater(_mockSignInBloc.stream,
+          emitsInOrder([const SignInOptionsState.loading()]));
     });
   });
 

@@ -9,7 +9,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 
-import 'sign_in_bloc_test.mocks.dart';
+import 'sign_in_options_bloc_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
@@ -37,7 +37,7 @@ void main() {
 
   test('initialState should be SignInInitial', () {
     // assert
-    expect(_bloc.state, equals(const SignInState.initial()));
+    expect(_bloc.state, equals(const SignInOptionsState.initial()));
   });
 
   group('when sign in with google', () {
@@ -56,13 +56,13 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(const SignInEvent.signInWithGoogleEvent());
+      _bloc.add(const SignInOptionsEvent.signInWithGoogleEvent());
 
       // assert later
 
       final expected = [
-        const SignInState.loading(),
-        const SignInState.signInCancelled(),
+        const SignInOptionsState.loading(),
+        const SignInOptionsState.signInCancelled(),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -81,13 +81,13 @@ void main() {
           .thenAnswer((_) async => Left(failureDetails));
 
       // act
-      _bloc.add(const SignInEvent.signInWithGoogleEvent());
+      _bloc.add(const SignInOptionsEvent.signInWithGoogleEvent());
 
       // assert later
 
       final expected = [
-        const SignInState.loading(),
-        SignInState.signInNotification(message: failureDetails.message),
+        const SignInOptionsState.loading(),
+        SignInOptionsState.signInNotification(message: failureDetails.message),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -100,13 +100,13 @@ void main() {
           .thenAnswer((_) async => const Right(unit));
 
       // act
-      _bloc.add(const SignInEvent.signInWithGoogleEvent());
+      _bloc.add(const SignInOptionsEvent.signInWithGoogleEvent());
 
       // assert later
 
       final expected = [
-        const SignInState.loading(),
-        const SignInState.signInAllowed(),
+        const SignInOptionsState.loading(),
+        const SignInOptionsState.signInAllowed(),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected));
@@ -119,17 +119,38 @@ void main() {
           .thenAnswer((_) async => const Right(unit));
 
       // act
-      _bloc.add(const SignInEvent.signInWithGoogleEvent());
+      _bloc.add(const SignInOptionsEvent.signInWithGoogleEvent());
 
       // assert later
 
       final expected = [
-        const SignInState.loading(),
-        const SignInState.signInAllowed(),
+        const SignInOptionsState.loading(),
+        const SignInOptionsState.signInAllowed(),
       ];
 
       await expectLater(_bloc.stream, emitsInOrder(expected)).then((_) {
         verify(_authBloc.add(const AuthEvent.authCheckRequested())).called(1);
+      });
+    });
+  });
+
+  group('when sign in with credential', () {
+    test('should go to credential page', () async {
+      // arrange
+
+      when(_mockNavigation.goTo(any)).thenReturn(null);
+
+      // act
+      _bloc.add(const SignInOptionsEvent.signInWithCredentialEvent());
+
+      // assert later
+
+      final expected = [
+        const SignInOptionsState.initial(),
+      ];
+
+      await expectLater(_bloc.stream, emitsInOrder(expected)).then((_) {
+        verify(_mockNavigation.goTo(any)).called(1);
       });
     });
   });

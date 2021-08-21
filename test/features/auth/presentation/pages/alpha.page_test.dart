@@ -50,7 +50,7 @@ void main() {
     when(_mockNavigationCubit.stream).thenAnswer((_) => Stream.value(state));
   }
 
-  void _signInState(SignInState state) {
+  void _signInState(SignInOptionsState state) {
     when(_mockSignInBloc.state).thenReturn(state);
     when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
   }
@@ -80,7 +80,7 @@ void main() {
 
       _navigationState(const NavigationState.initial());
 
-      _signInState(const SignInState.initial());
+      _signInState(const SignInOptionsState.initial());
 
       // Act
 
@@ -104,7 +104,7 @@ void main() {
 
       _navigationState(const NavigationState.initial());
 
-      _signInState(const SignInState.initial());
+      _signInState(const SignInOptionsState.initial());
 
       // Act
 
@@ -123,7 +123,7 @@ void main() {
 
       _navigationState(const NavigationState.initial());
 
-      _signInState(const SignInState.initial());
+      _signInState(const SignInOptionsState.initial());
 
       // Act
 
