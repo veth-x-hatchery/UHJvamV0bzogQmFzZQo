@@ -96,21 +96,19 @@ class MockFirebaseAuth extends _i1.Mock implements _i4.FirebaseAuth {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i6.Future<_i4.UserCredential> signInWithEmailAndPassword(
-          {String? credential, String? password}) =>
+  _i6.Future<_i4.UserCredential> createUserWithEmailAndPassword(
+          {String? email, String? password}) =>
       (super.noSuchMethod(
-              Invocation.method(#signInWithEmailAndPassword, [],
-                  {#credential: credential, #password: password}),
+              Invocation.method(#createUserWithEmailAndPassword, [],
+                  {#email: email, #password: password}),
               returnValue:
                   Future<_i4.UserCredential>.value(_FakeUserCredential_2()))
           as _i6.Future<_i4.UserCredential>);
   @override
-  _i6.Future<List<String>> fetchSignInMethodsForCredential(
-          String? credential) =>
-      (super.noSuchMethod(
-              Invocation.method(#fetchSignInMethodsForCredential, [credential]),
+  _i6.Future<List<String>> fetchSignInMethodsForEmail(String? email) => (super
+          .noSuchMethod(Invocation.method(#fetchSignInMethodsForEmail, [email]),
               returnValue: Future<List<String>>.value(<String>[]))
-          as _i6.Future<List<String>>);
+      as _i6.Future<List<String>>);
   @override
   _i6.Future<_i4.UserCredential> getRedirectResult() =>
       (super.noSuchMethod(Invocation.method(#getRedirectResult, []),
@@ -118,10 +116,9 @@ class MockFirebaseAuth extends _i1.Mock implements _i4.FirebaseAuth {
                   Future<_i4.UserCredential>.value(_FakeUserCredential_2()))
           as _i6.Future<_i4.UserCredential>);
   @override
-  bool isSignInWithCredentialLink(String? credentialLink) =>
-      (super.noSuchMethod(
-          Invocation.method(#isSignInWithCredentialLink, [credentialLink]),
-          returnValue: false) as bool);
+  bool isSignInWithEmailLink(String? emailLink) => (super.noSuchMethod(
+      Invocation.method(#isSignInWithEmailLink, [emailLink]),
+      returnValue: false) as bool);
   @override
   _i6.Stream<_i4.User?> authStateChanges() =>
       (super.noSuchMethod(Invocation.method(#authStateChanges, []),
@@ -135,23 +132,19 @@ class MockFirebaseAuth extends _i1.Mock implements _i4.FirebaseAuth {
       (super.noSuchMethod(Invocation.method(#userChanges, []),
           returnValue: Stream<_i4.User?>.empty()) as _i6.Stream<_i4.User?>);
   @override
-  _i6.Future<void> sendPasswordResetCredential(
-          {String? credential, _i3.ActionCodeSettings? actionCodeSettings}) =>
+  _i6.Future<void> sendPasswordResetEmail(
+          {String? email, _i3.ActionCodeSettings? actionCodeSettings}) =>
       (super.noSuchMethod(
-          Invocation.method(#sendPasswordResetCredential, [], {
-            #credential: credential,
-            #actionCodeSettings: actionCodeSettings
-          }),
+          Invocation.method(#sendPasswordResetEmail, [],
+              {#email: email, #actionCodeSettings: actionCodeSettings}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i6.Future<void> sendSignInLinkToCredential(
-          {String? credential, _i3.ActionCodeSettings? actionCodeSettings}) =>
+  _i6.Future<void> sendSignInLinkToEmail(
+          {String? email, _i3.ActionCodeSettings? actionCodeSettings}) =>
       (super.noSuchMethod(
-          Invocation.method(#sendSignInLinkToCredential, [], {
-            #credential: credential,
-            #actionCodeSettings: actionCodeSettings
-          }),
+          Invocation.method(#sendSignInLinkToEmail, [],
+              {#email: email, #actionCodeSettings: actionCodeSettings}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
@@ -203,23 +196,23 @@ class MockFirebaseAuth extends _i1.Mock implements _i4.FirebaseAuth {
                   Future<_i4.UserCredential>.value(_FakeUserCredential_2()))
           as _i6.Future<_i4.UserCredential>);
   @override
-  _i6.Future<_i4.UserCredential> signInWithCredentialAndPassword(
-          {String? credential, String? password}) =>
+  _i6.Future<_i4.UserCredential> signInWithEmailAndPassword(
+          {String? email, String? password}) =>
       (super.noSuchMethod(
-              Invocation.method(#signInWithCredentialAndPassword, [],
-                  {#credential: credential, #password: password}),
+              Invocation.method(#signInWithEmailAndPassword, [],
+                  {#email: email, #password: password}),
               returnValue:
                   Future<_i4.UserCredential>.value(_FakeUserCredential_2()))
           as _i6.Future<_i4.UserCredential>);
   @override
-  _i6.Future<_i4.UserCredential> signInWithCredentialLink(
-          {String? credential, String? credentialLink}) =>
+  _i6.Future<_i4.UserCredential> signInWithEmailLink(
+          {String? email, String? emailLink}) =>
       (super.noSuchMethod(
-              Invocation.method(#signInWithCredentialLink, [],
-                  {#credential: credential, #credentialLink: credentialLink}),
-              returnValue:
-                  Future<_i4.UserCredential>.value(_FakeUserCredential_2()))
-          as _i6.Future<_i4.UserCredential>);
+          Invocation.method(
+              #signInWithEmailLink, [], {#email: email, #emailLink: emailLink}),
+          returnValue:
+              Future<_i4.UserCredential>.value(_FakeUserCredential_2())) as _i6
+          .Future<_i4.UserCredential>);
   @override
   _i6.Future<_i4.ConfirmationResult> signInWithPhoneNumber(String? phoneNumber,
           [_i4.RecaptchaVerifier? verifier]) =>
@@ -388,8 +381,8 @@ class MockGoogleSignInAccount extends _i1.Mock
   }
 
   @override
-  String get credential =>
-      (super.noSuchMethod(Invocation.getter(#credential), returnValue: '')
+  String get email =>
+      (super.noSuchMethod(Invocation.getter(#email), returnValue: '')
           as String);
   @override
   String get id =>
@@ -449,9 +442,9 @@ class MockUser extends _i1.Mock implements _i4.User {
   }
 
   @override
-  bool get credentialVerified =>
-      (super.noSuchMethod(Invocation.getter(#credentialVerified),
-          returnValue: false) as bool);
+  bool get emailVerified =>
+      (super.noSuchMethod(Invocation.getter(#emailVerified), returnValue: false)
+          as bool);
   @override
   bool get isAnonymous =>
       (super.noSuchMethod(Invocation.getter(#isAnonymous), returnValue: false)
@@ -512,10 +505,10 @@ class MockUser extends _i1.Mock implements _i4.User {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i6.Future<void> sendCredentialVerification(
+  _i6.Future<void> sendEmailVerification(
           [_i3.ActionCodeSettings? actionCodeSettings]) =>
       (super.noSuchMethod(
-          Invocation.method(#sendCredentialVerification, [actionCodeSettings]),
+          Invocation.method(#sendEmailVerification, [actionCodeSettings]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
@@ -524,8 +517,8 @@ class MockUser extends _i1.Mock implements _i4.User {
               returnValue: Future<_i4.User>.value(_FakeUser_8()))
           as _i6.Future<_i4.User>);
   @override
-  _i6.Future<void> updateCredential(String? newCredential) =>
-      (super.noSuchMethod(Invocation.method(#updateCredential, [newCredential]),
+  _i6.Future<void> updateEmail(String? newEmail) =>
+      (super.noSuchMethod(Invocation.method(#updateEmail, [newEmail]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
@@ -558,11 +551,11 @@ class MockUser extends _i1.Mock implements _i4.User {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i6.Future<void> verifyBeforeUpdateCredential(String? newCredential,
+  _i6.Future<void> verifyBeforeUpdateEmail(String? newEmail,
           [_i3.ActionCodeSettings? actionCodeSettings]) =>
       (super.noSuchMethod(
-          Invocation.method(#verifyBeforeUpdateCredential,
-              [newCredential, actionCodeSettings]),
+          Invocation.method(
+              #verifyBeforeUpdateEmail, [newEmail, actionCodeSettings]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override

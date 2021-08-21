@@ -9,12 +9,12 @@ import 'package:flutter/src/widgets/navigator.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart'
     as _i4;
+import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart'
+    as _i2;
 import 'package:vethx_beta/features/signin/presentation/bloc/password/sign_in_password_bloc.dart'
     as _i6;
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart'
     as _i5;
-import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart'
-    as _i2;
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
     as _i7;
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart'

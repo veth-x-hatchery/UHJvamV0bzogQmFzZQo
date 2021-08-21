@@ -62,7 +62,7 @@ void main() {
       // Arrange
 
       when(_mockFirebaseAuth.signInWithEmailAndPassword(
-        credential: credential.getOrCrash(),
+        email: credential.getOrCrash(),
         password: password.getOrCrash(),
       )).thenThrow(firebaseException);
 
@@ -121,7 +121,7 @@ void main() {
 
       when(
         _mockFirebaseAuth.signInWithEmailAndPassword(
-          credential: credential.getOrCrash(),
+          email: credential.getOrCrash(),
           password: password.getOrCrash(),
         ),
       ).thenAnswer(
@@ -151,8 +151,8 @@ void main() {
     ) async {
       // Arrange
 
-      when(_mockFirebaseAuth.signInWithCredentialAndPassword(
-        credential: credential.getOrCrash(),
+      when(_mockFirebaseAuth.signInWithEmailAndPassword(
+        email: credential.getOrCrash(),
         password: password.getOrCrash(),
       )).thenThrow(firebaseException);
 
@@ -228,8 +228,8 @@ void main() {
       // Arrange
 
       when(
-        _mockFirebaseAuth.signInWithCredentialAndPassword(
-          credential: credential.getOrCrash(),
+        _mockFirebaseAuth.signInWithEmailAndPassword(
+          email: credential.getOrCrash(),
           password: password.getOrCrash(),
         ),
       ).thenAnswer(
@@ -320,8 +320,8 @@ void main() {
 
     Future<void> _credentialIsAlreadyInUse(Exception firebaseException) async {
       // Arrange
-      when(_mockFirebaseAuth.signInWithCredentialAndPassword(
-        credential: credential.getOrCrash(),
+      when(_mockFirebaseAuth.signInWithEmailAndPassword(
+        email: credential.getOrCrash(),
         password: _authFacade.randomPassword,
       )).thenThrow(firebaseException);
     }
