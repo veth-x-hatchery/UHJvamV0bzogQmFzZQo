@@ -8,23 +8,28 @@ import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 
 import 'sign_in_secret_bloc_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
+  NavigationCubit,
   SignInWithSecret,
 ])
 void main() {
   late SignInSecretBloc _bloc;
   late MockAuthBloc _mockAuthBloc;
+  late MockNavigationCubit _mockNavigation;
   late MockSignInWithSecret _mockSignInWithSecret;
 
   setUp(() {
     _mockAuthBloc = MockAuthBloc();
     _mockSignInWithSecret = MockSignInWithSecret();
+    _mockNavigation = MockNavigationCubit();
     _bloc = SignInSecretBloc(
       _mockAuthBloc,
+      _mockNavigation,
       _mockSignInWithSecret,
     );
   });
@@ -218,5 +223,50 @@ void main() {
     ).then((_) {
       verify(_mockAuthBloc.add(const AuthEvent.authCheckRequested())).called(1);
     });
+  });
+
+  test('should go to credential page when cached credential fail occours',
+      () async {
+    // arrange
+
+    const secret = 'dmFsaWRwYXNzd29yZAo';
+
+    final valueObject = Secret(secret);
+
+    final expectedFailure = FailureDetails(
+      failure: const AuthFailure.invalidCachedCredential(),
+      message: SignInWithSecretErrorMessages.invalidCachedCredential,
+    );
+
+    when(_mockSignInWithSecret.call(any))
+        .thenAnswer((_) => Future.value(Left(expectedFailure)));
+
+    // act
+
+    _bloc.add(const SignInSecretEvent.secretChanged(secret));
+
+    _bloc.add(const SignInSecretEvent.analyseSecretPressed());
+
+    // assert
+    await expectLater(
+      _bloc.stream,
+      emitsInOrder([
+        SignInSecretState(
+          secret: valueObject,
+          isLoading: false,
+          authFailureOrSuccessOption: none(),
+        ),
+        SignInSecretState(
+          secret: valueObject,
+          isLoading: true,
+          authFailureOrSuccessOption: none(),
+        ),
+        SignInSecretState(
+          secret: valueObject,
+          isLoading: false,
+          authFailureOrSuccessOption: some(Left(expectedFailure)),
+        )
+      ]),
+    ).then((_) => verify(_mockNavigation.goTo(any)).called(1));
   });
 }

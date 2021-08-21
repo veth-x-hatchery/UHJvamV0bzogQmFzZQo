@@ -135,6 +135,7 @@ Future<void> signInDependenciesInjection() async {
   sl.registerFactory<SignInSecretBloc>(
     () => SignInSecretBloc(
       sl<AuthBloc>(),
+      sl<NavigationCubit>(),
       sl<SignInWithSecret>(),
     ),
   );

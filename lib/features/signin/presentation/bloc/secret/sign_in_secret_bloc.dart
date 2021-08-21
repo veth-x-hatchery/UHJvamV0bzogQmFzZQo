@@ -4,10 +4,12 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
-import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
 part 'sign_in_secret_event.dart';
 part 'sign_in_secret_state.dart';
@@ -15,10 +17,12 @@ part 'sign_in_secret_bloc.freezed.dart';
 
 class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
   final AuthBloc _authBloc;
+  final NavigationCubit _navigation;
   final SignInWithSecret _signInWithCredentialAndSecret;
 
   SignInSecretBloc(
     this._authBloc,
+    this._navigation,
     this._signInWithCredentialAndSecret,
   ) : super(SignInSecretState.initial());
 
@@ -43,7 +47,14 @@ class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
         yield state.copyWith(
           isLoading: false,
           authFailureOrSuccessOption: result.fold(
-            (l) => optionOf(left(l)), // Todo(v): Simplify it
+            (l) {
+              if (l.failure == const AuthFailure.invalidCachedCredential()) {
+                _navigation.goTo(SignInPageGoTo.credentialPage(
+                    from: SignInPageRoutes.secretEntry));
+              }
+              // Todo(v): Simplify it
+              return optionOf(left(l));
+            },
             (r) {
               _authBloc.add(const AuthEvent.authCheckRequested());
               return none();
