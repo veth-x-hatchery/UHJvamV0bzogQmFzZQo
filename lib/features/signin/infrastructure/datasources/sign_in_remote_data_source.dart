@@ -16,7 +16,7 @@
 //   Future<bool> credentialAlreadyRegistered(String credential);
 
 //   /// Throws a [ServerException] for all error codes.
-//   Future<UserModel> createUserWithCredentialAndPassword(
+//   Future<UserModel> signInWithEmailAndPassword(
 //       String credential, String password);
 
 //   /// Throws a [ServerException] for all error codes.
@@ -43,9 +43,9 @@
 // //   SignInRemoteSource(this._http, this._api);
 
 // //   @override
-// //   Future<UserModel> createUserWithCredentialAndPassword(
+// //   Future<UserModel> signInWithEmailAndPassword(
 // //       String credential, String password) {
-// //     // TODO: implement createUserWithCredentialAndPassword
+// //     // TODO: implement signInWithEmailAndPassword
 // //     throw UnimplementedError();
 // //   }
 

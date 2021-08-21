@@ -24,7 +24,7 @@ class FieldCredential extends StatelessWidget {
       controller: controller,
       focusNode: focusNode,
       autofocus: true,
-      keyboardType: TextInputType.credentialAddress,
+      keyboardType: TextInputType.emailAddress,
       decoration: vethxInputDecoration(
         context,
         hintText: Texts.credentialHint,

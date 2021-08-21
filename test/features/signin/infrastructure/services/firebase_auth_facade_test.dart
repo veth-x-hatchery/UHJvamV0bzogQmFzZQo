@@ -61,7 +61,7 @@ void main() {
     ) async {
       // Arrange
 
-      when(_mockFirebaseAuth.createUserWithCredentialAndPassword(
+      when(_mockFirebaseAuth.signInWithEmailAndPassword(
         credential: credential.getOrCrash(),
         password: password.getOrCrash(),
       )).thenThrow(firebaseException);
@@ -120,7 +120,7 @@ void main() {
       // Arrange
 
       when(
-        _mockFirebaseAuth.createUserWithCredentialAndPassword(
+        _mockFirebaseAuth.signInWithEmailAndPassword(
           credential: credential.getOrCrash(),
           password: password.getOrCrash(),
         ),

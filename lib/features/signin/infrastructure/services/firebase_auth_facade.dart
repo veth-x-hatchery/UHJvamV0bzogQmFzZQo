@@ -29,8 +29,8 @@ class FirebaseAuthFacade implements IAuthFacade {
     required Password password,
   }) async {
     try {
-      await _firebaseAuth.createUserWithCredentialAndPassword(
-        credential: credentialAddress.getOrCrash(),
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: credentialAddress.getOrCrash(),
         password: password.getOrCrash(),
       );
       return right(unit);
@@ -54,8 +54,8 @@ class FirebaseAuthFacade implements IAuthFacade {
     required Password password,
   }) async {
     try {
-      await _firebaseAuth.signInWithCredentialAndPassword(
-        credential: credentialAddress.getOrCrash(),
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: credentialAddress.getOrCrash(),
         password: password.getOrCrash(),
       );
       return right(unit);
@@ -102,8 +102,8 @@ class FirebaseAuthFacade implements IAuthFacade {
   Future<Either<AuthFailure, bool>> credentialIsAlreadyInUse(
       CredentialAddress credentialAddress) async {
     try {
-      await _firebaseAuth.signInWithCredentialAndPassword(
-        credential: credentialAddress.getOrCrash(),
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: credentialAddress.getOrCrash(),
         password: randomPassword,
       );
       return right(true);

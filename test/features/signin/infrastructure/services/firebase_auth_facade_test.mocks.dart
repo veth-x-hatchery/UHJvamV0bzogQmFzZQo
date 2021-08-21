@@ -96,10 +96,10 @@ class MockFirebaseAuth extends _i1.Mock implements _i4.FirebaseAuth {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i6.Future<_i4.UserCredential> createUserWithCredentialAndPassword(
+  _i6.Future<_i4.UserCredential> signInWithEmailAndPassword(
           {String? credential, String? password}) =>
       (super.noSuchMethod(
-              Invocation.method(#createUserWithCredentialAndPassword, [],
+              Invocation.method(#signInWithEmailAndPassword, [],
                   {#credential: credential, #password: password}),
               returnValue:
                   Future<_i4.UserCredential>.value(_FakeUserCredential_2()))
