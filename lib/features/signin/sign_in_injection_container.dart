@@ -81,15 +81,15 @@ Future<void> signInDependenciesInjection() async {
   // );
 
   // Use cases
-  sl.registerLazySingleton<SignInCheckIfEmailIsInUse>(
-    () => SignInCheckIfEmailIsInUse(
+  sl.registerLazySingleton<SignInCheckIfCredentialIsInUse>(
+    () => SignInCheckIfCredentialIsInUse(
       // sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
   );
 
-  sl.registerLazySingleton<SignInWithEmailAndPassword>(
-    () => SignInWithEmailAndPassword(
+  sl.registerLazySingleton<SignInWithCredentialAndPassword>(
+    () => SignInWithCredentialAndPassword(
       // sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
@@ -102,8 +102,8 @@ Future<void> signInDependenciesInjection() async {
     ),
   );
 
-  sl.registerLazySingleton<SignInRegisterEmailAndPassword>(
-    () => SignInRegisterEmailAndPassword(
+  sl.registerLazySingleton<SignInRegisterCredentialAndPassword>(
+    () => SignInRegisterCredentialAndPassword(
       // sl<ISignInRepository>(),
       sl<IAuthFacade>(),
     ),
@@ -119,12 +119,12 @@ Future<void> signInDependenciesInjection() async {
   );
 
   sl.registerFactory<SignInRegisterBloc>(
-    () => SignInRegisterBloc(sl<SignInRegisterEmailAndPassword>()),
+    () => SignInRegisterBloc(sl<SignInRegisterCredentialAndPassword>()),
   );
 
-  sl.registerFactory<SignInEmailBloc>(
-    () => SignInEmailBloc(
-      sl<SignInCheckIfEmailIsInUse>(),
+  sl.registerFactory<SignInCredentialBloc>(
+    () => SignInCredentialBloc(
+      sl<SignInCheckIfCredentialIsInUse>(),
       sl<NavigationCubit>(),
     ),
   );
@@ -132,7 +132,7 @@ Future<void> signInDependenciesInjection() async {
   sl.registerFactory<SignInPasswordBloc>(
     () => SignInPasswordBloc(
       sl<AuthBloc>(),
-      sl<SignInWithEmailAndPassword>(),
+      sl<SignInWithCredentialAndPassword>(),
     ),
   );
 

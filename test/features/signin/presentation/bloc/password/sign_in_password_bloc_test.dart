@@ -13,19 +13,20 @@ import 'sign_in_password_bloc_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
-  SignInWithEmailAndPassword,
+  SignInWithCredentialAndPassword,
 ])
 void main() {
   late SignInPasswordBloc _bloc;
   late MockAuthBloc _mockAuthBloc;
-  late MockSignInWithEmailAndPassword _mockSignInWithEmailAndPassword;
+  late MockSignInWithCredentialAndPassword _mockSignInWithCredentialAndPassword;
 
   setUp(() {
     _mockAuthBloc = MockAuthBloc();
-    _mockSignInWithEmailAndPassword = MockSignInWithEmailAndPassword();
+    _mockSignInWithCredentialAndPassword =
+        MockSignInWithCredentialAndPassword();
     _bloc = SignInPasswordBloc(
       _mockAuthBloc,
-      _mockSignInWithEmailAndPassword,
+      _mockSignInWithCredentialAndPassword,
     );
   });
 
@@ -61,7 +62,7 @@ void main() {
 
     final valueObject = Password(password);
 
-    when(_mockSignInWithEmailAndPassword.call(any))
+    when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(right(unit)));
 
     // act
@@ -102,7 +103,7 @@ void main() {
 
     const password = 'test';
 
-    when(_mockSignInWithEmailAndPassword.call(any))
+    when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(right(unit)));
 
     // act
@@ -141,12 +142,12 @@ void main() {
 
     const password = 'dmFsaWRwYXNzd29yZAo';
     final expectedFailure = FailureDetails(
-      failure: const AuthFailure.invalidEmailAndPasswordCombination(),
-      message: SignInWithEmailAndPasswordErrorMessages
-          .invalidEmailAndPasswordCombination,
+      failure: const AuthFailure.invalidCredentialAndPasswordCombination(),
+      message: SignInWithCredentialAndPasswordErrorMessages
+          .invalidCredentialAndPasswordCombination,
     );
 
-    when(_mockSignInWithEmailAndPassword.call(any))
+    when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(Left(expectedFailure)));
 
     // act
@@ -186,7 +187,7 @@ void main() {
 
     final valueObject = Password(password);
 
-    when(_mockSignInWithEmailAndPassword.call(any))
+    when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(right(unit)));
 
     // act

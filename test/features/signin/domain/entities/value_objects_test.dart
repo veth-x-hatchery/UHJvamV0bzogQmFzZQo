@@ -5,12 +5,12 @@ import 'package:vethx_beta/features/signin/domain/core/failures.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 
 void main() {
-  const String validEmail = 'teste@vethx.com';
-  const String inValidEmail = '@com';
+  const String validCredential = 'teste@vethx.com';
+  const String inValidCredential = '@com';
 
-  group('when validate EmailAddress', () {
+  group('when validate CredentialAddress', () {
     test(
-        'should return [ValueFailure.empty] with righ message error [EmailAddressMessageErrors.empty]',
+        'should return [ValueFailure.empty] with righ message error [CredentialAddressMessageErrors.empty]',
         () {
       // arrange
 
@@ -18,30 +18,33 @@ void main() {
 
       // act
 
-      final credentialAddress = EmailAddress(credential);
+      final credentialAddress = CredentialAddress(credential);
 
       // assert
 
       expect(credentialAddress.value,
           left(const ValueFailure.empty(failedValue: credential)));
 
-      expect(credentialAddress.validation, EmailAddressMessageErrors.empty);
+      expect(
+          credentialAddress.validation, CredentialAddressMessageErrors.empty);
     });
 
-    test('should return [ValueFailure.invalidEmail]', () {
+    test('should return [ValueFailure.invalidCredential]', () {
       // arrange
 
       // act
 
-      final credentialAddress = EmailAddress(inValidEmail);
+      final credentialAddress = CredentialAddress(inValidCredential);
 
       // assert
 
-      expect(credentialAddress.value,
-          left(const ValueFailure.invalidEmail(failedValue: inValidEmail)));
-
       expect(
-          credentialAddress.validation, EmailAddressMessageErrors.invalidEmail);
+          credentialAddress.value,
+          left(const ValueFailure.invalidCredential(
+              failedValue: inValidCredential)));
+
+      expect(credentialAddress.validation,
+          CredentialAddressMessageErrors.invalidCredential);
     });
 
     test('should validate credential with success', () {
@@ -49,11 +52,11 @@ void main() {
 
       // act
 
-      final credentialAddress = EmailAddress(validEmail);
+      final credentialAddress = CredentialAddress(validCredential);
 
       // assert
 
-      expect(credentialAddress.value, right(validEmail));
+      expect(credentialAddress.value, right(validCredential));
 
       expect(credentialAddress.validation, null);
     });
@@ -65,7 +68,7 @@ void main() {
 
       // act
 
-      final credentialAddress = EmailAddress('invalid-credential');
+      final credentialAddress = CredentialAddress('invalid-credential');
 
       // assert
 

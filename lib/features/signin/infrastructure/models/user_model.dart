@@ -15,7 +15,7 @@
 //     required this.authType,
 //     required String credential,
 //   }) : super(
-//           credential: EmailAddress(credential),
+//           credential: CredentialAddress(credential),
 //           name: '',
 //         );
 

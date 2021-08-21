@@ -14,9 +14,10 @@ part 'sign_in_register_bloc.freezed.dart';
 
 class SignInRegisterBloc
     extends Bloc<SignInRegisterEvent, SignInRegisterState> {
-  final SignInRegisterEmailAndPassword _signInRegisterEmailAndPassword;
+  final SignInRegisterCredentialAndPassword
+      _signInRegisterCredentialAndPassword;
 
-  SignInRegisterBloc(this._signInRegisterEmailAndPassword)
+  SignInRegisterBloc(this._signInRegisterCredentialAndPassword)
       : super(SignInRegisterState.initial());
 
   @override
@@ -26,7 +27,7 @@ class SignInRegisterBloc
     yield* event.map(
       credentialChanged: (e) async* {
         yield state.copyWith(
-          credential: EmailAddress(e.credentialStr),
+          credential: CredentialAddress(e.credentialStr),
           authFailureOrSuccessOption: none(),
         );
       },
@@ -36,12 +37,12 @@ class SignInRegisterBloc
           authFailureOrSuccessOption: none(),
         );
       },
-      registerWithEmailAndPasswordPressed: (e) async* {
+      registerWithCredentialAndPasswordPressed: (e) async* {
         yield state.copyWith(
           isLoading: true,
           authFailureOrSuccessOption: none(),
         );
-        final result = await _signInRegisterEmailAndPassword.call(
+        final result = await _signInRegisterCredentialAndPassword.call(
           Params(
               credentials: Credentials(
             user: state.credential,

@@ -15,12 +15,12 @@ class NonEmptyStringValidator implements StringValidator {
   }
 }
 
-class EmailAndPasswordValidators {
+class CredentialAndPasswordValidators {
   final StringValidator credentialValidator = NonEmptyStringValidator();
   final StringValidator passwordValidator = NonEmptyStringValidator();
   final StringValidator confirmPasswordValidator = NonEmptyStringValidator();
 
-  final String invalidEmailTextErrorText = Texts.invalidEmail;
+  final String invalidCredentialTextErrorText = Texts.invalidCredential;
   final String invalidPasswordTextErrorText = Texts.invalidPassword;
 }
 

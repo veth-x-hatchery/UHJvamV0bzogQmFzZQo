@@ -16,7 +16,7 @@ import 'sign_in_check_credential_test.mocks.dart';
   IAuthFacade,
 ])
 void main() {
-  late SignInCheckIfEmailIsInUse _signInCheckIfEmailIsInUse;
+  late SignInCheckIfCredentialIsInUse _signInCheckIfCredentialIsInUse;
 
   // late MockISignInRepository _mockSignInRepository;
   late MockIAuthFacade _mockAuthFacade;
@@ -25,14 +25,14 @@ void main() {
     // _mockSignInRepository = MockISignInRepository();
     _mockAuthFacade = MockIAuthFacade();
 
-    _signInCheckIfEmailIsInUse = SignInCheckIfEmailIsInUse(
+    _signInCheckIfCredentialIsInUse = SignInCheckIfCredentialIsInUse(
       // _mockSignInRepository,
       _mockAuthFacade,
     );
   });
 
   group('when check user credential is already registered', () {
-    final credential = EmailAddress('test@vethx.com');
+    final credential = CredentialAddress('test@vethx.com');
 
     test('should return user is registered', () async {
       // arrange
@@ -42,8 +42,8 @@ void main() {
 
       // act
 
-      final result =
-          await _signInCheckIfEmailIsInUse.call(Params(credential: credential));
+      final result = await _signInCheckIfCredentialIsInUse
+          .call(Params(credential: credential));
 
       // assert
 
@@ -60,7 +60,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: CheckEmailErrorMessages.unavailable,
+        message: CheckCredentialErrorMessages.unavailable,
       );
 
       when(_mockAuthFacade.credentialIsAlreadyInUse(credential))
@@ -68,8 +68,8 @@ void main() {
 
       // act
 
-      final result =
-          await _signInCheckIfEmailIsInUse.call(Params(credential: credential));
+      final result = await _signInCheckIfCredentialIsInUse
+          .call(Params(credential: credential));
 
       // assert
 

@@ -8,8 +8,8 @@ class Texts {
 
   //! Login
   static const String forgotMyPassword = 'FORGOT MY PASSWORD';
-  static const String changeEmail = 'CHANGE E-MAIL';
-  static const String invalidEmail = 'Invalid credential';
+  static const String changeCredential = 'CHANGE E-MAIL';
+  static const String invalidCredential = 'Invalid credential';
   static const String invalidPassword = 'Invalid password';
   static const String passwordHint = 'Password';
   static const String credentialHint = 'E-mail';
@@ -22,7 +22,7 @@ class Texts {
   static const String signInPageTitle = 'Sign-In';
   static const String signInRegisterEntryTitle = 'Register';
   static const String signInWithGoogle = 'Sign In With Google';
-  static const String signInWithEmail = 'Sign in with credential';
+  static const String signInWithCredential = 'Sign in with credential';
 
   //! Error Messages
   static const String errorTroubleFriendlyMessage = 'Ops...';

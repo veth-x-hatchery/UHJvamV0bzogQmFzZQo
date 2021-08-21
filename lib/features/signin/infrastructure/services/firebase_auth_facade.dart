@@ -24,12 +24,12 @@ class FirebaseAuthFacade implements IAuthFacade {
   );
 
   @override
-  Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
-    required EmailAddress credentialAddress,
+  Future<Either<AuthFailure, Unit>> registerWithCredentialAndPassword({
+    required CredentialAddress credentialAddress,
     required Password password,
   }) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      await _firebaseAuth.createUserWithCredentialAndPassword(
         credential: credentialAddress.getOrCrash(),
         password: password.getOrCrash(),
       );
@@ -39,7 +39,7 @@ class FirebaseAuthFacade implements IAuthFacade {
         return left(const AuthFailure.credentialAlreadyInUse());
       } else {
         Logger.infrastructure(
-            'FirebaseAuthFacade.registerWithEmailAndPassword -> ${e.code}');
+            'FirebaseAuthFacade.registerWithCredentialAndPassword -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
     } on Exception catch (ex, stack) {
@@ -49,22 +49,23 @@ class FirebaseAuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({
-    required EmailAddress credentialAddress,
+  Future<Either<AuthFailure, Unit>> signInWithCredentialAndPassword({
+    required CredentialAddress credentialAddress,
     required Password password,
   }) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      await _firebaseAuth.signInWithCredentialAndPassword(
         credential: credentialAddress.getOrCrash(),
         password: password.getOrCrash(),
       );
       return right(unit);
     } on FirebaseException catch (e) {
       if (e.code == 'wrong-password' || e.code == 'user-not-found') {
-        return left(const AuthFailure.invalidEmailAndPasswordCombination());
+        return left(
+            const AuthFailure.invalidCredentialAndPasswordCombination());
       } else {
         Logger.infrastructure(
-            'FirebaseAuthFacade.signInWithEmailAndPassword -> ${e.code}');
+            'FirebaseAuthFacade.signInWithCredentialAndPassword -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
     } on Exception catch (ex, stack) {
@@ -99,9 +100,9 @@ class FirebaseAuthFacade implements IAuthFacade {
 
   @override
   Future<Either<AuthFailure, bool>> credentialIsAlreadyInUse(
-      EmailAddress credentialAddress) async {
+      CredentialAddress credentialAddress) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      await _firebaseAuth.signInWithCredentialAndPassword(
         credential: credentialAddress.getOrCrash(),
         password: randomPassword,
       );

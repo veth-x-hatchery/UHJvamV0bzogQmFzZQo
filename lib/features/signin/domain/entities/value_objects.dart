@@ -8,31 +8,32 @@ class PasswordMessageErrors {
   static const shortPassword = 'Your password must be more than 6 chars';
 }
 
-class EmailAddressMessageErrors {
+class CredentialAddressMessageErrors {
   static const empty = 'Informe your password';
-  static const invalidEmail = 'Invalid Email';
+  static const invalidCredential = 'Invalid Credential';
 }
 
-class EmailAddress extends ValueObject<String> {
+class CredentialAddress extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory EmailAddress(String? input) {
-    return EmailAddress._(
-      validateStringNullOrEmpty(input).flatMap(validateEmailAddress),
+  factory CredentialAddress(String? input) {
+    return CredentialAddress._(
+      validateStringNullOrEmpty(input).flatMap(validateCredentialAddress),
     );
   }
 
   String? get validation => value.fold(
         (f) => f.maybeMap(
-          empty: (_) => EmailAddressMessageErrors.empty,
-          invalidEmail: (_) => EmailAddressMessageErrors.invalidEmail,
+          empty: (_) => CredentialAddressMessageErrors.empty,
+          invalidCredential: (_) =>
+              CredentialAddressMessageErrors.invalidCredential,
           orElse: () => null,
         ),
         (_) => null,
       );
 
-  const EmailAddress._(this.value);
+  const CredentialAddress._(this.value);
 }
 
 class Password extends ValueObject<String> {

@@ -8,12 +8,12 @@ import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
 part 'sign_in_check_credential.freezed.dart';
 
-class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
+class SignInCheckIfCredentialIsInUse extends UseCase<bool, Params> {
   // final ISignInRepository _signInRepository;
 
   final IAuthFacade _authFacade;
 
-  SignInCheckIfEmailIsInUse(
+  SignInCheckIfCredentialIsInUse(
     // this._signInRepository,
     this._authFacade,
   );
@@ -30,7 +30,7 @@ class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
   FailureDetails _mapFailures(AuthFailure auth) {
     return FailureDetails(
       failure: auth,
-      message: CheckEmailErrorMessages.unavailable,
+      message: CheckCredentialErrorMessages.unavailable,
     );
   }
 }
@@ -38,11 +38,11 @@ class SignInCheckIfEmailIsInUse extends UseCase<bool, Params> {
 @freezed
 class Params with _$Params {
   const factory Params({
-    required EmailAddress credential,
+    required CredentialAddress credential,
   }) = _Params;
 }
 
-class CheckEmailErrorMessages {
+class CheckCredentialErrorMessages {
   static const unavailable = 'Unavailable';
-  static const credentialAlreadyRegistered = 'Email already registered';
+  static const credentialAlreadyRegistered = 'Credential already registered';
 }

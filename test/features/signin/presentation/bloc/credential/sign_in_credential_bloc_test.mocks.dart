@@ -92,12 +92,12 @@ class MockNavigationCubit extends _i1.Mock implements _i2.NavigationCubit {
   String toString() => super.toString();
 }
 
-/// A class which mocks [SignInCheckIfEmailIsInUse].
+/// A class which mocks [SignInCheckIfCredentialIsInUse].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInCheckIfEmailIsInUse extends _i1.Mock
-    implements _i7.SignInCheckIfEmailIsInUse {
-  MockSignInCheckIfEmailIsInUse() {
+class MockSignInCheckIfCredentialIsInUse extends _i1.Mock
+    implements _i7.SignInCheckIfCredentialIsInUse {
+  MockSignInCheckIfCredentialIsInUse() {
     _i1.throwOnMissingStub(this);
   }
 

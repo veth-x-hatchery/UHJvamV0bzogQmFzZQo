@@ -50,25 +50,25 @@ void main() {
     );
   });
 
-  group('when [FirebaseAuthFacade.registerWithEmailAndPassword]', () {
-    final credential = EmailAddress('test@vethx.com');
+  group('when [FirebaseAuthFacade.registerWithCredentialAndPassword]', () {
+    final credential = CredentialAddress('test@vethx.com');
 
     final password = Password('dGVzdEB2ZXRoeC5jb20K');
 
-    Future<void> _registerWithEmailAndPassword(
+    Future<void> _registerWithCredentialAndPassword(
       Exception firebaseException,
       AuthFailure expectedFailure,
     ) async {
       // Arrange
 
-      when(_mockFirebaseAuth.createUserWithEmailAndPassword(
+      when(_mockFirebaseAuth.createUserWithCredentialAndPassword(
         credential: credential.getOrCrash(),
         password: password.getOrCrash(),
       )).thenThrow(firebaseException);
 
       // act
 
-      final result = await _authFacade.registerWithEmailAndPassword(
+      final result = await _authFacade.registerWithCredentialAndPassword(
         credentialAddress: credential,
         password: password,
       );
@@ -90,7 +90,7 @@ void main() {
 
         // act && assert
 
-        await _registerWithEmailAndPassword(
+        await _registerWithCredentialAndPassword(
           firebaseException,
           expectedFailure,
         );
@@ -109,7 +109,7 @@ void main() {
 
         // act && assert
 
-        await _registerWithEmailAndPassword(
+        await _registerWithCredentialAndPassword(
           firebaseException,
           expectedFailure,
         );
@@ -120,7 +120,7 @@ void main() {
       // Arrange
 
       when(
-        _mockFirebaseAuth.createUserWithEmailAndPassword(
+        _mockFirebaseAuth.createUserWithCredentialAndPassword(
           credential: credential.getOrCrash(),
           password: password.getOrCrash(),
         ),
@@ -129,7 +129,7 @@ void main() {
 
       // act
 
-      final result = await _authFacade.registerWithEmailAndPassword(
+      final result = await _authFacade.registerWithCredentialAndPassword(
         credentialAddress: credential,
         password: password,
       );
@@ -140,25 +140,25 @@ void main() {
     });
   });
 
-  group('when [FirebaseAuthFacade.signInWithEmailAndPassword]', () {
-    final credential = EmailAddress('test@vethx.com');
+  group('when [FirebaseAuthFacade.signInWithCredentialAndPassword]', () {
+    final credential = CredentialAddress('test@vethx.com');
 
     final password = Password('dGVzdEB2ZXRoeC5jb20K');
 
-    Future<void> _signInWithEmailAndPassword(
+    Future<void> _signInWithCredentialAndPassword(
       Exception firebaseException,
       AuthFailure expectedFailure,
     ) async {
       // Arrange
 
-      when(_mockFirebaseAuth.signInWithEmailAndPassword(
+      when(_mockFirebaseAuth.signInWithCredentialAndPassword(
         credential: credential.getOrCrash(),
         password: password.getOrCrash(),
       )).thenThrow(firebaseException);
 
       // act
 
-      final result = await _authFacade.signInWithEmailAndPassword(
+      final result = await _authFacade.signInWithCredentialAndPassword(
         credentialAddress: credential,
         password: password,
       );
@@ -169,36 +169,38 @@ void main() {
     }
 
     test(
-        'should return [AuthFailure.invalidEmailAndPasswordCombination()] when Firebase throw [wrong-password]',
+        'should return [AuthFailure.invalidCredentialAndPasswordCombination()] when Firebase throw [wrong-password]',
         () async {
       // arrange
 
       final firebaseException =
           FirebaseException(code: 'wrong-password', plugin: '');
 
-      const expectedFailure = AuthFailure.invalidEmailAndPasswordCombination();
+      const expectedFailure =
+          AuthFailure.invalidCredentialAndPasswordCombination();
 
       // act && assert
 
-      await _signInWithEmailAndPassword(
+      await _signInWithCredentialAndPassword(
         firebaseException,
         expectedFailure,
       );
     });
 
     test(
-        'should return [AuthFailure.invalidEmailAndPasswordCombination()] when Firebase throw [user-not-found]',
+        'should return [AuthFailure.invalidCredentialAndPasswordCombination()] when Firebase throw [user-not-found]',
         () async {
       // arrange
 
       final firebaseException =
           FirebaseException(code: 'user-not-found', plugin: '');
 
-      const expectedFailure = AuthFailure.invalidEmailAndPasswordCombination();
+      const expectedFailure =
+          AuthFailure.invalidCredentialAndPasswordCombination();
 
       // act && assert
 
-      await _signInWithEmailAndPassword(
+      await _signInWithCredentialAndPassword(
         firebaseException,
         expectedFailure,
       );
@@ -215,7 +217,7 @@ void main() {
 
         // act && assert
 
-        await _signInWithEmailAndPassword(
+        await _signInWithCredentialAndPassword(
           firebaseException,
           expectedFailure,
         );
@@ -226,7 +228,7 @@ void main() {
       // Arrange
 
       when(
-        _mockFirebaseAuth.signInWithEmailAndPassword(
+        _mockFirebaseAuth.signInWithCredentialAndPassword(
           credential: credential.getOrCrash(),
           password: password.getOrCrash(),
         ),
@@ -235,7 +237,7 @@ void main() {
 
       // act
 
-      final result = await _authFacade.signInWithEmailAndPassword(
+      final result = await _authFacade.signInWithCredentialAndPassword(
         credentialAddress: credential,
         password: password,
       );
@@ -314,11 +316,11 @@ void main() {
   });
 
   group('when check if credential is already in use', () {
-    final credential = EmailAddress('test@vethx.com');
+    final credential = CredentialAddress('test@vethx.com');
 
     Future<void> _credentialIsAlreadyInUse(Exception firebaseException) async {
       // Arrange
-      when(_mockFirebaseAuth.signInWithEmailAndPassword(
+      when(_mockFirebaseAuth.signInWithCredentialAndPassword(
         credential: credential.getOrCrash(),
         password: _authFacade.randomPassword,
       )).thenThrow(firebaseException);
@@ -425,7 +427,7 @@ void main() {
 
       when(_mockFirebaseUserMapper.toDomain(_mockFirebaseUser))
           .thenAnswer((_) => domain.User(
-                credential: EmailAddress('credential@valid.com'),
+                credential: CredentialAddress('credential@valid.com'),
                 name: 'valid user',
               ));
 

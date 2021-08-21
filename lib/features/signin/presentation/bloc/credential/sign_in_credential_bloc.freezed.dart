@@ -14,106 +14,107 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$SignInEmailEventTearOff {
-  const _$SignInEmailEventTearOff();
+class _$SignInCredentialEventTearOff {
+  const _$SignInCredentialEventTearOff();
 
-  EmailChanged credentialChanged(String credentialStr) {
-    return EmailChanged(
+  CredentialChanged credentialChanged(String credentialStr) {
+    return CredentialChanged(
       credentialStr,
     );
   }
 
-  AnalyseEmailPressed analyseEmailPressed() {
-    return const AnalyseEmailPressed();
+  AnalyseCredentialPressed analyseCredentialPressed() {
+    return const AnalyseCredentialPressed();
   }
 }
 
 /// @nodoc
-const $SignInEmailEvent = _$SignInEmailEventTearOff();
+const $SignInCredentialEvent = _$SignInCredentialEventTearOff();
 
 /// @nodoc
-mixin _$SignInEmailEvent {
+mixin _$SignInCredentialEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String credentialStr) credentialChanged,
-    required TResult Function() analyseEmailPressed,
+    required TResult Function() analyseCredentialPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function()? analyseEmailPressed,
+    TResult Function()? analyseCredentialPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function()? analyseEmailPressed,
+    TResult Function()? analyseCredentialPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(EmailChanged value) credentialChanged,
-    required TResult Function(AnalyseEmailPressed value) analyseEmailPressed,
+    required TResult Function(CredentialChanged value) credentialChanged,
+    required TResult Function(AnalyseCredentialPressed value)
+        analyseCredentialPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(EmailChanged value)? credentialChanged,
-    TResult Function(AnalyseEmailPressed value)? analyseEmailPressed,
+    TResult Function(CredentialChanged value)? credentialChanged,
+    TResult Function(AnalyseCredentialPressed value)? analyseCredentialPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(EmailChanged value)? credentialChanged,
-    TResult Function(AnalyseEmailPressed value)? analyseEmailPressed,
+    TResult Function(CredentialChanged value)? credentialChanged,
+    TResult Function(AnalyseCredentialPressed value)? analyseCredentialPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SignInEmailEventCopyWith<$Res> {
-  factory $SignInEmailEventCopyWith(
-          SignInEmailEvent value, $Res Function(SignInEmailEvent) then) =
-      _$SignInEmailEventCopyWithImpl<$Res>;
+abstract class $SignInCredentialEventCopyWith<$Res> {
+  factory $SignInCredentialEventCopyWith(SignInCredentialEvent value,
+          $Res Function(SignInCredentialEvent) then) =
+      _$SignInCredentialEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$SignInEmailEventCopyWithImpl<$Res>
-    implements $SignInEmailEventCopyWith<$Res> {
-  _$SignInEmailEventCopyWithImpl(this._value, this._then);
+class _$SignInCredentialEventCopyWithImpl<$Res>
+    implements $SignInCredentialEventCopyWith<$Res> {
+  _$SignInCredentialEventCopyWithImpl(this._value, this._then);
 
-  final SignInEmailEvent _value;
+  final SignInCredentialEvent _value;
   // ignore: unused_field
-  final $Res Function(SignInEmailEvent) _then;
+  final $Res Function(SignInCredentialEvent) _then;
 }
 
 /// @nodoc
-abstract class $EmailChangedCopyWith<$Res> {
-  factory $EmailChangedCopyWith(
-          EmailChanged value, $Res Function(EmailChanged) then) =
-      _$EmailChangedCopyWithImpl<$Res>;
+abstract class $CredentialChangedCopyWith<$Res> {
+  factory $CredentialChangedCopyWith(
+          CredentialChanged value, $Res Function(CredentialChanged) then) =
+      _$CredentialChangedCopyWithImpl<$Res>;
   $Res call({String credentialStr});
 }
 
 /// @nodoc
-class _$EmailChangedCopyWithImpl<$Res>
-    extends _$SignInEmailEventCopyWithImpl<$Res>
-    implements $EmailChangedCopyWith<$Res> {
-  _$EmailChangedCopyWithImpl(
-      EmailChanged _value, $Res Function(EmailChanged) _then)
-      : super(_value, (v) => _then(v as EmailChanged));
+class _$CredentialChangedCopyWithImpl<$Res>
+    extends _$SignInCredentialEventCopyWithImpl<$Res>
+    implements $CredentialChangedCopyWith<$Res> {
+  _$CredentialChangedCopyWithImpl(
+      CredentialChanged _value, $Res Function(CredentialChanged) _then)
+      : super(_value, (v) => _then(v as CredentialChanged));
 
   @override
-  EmailChanged get _value => super._value as EmailChanged;
+  CredentialChanged get _value => super._value as CredentialChanged;
 
   @override
   $Res call({
     Object? credentialStr = freezed,
   }) {
-    return _then(EmailChanged(
+    return _then(CredentialChanged(
       credentialStr == freezed
           ? _value.credentialStr
           : credentialStr // ignore: cast_nullable_to_non_nullable
@@ -124,21 +125,21 @@ class _$EmailChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$EmailChanged implements EmailChanged {
-  const _$EmailChanged(this.credentialStr);
+class _$CredentialChanged implements CredentialChanged {
+  const _$CredentialChanged(this.credentialStr);
 
   @override
   final String credentialStr;
 
   @override
   String toString() {
-    return 'SignInEmailEvent.credentialChanged(credentialStr: $credentialStr)';
+    return 'SignInCredentialEvent.credentialChanged(credentialStr: $credentialStr)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is EmailChanged &&
+        (other is CredentialChanged &&
             (identical(other.credentialStr, credentialStr) ||
                 const DeepCollectionEquality()
                     .equals(other.credentialStr, credentialStr)));
@@ -150,14 +151,14 @@ class _$EmailChanged implements EmailChanged {
 
   @JsonKey(ignore: true)
   @override
-  $EmailChangedCopyWith<EmailChanged> get copyWith =>
-      _$EmailChangedCopyWithImpl<EmailChanged>(this, _$identity);
+  $CredentialChangedCopyWith<CredentialChanged> get copyWith =>
+      _$CredentialChangedCopyWithImpl<CredentialChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String credentialStr) credentialChanged,
-    required TResult Function() analyseEmailPressed,
+    required TResult Function() analyseCredentialPressed,
   }) {
     return credentialChanged(credentialStr);
   }
@@ -166,7 +167,7 @@ class _$EmailChanged implements EmailChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function()? analyseEmailPressed,
+    TResult Function()? analyseCredentialPressed,
   }) {
     return credentialChanged?.call(credentialStr);
   }
@@ -175,7 +176,7 @@ class _$EmailChanged implements EmailChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function()? analyseEmailPressed,
+    TResult Function()? analyseCredentialPressed,
     required TResult orElse(),
   }) {
     if (credentialChanged != null) {
@@ -187,8 +188,9 @@ class _$EmailChanged implements EmailChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(EmailChanged value) credentialChanged,
-    required TResult Function(AnalyseEmailPressed value) analyseEmailPressed,
+    required TResult Function(CredentialChanged value) credentialChanged,
+    required TResult Function(AnalyseCredentialPressed value)
+        analyseCredentialPressed,
   }) {
     return credentialChanged(this);
   }
@@ -196,8 +198,8 @@ class _$EmailChanged implements EmailChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(EmailChanged value)? credentialChanged,
-    TResult Function(AnalyseEmailPressed value)? analyseEmailPressed,
+    TResult Function(CredentialChanged value)? credentialChanged,
+    TResult Function(AnalyseCredentialPressed value)? analyseCredentialPressed,
   }) {
     return credentialChanged?.call(this);
   }
@@ -205,8 +207,8 @@ class _$EmailChanged implements EmailChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(EmailChanged value)? credentialChanged,
-    TResult Function(AnalyseEmailPressed value)? analyseEmailPressed,
+    TResult Function(CredentialChanged value)? credentialChanged,
+    TResult Function(AnalyseCredentialPressed value)? analyseCredentialPressed,
     required TResult orElse(),
   }) {
     if (credentialChanged != null) {
@@ -216,47 +218,48 @@ class _$EmailChanged implements EmailChanged {
   }
 }
 
-abstract class EmailChanged implements SignInEmailEvent {
-  const factory EmailChanged(String credentialStr) = _$EmailChanged;
+abstract class CredentialChanged implements SignInCredentialEvent {
+  const factory CredentialChanged(String credentialStr) = _$CredentialChanged;
 
   String get credentialStr => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $EmailChangedCopyWith<EmailChanged> get copyWith =>
+  $CredentialChangedCopyWith<CredentialChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AnalyseEmailPressedCopyWith<$Res> {
-  factory $AnalyseEmailPressedCopyWith(
-          AnalyseEmailPressed value, $Res Function(AnalyseEmailPressed) then) =
-      _$AnalyseEmailPressedCopyWithImpl<$Res>;
+abstract class $AnalyseCredentialPressedCopyWith<$Res> {
+  factory $AnalyseCredentialPressedCopyWith(AnalyseCredentialPressed value,
+          $Res Function(AnalyseCredentialPressed) then) =
+      _$AnalyseCredentialPressedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AnalyseEmailPressedCopyWithImpl<$Res>
-    extends _$SignInEmailEventCopyWithImpl<$Res>
-    implements $AnalyseEmailPressedCopyWith<$Res> {
-  _$AnalyseEmailPressedCopyWithImpl(
-      AnalyseEmailPressed _value, $Res Function(AnalyseEmailPressed) _then)
-      : super(_value, (v) => _then(v as AnalyseEmailPressed));
+class _$AnalyseCredentialPressedCopyWithImpl<$Res>
+    extends _$SignInCredentialEventCopyWithImpl<$Res>
+    implements $AnalyseCredentialPressedCopyWith<$Res> {
+  _$AnalyseCredentialPressedCopyWithImpl(AnalyseCredentialPressed _value,
+      $Res Function(AnalyseCredentialPressed) _then)
+      : super(_value, (v) => _then(v as AnalyseCredentialPressed));
 
   @override
-  AnalyseEmailPressed get _value => super._value as AnalyseEmailPressed;
+  AnalyseCredentialPressed get _value =>
+      super._value as AnalyseCredentialPressed;
 }
 
 /// @nodoc
 
-class _$AnalyseEmailPressed implements AnalyseEmailPressed {
-  const _$AnalyseEmailPressed();
+class _$AnalyseCredentialPressed implements AnalyseCredentialPressed {
+  const _$AnalyseCredentialPressed();
 
   @override
   String toString() {
-    return 'SignInEmailEvent.analyseEmailPressed()';
+    return 'SignInCredentialEvent.analyseCredentialPressed()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is AnalyseEmailPressed);
+    return identical(this, other) || (other is AnalyseCredentialPressed);
   }
 
   @override
@@ -266,29 +269,29 @@ class _$AnalyseEmailPressed implements AnalyseEmailPressed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String credentialStr) credentialChanged,
-    required TResult Function() analyseEmailPressed,
+    required TResult Function() analyseCredentialPressed,
   }) {
-    return analyseEmailPressed();
+    return analyseCredentialPressed();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function()? analyseEmailPressed,
+    TResult Function()? analyseCredentialPressed,
   }) {
-    return analyseEmailPressed?.call();
+    return analyseCredentialPressed?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
-    TResult Function()? analyseEmailPressed,
+    TResult Function()? analyseCredentialPressed,
     required TResult orElse(),
   }) {
-    if (analyseEmailPressed != null) {
-      return analyseEmailPressed();
+    if (analyseCredentialPressed != null) {
+      return analyseCredentialPressed();
     }
     return orElse();
   }
@@ -296,49 +299,50 @@ class _$AnalyseEmailPressed implements AnalyseEmailPressed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(EmailChanged value) credentialChanged,
-    required TResult Function(AnalyseEmailPressed value) analyseEmailPressed,
+    required TResult Function(CredentialChanged value) credentialChanged,
+    required TResult Function(AnalyseCredentialPressed value)
+        analyseCredentialPressed,
   }) {
-    return analyseEmailPressed(this);
+    return analyseCredentialPressed(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(EmailChanged value)? credentialChanged,
-    TResult Function(AnalyseEmailPressed value)? analyseEmailPressed,
+    TResult Function(CredentialChanged value)? credentialChanged,
+    TResult Function(AnalyseCredentialPressed value)? analyseCredentialPressed,
   }) {
-    return analyseEmailPressed?.call(this);
+    return analyseCredentialPressed?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(EmailChanged value)? credentialChanged,
-    TResult Function(AnalyseEmailPressed value)? analyseEmailPressed,
+    TResult Function(CredentialChanged value)? credentialChanged,
+    TResult Function(AnalyseCredentialPressed value)? analyseCredentialPressed,
     required TResult orElse(),
   }) {
-    if (analyseEmailPressed != null) {
-      return analyseEmailPressed(this);
+    if (analyseCredentialPressed != null) {
+      return analyseCredentialPressed(this);
     }
     return orElse();
   }
 }
 
-abstract class AnalyseEmailPressed implements SignInEmailEvent {
-  const factory AnalyseEmailPressed() = _$AnalyseEmailPressed;
+abstract class AnalyseCredentialPressed implements SignInCredentialEvent {
+  const factory AnalyseCredentialPressed() = _$AnalyseCredentialPressed;
 }
 
 /// @nodoc
-class _$SignInEmailStateTearOff {
-  const _$SignInEmailStateTearOff();
+class _$SignInCredentialStateTearOff {
+  const _$SignInCredentialStateTearOff();
 
-  _EmailState call(
-      {required EmailAddress credential,
+  _CredentialState call(
+      {required CredentialAddress credential,
       required bool isLoading,
       required Option<Either<FailureDetails, Unit>>
           authFailureOrSuccessOption}) {
-    return _EmailState(
+    return _CredentialState(
       credential: credential,
       isLoading: isLoading,
       authFailureOrSuccessOption: authFailureOrSuccessOption,
@@ -347,39 +351,39 @@ class _$SignInEmailStateTearOff {
 }
 
 /// @nodoc
-const $SignInEmailState = _$SignInEmailStateTearOff();
+const $SignInCredentialState = _$SignInCredentialStateTearOff();
 
 /// @nodoc
-mixin _$SignInEmailState {
-  EmailAddress get credential => throw _privateConstructorUsedError;
+mixin _$SignInCredentialState {
+  CredentialAddress get credential => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SignInEmailStateCopyWith<SignInEmailState> get copyWith =>
+  $SignInCredentialStateCopyWith<SignInCredentialState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SignInEmailStateCopyWith<$Res> {
-  factory $SignInEmailStateCopyWith(
-          SignInEmailState value, $Res Function(SignInEmailState) then) =
-      _$SignInEmailStateCopyWithImpl<$Res>;
+abstract class $SignInCredentialStateCopyWith<$Res> {
+  factory $SignInCredentialStateCopyWith(SignInCredentialState value,
+          $Res Function(SignInCredentialState) then) =
+      _$SignInCredentialStateCopyWithImpl<$Res>;
   $Res call(
-      {EmailAddress credential,
+      {CredentialAddress credential,
       bool isLoading,
       Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
-class _$SignInEmailStateCopyWithImpl<$Res>
-    implements $SignInEmailStateCopyWith<$Res> {
-  _$SignInEmailStateCopyWithImpl(this._value, this._then);
+class _$SignInCredentialStateCopyWithImpl<$Res>
+    implements $SignInCredentialStateCopyWith<$Res> {
+  _$SignInCredentialStateCopyWithImpl(this._value, this._then);
 
-  final SignInEmailState _value;
+  final SignInCredentialState _value;
   // ignore: unused_field
-  final $Res Function(SignInEmailState) _then;
+  final $Res Function(SignInCredentialState) _then;
 
   @override
   $Res call({
@@ -391,7 +395,7 @@ class _$SignInEmailStateCopyWithImpl<$Res>
       credential: credential == freezed
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+              as CredentialAddress,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -405,28 +409,28 @@ class _$SignInEmailStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$EmailStateCopyWith<$Res>
-    implements $SignInEmailStateCopyWith<$Res> {
-  factory _$EmailStateCopyWith(
-          _EmailState value, $Res Function(_EmailState) then) =
-      __$EmailStateCopyWithImpl<$Res>;
+abstract class _$CredentialStateCopyWith<$Res>
+    implements $SignInCredentialStateCopyWith<$Res> {
+  factory _$CredentialStateCopyWith(
+          _CredentialState value, $Res Function(_CredentialState) then) =
+      __$CredentialStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {EmailAddress credential,
+      {CredentialAddress credential,
       bool isLoading,
       Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
-class __$EmailStateCopyWithImpl<$Res>
-    extends _$SignInEmailStateCopyWithImpl<$Res>
-    implements _$EmailStateCopyWith<$Res> {
-  __$EmailStateCopyWithImpl(
-      _EmailState _value, $Res Function(_EmailState) _then)
-      : super(_value, (v) => _then(v as _EmailState));
+class __$CredentialStateCopyWithImpl<$Res>
+    extends _$SignInCredentialStateCopyWithImpl<$Res>
+    implements _$CredentialStateCopyWith<$Res> {
+  __$CredentialStateCopyWithImpl(
+      _CredentialState _value, $Res Function(_CredentialState) _then)
+      : super(_value, (v) => _then(v as _CredentialState));
 
   @override
-  _EmailState get _value => super._value as _EmailState;
+  _CredentialState get _value => super._value as _CredentialState;
 
   @override
   $Res call({
@@ -434,11 +438,11 @@ class __$EmailStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? authFailureOrSuccessOption = freezed,
   }) {
-    return _then(_EmailState(
+    return _then(_CredentialState(
       credential: credential == freezed
           ? _value.credential
           : credential // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+              as CredentialAddress,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -453,14 +457,14 @@ class __$EmailStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EmailState implements _EmailState {
-  const _$_EmailState(
+class _$_CredentialState implements _CredentialState {
+  const _$_CredentialState(
       {required this.credential,
       required this.isLoading,
       required this.authFailureOrSuccessOption});
 
   @override
-  final EmailAddress credential;
+  final CredentialAddress credential;
   @override
   final bool isLoading;
   @override
@@ -468,13 +472,13 @@ class _$_EmailState implements _EmailState {
 
   @override
   String toString() {
-    return 'SignInEmailState(credential: $credential, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'SignInCredentialState(credential: $credential, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _EmailState &&
+        (other is _CredentialState &&
             (identical(other.credential, credential) ||
                 const DeepCollectionEquality()
                     .equals(other.credential, credential)) &&
@@ -497,19 +501,19 @@ class _$_EmailState implements _EmailState {
 
   @JsonKey(ignore: true)
   @override
-  _$EmailStateCopyWith<_EmailState> get copyWith =>
-      __$EmailStateCopyWithImpl<_EmailState>(this, _$identity);
+  _$CredentialStateCopyWith<_CredentialState> get copyWith =>
+      __$CredentialStateCopyWithImpl<_CredentialState>(this, _$identity);
 }
 
-abstract class _EmailState implements SignInEmailState {
-  const factory _EmailState(
-      {required EmailAddress credential,
+abstract class _CredentialState implements SignInCredentialState {
+  const factory _CredentialState(
+      {required CredentialAddress credential,
       required bool isLoading,
       required Option<Either<FailureDetails, Unit>>
-          authFailureOrSuccessOption}) = _$_EmailState;
+          authFailureOrSuccessOption}) = _$_CredentialState;
 
   @override
-  EmailAddress get credential => throw _privateConstructorUsedError;
+  CredentialAddress get credential => throw _privateConstructorUsedError;
   @override
   bool get isLoading => throw _privateConstructorUsedError;
   @override
@@ -517,6 +521,6 @@ abstract class _EmailState implements SignInEmailState {
       throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$EmailStateCopyWith<_EmailState> get copyWith =>
+  _$CredentialStateCopyWith<_CredentialState> get copyWith =>
       throw _privateConstructorUsedError;
 }

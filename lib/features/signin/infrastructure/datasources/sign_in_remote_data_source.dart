@@ -16,7 +16,7 @@
 //   Future<bool> credentialAlreadyRegistered(String credential);
 
 //   /// Throws a [ServerException] for all error codes.
-//   Future<UserModel> createUserWithEmailAndPassword(
+//   Future<UserModel> createUserWithCredentialAndPassword(
 //       String credential, String password);
 
 //   /// Throws a [ServerException] for all error codes.
@@ -43,9 +43,9 @@
 // //   SignInRemoteSource(this._http, this._api);
 
 // //   @override
-// //   Future<UserModel> createUserWithEmailAndPassword(
+// //   Future<UserModel> createUserWithCredentialAndPassword(
 // //       String credential, String password) {
-// //     // TODO: implement createUserWithEmailAndPassword
+// //     // TODO: implement createUserWithCredentialAndPassword
 // //     throw UnimplementedError();
 // //   }
 
@@ -87,7 +87,7 @@
 // //   @override
 // //   Future<bool> credentialAlreadyRegistered(String credential) async {
 // //     final response = await _http.get(_api.endpointUri(
-// //       Endpoint.checkEmail,
+// //       Endpoint.checkCredential,
 // //       queryParameters: <String, String>{'credential': credential},
 // //     ));
 
@@ -103,22 +103,22 @@
 
 // //   @override
 // //   Future<Either<AuthFailure, bool>> credentialIsAlreadyInUse(
-// //       EmailAddress credentialAddress) {
+// //       CredentialAddress credentialAddress) {
 // //     // TODO: implement credentialIsAlreadyInUse
 // //     throw UnimplementedError();
 // //   }
 
 // //   @override
-// //   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
-// //       {required EmailAddress credentialAddress, required Password password}) {
-// //     // TODO: implement registerWithEmailAndPassword
+// //   Future<Either<AuthFailure, Unit>> registerWithCredentialAndPassword(
+// //       {required CredentialAddress credentialAddress, required Password password}) {
+// //     // TODO: implement registerWithCredentialAndPassword
 // //     throw UnimplementedError();
 // //   }
 
 // //   @override
-// //   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword(
-// //       {required EmailAddress credentialAddress, required Password password}) {
-// //     // TODO: implement signInWithEmailAndPassword
+// //   Future<Either<AuthFailure, Unit>> signInWithCredentialAndPassword(
+// //       {required CredentialAddress credentialAddress, required Password password}) {
+// //     // TODO: implement signInWithCredentialAndPassword
 // //     throw UnimplementedError();
 // //   }
 

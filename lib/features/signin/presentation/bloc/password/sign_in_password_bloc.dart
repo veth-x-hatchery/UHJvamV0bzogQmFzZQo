@@ -16,11 +16,11 @@ part 'sign_in_password_bloc.freezed.dart';
 class SignInPasswordBloc
     extends Bloc<SignInPasswordEvent, SignInPasswordState> {
   final AuthBloc _authBloc;
-  final SignInWithEmailAndPassword _signInWithEmailAndPassword;
+  final SignInWithCredentialAndPassword _signInWithCredentialAndPassword;
 
   SignInPasswordBloc(
     this._authBloc,
-    this._signInWithEmailAndPassword,
+    this._signInWithCredentialAndPassword,
   ) : super(SignInPasswordState.initial());
 
   @override
@@ -39,12 +39,12 @@ class SignInPasswordBloc
           isLoading: true,
           authFailureOrSuccessOption: none(),
         );
-        final result = await _signInWithEmailAndPassword.call(Params(
+        final result = await _signInWithCredentialAndPassword.call(Params(
           credentials: Credentials(
             password: state.password,
             // Todo(v): Remove it! User and Password cannot cohabited same space in time.
             // Todo(v): User and Secret -> replace credential and password
-            user: EmailAddress(''),
+            user: CredentialAddress(''),
           ),
         ));
         yield state.copyWith(

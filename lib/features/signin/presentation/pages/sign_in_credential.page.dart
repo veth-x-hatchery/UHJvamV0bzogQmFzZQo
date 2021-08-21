@@ -9,29 +9,30 @@ import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 
-class SignInEmailPage extends StatefulWidget {
-  const SignInEmailPage({Key? key}) : super(key: key);
+class SignInCredentialPage extends StatefulWidget {
+  const SignInCredentialPage({Key? key}) : super(key: key);
   @override
-  State<SignInEmailPage> createState() => _SignInEmailPageState();
+  State<SignInCredentialPage> createState() => _SignInCredentialPageState();
 
   static Widget create({
     BuildContext? context,
-    required SignInEmailBloc bloc,
+    required SignInCredentialBloc bloc,
   }) {
     return BlocProvider(
       create: (_) => bloc,
-      child: const SignInEmailPage(),
+      child: const SignInCredentialPage(),
     );
   }
 }
 
-class _SignInEmailPageState extends State<SignInEmailPage> {
+class _SignInCredentialPageState extends State<SignInCredentialPage> {
   final _credentialFormKey = GlobalKey<FormState>();
   final _credentialFocusNode = FocusNode();
   final _credentialTextEditingController = TextEditingController();
 
-  SignInEmailBloc get bloc => BlocProvider.of<SignInEmailBloc>(context);
-  SignInEmailState get current => bloc.state;
+  SignInCredentialBloc get bloc =>
+      BlocProvider.of<SignInCredentialBloc>(context);
+  SignInCredentialState get current => bloc.state;
 
   @override
   void initState() {
@@ -47,9 +48,9 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
     super.dispose();
   }
 
-  Future<void> _validateEmail() async {
+  Future<void> _validateCredential() async {
     if (_credentialFormKey.currentState?.validate() == true) {
-      bloc.add(const SignInEmailEvent.analyseEmailPressed());
+      bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
     }
   }
 
@@ -57,17 +58,17 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
-      child: BlocConsumer<SignInEmailBloc, SignInEmailState>(
+      child: BlocConsumer<SignInCredentialBloc, SignInCredentialState>(
         listener: (context, state) {
           state.authFailureOrSuccessOption.fold(
             () {},
             (either) {
               either.fold(
                 (failure) {
-                  Logger.presentation('SignInEmailBloc $state: $failure');
+                  Logger.presentation('SignInCredentialBloc $state: $failure');
                 },
                 (_) {
-                  Logger.presentation('SignInEmailBloc $state');
+                  Logger.presentation('SignInCredentialBloc $state');
                 },
               );
             },
@@ -82,19 +83,22 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
                 loading: state.isLoading,
               ),
               SizedBox(height: SizeConfig.defaultEdgeSpace),
-              FieldEmail(
-                key: const Key(SignInPageKeys.signInEmailPageEmailTextField),
+              FieldCredential(
+                key: const Key(
+                    SignInPageKeys.signInCredentialPageCredentialTextField),
                 controller: _credentialTextEditingController,
                 focusNode: _credentialFocusNode,
-                onEditingComplete: state.isLoading ? () {} : _validateEmail,
+                onEditingComplete:
+                    state.isLoading ? () {} : _validateCredential,
                 onChanged: (value) =>
-                    bloc.add(SignInEmailEvent.credentialChanged(value)),
+                    bloc.add(SignInCredentialEvent.credentialChanged(value)),
                 validator: (_) => current.credential.validation,
               ),
               SizedBox(height: SizeConfig.defaultEdgeSpace),
               CustomRaisedButton(
-                key: const Key(SignInPageKeys.signInEmailPageValidateButton),
-                onPressed: state.isLoading ? () {} : _validateEmail,
+                key: const Key(
+                    SignInPageKeys.signInCredentialPageValidateButton),
+                onPressed: state.isLoading ? () {} : _validateCredential,
                 child: Text(
                   Texts.goToNextStep,
                   style: Theme.of(context).textTheme.button,

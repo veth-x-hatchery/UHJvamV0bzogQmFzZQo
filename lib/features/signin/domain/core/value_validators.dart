@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures.dart';
 
-Either<ValueFailure<String>, String> validateEmailAddress(String input) {
+Either<ValueFailure<String>, String> validateCredentialAddress(String input) {
   const credentialRegex =
       r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
   if (RegExp(credentialRegex).hasMatch(input)) {
     return right(input);
   } else {
-    return left(ValueFailure.invalidEmail(failedValue: input));
+    return left(ValueFailure.invalidCredential(failedValue: input));
   }
 }
 

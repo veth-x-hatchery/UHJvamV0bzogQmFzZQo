@@ -32,7 +32,7 @@ class SignInOptionsPage extends StatelessWidget {
           create: (_) => sl<NavigationCubit>(),
         ),
         BlocProvider(
-          create: (_) => sl<SignInEmailBloc>(),
+          create: (_) => sl<SignInCredentialBloc>(),
         ),
         BlocProvider(
           create: (_) => sl<SignInRegisterBloc>(),
@@ -64,7 +64,7 @@ class SignInOptionsPage extends StatelessWidget {
                   ),
                 );
                 break;
-              case SignInPageRoutes.registerEmailSignIn:
+              case SignInPageRoutes.registerCredentialSignIn:
                 Navigator.pushReplacement(
                   context,
                   SlideLeftRoute<void>(
@@ -74,8 +74,8 @@ class SignInOptionsPage extends StatelessWidget {
                 );
                 break;
               case SignInPageRoutes.credentialEntry:
-                final credentialPage = SignInEmailPage.create(
-                    bloc: BlocProvider.of<SignInEmailBloc>(context));
+                final credentialPage = SignInCredentialPage.create(
+                    bloc: BlocProvider.of<SignInCredentialBloc>(context));
                 page.from == SignInPageRoutes.signInOptions
                     ? Navigator.push(
                         context, SlideLeftRoute<void>(page: credentialPage))
@@ -112,9 +112,9 @@ class SignInOptionsPage extends StatelessWidget {
               ),
               SizedBox(height: SizeConfig.defaultEdgeSpace),
               SignInButton(
-                key: const Key(SignInPageKeys.signInWithEmail),
+                key: const Key(SignInPageKeys.signInWithCredential),
                 assetName: 'assets/images/mail-logo.png',
-                text: Texts.signInWithEmail,
+                text: Texts.signInWithCredential,
                 textColor: Colors.white,
                 color: Colors.teal[700],
                 onPressed: isLoading

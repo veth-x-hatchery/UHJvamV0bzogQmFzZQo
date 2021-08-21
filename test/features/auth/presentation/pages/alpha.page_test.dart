@@ -98,7 +98,7 @@ void main() {
       // Arrange
 
       _authState(AuthState.authenticated(User(
-        credential: EmailAddress('test@test.com'),
+        credential: CredentialAddress('test@test.com'),
         name: 'test',
       )));
 

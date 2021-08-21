@@ -4,10 +4,10 @@ part of 'sign_in_options_bloc.dart';
 class SignInEvent with _$SignInEvent {
   const factory SignInEvent.started() = _Started;
 
-  const factory SignInEvent.signInWithEmailEvent({
-    required EmailAddress credential,
+  const factory SignInEvent.signInWithCredentialEvent({
+    required CredentialAddress credential,
     required Password password,
-  }) = SignInWithEmailEvent;
+  }) = SignInWithCredentialEvent;
 
   const factory SignInEvent.signInWithGoogleEvent() = SignInWithGoogleEvent;
 }

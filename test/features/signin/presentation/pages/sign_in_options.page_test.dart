@@ -23,7 +23,7 @@ import 'sign_in_options.page_test.mocks.dart';
 
 @GenerateMocks([
   SignInOptionsBloc,
-  SignInEmailBloc,
+  SignInCredentialBloc,
   SignInRegisterBloc,
   SignInPasswordBloc,
   NavigationCubit,
@@ -31,7 +31,7 @@ import 'sign_in_options.page_test.mocks.dart';
   MockSpec<NavigatorObserver>(returnNullOnMissingStub: true)
 ])
 void main() {
-  late MockSignInEmailBloc _mockMockSignInEmailBloc;
+  late MockSignInCredentialBloc _mockMockSignInCredentialBloc;
   late MockSignInRegisterBloc _mockMockSignInRegisterBloc;
   late MockSignInPasswordBloc _mockMockSignInPasswordBloc;
   late MockNavigatorObserver _mockNavigationObserver;
@@ -41,7 +41,7 @@ void main() {
   late GetIt sl;
 
   setUp(() {
-    _mockMockSignInEmailBloc = MockSignInEmailBloc();
+    _mockMockSignInCredentialBloc = MockSignInCredentialBloc();
     _mockMockSignInRegisterBloc = MockSignInRegisterBloc();
     _mockMockSignInPasswordBloc = MockSignInPasswordBloc();
 
@@ -53,7 +53,8 @@ void main() {
     sl = GetIt.instance;
 
     sl.registerFactory<SignInOptionsBloc>(() => _mockSignInBloc);
-    sl.registerFactory<SignInEmailBloc>(() => _mockMockSignInEmailBloc);
+    sl.registerFactory<SignInCredentialBloc>(
+        () => _mockMockSignInCredentialBloc);
     sl.registerFactory<SignInRegisterBloc>(() => _mockMockSignInRegisterBloc);
     sl.registerFactory<SignInPasswordBloc>(() => _mockMockSignInPasswordBloc);
 
@@ -68,9 +69,9 @@ void main() {
   }
 
   // ignore: non_constant_identifier_names
-  void _SignInEmailState(SignInEmailState state) {
-    when(_mockMockSignInEmailBloc.state).thenReturn(state);
-    when(_mockMockSignInEmailBloc.stream)
+  void _SignInCredentialState(SignInCredentialState state) {
+    when(_mockMockSignInCredentialBloc.state).thenReturn(state);
+    when(_mockMockSignInCredentialBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
@@ -90,7 +91,7 @@ void main() {
 
   void _setInitialState() {
     _signInState(const SignInState.initial());
-    _SignInEmailState(SignInEmailState.initial());
+    _SignInCredentialState(SignInCredentialState.initial());
     _SignInRegisterState(SignInRegisterState.initial());
     _SignInPasswordState(SignInPasswordState.initial());
   }
@@ -206,7 +207,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.byType(SignInEmailPage), findsOneWidget);
+      expect(find.byType(SignInCredentialPage), findsOneWidget);
     });
   });
 
@@ -283,7 +284,7 @@ void main() {
       await _pumpPage(tester);
 
       final credentialSignInButton =
-          find.byKey(const Key(SignInPageKeys.signInWithEmail));
+          find.byKey(const Key(SignInPageKeys.signInWithCredential));
 
       // Assert
 
@@ -299,7 +300,7 @@ void main() {
       await _pumpPage(tester);
 
       final credentialSignInButton =
-          find.byKey(const Key(SignInPageKeys.signInWithEmail));
+          find.byKey(const Key(SignInPageKeys.signInWithCredential));
 
       // Act
 
@@ -316,7 +317,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.byType(SignInEmailPage), findsOneWidget);
+      expect(find.byType(SignInCredentialPage), findsOneWidget);
 
       // Todo(v): Research
       // verify(_mockNavigationObserver.didPush(any, any)).called(1);

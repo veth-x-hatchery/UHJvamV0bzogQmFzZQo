@@ -10,14 +10,16 @@ import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_re
 
 import 'register_bloc_test.mocks.dart';
 
-@GenerateMocks([SignInRegisterEmailAndPassword])
+@GenerateMocks([SignInRegisterCredentialAndPassword])
 void main() {
   late SignInRegisterBloc _bloc;
-  late MockSignInRegisterEmailAndPassword _mockSignInWithEmailAndPassword;
+  late MockSignInRegisterCredentialAndPassword
+      _mockSignInWithCredentialAndPassword;
 
   setUp(() {
-    _mockSignInWithEmailAndPassword = MockSignInRegisterEmailAndPassword();
-    _bloc = SignInRegisterBloc(_mockSignInWithEmailAndPassword);
+    _mockSignInWithCredentialAndPassword =
+        MockSignInRegisterCredentialAndPassword();
+    _bloc = SignInRegisterBloc(_mockSignInWithCredentialAndPassword);
   });
 
   test('when credential changes occour then should emit correct state',
@@ -36,7 +38,7 @@ void main() {
         _bloc.stream,
         emitsInOrder([
           SignInRegisterState(
-            credential: EmailAddress(credential),
+            credential: CredentialAddress(credential),
             password: Password(''),
             isLoading: false,
             authFailureOrSuccessOption: none(),
@@ -59,7 +61,7 @@ void main() {
         _bloc.stream,
         emitsInOrder([
           SignInRegisterState(
-            credential: EmailAddress(''),
+            credential: CredentialAddress(''),
             password: Password(password),
             isLoading: false,
             authFailureOrSuccessOption: none(),
@@ -76,14 +78,15 @@ void main() {
     const credential = 'test';
     const password = '1234';
 
-    when(_mockSignInWithEmailAndPassword.call(any))
+    when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(const Right(unit)));
 
     // act
 
     _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
     _bloc.add(const SignInRegisterEvent.passwordChanged(password));
-    _bloc.add(const SignInRegisterEvent.registerWithEmailAndPasswordPressed());
+    _bloc.add(
+        const SignInRegisterEvent.registerWithCredentialAndPasswordPressed());
 
     // assert
     await expectLater(
@@ -91,25 +94,25 @@ void main() {
         emitsInOrder(
           [
             SignInRegisterState(
-              credential: EmailAddress(credential),
+              credential: CredentialAddress(credential),
               password: Password(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: EmailAddress(credential),
+              credential: CredentialAddress(credential),
               password: Password(password),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: EmailAddress(credential),
+              credential: CredentialAddress(credential),
               password: Password(password),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: EmailAddress(credential),
+              credential: CredentialAddress(credential),
               password: Password(password),
               isLoading: false,
               authFailureOrSuccessOption: none(),
@@ -127,14 +130,15 @@ void main() {
     const credential = 'test';
     const password = '1234';
 
-    when(_mockSignInWithEmailAndPassword.call(any))
+    when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(const Right(unit)));
 
     // act
 
     _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
     _bloc.add(const SignInRegisterEvent.passwordChanged(password));
-    _bloc.add(const SignInRegisterEvent.registerWithEmailAndPasswordPressed());
+    _bloc.add(
+        const SignInRegisterEvent.registerWithCredentialAndPasswordPressed());
 
     // assert
     await expectLater(
@@ -142,25 +146,25 @@ void main() {
         emitsInOrder(
           [
             SignInRegisterState(
-              credential: EmailAddress(credential),
+              credential: CredentialAddress(credential),
               password: Password(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: EmailAddress(credential),
+              credential: CredentialAddress(credential),
               password: Password(password),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: EmailAddress(credential),
+              credential: CredentialAddress(credential),
               password: Password(password),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: EmailAddress(credential),
+              credential: CredentialAddress(credential),
               password: Password(password),
               isLoading: false,
               authFailureOrSuccessOption: none(),
@@ -175,19 +179,20 @@ void main() {
     const credential = 'test';
     const password = '1234';
     final expectedFailure = FailureDetails(
-      failure: const AuthFailure.invalidEmailAndPasswordCombination(),
-      message: SignInRegisterEmailAndPasswordErrorMessages
-          .invalidEmailAndPasswordCombination,
+      failure: const AuthFailure.invalidCredentialAndPasswordCombination(),
+      message: SignInRegisterCredentialAndPasswordErrorMessages
+          .invalidCredentialAndPasswordCombination,
     );
 
-    when(_mockSignInWithEmailAndPassword.call(any))
+    when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(Left(expectedFailure)));
 
     // act
 
     _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
     _bloc.add(const SignInRegisterEvent.passwordChanged(password));
-    _bloc.add(const SignInRegisterEvent.registerWithEmailAndPasswordPressed());
+    _bloc.add(
+        const SignInRegisterEvent.registerWithCredentialAndPasswordPressed());
 
     // assert
     await expectLater(
@@ -195,25 +200,25 @@ void main() {
         emitsInOrder(
           [
             SignInRegisterState(
-              credential: EmailAddress(credential),
+              credential: CredentialAddress(credential),
               password: Password(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: EmailAddress(credential),
+              credential: CredentialAddress(credential),
               password: Password(password),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: EmailAddress(credential),
+              credential: CredentialAddress(credential),
               password: Password(password),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
             SignInRegisterState(
-              credential: EmailAddress(credential),
+              credential: CredentialAddress(credential),
               password: Password(password),
               isLoading: false,
               authFailureOrSuccessOption: some(Left(expectedFailure)),

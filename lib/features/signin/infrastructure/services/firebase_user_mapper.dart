@@ -8,7 +8,7 @@ class FirebaseUserMapper {
         ? null
         : User(
             name: _.displayName ?? _.credential!.split('@').first,
-            credential: EmailAddress(_.credential),
+            credential: CredentialAddress(_.credential),
           );
   }
 }

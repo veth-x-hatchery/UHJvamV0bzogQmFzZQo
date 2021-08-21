@@ -13,12 +13,12 @@ import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
 import 'sign_in_credential.page_test.mocks.dart';
 
-@GenerateMocks([SignInEmailBloc])
+@GenerateMocks([SignInCredentialBloc])
 void main() {
-  late MockSignInEmailBloc _mockMockSignInEmailBloc;
+  late MockSignInCredentialBloc _mockMockSignInCredentialBloc;
 
   setUp(() {
-    _mockMockSignInEmailBloc = MockSignInEmailBloc();
+    _mockMockSignInCredentialBloc = MockSignInCredentialBloc();
   });
 
   Future<void> _pumpPage(WidgetTester tester) async {
@@ -26,23 +26,24 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInEmailPage.create(bloc: _mockMockSignInEmailBloc),
+            body: SignInCredentialPage.create(
+                bloc: _mockMockSignInCredentialBloc),
           ),
         ),
       ),
     );
   }
 
-  void _signInState(SignInEmailState state) {
-    when(_mockMockSignInEmailBloc.state).thenReturn(state);
-    when(_mockMockSignInEmailBloc.stream)
+  void _signInState(SignInCredentialState state) {
+    when(_mockMockSignInCredentialBloc.state).thenReturn(state);
+    when(_mockMockSignInCredentialBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
   Finder _credentialInput() {
     // arrange
-    final credentialInput =
-        find.byKey(const Key(SignInPageKeys.signInEmailPageEmailTextField));
+    final credentialInput = find.byKey(
+        const Key(SignInPageKeys.signInCredentialPageCredentialTextField));
     // Act && Assert
     expect(credentialInput, findsOneWidget);
     return credentialInput;
@@ -50,8 +51,8 @@ void main() {
 
   Finder _validationButton() {
     // arrange
-    final validationButton =
-        find.byKey(const Key(SignInPageKeys.signInEmailPageValidateButton));
+    final validationButton = find
+        .byKey(const Key(SignInPageKeys.signInCredentialPageValidateButton));
     // Act && Assert
     expect(validationButton, findsOneWidget);
     return validationButton;
@@ -61,24 +62,24 @@ void main() {
   void _prepareFormValidationValues({
     String? credential,
   }) {
-    final credentialVO = EmailAddress(credential);
-    final state = SignInEmailState(
+    final credentialVO = CredentialAddress(credential);
+    final state = SignInCredentialState(
       credential: credentialVO,
       isLoading: false,
       authFailureOrSuccessOption: none(),
     );
-    when(_mockMockSignInEmailBloc.state).thenReturn(state);
+    when(_mockMockSignInCredentialBloc.state).thenReturn(state);
   }
 
   testWidgets('should find the validation button', (tester) async {
     // arrange
 
-    _signInState(SignInEmailState.initial());
+    _signInState(SignInCredentialState.initial());
 
     await _pumpPage(tester);
 
-    final validationButton =
-        find.byKey(const Key(SignInPageKeys.signInEmailPageValidateButton));
+    final validationButton = find
+        .byKey(const Key(SignInPageKeys.signInCredentialPageValidateButton));
 
     // Act
 
@@ -92,12 +93,12 @@ void main() {
   testWidgets('should find the credential input', (tester) async {
     // arrange
 
-    _signInState(SignInEmailState.initial());
+    _signInState(SignInCredentialState.initial());
 
     await _pumpPage(tester);
 
-    final credentialInput =
-        find.byKey(const Key(SignInPageKeys.signInEmailPageEmailTextField));
+    final credentialInput = find.byKey(
+        const Key(SignInPageKeys.signInCredentialPageCredentialTextField));
 
     // Act
 
@@ -112,8 +113,8 @@ void main() {
       (tester) async {
     // Arrange
 
-    _signInState(SignInEmailState(
-      credential: EmailAddress('test@test.com'),
+    _signInState(SignInCredentialState(
+      credential: CredentialAddress('test@test.com'),
       isLoading: true,
       authFailureOrSuccessOption: none(),
     ));
@@ -130,7 +131,7 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(SignInEmailState.initial());
+    _signInState(SignInCredentialState.initial());
 
     await _pumpPage(tester);
 
@@ -142,8 +143,8 @@ void main() {
 
     // assert
 
-    verifyNever(_mockMockSignInEmailBloc
-        .add(const SignInEmailEvent.analyseEmailPressed()));
+    verifyNever(_mockMockSignInCredentialBloc
+        .add(const SignInCredentialEvent.analyseCredentialPressed()));
   });
 
   testWidgets(
@@ -151,15 +152,15 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(SignInEmailState.initial());
+    _signInState(SignInCredentialState.initial());
 
     await _pumpPage(tester);
 
-    const invalidEmail = 'invalidcredential';
+    const invalidCredential = 'invalidcredential';
 
-    await tester.enterText(_credentialInput(), invalidEmail);
+    await tester.enterText(_credentialInput(), invalidCredential);
 
-    _prepareFormValidationValues(credential: invalidEmail);
+    _prepareFormValidationValues(credential: invalidCredential);
 
     // Act
 
@@ -169,15 +170,15 @@ void main() {
 
     // assert
 
-    verifyNever(_mockMockSignInEmailBloc
-        .add(const SignInEmailEvent.analyseEmailPressed()));
+    verifyNever(_mockMockSignInCredentialBloc
+        .add(const SignInCredentialEvent.analyseCredentialPressed()));
   });
 
   testWidgets('when user enters a correct credential then SignInBLoC is called',
       (tester) async {
     // arrange
 
-    _signInState(SignInEmailState.initial());
+    _signInState(SignInCredentialState.initial());
 
     await _pumpPage(tester);
 
@@ -191,6 +192,6 @@ void main() {
 
     // assert
 
-    verify(_mockMockSignInEmailBloc.add(any)).called(1);
+    verify(_mockMockSignInCredentialBloc.add(any)).called(1);
   });
 }

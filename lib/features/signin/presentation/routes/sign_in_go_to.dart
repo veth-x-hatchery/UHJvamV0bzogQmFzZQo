@@ -2,7 +2,7 @@ enum SignInPageRoutes {
   signInOptions,
   credentialEntry,
   passwordEntry,
-  registerEmailSignIn,
+  registerCredentialSignIn,
 }
 
 class SignInPageGoTo {
@@ -31,7 +31,7 @@ class SignInPageGoTo {
     String? credential,
   }) =>
       SignInPageGoTo._internal(
-        to: SignInPageRoutes.registerEmailSignIn,
+        to: SignInPageRoutes.registerCredentialSignIn,
         from: from,
         parameters: credential,
       );

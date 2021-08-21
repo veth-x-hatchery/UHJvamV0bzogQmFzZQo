@@ -1,7 +1,7 @@
 class SignInNavigationRoutes {
   static const String signIn = '/signIn';
   static const String signInOptions = '/signInOptions';
-  static const String signEmailEntry = '/signEmailEntry';
+  static const String signCredentialEntry = '/signCredentialEntry';
   static const String signPasswordEntry = '/signPasswordEntry';
-  static const String signRegisterEmail = '/signRegisterEmail';
+  static const String signRegisterCredential = '/signRegisterCredential';
 }

@@ -39,7 +39,7 @@ class MockIAuthFacade extends _i1.Mock implements _i3.IAuthFacade {
           returnValue: Future<_i5.User?>.value()) as _i4.Future<_i5.User?>);
   @override
   _i4.Future<_i2.Either<_i6.AuthFailure, bool>> credentialIsAlreadyInUse(
-          _i7.EmailAddress? credentialAddress) =>
+          _i7.CredentialAddress? credentialAddress) =>
       (super.noSuchMethod(
               Invocation.method(#credentialIsAlreadyInUse, [credentialAddress]),
               returnValue: Future<_i2.Either<_i6.AuthFailure, bool>>.value(
@@ -47,23 +47,28 @@ class MockIAuthFacade extends _i1.Mock implements _i3.IAuthFacade {
           as _i4.Future<_i2.Either<_i6.AuthFailure, bool>>);
   @override
   _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>
-      registerWithEmailAndPassword(
-              {_i7.EmailAddress? credentialAddress, _i7.Password? password}) =>
+      registerWithCredentialAndPassword(
+              {_i7.CredentialAddress? credentialAddress,
+              _i7.Password? password}) =>
           (super.noSuchMethod(
-              Invocation.method(#registerWithEmailAndPassword, [],
+              Invocation.method(#registerWithCredentialAndPassword, [],
                   {#credentialAddress: credentialAddress, #password: password}),
               returnValue: Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>.value(
                   _FakeEither_0<_i6.AuthFailure, _i2.Unit>())) as _i4
               .Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>);
   @override
-  _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>> signInWithEmailAndPassword(
-          {_i7.EmailAddress? credentialAddress, _i7.Password? password}) =>
-      (super.noSuchMethod(
-              Invocation.method(#signInWithEmailAndPassword, [],
-                  {#credentialAddress: credentialAddress, #password: password}),
+  _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>
+      signInWithCredentialAndPassword(
+              {_i7.CredentialAddress? credentialAddress,
+              _i7.Password? password}) =>
+          (super.noSuchMethod(
+              Invocation.method(#signInWithCredentialAndPassword, [], {
+                #credentialAddress: credentialAddress,
+                #password: password
+              }),
               returnValue: Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>.value(
-                  _FakeEither_0<_i6.AuthFailure, _i2.Unit>()))
-          as _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>);
+                  _FakeEither_0<_i6.AuthFailure, _i2.Unit>())) as _i4
+              .Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>);
   @override
   _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>> signInWithGoogle() =>
       (super.noSuchMethod(Invocation.method(#signInWithGoogle, []),

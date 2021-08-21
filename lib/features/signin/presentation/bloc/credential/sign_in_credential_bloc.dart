@@ -13,32 +13,33 @@ part 'sign_in_credential_event.dart';
 part 'sign_in_credential_state.dart';
 part 'sign_in_credential_bloc.freezed.dart';
 
-class SignInEmailBloc extends Bloc<SignInEmailEvent, SignInEmailState> {
-  final SignInCheckIfEmailIsInUse _signInCheckIfEmailIsInUse;
+class SignInCredentialBloc
+    extends Bloc<SignInCredentialEvent, SignInCredentialState> {
+  final SignInCheckIfCredentialIsInUse _signInCheckIfCredentialIsInUse;
   final NavigationCubit _navigation;
 
-  SignInEmailBloc(
-    this._signInCheckIfEmailIsInUse,
+  SignInCredentialBloc(
+    this._signInCheckIfCredentialIsInUse,
     this._navigation,
-  ) : super(SignInEmailState.initial());
+  ) : super(SignInCredentialState.initial());
 
   @override
-  Stream<SignInEmailState> mapEventToState(
-    SignInEmailEvent event,
+  Stream<SignInCredentialState> mapEventToState(
+    SignInCredentialEvent event,
   ) async* {
     yield* event.map(
       credentialChanged: (e) async* {
         yield state.copyWith(
-          credential: EmailAddress(e.credentialStr),
+          credential: CredentialAddress(e.credentialStr),
           authFailureOrSuccessOption: none(),
         );
       },
-      analyseEmailPressed: (e) async* {
+      analyseCredentialPressed: (e) async* {
         yield state.copyWith(
           isLoading: true,
           authFailureOrSuccessOption: none(),
         );
-        final result = await _signInCheckIfEmailIsInUse
+        final result = await _signInCheckIfCredentialIsInUse
             .call(Params(credential: state.credential));
         yield state.copyWith(
           isLoading: false,

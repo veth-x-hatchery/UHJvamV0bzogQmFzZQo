@@ -17,83 +17,85 @@ import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
-class _FakeSignInEmailState_0 extends _i1.Fake implements _i2.SignInEmailState {
-}
+class _FakeSignInCredentialState_0 extends _i1.Fake
+    implements _i2.SignInCredentialState {}
 
 class _FakeStreamSubscription_1<T> extends _i1.Fake
     implements _i3.StreamSubscription<T> {}
 
-/// A class which mocks [SignInEmailBloc].
+/// A class which mocks [SignInCredentialBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInEmailBloc extends _i1.Mock implements _i2.SignInEmailBloc {
-  MockSignInEmailBloc() {
+class MockSignInCredentialBloc extends _i1.Mock
+    implements _i2.SignInCredentialBloc {
+  MockSignInCredentialBloc() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.SignInEmailState get state =>
+  _i2.SignInCredentialState get state =>
       (super.noSuchMethod(Invocation.getter(#state),
-          returnValue: _FakeSignInEmailState_0()) as _i2.SignInEmailState);
+              returnValue: _FakeSignInCredentialState_0())
+          as _i2.SignInCredentialState);
   @override
-  _i3.Stream<_i2.SignInEmailState> get stream =>
+  _i3.Stream<_i2.SignInCredentialState> get stream =>
       (super.noSuchMethod(Invocation.getter(#stream),
-              returnValue: Stream<_i2.SignInEmailState>.empty())
-          as _i3.Stream<_i2.SignInEmailState>);
+              returnValue: Stream<_i2.SignInCredentialState>.empty())
+          as _i3.Stream<_i2.SignInCredentialState>);
   @override
-  _i3.Stream<_i2.SignInEmailState> mapEventToState(
-          _i2.SignInEmailEvent? event) =>
+  _i3.Stream<_i2.SignInCredentialState> mapEventToState(
+          _i2.SignInCredentialEvent? event) =>
       (super.noSuchMethod(Invocation.method(#mapEventToState, [event]),
-              returnValue: Stream<_i2.SignInEmailState>.empty())
-          as _i3.Stream<_i2.SignInEmailState>);
+              returnValue: Stream<_i2.SignInCredentialState>.empty())
+          as _i3.Stream<_i2.SignInCredentialState>);
   @override
-  void add(_i2.SignInEmailEvent? event) =>
+  void add(_i2.SignInCredentialEvent? event) =>
       super.noSuchMethod(Invocation.method(#add, [event]),
           returnValueForMissingStub: null);
   @override
-  void onEvent(_i2.SignInEmailEvent? event) =>
+  void onEvent(_i2.SignInCredentialEvent? event) =>
       super.noSuchMethod(Invocation.method(#onEvent, [event]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<
-      _i4.Transition<_i2.SignInEmailEvent, _i2.SignInEmailState>> transformEvents(
-          _i3.Stream<_i2.SignInEmailEvent>? events,
-          _i4.TransitionFunction<_i2.SignInEmailEvent, _i2.SignInEmailState>?
-              transitionFn) =>
-      (super.noSuchMethod(
+  _i3.Stream<_i4.Transition<_i2.SignInCredentialEvent, _i2.SignInCredentialState>>
+      transformEvents(
+              _i3.Stream<_i2.SignInCredentialEvent>? events,
+              _i4.TransitionFunction<_i2.SignInCredentialEvent,
+                      _i2.SignInCredentialState>?
+                  transitionFn) =>
+          (super.noSuchMethod(
               Invocation.method(#transformEvents, [events, transitionFn]),
               returnValue:
-                  Stream<_i4.Transition<_i2.SignInEmailEvent, _i2.SignInEmailState>>.empty())
-          as _i3.Stream<
-              _i4.Transition<_i2.SignInEmailEvent, _i2.SignInEmailState>>);
+                  Stream<_i4.Transition<_i2.SignInCredentialEvent, _i2.SignInCredentialState>>.empty()) as _i3
+              .Stream<_i4.Transition<_i2.SignInCredentialEvent, _i2.SignInCredentialState>>);
   @override
-  void emit(_i2.SignInEmailState? state) =>
+  void emit(_i2.SignInCredentialState? state) =>
       super.noSuchMethod(Invocation.method(#emit, [state]),
           returnValueForMissingStub: null);
   @override
   void onTransition(
-          _i4.Transition<_i2.SignInEmailEvent, _i2.SignInEmailState>?
+          _i4.Transition<_i2.SignInCredentialEvent, _i2.SignInCredentialState>?
               transition) =>
       super.noSuchMethod(Invocation.method(#onTransition, [transition]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<
-      _i4.Transition<_i2.SignInEmailEvent, _i2.SignInEmailState>> transformTransitions(
-          _i3.Stream<_i4.Transition<_i2.SignInEmailEvent, _i2.SignInEmailState>>?
-              transitions) =>
-      (super.noSuchMethod(
-              Invocation.method(#transformTransitions, [transitions]),
-              returnValue:
-                  Stream<_i4.Transition<_i2.SignInEmailEvent, _i2.SignInEmailState>>.empty())
-          as _i3.Stream<
-              _i4.Transition<_i2.SignInEmailEvent, _i2.SignInEmailState>>);
+  _i3.Stream<_i4.Transition<_i2.SignInCredentialEvent, _i2.SignInCredentialState>>
+      transformTransitions(
+              _i3.Stream<_i4.Transition<_i2.SignInCredentialEvent, _i2.SignInCredentialState>>?
+                  transitions) =>
+          (super.noSuchMethod(
+                  Invocation.method(#transformTransitions, [transitions]),
+                  returnValue:
+                      Stream<_i4.Transition<_i2.SignInCredentialEvent, _i2.SignInCredentialState>>.empty())
+              as _i3.Stream<
+                  _i4.Transition<_i2.SignInCredentialEvent, _i2.SignInCredentialState>>);
   @override
   _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
       returnValue: Future<void>.value(),
       returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
   @override
-  _i3.StreamSubscription<_i2.SignInEmailState> listen(
-          void Function(_i2.SignInEmailState)? onData,
+  _i3.StreamSubscription<_i2.SignInCredentialState> listen(
+          void Function(_i2.SignInCredentialState)? onData,
           {Function? onError,
           void Function()? onDone,
           bool? cancelOnError}) =>
@@ -105,10 +107,11 @@ class MockSignInEmailBloc extends _i1.Mock implements _i2.SignInEmailBloc {
                 #onDone: onDone,
                 #cancelOnError: cancelOnError
               }),
-              returnValue: _FakeStreamSubscription_1<_i2.SignInEmailState>())
-          as _i3.StreamSubscription<_i2.SignInEmailState>);
+              returnValue:
+                  _FakeStreamSubscription_1<_i2.SignInCredentialState>())
+          as _i3.StreamSubscription<_i2.SignInCredentialState>);
   @override
-  void onChange(_i4.Change<_i2.SignInEmailState>? change) =>
+  void onChange(_i4.Change<_i2.SignInCredentialState>? change) =>
       super.noSuchMethod(Invocation.method(#onChange, [change]),
           returnValueForMissingStub: null);
   @override

@@ -47,14 +47,15 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
 
   void _validateForm() {
     if (_formKey.currentState?.validate() == true) {
-      bloc.add(const SignInRegisterEvent.registerWithEmailAndPasswordPressed());
+      bloc.add(
+          const SignInRegisterEvent.registerWithCredentialAndPasswordPressed());
     }
   }
 
   @override
   void initState() {
     if (widget.credential != null) {
-      final credential = EmailAddress(widget.credential);
+      final credential = CredentialAddress(widget.credential);
       if (credential.isValid()) {
         _credentialTextEditingController.text = credential.getOrCrash();
         _passwordFocusNode.requestFocus();
@@ -110,11 +111,11 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                   loading: state.isLoading,
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
-                FieldEmail(
+                FieldCredential(
                   controller: _credentialTextEditingController,
                   focusNode: _credentialFocusNode,
                   key: const Key(
-                      SignInPageKeys.signInRegisterPageEmailTextField),
+                      SignInPageKeys.signInRegisterPageCredentialTextField),
                   onChanged: (value) =>
                       bloc.add(SignInRegisterEvent.credentialChanged(value)),
                   validator: (_) => current.credential.validation,

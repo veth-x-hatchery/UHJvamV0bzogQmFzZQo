@@ -1,14 +1,14 @@
 part of 'sign_in_credential_bloc.dart';
 
 @freezed
-class SignInEmailState with _$SignInEmailState {
-  const factory SignInEmailState({
-    required EmailAddress credential,
+class SignInCredentialState with _$SignInCredentialState {
+  const factory SignInCredentialState({
+    required CredentialAddress credential,
     required bool isLoading,
     required Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
-  }) = _EmailState;
-  factory SignInEmailState.initial() => SignInEmailState(
-        credential: EmailAddress(''),
+  }) = _CredentialState;
+  factory SignInCredentialState.initial() => SignInCredentialState(
+        credential: CredentialAddress(''),
         isLoading: false,
         authFailureOrSuccessOption: none(),
       );

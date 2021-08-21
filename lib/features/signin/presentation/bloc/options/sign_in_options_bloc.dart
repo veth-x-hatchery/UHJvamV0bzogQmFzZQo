@@ -46,7 +46,7 @@ class SignInOptionsBloc extends Bloc<SignInEvent, SignInState> {
         _mapFailureToSignStateErrorMessage,
         (_) => const SignInState.signInAllowed(),
       );
-    }, signInWithEmailEvent: (e) async* {
+    }, signInWithCredentialEvent: (e) async* {
       _navigation.goTo(
           SignInPageGoTo.credentialPage(from: SignInPageRoutes.signInOptions));
       yield const SignInState.initial();

@@ -13,18 +13,18 @@ import 'sign_in_credential_bloc_test.mocks.dart';
 
 @GenerateMocks([
   NavigationCubit,
-  SignInCheckIfEmailIsInUse,
+  SignInCheckIfCredentialIsInUse,
 ])
 void main() {
-  late SignInEmailBloc _bloc;
-  late MockSignInCheckIfEmailIsInUse _mockSignInWithEmailAndPassword;
+  late SignInCredentialBloc _bloc;
+  late MockSignInCheckIfCredentialIsInUse _mockSignInWithCredentialAndPassword;
   late MockNavigationCubit _mockNavigation;
 
   setUp(() {
-    _mockSignInWithEmailAndPassword = MockSignInCheckIfEmailIsInUse();
+    _mockSignInWithCredentialAndPassword = MockSignInCheckIfCredentialIsInUse();
     _mockNavigation = MockNavigationCubit();
-    _bloc = SignInEmailBloc(
-      _mockSignInWithEmailAndPassword,
+    _bloc = SignInCredentialBloc(
+      _mockSignInWithCredentialAndPassword,
       _mockNavigation,
     );
   });
@@ -37,15 +37,15 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInEmailEvent.credentialChanged(credential));
+    _bloc.add(const SignInCredentialEvent.credentialChanged(credential));
 
     // assert
 
     await expectLater(
         _bloc.stream,
         emitsInOrder([
-          SignInEmailState(
-            credential: EmailAddress(credential),
+          SignInCredentialState(
+            credential: CredentialAddress(credential),
             isLoading: false,
             authFailureOrSuccessOption: none(),
           )
@@ -60,33 +60,33 @@ void main() {
 
     const credential = 'test@test.com';
 
-    final valueObject = EmailAddress(credential);
+    final valueObject = CredentialAddress(credential);
 
-    when(_mockSignInWithEmailAndPassword.call(any))
+    when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act
 
-    _bloc.add(const SignInEmailEvent.credentialChanged(credential));
+    _bloc.add(const SignInCredentialEvent.credentialChanged(credential));
 
-    _bloc.add(const SignInEmailEvent.analyseEmailPressed());
+    _bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
 
     // assert
     await expectLater(
         _bloc.stream,
         emitsInOrder(
           [
-            SignInEmailState(
+            SignInCredentialState(
               credential: valueObject,
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
-            SignInEmailState(
+            SignInCredentialState(
               credential: valueObject,
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
-            SignInEmailState(
+            SignInCredentialState(
               credential: valueObject,
               isLoading: false,
               authFailureOrSuccessOption: none(),
@@ -103,14 +103,14 @@ void main() {
 
     const credential = 'test';
 
-    when(_mockSignInWithEmailAndPassword.call(any))
+    when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act
 
-    _bloc.add(const SignInEmailEvent.credentialChanged(credential));
+    _bloc.add(const SignInCredentialEvent.credentialChanged(credential));
 
-    _bloc.add(const SignInEmailEvent.analyseEmailPressed());
+    _bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
 
     // assert
 
@@ -118,18 +118,18 @@ void main() {
         _bloc.stream,
         emitsInOrder(
           [
-            SignInEmailState(
-              credential: EmailAddress(credential),
+            SignInCredentialState(
+              credential: CredentialAddress(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
-            SignInEmailState(
-              credential: EmailAddress(credential),
+            SignInCredentialState(
+              credential: CredentialAddress(credential),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
-            SignInEmailState(
-              credential: EmailAddress(credential),
+            SignInCredentialState(
+              credential: CredentialAddress(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             )
@@ -142,36 +142,36 @@ void main() {
 
     const credential = 'test@test.com';
     final expectedFailure = FailureDetails(
-      failure: const AuthFailure.invalidEmailAndPasswordCombination(),
-      message: CheckEmailErrorMessages.credentialAlreadyRegistered,
+      failure: const AuthFailure.invalidCredentialAndPasswordCombination(),
+      message: CheckCredentialErrorMessages.credentialAlreadyRegistered,
     );
 
-    when(_mockSignInWithEmailAndPassword.call(any))
+    when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(Left(expectedFailure)));
 
     // act
 
-    _bloc.add(const SignInEmailEvent.credentialChanged(credential));
+    _bloc.add(const SignInCredentialEvent.credentialChanged(credential));
 
-    _bloc.add(const SignInEmailEvent.analyseEmailPressed());
+    _bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
 
     // assert
     await expectLater(
         _bloc.stream,
         emitsInOrder(
           [
-            SignInEmailState(
-              credential: EmailAddress(credential),
+            SignInCredentialState(
+              credential: CredentialAddress(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
-            SignInEmailState(
-              credential: EmailAddress(credential),
+            SignInCredentialState(
+              credential: CredentialAddress(credential),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
-            SignInEmailState(
-              credential: EmailAddress(credential),
+            SignInCredentialState(
+              credential: CredentialAddress(credential),
               isLoading: false,
               authFailureOrSuccessOption: some(Left(expectedFailure)),
             )
@@ -184,14 +184,14 @@ void main() {
 
     const credential = 'test@test.com';
 
-    when(_mockSignInWithEmailAndPassword.call(any))
+    when(_mockSignInWithCredentialAndPassword.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act
 
-    _bloc.add(const SignInEmailEvent.credentialChanged(credential));
+    _bloc.add(const SignInCredentialEvent.credentialChanged(credential));
 
-    _bloc.add(const SignInEmailEvent.analyseEmailPressed());
+    _bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
 
     // assert
 
@@ -199,18 +199,18 @@ void main() {
         _bloc.stream,
         emitsInOrder(
           [
-            SignInEmailState(
-              credential: EmailAddress(credential),
+            SignInCredentialState(
+              credential: CredentialAddress(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             ),
-            SignInEmailState(
-              credential: EmailAddress(credential),
+            SignInCredentialState(
+              credential: CredentialAddress(credential),
               isLoading: true,
               authFailureOrSuccessOption: none(),
             ),
-            SignInEmailState(
-              credential: EmailAddress(credential),
+            SignInCredentialState(
+              credential: CredentialAddress(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
             )

@@ -101,7 +101,7 @@ class _SignInPasswordPageState extends State<SignInPasswordPage> {
             TextButton(
               onPressed: state.isLoading ? () {} : () => {},
               child: Text(
-                Texts.changeEmail,
+                Texts.changeCredential,
                 style: Theme.of(context).textTheme.button,
               ),
             ),
