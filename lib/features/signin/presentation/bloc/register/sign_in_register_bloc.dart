@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:vethx_beta/core/notifications/notification.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
@@ -54,6 +55,10 @@ class SignInRegisterBloc
         );
         yield state.copyWith(
           isLoading: false,
+          notification: result.fold(
+            (l) => optionOf(VethxNotification.snack(message: l.message)),
+            (r) => none(),
+          ),
           authFailureOrSuccessOption: result.fold(
             (l) => some(result),
             (r) {

@@ -523,13 +523,14 @@ class _$SignInRegisterStateTearOff {
       {required Credential credential,
       required Secret secret,
       required bool isLoading,
-      required Option<Either<FailureDetails, Unit>>
-          authFailureOrSuccessOption}) {
+      required Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+      required Option<VethxNotification> notification}) {
     return _RegisterState(
       credential: credential,
       secret: secret,
       isLoading: isLoading,
       authFailureOrSuccessOption: authFailureOrSuccessOption,
+      notification: notification,
     );
   }
 }
@@ -543,6 +544,8 @@ mixin _$SignInRegisterState {
   Secret get secret => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
+  Option<VethxNotification> get notification =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -559,7 +562,8 @@ abstract class $SignInRegisterStateCopyWith<$Res> {
       {Credential credential,
       Secret secret,
       bool isLoading,
-      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
+      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+      Option<VethxNotification> notification});
 }
 
 /// @nodoc
@@ -577,6 +581,7 @@ class _$SignInRegisterStateCopyWithImpl<$Res>
     Object? secret = freezed,
     Object? isLoading = freezed,
     Object? authFailureOrSuccessOption = freezed,
+    Object? notification = freezed,
   }) {
     return _then(_value.copyWith(
       credential: credential == freezed
@@ -595,6 +600,10 @@ class _$SignInRegisterStateCopyWithImpl<$Res>
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<FailureDetails, Unit>>,
+      notification: notification == freezed
+          ? _value.notification
+          : notification // ignore: cast_nullable_to_non_nullable
+              as Option<VethxNotification>,
     ));
   }
 }
@@ -610,7 +619,8 @@ abstract class _$RegisterStateCopyWith<$Res>
       {Credential credential,
       Secret secret,
       bool isLoading,
-      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
+      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+      Option<VethxNotification> notification});
 }
 
 /// @nodoc
@@ -630,6 +640,7 @@ class __$RegisterStateCopyWithImpl<$Res>
     Object? secret = freezed,
     Object? isLoading = freezed,
     Object? authFailureOrSuccessOption = freezed,
+    Object? notification = freezed,
   }) {
     return _then(_RegisterState(
       credential: credential == freezed
@@ -648,6 +659,10 @@ class __$RegisterStateCopyWithImpl<$Res>
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<FailureDetails, Unit>>,
+      notification: notification == freezed
+          ? _value.notification
+          : notification // ignore: cast_nullable_to_non_nullable
+              as Option<VethxNotification>,
     ));
   }
 }
@@ -659,7 +674,8 @@ class _$_RegisterState implements _RegisterState {
       {required this.credential,
       required this.secret,
       required this.isLoading,
-      required this.authFailureOrSuccessOption});
+      required this.authFailureOrSuccessOption,
+      required this.notification});
 
   @override
   final Credential credential;
@@ -669,10 +685,12 @@ class _$_RegisterState implements _RegisterState {
   final bool isLoading;
   @override
   final Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption;
+  @override
+  final Option<VethxNotification> notification;
 
   @override
   String toString() {
-    return 'SignInRegisterState(credential: $credential, secret: $secret, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'SignInRegisterState(credential: $credential, secret: $secret, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption, notification: $notification)';
   }
 
   @override
@@ -691,7 +709,10 @@ class _$_RegisterState implements _RegisterState {
                     authFailureOrSuccessOption) ||
                 const DeepCollectionEquality().equals(
                     other.authFailureOrSuccessOption,
-                    authFailureOrSuccessOption)));
+                    authFailureOrSuccessOption)) &&
+            (identical(other.notification, notification) ||
+                const DeepCollectionEquality()
+                    .equals(other.notification, notification)));
   }
 
   @override
@@ -700,7 +721,8 @@ class _$_RegisterState implements _RegisterState {
       const DeepCollectionEquality().hash(credential) ^
       const DeepCollectionEquality().hash(secret) ^
       const DeepCollectionEquality().hash(isLoading) ^
-      const DeepCollectionEquality().hash(authFailureOrSuccessOption);
+      const DeepCollectionEquality().hash(authFailureOrSuccessOption) ^
+      const DeepCollectionEquality().hash(notification);
 
   @JsonKey(ignore: true)
   @override
@@ -713,8 +735,8 @@ abstract class _RegisterState implements SignInRegisterState {
       {required Credential credential,
       required Secret secret,
       required bool isLoading,
-      required Option<Either<FailureDetails, Unit>>
-          authFailureOrSuccessOption}) = _$_RegisterState;
+      required Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+      required Option<VethxNotification> notification}) = _$_RegisterState;
 
   @override
   Credential get credential => throw _privateConstructorUsedError;
@@ -724,6 +746,9 @@ abstract class _RegisterState implements SignInRegisterState {
   bool get isLoading => throw _privateConstructorUsedError;
   @override
   Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
+  @override
+  Option<VethxNotification> get notification =>
       throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

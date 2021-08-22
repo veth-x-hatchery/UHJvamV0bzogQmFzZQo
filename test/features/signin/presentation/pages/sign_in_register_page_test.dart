@@ -83,6 +83,7 @@ void main() {
       secret: secretVO,
       isLoading: false,
       authFailureOrSuccessOption: none(),
+      notification: none(),
     );
     when(_mockSignInBloc.state).thenReturn(state);
   }
@@ -155,6 +156,7 @@ void main() {
       secret: Secret(validSecret),
       isLoading: true,
       authFailureOrSuccessOption: none(),
+      notification: none(),
     ));
 
     await _pumpPage(tester);

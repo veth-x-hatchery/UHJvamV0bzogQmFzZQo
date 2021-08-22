@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/core/notifications/notification.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
@@ -9,7 +10,7 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_cred
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 
-import 'register_bloc_test.mocks.dart';
+import 'sign_in_register_bloc_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
@@ -49,6 +50,7 @@ void main() {
             secret: Secret(''),
             isLoading: false,
             authFailureOrSuccessOption: none(),
+            notification: none(),
           )
         ]));
     //
@@ -72,6 +74,7 @@ void main() {
             secret: Secret(secret),
             isLoading: false,
             authFailureOrSuccessOption: none(),
+            notification: none(),
           )
         ]));
     //
@@ -105,24 +108,28 @@ void main() {
               secret: Secret(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInRegisterState(
               credential: Credential(credential),
               secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInRegisterState(
               credential: Credential(credential),
               secret: Secret(secret),
               isLoading: true,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInRegisterState(
               credential: Credential(credential),
               secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             )
           ],
         )).then((_) {
@@ -130,7 +137,9 @@ void main() {
     });
   });
 
-  test('when confirmation occour then should emit an failure detais', () async {
+  test(
+      'when confirmation occour then should emit an failure detais and a notification message',
+      () async {
     // arrange
 
     const credential = 'test';
@@ -161,24 +170,29 @@ void main() {
               secret: Secret(''),
               isLoading: false,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInRegisterState(
               credential: Credential(credential),
               secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInRegisterState(
               credential: Credential(credential),
               secret: Secret(secret),
               isLoading: true,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInRegisterState(
               credential: Credential(credential),
               secret: Secret(secret),
               isLoading: false,
               authFailureOrSuccessOption: some(Left(expectedFailure)),
+              notification: optionOf(
+                  VethxNotification.snack(message: expectedFailure.message)),
             )
           ],
         ));

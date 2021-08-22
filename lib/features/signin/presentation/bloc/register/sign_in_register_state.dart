@@ -7,11 +7,13 @@ class SignInRegisterState with _$SignInRegisterState {
     required Secret secret,
     required bool isLoading,
     required Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+    required Option<VethxNotification> notification,
   }) = _RegisterState;
   factory SignInRegisterState.initial() => SignInRegisterState(
         credential: Credential(''),
         secret: Secret(''),
         isLoading: false,
         authFailureOrSuccessOption: none(),
+        notification: none(),
       );
 }
