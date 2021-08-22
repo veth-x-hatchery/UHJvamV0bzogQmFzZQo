@@ -27,6 +27,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secr
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/injection_container.dart';
 
+/// https://github.com/fluttercommunity/get_it/issues/109
 Future<void> signInDependenciesInjection() async {
   //! External
 
