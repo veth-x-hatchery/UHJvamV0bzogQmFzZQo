@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
@@ -66,17 +67,12 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
       context,
       child: BlocConsumer<SignInSecretBloc, SignInSecretState>(
         listener: (context, state) {
-          state.authFailureOrSuccessOption.fold(
+          state.notification.fold(
             () {},
-            (either) {
-              either.fold(
-                (failure) {
-                  Logger.presentation('SignInSecretPage $state: $failure');
-                },
-                (_) {
-                  Logger.presentation('SignInSecretPage $state');
-                },
-              );
+            (notification) {
+              Logger.presentation(
+                  'SignInSecretPage -> notification: $notification');
+              vethxNotify(context, notification);
             },
           );
         },

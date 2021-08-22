@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/core/notifications/notification.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -194,5 +198,35 @@ void main() {
 
     verify(_mockBloc.add(const SignInSecretEvent.analyseSecretPressed()))
         .called(1);
+  });
+
+  testWidgets('when receive a failure then should show a snack message',
+      (tester) async {
+    // Arrange
+
+    const secret = 'dmFsaWRwYXNzd29yZAo';
+
+    final valueObject = Secret(secret);
+
+    final expectedFailure = FailureDetails(
+      failure: const AuthFailure.invalidCachedCredential(),
+      message: SignInWithSecretErrorMessages.invalidCachedCredential,
+    );
+
+    _signInState(SignInSecretState(
+      secret: valueObject,
+      isLoading: false,
+      authFailureOrSuccessOption: some(Left(expectedFailure)),
+      notification:
+          optionOf(VethxNotification.snack(message: expectedFailure.message)),
+    ));
+
+    await _pumpPage(tester);
+
+    await tester.pumpAndSettle();
+
+    // Act && Assert
+
+    expect(find.text(expectedFailure.message), findsOneWidget);
   });
 }

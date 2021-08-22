@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
@@ -93,17 +94,12 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
       context,
       child: BlocConsumer<SignInRegisterBloc, SignInRegisterState>(
         listener: (context, state) {
-          state.authFailureOrSuccessOption.fold(
+          state.notification.fold(
             () {},
-            (either) {
-              either.fold(
-                (failure) {
-                  Logger.presentation('SignInRegisterBloc $state: $failure');
-                },
-                (_) {
-                  Logger.presentation('SignInRegisterBloc $state');
-                },
-              );
+            (notification) {
+              Logger.presentation(
+                  'SignInRegisterPage -> notification: $notification');
+              vethxNotify(context, notification);
             },
           );
         },
