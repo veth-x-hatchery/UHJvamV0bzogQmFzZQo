@@ -11,6 +11,7 @@ import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repositor
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
@@ -21,6 +22,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/injection_container.dart';
@@ -132,6 +134,13 @@ Future<void> signInDependenciesInjection() async {
     () => SignInRegisterBloc(
       sl<AuthBloc>(),
       sl<SignInRegisterCredentialAndSecret>(),
+    ),
+  );
+
+  sl.registerFactory<SignInSecretResetBloc>(
+    () => SignInSecretResetBloc(
+      sl<SignInSecretReset>(),
+      sl<NavigationCubit>(),
     ),
   );
 

@@ -8,6 +8,7 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 
@@ -15,6 +16,7 @@ import 'sign_in_secret_bloc_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
+  SignInSecretResetBloc,
   NavigationCubit,
   SignInWithSecret,
 ])
@@ -149,7 +151,7 @@ void main() {
         ));
   });
 
-  test('when confirmation occour then should emit an failure detais', () async {
+  test('when confirmation occour then should emit a failure detais', () async {
     // arrange
 
     const secret = 'dmFsaWRwYXNzd29yZAo';

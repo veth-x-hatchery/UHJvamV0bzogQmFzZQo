@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
-import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
@@ -41,6 +41,9 @@ class SignInOptionsPage extends StatelessWidget {
         BlocProvider(
           create: (_) => sl<SignInSecretBloc>(),
         ),
+        BlocProvider(
+          create: (_) => sl<SignInSecretResetBloc>(),
+        ),
       ],
       child: const SignInOptionsPage(),
     );
@@ -66,7 +69,12 @@ class SignInOptionsPage extends StatelessWidget {
                   context,
                   SlideLeftRoute<void>(
                     page: SignInSecretPage.create(
-                        bloc: BlocProvider.of<SignInSecretBloc>(context)),
+                      secretResetbloc:
+                          BlocProvider.of<SignInSecretResetBloc>(context),
+                      secretBloc: BlocProvider.of<SignInSecretBloc>(context),
+                      navigationCubit:
+                          BlocProvider.of<NavigationCubit>(context),
+                    ),
                   ),
                 );
                 break;

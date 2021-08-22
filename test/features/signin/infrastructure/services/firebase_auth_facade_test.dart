@@ -145,7 +145,7 @@ void main() {
 
     final secret = Secret('dGVzdEB2ZXRoeC5jb20K');
 
-    Future<void> _signInWithCredentialAndSecret(
+    Future<void> _throwExceptionAssert(
       Exception firebaseException,
       AuthFailure expectedFailure,
     ) async {
@@ -181,7 +181,7 @@ void main() {
 
       // act && assert
 
-      await _signInWithCredentialAndSecret(
+      await _throwExceptionAssert(
         firebaseException,
         expectedFailure,
       );
@@ -200,7 +200,7 @@ void main() {
 
       // act && assert
 
-      await _signInWithCredentialAndSecret(
+      await _throwExceptionAssert(
         firebaseException,
         expectedFailure,
       );
@@ -218,7 +218,7 @@ void main() {
 
         // act && assert
 
-        await _signInWithCredentialAndSecret(
+        await _throwExceptionAssert(
           firebaseException,
           expectedFailure,
         );
@@ -467,6 +467,99 @@ void main() {
       verify(_mockFirebaseAuth.currentUser);
 
       expect(result != null, true);
+    });
+  });
+
+  group('when request password reset', () {
+    final credential = Credential('test@vethx.com');
+
+    Future<void> _throwExceptionAssert(
+      Exception firebaseException,
+      AuthFailure expectedFailure,
+    ) async {
+      // Arrange
+
+      when(_mockFirebaseAuth.sendPasswordResetEmail(
+              email: credential.getOrCrash()))
+          .thenThrow(firebaseException);
+
+      // act
+
+      final result = await _authFacade.passwordReset(credential);
+
+      // assert
+
+      expect(result, left(expectedFailure));
+    }
+
+    test('should return [rigth(Unit)] success', () async {
+      // Arrange
+
+      when(
+        _mockFirebaseAuth.sendPasswordResetEmail(
+            email: credential.getOrCrash()),
+      ).thenAnswer((_) => Future.value());
+
+      // act
+
+      final result = await _authFacade.passwordReset(credential);
+
+      // assert
+
+      expect(result, right(unit));
+    });
+
+    test(
+        'should return [AuthFailure.invalidCredentialAndSecretCombination()] when Firebase throw [auth/user-not-found]',
+        () async {
+      // arrange
+
+      final firebaseException =
+          FirebaseException(code: 'auth/user-not-found', plugin: '');
+
+      const expectedFailure = AuthFailure.invalidCachedCredential();
+
+      // act && assert
+
+      await _throwExceptionAssert(
+        firebaseException,
+        expectedFailure,
+      );
+    });
+
+    test(
+        'should return [AuthFailure.invalidCredentialAndSecretCombination()] when Firebase throw [auth/invalid-email]',
+        () async {
+      // arrange
+
+      final firebaseException =
+          FirebaseException(code: 'auth/invalid-email', plugin: '');
+
+      const expectedFailure = AuthFailure.invalidCachedCredential();
+
+      // act && assert
+
+      await _throwExceptionAssert(
+        firebaseException,
+        expectedFailure,
+      );
+    });
+
+    test(
+        'should return [AuthFailure.serverError()] when Firebase throw an unmapped exception',
+        () async {
+      // arrange
+
+      final firebaseException = FirebaseException(code: 'asdf', plugin: '');
+
+      const expectedFailure = AuthFailure.serverError();
+
+      // act && assert
+
+      await _throwExceptionAssert(
+        firebaseException,
+        expectedFailure,
+      );
     });
   });
 }

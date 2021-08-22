@@ -4,11 +4,15 @@ import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
+import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 class SignInSecretPage extends StatefulWidget {
   const SignInSecretPage({Key? key}) : super(key: key);
@@ -18,10 +22,22 @@ class SignInSecretPage extends StatefulWidget {
 
   static Widget create({
     BuildContext? context,
-    required SignInSecretBloc bloc,
+    required SignInSecretBloc secretBloc,
+    required SignInSecretResetBloc secretResetbloc,
+    required NavigationCubit navigationCubit,
   }) {
-    return BlocProvider(
-      create: (_) => bloc,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SignInSecretBloc>(
+          create: (_) => secretBloc,
+        ),
+        BlocProvider<SignInSecretResetBloc>(
+          create: (_) => secretResetbloc,
+        ),
+        BlocProvider<NavigationCubit>(
+          create: (_) => navigationCubit,
+        ),
+      ],
       child: const SignInSecretPage(),
     );
   }
@@ -108,15 +124,16 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
                   ),
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
+                SignInSecretResetButton(
+                    bloc: BlocProvider.of<SignInSecretResetBloc>(context)),
                 TextButton(
-                  onPressed: state.isLoading ? () {} : () => {},
-                  child: Text(
-                    Texts.forgotMySecret,
-                    style: Theme.of(context).textTheme.button,
-                  ),
-                ),
-                TextButton(
-                  onPressed: state.isLoading ? () {} : () => {},
+                  key: const Key(SignInPageKeys.signInChangeCredentialButton),
+                  onPressed: state.isLoading
+                      ? () {}
+                      : () => BlocProvider.of<NavigationCubit>(context)
+                              .goTo(SignInPageGoTo.credentialPage(
+                            from: SignInPageRoutes.secretEntry,
+                          )),
                   child: Text(
                     Texts.changeCredential,
                     style: Theme.of(context).textTheme.button,
@@ -127,6 +144,50 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
           );
         },
       ),
+    );
+  }
+}
+
+class SignInSecretResetButton extends StatelessWidget {
+  const SignInSecretResetButton({
+    Key? key,
+    required this.bloc,
+  }) : super(key: key);
+
+  final SignInSecretResetBloc bloc;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<SignInSecretResetBloc, SignInSecretResetState>(
+      bloc: bloc,
+      listener: (context, state) {
+        state.notification.fold(
+          () {},
+          (notification) {
+            Logger.presentation(
+                'SignInSecretPage -> SignInSecretResetBloc -> notification: $notification');
+            vethxNotify(context, notification);
+          },
+        );
+      },
+      builder: (context, state) {
+        return SizedBox(
+          height: Theme.of(context).textTheme.button!.fontSize,
+          child: Center(
+            child: state.isLoading
+                ? const GenericProgressIndicator()
+                : TextButton(
+                    key: const Key(SignInPageKeys.signInsecretResetButton),
+                    onPressed: () => bloc
+                        .add(const SignInSecretResetEvent.secretResetRequest()),
+                    child: Text(
+                      Texts.forgotMySecret,
+                      style: Theme.of(context).textTheme.button,
+                    ),
+                  ),
+          ),
+        );
+      },
     );
   }
 }

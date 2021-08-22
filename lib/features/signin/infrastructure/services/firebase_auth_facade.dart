@@ -127,4 +127,22 @@ class FirebaseAuthFacade implements IAuthFacade {
     return Future.value(
         _firebaseUserMapper.toDomain(_firebaseAuth.currentUser));
   }
+
+  @override
+  Future<Either<AuthFailure, Unit>> passwordReset(Credential credential) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(
+          email: credential.getOrCrash());
+      return right(unit);
+    } on FirebaseException catch (e, s) {
+      if (e.code.contains('invalid-email') ||
+          e.code.contains('user-not-found')) {
+        return left(const AuthFailure.invalidCachedCredential());
+      } else {
+        Logger.infrastructure('FirebaseAuthFacade.resetPassword -> ${e.code}',
+            exception: e, stackTrace: s);
+        return left(const AuthFailure.serverError());
+      }
+    }
+  }
 }

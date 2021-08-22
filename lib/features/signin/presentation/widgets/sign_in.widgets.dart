@@ -24,6 +24,11 @@ class SignInPageKeys {
   static const String signInSecretPageValidateButton =
       'signInSecretPageValidateButton';
 
+  static const String signInChangeCredentialButton =
+      'signInChangeCredentialButton';
+
+  static const String signInsecretResetButton = 'signInsecretResetButton';
+
   //! sign in register page
   static const String signInRegisterPageCredentialTextField =
       'signInRegisterPageCredentialTextField';

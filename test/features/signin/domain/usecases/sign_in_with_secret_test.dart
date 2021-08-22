@@ -34,7 +34,7 @@ void main() {
 
   final secret = Secret('dGVzdEB2ZXRoeC5jb20K');
 
-  group('then sign in with credential and secret', () {
+  group('when sign in with credential and secret', () {
     test('should return success with the given credentials', () async {
       // arrange
 

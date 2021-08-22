@@ -22,4 +22,6 @@ abstract class IAuthFacade {
   Future<Either<AuthFailure, Unit>> signInWithGoogle();
 
   Future<void> signOut();
+
+  Future<Either<AuthFailure, Unit>> passwordReset(Credential credential);
 }

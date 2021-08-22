@@ -138,7 +138,7 @@ void main() {
   });
 
   test(
-      'when confirmation occour then should emit an failure detais and a notification message',
+      'when confirmation occour then should emit a failure detais and a notification message',
       () async {
     // arrange
 

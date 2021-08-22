@@ -8,6 +8,7 @@ import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
@@ -19,6 +20,7 @@ import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
+
 import 'sign_in_options.page_test.mocks.dart';
 
 @GenerateMocks([
@@ -26,6 +28,7 @@ import 'sign_in_options.page_test.mocks.dart';
   SignInCredentialBloc,
   SignInRegisterBloc,
   SignInSecretBloc,
+  SignInSecretResetBloc,
   NavigationCubit,
 ], customMocks: [
   MockSpec<NavigatorObserver>(returnNullOnMissingStub: true)
@@ -34,6 +37,7 @@ void main() {
   late MockSignInCredentialBloc _mockMockSignInCredentialBloc;
   late MockSignInRegisterBloc _mockMockSignInRegisterBloc;
   late MockSignInSecretBloc _mockMockSignInSecretBloc;
+  late MockSignInSecretResetBloc _mockSignInSecretResetBloc;
   late MockNavigatorObserver _mockNavigationObserver;
 
   late MockSignInOptionsBloc _mockSignInBloc;
@@ -44,6 +48,7 @@ void main() {
     _mockMockSignInCredentialBloc = MockSignInCredentialBloc();
     _mockMockSignInRegisterBloc = MockSignInRegisterBloc();
     _mockMockSignInSecretBloc = MockSignInSecretBloc();
+    _mockSignInSecretResetBloc = MockSignInSecretResetBloc();
 
     _navigationCubit = NavigationCubit();
     _mockNavigationObserver = MockNavigatorObserver();
@@ -57,6 +62,7 @@ void main() {
         () => _mockMockSignInCredentialBloc);
     sl.registerFactory<SignInRegisterBloc>(() => _mockMockSignInRegisterBloc);
     sl.registerFactory<SignInSecretBloc>(() => _mockMockSignInSecretBloc);
+    sl.registerFactory<SignInSecretResetBloc>(() => _mockSignInSecretResetBloc);
 
     sl.registerLazySingleton<NavigationCubit>(() => _navigationCubit);
   });
@@ -89,12 +95,19 @@ void main() {
         .thenAnswer((_) => Stream.value(state));
   }
 
+  void _signInSecretResetState(SignInSecretResetState state) {
+    when(_mockSignInSecretResetBloc.state).thenReturn(state);
+    when(_mockSignInSecretResetBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
+  }
+
   void _setInitialState() {
     _signInState(const SignInOptionsState.initial());
     _SignInCredentialState(SignInCredentialState.initial());
     _SignInRegisterState(SignInRegisterState.initial());
     _SignInSecretState(SignInSecretState.initial());
     _SignInSecretState(SignInSecretState.initial());
+    _signInSecretResetState(SignInSecretResetState.initial());
   }
 
   Future<void> _pumpPage(WidgetTester tester) async {
