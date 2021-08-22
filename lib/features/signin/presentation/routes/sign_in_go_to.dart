@@ -17,11 +17,11 @@ class SignInPageGoTo {
     this.parameters,
   });
 
-  factory SignInPageGoTo.alpha({required SignInPageRoutes from}) =>
-      SignInPageGoTo._internal(
-        to: SignInPageRoutes.alpha,
-        from: from,
-      );
+  // factory SignInPageGoTo.alpha({required SignInPageRoutes from}) =>
+  //     SignInPageGoTo._internal(
+  //       to: SignInPageRoutes.alpha,
+  //       from: from,
+  //     );
 
   factory SignInPageGoTo.secretPage({
     required SignInPageRoutes from,
