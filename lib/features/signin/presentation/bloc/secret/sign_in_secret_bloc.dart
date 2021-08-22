@@ -36,12 +36,14 @@ class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
         yield state.copyWith(
           secret: Secret(e.secretStr),
           authFailureOrSuccessOption: none(),
+          notification: none(),
         );
       },
       analyseSecretPressed: (e) async* {
         yield state.copyWith(
           isLoading: true,
           authFailureOrSuccessOption: none(),
+          notification: none(),
         );
         final result =
             await _signInWithSecret.call(Params(secret: state.secret));

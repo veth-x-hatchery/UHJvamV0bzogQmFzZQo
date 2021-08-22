@@ -33,18 +33,21 @@ class SignInRegisterBloc
         yield state.copyWith(
           credential: Credential(e.credentialStr),
           authFailureOrSuccessOption: none(),
+          notification: none(),
         );
       },
       secretChanged: (e) async* {
         yield state.copyWith(
           secret: Secret(e.secretStr),
           authFailureOrSuccessOption: none(),
+          notification: none(),
         );
       },
       registerWithCredentialAndSecretPressed: (e) async* {
         yield state.copyWith(
           isLoading: true,
           authFailureOrSuccessOption: none(),
+          notification: none(),
         );
         final result = await _signInRegisterCredentialAndSecret.call(
           Params(

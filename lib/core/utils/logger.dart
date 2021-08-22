@@ -63,6 +63,30 @@ class Logger {
     Logger.i(message, layer: ArchitectureLayer.infrastructure);
   }
 
+  Logger.bloc(
+    String message, {
+    dynamic exception,
+    StackTrace? stackTrace,
+  }) {
+    Logger.presentation(
+      '[BLoC] $message',
+      exception: exception,
+      stackTrace: stackTrace,
+    );
+  }
+
+  Logger.widget(
+    String message, {
+    dynamic exception,
+    StackTrace? stackTrace,
+  }) {
+    Logger.presentation(
+      '[Widget] $message',
+      exception: exception,
+      stackTrace: stackTrace,
+    );
+  }
+
   static void e(
     String message, {
     dynamic ex,

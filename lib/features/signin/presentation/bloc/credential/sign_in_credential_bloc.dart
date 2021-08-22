@@ -16,11 +16,11 @@ part 'sign_in_credential_bloc.freezed.dart';
 
 class SignInCredentialBloc
     extends Bloc<SignInCredentialEvent, SignInCredentialState> {
-  final SignInCredentialCheck _signInCheckIfCredentialIsInUse;
+  final SignInCredentialCheck _credentialCheck;
   final NavigationCubit _navigation;
 
   SignInCredentialBloc(
-    this._signInCheckIfCredentialIsInUse,
+    this._credentialCheck,
     this._navigation,
   ) : super(SignInCredentialState.initial());
 
@@ -39,9 +39,10 @@ class SignInCredentialBloc
         yield state.copyWith(
           isLoading: true,
           authFailureOrSuccessOption: none(),
+          notification: none(),
         );
-        final result = await _signInCheckIfCredentialIsInUse
-            .call(Params(credential: state.credential));
+        final result =
+            await _credentialCheck.call(Params(credential: state.credential));
         yield state.copyWith(
           isLoading: false,
           notification: result.fold(
