@@ -25,18 +25,15 @@ void main() {
   late MockAuthBloc _mockAuthBloc;
   late MockNavigationCubit _mockNavigation;
   late MockSignInWithSecret _mockSignInWithSecret;
-  late MockSignInSecretResetBloc _mockSignInSecretResetBloc;
 
   setUp(() {
     _mockAuthBloc = MockAuthBloc();
     _mockSignInWithSecret = MockSignInWithSecret();
     _mockNavigation = MockNavigationCubit();
-    _mockSignInSecretResetBloc = MockSignInSecretResetBloc();
     _bloc = SignInSecretBloc(
       _mockAuthBloc,
       _mockNavigation,
       _mockSignInWithSecret,
-      _mockSignInSecretResetBloc,
     );
   });
 

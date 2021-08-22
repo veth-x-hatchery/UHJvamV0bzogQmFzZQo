@@ -8,6 +8,7 @@ import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
@@ -19,6 +20,7 @@ import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
+
 import 'sign_in_options.page_test.mocks.dart';
 
 @GenerateMocks([

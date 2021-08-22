@@ -8,6 +8,7 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -17,12 +18,17 @@ import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
 import 'sign_in_secret.page_test.mocks.dart';
 
-@GenerateMocks([SignInSecretBloc])
+@GenerateMocks([
+  SignInSecretBloc,
+  SignInSecretResetBloc,
+])
 void main() {
   late MockSignInSecretBloc _mockBloc;
+  late MockSignInSecretResetBloc _mockSignInSecretResetBloc;
 
   setUp(() {
     _mockBloc = MockSignInSecretBloc();
+    _mockSignInSecretResetBloc = MockSignInSecretResetBloc();
   });
 
   Future<void> _pumpPage(WidgetTester tester) async {
@@ -30,7 +36,10 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInSecretPage.create(bloc: _mockBloc),
+            body: SignInSecretPage.create(
+              secretBloc: _mockBloc,
+              secretResetbloc: _mockSignInSecretResetBloc,
+            ),
           ),
         ),
       ),
