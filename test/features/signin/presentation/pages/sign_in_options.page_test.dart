@@ -95,12 +95,19 @@ void main() {
         .thenAnswer((_) => Stream.value(state));
   }
 
+  void _SignInSecretResetState(SignInSecretResetState state) {
+    when(_mockSignInSecretResetBloc.state).thenReturn(state);
+    when(_mockSignInSecretResetBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
+  }
+
   void _setInitialState() {
     _signInState(const SignInOptionsState.initial());
     _SignInCredentialState(SignInCredentialState.initial());
     _SignInRegisterState(SignInRegisterState.initial());
     _SignInSecretState(SignInSecretState.initial());
     _SignInSecretState(SignInSecretState.initial());
+    _SignInSecretResetState(SignInSecretResetState.initial());
   }
 
   Future<void> _pumpPage(WidgetTester tester) async {

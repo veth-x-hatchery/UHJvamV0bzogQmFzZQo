@@ -46,9 +46,22 @@ void main() {
     );
   }
 
+  void _SignInSecretResetState(SignInSecretResetState state) {
+    when(_mockSignInSecretResetBloc.state).thenReturn(state);
+    when(_mockSignInSecretResetBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
+  }
+
   void _signInState(SignInSecretState state) {
     when(_mockBloc.state).thenReturn(state);
     when(_mockBloc.stream).thenAnswer((_) => Stream.value(state));
+
+    _SignInSecretResetState(SignInSecretResetState.initial());
+  }
+
+  void _setInitialState() {
+    _setInitialState();
+    _SignInSecretResetState(SignInSecretResetState.initial());
   }
 
   Finder _secretInput() {
@@ -86,7 +99,7 @@ void main() {
   testWidgets('should find the validation button', (tester) async {
     // arrange
 
-    _signInState(SignInSecretState.initial());
+    _setInitialState();
 
     await _pumpPage(tester);
 
@@ -105,7 +118,7 @@ void main() {
   testWidgets('should find the secret input', (tester) async {
     // arrange
 
-    _signInState(SignInSecretState.initial());
+    _setInitialState();
 
     await _pumpPage(tester);
 
@@ -143,7 +156,7 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(SignInSecretState.initial());
+    _setInitialState();
 
     await _pumpPage(tester);
 
@@ -164,7 +177,7 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(SignInSecretState.initial());
+    _setInitialState();
 
     await _pumpPage(tester);
 
@@ -189,7 +202,7 @@ void main() {
       (tester) async {
     // arrange
 
-    _signInState(SignInSecretState.initial());
+    _setInitialState();
 
     await _pumpPage(tester);
 
