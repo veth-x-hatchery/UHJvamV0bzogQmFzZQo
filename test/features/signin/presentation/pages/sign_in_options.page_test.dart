@@ -26,6 +26,7 @@ import 'sign_in_options.page_test.mocks.dart';
   SignInCredentialBloc,
   SignInRegisterBloc,
   SignInSecretBloc,
+  SignInSecretResetBloc,
   NavigationCubit,
 ], customMocks: [
   MockSpec<NavigatorObserver>(returnNullOnMissingStub: true)
@@ -34,6 +35,7 @@ void main() {
   late MockSignInCredentialBloc _mockMockSignInCredentialBloc;
   late MockSignInRegisterBloc _mockMockSignInRegisterBloc;
   late MockSignInSecretBloc _mockMockSignInSecretBloc;
+  late MockSignInSecretResetBloc _mockSignInSecretResetBloc;
   late MockNavigatorObserver _mockNavigationObserver;
 
   late MockSignInOptionsBloc _mockSignInBloc;
@@ -44,6 +46,7 @@ void main() {
     _mockMockSignInCredentialBloc = MockSignInCredentialBloc();
     _mockMockSignInRegisterBloc = MockSignInRegisterBloc();
     _mockMockSignInSecretBloc = MockSignInSecretBloc();
+    _mockSignInSecretResetBloc = MockSignInSecretResetBloc();
 
     _navigationCubit = NavigationCubit();
     _mockNavigationObserver = MockNavigatorObserver();
@@ -57,6 +60,7 @@ void main() {
         () => _mockMockSignInCredentialBloc);
     sl.registerFactory<SignInRegisterBloc>(() => _mockMockSignInRegisterBloc);
     sl.registerFactory<SignInSecretBloc>(() => _mockMockSignInSecretBloc);
+    sl.registerFactory<SignInSecretResetBloc>(() => _mockSignInSecretResetBloc);
 
     sl.registerLazySingleton<NavigationCubit>(() => _navigationCubit);
   });

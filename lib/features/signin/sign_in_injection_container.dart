@@ -149,7 +149,6 @@ Future<void> signInDependenciesInjection() async {
       sl<AuthBloc>(),
       sl<NavigationCubit>(),
       sl<SignInWithSecret>(),
-      sl<SignInSecretResetBloc>(),
     ),
   );
 

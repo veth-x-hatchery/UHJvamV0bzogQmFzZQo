@@ -22,13 +22,10 @@ class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
   final NavigationCubit _navigation;
   final SignInWithSecret _signInWithSecret;
 
-  final SignInSecretResetBloc secretResetBloc;
-
   SignInSecretBloc(
     this._authBloc,
     this._navigation,
     this._signInWithSecret,
-    this.secretResetBloc,
   ) : super(SignInSecretState.initial());
 
   @override

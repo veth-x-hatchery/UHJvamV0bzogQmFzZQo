@@ -19,10 +19,18 @@ class SignInSecretPage extends StatefulWidget {
 
   static Widget create({
     BuildContext? context,
-    required SignInSecretBloc bloc,
+    required SignInSecretBloc secretBloc,
+    required SignInSecretResetBloc secretResetbloc,
   }) {
-    return BlocProvider(
-      create: (_) => bloc,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SignInSecretBloc>(
+          create: (_) => secretBloc,
+        ),
+        BlocProvider<SignInSecretResetBloc>(
+          create: (_) => secretResetbloc,
+        ),
+      ],
       child: const SignInSecretPage(),
     );
   }
@@ -109,7 +117,8 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
                   ),
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
-                SignInSecretResetButton(bloc: bloc.secretResetBloc),
+                SignInSecretResetButton(
+                    bloc: BlocProvider.of<SignInSecretResetBloc>(context)),
                 TextButton(
                   onPressed: state.isLoading ? () {} : () => {},
                   child: Text(
