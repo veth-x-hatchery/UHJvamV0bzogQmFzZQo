@@ -6,10 +6,12 @@ class SignInSecretState with _$SignInSecretState {
     required Secret secret,
     required bool isLoading,
     required Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+    required Option<VethxNotification> notification,
   }) = _SecretState;
   factory SignInSecretState.initial() => SignInSecretState(
         secret: Secret(''),
         isLoading: false,
         authFailureOrSuccessOption: none(),
+        notification: none(),
       );
 }

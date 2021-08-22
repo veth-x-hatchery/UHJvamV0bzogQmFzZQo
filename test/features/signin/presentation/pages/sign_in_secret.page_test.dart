@@ -65,6 +65,7 @@ void main() {
       secret: credentialVO,
       isLoading: false,
       authFailureOrSuccessOption: none(),
+      notification: none(),
     );
     when(_mockBloc.state).thenReturn(state);
   }
@@ -115,6 +116,7 @@ void main() {
       isLoading: true,
       secret: Secret(''),
       authFailureOrSuccessOption: none(),
+      notification: none(),
     ));
 
     await _pumpPage(tester);

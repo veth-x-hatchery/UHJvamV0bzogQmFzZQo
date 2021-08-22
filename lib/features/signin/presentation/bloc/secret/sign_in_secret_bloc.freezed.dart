@@ -336,12 +336,13 @@ class _$SignInSecretStateTearOff {
   _SecretState call(
       {required Secret secret,
       required bool isLoading,
-      required Option<Either<FailureDetails, Unit>>
-          authFailureOrSuccessOption}) {
+      required Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+      required Option<VethxNotification> notification}) {
     return _SecretState(
       secret: secret,
       isLoading: isLoading,
       authFailureOrSuccessOption: authFailureOrSuccessOption,
+      notification: notification,
     );
   }
 }
@@ -354,6 +355,8 @@ mixin _$SignInSecretState {
   Secret get secret => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
+  Option<VethxNotification> get notification =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -369,7 +372,8 @@ abstract class $SignInSecretStateCopyWith<$Res> {
   $Res call(
       {Secret secret,
       bool isLoading,
-      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
+      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+      Option<VethxNotification> notification});
 }
 
 /// @nodoc
@@ -386,6 +390,7 @@ class _$SignInSecretStateCopyWithImpl<$Res>
     Object? secret = freezed,
     Object? isLoading = freezed,
     Object? authFailureOrSuccessOption = freezed,
+    Object? notification = freezed,
   }) {
     return _then(_value.copyWith(
       secret: secret == freezed
@@ -400,6 +405,10 @@ class _$SignInSecretStateCopyWithImpl<$Res>
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<FailureDetails, Unit>>,
+      notification: notification == freezed
+          ? _value.notification
+          : notification // ignore: cast_nullable_to_non_nullable
+              as Option<VethxNotification>,
     ));
   }
 }
@@ -414,7 +423,8 @@ abstract class _$SecretStateCopyWith<$Res>
   $Res call(
       {Secret secret,
       bool isLoading,
-      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
+      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+      Option<VethxNotification> notification});
 }
 
 /// @nodoc
@@ -433,6 +443,7 @@ class __$SecretStateCopyWithImpl<$Res>
     Object? secret = freezed,
     Object? isLoading = freezed,
     Object? authFailureOrSuccessOption = freezed,
+    Object? notification = freezed,
   }) {
     return _then(_SecretState(
       secret: secret == freezed
@@ -447,6 +458,10 @@ class __$SecretStateCopyWithImpl<$Res>
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<FailureDetails, Unit>>,
+      notification: notification == freezed
+          ? _value.notification
+          : notification // ignore: cast_nullable_to_non_nullable
+              as Option<VethxNotification>,
     ));
   }
 }
@@ -457,7 +472,8 @@ class _$_SecretState implements _SecretState {
   const _$_SecretState(
       {required this.secret,
       required this.isLoading,
-      required this.authFailureOrSuccessOption});
+      required this.authFailureOrSuccessOption,
+      required this.notification});
 
   @override
   final Secret secret;
@@ -465,10 +481,12 @@ class _$_SecretState implements _SecretState {
   final bool isLoading;
   @override
   final Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption;
+  @override
+  final Option<VethxNotification> notification;
 
   @override
   String toString() {
-    return 'SignInSecretState(secret: $secret, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'SignInSecretState(secret: $secret, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption, notification: $notification)';
   }
 
   @override
@@ -484,7 +502,10 @@ class _$_SecretState implements _SecretState {
                     authFailureOrSuccessOption) ||
                 const DeepCollectionEquality().equals(
                     other.authFailureOrSuccessOption,
-                    authFailureOrSuccessOption)));
+                    authFailureOrSuccessOption)) &&
+            (identical(other.notification, notification) ||
+                const DeepCollectionEquality()
+                    .equals(other.notification, notification)));
   }
 
   @override
@@ -492,7 +513,8 @@ class _$_SecretState implements _SecretState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(secret) ^
       const DeepCollectionEquality().hash(isLoading) ^
-      const DeepCollectionEquality().hash(authFailureOrSuccessOption);
+      const DeepCollectionEquality().hash(authFailureOrSuccessOption) ^
+      const DeepCollectionEquality().hash(notification);
 
   @JsonKey(ignore: true)
   @override
@@ -504,8 +526,8 @@ abstract class _SecretState implements SignInSecretState {
   const factory _SecretState(
       {required Secret secret,
       required bool isLoading,
-      required Option<Either<FailureDetails, Unit>>
-          authFailureOrSuccessOption}) = _$_SecretState;
+      required Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+      required Option<VethxNotification> notification}) = _$_SecretState;
 
   @override
   Secret get secret => throw _privateConstructorUsedError;
@@ -513,6 +535,9 @@ abstract class _SecretState implements SignInSecretState {
   bool get isLoading => throw _privateConstructorUsedError;
   @override
   Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
+  @override
+  Option<VethxNotification> get notification =>
       throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
