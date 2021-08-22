@@ -9,6 +9,7 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
@@ -21,10 +22,13 @@ class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
   final NavigationCubit _navigation;
   final SignInWithSecret _signInWithSecret;
 
+  final SignInSecretResetBloc secretResetBloc;
+
   SignInSecretBloc(
     this._authBloc,
     this._navigation,
     this._signInWithSecret,
+    this.secretResetBloc,
   ) : super(SignInSecretState.initial());
 
   @override

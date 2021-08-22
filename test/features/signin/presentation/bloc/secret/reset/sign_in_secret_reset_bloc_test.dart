@@ -39,7 +39,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInPasswordResetEvent.resetPasswordRequest());
+    _bloc.add(const SignInSecretResetEvent.resetPasswordRequest());
 
     // assert
 
@@ -47,7 +47,12 @@ void main() {
         _bloc.stream,
         emitsInOrder(
           [
-            SignInPasswordResetState(
+            SignInSecretResetState(
+              isLoading: true,
+              notification: none(),
+            ),
+            SignInSecretResetState(
+                isLoading: false,
                 notification: optionOf(VethxNotification.snack(
                     message: SignInSecretResetMessages.success))),
           ],
@@ -67,14 +72,19 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInPasswordResetEvent.resetPasswordRequest());
+    _bloc.add(const SignInSecretResetEvent.resetPasswordRequest());
 
     // assert
     await expectLater(
         _bloc.stream,
         emitsInOrder(
           [
-            SignInPasswordResetState(
+            SignInSecretResetState(
+              isLoading: true,
+              notification: none(),
+            ),
+            SignInSecretResetState(
+                isLoading: false,
                 notification: optionOf(
                     VethxNotification.snack(message: expectedFailure.message))),
           ],
@@ -95,13 +105,18 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInPasswordResetEvent.resetPasswordRequest());
+    _bloc.add(const SignInSecretResetEvent.resetPasswordRequest());
 
     // assert
     await expectLater(
       _bloc.stream,
       emitsInOrder([
-        SignInPasswordResetState(
+        SignInSecretResetState(
+          isLoading: true,
+          notification: none(),
+        ),
+        SignInSecretResetState(
+            isLoading: false,
             notification: optionOf(
                 VethxNotification.snack(message: expectedFailure.message))),
       ]),

@@ -4,19 +4,21 @@
 
 import 'dart:async' as _i3;
 
-import 'package:bloc/bloc.dart' as _i6;
-import 'package:dartz/dartz.dart' as _i5;
+import 'package:bloc/bloc.dart' as _i7;
+import 'package:dartz/dartz.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
-    as _i9;
+    as _i10;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart'
-    as _i8;
+    as _i9;
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
     as _i2;
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart'
     as _i4;
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
+    as _i5;
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart'
-    as _i7;
+    as _i8;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -31,9 +33,12 @@ class _FakeAuthState_0 extends _i1.Fake implements _i2.AuthState {}
 class _FakeStreamSubscription_1<T> extends _i1.Fake
     implements _i3.StreamSubscription<T> {}
 
-class _FakeNavigationState_2 extends _i1.Fake implements _i4.NavigationState {}
+class _FakeSignInSecretResetState_2 extends _i1.Fake
+    implements _i4.SignInSecretResetState {}
 
-class _FakeEither_3<L, R> extends _i1.Fake implements _i5.Either<L, R> {}
+class _FakeNavigationState_3 extends _i1.Fake implements _i5.NavigationState {}
+
+class _FakeEither_4<L, R> extends _i1.Fake implements _i6.Either<L, R> {}
 
 /// A class which mocks [AuthBloc].
 ///
@@ -64,31 +69,31 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
       super.noSuchMethod(Invocation.method(#onEvent, [event]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>> transformEvents(
+  _i3.Stream<_i7.Transition<_i2.AuthEvent, _i2.AuthState>> transformEvents(
           _i3.Stream<_i2.AuthEvent>? events,
-          _i6.TransitionFunction<_i2.AuthEvent, _i2.AuthState>? transitionFn) =>
+          _i7.TransitionFunction<_i2.AuthEvent, _i2.AuthState>? transitionFn) =>
       (super.noSuchMethod(
               Invocation.method(#transformEvents, [events, transitionFn]),
               returnValue:
-                  Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>>.empty())
-          as _i3.Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>>);
+                  Stream<_i7.Transition<_i2.AuthEvent, _i2.AuthState>>.empty())
+          as _i3.Stream<_i7.Transition<_i2.AuthEvent, _i2.AuthState>>);
   @override
   void emit(_i2.AuthState? state) =>
       super.noSuchMethod(Invocation.method(#emit, [state]),
           returnValueForMissingStub: null);
   @override
-  void onTransition(_i6.Transition<_i2.AuthEvent, _i2.AuthState>? transition) =>
+  void onTransition(_i7.Transition<_i2.AuthEvent, _i2.AuthState>? transition) =>
       super.noSuchMethod(Invocation.method(#onTransition, [transition]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>> transformTransitions(
-          _i3.Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>>?
+  _i3.Stream<_i7.Transition<_i2.AuthEvent, _i2.AuthState>> transformTransitions(
+          _i3.Stream<_i7.Transition<_i2.AuthEvent, _i2.AuthState>>?
               transitions) =>
       (super.noSuchMethod(
               Invocation.method(#transformTransitions, [transitions]),
               returnValue:
-                  Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>>.empty())
-          as _i3.Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>>);
+                  Stream<_i7.Transition<_i2.AuthEvent, _i2.AuthState>>.empty())
+          as _i3.Stream<_i7.Transition<_i2.AuthEvent, _i2.AuthState>>);
   @override
   _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
       returnValue: Future<void>.value(),
@@ -110,7 +115,111 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
               returnValue: _FakeStreamSubscription_1<_i2.AuthState>())
           as _i3.StreamSubscription<_i2.AuthState>);
   @override
-  void onChange(_i6.Change<_i2.AuthState>? change) =>
+  void onChange(_i7.Change<_i2.AuthState>? change) =>
+      super.noSuchMethod(Invocation.method(#onChange, [change]),
+          returnValueForMissingStub: null);
+  @override
+  void addError(Object? error, [StackTrace? stackTrace]) =>
+      super.noSuchMethod(Invocation.method(#addError, [error, stackTrace]),
+          returnValueForMissingStub: null);
+  @override
+  void onError(Object? error, StackTrace? stackTrace) =>
+      super.noSuchMethod(Invocation.method(#onError, [error, stackTrace]),
+          returnValueForMissingStub: null);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [SignInSecretResetBloc].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSignInSecretResetBloc extends _i1.Mock
+    implements _i4.SignInSecretResetBloc {
+  MockSignInSecretResetBloc() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.SignInSecretResetState get state =>
+      (super.noSuchMethod(Invocation.getter(#state),
+              returnValue: _FakeSignInSecretResetState_2())
+          as _i4.SignInSecretResetState);
+  @override
+  _i3.Stream<_i4.SignInSecretResetState> get stream =>
+      (super.noSuchMethod(Invocation.getter(#stream),
+              returnValue: Stream<_i4.SignInSecretResetState>.empty())
+          as _i3.Stream<_i4.SignInSecretResetState>);
+  @override
+  _i3.Stream<_i4.SignInSecretResetState> mapEventToState(
+          _i4.SignInSecretResetEvent? event) =>
+      (super.noSuchMethod(Invocation.method(#mapEventToState, [event]),
+              returnValue: Stream<_i4.SignInSecretResetState>.empty())
+          as _i3.Stream<_i4.SignInSecretResetState>);
+  @override
+  void add(_i4.SignInSecretResetEvent? event) =>
+      super.noSuchMethod(Invocation.method(#add, [event]),
+          returnValueForMissingStub: null);
+  @override
+  void onEvent(_i4.SignInSecretResetEvent? event) =>
+      super.noSuchMethod(Invocation.method(#onEvent, [event]),
+          returnValueForMissingStub: null);
+  @override
+  _i3.Stream<_i7.Transition<_i4.SignInSecretResetEvent, _i4.SignInSecretResetState>>
+      transformEvents(
+              _i3.Stream<_i4.SignInSecretResetEvent>? events,
+              _i7.TransitionFunction<_i4.SignInSecretResetEvent,
+                      _i4.SignInSecretResetState>?
+                  transitionFn) =>
+          (super.noSuchMethod(
+              Invocation.method(#transformEvents, [events, transitionFn]),
+              returnValue:
+                  Stream<_i7.Transition<_i4.SignInSecretResetEvent, _i4.SignInSecretResetState>>.empty()) as _i3
+              .Stream<_i7.Transition<_i4.SignInSecretResetEvent, _i4.SignInSecretResetState>>);
+  @override
+  void emit(_i4.SignInSecretResetState? state) =>
+      super.noSuchMethod(Invocation.method(#emit, [state]),
+          returnValueForMissingStub: null);
+  @override
+  void onTransition(
+          _i7.Transition<_i4.SignInSecretResetEvent,
+                  _i4.SignInSecretResetState>?
+              transition) =>
+      super.noSuchMethod(Invocation.method(#onTransition, [transition]),
+          returnValueForMissingStub: null);
+  @override
+  _i3.Stream<_i7.Transition<_i4.SignInSecretResetEvent, _i4.SignInSecretResetState>>
+      transformTransitions(
+              _i3.Stream<_i7.Transition<_i4.SignInSecretResetEvent, _i4.SignInSecretResetState>>?
+                  transitions) =>
+          (super.noSuchMethod(
+                  Invocation.method(#transformTransitions, [transitions]),
+                  returnValue:
+                      Stream<_i7.Transition<_i4.SignInSecretResetEvent, _i4.SignInSecretResetState>>.empty())
+              as _i3.Stream<
+                  _i7.Transition<_i4.SignInSecretResetEvent, _i4.SignInSecretResetState>>);
+  @override
+  _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
+      returnValue: Future<void>.value(),
+      returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
+  @override
+  _i3.StreamSubscription<_i4.SignInSecretResetState> listen(
+          void Function(_i4.SignInSecretResetState)? onData,
+          {Function? onError,
+          void Function()? onDone,
+          bool? cancelOnError}) =>
+      (super.noSuchMethod(
+              Invocation.method(#listen, [
+                onData
+              ], {
+                #onError: onError,
+                #onDone: onDone,
+                #cancelOnError: cancelOnError
+              }),
+              returnValue:
+                  _FakeStreamSubscription_1<_i4.SignInSecretResetState>())
+          as _i3.StreamSubscription<_i4.SignInSecretResetState>);
+  @override
+  void onChange(_i7.Change<_i4.SignInSecretResetState>? change) =>
       super.noSuchMethod(Invocation.method(#onChange, [change]),
           returnValueForMissingStub: null);
   @override
@@ -128,27 +237,27 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
 /// A class which mocks [NavigationCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigationCubit extends _i1.Mock implements _i4.NavigationCubit {
+class MockNavigationCubit extends _i1.Mock implements _i5.NavigationCubit {
   MockNavigationCubit() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.NavigationState get state =>
+  _i5.NavigationState get state =>
       (super.noSuchMethod(Invocation.getter(#state),
-          returnValue: _FakeNavigationState_2()) as _i4.NavigationState);
+          returnValue: _FakeNavigationState_3()) as _i5.NavigationState);
   @override
-  _i3.Stream<_i4.NavigationState> get stream =>
+  _i3.Stream<_i5.NavigationState> get stream =>
       (super.noSuchMethod(Invocation.getter(#stream),
-              returnValue: Stream<_i4.NavigationState>.empty())
-          as _i3.Stream<_i4.NavigationState>);
+              returnValue: Stream<_i5.NavigationState>.empty())
+          as _i3.Stream<_i5.NavigationState>);
   @override
-  void goTo(_i7.SignInPageGoTo? parameters) =>
+  void goTo(_i8.SignInPageGoTo? parameters) =>
       super.noSuchMethod(Invocation.method(#goTo, [parameters]),
           returnValueForMissingStub: null);
   @override
-  _i3.StreamSubscription<_i4.NavigationState> listen(
-          void Function(_i4.NavigationState)? onData,
+  _i3.StreamSubscription<_i5.NavigationState> listen(
+          void Function(_i5.NavigationState)? onData,
           {Function? onError,
           void Function()? onDone,
           bool? cancelOnError}) =>
@@ -160,14 +269,14 @@ class MockNavigationCubit extends _i1.Mock implements _i4.NavigationCubit {
                 #onDone: onDone,
                 #cancelOnError: cancelOnError
               }),
-              returnValue: _FakeStreamSubscription_1<_i4.NavigationState>())
-          as _i3.StreamSubscription<_i4.NavigationState>);
+              returnValue: _FakeStreamSubscription_1<_i5.NavigationState>())
+          as _i3.StreamSubscription<_i5.NavigationState>);
   @override
-  void emit(_i4.NavigationState? state) =>
+  void emit(_i5.NavigationState? state) =>
       super.noSuchMethod(Invocation.method(#emit, [state]),
           returnValueForMissingStub: null);
   @override
-  void onChange(_i6.Change<_i4.NavigationState>? change) =>
+  void onChange(_i7.Change<_i5.NavigationState>? change) =>
       super.noSuchMethod(Invocation.method(#onChange, [change]),
           returnValueForMissingStub: null);
   @override
@@ -189,18 +298,18 @@ class MockNavigationCubit extends _i1.Mock implements _i4.NavigationCubit {
 /// A class which mocks [SignInWithSecret].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInWithSecret extends _i1.Mock implements _i8.SignInWithSecret {
+class MockSignInWithSecret extends _i1.Mock implements _i9.SignInWithSecret {
   MockSignInWithSecret() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<_i5.Either<_i9.FailureDetails, _i5.Unit>> call(
-          _i8.Params? params) =>
+  _i3.Future<_i6.Either<_i10.FailureDetails, _i6.Unit>> call(
+          _i9.Params? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<_i5.Either<_i9.FailureDetails, _i5.Unit>>.value(
-              _FakeEither_3<_i9.FailureDetails, _i5.Unit>())) as _i3
-          .Future<_i5.Either<_i9.FailureDetails, _i5.Unit>>);
+          returnValue: Future<_i6.Either<_i10.FailureDetails, _i6.Unit>>.value(
+              _FakeEither_4<_i10.FailureDetails, _i6.Unit>())) as _i3
+          .Future<_i6.Either<_i10.FailureDetails, _i6.Unit>>);
   @override
   String toString() => super.toString();
 }

@@ -14,8 +14,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$SignInPasswordResetEventTearOff {
-  const _$SignInPasswordResetEventTearOff();
+class _$SignInSecretResetEventTearOff {
+  const _$SignInSecretResetEventTearOff();
 
   ResetPasswordRequest resetPasswordRequest() {
     return const ResetPasswordRequest();
@@ -23,10 +23,10 @@ class _$SignInPasswordResetEventTearOff {
 }
 
 /// @nodoc
-const $SignInPasswordResetEvent = _$SignInPasswordResetEventTearOff();
+const $SignInSecretResetEvent = _$SignInSecretResetEventTearOff();
 
 /// @nodoc
-mixin _$SignInPasswordResetEvent {
+mixin _$SignInSecretResetEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() resetPasswordRequest,
@@ -62,20 +62,20 @@ mixin _$SignInPasswordResetEvent {
 }
 
 /// @nodoc
-abstract class $SignInPasswordResetEventCopyWith<$Res> {
-  factory $SignInPasswordResetEventCopyWith(SignInPasswordResetEvent value,
-          $Res Function(SignInPasswordResetEvent) then) =
-      _$SignInPasswordResetEventCopyWithImpl<$Res>;
+abstract class $SignInSecretResetEventCopyWith<$Res> {
+  factory $SignInSecretResetEventCopyWith(SignInSecretResetEvent value,
+          $Res Function(SignInSecretResetEvent) then) =
+      _$SignInSecretResetEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$SignInPasswordResetEventCopyWithImpl<$Res>
-    implements $SignInPasswordResetEventCopyWith<$Res> {
-  _$SignInPasswordResetEventCopyWithImpl(this._value, this._then);
+class _$SignInSecretResetEventCopyWithImpl<$Res>
+    implements $SignInSecretResetEventCopyWith<$Res> {
+  _$SignInSecretResetEventCopyWithImpl(this._value, this._then);
 
-  final SignInPasswordResetEvent _value;
+  final SignInSecretResetEvent _value;
   // ignore: unused_field
-  final $Res Function(SignInPasswordResetEvent) _then;
+  final $Res Function(SignInSecretResetEvent) _then;
 }
 
 /// @nodoc
@@ -87,7 +87,7 @@ abstract class $ResetPasswordRequestCopyWith<$Res> {
 
 /// @nodoc
 class _$ResetPasswordRequestCopyWithImpl<$Res>
-    extends _$SignInPasswordResetEventCopyWithImpl<$Res>
+    extends _$SignInSecretResetEventCopyWithImpl<$Res>
     implements $ResetPasswordRequestCopyWith<$Res> {
   _$ResetPasswordRequestCopyWithImpl(
       ResetPasswordRequest _value, $Res Function(ResetPasswordRequest) _then)
@@ -104,7 +104,7 @@ class _$ResetPasswordRequest implements ResetPasswordRequest {
 
   @override
   String toString() {
-    return 'SignInPasswordResetEvent.resetPasswordRequest()';
+    return 'SignInSecretResetEvent.resetPasswordRequest()';
   }
 
   @override
@@ -172,57 +172,65 @@ class _$ResetPasswordRequest implements ResetPasswordRequest {
   }
 }
 
-abstract class ResetPasswordRequest implements SignInPasswordResetEvent {
+abstract class ResetPasswordRequest implements SignInSecretResetEvent {
   const factory ResetPasswordRequest() = _$ResetPasswordRequest;
 }
 
 /// @nodoc
-class _$SignInPasswordResetStateTearOff {
-  const _$SignInPasswordResetStateTearOff();
+class _$SignInSecretResetStateTearOff {
+  const _$SignInSecretResetStateTearOff();
 
-  _SignInPasswordResetState call(
-      {required Option<VethxNotification> notification}) {
-    return _SignInPasswordResetState(
+  _SignInSecretResetState call(
+      {required bool isLoading,
+      required Option<VethxNotification> notification}) {
+    return _SignInSecretResetState(
+      isLoading: isLoading,
       notification: notification,
     );
   }
 }
 
 /// @nodoc
-const $SignInPasswordResetState = _$SignInPasswordResetStateTearOff();
+const $SignInSecretResetState = _$SignInSecretResetStateTearOff();
 
 /// @nodoc
-mixin _$SignInPasswordResetState {
+mixin _$SignInSecretResetState {
+  bool get isLoading => throw _privateConstructorUsedError;
   Option<VethxNotification> get notification =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SignInPasswordResetStateCopyWith<SignInPasswordResetState> get copyWith =>
+  $SignInSecretResetStateCopyWith<SignInSecretResetState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SignInPasswordResetStateCopyWith<$Res> {
-  factory $SignInPasswordResetStateCopyWith(SignInPasswordResetState value,
-          $Res Function(SignInPasswordResetState) then) =
-      _$SignInPasswordResetStateCopyWithImpl<$Res>;
-  $Res call({Option<VethxNotification> notification});
+abstract class $SignInSecretResetStateCopyWith<$Res> {
+  factory $SignInSecretResetStateCopyWith(SignInSecretResetState value,
+          $Res Function(SignInSecretResetState) then) =
+      _$SignInSecretResetStateCopyWithImpl<$Res>;
+  $Res call({bool isLoading, Option<VethxNotification> notification});
 }
 
 /// @nodoc
-class _$SignInPasswordResetStateCopyWithImpl<$Res>
-    implements $SignInPasswordResetStateCopyWith<$Res> {
-  _$SignInPasswordResetStateCopyWithImpl(this._value, this._then);
+class _$SignInSecretResetStateCopyWithImpl<$Res>
+    implements $SignInSecretResetStateCopyWith<$Res> {
+  _$SignInSecretResetStateCopyWithImpl(this._value, this._then);
 
-  final SignInPasswordResetState _value;
+  final SignInSecretResetState _value;
   // ignore: unused_field
-  final $Res Function(SignInPasswordResetState) _then;
+  final $Res Function(SignInSecretResetState) _then;
 
   @override
   $Res call({
+    Object? isLoading = freezed,
     Object? notification = freezed,
   }) {
     return _then(_value.copyWith(
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       notification: notification == freezed
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
@@ -232,32 +240,36 @@ class _$SignInPasswordResetStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$SignInPasswordResetStateCopyWith<$Res>
-    implements $SignInPasswordResetStateCopyWith<$Res> {
-  factory _$SignInPasswordResetStateCopyWith(_SignInPasswordResetState value,
-          $Res Function(_SignInPasswordResetState) then) =
-      __$SignInPasswordResetStateCopyWithImpl<$Res>;
+abstract class _$SignInSecretResetStateCopyWith<$Res>
+    implements $SignInSecretResetStateCopyWith<$Res> {
+  factory _$SignInSecretResetStateCopyWith(_SignInSecretResetState value,
+          $Res Function(_SignInSecretResetState) then) =
+      __$SignInSecretResetStateCopyWithImpl<$Res>;
   @override
-  $Res call({Option<VethxNotification> notification});
+  $Res call({bool isLoading, Option<VethxNotification> notification});
 }
 
 /// @nodoc
-class __$SignInPasswordResetStateCopyWithImpl<$Res>
-    extends _$SignInPasswordResetStateCopyWithImpl<$Res>
-    implements _$SignInPasswordResetStateCopyWith<$Res> {
-  __$SignInPasswordResetStateCopyWithImpl(_SignInPasswordResetState _value,
-      $Res Function(_SignInPasswordResetState) _then)
-      : super(_value, (v) => _then(v as _SignInPasswordResetState));
+class __$SignInSecretResetStateCopyWithImpl<$Res>
+    extends _$SignInSecretResetStateCopyWithImpl<$Res>
+    implements _$SignInSecretResetStateCopyWith<$Res> {
+  __$SignInSecretResetStateCopyWithImpl(_SignInSecretResetState _value,
+      $Res Function(_SignInSecretResetState) _then)
+      : super(_value, (v) => _then(v as _SignInSecretResetState));
 
   @override
-  _SignInPasswordResetState get _value =>
-      super._value as _SignInPasswordResetState;
+  _SignInSecretResetState get _value => super._value as _SignInSecretResetState;
 
   @override
   $Res call({
+    Object? isLoading = freezed,
     Object? notification = freezed,
   }) {
-    return _then(_SignInPasswordResetState(
+    return _then(_SignInSecretResetState(
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       notification: notification == freezed
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
@@ -268,21 +280,27 @@ class __$SignInPasswordResetStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SignInPasswordResetState implements _SignInPasswordResetState {
-  const _$_SignInPasswordResetState({required this.notification});
+class _$_SignInSecretResetState implements _SignInSecretResetState {
+  const _$_SignInSecretResetState(
+      {required this.isLoading, required this.notification});
 
+  @override
+  final bool isLoading;
   @override
   final Option<VethxNotification> notification;
 
   @override
   String toString() {
-    return 'SignInPasswordResetState(notification: $notification)';
+    return 'SignInSecretResetState(isLoading: $isLoading, notification: $notification)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _SignInPasswordResetState &&
+        (other is _SignInSecretResetState &&
+            (identical(other.isLoading, isLoading) ||
+                const DeepCollectionEquality()
+                    .equals(other.isLoading, isLoading)) &&
             (identical(other.notification, notification) ||
                 const DeepCollectionEquality()
                     .equals(other.notification, notification)));
@@ -290,25 +308,30 @@ class _$_SignInPasswordResetState implements _SignInPasswordResetState {
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(notification);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(isLoading) ^
+      const DeepCollectionEquality().hash(notification);
 
   @JsonKey(ignore: true)
   @override
-  _$SignInPasswordResetStateCopyWith<_SignInPasswordResetState> get copyWith =>
-      __$SignInPasswordResetStateCopyWithImpl<_SignInPasswordResetState>(
+  _$SignInSecretResetStateCopyWith<_SignInSecretResetState> get copyWith =>
+      __$SignInSecretResetStateCopyWithImpl<_SignInSecretResetState>(
           this, _$identity);
 }
 
-abstract class _SignInPasswordResetState implements SignInPasswordResetState {
-  const factory _SignInPasswordResetState(
-          {required Option<VethxNotification> notification}) =
-      _$_SignInPasswordResetState;
+abstract class _SignInSecretResetState implements SignInSecretResetState {
+  const factory _SignInSecretResetState(
+          {required bool isLoading,
+          required Option<VethxNotification> notification}) =
+      _$_SignInSecretResetState;
 
+  @override
+  bool get isLoading => throw _privateConstructorUsedError;
   @override
   Option<VethxNotification> get notification =>
       throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SignInPasswordResetStateCopyWith<_SignInPasswordResetState> get copyWith =>
+  _$SignInSecretResetStateCopyWith<_SignInSecretResetState> get copyWith =>
       throw _privateConstructorUsedError;
 }

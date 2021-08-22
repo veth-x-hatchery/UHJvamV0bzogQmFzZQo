@@ -4,6 +4,7 @@ import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -108,13 +109,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
                   ),
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
-                TextButton(
-                  onPressed: state.isLoading ? () {} : () => {},
-                  child: Text(
-                    Texts.forgotMySecret,
-                    style: Theme.of(context).textTheme.button,
-                  ),
-                ),
+                SignInSecretResetButton(bloc: bloc.secretResetBloc),
                 TextButton(
                   onPressed: state.isLoading ? () {} : () => {},
                   child: Text(
@@ -127,6 +122,49 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
           );
         },
       ),
+    );
+  }
+}
+
+class SignInSecretResetButton extends StatelessWidget {
+  const SignInSecretResetButton({
+    Key? key,
+    required this.bloc,
+  }) : super(key: key);
+
+  final SignInSecretResetBloc bloc;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<SignInSecretResetBloc, SignInSecretResetState>(
+      bloc: bloc,
+      listener: (context, state) {
+        state.notification.fold(
+          () {},
+          (notification) {
+            Logger.presentation(
+                'SignInSecretPage -> SignInSecretResetBloc -> notification: $notification');
+            vethxNotify(context, notification);
+          },
+        );
+      },
+      builder: (context, state) {
+        return SizedBox(
+          height: Theme.of(context).textTheme.button!.fontSize,
+          child: Center(
+            child: TextButton(
+              onPressed: state.isLoading
+                  ? () {}
+                  : () => bloc
+                      .add(const SignInSecretResetEvent.resetPasswordRequest()),
+              child: Text(
+                Texts.forgotMySecret,
+                style: Theme.of(context).textTheme.button,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,10 +1,13 @@
 part of 'sign_in_secret_reset_bloc.dart';
 
 @freezed
-class SignInPasswordResetState with _$SignInPasswordResetState {
-  const factory SignInPasswordResetState({
+class SignInSecretResetState with _$SignInSecretResetState {
+  const factory SignInSecretResetState({
+    required bool isLoading,
     required Option<VethxNotification> notification,
-  }) = _SignInPasswordResetState;
-  factory SignInPasswordResetState.initial() =>
-      SignInPasswordResetState(notification: none());
+  }) = _SignInSecretResetState;
+  factory SignInSecretResetState.initial() => SignInSecretResetState(
+        isLoading: false,
+        notification: none(),
+      );
 }

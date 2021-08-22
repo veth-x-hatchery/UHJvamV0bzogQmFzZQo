@@ -15,34 +15,39 @@ part 'sign_in_secret_reset_state.dart';
 part 'sign_in_secret_reset_bloc.freezed.dart';
 
 class SignInSecretResetBloc
-    extends Bloc<SignInPasswordResetEvent, SignInPasswordResetState> {
+    extends Bloc<SignInSecretResetEvent, SignInSecretResetState> {
   SignInSecretResetBloc(
     this._useCase,
     this._navigation,
-  ) : super(SignInPasswordResetState.initial());
+  ) : super(SignInSecretResetState.initial());
 
   final SignInSecretReset _useCase;
   final NavigationCubit _navigation;
 
   @override
-  Stream<SignInPasswordResetState> mapEventToState(
-    SignInPasswordResetEvent event,
+  Stream<SignInSecretResetState> mapEventToState(
+    SignInSecretResetEvent event,
   ) async* {
     yield* event.map(
       resetPasswordRequest: (e) async* {
+        yield SignInSecretResetState(
+          isLoading: true,
+          notification: none(),
+        );
         final result = await _useCase.call(const NoParams());
-        yield SignInPasswordResetState(
+        yield SignInSecretResetState(
+            isLoading: false,
             notification: result.fold(
-          (l) {
-            if (l.failure == const AuthFailure.invalidCachedCredential()) {
-              _navigation.goTo(SignInPageGoTo.credentialPage(
-                  from: SignInPageRoutes.secretEntry));
-            }
-            return optionOf(VethxNotification.snack(message: l.message));
-          },
-          (r) => optionOf(VethxNotification.snack(
-              message: SignInSecretResetMessages.success)),
-        ));
+              (l) {
+                if (l.failure == const AuthFailure.invalidCachedCredential()) {
+                  _navigation.goTo(SignInPageGoTo.credentialPage(
+                      from: SignInPageRoutes.secretEntry));
+                }
+                return optionOf(VethxNotification.snack(message: l.message));
+              },
+              (r) => optionOf(VethxNotification.snack(
+                  message: SignInSecretResetMessages.success)),
+            ));
       },
     );
   }
