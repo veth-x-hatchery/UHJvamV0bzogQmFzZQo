@@ -63,9 +63,16 @@ void main() {
     when(_mockBloc.stream).thenAnswer((_) => Stream.value(state));
   }
 
+  void _navigationCubitState() {
+    when(_mockNavigationCubit.goTo(any)).thenReturn(null);
+    when(_mockNavigationCubit.stream)
+        .thenAnswer((_) => Stream.value(const NavigationState.initial()));
+  }
+
   void _setInitialState() {
     _secretBlocState(SignInSecretState.initial());
     _scretResetBlocState(SignInSecretResetState.initial());
+    _navigationCubitState();
   }
 
   Finder _secretInput() {
