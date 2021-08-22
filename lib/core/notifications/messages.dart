@@ -1,23 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/core/notifications/notification.dart';
 import 'package:vethx_beta/ui/widgets/shared/platform_alert_dialog.widget.dart';
-
-enum VethxNotificationType {
-  alert,
-  snack,
-  notification,
-}
-
-class VethxNotification {
-  VethxNotification({
-    required this.type,
-    required this.message,
-    this.title = '',
-  });
-  String title;
-  String message;
-  VethxNotificationType type;
-}
 
 void vethxNotify(BuildContext context, VethxNotification notification) {
   WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -31,7 +15,7 @@ void vethxNotify(BuildContext context, VethxNotification notification) {
         break;
       case VethxNotificationType.alert:
         PlatformAlertDialog(
-          title: notification.title,
+          title: notification.title ?? '',
           content: notification.message,
           defaultActionText: Texts.oK,
           cancelActionText: Texts.cancel,

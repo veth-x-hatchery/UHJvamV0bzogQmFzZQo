@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/core/notifications/notification.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
@@ -48,6 +49,7 @@ void main() {
             credential: Credential(credential),
             isLoading: false,
             authFailureOrSuccessOption: none(),
+            notification: none(),
           )
         ]));
     //
@@ -80,16 +82,19 @@ void main() {
               credential: valueObject,
               isLoading: false,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInCredentialState(
               credential: valueObject,
               isLoading: true,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInCredentialState(
               credential: valueObject,
               isLoading: false,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             )
           ],
         ));
@@ -122,22 +127,27 @@ void main() {
               credential: Credential(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInCredentialState(
               credential: Credential(credential),
               isLoading: true,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInCredentialState(
               credential: Credential(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             )
           ],
         ));
   });
 
-  test('when confirmation occour then should emit an failure detais', () async {
+  test(
+      'when confirmation occour then should emit an failure detais with a notification',
+      () async {
     // arrange
 
     const credential = 'test@test.com';
@@ -164,16 +174,20 @@ void main() {
               credential: Credential(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInCredentialState(
               credential: Credential(credential),
               isLoading: true,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInCredentialState(
               credential: Credential(credential),
               isLoading: false,
               authFailureOrSuccessOption: some(Left(expectedFailure)),
+              notification: optionOf(
+                  VethxNotification.snack(message: expectedFailure.message)),
             )
           ],
         ));
@@ -203,16 +217,19 @@ void main() {
               credential: Credential(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInCredentialState(
               credential: Credential(credential),
               isLoading: true,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             ),
             SignInCredentialState(
               credential: Credential(credential),
               isLoading: false,
               authFailureOrSuccessOption: none(),
+              notification: none(),
             )
           ],
         )).then(
