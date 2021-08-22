@@ -5,11 +5,11 @@ import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repositor
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
-class SignInResetPassword extends UseCase<Unit, NoParams> {
+class SignInSecretReset extends UseCase<Unit, NoParams> {
   final ISignInRepository _signInRepository;
   final IAuthFacade _authFacade;
 
-  SignInResetPassword(
+  SignInSecretReset(
     this._signInRepository,
     this._authFacade,
   );
@@ -20,7 +20,7 @@ class SignInResetPassword extends UseCase<Unit, NoParams> {
     return cachedCredential.fold(
       (l) => left(_mapFailures(const AuthFailure.invalidCachedCredential())),
       (credential) {
-        return _authFacade.resetPassword(credential).then((value) => value.fold(
+        return _authFacade.passwordReset(credential).then((value) => value.fold(
               (l) => left(_mapFailures(l)),
               (r) => right(unit),
             ));
@@ -32,17 +32,17 @@ class SignInResetPassword extends UseCase<Unit, NoParams> {
     if (auth == const AuthFailure.invalidCachedCredential()) {
       return FailureDetails(
         failure: auth,
-        message: SignInResetPasswordErrorMessages.invalidCachedCredential,
+        message: SignInSecretResetErrorMessages.invalidCachedCredential,
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInResetPasswordErrorMessages.unavailable,
+      message: SignInSecretResetErrorMessages.unavailable,
     );
   }
 }
 
-class SignInResetPasswordErrorMessages {
+class SignInSecretResetErrorMessages {
   static const unavailable = 'Unavailable';
   static const invalidCachedCredential = 'Please confirm your email';
 }

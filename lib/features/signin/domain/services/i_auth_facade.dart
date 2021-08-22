@@ -23,5 +23,5 @@ abstract class IAuthFacade {
 
   Future<void> signOut();
 
-  Future<Either<AuthFailure, Unit>> resetPassword(Credential credential);
+  Future<Either<AuthFailure, Unit>> passwordReset(Credential credential);
 }

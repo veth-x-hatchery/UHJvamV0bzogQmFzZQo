@@ -129,7 +129,7 @@ class FirebaseAuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> resetPassword(Credential credential) async {
+  Future<Either<AuthFailure, Unit>> passwordReset(Credential credential) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(
           email: credential.getOrCrash());

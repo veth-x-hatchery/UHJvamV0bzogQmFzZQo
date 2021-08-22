@@ -485,7 +485,7 @@ void main() {
 
       // act
 
-      final result = await _authFacade.resetPassword(credential);
+      final result = await _authFacade.passwordReset(credential);
 
       // assert
 
@@ -502,7 +502,7 @@ void main() {
 
       // act
 
-      final result = await _authFacade.resetPassword(credential);
+      final result = await _authFacade.passwordReset(credential);
 
       // assert
 
