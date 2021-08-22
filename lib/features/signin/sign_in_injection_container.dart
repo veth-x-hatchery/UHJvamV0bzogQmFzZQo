@@ -100,6 +100,13 @@ Future<void> signInDependenciesInjection() async {
     ),
   );
 
+  sl.registerLazySingleton<SignInSecretReset>(
+    () => SignInSecretReset(
+      sl<ISignInRepository>(),
+      sl<IAuthFacade>(),
+    ),
+  );
+
   sl.registerLazySingleton<SignInWithGoogle>(
     () => SignInWithGoogle(
       // sl<ISignInRepository>(),
