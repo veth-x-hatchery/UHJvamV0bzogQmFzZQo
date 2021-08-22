@@ -39,7 +39,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInSecretResetEvent.resetPasswordRequest());
+    _bloc.add(const SignInSecretResetEvent.secretResetRequest());
 
     // assert
 
@@ -72,7 +72,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInSecretResetEvent.resetPasswordRequest());
+    _bloc.add(const SignInSecretResetEvent.secretResetRequest());
 
     // assert
     await expectLater(
@@ -105,7 +105,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInSecretResetEvent.resetPasswordRequest());
+    _bloc.add(const SignInSecretResetEvent.secretResetRequest());
 
     // assert
     await expectLater(

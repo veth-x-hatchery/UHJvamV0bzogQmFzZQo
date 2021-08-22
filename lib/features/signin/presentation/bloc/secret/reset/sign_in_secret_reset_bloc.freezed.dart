@@ -17,8 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SignInSecretResetEventTearOff {
   const _$SignInSecretResetEventTearOff();
 
-  ResetPasswordRequest resetPasswordRequest() {
-    return const ResetPasswordRequest();
+  SecretResetRequest secretResetRequest() {
+    return const SecretResetRequest();
   }
 }
 
@@ -29,33 +29,33 @@ const $SignInSecretResetEvent = _$SignInSecretResetEventTearOff();
 mixin _$SignInSecretResetEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() resetPasswordRequest,
+    required TResult Function() secretResetRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? resetPasswordRequest,
+    TResult Function()? secretResetRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? resetPasswordRequest,
+    TResult Function()? secretResetRequest,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(ResetPasswordRequest value) resetPasswordRequest,
+    required TResult Function(SecretResetRequest value) secretResetRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ResetPasswordRequest value)? resetPasswordRequest,
+    TResult Function(SecretResetRequest value)? secretResetRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(ResetPasswordRequest value)? resetPasswordRequest,
+    TResult Function(SecretResetRequest value)? secretResetRequest,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -79,37 +79,37 @@ class _$SignInSecretResetEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class $ResetPasswordRequestCopyWith<$Res> {
-  factory $ResetPasswordRequestCopyWith(ResetPasswordRequest value,
-          $Res Function(ResetPasswordRequest) then) =
-      _$ResetPasswordRequestCopyWithImpl<$Res>;
+abstract class $SecretResetRequestCopyWith<$Res> {
+  factory $SecretResetRequestCopyWith(
+          SecretResetRequest value, $Res Function(SecretResetRequest) then) =
+      _$SecretResetRequestCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ResetPasswordRequestCopyWithImpl<$Res>
+class _$SecretResetRequestCopyWithImpl<$Res>
     extends _$SignInSecretResetEventCopyWithImpl<$Res>
-    implements $ResetPasswordRequestCopyWith<$Res> {
-  _$ResetPasswordRequestCopyWithImpl(
-      ResetPasswordRequest _value, $Res Function(ResetPasswordRequest) _then)
-      : super(_value, (v) => _then(v as ResetPasswordRequest));
+    implements $SecretResetRequestCopyWith<$Res> {
+  _$SecretResetRequestCopyWithImpl(
+      SecretResetRequest _value, $Res Function(SecretResetRequest) _then)
+      : super(_value, (v) => _then(v as SecretResetRequest));
 
   @override
-  ResetPasswordRequest get _value => super._value as ResetPasswordRequest;
+  SecretResetRequest get _value => super._value as SecretResetRequest;
 }
 
 /// @nodoc
 
-class _$ResetPasswordRequest implements ResetPasswordRequest {
-  const _$ResetPasswordRequest();
+class _$SecretResetRequest implements SecretResetRequest {
+  const _$SecretResetRequest();
 
   @override
   String toString() {
-    return 'SignInSecretResetEvent.resetPasswordRequest()';
+    return 'SignInSecretResetEvent.secretResetRequest()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is ResetPasswordRequest);
+    return identical(this, other) || (other is SecretResetRequest);
   }
 
   @override
@@ -118,27 +118,27 @@ class _$ResetPasswordRequest implements ResetPasswordRequest {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() resetPasswordRequest,
+    required TResult Function() secretResetRequest,
   }) {
-    return resetPasswordRequest();
+    return secretResetRequest();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? resetPasswordRequest,
+    TResult Function()? secretResetRequest,
   }) {
-    return resetPasswordRequest?.call();
+    return secretResetRequest?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? resetPasswordRequest,
+    TResult Function()? secretResetRequest,
     required TResult orElse(),
   }) {
-    if (resetPasswordRequest != null) {
-      return resetPasswordRequest();
+    if (secretResetRequest != null) {
+      return secretResetRequest();
     }
     return orElse();
   }
@@ -146,34 +146,34 @@ class _$ResetPasswordRequest implements ResetPasswordRequest {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(ResetPasswordRequest value) resetPasswordRequest,
+    required TResult Function(SecretResetRequest value) secretResetRequest,
   }) {
-    return resetPasswordRequest(this);
+    return secretResetRequest(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ResetPasswordRequest value)? resetPasswordRequest,
+    TResult Function(SecretResetRequest value)? secretResetRequest,
   }) {
-    return resetPasswordRequest?.call(this);
+    return secretResetRequest?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(ResetPasswordRequest value)? resetPasswordRequest,
+    TResult Function(SecretResetRequest value)? secretResetRequest,
     required TResult orElse(),
   }) {
-    if (resetPasswordRequest != null) {
-      return resetPasswordRequest(this);
+    if (secretResetRequest != null) {
+      return secretResetRequest(this);
     }
     return orElse();
   }
 }
 
-abstract class ResetPasswordRequest implements SignInSecretResetEvent {
-  const factory ResetPasswordRequest() = _$ResetPasswordRequest;
+abstract class SecretResetRequest implements SignInSecretResetEvent {
+  const factory SecretResetRequest() = _$SecretResetRequest;
 }
 
 /// @nodoc

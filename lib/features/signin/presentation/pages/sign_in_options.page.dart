@@ -72,6 +72,8 @@ class SignInOptionsPage extends StatelessWidget {
                       secretResetbloc:
                           BlocProvider.of<SignInSecretResetBloc>(context),
                       secretBloc: BlocProvider.of<SignInSecretBloc>(context),
+                      navigationCubit:
+                          BlocProvider.of<NavigationCubit>(context),
                     ),
                   ),
                 );

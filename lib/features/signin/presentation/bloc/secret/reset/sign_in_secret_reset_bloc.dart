@@ -29,7 +29,7 @@ class SignInSecretResetBloc
     SignInSecretResetEvent event,
   ) async* {
     yield* event.map(
-      resetPasswordRequest: (e) async* {
+      secretResetRequest: (e) async* {
         yield SignInSecretResetState(
           isLoading: true,
           notification: none(),
