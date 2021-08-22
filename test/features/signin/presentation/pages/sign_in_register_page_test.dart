@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/core/notifications/notification.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -261,5 +265,37 @@ void main() {
     verify(_mockSignInBloc.add(
             const SignInRegisterEvent.registerWithCredentialAndSecretPressed()))
         .called(1);
+  });
+
+  testWidgets('when receive a failure then should show a snack message',
+      (tester) async {
+    // Arrange
+
+    const credential = 'test@test.com';
+
+    const secret = 'dmFsaWRwYXNzd29yZAo';
+
+    final expectedFailure = FailureDetails(
+      failure: const AuthFailure.invalidCredentialAndSecretCombination(),
+      message: SignInRegisterCredentialAndSecretErrorMessages
+          .invalidCredentialAndSecretCombination,
+    );
+
+    _signInState(SignInRegisterState(
+      credential: Credential(credential),
+      secret: Secret(secret),
+      isLoading: false,
+      authFailureOrSuccessOption: some(Left(expectedFailure)),
+      notification:
+          optionOf(VethxNotification.snack(message: expectedFailure.message)),
+    ));
+
+    await _pumpPage(tester);
+
+    await tester.pumpAndSettle();
+
+    // Act && Assert
+
+    expect(find.text(expectedFailure.message), findsOneWidget);
   });
 }

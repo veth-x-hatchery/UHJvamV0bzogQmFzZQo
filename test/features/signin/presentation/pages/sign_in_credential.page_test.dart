@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/core/notifications/notification.dart';
+import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -197,20 +201,29 @@ void main() {
         .called(1);
   });
 
-  // testWidgets('when receive a failure then should show a message',
-  //     (tester) async {
-  //   // Arrange
+  testWidgets('when receive a failure then should show a snack message',
+      (tester) async {
+    // Arrange
 
-  //   _signInState(SignInCredentialState(
-  //     credential: Credential('test@test.com'),
-  //     isLoading: true,
-  //     authFailureOrSuccessOption: none(),
-  //   ));
+    final expectedFailure = FailureDetails(
+      failure: const AuthFailure.invalidCredentialAndSecretCombination(),
+      message: CheckCredentialErrorMessages.credentialAlreadyRegistered,
+    );
 
-  //   await _pumpPage(tester);
+    _signInState(SignInCredentialState(
+      credential: Credential('test@test.com'),
+      isLoading: false,
+      authFailureOrSuccessOption: some(Left(expectedFailure)),
+      notification:
+          optionOf(VethxNotification.snack(message: expectedFailure.message)),
+    ));
 
-  //   // Act && Assert
+    await _pumpPage(tester);
 
-  //   expect(find.byType(GenericProgressIndicator), findsOneWidget);
-  // });
+    await tester.pumpAndSettle();
+
+    // Act && Assert
+
+    expect(find.text(expectedFailure.message), findsOneWidget);
+  });
 }

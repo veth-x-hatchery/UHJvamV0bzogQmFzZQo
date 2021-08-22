@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
@@ -34,6 +35,18 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
       BlocProvider.of<SignInCredentialBloc>(context);
   SignInCredentialState get current => bloc.state;
 
+  Future<void> _validateCredential() async {
+    // ignore: leading_newlines_in_multiline_strings
+    Logger.presentation('''\n
+        FormKey:    ${_formKey.currentState?.validate()}
+        Controller: ${_credentialTextEditingController.text}
+        Validation: ${current.credential.validation}
+        ''');
+    if (_formKey.currentState?.validate() == true) {
+      bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
+    }
+  }
+
   @override
   void initState() {
     _credentialFocusNode.requestFocus();
@@ -48,18 +61,6 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
     super.dispose();
   }
 
-  Future<void> _validateCredential() async {
-    // ignore: leading_newlines_in_multiline_strings
-    Logger.presentation('''\n
-        FormKey:    ${_formKey.currentState?.validate()}
-        Controller: ${_credentialTextEditingController.text}
-        Validation: ${current.credential.validation}
-        ''');
-    if (_formKey.currentState?.validate() == true) {
-      bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return signInScaffold(
@@ -70,7 +71,8 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
             () {},
             (notification) {
               Logger.presentation(
-                  'SignInCredentialBloc -> notification: $notification');
+                  'SignInCredentialPage -> notification: $notification');
+              vethxNotify(context, notification);
             },
           );
         },
