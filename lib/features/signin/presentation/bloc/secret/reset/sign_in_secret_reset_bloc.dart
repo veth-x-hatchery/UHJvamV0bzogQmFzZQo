@@ -1,0 +1,49 @@
+import 'dart:async';
+
+import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:vethx_beta/core/notifications/notification.dart';
+import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart';
+import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
+
+part 'sign_in_secret_reset_event.dart';
+part 'sign_in_secret_reset_state.dart';
+part 'sign_in_secret_reset_bloc.freezed.dart';
+
+class SignInSecretResetBloc
+    extends Bloc<SignInPasswordResetEvent, SignInPasswordResetState> {
+  SignInSecretResetBloc(
+    this._useCase,
+    this._navigation,
+  ) : super(SignInPasswordResetState.initial());
+
+  final SignInSecretReset _useCase;
+  final NavigationCubit _navigation;
+
+  @override
+  Stream<SignInPasswordResetState> mapEventToState(
+    SignInPasswordResetEvent event,
+  ) async* {
+    yield* event.map(
+      resetPasswordRequest: (e) async* {
+        final result = await _useCase.call(const NoParams());
+        yield SignInPasswordResetState(
+            notification: result.fold(
+          (l) {
+            if (l.failure == const AuthFailure.invalidCachedCredential()) {
+              _navigation.goTo(SignInPageGoTo.credentialPage(
+                  from: SignInPageRoutes.secretEntry));
+            }
+            return optionOf(VethxNotification.snack(message: l.message));
+          },
+          (r) => optionOf(VethxNotification.snack(
+              message: SignInSecretResetMessages.success)),
+        ));
+      },
+    );
+  }
+}

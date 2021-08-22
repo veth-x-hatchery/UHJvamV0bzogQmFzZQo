@@ -149,7 +149,7 @@ void main() {
         ));
   });
 
-  test('when confirmation occour then should emit an failure detais', () async {
+  test('when confirmation occour then should emit a failure detais', () async {
     // arrange
 
     const secret = 'dmFsaWRwYXNzd29yZAo';

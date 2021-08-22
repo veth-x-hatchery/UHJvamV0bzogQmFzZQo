@@ -32,17 +32,18 @@ class SignInSecretReset extends UseCase<Unit, NoParams> {
     if (auth == const AuthFailure.invalidCachedCredential()) {
       return FailureDetails(
         failure: auth,
-        message: SignInSecretResetErrorMessages.invalidCachedCredential,
+        message: SignInSecretResetMessages.invalidCachedCredential,
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInSecretResetErrorMessages.unavailable,
+      message: SignInSecretResetMessages.unavailable,
     );
   }
 }
 
-class SignInSecretResetErrorMessages {
+class SignInSecretResetMessages {
   static const unavailable = 'Unavailable';
   static const invalidCachedCredential = 'Please confirm your email';
+  static const success = 'The reset instructions was sent to your email ';
 }

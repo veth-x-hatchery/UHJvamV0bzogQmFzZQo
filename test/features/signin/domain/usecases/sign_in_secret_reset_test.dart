@@ -60,7 +60,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInSecretResetErrorMessages.unavailable,
+        message: SignInSecretResetMessages.unavailable,
       );
 
       when(_mockSignInRepository.cachedCredential())
@@ -87,7 +87,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInSecretResetErrorMessages.invalidCachedCredential,
+        message: SignInSecretResetMessages.invalidCachedCredential,
       );
 
       when(_mockSignInRepository.cachedCredential())
