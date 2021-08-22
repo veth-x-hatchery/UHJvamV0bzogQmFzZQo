@@ -340,12 +340,13 @@ class _$SignInCredentialStateTearOff {
   _CredentialState call(
       {required Credential credential,
       required bool isLoading,
-      required Option<Either<FailureDetails, Unit>>
-          authFailureOrSuccessOption}) {
+      required Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+      required Option<VethxNotification> notification}) {
     return _CredentialState(
       credential: credential,
       isLoading: isLoading,
       authFailureOrSuccessOption: authFailureOrSuccessOption,
+      notification: notification,
     );
   }
 }
@@ -358,6 +359,8 @@ mixin _$SignInCredentialState {
   Credential get credential => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
+  Option<VethxNotification> get notification =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -373,7 +376,8 @@ abstract class $SignInCredentialStateCopyWith<$Res> {
   $Res call(
       {Credential credential,
       bool isLoading,
-      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
+      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+      Option<VethxNotification> notification});
 }
 
 /// @nodoc
@@ -390,6 +394,7 @@ class _$SignInCredentialStateCopyWithImpl<$Res>
     Object? credential = freezed,
     Object? isLoading = freezed,
     Object? authFailureOrSuccessOption = freezed,
+    Object? notification = freezed,
   }) {
     return _then(_value.copyWith(
       credential: credential == freezed
@@ -404,6 +409,10 @@ class _$SignInCredentialStateCopyWithImpl<$Res>
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<FailureDetails, Unit>>,
+      notification: notification == freezed
+          ? _value.notification
+          : notification // ignore: cast_nullable_to_non_nullable
+              as Option<VethxNotification>,
     ));
   }
 }
@@ -418,7 +427,8 @@ abstract class _$CredentialStateCopyWith<$Res>
   $Res call(
       {Credential credential,
       bool isLoading,
-      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption});
+      Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+      Option<VethxNotification> notification});
 }
 
 /// @nodoc
@@ -437,6 +447,7 @@ class __$CredentialStateCopyWithImpl<$Res>
     Object? credential = freezed,
     Object? isLoading = freezed,
     Object? authFailureOrSuccessOption = freezed,
+    Object? notification = freezed,
   }) {
     return _then(_CredentialState(
       credential: credential == freezed
@@ -451,6 +462,10 @@ class __$CredentialStateCopyWithImpl<$Res>
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<FailureDetails, Unit>>,
+      notification: notification == freezed
+          ? _value.notification
+          : notification // ignore: cast_nullable_to_non_nullable
+              as Option<VethxNotification>,
     ));
   }
 }
@@ -461,7 +476,8 @@ class _$_CredentialState implements _CredentialState {
   const _$_CredentialState(
       {required this.credential,
       required this.isLoading,
-      required this.authFailureOrSuccessOption});
+      required this.authFailureOrSuccessOption,
+      required this.notification});
 
   @override
   final Credential credential;
@@ -469,10 +485,12 @@ class _$_CredentialState implements _CredentialState {
   final bool isLoading;
   @override
   final Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption;
+  @override
+  final Option<VethxNotification> notification;
 
   @override
   String toString() {
-    return 'SignInCredentialState(credential: $credential, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'SignInCredentialState(credential: $credential, isLoading: $isLoading, authFailureOrSuccessOption: $authFailureOrSuccessOption, notification: $notification)';
   }
 
   @override
@@ -489,7 +507,10 @@ class _$_CredentialState implements _CredentialState {
                     authFailureOrSuccessOption) ||
                 const DeepCollectionEquality().equals(
                     other.authFailureOrSuccessOption,
-                    authFailureOrSuccessOption)));
+                    authFailureOrSuccessOption)) &&
+            (identical(other.notification, notification) ||
+                const DeepCollectionEquality()
+                    .equals(other.notification, notification)));
   }
 
   @override
@@ -497,7 +518,8 @@ class _$_CredentialState implements _CredentialState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(credential) ^
       const DeepCollectionEquality().hash(isLoading) ^
-      const DeepCollectionEquality().hash(authFailureOrSuccessOption);
+      const DeepCollectionEquality().hash(authFailureOrSuccessOption) ^
+      const DeepCollectionEquality().hash(notification);
 
   @JsonKey(ignore: true)
   @override
@@ -509,8 +531,8 @@ abstract class _CredentialState implements SignInCredentialState {
   const factory _CredentialState(
       {required Credential credential,
       required bool isLoading,
-      required Option<Either<FailureDetails, Unit>>
-          authFailureOrSuccessOption}) = _$_CredentialState;
+      required Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+      required Option<VethxNotification> notification}) = _$_CredentialState;
 
   @override
   Credential get credential => throw _privateConstructorUsedError;
@@ -518,6 +540,9 @@ abstract class _CredentialState implements SignInCredentialState {
   bool get isLoading => throw _privateConstructorUsedError;
   @override
   Option<Either<FailureDetails, Unit>> get authFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
+  @override
+  Option<VethxNotification> get notification =>
       throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

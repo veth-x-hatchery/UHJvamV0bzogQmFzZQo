@@ -66,17 +66,11 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
       context,
       child: BlocConsumer<SignInCredentialBloc, SignInCredentialState>(
         listener: (context, state) {
-          state.authFailureOrSuccessOption.fold(
+          state.notification.fold(
             () {},
-            (either) {
-              either.fold(
-                (failure) {
-                  Logger.presentation('SignInCredentialBloc $state: $failure');
-                },
-                (_) {
-                  Logger.presentation('SignInCredentialBloc $state');
-                },
-              );
+            (notification) {
+              Logger.presentation(
+                  'SignInCredentialBloc -> notification: $notification');
             },
           );
         },

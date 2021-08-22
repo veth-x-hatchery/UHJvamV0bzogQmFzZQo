@@ -3,12 +3,15 @@
 
 
 
+
+*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** 
+
 1 - Inject SignInBLoC with the SignInPage
 
-1 - Validacao dos campos
 2 - Validacao das notificacoes
-		3 - Validacao da transicao de telas
+
 4 - Escrever os testes de Integracao com DRIVER
+
 5 - Adicionar um SPLASH durante o carregamento das dependencias
 	1 - Get_It
 	2 - Firebase
@@ -22,56 +25,5 @@
 					3 - renomear arquivos e pastas
 					4 - renomear variaveis e objetos
 
-1 - Criar mais um caso de uso
+*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** 
 
-	1 - SignInCacheLogInIntention
-	
-		1 - Criar o repositorio:
-		
-			1 - Criar o medodo "SaveCredential"
-			
-		2 - Criar o datasource:
-		
-			1 - Criar o metodo CacheCredential
-			
-				1 - Por enquanto vai fazer um UPDATE no objeto
-				
-	** Testes:
-	
-		1 - Exception -> Failure -> Generalista
-		
-			Retornar uma mensagem de indisponibilidade
-			
-			Logger.infrastructure
-		
-		2 - Retornar sucesso
-	
-2 - Atualizar o SignInWithSecret
-
-	1 - Criar mais um metodo no repositorio
-	
-		1 - GetCredential
-	
-	2 - Criar mais um medoto no datasource
-	
-		1 - CachedCredential
-	
-	** Testes:
-	
-		1 - Exception -> Failure -> Generalista
-		
-			Retornar uma mensagem de indisponibilidade
-			
-			Logger.infrastructure
-		
-		2 - Not Found Exception -> Failure Not Cached
-		
-			Retornar uma mensagem :Credenciais invalidas
-			
-			Redirecionar para a tela de Credencial
-			
-		
-			
-		
-	
-	

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
@@ -43,6 +44,13 @@ class SignInCredentialBloc
             .call(Params(credential: state.credential));
         yield state.copyWith(
           isLoading: false,
+          notification: result.fold(
+            (l) => optionOf(VethxNotification(
+              message: l.message,
+              type: VethxNotificationType.snack,
+            )),
+            (r) => none(),
+          ),
           authFailureOrSuccessOption: result.fold(
             (l) => optionOf(left(l)), // Todo(v): Simplify it
             (isAlreadyInUse) {

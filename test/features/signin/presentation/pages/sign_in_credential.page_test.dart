@@ -194,4 +194,21 @@ void main() {
             .add(const SignInCredentialEvent.analyseCredentialPressed()))
         .called(1);
   });
+
+  testWidgets('when receive a failure then should show a message',
+      (tester) async {
+    // Arrange
+
+    _signInState(SignInCredentialState(
+      credential: Credential('test@test.com'),
+      isLoading: true,
+      authFailureOrSuccessOption: none(),
+    ));
+
+    await _pumpPage(tester);
+
+    // Act && Assert
+
+    expect(find.byType(GenericProgressIndicator), findsOneWidget);
+  });
 }

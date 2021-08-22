@@ -6,10 +6,12 @@ class SignInCredentialState with _$SignInCredentialState {
     required Credential credential,
     required bool isLoading,
     required Option<Either<FailureDetails, Unit>> authFailureOrSuccessOption,
+    required Option<VethxNotification> notification,
   }) = _CredentialState;
   factory SignInCredentialState.initial() => SignInCredentialState(
         credential: Credential(''),
         isLoading: false,
         authFailureOrSuccessOption: none(),
+        notification: none(),
       );
 }
