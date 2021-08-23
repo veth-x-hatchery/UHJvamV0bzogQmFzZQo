@@ -132,15 +132,40 @@ void main() {
     when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
   }
 
-  void _setInitialState() {
-    _signInState(const SignInOptionsState.initial());
+  void _signInCredentialState(SignInCredentialState state) {
+    when(_mockMockSignInCredentialBloc.state).thenReturn(state);
+    when(_mockMockSignInCredentialBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
   }
 
-  void _setUpServiceLocator() {}
+  void _signInRegisterState(SignInRegisterState state) {
+    when(_mockMockSignInRegisterBloc.state).thenReturn(state);
+    when(_mockMockSignInRegisterBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
+  }
+
+  void _signInSecretState(SignInSecretState state) {
+    when(_mockMockSignInSecretBloc.state).thenReturn(state);
+    when(_mockMockSignInSecretBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
+  }
+
+  void _signInSecretResetState(SignInSecretResetState state) {
+    when(_mockSignInSecretResetBloc.state).thenReturn(state);
+    when(_mockSignInSecretResetBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
+  }
+
+  void _setInitialState() {
+    _signInState(const SignInOptionsState.initial());
+    _signInCredentialState(SignInCredentialState.initial());
+    _signInRegisterState(SignInRegisterState.initial());
+    _signInSecretState(SignInSecretState.initial());
+    _signInSecretState(SignInSecretState.initial());
+    _signInSecretResetState(SignInSecretResetState.initial());
+  }
 
   Future<void> _pumpPage(WidgetTester tester) async {
-    _setUpServiceLocator();
-
     await tester.pumpWidget(
       MaterialApp(
         navigatorObservers: [
