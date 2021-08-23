@@ -41,11 +41,7 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInSecretPage.create(
-              secretBloc: _mockBloc,
-              secretResetbloc: _mockSignInSecretResetBloc,
-              navigationCubit: _mockNavigationCubit,
-            ),
+            body: SignInSecretPage.create(),
           ),
         ),
       ),

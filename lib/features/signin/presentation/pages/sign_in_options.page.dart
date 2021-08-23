@@ -4,11 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
@@ -71,31 +67,16 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
                 Navigator.pushReplacement(
                   context,
                   SlideLeftRoute<void>(
-                    page: SignInSecretPage.create(
-                      secretResetbloc: SignInDependenciesInjection.get<
-                          SignInSecretResetBloc>(),
-                      secretBloc:
-                          SignInDependenciesInjection.get<SignInSecretBloc>(),
-                      navigationCubit:
-                          SignInDependenciesInjection.get<NavigationCubit>(),
-                    ),
+                    page: SignInSecretPage.create(),
                   ),
                 );
                 break;
               case SignInPageRoutes.registerCredentialSignIn:
-                Navigator.pushReplacement(
-                  context,
-                  SlideLeftRoute<void>(
-                      page: SignInRegisterPage.create(
-                          bloc: SignInDependenciesInjection.get<
-                              SignInRegisterBloc>(),
-                          credential: page.parameters as String?)),
-                );
+                Navigator.pushReplacement(context,
+                    SlideLeftRoute<void>(page: SignInRegisterPage.create()));
                 break;
               case SignInPageRoutes.credentialEntry:
-                final credentialPage = SignInCredentialPage.create(
-                    bloc: SignInDependenciesInjection.get<
-                        SignInCredentialBloc>());
+                final credentialPage = SignInCredentialPage.create();
                 page.from == SignInPageRoutes.signInOptions
                     ? Navigator.push(
                         context, SlideLeftRoute<void>(page: credentialPage))

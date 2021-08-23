@@ -30,7 +30,7 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInCredentialPage.create(bloc: _mockBloc),
+            body: SignInCredentialPage.create(),
           ),
         ),
       ),

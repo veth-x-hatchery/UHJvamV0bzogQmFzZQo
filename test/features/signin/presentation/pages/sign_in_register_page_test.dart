@@ -30,7 +30,7 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInRegisterPage.create(bloc: _mockSignInBloc),
+            body: SignInRegisterPage.create(),
           ),
         ),
       ),
