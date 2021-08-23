@@ -5,12 +5,9 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
+import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
@@ -18,21 +15,56 @@ import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_p
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
 import 'sign_in_options.page_test.mocks.dart';
 
+class MockISignInServiceLocator implements ISignInServiceLocator {
+  final GetIt _getIt;
+
+  MockISignInServiceLocator(
+    this._getIt,
+  );
+
+  @override
+  Future<void> dispose() {
+    // TODO: implement dispose
+    throw UnimplementedError();
+  }
+
+  @override
+  T get<T extends Object>() {
+    // TODO: implement get
+    return _getIt.get<T>();
+  }
+
+  @override
+  Future<void> init() {
+    // TODO: implement init
+    throw UnimplementedError();
+  }
+}
+
+// T getSignServiceLocator<T extends Object>() {
+//   Logger.serviceLocator('SignInServiceLocator -> get: $T');
+//   return getIt<T>();
+// }
+
 @GenerateMocks([
   SignInOptionsBloc,
   NavigationCubit,
 ], customMocks: [
-  MockSpec<NavigatorObserver>(returnNullOnMissingStub: true)
+  MockSpec<NavigatorObserver>(returnNullOnMissingStub: true),
+  // MockSpec<ISignInServiceLocator>(
+  //     as: #MockISignInServiceLocator,
+  //     fallbackGenerators: {#get: getSignServiceLocator})
 ])
 void main() {
   late MockNavigatorObserver _mockNavigationObserver;
-
+  late MockISignInServiceLocator _mokckISignInServiceLocator;
   late MockSignInOptionsBloc _mockSignInBloc;
   late NavigationCubit _navigationCubit;
   late GetIt getIt;
@@ -41,10 +73,12 @@ void main() {
     _mockSignInBloc = MockSignInOptionsBloc();
     _navigationCubit = NavigationCubit();
     _mockNavigationObserver = MockNavigatorObserver();
+    _mokckISignInServiceLocator = MockISignInServiceLocator();
 
     getIt = GetIt.instance;
 
     getIt.registerFactory<SignInOptionsBloc>(() => _mockSignInBloc);
+
     getIt.registerLazySingleton<NavigationCubit>(() => _navigationCubit);
   });
 
@@ -59,7 +93,36 @@ void main() {
     _signInState(const SignInOptionsState.initial());
   }
 
+  void _setUpServiceLocator() {
+    when(_mokckISignInServiceLocator.init()).thenAnswer((_) async {
+      getIt.pushNewScope();
+
+      getIt.registerFactory<SignInOptionsBloc>(() => _mockSignInBloc);
+
+      getIt.registerLazySingleton<NavigationCubit>(() => _navigationCubit);
+
+      Logger.serviceLocator('MockISignInServiceLocator -> pushNewScope');
+
+      return Future.value();
+    });
+
+    when(_mokckISignInServiceLocator.get<SignInOptionsBloc>())
+        .thenReturn(getSignServiceLocator<SignInOptionsBloc>());
+
+    when(_mokckISignInServiceLocator.get<NavigationCubit>())
+        .thenReturn(getSignServiceLocator<NavigationCubit>());
+
+    when(_mokckISignInServiceLocator.dispose()).thenAnswer((_) async {
+      getIt.popScope();
+
+      Logger.serviceLocator('MockISignInServiceLocator -> popScope');
+      return Future.value();
+    });
+  }
+
   Future<void> _pumpPage(WidgetTester tester) async {
+    _setUpServiceLocator();
+
     await tester.pumpWidget(
       MaterialApp(
         navigatorObservers: [
@@ -68,7 +131,8 @@ void main() {
         ],
         home: setupToPump(
           Scaffold(
-            body: SignInOptionsPage.create(),
+            body: SignInOptionsPage.create(
+                serviceLocator: _mokckISignInServiceLocator),
           ),
         ),
       ),

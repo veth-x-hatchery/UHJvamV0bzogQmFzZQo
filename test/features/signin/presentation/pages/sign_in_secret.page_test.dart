@@ -15,11 +15,14 @@ import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secr
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
 import 'sign_in_secret.page_test.mocks.dart';
+
+class MockISignInServiceLocator extends Mock implements ISignInServiceLocator {}
 
 @GenerateMocks([
   SignInSecretBloc,
@@ -30,12 +33,14 @@ void main() {
   late MockSignInSecretBloc _mockBloc;
   late MockSignInSecretResetBloc _mockSignInSecretResetBloc;
   late MockNavigationCubit _mockNavigationCubit;
+  late MockISignInServiceLocator _mokckISignInServiceLocator;
   late GetIt getIt;
 
   setUp(() {
     _mockBloc = MockSignInSecretBloc();
     _mockSignInSecretResetBloc = MockSignInSecretResetBloc();
     _mockNavigationCubit = MockNavigationCubit();
+    _mokckISignInServiceLocator = MockISignInServiceLocator();
 
     getIt = GetIt.instance;
 
@@ -52,7 +57,8 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInSecretPage.create(),
+            body: SignInSecretPage.create(
+                serviceLocator: _mokckISignInServiceLocator),
           ),
         ),
       ),

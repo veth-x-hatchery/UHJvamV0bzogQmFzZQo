@@ -12,21 +12,25 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_cred
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
 import 'sign_in_register_page_test.mocks.dart';
 
-@GenerateMocks([
-  SignInRegisterBloc,
-])
+class MockISignInServiceLocator extends Mock implements ISignInServiceLocator {}
+
+@GenerateMocks([SignInRegisterBloc])
 void main() {
   late MockSignInRegisterBloc _mockSignInBloc;
+  late MockISignInServiceLocator _mokckISignInServiceLocator;
   late GetIt getIt;
 
   setUp(() {
     _mockSignInBloc = MockSignInRegisterBloc();
+    _mokckISignInServiceLocator = MockISignInServiceLocator();
+
     getIt = GetIt.instance;
     getIt.registerFactory<SignInRegisterBloc>(() => _mockSignInBloc);
   });
@@ -38,7 +42,8 @@ void main() {
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInRegisterPage.create(),
+            body: SignInRegisterPage.create(
+                serviceLocator: _mokckISignInServiceLocator),
           ),
         ),
       ),

@@ -12,33 +12,39 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credent
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
 import 'sign_in_credential.page_test.mocks.dart';
 
-@GenerateMocks([
-  SignInCredentialBloc,
-])
+class MockISignInServiceLocator extends Mock implements ISignInServiceLocator {}
+
+@GenerateMocks([SignInCredentialBloc])
 void main() {
   late MockSignInCredentialBloc _mockBloc;
+  late MockISignInServiceLocator _mokckISignInServiceLocator;
   late GetIt getIt;
 
   setUp(() {
     _mockBloc = MockSignInCredentialBloc();
+    _mokckISignInServiceLocator = MockISignInServiceLocator();
     getIt = GetIt.instance;
     getIt.registerFactory<SignInCredentialBloc>(() => _mockBloc);
   });
 
   tearDown(() => getIt.reset());
 
+  // when(_mokckISignInServiceLocator.)
+
   Future<void> _pumpPage(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInCredentialPage.create(),
+            body: SignInCredentialPage.create(
+                serviceLocator: _mokckISignInServiceLocator),
           ),
         ),
       ),
