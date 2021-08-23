@@ -7,19 +7,22 @@ import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
-import 'package:vethx_beta/features/signin/sign_in_injection_container.dart';
+import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 
 class SignInCredentialPage extends StatefulWidget {
   const SignInCredentialPage({Key? key}) : super(key: key);
+
   @override
   State<SignInCredentialPage> createState() => _SignInCredentialPageState();
 
-  static Widget create() {
+  static Widget create({
+    required ISignInServiceLocator serviceLocator,
+  }) {
     Logger.widget('SignInCredentialPage -> create');
     return BlocProvider(
-      create: (_) => SignInServiceLocator.get<SignInCredentialBloc>(),
+      create: (_) => serviceLocator.get<SignInCredentialBloc>(),
       child: const SignInCredentialPage(),
     );
   }

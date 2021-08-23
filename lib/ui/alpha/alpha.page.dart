@@ -5,7 +5,8 @@ import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
-import 'package:vethx_beta/injection_container.dart';
+import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
+import 'package:vethx_beta/service_locator.dart';
 
 class AlphaPage extends StatelessWidget {
   const AlphaPage({
@@ -32,7 +33,9 @@ class AlphaPage extends StatelessWidget {
         return state.map(
           initial: (_) => _PageWidget(),
           authenticated: (_) => const HomePage(),
-          unauthenticated: (_) => SignInOptionsPage.create(),
+          unauthenticated: (_) => SignInOptionsPage.create(
+            serviceLocator: SignInServiceLocator(),
+          ),
         );
       },
       // child: _PageWidget(),

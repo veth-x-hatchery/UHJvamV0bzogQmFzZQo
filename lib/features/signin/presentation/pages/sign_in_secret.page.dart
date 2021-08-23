@@ -10,7 +10,7 @@ import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.d
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
-import 'package:vethx_beta/features/signin/sign_in_injection_container.dart';
+import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
@@ -21,18 +21,20 @@ class SignInSecretPage extends StatefulWidget {
   @override
   State<SignInSecretPage> createState() => _SignInSecretPageState();
 
-  static Widget create() {
+  static Widget create({
+    required ISignInServiceLocator serviceLocator,
+  }) {
     Logger.widget('SignInSecretPage -> create');
     return MultiBlocProvider(
       providers: [
         BlocProvider<SignInSecretBloc>(
-          create: (_) => SignInServiceLocator.get<SignInSecretBloc>(),
+          create: (_) => serviceLocator.get<SignInSecretBloc>(),
         ),
         BlocProvider<SignInSecretResetBloc>(
-          create: (_) => SignInServiceLocator.get<SignInSecretResetBloc>(),
+          create: (_) => serviceLocator.get<SignInSecretResetBloc>(),
         ),
         BlocProvider<NavigationCubit>(
-          create: (_) => SignInServiceLocator.get<NavigationCubit>(),
+          create: (_) => serviceLocator.get<NavigationCubit>(),
         ),
       ],
       child: const SignInSecretPage(),

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/notifications/notification.dart';
@@ -29,12 +30,22 @@ void main() {
   late MockSignInSecretBloc _mockBloc;
   late MockSignInSecretResetBloc _mockSignInSecretResetBloc;
   late MockNavigationCubit _mockNavigationCubit;
+  late GetIt getIt;
 
   setUp(() {
     _mockBloc = MockSignInSecretBloc();
     _mockSignInSecretResetBloc = MockSignInSecretResetBloc();
     _mockNavigationCubit = MockNavigationCubit();
+
+    getIt = GetIt.instance;
+
+    getIt.registerLazySingleton<NavigationCubit>(() => _mockNavigationCubit);
+    getIt.registerFactory<SignInSecretBloc>(() => _mockBloc);
+    getIt.registerFactory<SignInSecretResetBloc>(
+        () => _mockSignInSecretResetBloc);
   });
+
+  tearDown(() => getIt.reset());
 
   Future<void> _pumpPage(WidgetTester tester) async {
     await tester.pumpWidget(

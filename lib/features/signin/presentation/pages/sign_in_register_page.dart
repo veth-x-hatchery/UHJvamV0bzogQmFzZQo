@@ -8,7 +8,7 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
-import 'package:vethx_beta/features/signin/sign_in_injection_container.dart';
+import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 
@@ -23,10 +23,13 @@ class SignInRegisterPage extends StatefulWidget {
   @override
   State<SignInRegisterPage> createState() => _SignInRegisterPageState();
 
-  static Widget create({Credential? credential}) {
+  static Widget create({
+    required ISignInServiceLocator serviceLocator,
+    Credential? credential,
+  }) {
     Logger.widget('SignInRegisterPage -> create');
     return BlocProvider(
-      create: (_) => SignInServiceLocator.get<SignInRegisterBloc>(),
+      create: (_) => serviceLocator.get<SignInRegisterBloc>(),
       child: SignInRegisterPage(credential: credential),
     );
   }

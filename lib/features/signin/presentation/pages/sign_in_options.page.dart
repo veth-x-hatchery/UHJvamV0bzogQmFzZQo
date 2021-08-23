@@ -13,25 +13,32 @@ import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.pag
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
-import 'package:vethx_beta/features/signin/sign_in_injection_container.dart';
+import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_beta/ui/widgets/transitions/slide_route.dart';
 
 class SignInOptionsPage extends StatefulWidget {
-  const SignInOptionsPage({Key? key}) : super(key: key);
+  const SignInOptionsPage({
+    Key? key,
+    required this.serviceLocator,
+  }) : super(key: key);
+  final ISignInServiceLocator serviceLocator;
 
-  static Widget create({BuildContext? context}) {
+  static Widget create({
+    BuildContext? context,
+    required ISignInServiceLocator serviceLocator,
+  }) {
     Logger.widget('SignInOptionsPage -> create');
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => SignInServiceLocator.get<SignInOptionsBloc>(),
+          create: (_) => serviceLocator.get<SignInOptionsBloc>(),
         ),
         BlocProvider(
-          create: (_) => SignInServiceLocator.get<NavigationCubit>(),
+          create: (_) => serviceLocator.get<NavigationCubit>(),
         ),
       ],
-      child: const SignInOptionsPage(),
+      child: SignInOptionsPage(serviceLocator: serviceLocator),
     );
   }
 
@@ -40,17 +47,19 @@ class SignInOptionsPage extends StatefulWidget {
 }
 
 class _SignInOptionsPageState extends State<SignInOptionsPage> {
+  ISignInServiceLocator get serviceLocator => widget.serviceLocator;
+
   @override
   void initState() {
     Logger.widget('SignInOptionsPage -> initState');
-    SignInServiceLocator().pushNewScope();
+    serviceLocator.init();
     super.initState();
   }
 
   @override
   void dispose() {
     Logger.widget('SignInOptionsPage -> dispose');
-    SignInServiceLocator().popScope();
+    serviceLocator.dispose();
     super.dispose();
   }
 
@@ -68,7 +77,8 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
                 Navigator.pushReplacement(
                   context,
                   SlideLeftRoute<void>(
-                    page: SignInSecretPage.create(),
+                    page:
+                        SignInSecretPage.create(serviceLocator: serviceLocator),
                   ),
                 );
                 break;
@@ -77,10 +87,12 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
                     context,
                     SlideLeftRoute<void>(
                         page: SignInRegisterPage.create(
+                            serviceLocator: serviceLocator,
                             credential: page.parameters as Credential?)));
                 break;
               case SignInPageRoutes.credentialEntry:
-                final credentialPage = SignInCredentialPage.create();
+                final credentialPage =
+                    SignInCredentialPage.create(serviceLocator: serviceLocator);
                 page.from == SignInPageRoutes.signInOptions
                     ? Navigator.push(
                         context, SlideLeftRoute<void>(page: credentialPage))

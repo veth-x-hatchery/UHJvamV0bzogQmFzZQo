@@ -17,22 +17,31 @@ import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_re
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
-import 'package:vethx_beta/injection_container.dart';
+import 'package:vethx_beta/service_locator.dart';
 
-class SignInServiceLocator {
-  Future<void> pushNewScope() async {
+abstract class ISignInServiceLocator {
+  Future<void> init();
+  Future<void> dispose();
+  T get<T extends Object>();
+}
+
+class SignInServiceLocator implements ISignInServiceLocator {
+  @override
+  Future<void> init() async {
     Logger.serviceLocator(
         'SignInServiceLocator -> pushNewScope: SignInGetItScope');
     getIt.pushNewScope(scopeName: 'SignInGetItScope');
     await _signInDependencies();
   }
 
-  Future<void> popScope() async {
+  @override
+  Future<void> dispose() async {
     Logger.serviceLocator('SignInServiceLocator -> popScope: SignInGetItScope');
     getIt.popScopesTill('SignInGetItScope');
   }
 
-  static T get<T extends Object>() {
+  @override
+  T get<T extends Object>() {
     Logger.serviceLocator('SignInServiceLocator -> get: $T');
     return getIt<T>();
   }

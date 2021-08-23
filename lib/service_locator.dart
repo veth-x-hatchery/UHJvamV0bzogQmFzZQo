@@ -11,6 +11,7 @@ import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
+import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 
 final getIt = GetIt.instance;
 
@@ -56,5 +57,11 @@ Future<void> init() async {
     () => AuthBloc(
       getIt<IAuthFacade>(),
     ),
+  );
+
+  // Features Service Locators
+
+  getIt.registerLazySingleton<ISignInServiceLocator>(
+    () => SignInServiceLocator(),
   );
 }

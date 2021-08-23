@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/navigation.dart';
+import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
+import 'package:vethx_beta/service_locator.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
 // ignore: avoid_classes_with_only_static_members
@@ -16,10 +18,14 @@ class NavigationRoutes {
     switch (settings.name) {
       case SignInNavigationRoutes.signIn:
         return MaterialPageRoute<void>(
-            builder: (_) => const SignInOptionsPage());
+            builder: (_) => SignInOptionsPage(
+                  serviceLocator: getIt<ISignInServiceLocator>(),
+                ));
       case SignInNavigationRoutes.signInOptions:
         return MaterialPageRoute<void>(
-            builder: (_) => const SignInOptionsPage());
+            builder: (_) => SignInOptionsPage(
+                  serviceLocator: getIt<ISignInServiceLocator>(),
+                ));
       case slash:
       case alpha:
       default:
@@ -29,7 +35,9 @@ class NavigationRoutes {
 
   static Map<String, WidgetBuilder> routes() => <String, WidgetBuilder>{
         SignInNavigationRoutes.signIn: (BuildContext context) =>
-            const SignInOptionsPage(),
+            SignInOptionsPage(
+              serviceLocator: getIt<ISignInServiceLocator>(),
+            ),
       };
 }
 

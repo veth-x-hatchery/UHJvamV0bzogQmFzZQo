@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
-import 'package:vethx_beta/injection_container.dart';
+import 'package:vethx_beta/service_locator.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
 Future<void> main() async {

@@ -26,89 +26,37 @@ import 'sign_in_options.page_test.mocks.dart';
 
 @GenerateMocks([
   SignInOptionsBloc,
-  SignInCredentialBloc,
-  SignInRegisterBloc,
-  SignInSecretBloc,
-  SignInSecretResetBloc,
   NavigationCubit,
 ], customMocks: [
   MockSpec<NavigatorObserver>(returnNullOnMissingStub: true)
 ])
 void main() {
-  late MockSignInCredentialBloc _mockMockSignInCredentialBloc;
-  late MockSignInRegisterBloc _mockMockSignInRegisterBloc;
-  late MockSignInSecretBloc _mockMockSignInSecretBloc;
-  late MockSignInSecretResetBloc _mockSignInSecretResetBloc;
   late MockNavigatorObserver _mockNavigationObserver;
 
   late MockSignInOptionsBloc _mockSignInBloc;
   late NavigationCubit _navigationCubit;
-  late GetIt sl;
+  late GetIt getIt;
 
   setUp(() {
-    _mockMockSignInCredentialBloc = MockSignInCredentialBloc();
-    _mockMockSignInRegisterBloc = MockSignInRegisterBloc();
-    _mockMockSignInSecretBloc = MockSignInSecretBloc();
-    _mockSignInSecretResetBloc = MockSignInSecretResetBloc();
-
+    _mockSignInBloc = MockSignInOptionsBloc();
     _navigationCubit = NavigationCubit();
     _mockNavigationObserver = MockNavigatorObserver();
 
-    _mockSignInBloc = MockSignInOptionsBloc();
+    getIt = GetIt.instance;
 
-    sl = GetIt.instance;
-
-    sl.registerFactory<SignInOptionsBloc>(() => _mockSignInBloc);
-    sl.registerFactory<SignInCredentialBloc>(
-        () => _mockMockSignInCredentialBloc);
-    sl.registerFactory<SignInRegisterBloc>(() => _mockMockSignInRegisterBloc);
-    sl.registerFactory<SignInSecretBloc>(() => _mockMockSignInSecretBloc);
-    sl.registerFactory<SignInSecretResetBloc>(() => _mockSignInSecretResetBloc);
-
-    sl.registerLazySingleton<NavigationCubit>(() => _navigationCubit);
+    getIt.registerFactory<SignInOptionsBloc>(() => _mockSignInBloc);
+    getIt.registerLazySingleton<NavigationCubit>(() => _navigationCubit);
   });
 
-  tearDown(() => sl.reset());
+  tearDown(() => getIt.reset());
 
   void _signInState(SignInOptionsState state) {
     when(_mockSignInBloc.state).thenReturn(state);
     when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
   }
 
-  // ignore: non_constant_identifier_names
-  void _SignInCredentialState(SignInCredentialState state) {
-    when(_mockMockSignInCredentialBloc.state).thenReturn(state);
-    when(_mockMockSignInCredentialBloc.stream)
-        .thenAnswer((_) => Stream.value(state));
-  }
-
-  // ignore: non_constant_identifier_names
-  void _SignInRegisterState(SignInRegisterState state) {
-    when(_mockMockSignInRegisterBloc.state).thenReturn(state);
-    when(_mockMockSignInRegisterBloc.stream)
-        .thenAnswer((_) => Stream.value(state));
-  }
-
-  // ignore: non_constant_identifier_names
-  void _SignInSecretState(SignInSecretState state) {
-    when(_mockMockSignInSecretBloc.state).thenReturn(state);
-    when(_mockMockSignInSecretBloc.stream)
-        .thenAnswer((_) => Stream.value(state));
-  }
-
-  void _signInSecretResetState(SignInSecretResetState state) {
-    when(_mockSignInSecretResetBloc.state).thenReturn(state);
-    when(_mockSignInSecretResetBloc.stream)
-        .thenAnswer((_) => Stream.value(state));
-  }
-
   void _setInitialState() {
     _signInState(const SignInOptionsState.initial());
-    _SignInCredentialState(SignInCredentialState.initial());
-    _SignInRegisterState(SignInRegisterState.initial());
-    _SignInSecretState(SignInSecretState.initial());
-    _SignInSecretState(SignInSecretState.initial());
-    _signInSecretResetState(SignInSecretResetState.initial());
   }
 
   Future<void> _pumpPage(WidgetTester tester) async {
