@@ -24,10 +24,15 @@ class MockISignInServiceLocator implements ISignInServiceLocator {
   final Future<void> Function()? initOverride;
   final Future<void> Function()? disposeOverride;
 
+  /// In some test cases we can need to use .GoTo funcionality
+  final bool useNavigationMock;
+  late NavigationCubit navigationCubit;
+
   MockISignInServiceLocator({
     required this.getIt,
     this.initOverride,
     this.disposeOverride,
+    this.useNavigationMock = true,
   }) {
     mockSignInBloc = MockSignInOptionsBloc();
     mockMockSignInSecretBloc = MockSignInSecretBloc();
@@ -35,6 +40,7 @@ class MockISignInServiceLocator implements ISignInServiceLocator {
     mockMockSignInRegisterBloc = MockSignInRegisterBloc();
     mockSignInSecretResetBloc = MockSignInSecretResetBloc();
     mockNavigationCubit = MockNavigationCubit();
+    navigationCubit = NavigationCubit();
   }
 
   @override
@@ -63,7 +69,7 @@ class MockISignInServiceLocator implements ISignInServiceLocator {
       () => mockSignInSecretResetBloc,
     );
     getIt.registerLazySingleton<NavigationCubit>(
-      () => mockNavigationCubit,
+      () => useNavigationMock ? mockNavigationCubit : navigationCubit,
     );
 
     Logger.serviceLocator('MockISignInServiceLocator -> pushNewScope');

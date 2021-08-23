@@ -16,8 +16,6 @@ import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
-import '../../../../helpers/features/signin/sign_in_service_locator.mock.mocks.dart';
-import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
 import 'alpha.page_test.mocks.dart';
 

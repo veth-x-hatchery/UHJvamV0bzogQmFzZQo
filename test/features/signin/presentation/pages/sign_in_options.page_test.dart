@@ -36,7 +36,10 @@ void main() {
   setUp(() {
     getIt = GetIt.instance;
 
-    _sl = MockISignInServiceLocator(getIt: getIt);
+    _sl = MockISignInServiceLocator(
+      getIt: getIt,
+      useNavigationMock: false,
+    );
 
     _mockNavigationObserver = MockNavigatorObserver();
   });
@@ -127,7 +130,7 @@ void main() {
 
       // act
 
-      _sl.mockNavigationCubit.goTo(SignInPageGoTo.secretPage(
+      _sl.navigationCubit.goTo(SignInPageGoTo.secretPage(
         from: SignInPageRoutes.credentialEntry,
         credential: 'teste@teste.com',
       ));
@@ -154,7 +157,7 @@ void main() {
 
       // act
 
-      _sl.mockNavigationCubit.goTo(SignInPageGoTo.registerPage(
+      _sl.navigationCubit.goTo(SignInPageGoTo.registerPage(
         from: SignInPageRoutes.credentialEntry,
         credential: Credential('test@test.com'),
       ));
@@ -181,7 +184,7 @@ void main() {
 
       // act
 
-      _sl.mockNavigationCubit.goTo(
+      _sl.navigationCubit.goTo(
         SignInPageGoTo.credentialPage(from: SignInPageRoutes.secretEntry),
       );
 
@@ -207,7 +210,7 @@ void main() {
 
       // act
 
-      _sl.mockNavigationCubit.goTo(
+      _sl.navigationCubit.goTo(
         SignInPageGoTo.credentialPage(from: SignInPageRoutes.signInOptions),
       );
 
@@ -320,7 +323,7 @@ void main() {
 
       // Assert
 
-      _sl.mockNavigationCubit.stream.listen((value) {
+      _sl.navigationCubit.stream.listen((value) {
         expect(
             value,
             NavigationState.goTo(SignInPageGoTo.credentialPage(
