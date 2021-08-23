@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 Scaffold signInScaffold(
   BuildContext context, {
-  required Widget child,
   bool leading = true,
+  Function()? onPressed,
+  required Widget child,
 }) {
   return Scaffold(
     appBar: AppBar(
@@ -15,7 +16,8 @@ Scaffold signInScaffold(
                 Icons.arrow_back_ios,
                 color: Theme.of(context).primaryColor,
               ),
-              onPressed: () => Navigator.maybePop(context),
+              onPressed: () =>
+                  onPressed == null ? Navigator.maybePop(context) : onPressed(),
             )
           : null,
     ),

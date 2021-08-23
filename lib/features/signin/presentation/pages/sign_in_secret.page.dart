@@ -79,6 +79,8 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
+      onPressed: () => BlocProvider.of<NavigationCubit>(context).goTo(
+          SignInPageGoTo.credentialPage(from: SignInPageRoutes.secretEntry)),
       child: BlocConsumer<SignInSecretBloc, SignInSecretState>(
         listener: (context, state) {
           state.authFailureOrSuccessOption.map((a) {
