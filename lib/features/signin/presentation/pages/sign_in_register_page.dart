@@ -62,7 +62,9 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
   @override
   void initState() {
     if (widget.credential?.isValid() == true) {
-      _credentialTextEditingController.text = widget.credential!.getOrCrash();
+      final credentialStr = widget.credential!.getOrCrash();
+      bloc.add(SignInRegisterEvent.credentialChanged(credentialStr));
+      _credentialTextEditingController.text = credentialStr;
       _secretFocusNode.requestFocus();
     } else {
       _credentialFocusNode.requestFocus();
