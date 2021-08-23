@@ -15,50 +15,32 @@ import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secr
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
-import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
+import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
-import 'sign_in_secret.page_test.mocks.dart';
-
-class MockISignInServiceLocator extends Mock implements ISignInServiceLocator {}
-
-@GenerateMocks([
-  SignInSecretBloc,
-  SignInSecretResetBloc,
-  NavigationCubit,
-])
 void main() {
-  late MockSignInSecretBloc _mockBloc;
-  late MockSignInSecretResetBloc _mockSignInSecretResetBloc;
-  late MockNavigationCubit _mockNavigationCubit;
-  late MockISignInServiceLocator _mokckISignInServiceLocator;
+  late MockISignInServiceLocator _sl;
   late GetIt getIt;
 
   setUp(() {
-    _mockBloc = MockSignInSecretBloc();
-    _mockSignInSecretResetBloc = MockSignInSecretResetBloc();
-    _mockNavigationCubit = MockNavigationCubit();
-    _mokckISignInServiceLocator = MockISignInServiceLocator();
-
     getIt = GetIt.instance;
-
-    getIt.registerLazySingleton<NavigationCubit>(() => _mockNavigationCubit);
-    getIt.registerFactory<SignInSecretBloc>(() => _mockBloc);
-    getIt.registerFactory<SignInSecretResetBloc>(
-        () => _mockSignInSecretResetBloc);
+    _sl = MockISignInServiceLocator(getIt: getIt);
+    _sl.init();
   });
 
-  tearDown(() => getIt.reset());
+  tearDown(() {
+    _sl.dispose();
+    getIt.reset();
+  });
 
   Future<void> _pumpPage(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInSecretPage.create(
-                serviceLocator: _mokckISignInServiceLocator),
+            body: SignInSecretPage.create(serviceLocator: _sl),
           ),
         ),
       ),
@@ -66,19 +48,20 @@ void main() {
   }
 
   void _scretResetBlocState(SignInSecretResetState state) {
-    when(_mockSignInSecretResetBloc.state).thenReturn(state);
-    when(_mockSignInSecretResetBloc.stream)
+    when(_sl.mockSignInSecretResetBloc.state).thenReturn(state);
+    when(_sl.mockSignInSecretResetBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
   void _secretBlocState(SignInSecretState state) {
-    when(_mockBloc.state).thenReturn(state);
-    when(_mockBloc.stream).thenAnswer((_) => Stream.value(state));
+    when(_sl.mockSignInSecretBloc.state).thenReturn(state);
+    when(_sl.mockSignInSecretBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
   }
 
   void _navigationCubitState() {
-    when(_mockNavigationCubit.goTo(any)).thenReturn(null);
-    when(_mockNavigationCubit.stream)
+    when(_sl.mockNavigationCubit.goTo(any)).thenReturn(null);
+    when(_sl.mockNavigationCubit.stream)
         .thenAnswer((_) => Stream.value(const NavigationState.initial()));
   }
 
@@ -135,7 +118,7 @@ void main() {
       authFailureOrSuccessOption: none(),
       notification: none(),
     );
-    when(_mockBloc.state).thenReturn(state);
+    when(_sl.mockSignInSecretBloc.state).thenReturn(state);
   }
 
   testWidgets('should find the change credential reset button', (tester) async {
@@ -252,7 +235,7 @@ void main() {
 
     // assert
 
-    verifyNever(_mockBloc.add(any));
+    verifyNever(_sl.mockSignInSecretBloc.add(any));
   });
 
   testWidgets('when user enters a invalid secret then no events are emitted',
@@ -277,7 +260,8 @@ void main() {
 
     // assert
 
-    verifyNever(_mockBloc.add(const SignInSecretEvent.analyseSecretPressed()));
+    verifyNever(_sl.mockSignInSecretBloc
+        .add(const SignInSecretEvent.analyseSecretPressed()));
   });
 
   testWidgets('when user enters a correct secret then SignInBLoC is called',
@@ -300,7 +284,8 @@ void main() {
 
     // assert
 
-    verify(_mockBloc.add(const SignInSecretEvent.analyseSecretPressed()))
+    verify(_sl.mockSignInSecretBloc
+            .add(const SignInSecretEvent.analyseSecretPressed()))
         .called(1);
   });
 
@@ -350,7 +335,7 @@ void main() {
 
       // assert
 
-      verify(_mockNavigationCubit.goTo(any)).called(1);
+      verify(_sl.mockNavigationCubit.goTo(any)).called(1);
     });
   });
 
@@ -368,7 +353,7 @@ void main() {
 
       // assert
 
-      verify(_mockSignInSecretResetBloc
+      verify(_sl.mockSignInSecretResetBloc
               .add(const SignInSecretResetEvent.secretResetRequest()))
           .called(1);
     });

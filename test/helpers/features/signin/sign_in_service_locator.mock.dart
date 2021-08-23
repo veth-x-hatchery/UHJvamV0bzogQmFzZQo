@@ -13,9 +13,9 @@ import 'sign_in_service_locator.mock.mocks.dart';
 
 class MockISignInServiceLocator implements ISignInServiceLocator {
   late MockSignInOptionsBloc mockSignInBloc;
-  late MockSignInCredentialBloc mockMockSignInCredentialBloc;
-  late MockSignInRegisterBloc mockMockSignInRegisterBloc;
-  late MockSignInSecretBloc mockMockSignInSecretBloc;
+  late MockSignInCredentialBloc mockSignInCredentialBloc;
+  late MockSignInRegisterBloc mockSignInRegisterBloc;
+  late MockSignInSecretBloc mockSignInSecretBloc;
   late MockSignInSecretResetBloc mockSignInSecretResetBloc;
   late MockNavigationCubit mockNavigationCubit;
 
@@ -30,9 +30,9 @@ class MockISignInServiceLocator implements ISignInServiceLocator {
     this.useNavigationMock = true,
   }) {
     mockSignInBloc = MockSignInOptionsBloc();
-    mockMockSignInSecretBloc = MockSignInSecretBloc();
-    mockMockSignInCredentialBloc = MockSignInCredentialBloc();
-    mockMockSignInRegisterBloc = MockSignInRegisterBloc();
+    mockSignInSecretBloc = MockSignInSecretBloc();
+    mockSignInCredentialBloc = MockSignInCredentialBloc();
+    mockSignInRegisterBloc = MockSignInRegisterBloc();
     mockSignInSecretResetBloc = MockSignInSecretResetBloc();
     mockNavigationCubit = MockNavigationCubit();
     navigationCubit = NavigationCubit();
@@ -52,13 +52,13 @@ class MockISignInServiceLocator implements ISignInServiceLocator {
       () => mockSignInBloc,
     );
     getIt.registerFactory<SignInCredentialBloc>(
-      () => mockMockSignInCredentialBloc,
+      () => mockSignInCredentialBloc,
     );
     getIt.registerFactory<SignInRegisterBloc>(
-      () => mockMockSignInRegisterBloc,
+      () => mockSignInRegisterBloc,
     );
     getIt.registerFactory<SignInSecretBloc>(
-      () => mockMockSignInSecretBloc,
+      () => mockSignInSecretBloc,
     );
     getIt.registerFactory<SignInSecretResetBloc>(
       () => mockSignInSecretResetBloc,

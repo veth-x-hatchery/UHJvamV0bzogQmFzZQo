@@ -41,8 +41,8 @@ void main() {
   }
 
   void _signInState(SignInRegisterState state) {
-    when(_sl.mockMockSignInRegisterBloc.state).thenReturn(state);
-    when(_sl.mockMockSignInRegisterBloc.stream)
+    when(_sl.mockSignInRegisterBloc.state).thenReturn(state);
+    when(_sl.mockSignInRegisterBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
@@ -93,7 +93,7 @@ void main() {
       authFailureOrSuccessOption: none(),
       notification: none(),
     );
-    when(_sl.mockMockSignInRegisterBloc.state).thenReturn(state);
+    when(_sl.mockSignInRegisterBloc.state).thenReturn(state);
   }
 
   group('when searching for controllers', () {
@@ -193,7 +193,7 @@ void main() {
 
     // assert
 
-    verifyNever(_sl.mockMockSignInRegisterBloc.add(any));
+    verifyNever(_sl.mockSignInRegisterBloc.add(any));
   });
 
   testWidgets(
@@ -215,7 +215,7 @@ void main() {
 
     // assert
 
-    verifyNever(_sl.mockMockSignInRegisterBloc.add(
+    verifyNever(_sl.mockSignInRegisterBloc.add(
         const SignInRegisterEvent.registerWithCredentialAndSecretPressed()));
   });
 
@@ -240,7 +240,7 @@ void main() {
 
     // assert
 
-    verifyNever(_sl.mockMockSignInRegisterBloc.add(
+    verifyNever(_sl.mockSignInRegisterBloc.add(
         const SignInRegisterEvent.registerWithCredentialAndSecretPressed()));
   });
 
@@ -266,7 +266,7 @@ void main() {
 
     // assert
 
-    verify(_sl.mockMockSignInRegisterBloc.add(
+    verify(_sl.mockSignInRegisterBloc.add(
             const SignInRegisterEvent.registerWithCredentialAndSecretPressed()))
         .called(1);
   });

@@ -44,8 +44,8 @@ void main() {
   }
 
   void _signInState(SignInCredentialState state) {
-    when(_sl.mockMockSignInCredentialBloc.state).thenReturn(state);
-    when(_sl.mockMockSignInCredentialBloc.stream)
+    when(_sl.mockSignInCredentialBloc.state).thenReturn(state);
+    when(_sl.mockSignInCredentialBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
@@ -78,7 +78,7 @@ void main() {
       authFailureOrSuccessOption: none(),
       notification: none(),
     );
-    when(_sl.mockMockSignInCredentialBloc.state).thenReturn(state);
+    when(_sl.mockSignInCredentialBloc.state).thenReturn(state);
   }
 
   testWidgets('should find the validation button', (tester) async {
@@ -154,7 +154,7 @@ void main() {
 
     // assert
 
-    verifyNever(_sl.mockMockSignInCredentialBloc
+    verifyNever(_sl.mockSignInCredentialBloc
         .add(const SignInCredentialEvent.analyseCredentialPressed()));
   });
 
@@ -181,7 +181,7 @@ void main() {
 
     // assert
 
-    verifyNever(_sl.mockMockSignInCredentialBloc
+    verifyNever(_sl.mockSignInCredentialBloc
         .add(const SignInCredentialEvent.analyseCredentialPressed()));
   });
 
@@ -203,7 +203,7 @@ void main() {
 
     // assert
 
-    verify(_sl.mockMockSignInCredentialBloc
+    verify(_sl.mockSignInCredentialBloc
             .add(const SignInCredentialEvent.analyseCredentialPressed()))
         .called(1);
   });

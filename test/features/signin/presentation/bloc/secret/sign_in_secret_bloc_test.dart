@@ -99,7 +99,7 @@ void main() {
             SignInSecretState(
               secret: valueObject,
               isLoading: false,
-              authFailureOrSuccessOption: none(),
+              authFailureOrSuccessOption: some(right(unit)),
               notification: none(),
             )
           ],
@@ -144,7 +144,7 @@ void main() {
             SignInSecretState(
               secret: Secret(secret),
               isLoading: false,
-              authFailureOrSuccessOption: none(),
+              authFailureOrSuccessOption: some(right(unit)),
               notification: none(),
             )
           ],
@@ -233,7 +233,7 @@ void main() {
         SignInSecretState(
           secret: valueObject,
           isLoading: false,
-          authFailureOrSuccessOption: none(),
+          authFailureOrSuccessOption: some(right(unit)),
           notification: none(),
         )
       ]),

@@ -52,20 +52,20 @@ void main() {
   }
 
   void _signInCredentialState(SignInCredentialState state) {
-    when(_sl.mockMockSignInCredentialBloc.state).thenReturn(state);
-    when(_sl.mockMockSignInCredentialBloc.stream)
+    when(_sl.mockSignInCredentialBloc.state).thenReturn(state);
+    when(_sl.mockSignInCredentialBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
   void _signInRegisterState(SignInRegisterState state) {
-    when(_sl.mockMockSignInRegisterBloc.state).thenReturn(state);
-    when(_sl.mockMockSignInRegisterBloc.stream)
+    when(_sl.mockSignInRegisterBloc.state).thenReturn(state);
+    when(_sl.mockSignInRegisterBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
   void _signInSecretState(SignInSecretState state) {
-    when(_sl.mockMockSignInSecretBloc.state).thenReturn(state);
-    when(_sl.mockMockSignInSecretBloc.stream)
+    when(_sl.mockSignInSecretBloc.state).thenReturn(state);
+    when(_sl.mockSignInSecretBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
