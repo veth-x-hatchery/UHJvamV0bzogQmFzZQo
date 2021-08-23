@@ -26,7 +26,7 @@ class SignInRegisterPage extends StatefulWidget {
   static Widget create({Credential? credential}) {
     Logger.widget('SignInRegisterPage -> create');
     return BlocProvider(
-      create: (_) => SignInDependenciesInjection.get<SignInRegisterBloc>(),
+      create: (_) => SignInServiceLocator.get<SignInRegisterBloc>(),
       child: SignInRegisterPage(credential: credential),
     );
   }

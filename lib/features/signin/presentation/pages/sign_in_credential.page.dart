@@ -19,7 +19,7 @@ class SignInCredentialPage extends StatefulWidget {
   static Widget create() {
     Logger.widget('SignInCredentialPage -> create');
     return BlocProvider(
-      create: (_) => SignInDependenciesInjection.get<SignInCredentialBloc>(),
+      create: (_) => SignInServiceLocator.get<SignInCredentialBloc>(),
       child: const SignInCredentialPage(),
     );
   }

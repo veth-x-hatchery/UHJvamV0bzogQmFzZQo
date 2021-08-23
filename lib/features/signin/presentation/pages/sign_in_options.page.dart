@@ -25,10 +25,10 @@ class SignInOptionsPage extends StatefulWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => SignInDependenciesInjection.get<SignInOptionsBloc>(),
+          create: (_) => SignInServiceLocator.get<SignInOptionsBloc>(),
         ),
         BlocProvider(
-          create: (_) => SignInDependenciesInjection.get<NavigationCubit>(),
+          create: (_) => SignInServiceLocator.get<NavigationCubit>(),
         ),
       ],
       child: const SignInOptionsPage(),
@@ -43,14 +43,14 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
   @override
   void initState() {
     Logger.widget('SignInOptionsPage -> initState');
-    SignInDependenciesInjection().pushNewScope();
+    SignInServiceLocator().pushNewScope();
     super.initState();
   }
 
   @override
   void dispose() {
     Logger.widget('SignInOptionsPage -> dispose');
-    SignInDependenciesInjection().popScope();
+    SignInServiceLocator().popScope();
     super.dispose();
   }
 

@@ -19,22 +19,21 @@ import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secr
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/injection_container.dart';
 
-class SignInDependenciesInjection {
+class SignInServiceLocator {
   Future<void> pushNewScope() async {
     Logger.serviceLocator(
-        'SignInDependenciesInjection -> pushNewScope: SignInGetItScope');
+        'SignInServiceLocator -> pushNewScope: SignInGetItScope');
     getIt.pushNewScope(scopeName: 'SignInGetItScope');
     await _signInDependencies();
   }
 
   Future<void> popScope() async {
-    Logger.serviceLocator(
-        'SignInDependenciesInjection -> popScope: SignInGetItScope');
+    Logger.serviceLocator('SignInServiceLocator -> popScope: SignInGetItScope');
     getIt.popScopesTill('SignInGetItScope');
   }
 
   static T get<T extends Object>() {
-    Logger.serviceLocator('SignInDependenciesInjection -> get: $T');
+    Logger.serviceLocator('SignInServiceLocator -> get: $T');
     return getIt<T>();
   }
 

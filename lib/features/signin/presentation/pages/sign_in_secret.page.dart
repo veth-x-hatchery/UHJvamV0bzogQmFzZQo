@@ -26,14 +26,13 @@ class SignInSecretPage extends StatefulWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<SignInSecretBloc>(
-          create: (_) => SignInDependenciesInjection.get<SignInSecretBloc>(),
+          create: (_) => SignInServiceLocator.get<SignInSecretBloc>(),
         ),
         BlocProvider<SignInSecretResetBloc>(
-          create: (_) =>
-              SignInDependenciesInjection.get<SignInSecretResetBloc>(),
+          create: (_) => SignInServiceLocator.get<SignInSecretResetBloc>(),
         ),
         BlocProvider<NavigationCubit>(
-          create: (_) => SignInDependenciesInjection.get<NavigationCubit>(),
+          create: (_) => SignInServiceLocator.get<NavigationCubit>(),
         ),
       ],
       child: const SignInSecretPage(),
