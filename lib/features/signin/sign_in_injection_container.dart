@@ -34,7 +34,10 @@ class SignInDependenciesInjection {
     await _signInDependencies();
   }
 
-  static T get<T extends Object>() => getIt<T>();
+  static T get<T extends Object>() {
+    Logger.serviceLocator('SignInDependenciesInjection -> get: $T');
+    return getIt<T>();
+  }
 
   /// https://github.com/fluttercommunity/get_it/issues/109
   Future<void> _signInDependencies() async {

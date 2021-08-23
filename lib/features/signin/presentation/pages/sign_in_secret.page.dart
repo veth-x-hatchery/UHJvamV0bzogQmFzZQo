@@ -26,6 +26,7 @@ class SignInSecretPage extends StatefulWidget {
     required SignInSecretResetBloc secretResetbloc,
     required NavigationCubit navigationCubit,
   }) {
+    Logger.widget('SignInSecretPage -> create');
     return MultiBlocProvider(
       providers: [
         BlocProvider<SignInSecretBloc>(

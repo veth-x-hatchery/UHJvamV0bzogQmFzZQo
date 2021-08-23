@@ -27,6 +27,7 @@ class SignInRegisterPage extends StatefulWidget {
     required SignInRegisterBloc bloc,
     String? credential,
   }) {
+    Logger.widget('SignInRegisterPage -> create');
     return BlocProvider(
       create: (_) => bloc,
       child: SignInRegisterPage(credential: credential),

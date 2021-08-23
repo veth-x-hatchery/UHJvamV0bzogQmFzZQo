@@ -33,20 +33,6 @@ class SignInOptionsPage extends StatefulWidget {
         BlocProvider(
           create: (_) => SignInDependenciesInjection.get<NavigationCubit>(),
         ),
-        BlocProvider(
-          create: (_) =>
-              SignInDependenciesInjection.get<SignInCredentialBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => SignInDependenciesInjection.get<SignInRegisterBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => SignInDependenciesInjection.get<SignInSecretBloc>(),
-        ),
-        BlocProvider(
-          create: (_) =>
-              SignInDependenciesInjection.get<SignInSecretResetBloc>(),
-        ),
       ],
       child: const SignInOptionsPage(),
     );
@@ -86,11 +72,12 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
                   context,
                   SlideLeftRoute<void>(
                     page: SignInSecretPage.create(
-                      secretResetbloc:
-                          BlocProvider.of<SignInSecretResetBloc>(context),
-                      secretBloc: BlocProvider.of<SignInSecretBloc>(context),
+                      secretResetbloc: SignInDependenciesInjection.get<
+                          SignInSecretResetBloc>(),
+                      secretBloc:
+                          SignInDependenciesInjection.get<SignInSecretBloc>(),
                       navigationCubit:
-                          BlocProvider.of<NavigationCubit>(context),
+                          SignInDependenciesInjection.get<NavigationCubit>(),
                     ),
                   ),
                 );
@@ -100,13 +87,15 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
                   context,
                   SlideLeftRoute<void>(
                       page: SignInRegisterPage.create(
-                          bloc: BlocProvider.of<SignInRegisterBloc>(context),
+                          bloc: SignInDependenciesInjection.get<
+                              SignInRegisterBloc>(),
                           credential: page.parameters as String?)),
                 );
                 break;
               case SignInPageRoutes.credentialEntry:
                 final credentialPage = SignInCredentialPage.create(
-                    bloc: BlocProvider.of<SignInCredentialBloc>(context));
+                    bloc: SignInDependenciesInjection.get<
+                        SignInCredentialBloc>());
                 page.from == SignInPageRoutes.signInOptions
                     ? Navigator.push(
                         context, SlideLeftRoute<void>(page: credentialPage))

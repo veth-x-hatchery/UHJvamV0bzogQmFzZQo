@@ -19,6 +19,7 @@ class SignInCredentialPage extends StatefulWidget {
     BuildContext? context,
     required SignInCredentialBloc bloc,
   }) {
+    Logger.widget('SignInCredentialPage -> create');
     return BlocProvider(
       create: (_) => bloc,
       child: const SignInCredentialPage(),
