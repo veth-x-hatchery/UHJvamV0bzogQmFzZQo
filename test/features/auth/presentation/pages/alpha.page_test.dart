@@ -12,33 +12,49 @@ import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
+import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
+
+import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
+import '../../../../helpers/features/signin/sign_in_service_locator.mock.mocks.dart';
+import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
 import 'alpha.page_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
-  SignInOptionsBloc,
-  NavigationCubit,
-  LoggingNavigationObserver,
+], customMocks: [
+  MockSpec<NavigatorObserver>(returnNullOnMissingStub: true),
 ])
 void main() {
+  late GetIt getIt;
   late MockAuthBloc _mockAuthBloc;
-  late MockSignInOptionsBloc _mockSignInBloc;
-  late MockNavigationCubit _mockNavigationCubit;
-  late GetIt sl;
+  late MockISignInServiceLocator _sl;
+  late MockNavigatorObserver _mockNavigationObserver;
 
   setUp(() {
+    getIt = GetIt.instance;
+
+    _sl = MockISignInServiceLocator(getIt: getIt);
+
     _mockAuthBloc = MockAuthBloc();
-    _mockSignInBloc = MockSignInOptionsBloc();
-    _mockNavigationCubit = MockNavigationCubit();
-    sl = GetIt.instance;
-    sl.registerFactory<AuthBloc>(() => _mockAuthBloc);
-    sl.registerFactory<SignInOptionsBloc>(() => _mockSignInBloc);
-    sl.registerLazySingleton<NavigationCubit>(() => _mockNavigationCubit);
+
+    _mockNavigationObserver = MockNavigatorObserver();
+
+    // BLoC
+
+    getIt.registerLazySingleton<AuthBloc>(
+      () => _mockAuthBloc,
+    );
+
+    // Features Service Locators
+
+    getIt.registerLazySingleton<ISignInServiceLocator>(
+      () => _sl,
+    );
   });
 
-  tearDown(() => sl.reset());
+  tearDown(() => getIt.reset());
 
   void _authState(AuthState state) {
     when(_mockAuthBloc.state).thenReturn(state);
@@ -46,13 +62,20 @@ void main() {
   }
 
   void _navigationState(NavigationState state) {
-    when(_mockNavigationCubit.state).thenReturn(state);
-    when(_mockNavigationCubit.stream).thenAnswer((_) => Stream.value(state));
+    when(_sl.mockNavigationCubit.state).thenReturn(state);
+    when(_sl.mockNavigationCubit.stream).thenAnswer((_) => Stream.value(state));
   }
 
   void _signInState(SignInOptionsState state) {
-    when(_mockSignInBloc.state).thenReturn(state);
-    when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
+    when(_sl.mockSignInBloc.state).thenReturn(state);
+    when(_sl.mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
+  }
+
+  void _initialState() {
+    when(_mockAuthBloc.add(any)).thenReturn(null);
+    _authState(const AuthState.unauthenticated());
+    _navigationState(const NavigationState.initial());
+    _signInState(const SignInOptionsState.initial());
   }
 
   Future<void> _pumpWidgetAlphaPage(WidgetTester tester) async {
@@ -76,11 +99,7 @@ void main() {
         (WidgetTester tester) async {
       // Arrange
 
-      _authState(const AuthState.unauthenticated());
-
-      _navigationState(const NavigationState.initial());
-
-      _signInState(const SignInOptionsState.initial());
+      _initialState();
 
       // Act
 
@@ -97,14 +116,12 @@ void main() {
         (WidgetTester tester) async {
       // Arrange
 
+      _initialState();
+
       _authState(AuthState.authenticated(User(
         credential: Credential('test@test.com'),
         name: 'test',
       )));
-
-      _navigationState(const NavigationState.initial());
-
-      _signInState(const SignInOptionsState.initial());
 
       // Act
 
@@ -119,11 +136,7 @@ void main() {
         (WidgetTester tester) async {
       // Arrange
 
-      _authState(const AuthState.initial());
-
-      _navigationState(const NavigationState.initial());
-
-      _signInState(const SignInOptionsState.initial());
+      _initialState();
 
       // Act
 

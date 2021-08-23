@@ -34,7 +34,7 @@ class AlphaPage extends StatelessWidget {
           initial: (_) => _PageWidget(),
           authenticated: (_) => const HomePage(),
           unauthenticated: (_) => SignInOptionsPage.create(
-            serviceLocator: SignInServiceLocator(),
+            serviceLocator: getIt<ISignInServiceLocator>(),
           ),
         );
       },

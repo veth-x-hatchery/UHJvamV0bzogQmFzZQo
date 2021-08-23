@@ -5,7 +5,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
@@ -19,140 +18,56 @@ import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_p
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
-import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
+import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
+import '../../../../helpers/features/signin/sign_in_service_locator.mock.mocks.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
-import 'sign_in_options.page_test.mocks.dart';
-
-class MockISignInServiceLocator implements ISignInServiceLocator {
-  final GetIt getIt;
-
-  final Future<void> Function() initOverride;
-  final Future<void> Function() disposeOverride;
-
-  MockISignInServiceLocator({
-    required this.getIt,
-    required this.initOverride,
-    required this.disposeOverride,
-  });
-
-  @override
-  Future<void> dispose() {
-    return disposeOverride();
-  }
-
-  @override
-  T get<T extends Object>() {
-    // TODO: implement get
-    return getIt.get<T>();
-  }
-
-  @override
-  Future<void> init() async {
-    return initOverride();
-  }
-}
-
-@GenerateMocks([
-  SignInOptionsBloc,
-  SignInCredentialBloc,
-  SignInRegisterBloc,
-  SignInSecretBloc,
-  SignInSecretResetBloc,
-  NavigationCubit,
-], customMocks: [
-  MockSpec<NavigatorObserver>(returnNullOnMissingStub: true)
+@GenerateMocks([], customMocks: [
+  MockSpec<NavigatorObserver>(returnNullOnMissingStub: true),
 ])
 void main() {
-  late MockSignInCredentialBloc _mockMockSignInCredentialBloc;
-  late MockSignInRegisterBloc _mockMockSignInRegisterBloc;
-  late MockSignInSecretBloc _mockMockSignInSecretBloc;
-  late MockSignInSecretResetBloc _mockSignInSecretResetBloc;
-  late MockNavigatorObserver _mockNavigationObserver;
-
-  late MockSignInOptionsBloc _mockSignInBloc;
-  late NavigationCubit _navigationCubit;
-
-  late MockISignInServiceLocator _mockISignInServiceLocator;
   late GetIt getIt;
+  late MockNavigatorObserver _mockNavigationObserver;
+  late MockISignInServiceLocator _sl;
 
   setUp(() {
-    _mockSignInBloc = MockSignInOptionsBloc();
-    _mockMockSignInSecretBloc = MockSignInSecretBloc();
-    _mockMockSignInCredentialBloc = MockSignInCredentialBloc();
-    _mockMockSignInRegisterBloc = MockSignInRegisterBloc();
-    _mockSignInSecretResetBloc = MockSignInSecretResetBloc();
-
-    _navigationCubit = NavigationCubit();
-    _mockNavigationObserver = MockNavigatorObserver();
-
     getIt = GetIt.instance;
 
-    _mockISignInServiceLocator = MockISignInServiceLocator(
-      getIt: getIt,
-      initOverride: () async {
-        getIt.pushNewScope();
+    _sl = MockISignInServiceLocator(getIt: getIt);
 
-        getIt.registerFactory<SignInOptionsBloc>(
-          () => _mockSignInBloc,
-        );
-        getIt.registerFactory<SignInCredentialBloc>(
-          () => _mockMockSignInCredentialBloc,
-        );
-        getIt.registerFactory<SignInRegisterBloc>(
-          () => _mockMockSignInRegisterBloc,
-        );
-        getIt.registerFactory<SignInSecretBloc>(
-          () => _mockMockSignInSecretBloc,
-        );
-        getIt.registerFactory<SignInSecretResetBloc>(
-          () => _mockSignInSecretResetBloc,
-        );
-        getIt.registerLazySingleton<NavigationCubit>(
-          () => _navigationCubit,
-        );
-
-        Logger.serviceLocator('MockISignInServiceLocator -> pushNewScope');
-        return Future.value();
-      },
-      disposeOverride: () {
-        getIt.popScope();
-        Logger.serviceLocator('MockISignInServiceLocator -> popScope');
-        return Future.value();
-      },
-    );
+    _mockNavigationObserver = MockNavigatorObserver();
   });
 
   tearDown(() => getIt.reset());
 
   void _signInState(SignInOptionsState state) {
-    when(_mockSignInBloc.state).thenReturn(state);
-    when(_mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
+    when(_sl.mockSignInBloc.state).thenReturn(state);
+    when(_sl.mockSignInBloc.stream).thenAnswer((_) => Stream.value(state));
   }
 
   void _signInCredentialState(SignInCredentialState state) {
-    when(_mockMockSignInCredentialBloc.state).thenReturn(state);
-    when(_mockMockSignInCredentialBloc.stream)
+    when(_sl.mockMockSignInCredentialBloc.state).thenReturn(state);
+    when(_sl.mockMockSignInCredentialBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
   void _signInRegisterState(SignInRegisterState state) {
-    when(_mockMockSignInRegisterBloc.state).thenReturn(state);
-    when(_mockMockSignInRegisterBloc.stream)
+    when(_sl.mockMockSignInRegisterBloc.state).thenReturn(state);
+    when(_sl.mockMockSignInRegisterBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
   void _signInSecretState(SignInSecretState state) {
-    when(_mockMockSignInSecretBloc.state).thenReturn(state);
-    when(_mockMockSignInSecretBloc.stream)
+    when(_sl.mockMockSignInSecretBloc.state).thenReturn(state);
+    when(_sl.mockMockSignInSecretBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
   void _signInSecretResetState(SignInSecretResetState state) {
-    when(_mockSignInSecretResetBloc.state).thenReturn(state);
-    when(_mockSignInSecretResetBloc.stream)
+    when(_sl.mockSignInSecretResetBloc.state).thenReturn(state);
+    when(_sl.mockSignInSecretResetBloc.stream)
         .thenAnswer((_) => Stream.value(state));
   }
 
@@ -174,8 +89,7 @@ void main() {
         ],
         home: setupToPump(
           Scaffold(
-            body: SignInOptionsPage.create(
-                serviceLocator: _mockISignInServiceLocator),
+            body: SignInOptionsPage.create(serviceLocator: _sl),
           ),
         ),
       ),
@@ -212,7 +126,7 @@ void main() {
 
       // act
 
-      _navigationCubit.goTo(SignInPageGoTo.secretPage(
+      _sl.mockNavigationCubit.goTo(SignInPageGoTo.secretPage(
         from: SignInPageRoutes.credentialEntry,
         credential: 'teste@teste.com',
       ));
@@ -239,7 +153,7 @@ void main() {
 
       // act
 
-      _navigationCubit.goTo(SignInPageGoTo.registerPage(
+      _sl.mockNavigationCubit.goTo(SignInPageGoTo.registerPage(
         from: SignInPageRoutes.credentialEntry,
         credential: Credential('test@test.com'),
       ));
@@ -266,7 +180,7 @@ void main() {
 
       // act
 
-      _navigationCubit.goTo(
+      _sl.mockNavigationCubit.goTo(
         SignInPageGoTo.credentialPage(from: SignInPageRoutes.secretEntry),
       );
 
@@ -292,7 +206,7 @@ void main() {
 
       // act
 
-      _navigationCubit.goTo(
+      _sl.mockNavigationCubit.goTo(
         SignInPageGoTo.credentialPage(from: SignInPageRoutes.signInOptions),
       );
 
@@ -359,13 +273,13 @@ void main() {
 
       // Assert
 
-      verify(_mockSignInBloc
+      verify(_sl.mockSignInBloc
               .add(const SignInOptionsEvent.signInWithGoogleEvent()))
           .called(1);
 
       // Assert
 
-      await expectLater(_mockSignInBloc.stream,
+      await expectLater(_sl.mockSignInBloc.stream,
           emitsInOrder([const SignInOptionsState.loading()]));
     });
   });
@@ -405,7 +319,7 @@ void main() {
 
       // Assert
 
-      _navigationCubit.stream.listen((value) {
+      _sl.mockNavigationCubit.stream.listen((value) {
         expect(
             value,
             NavigationState.goTo(SignInPageGoTo.credentialPage(
