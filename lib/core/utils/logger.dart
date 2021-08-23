@@ -87,6 +87,18 @@ class Logger {
     );
   }
 
+  Logger.serviceLocator(
+    String message, {
+    dynamic exception,
+    StackTrace? stackTrace,
+  }) {
+    Logger.presentation(
+      '[Service Locator] $message',
+      exception: exception,
+      stackTrace: stackTrace,
+    );
+  }
+
   static void e(
     String message, {
     dynamic ex,

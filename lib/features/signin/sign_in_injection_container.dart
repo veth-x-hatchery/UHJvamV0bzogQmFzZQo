@@ -1,13 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:http/http.dart' as http;
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vethx_beta/core/api/api.dart';
-import 'package:vethx_beta/core/api/api_setup.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
+import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
-// import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
@@ -16,8 +10,6 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.d
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
 import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
-import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
-import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
@@ -27,146 +19,120 @@ import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secr
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/injection_container.dart';
 
-/// https://github.com/fluttercommunity/get_it/issues/109
-Future<void> signInDependenciesInjection() async {
-  //! External
+class SignInDependenciesInjection {
+  Future<void> pushNewScope() async {
+    Logger.serviceLocator(
+        'SignInDependenciesInjection -> pushNewScope: SignInGetItScope');
+    getIt.pushNewScope(scopeName: 'SignInGetItScope');
+    await _signInDependencies();
+  }
 
-  final sharedPreferences = await SharedPreferences.getInstance();
+  Future<void> popScope() async {
+    Logger.serviceLocator(
+        'SignInDependenciesInjection -> popScope: SignInGetItScope');
+    getIt.popScopesTill('SignInGetItScope');
+    await _signInDependencies();
+  }
 
-  sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+  static T get<T extends Object>() => getIt<T>();
 
-  sl.registerLazySingleton(() => http.Client());
+  /// https://github.com/fluttercommunity/get_it/issues/109
+  Future<void> _signInDependencies() async {
+    // Data sources
 
-  sl.registerLazySingleton(() => InternetConnectionChecker());
+    getIt.registerLazySingleton<ISignInLocalSource>(
+      () => SignInLocalSource(getIt<SharedPreferences>()),
+    );
 
-  sl.registerLazySingleton(() => FirebaseAuth.instance);
+    // Repository
+    getIt.registerLazySingleton<ISignInRepository>(
+      () => SignInRepository(
+        // sl<ISignInRemoteSource>(),
+        getIt<ISignInLocalSource>(),
+        getIt<INetworkInfo>(),
+      ),
+    );
 
-  sl.registerLazySingleton(() => GoogleSignIn());
+    // Use cases
 
-  //! Core
+    getIt.registerLazySingleton<SignInCredentialCheck>(
+      () => SignInCredentialCheck(
+        getIt<ISignInRepository>(),
+        getIt<IAuthFacade>(),
+      ),
+    );
 
-  sl.registerLazySingleton<INetworkInfo>(
-      () => NetworkInfo(sl<InternetConnectionChecker>()));
+    getIt.registerLazySingleton<SignInWithSecret>(
+      () => SignInWithSecret(
+        getIt<ISignInRepository>(),
+        getIt<IAuthFacade>(),
+      ),
+    );
 
-  sl.registerLazySingleton<IApiSetup>(() => ApiSetupProduction());
+    getIt.registerLazySingleton<SignInSecretReset>(
+      () => SignInSecretReset(
+        getIt<ISignInRepository>(),
+        getIt<IAuthFacade>(),
+      ),
+    );
 
-  sl.registerLazySingleton<API>(() => API(sl<IApiSetup>()));
+    getIt.registerLazySingleton<SignInWithGoogle>(
+      () => SignInWithGoogle(
+        // sl<ISignInRepository>(),
+        getIt<IAuthFacade>(),
+      ),
+    );
 
-  // Services
+    getIt.registerLazySingleton<SignInRegisterCredentialAndSecret>(
+      () => SignInRegisterCredentialAndSecret(
+        // sl<ISignInRepository>(),
+        getIt<IAuthFacade>(),
+      ),
+    );
 
-  sl.registerLazySingleton<FirebaseUserMapper>(() => FirebaseUserMapper());
+    // BLoC
 
-  sl.registerLazySingleton<IAuthFacade>(
-    () => FirebaseAuthFacade(
-      sl<FirebaseAuth>(),
-      sl<GoogleSignIn>(),
-      sl<FirebaseUserMapper>(),
-    ),
-  );
+    getIt.registerLazySingleton<NavigationCubit>(
+      () => NavigationCubit(),
+    );
 
-  // Data sources
+    getIt.registerFactory<SignInOptionsBloc>(
+      () => SignInOptionsBloc(
+        getIt<AuthBloc>(),
+        getIt<NavigationCubit>(),
+        getIt<SignInWithGoogle>(),
+      ),
+    );
 
-  // sl.registerLazySingleton<ISignInRemoteSource>(
-  //   () => SignInRemoteSource(
-  //     sl<http.Client>(),
-  //     sl<API>(),
-  //   ),
-  // );
+    getIt.registerFactory<SignInCredentialBloc>(
+      () => SignInCredentialBloc(
+        getIt<SignInCredentialCheck>(),
+        getIt<NavigationCubit>(),
+      ),
+    );
 
-  sl.registerLazySingleton<ISignInLocalSource>(
-    () => SignInLocalSource(sl<SharedPreferences>()),
-  );
+    getIt.registerFactory<SignInRegisterBloc>(
+      () => SignInRegisterBloc(
+        getIt<AuthBloc>(),
+        getIt<SignInRegisterCredentialAndSecret>(),
+      ),
+    );
 
-  // Repository
-  sl.registerLazySingleton<ISignInRepository>(
-    () => SignInRepository(
-      // sl<ISignInRemoteSource>(),
-      sl<ISignInLocalSource>(),
-      sl<INetworkInfo>(),
-    ),
-  );
+    getIt.registerFactory<SignInSecretBloc>(
+      () => SignInSecretBloc(
+        getIt<AuthBloc>(),
+        getIt<NavigationCubit>(),
+        getIt<SignInWithSecret>(),
+      ),
+    );
 
-  // Use cases
-  sl.registerLazySingleton<SignInCredentialCheck>(
-    () => SignInCredentialCheck(
-      sl<ISignInRepository>(),
-      sl<IAuthFacade>(),
-    ),
-  );
+    getIt.registerFactory<SignInSecretResetBloc>(
+      () => SignInSecretResetBloc(
+        getIt<SignInSecretReset>(),
+        getIt<NavigationCubit>(),
+      ),
+    );
 
-  sl.registerLazySingleton<SignInWithSecret>(
-    () => SignInWithSecret(
-      sl<ISignInRepository>(),
-      sl<IAuthFacade>(),
-    ),
-  );
-
-  sl.registerLazySingleton<SignInSecretReset>(
-    () => SignInSecretReset(
-      sl<ISignInRepository>(),
-      sl<IAuthFacade>(),
-    ),
-  );
-
-  sl.registerLazySingleton<SignInWithGoogle>(
-    () => SignInWithGoogle(
-      // sl<ISignInRepository>(),
-      sl<IAuthFacade>(),
-    ),
-  );
-
-  sl.registerLazySingleton<SignInRegisterCredentialAndSecret>(
-    () => SignInRegisterCredentialAndSecret(
-      // sl<ISignInRepository>(),
-      sl<IAuthFacade>(),
-    ),
-  );
-
-  // Bloc
-  sl.registerLazySingleton<NavigationCubit>(
-    () => NavigationCubit(),
-  );
-
-  sl.registerFactory<AuthBloc>(
-    () => AuthBloc(sl<IAuthFacade>()),
-  );
-
-  sl.registerFactory<SignInCredentialBloc>(
-    () => SignInCredentialBloc(
-      sl<SignInCredentialCheck>(),
-      sl<NavigationCubit>(),
-    ),
-  );
-
-  sl.registerFactory<SignInRegisterBloc>(
-    () => SignInRegisterBloc(
-      sl<AuthBloc>(),
-      sl<SignInRegisterCredentialAndSecret>(),
-    ),
-  );
-
-  sl.registerFactory<SignInSecretResetBloc>(
-    () => SignInSecretResetBloc(
-      sl<SignInSecretReset>(),
-      sl<NavigationCubit>(),
-    ),
-  );
-
-  sl.registerFactory<SignInSecretBloc>(
-    () => SignInSecretBloc(
-      sl<AuthBloc>(),
-      sl<NavigationCubit>(),
-      sl<SignInWithSecret>(),
-    ),
-  );
-
-  sl.registerFactory<SignInOptionsBloc>(
-    () => SignInOptionsBloc(
-      sl<AuthBloc>(),
-      sl<NavigationCubit>(),
-      sl<SignInWithGoogle>(),
-    ),
-  );
-
-  //********************************** */
+    //********************************** */
+  }
 }

@@ -16,37 +16,59 @@ import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.pag
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
-import 'package:vethx_beta/injection_container.dart';
+import 'package:vethx_beta/features/signin/sign_in_injection_container.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_beta/ui/widgets/transitions/slide_route.dart';
 
-class SignInOptionsPage extends StatelessWidget {
+class SignInOptionsPage extends StatefulWidget {
   const SignInOptionsPage({Key? key}) : super(key: key);
 
   static Widget create({BuildContext? context}) {
+    Logger.widget('SignInOptionsPage -> create');
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => sl<SignInOptionsBloc>(),
+          create: (_) => SignInDependenciesInjection.get<SignInOptionsBloc>(),
         ),
         BlocProvider(
-          create: (_) => sl<NavigationCubit>(),
+          create: (_) => SignInDependenciesInjection.get<NavigationCubit>(),
         ),
         BlocProvider(
-          create: (_) => sl<SignInCredentialBloc>(),
+          create: (_) =>
+              SignInDependenciesInjection.get<SignInCredentialBloc>(),
         ),
         BlocProvider(
-          create: (_) => sl<SignInRegisterBloc>(),
+          create: (_) => SignInDependenciesInjection.get<SignInRegisterBloc>(),
         ),
         BlocProvider(
-          create: (_) => sl<SignInSecretBloc>(),
+          create: (_) => SignInDependenciesInjection.get<SignInSecretBloc>(),
         ),
         BlocProvider(
-          create: (_) => sl<SignInSecretResetBloc>(),
+          create: (_) =>
+              SignInDependenciesInjection.get<SignInSecretResetBloc>(),
         ),
       ],
       child: const SignInOptionsPage(),
     );
+  }
+
+  @override
+  State<SignInOptionsPage> createState() => _SignInOptionsPageState();
+}
+
+class _SignInOptionsPageState extends State<SignInOptionsPage> {
+  @override
+  void initState() {
+    Logger.widget('SignInOptionsPage -> initState');
+    SignInDependenciesInjection().pushNewScope();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    Logger.widget('SignInOptionsPage -> dispose');
+    SignInDependenciesInjection().popScope();
+    super.dispose();
   }
 
   @override
@@ -59,11 +81,6 @@ class SignInOptionsPage extends StatelessWidget {
           initial: () {},
           goTo: (page) {
             switch (page.to) {
-              // case SignInPageRoutes.alpha:
-              //   // Navigator.popUntil(context,
-              //   //     (route) => route.settings.name == NavigationRoutes.alpha);
-              //   // Navigator.pop(context);
-              //   break;
               case SignInPageRoutes.secretEntry:
                 Navigator.pushReplacement(
                   context,

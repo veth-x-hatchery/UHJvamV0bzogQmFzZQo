@@ -14,7 +14,8 @@ class AlphaPage extends StatelessWidget {
 
   static Widget create(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
+      create: (_) =>
+          getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
       child: const AlphaPage(),
     );
   }
@@ -23,6 +24,7 @@ class AlphaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return BlocConsumer<AuthBloc, AuthState>(
+      bloc: getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
       listener: (context, state) {
         Logger.presentation('AlphaPage -> AuthBloc: $state');
       },
