@@ -29,7 +29,6 @@ class SignInCredentialBloc
   Stream<SignInCredentialState> mapEventToState(
     SignInCredentialEvent event,
   ) async* {
-    Logger.bloc('SignInCredentialBloc -> Event: $event');
     yield* event.map(
       credentialChanged: (e) async* {
         yield state.copyWith(

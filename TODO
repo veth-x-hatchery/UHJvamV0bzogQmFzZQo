@@ -1,5 +1,45 @@
 
 
+Drive Tests
+
+1 - Email Page
+
+	1 - Sign in with email
+	
+	2 - Invalid email message
+	
+	3 - Valid email
+	
+		1 - Go To Secret Page
+		
+		2 - Go To Register Page
+	
+2 - Secret Page
+
+	1 - Invalid password message
+	
+	2 - Forgot my password
+	
+		1 - Get Message
+		
+	3 - Change my email
+	
+		1 - Valid Email
+		
+		2 - Valid Password
+		
+		3 - GoTo -> Home
+	
+3 - Register Page
+
+	1 - Invalid Email
+	
+	2 - Invalid Password
+	
+	3 - Access OK
+	
+	4 - GoTo -> Home
+
 
 
 
