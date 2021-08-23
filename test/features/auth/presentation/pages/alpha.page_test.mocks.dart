@@ -4,18 +4,11 @@
 
 import 'dart:async' as _i3;
 
-import 'package:bloc/bloc.dart' as _i6;
-import 'package:flutter/widgets.dart' as _i9;
+import 'package:bloc/bloc.dart' as _i4;
+import 'package:flutter/src/widgets/navigator.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:vethx_beta/core/routes/navigation.dart' as _i8;
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
     as _i2;
-import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart'
-    as _i4;
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
-    as _i5;
-import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart'
-    as _i7;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -29,11 +22,6 @@ class _FakeAuthState_0 extends _i1.Fake implements _i2.AuthState {}
 
 class _FakeStreamSubscription_1<T> extends _i1.Fake
     implements _i3.StreamSubscription<T> {}
-
-class _FakeSignInOptionsState_2 extends _i1.Fake
-    implements _i4.SignInOptionsState {}
-
-class _FakeNavigationState_3 extends _i1.Fake implements _i5.NavigationState {}
 
 /// A class which mocks [AuthBloc].
 ///
@@ -64,31 +52,31 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
       super.noSuchMethod(Invocation.method(#onEvent, [event]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>> transformEvents(
+  _i3.Stream<_i4.Transition<_i2.AuthEvent, _i2.AuthState>> transformEvents(
           _i3.Stream<_i2.AuthEvent>? events,
-          _i6.TransitionFunction<_i2.AuthEvent, _i2.AuthState>? transitionFn) =>
+          _i4.TransitionFunction<_i2.AuthEvent, _i2.AuthState>? transitionFn) =>
       (super.noSuchMethod(
               Invocation.method(#transformEvents, [events, transitionFn]),
               returnValue:
-                  Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>>.empty())
-          as _i3.Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>>);
+                  Stream<_i4.Transition<_i2.AuthEvent, _i2.AuthState>>.empty())
+          as _i3.Stream<_i4.Transition<_i2.AuthEvent, _i2.AuthState>>);
   @override
   void emit(_i2.AuthState? state) =>
       super.noSuchMethod(Invocation.method(#emit, [state]),
           returnValueForMissingStub: null);
   @override
-  void onTransition(_i6.Transition<_i2.AuthEvent, _i2.AuthState>? transition) =>
+  void onTransition(_i4.Transition<_i2.AuthEvent, _i2.AuthState>? transition) =>
       super.noSuchMethod(Invocation.method(#onTransition, [transition]),
           returnValueForMissingStub: null);
   @override
-  _i3.Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>> transformTransitions(
-          _i3.Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>>?
+  _i3.Stream<_i4.Transition<_i2.AuthEvent, _i2.AuthState>> transformTransitions(
+          _i3.Stream<_i4.Transition<_i2.AuthEvent, _i2.AuthState>>?
               transitions) =>
       (super.noSuchMethod(
               Invocation.method(#transformTransitions, [transitions]),
               returnValue:
-                  Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>>.empty())
-          as _i3.Stream<_i6.Transition<_i2.AuthEvent, _i2.AuthState>>);
+                  Stream<_i4.Transition<_i2.AuthEvent, _i2.AuthState>>.empty())
+          as _i3.Stream<_i4.Transition<_i2.AuthEvent, _i2.AuthState>>);
   @override
   _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
       returnValue: Future<void>.value(),
@@ -110,7 +98,7 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
               returnValue: _FakeStreamSubscription_1<_i2.AuthState>())
           as _i3.StreamSubscription<_i2.AuthState>);
   @override
-  void onChange(_i6.Change<_i2.AuthState>? change) =>
+  void onChange(_i4.Change<_i2.AuthState>? change) =>
       super.noSuchMethod(Invocation.method(#onChange, [change]),
           returnValueForMissingStub: null);
   @override
@@ -125,211 +113,33 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
   String toString() => super.toString();
 }
 
-/// A class which mocks [SignInOptionsBloc].
+/// A class which mocks [NavigatorObserver].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInOptionsBloc extends _i1.Mock implements _i4.SignInOptionsBloc {
-  MockSignInOptionsBloc() {
-    _i1.throwOnMissingStub(this);
-  }
-
+class MockNavigatorObserver extends _i1.Mock implements _i5.NavigatorObserver {
   @override
-  _i4.SignInOptionsState get state =>
-      (super.noSuchMethod(Invocation.getter(#state),
-          returnValue: _FakeSignInOptionsState_2()) as _i4.SignInOptionsState);
-  @override
-  _i3.Stream<_i4.SignInOptionsState> get stream =>
-      (super.noSuchMethod(Invocation.getter(#stream),
-              returnValue: Stream<_i4.SignInOptionsState>.empty())
-          as _i3.Stream<_i4.SignInOptionsState>);
-  @override
-  void emit(_i4.SignInOptionsState? state) =>
-      super.noSuchMethod(Invocation.method(#emit, [state]),
-          returnValueForMissingStub: null);
-  @override
-  _i3.Stream<_i4.SignInOptionsState> mapEventToState(
-          _i4.SignInOptionsEvent? event) =>
-      (super.noSuchMethod(Invocation.method(#mapEventToState, [event]),
-              returnValue: Stream<_i4.SignInOptionsState>.empty())
-          as _i3.Stream<_i4.SignInOptionsState>);
-  @override
-  void add(_i4.SignInOptionsEvent? event) =>
-      super.noSuchMethod(Invocation.method(#add, [event]),
-          returnValueForMissingStub: null);
-  @override
-  void onEvent(_i4.SignInOptionsEvent? event) =>
-      super.noSuchMethod(Invocation.method(#onEvent, [event]),
-          returnValueForMissingStub: null);
-  @override
-  _i3.Stream<_i6.Transition<_i4.SignInOptionsEvent, _i4.SignInOptionsState>>
-      transformEvents(
-              _i3.Stream<_i4.SignInOptionsEvent>? events,
-              _i6.TransitionFunction<_i4.SignInOptionsEvent, _i4.SignInOptionsState>?
-                  transitionFn) =>
-          (super.noSuchMethod(
-                  Invocation.method(#transformEvents, [events, transitionFn]),
-                  returnValue:
-                      Stream<_i6.Transition<_i4.SignInOptionsEvent, _i4.SignInOptionsState>>.empty())
-              as _i3.Stream<
-                  _i6.Transition<_i4.SignInOptionsEvent, _i4.SignInOptionsState>>);
-  @override
-  void onTransition(
-          _i6.Transition<_i4.SignInOptionsEvent, _i4.SignInOptionsState>?
-              transition) =>
-      super.noSuchMethod(Invocation.method(#onTransition, [transition]),
-          returnValueForMissingStub: null);
-  @override
-  _i3.Stream<_i6.Transition<_i4.SignInOptionsEvent, _i4.SignInOptionsState>>
-      transformTransitions(
-              _i3.Stream<_i6.Transition<_i4.SignInOptionsEvent, _i4.SignInOptionsState>>?
-                  transitions) =>
-          (super.noSuchMethod(
-                  Invocation.method(#transformTransitions, [transitions]),
-                  returnValue:
-                      Stream<_i6.Transition<_i4.SignInOptionsEvent, _i4.SignInOptionsState>>.empty())
-              as _i3.Stream<
-                  _i6.Transition<_i4.SignInOptionsEvent, _i4.SignInOptionsState>>);
-  @override
-  _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
-  @override
-  _i3.StreamSubscription<_i4.SignInOptionsState> listen(
-          void Function(_i4.SignInOptionsState)? onData,
-          {Function? onError,
-          void Function()? onDone,
-          bool? cancelOnError}) =>
-      (super.noSuchMethod(
-              Invocation.method(#listen, [
-                onData
-              ], {
-                #onError: onError,
-                #onDone: onDone,
-                #cancelOnError: cancelOnError
-              }),
-              returnValue: _FakeStreamSubscription_1<_i4.SignInOptionsState>())
-          as _i3.StreamSubscription<_i4.SignInOptionsState>);
-  @override
-  void onChange(_i6.Change<_i4.SignInOptionsState>? change) =>
-      super.noSuchMethod(Invocation.method(#onChange, [change]),
-          returnValueForMissingStub: null);
-  @override
-  void addError(Object? error, [StackTrace? stackTrace]) =>
-      super.noSuchMethod(Invocation.method(#addError, [error, stackTrace]),
-          returnValueForMissingStub: null);
-  @override
-  void onError(Object? error, StackTrace? stackTrace) =>
-      super.noSuchMethod(Invocation.method(#onError, [error, stackTrace]),
-          returnValueForMissingStub: null);
-  @override
-  String toString() => super.toString();
-}
-
-/// A class which mocks [NavigationCubit].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockNavigationCubit extends _i1.Mock implements _i5.NavigationCubit {
-  MockNavigationCubit() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i5.NavigationState get state =>
-      (super.noSuchMethod(Invocation.getter(#state),
-          returnValue: _FakeNavigationState_3()) as _i5.NavigationState);
-  @override
-  _i3.Stream<_i5.NavigationState> get stream =>
-      (super.noSuchMethod(Invocation.getter(#stream),
-              returnValue: Stream<_i5.NavigationState>.empty())
-          as _i3.Stream<_i5.NavigationState>);
-  @override
-  void goTo(_i7.SignInPageGoTo? parameters) =>
-      super.noSuchMethod(Invocation.method(#goTo, [parameters]),
-          returnValueForMissingStub: null);
-  @override
-  _i3.StreamSubscription<_i5.NavigationState> listen(
-          void Function(_i5.NavigationState)? onData,
-          {Function? onError,
-          void Function()? onDone,
-          bool? cancelOnError}) =>
-      (super.noSuchMethod(
-              Invocation.method(#listen, [
-                onData
-              ], {
-                #onError: onError,
-                #onDone: onDone,
-                #cancelOnError: cancelOnError
-              }),
-              returnValue: _FakeStreamSubscription_1<_i5.NavigationState>())
-          as _i3.StreamSubscription<_i5.NavigationState>);
-  @override
-  void emit(_i5.NavigationState? state) =>
-      super.noSuchMethod(Invocation.method(#emit, [state]),
-          returnValueForMissingStub: null);
-  @override
-  void onChange(_i6.Change<_i5.NavigationState>? change) =>
-      super.noSuchMethod(Invocation.method(#onChange, [change]),
-          returnValueForMissingStub: null);
-  @override
-  void addError(Object? error, [StackTrace? stackTrace]) =>
-      super.noSuchMethod(Invocation.method(#addError, [error, stackTrace]),
-          returnValueForMissingStub: null);
-  @override
-  void onError(Object? error, StackTrace? stackTrace) =>
-      super.noSuchMethod(Invocation.method(#onError, [error, stackTrace]),
-          returnValueForMissingStub: null);
-  @override
-  _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
-  @override
-  String toString() => super.toString();
-}
-
-/// A class which mocks [LoggingNavigationObserver].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockLoggingNavigationObserver extends _i1.Mock
-    implements _i8.LoggingNavigationObserver {
-  MockLoggingNavigationObserver() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  void didPop(_i9.Route<dynamic>? route, _i9.Route<dynamic>? previousRoute) =>
-      super.noSuchMethod(Invocation.method(#didPop, [route, previousRoute]),
-          returnValueForMissingStub: null);
-  @override
-  void didPush(_i9.Route<dynamic>? route, _i9.Route<dynamic>? previousRoute) =>
+  void didPush(_i5.Route<dynamic>? route, _i5.Route<dynamic>? previousRoute) =>
       super.noSuchMethod(Invocation.method(#didPush, [route, previousRoute]),
           returnValueForMissingStub: null);
   @override
+  void didPop(_i5.Route<dynamic>? route, _i5.Route<dynamic>? previousRoute) =>
+      super.noSuchMethod(Invocation.method(#didPop, [route, previousRoute]),
+          returnValueForMissingStub: null);
+  @override
   void didRemove(
-          _i9.Route<dynamic>? route, _i9.Route<dynamic>? previousRoute) =>
+          _i5.Route<dynamic>? route, _i5.Route<dynamic>? previousRoute) =>
       super.noSuchMethod(Invocation.method(#didRemove, [route, previousRoute]),
           returnValueForMissingStub: null);
   @override
   void didReplace(
-          {_i9.Route<dynamic>? newRoute, _i9.Route<dynamic>? oldRoute}) =>
+          {_i5.Route<dynamic>? newRoute, _i5.Route<dynamic>? oldRoute}) =>
       super.noSuchMethod(
           Invocation.method(
               #didReplace, [], {#newRoute: newRoute, #oldRoute: oldRoute}),
           returnValueForMissingStub: null);
   @override
-  bool debugObservingRoute(_i9.PageRoute<dynamic>? route) =>
-      (super.noSuchMethod(Invocation.method(#debugObservingRoute, [route]),
-          returnValue: false) as bool);
-  @override
-  void subscribe(_i9.RouteAware? routeAware, _i9.PageRoute<dynamic>? route) =>
-      super.noSuchMethod(Invocation.method(#subscribe, [routeAware, route]),
-          returnValueForMissingStub: null);
-  @override
-  void unsubscribe(_i9.RouteAware? routeAware) =>
-      super.noSuchMethod(Invocation.method(#unsubscribe, [routeAware]),
-          returnValueForMissingStub: null);
-  @override
   void didStartUserGesture(
-          _i9.Route<dynamic>? route, _i9.Route<dynamic>? previousRoute) =>
+          _i5.Route<dynamic>? route, _i5.Route<dynamic>? previousRoute) =>
       super.noSuchMethod(
           Invocation.method(#didStartUserGesture, [route, previousRoute]),
           returnValueForMissingStub: null);

@@ -17,7 +17,7 @@ class MockISignInServiceLocator implements ISignInServiceLocator {
   late MockSignInRegisterBloc mockMockSignInRegisterBloc;
   late MockSignInSecretBloc mockMockSignInSecretBloc;
   late MockSignInSecretResetBloc mockSignInSecretResetBloc;
-  late NavigationCubit mockNavigationCubit;
+  late MockNavigationCubit mockNavigationCubit;
 
   final GetIt getIt;
 
@@ -34,7 +34,7 @@ class MockISignInServiceLocator implements ISignInServiceLocator {
     mockMockSignInCredentialBloc = MockSignInCredentialBloc();
     mockMockSignInRegisterBloc = MockSignInRegisterBloc();
     mockSignInSecretResetBloc = MockSignInSecretResetBloc();
-    mockNavigationCubit = NavigationCubit();
+    mockNavigationCubit = MockNavigationCubit();
   }
 
   @override

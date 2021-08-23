@@ -5,7 +5,6 @@
 import 'dart:async' as _i3;
 
 import 'package:bloc/bloc.dart' as _i9;
-import 'package:flutter/src/widgets/navigator.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart'
     as _i4;
@@ -615,45 +614,6 @@ class MockNavigationCubit extends _i1.Mock implements _i8.NavigationCubit {
   _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
       returnValue: Future<void>.value(),
       returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
-  @override
-  String toString() => super.toString();
-}
-
-/// A class which mocks [NavigatorObserver].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockNavigatorObserver extends _i1.Mock implements _i11.NavigatorObserver {
-  @override
-  void didPush(
-          _i11.Route<dynamic>? route, _i11.Route<dynamic>? previousRoute) =>
-      super.noSuchMethod(Invocation.method(#didPush, [route, previousRoute]),
-          returnValueForMissingStub: null);
-  @override
-  void didPop(_i11.Route<dynamic>? route, _i11.Route<dynamic>? previousRoute) =>
-      super.noSuchMethod(Invocation.method(#didPop, [route, previousRoute]),
-          returnValueForMissingStub: null);
-  @override
-  void didRemove(
-          _i11.Route<dynamic>? route, _i11.Route<dynamic>? previousRoute) =>
-      super.noSuchMethod(Invocation.method(#didRemove, [route, previousRoute]),
-          returnValueForMissingStub: null);
-  @override
-  void didReplace(
-          {_i11.Route<dynamic>? newRoute, _i11.Route<dynamic>? oldRoute}) =>
-      super.noSuchMethod(
-          Invocation.method(
-              #didReplace, [], {#newRoute: newRoute, #oldRoute: oldRoute}),
-          returnValueForMissingStub: null);
-  @override
-  void didStartUserGesture(
-          _i11.Route<dynamic>? route, _i11.Route<dynamic>? previousRoute) =>
-      super.noSuchMethod(
-          Invocation.method(#didStartUserGesture, [route, previousRoute]),
-          returnValueForMissingStub: null);
-  @override
-  void didStopUserGesture() =>
-      super.noSuchMethod(Invocation.method(#didStopUserGesture, []),
-          returnValueForMissingStub: null);
   @override
   String toString() => super.toString();
 }

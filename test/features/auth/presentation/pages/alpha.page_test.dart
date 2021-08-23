@@ -72,7 +72,6 @@ void main() {
   }
 
   void _initialState() {
-    when(_mockAuthBloc.add(any)).thenReturn(null);
     _authState(const AuthState.unauthenticated());
     _navigationState(const NavigationState.initial());
     _signInState(const SignInOptionsState.initial());
@@ -85,7 +84,7 @@ void main() {
         onGenerateRoute: NavigationRoutes.onGenerateRoute,
         routes: NavigationRoutes.routes(),
         // initialRoute: NavigationRoutes.alpha,
-        navigatorObservers: [LoggingNavigationObserver()],
+        navigatorObservers: [_mockNavigationObserver],
         theme: ThemeData(primarySwatch: Colors.blue),
         home: Builder(builder: (context) {
           return AlphaPage.create(context);
@@ -137,6 +136,8 @@ void main() {
       // Arrange
 
       _initialState();
+
+      _authState(const AuthState.initial());
 
       // Act
 

@@ -21,8 +21,9 @@ import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
-import '../../../../helpers/features/signin/sign_in_service_locator.mock.mocks.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
+
+import 'sign_in_options.page_test.mocks.dart';
 
 @GenerateMocks([], customMocks: [
   MockSpec<NavigatorObserver>(returnNullOnMissingStub: true),
