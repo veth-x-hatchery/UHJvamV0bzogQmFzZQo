@@ -172,7 +172,7 @@ class SignInSecretResetButton extends StatelessWidget {
       },
       builder: (context, state) {
         return SizedBox(
-          height: Theme.of(context).textTheme.button!.fontSize,
+          height: Theme.of(context).textTheme.button!.fontSize! * 3,
           child: Center(
             child: state.isLoading
                 ? const GenericProgressIndicator()
