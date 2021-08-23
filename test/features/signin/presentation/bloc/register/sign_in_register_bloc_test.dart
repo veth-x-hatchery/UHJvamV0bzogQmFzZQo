@@ -94,7 +94,9 @@ void main() {
     // act
 
     _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
+
     _bloc.add(const SignInRegisterEvent.secretChanged(secret));
+
     _bloc.add(
         const SignInRegisterEvent.registerWithCredentialAndSecretPressed());
 
@@ -103,6 +105,7 @@ void main() {
         _bloc.stream,
         emitsInOrder(
           [
+            // SignInRegisterState.initial(),
             SignInRegisterState(
               credential: Credential(credential),
               secret: Secret(''),
@@ -128,7 +131,7 @@ void main() {
               credential: Credential(credential),
               secret: Secret(secret),
               isLoading: false,
-              authFailureOrSuccessOption: none(),
+              authFailureOrSuccessOption: some(right(unit)),
               notification: none(),
             )
           ],
