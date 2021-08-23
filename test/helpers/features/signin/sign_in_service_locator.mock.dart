@@ -21,17 +21,12 @@ class MockISignInServiceLocator implements ISignInServiceLocator {
 
   final GetIt getIt;
 
-  final Future<void> Function()? initOverride;
-  final Future<void> Function()? disposeOverride;
-
   /// In some test cases we can need to use .GoTo funcionality
   final bool useNavigationMock;
   late NavigationCubit navigationCubit;
 
   MockISignInServiceLocator({
     required this.getIt,
-    this.initOverride,
-    this.disposeOverride,
     this.useNavigationMock = true,
   }) {
     mockSignInBloc = MockSignInOptionsBloc();
