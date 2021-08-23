@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
@@ -72,8 +73,11 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
                 );
                 break;
               case SignInPageRoutes.registerCredentialSignIn:
-                Navigator.pushReplacement(context,
-                    SlideLeftRoute<void>(page: SignInRegisterPage.create()));
+                Navigator.pushReplacement(
+                    context,
+                    SlideLeftRoute<void>(
+                        page: SignInRegisterPage.create(
+                            credential: page.parameters as Credential?)));
                 break;
               case SignInPageRoutes.credentialEntry:
                 final credentialPage = SignInCredentialPage.create();

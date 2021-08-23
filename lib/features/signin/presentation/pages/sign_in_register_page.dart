@@ -13,7 +13,7 @@ import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 
 class SignInRegisterPage extends StatefulWidget {
-  final String? credential;
+  final Credential? credential;
 
   const SignInRegisterPage({
     Key? key,
@@ -23,11 +23,11 @@ class SignInRegisterPage extends StatefulWidget {
   @override
   State<SignInRegisterPage> createState() => _SignInRegisterPageState();
 
-  static Widget create() {
+  static Widget create({Credential? credential}) {
     Logger.widget('SignInRegisterPage -> create');
     return BlocProvider(
       create: (_) => SignInDependenciesInjection.get<SignInRegisterBloc>(),
-      child: const SignInRegisterPage(),
+      child: SignInRegisterPage(credential: credential),
     );
   }
 }
@@ -61,12 +61,9 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
 
   @override
   void initState() {
-    if (widget.credential != null) {
-      final credential = Credential(widget.credential);
-      if (credential.isValid()) {
-        _credentialTextEditingController.text = credential.getOrCrash();
-        _secretFocusNode.requestFocus();
-      }
+    if (widget.credential?.isValid() == true) {
+      _credentialTextEditingController.text = widget.credential!.getOrCrash();
+      _secretFocusNode.requestFocus();
     } else {
       _credentialFocusNode.requestFocus();
     }

@@ -57,6 +57,7 @@ class SignInCredentialBloc
                   ? SignInPageGoTo.secretPage(
                       from: SignInPageRoutes.credentialEntry)
                   : SignInPageGoTo.registerPage(
+                      credential: state.credential,
                       from: SignInPageRoutes.credentialEntry));
               return none();
             },

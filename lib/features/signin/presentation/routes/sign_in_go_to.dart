@@ -1,3 +1,5 @@
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+
 enum SignInPageRoutes {
   alpha,
   signInOptions,
@@ -35,7 +37,7 @@ class SignInPageGoTo {
 
   factory SignInPageGoTo.registerPage({
     required SignInPageRoutes from,
-    String? credential,
+    Credential? credential,
   }) =>
       SignInPageGoTo._internal(
         to: SignInPageRoutes.registerCredentialSignIn,
