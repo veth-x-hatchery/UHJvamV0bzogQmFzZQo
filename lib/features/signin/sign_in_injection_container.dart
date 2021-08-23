@@ -37,7 +37,6 @@ class SignInServiceLocator {
     return getIt<T>();
   }
 
-  /// https://github.com/fluttercommunity/get_it/issues/109
   Future<void> _signInDependencies() async {
     // Data sources
 
