@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/notifications/notification.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
@@ -12,39 +11,32 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credent
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
-import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
+import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
-import 'sign_in_credential.page_test.mocks.dart';
-
-class MockISignInServiceLocator extends Mock implements ISignInServiceLocator {}
-
-@GenerateMocks([SignInCredentialBloc])
 void main() {
-  late MockSignInCredentialBloc _mockBloc;
-  late MockISignInServiceLocator _mokckISignInServiceLocator;
+  late MockISignInServiceLocator _sl;
   late GetIt getIt;
 
   setUp(() {
-    _mockBloc = MockSignInCredentialBloc();
-    _mokckISignInServiceLocator = MockISignInServiceLocator();
     getIt = GetIt.instance;
-    getIt.registerFactory<SignInCredentialBloc>(() => _mockBloc);
+    _sl = MockISignInServiceLocator(getIt: getIt);
+    _sl.init();
   });
 
-  tearDown(() => getIt.reset());
-
-  // when(_mokckISignInServiceLocator.)
+  tearDown(() {
+    _sl.dispose();
+    getIt.reset();
+  });
 
   Future<void> _pumpPage(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: setupToPump(
           Scaffold(
-            body: SignInCredentialPage.create(
-                serviceLocator: _mokckISignInServiceLocator),
+            body: SignInCredentialPage.create(serviceLocator: _sl),
           ),
         ),
       ),
@@ -52,8 +44,9 @@ void main() {
   }
 
   void _signInState(SignInCredentialState state) {
-    when(_mockBloc.state).thenReturn(state);
-    when(_mockBloc.stream).thenAnswer((_) => Stream.value(state));
+    when(_sl.mockMockSignInCredentialBloc.state).thenReturn(state);
+    when(_sl.mockMockSignInCredentialBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
   }
 
   Finder _credentialInput() {
@@ -85,7 +78,7 @@ void main() {
       authFailureOrSuccessOption: none(),
       notification: none(),
     );
-    when(_mockBloc.state).thenReturn(state);
+    when(_sl.mockMockSignInCredentialBloc.state).thenReturn(state);
   }
 
   testWidgets('should find the validation button', (tester) async {
@@ -161,8 +154,8 @@ void main() {
 
     // assert
 
-    verifyNever(
-        _mockBloc.add(const SignInCredentialEvent.analyseCredentialPressed()));
+    verifyNever(_sl.mockMockSignInCredentialBloc
+        .add(const SignInCredentialEvent.analyseCredentialPressed()));
   });
 
   testWidgets(
@@ -188,8 +181,8 @@ void main() {
 
     // assert
 
-    verifyNever(
-        _mockBloc.add(const SignInCredentialEvent.analyseCredentialPressed()));
+    verifyNever(_sl.mockMockSignInCredentialBloc
+        .add(const SignInCredentialEvent.analyseCredentialPressed()));
   });
 
   testWidgets('when user enters a correct credential then SignInBLoC is called',
@@ -210,7 +203,7 @@ void main() {
 
     // assert
 
-    verify(_mockBloc
+    verify(_sl.mockMockSignInCredentialBloc
             .add(const SignInCredentialEvent.analyseCredentialPressed()))
         .called(1);
   });
