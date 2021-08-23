@@ -39,7 +39,6 @@ class Logger {
         layer: ArchitectureLayer.domain,
       );
     }
-    Logger.i(message, layer: ArchitectureLayer.domain);
   }
 
   Logger.infrastructure(
@@ -60,7 +59,6 @@ class Logger {
         layer: ArchitectureLayer.infrastructure,
       );
     }
-    Logger.i(message, layer: ArchitectureLayer.infrastructure);
   }
 
   Logger.bloc(
