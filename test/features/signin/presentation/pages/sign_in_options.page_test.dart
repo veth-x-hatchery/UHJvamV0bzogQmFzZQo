@@ -7,7 +7,11 @@ import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
+import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
@@ -53,30 +57,63 @@ class MockISignInServiceLocator implements ISignInServiceLocator {
 
 @GenerateMocks([
   SignInOptionsBloc,
+  SignInCredentialBloc,
+  SignInRegisterBloc,
+  SignInSecretBloc,
+  SignInSecretResetBloc,
   NavigationCubit,
 ], customMocks: [
-  MockSpec<NavigatorObserver>(returnNullOnMissingStub: true),
+  MockSpec<NavigatorObserver>(returnNullOnMissingStub: true)
 ])
 void main() {
+  late MockSignInCredentialBloc _mockMockSignInCredentialBloc;
+  late MockSignInRegisterBloc _mockMockSignInRegisterBloc;
+  late MockSignInSecretBloc _mockMockSignInSecretBloc;
+  late MockSignInSecretResetBloc _mockSignInSecretResetBloc;
   late MockNavigatorObserver _mockNavigationObserver;
-  late MockISignInServiceLocator _mokckISignInServiceLocator;
+
   late MockSignInOptionsBloc _mockSignInBloc;
   late NavigationCubit _navigationCubit;
+
+  late MockISignInServiceLocator _mockISignInServiceLocator;
   late GetIt getIt;
 
   setUp(() {
     _mockSignInBloc = MockSignInOptionsBloc();
+    _mockMockSignInSecretBloc = MockSignInSecretBloc();
+    _mockMockSignInCredentialBloc = MockSignInCredentialBloc();
+    _mockMockSignInRegisterBloc = MockSignInRegisterBloc();
+    _mockSignInSecretResetBloc = MockSignInSecretResetBloc();
+
     _navigationCubit = NavigationCubit();
     _mockNavigationObserver = MockNavigatorObserver();
 
     getIt = GetIt.instance;
 
-    _mokckISignInServiceLocator = MockISignInServiceLocator(
+    _mockISignInServiceLocator = MockISignInServiceLocator(
       getIt: getIt,
       initOverride: () async {
         getIt.pushNewScope();
-        getIt.registerFactory<SignInOptionsBloc>(() => _mockSignInBloc);
-        getIt.registerLazySingleton<NavigationCubit>(() => _navigationCubit);
+
+        getIt.registerFactory<SignInOptionsBloc>(
+          () => _mockSignInBloc,
+        );
+        getIt.registerFactory<SignInCredentialBloc>(
+          () => _mockMockSignInCredentialBloc,
+        );
+        getIt.registerFactory<SignInRegisterBloc>(
+          () => _mockMockSignInRegisterBloc,
+        );
+        getIt.registerFactory<SignInSecretBloc>(
+          () => _mockMockSignInSecretBloc,
+        );
+        getIt.registerFactory<SignInSecretResetBloc>(
+          () => _mockSignInSecretResetBloc,
+        );
+        getIt.registerLazySingleton<NavigationCubit>(
+          () => _navigationCubit,
+        );
+
         Logger.serviceLocator('MockISignInServiceLocator -> pushNewScope');
         return Future.value();
       },
@@ -113,7 +150,7 @@ void main() {
         home: setupToPump(
           Scaffold(
             body: SignInOptionsPage.create(
-                serviceLocator: _mokckISignInServiceLocator),
+                serviceLocator: _mockISignInServiceLocator),
           ),
         ),
       ),
