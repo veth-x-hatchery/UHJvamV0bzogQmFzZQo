@@ -66,9 +66,7 @@ class SignInRegisterBloc
             (l) => some(result),
             (r) {
               _authBloc.add(const AuthEvent.authCheckRequested());
-              // _navigation.goTo(SignInPageGoTo.credentialPage(
-              //     from: SignInPageRoutes.secretEntry));
-              return none();
+              return optionOf(right(unit));
             },
           ),
         );

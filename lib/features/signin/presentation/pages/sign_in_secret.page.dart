@@ -81,6 +81,12 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
       context,
       child: BlocConsumer<SignInSecretBloc, SignInSecretState>(
         listener: (context, state) {
+          state.authFailureOrSuccessOption.map((a) {
+            a.fold(
+              (_) => null,
+              (_) => Navigator.of(context).pop(),
+            );
+          });
           state.notification.fold(
             () {},
             (notification) {

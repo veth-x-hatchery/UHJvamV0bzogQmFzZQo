@@ -31,7 +31,6 @@ class SignInDependenciesInjection {
     Logger.serviceLocator(
         'SignInDependenciesInjection -> popScope: SignInGetItScope');
     getIt.popScopesTill('SignInGetItScope');
-    await _signInDependencies();
   }
 
   static T get<T extends Object>() {

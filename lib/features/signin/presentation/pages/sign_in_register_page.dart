@@ -92,6 +92,12 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
       context,
       child: BlocConsumer<SignInRegisterBloc, SignInRegisterState>(
         listener: (context, state) {
+          state.authFailureOrSuccessOption.map((a) {
+            a.fold(
+              (l) => null,
+              (_) => Navigator.pop(context),
+            );
+          });
           state.notification.fold(
             () {},
             (notification) {
@@ -121,6 +127,13 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                   onChanged: (value) =>
                       bloc.add(SignInRegisterEvent.credentialChanged(value)),
                   validator: (_) => current.credential.validation,
+                  onEditingComplete: state.isLoading
+                      ? () {}
+                      : () {
+                          if (current.credential.isValid()) {
+                            _secretFocusNode.requestFocus();
+                          }
+                        },
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 FieldSecret(
