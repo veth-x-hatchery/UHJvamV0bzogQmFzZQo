@@ -45,14 +45,6 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
   SignInRegisterState get current => bloc.state;
 
   void _validateForm() {
-    // ignore: leading_newlines_in_multiline_strings
-    Logger.presentation('''\n
-        FormKey:      ${_formKey.currentState?.validate()}
-        Controller1:  ${_credentialTextEditingController.text}
-        Controller2:  ${_secretTextEditingController.text}
-        Validation1:  ${current.credential.validation}
-        Validation2:  ${current.secret.validation}
-        ''');
     if (_formKey.currentState?.validate() == true) {
       bloc.add(
           const SignInRegisterEvent.registerWithCredentialAndSecretPressed());

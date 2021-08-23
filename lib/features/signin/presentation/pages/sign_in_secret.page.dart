@@ -64,12 +64,6 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
   }
 
   Future<void> _authenticate() async {
-    // ignore: leading_newlines_in_multiline_strings
-    Logger.presentation('''\n
-        FormKey:     ${_formKey.currentState?.validate()}
-        Controller:  ${_secretTextEditingController.text}
-        Validation:  ${current.secret.validation}
-        ''');
     if (_formKey.currentState?.validate() == true) {
       bloc.add(const SignInSecretEvent.analyseSecretPressed());
     }

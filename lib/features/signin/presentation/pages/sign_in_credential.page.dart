@@ -35,12 +35,6 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
   SignInCredentialState get current => bloc.state;
 
   Future<void> _validateCredential() async {
-    // ignore: leading_newlines_in_multiline_strings
-    Logger.presentation('''\n
-        FormKey:    ${_formKey.currentState?.validate()}
-        Controller: ${_credentialTextEditingController.text}
-        Validation: ${current.credential.validation}
-        ''');
     if (_formKey.currentState?.validate() == true) {
       bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
     }
