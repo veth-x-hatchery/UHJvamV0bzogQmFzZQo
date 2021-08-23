@@ -26,7 +26,9 @@ void main() {
 
   setUp(() {
     getIt = GetIt.instance;
+
     _sl = MockISignInServiceLocator(getIt: getIt);
+
     _sl.init();
   });
 
@@ -287,6 +289,23 @@ void main() {
     verify(_sl.mockSignInSecretBloc
             .add(const SignInSecretEvent.analyseSecretPressed()))
         .called(1);
+  });
+
+  testWidgets('when secret is validated with success should pop the page',
+      (tester) async {
+    // arrange
+
+    _setInitialState();
+
+    await _pumpPage(tester);
+
+    // Act
+
+    await tester.tap(_changeCredentialButton());
+
+    // assert
+
+    // verify(_sl.mockNavigationCubit).called(1);
   });
 
   testWidgets('when receive a failure then should show a snack message',

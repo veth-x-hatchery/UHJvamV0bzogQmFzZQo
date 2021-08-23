@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/notifications/notification.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
@@ -16,13 +17,16 @@ import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
+
 void main() {
   late MockISignInServiceLocator _sl;
   late GetIt getIt;
 
   setUp(() {
     getIt = GetIt.instance;
+
     _sl = MockISignInServiceLocator(getIt: getIt);
+
     _sl.init();
   });
 
