@@ -13,9 +13,6 @@ import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.d
     as _i4;
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart'
     as _i6;
-import 'package:vethx_beta/features/signin/sign_in_service_locator.dart' as _i8;
-
-import 'sign_in_options.page_test.dart' as _i9;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -228,31 +225,6 @@ class MockNavigatorObserver extends _i1.Mock implements _i7.NavigatorObserver {
   void didStopUserGesture() =>
       super.noSuchMethod(Invocation.method(#didStopUserGesture, []),
           returnValueForMissingStub: null);
-  @override
-  String toString() => super.toString();
-}
-
-/// A class which mocks [ISignInServiceLocator].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockISignInServiceLocator extends _i1.Mock
-    implements _i8.ISignInServiceLocator {
-  MockISignInServiceLocator() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i3.Future<void> init() => (super.noSuchMethod(Invocation.method(#init, []),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
-  @override
-  _i3.Future<void> dispose() =>
-      (super.noSuchMethod(Invocation.method(#dispose, []),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
-  @override
-  T get<T extends Object>() => (super.noSuchMethod(Invocation.method(#get, []),
-      returnValue: _i9.getSignServiceLocator<T>()) as T);
   @override
   String toString() => super.toString();
 }
