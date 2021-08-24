@@ -19,6 +19,8 @@ import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secr
 import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/service_locator.dart';
 
+/// Will be responsible for the entire sign in feature dependencies.
+/// Need to be initialized and disposed by the feature root page.
 abstract class ISignInServiceLocator {
   Future<void> init();
   Future<void> dispose();

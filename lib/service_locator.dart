@@ -61,7 +61,7 @@ Future<void> init() async {
 
   // Features Service Locators
 
-  getIt.registerLazySingleton<ISignInServiceLocator>(
+  getIt.registerFactory<ISignInServiceLocator>(
     () => SignInServiceLocator(),
   );
 }

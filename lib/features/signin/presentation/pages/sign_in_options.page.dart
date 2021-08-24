@@ -14,6 +14,7 @@ import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dar
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
+import 'package:vethx_beta/service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_beta/ui/widgets/transitions/slide_route.dart';
 
@@ -26,19 +27,20 @@ class SignInOptionsPage extends StatefulWidget {
 
   static Widget create({
     BuildContext? context,
-    required ISignInServiceLocator serviceLocator,
+    ISignInServiceLocator? serviceLocator,
   }) {
     Logger.widget('SignInOptionsPage -> create');
+    final sl = serviceLocator ?? getIt<ISignInServiceLocator>();
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => serviceLocator.get<SignInOptionsBloc>(),
+          create: (_) => sl.get<SignInOptionsBloc>(),
         ),
         BlocProvider(
-          create: (_) => serviceLocator.get<NavigationCubit>(),
+          create: (_) => sl.get<NavigationCubit>(),
         ),
       ],
-      child: SignInOptionsPage(serviceLocator: serviceLocator),
+      child: SignInOptionsPage(serviceLocator: sl),
     );
   }
 
