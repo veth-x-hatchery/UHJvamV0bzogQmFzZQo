@@ -5,7 +5,6 @@ import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
-import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/service_locator.dart';
 
 class AlphaPage extends StatelessWidget {
