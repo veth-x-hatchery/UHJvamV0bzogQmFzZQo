@@ -19,3 +19,11 @@ Finder signInCredentialPageValidationButton() {
   expect(validationButton, findsOneWidget);
   return validationButton;
 }
+
+Finder signInBackPageButton() {
+  // arrange
+  final button = find.byKey(const Key(SignInPageKeys.signInBackPageButton));
+  // Act && Assert
+  expect(button, findsOneWidget);
+  return button;
+}

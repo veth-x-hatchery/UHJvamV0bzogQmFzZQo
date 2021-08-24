@@ -4,14 +4,17 @@ import 'package:get_it/get_it.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:vethx_beta/main.dart' as app;
 
-import '../../../test/helpers/features/signin/sign_in_credential.helpers.dart';
+import '../../../test/helpers/features/signin/presentation/pages/sign_in_credential.helpers.dart';
 import 'sign_in_integration_tests_helpers.dart';
 
 void main() {
-  late IntegrationTestWidgetsFlutterBinding _binding;
+  final IntegrationTestWidgetsFlutterBinding _binding =
+      IntegrationTestWidgetsFlutterBinding.ensureInitialized()
+          as IntegrationTestWidgetsFlutterBinding;
 
   late IntegrationTestsHelpers helper;
 
@@ -20,90 +23,87 @@ void main() {
     await _binding.convertFlutterSurfaceToImage();
   }
 
-  setUp(() async {
+  testWidgets('should show invalid email message', (WidgetTester tester) async {
     app.main();
+
+    await _setupAndroidScreenShots();
+
+    helper = IntegrationTestsHelpers(binding: _binding);
+
+    const prefix = 'case-1';
+
+    await goToEmailPage(
+      prefix: prefix,
+      tester: tester,
+      helper: helper,
+    );
+
+    Logger.tests('3 - Invalid email message');
+
+    await tester.tap(signInCredentialPageInput());
+    await tester.pumpAndSettle();
+
+    await tester.enterText(signInCredentialPageInput(), 'invalid-email');
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(signInCredentialPageValidationButton());
+    await tester.pumpAndSettle();
+
+    await tester.tap(signInCredentialPageValidationButton());
+    await tester.pumpAndSettle();
+
+    expect(find.text(CredentialAddressMessageErrors.invalidCredential),
+        findsOneWidget);
+
+    await helper.screenshot(
+      prefix: prefix,
+      name: 'sign_in_email_invalid_email',
+    );
+
+    await tester.tap(signInBackPageButton());
+
+    await tester.pumpAndSettle();
+
+    expect(find.byType(SignInOptionsPage), findsOneWidget);
   });
+  // group('sign in with email tests', () {
+  //   setUp(() async {
+  //     await _setupAndroidScreenShots();
+  //     helper = IntegrationTestsHelpers(binding: _binding);
+  //   });
 
-  tearDown(() => GetIt.instance.reset());
-  group('sign in with email tests', () {
-    setUp(() async {
-      _binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized()
-          as IntegrationTestWidgetsFlutterBinding;
-      helper = IntegrationTestsHelpers(binding: _binding);
-      await _setupAndroidScreenShots();
-    });
+  // testWidgets('should show accept the email and go to password page',
+  //     (WidgetTester tester) async {
+  //   const prefix = 'case-2';
 
-    testWidgets('should show invalid email message',
-        (WidgetTester tester) async {
-      const prefix = 'case-1';
+  //   await goToEmailPage(
+  //     tester: tester,
+  //     helper: helper,
+  //     prefix: prefix,
+  //   );
 
-      await goToEmailPage(
-        prefix: prefix,
-        tester: tester,
-        helper: helper,
-      );
+  //   Logger.tests('3 - Valid email and go to password page');
 
-      Logger.tests('3 - Invalid email message');
+  //   await tester.tap(signInCredentialPageInput());
+  //   await tester.pumpAndSettle();
 
-      await tester.tap(signInCredentialPageInput());
-      await tester.pumpAndSettle();
+  //   await tester.enterText(signInCredentialPageInput(), 'test@vethx.com');
+  //   await tester.pumpAndSettle();
 
-      await tester.enterText(signInCredentialPageInput(), 'invalid-email');
-      await tester.pumpAndSettle();
+  //   await tester.ensureVisible(signInCredentialPageValidationButton());
+  //   await tester.pumpAndSettle();
 
-      await tester.ensureVisible(signInCredentialPageValidationButton());
-      await tester.pumpAndSettle();
+  //   await tester.tap(signInCredentialPageValidationButton());
+  //   await tester.pumpAndSettle();
 
-      await tester.tap(signInCredentialPageValidationButton());
-      await tester.pumpAndSettle();
+  //   expect(find.byType(SignInSecretPage), findsOneWidget);
 
-      expect(find.text(CredentialAddressMessageErrors.invalidCredential),
-          findsOneWidget);
-
-      await helper.screenshot(
-        prefix: prefix,
-        name: 'sign_in_email_invalid_email',
-      );
-
-      final backButton = find.byType(BackButton);
-      await tester.ensureVisible(backButton);
-      await tester.tap(backButton);
-
-      await tester.pumpAndSettle();
-    });
-
-    testWidgets('should show accept the email and go to password page',
-        (WidgetTester tester) async {
-      const prefix = 'case-2';
-
-      await goToEmailPage(
-        tester: tester,
-        helper: helper,
-        prefix: prefix,
-      );
-
-      Logger.tests('3 - Valid email and go to password page');
-
-      await tester.tap(signInCredentialPageInput());
-      await tester.pumpAndSettle();
-
-      await tester.enterText(signInCredentialPageInput(), 'test@vethx.com');
-      await tester.pumpAndSettle();
-
-      await tester.ensureVisible(signInCredentialPageValidationButton());
-      await tester.pumpAndSettle();
-
-      await tester.tap(signInCredentialPageValidationButton());
-      await tester.pumpAndSettle();
-
-      expect(find.byType(SignInSecretPage), findsOneWidget);
-
-      await helper.screenshot(
-        prefix: prefix,
-        name: 'sign_in_password',
-      );
-    });
-  });
+  //   await helper.screenshot(
+  //     prefix: prefix,
+  //     name: 'sign_in_password',
+  //   );
+  // });
+  // });
 }
 
 /**

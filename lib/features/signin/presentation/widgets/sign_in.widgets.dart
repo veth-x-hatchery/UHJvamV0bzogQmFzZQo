@@ -4,6 +4,9 @@ export 'login/sign_in_button.widget.dart';
 export 'login/sign_in_scaffold.widget.dart';
 
 class SignInPageKeys {
+  //! shared
+  static const signInBackPageButton = 'signInBackPageButton';
+
   //! sign in options
 
   static const signInLoader = 'signInLoader';
