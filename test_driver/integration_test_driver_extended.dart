@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:integration_test/integration_test_driver_extended.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
@@ -8,6 +10,8 @@ Future<void> main() async {
     driver: driver,
     onScreenshot: (String screenshotName, List<int> screenshotBytes) async {
       Logger.widget('Test -> screenshotName: $screenshotName');
+      final image = File('$screenshotName.png');
+      image.writeAsBytesSync(screenshotBytes);
       return true;
     },
   );
