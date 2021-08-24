@@ -97,6 +97,18 @@ class Logger {
     );
   }
 
+  Logger.tests(
+    String message, {
+    dynamic exception,
+    StackTrace? stackTrace,
+  }) {
+    Logger.presentation(
+      '[Tests] $message',
+      exception: exception,
+      stackTrace: stackTrace,
+    );
+  }
+
   static void e(
     String message, {
     dynamic ex,
