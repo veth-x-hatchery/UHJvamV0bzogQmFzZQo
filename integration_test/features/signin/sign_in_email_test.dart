@@ -23,71 +23,31 @@ void main() {
     await _binding.convertFlutterSurfaceToImage();
   }
 
-  testWidgets('should show invalid email message', (WidgetTester tester) async {
+  setUp(() async {
     app.main();
 
     await _setupAndroidScreenShots();
 
     helper = IntegrationTestsHelpers(binding: _binding);
-
-    const prefix = 'case-1';
-
-    await goToEmailPage(
-      prefix: prefix,
-      tester: tester,
-      helper: helper,
-    );
-
-    Logger.tests('3 - Invalid email message');
-
-    await tester.tap(signInCredentialPageInput());
-    await tester.pumpAndSettle();
-
-    await tester.enterText(signInCredentialPageInput(), 'invalid-email');
-    await tester.pumpAndSettle();
-
-    await tester.ensureVisible(signInCredentialPageValidationButton());
-    await tester.pumpAndSettle();
-
-    await tester.tap(signInCredentialPageValidationButton());
-    await tester.pumpAndSettle();
-
-    expect(find.text(CredentialAddressMessageErrors.invalidCredential),
-        findsOneWidget);
-
-    await helper.screenshot(
-      prefix: prefix,
-      name: 'sign_in_email_invalid_email',
-    );
-
-    await tester.tap(signInBackPageButton());
-
-    await tester.pumpAndSettle();
-
-    expect(find.byType(SignInOptionsPage), findsOneWidget);
   });
-  // group('sign in with email tests', () {
-  //   setUp(() async {
-  //     await _setupAndroidScreenShots();
-  //     helper = IntegrationTestsHelpers(binding: _binding);
-  //   });
 
-  // testWidgets('should show accept the email and go to password page',
-  //     (WidgetTester tester) async {
-  //   const prefix = 'case-2';
+  tearDown(() => GetIt.instance.reset());
+
+  // testWidgets('should show invalid email message', (WidgetTester tester) async {
+  //   const prefix = 'case-1';
 
   //   await goToEmailPage(
+  //     prefix: prefix,
   //     tester: tester,
   //     helper: helper,
-  //     prefix: prefix,
   //   );
 
-  //   Logger.tests('3 - Valid email and go to password page');
+  //   Logger.tests('3 - Invalid email message');
 
   //   await tester.tap(signInCredentialPageInput());
   //   await tester.pumpAndSettle();
 
-  //   await tester.enterText(signInCredentialPageInput(), 'test@vethx.com');
+  //   await tester.enterText(signInCredentialPageInput(), 'invalid-email');
   //   await tester.pumpAndSettle();
 
   //   await tester.ensureVisible(signInCredentialPageValidationButton());
@@ -96,13 +56,62 @@ void main() {
   //   await tester.tap(signInCredentialPageValidationButton());
   //   await tester.pumpAndSettle();
 
-  //   expect(find.byType(SignInSecretPage), findsOneWidget);
+  //   expect(find.text(CredentialAddressMessageErrors.invalidCredential),
+  //       findsOneWidget);
 
   //   await helper.screenshot(
   //     prefix: prefix,
-  //     name: 'sign_in_password',
+  //     name: 'sign_in_email_invalid_email',
   //   );
+
+  //   await tester.tap(signInBackPageButton());
+  //   await tester.pumpAndSettle();
+
+  //   expect(find.byType(SignInOptionsPage), findsOneWidget);
   // });
+
+  testWidgets('should show accept the email and go to password page',
+      (WidgetTester tester) async {
+    const prefix = 'case-2';
+
+    await goToEmailPage(
+      tester: tester,
+      helper: helper,
+      prefix: prefix,
+    );
+
+    Logger.tests('3 - Valid email and go to password page');
+
+    await tester.tap(signInCredentialPageInput());
+    await tester.pumpAndSettle();
+
+    await tester.enterText(signInCredentialPageInput(), 'test@vethx.com');
+    await tester.pumpAndSettle();
+
+    await helper.screenshot(
+      prefix: prefix,
+      name: 'sign_in_valid_email',
+    );
+
+    await tester.ensureVisible(signInCredentialPageValidationButton());
+    await tester.pumpAndSettle();
+
+    await tester.tap(signInCredentialPageValidationButton());
+    await tester.pumpAndSettle();
+
+    expect(find.byType(SignInSecretPage), findsOneWidget);
+
+    await helper.screenshot(
+      prefix: prefix,
+      name: 'sign_in_password',
+    );
+  });
+
+  //  group('sign in with email tests', () {
+  //    setUp(() async {
+  //      await _setupAndroidScreenShots();
+  //      helper = IntegrationTestsHelpers(binding: _binding);
+  //    });
   // });
 }
 
