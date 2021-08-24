@@ -143,7 +143,5 @@ class SignInServiceLocator implements ISignInServiceLocator {
         getIt<NavigationCubit>(),
       ),
     );
-
-    //********************************** */
   }
 }
