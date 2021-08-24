@@ -43,7 +43,7 @@ Future<void> goToEmailPage({
   final signInWithCredentials =
       find.byKey(const Key(SignInPageKeys.signInWithCredential));
 
-  Logger.tests('1 - Sign In Options Page');
+  Logger.tests('Starting on Sign In Options Page');
 
   await tester.pumpAndSettle();
 
@@ -56,7 +56,7 @@ Future<void> goToEmailPage({
     );
   }
 
-  Logger.tests('2 - Email Sign In Page');
+  Logger.tests('Go to Email Sign In Page');
 
   await tester.tap(signInWithCredentials);
 

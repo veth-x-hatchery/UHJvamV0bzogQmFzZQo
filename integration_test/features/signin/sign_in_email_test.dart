@@ -18,8 +18,8 @@ void main() {
 
   late IntegrationTestsHelpers helper;
 
+  /// This is required prior to taking the screenshot (Android only).
   Future<void> _setupAndroidScreenShots() async {
-    // This is required prior to taking the screenshot (Android only).
     await _binding.convertFlutterSurfaceToImage();
   }
 
@@ -33,90 +33,87 @@ void main() {
 
   tearDown(() => GetIt.instance.reset());
 
-  // testWidgets('should show invalid email message', (WidgetTester tester) async {
-  //   const prefix = 'case-1';
-
-  //   await goToEmailPage(
-  //     prefix: prefix,
-  //     tester: tester,
-  //     helper: helper,
-  //   );
-
-  //   Logger.tests('3 - Invalid email message');
-
-  //   await tester.tap(signInCredentialPageInput());
-  //   await tester.pumpAndSettle();
-
-  //   await tester.enterText(signInCredentialPageInput(), 'invalid-email');
-  //   await tester.pumpAndSettle();
-
-  //   await tester.ensureVisible(signInCredentialPageValidationButton());
-  //   await tester.pumpAndSettle();
-
-  //   await tester.tap(signInCredentialPageValidationButton());
-  //   await tester.pumpAndSettle();
-
-  //   expect(find.text(CredentialAddressMessageErrors.invalidCredential),
-  //       findsOneWidget);
-
-  //   await helper.screenshot(
-  //     prefix: prefix,
-  //     name: 'sign_in_email_invalid_email',
-  //   );
-
-  //   await tester.tap(signInBackPageButton());
-  //   await tester.pumpAndSettle();
-
-  //   expect(find.byType(SignInOptionsPage), findsOneWidget);
-  // });
-
-  testWidgets('should show accept the email and go to password page',
-      (WidgetTester tester) async {
-    const prefix = 'case-2';
-
-    await goToEmailPage(
-      tester: tester,
-      helper: helper,
-      prefix: prefix,
-    );
-
-    Logger.tests('3 - Valid email and go to password page');
-
+  Future<void> enterEmail(WidgetTester tester, {required String text}) async {
     await tester.tap(signInCredentialPageInput());
     await tester.pumpAndSettle();
-
-    await tester.enterText(signInCredentialPageInput(), 'test@vethx.com');
+    await tester.enterText(signInCredentialPageInput(), text);
     await tester.pumpAndSettle();
+  }
 
-    await helper.screenshot(
-      prefix: prefix,
-      name: 'sign_in_valid_email',
-    );
+  Future<void> enterAnInvalidEmail(WidgetTester tester) async {
+    Logger.tests('Enter an invalid email');
+    await enterEmail(tester, text: 'invalid-email');
+  }
 
+  Future<void> enterAvalidRegisteredEmail(WidgetTester tester) async {
+    Logger.tests('Enter a valid registered email');
+    await enterEmail(tester, text: 'test@vethx.com');
+  }
+
+  Future<void> submitEmail(WidgetTester tester) async {
+    Logger.tests('Submiting the email');
     await tester.ensureVisible(signInCredentialPageValidationButton());
     await tester.pumpAndSettle();
-
     await tester.tap(signInCredentialPageValidationButton());
     await tester.pumpAndSettle();
+  }
 
-    expect(find.byType(SignInSecretPage), findsOneWidget);
+  Future<void> goBackPage(WidgetTester tester) async {
+    Logger.tests('Go back');
+    await tester.tap(signInBackPageButton());
+    await tester.pumpAndSettle();
+  }
 
-    await helper.screenshot(
-      prefix: prefix,
-      name: 'sign_in_password',
-    );
+  group('sign in with email tests', () {
+    testWidgets('should show invalid email message',
+        (WidgetTester tester) async {
+      const prefix = 'case-1';
+
+      await goToEmailPage(
+        prefix: prefix,
+        tester: tester,
+        helper: helper,
+      );
+
+      await enterAnInvalidEmail(tester);
+
+      await submitEmail(tester);
+
+      expect(find.text(CredentialAddressMessageErrors.invalidCredential),
+          findsOneWidget);
+
+      await helper.screenshot(
+        prefix: prefix,
+        name: 'sign_in_email_invalid_email',
+      );
+
+      await goBackPage(tester);
+
+      expect(find.byType(SignInOptionsPage), findsOneWidget);
+
+      await goToEmailPage(
+        prefix: prefix,
+        tester: tester,
+        helper: helper,
+      );
+
+      await enterAvalidRegisteredEmail(tester);
+
+      await helper.screenshot(
+        prefix: prefix,
+        name: 'sign_in_email_valid_registerd_email',
+      );
+
+      await submitEmail(tester);
+
+      Logger.tests('Go to password page');
+
+      expect(find.byType(SignInSecretPage), findsOneWidget);
+
+      await helper.screenshot(
+        prefix: prefix,
+        name: 'sign_in_password_page',
+      );
+    });
   });
-
-  //  group('sign in with email tests', () {
-  //    setUp(() async {
-  //      await _setupAndroidScreenShots();
-  //      helper = IntegrationTestsHelpers(binding: _binding);
-  //    });
-  // });
 }
-
-/**
- * 
-flutter drive --driver=test_driver/integration_test_driver_extended.dart \
---target=integration_test/app_test.dart
- */
