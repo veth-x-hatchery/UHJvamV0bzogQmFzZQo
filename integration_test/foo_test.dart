@@ -7,32 +7,16 @@ import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.
 import 'package:vethx_beta/main.dart' as app;
 
 void main() {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-
-  final binding = IntegrationTestWidgetsFlutterBinding();
+  final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized()
+      as IntegrationTestWidgetsFlutterBinding;
 
   group('end-to-end test', () {
     testWidgets('tap on the sign in with credential button; verify button',
         (WidgetTester tester) async {
-      app.main();
-
-      await tester.pumpAndSettle();
-
-      final signInWithCredentials =
-          find.byKey(const Key(SignInPageKeys.signInWithCredential));
-
-      await tester.tap(signInWithCredentials);
-
-      await tester.pumpAndSettle();
-
-      expect(find.byType(SignInCredentialPage), findsOneWidget);
-    });
-
-    testWidgets('tap on the sign in with credential button; verify button',
-        (WidgetTester tester) async {
-      app.main();
-
       // This is required prior to taking the screenshot (Android only).
+
+      app.main();
+
       await binding.convertFlutterSurfaceToImage();
 
       await tester.pumpAndSettle();
