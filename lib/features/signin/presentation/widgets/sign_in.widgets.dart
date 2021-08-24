@@ -6,6 +6,7 @@ export 'login/sign_in_scaffold.widget.dart';
 class SignInPageKeys {
   //! sign in options
 
+  static const signInLoader = 'signInLoader';
   static const signInWithGoogleButton = 'signInWithGoogleButton';
   static const signInWithCredential = 'signInWithCredential';
 

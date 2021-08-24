@@ -116,6 +116,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
             children: [
               SizedBox(height: SizeConfig.defaultEdgeSpace),
               SignInLoader(
+                key: const Key(SignInPageKeys.signInLoader),
                 size: SizeConfig.screenHeight * 0.25,
                 loading: isLoading,
               ),
