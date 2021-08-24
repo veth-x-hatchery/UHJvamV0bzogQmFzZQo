@@ -9,7 +9,7 @@ Future<void> main() async {
   await integrationDriver(
     driver: driver,
     onScreenshot: (String screenshotName, List<int> screenshotBytes) async {
-      Logger.widget('Test -> screenshotName: $screenshotName');
+      Logger.tests('Screenshot: $screenshotName');
       final image = File('$screenshotName.png');
       image.writeAsBytesSync(screenshotBytes);
       return true;
