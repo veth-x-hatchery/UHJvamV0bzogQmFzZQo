@@ -27,7 +27,7 @@ void main() {
       // arrange
 
       when(_mockIAuthFacade.getSignedInUser())
-          .thenAnswer((_) => Future.value());
+          .thenAnswer((_) async => Future.value());
 
       final expected = [
         const AuthState.unauthenticated(),
@@ -69,7 +69,7 @@ void main() {
       () async {
     // arrange
 
-    when(_mockIAuthFacade.signOut()).thenAnswer((_) => Future.value());
+    when(_mockIAuthFacade.signOut()).thenAnswer((_) async => _);
 
     final expected = [
       const AuthState.unauthenticated(),

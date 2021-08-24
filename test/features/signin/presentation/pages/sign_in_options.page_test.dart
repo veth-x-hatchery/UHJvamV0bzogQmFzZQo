@@ -44,7 +44,9 @@ void main() {
     _mockNavigationObserver = MockNavigatorObserver();
   });
 
-  tearDown(() => getIt.reset());
+  tearDown(() {
+    getIt.reset();
+  });
 
   void _signInState(SignInOptionsState state) {
     when(_sl.mockSignInBloc.state).thenReturn(state);
@@ -114,7 +116,15 @@ void main() {
       // Assert
 
       expect(find.text(Texts.signInPageTitle), findsOneWidget);
+
+      // verifyNever(_sl.dispose);
     });
+
+    tearDown(() {
+      // verifyNever(_sl.dispose());
+    });
+
+    // v
   });
 
   group('when receiving navigation events', () {

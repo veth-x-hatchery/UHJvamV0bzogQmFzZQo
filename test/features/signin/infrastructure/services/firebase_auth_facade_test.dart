@@ -371,7 +371,7 @@ void main() {
       when(_mockGoogleSignIn.signOut())
           .thenAnswer((_) => Future.value(_mockGoogleSignInAccount));
 
-      when(_mockFirebaseAuth.signOut()).thenAnswer((_) => Future.value());
+      when(_mockFirebaseAuth.signOut()).thenAnswer((_) async => _);
 
       when(_mockFirebaseAuth.signInWithEmailAndPassword(
         email: credential.getOrCrash(),
@@ -415,7 +415,7 @@ void main() {
     when(_mockGoogleSignIn.signOut())
         .thenAnswer((_) => Future<MockGoogleSignInAccount?>.value());
 
-    when(_mockFirebaseAuth.signOut()).thenAnswer((_) => Future.value());
+    when(_mockFirebaseAuth.signOut()).thenAnswer((_) async => _);
 
     //act
 
@@ -498,7 +498,7 @@ void main() {
       when(
         _mockFirebaseAuth.sendPasswordResetEmail(
             email: credential.getOrCrash()),
-      ).thenAnswer((_) => Future.value());
+      ).thenAnswer((_) async => _);
 
       // act
 

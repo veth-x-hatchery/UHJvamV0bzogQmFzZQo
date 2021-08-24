@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
@@ -12,7 +13,7 @@ import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 
 import 'sign_in_service_locator.mock.mocks.dart';
 
-class MockISignInServiceLocator implements ISignInServiceLocator {
+class MockISignInServiceLocator extends Mock implements ISignInServiceLocator {
   late MockSignInOptionsBloc mockSignInBloc;
   late MockSignInCredentialBloc mockSignInCredentialBloc;
   late MockSignInRegisterBloc mockSignInRegisterBloc;

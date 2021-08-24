@@ -86,7 +86,7 @@ void main() {
         // arrange
 
         when(mockLocalDataSource.cacheCredential(credential))
-            .thenAnswer((_) => Future.value());
+            .thenAnswer((_) async => _);
 
         // act
 
