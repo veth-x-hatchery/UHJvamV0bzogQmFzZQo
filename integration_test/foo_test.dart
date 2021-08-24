@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
@@ -19,16 +22,19 @@ void main() {
 
       await binding.convertFlutterSurfaceToImage();
 
-      await tester.pumpAndSettle();
-
       final signInWithCredentials =
           find.byKey(const Key(SignInPageKeys.signInWithCredential));
 
-      await tester.tap(signInWithCredentials);
-
       await tester.pumpAndSettle();
+      await Future.delayed(const Duration(seconds: 3));
+      final List<int> firstPng = await binding.takeScreenshot('screenshot-1');
+      expect(firstPng.isNotEmpty, isTrue);
 
-      await binding.takeScreenshot('screenshot-1');
+      await tester.tap(signInWithCredentials);
+      await tester.pumpAndSettle();
+      await Future.delayed(const Duration(seconds: 3));
+      final List<int> secondPng = await binding.takeScreenshot('screenshot-2');
+      expect(secondPng.isNotEmpty, isTrue);
 
       expect(find.byType(SignInCredentialPage), findsOneWidget);
     });
