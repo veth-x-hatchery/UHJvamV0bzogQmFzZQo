@@ -47,7 +47,8 @@ void main() {
       await _setupAndroidScreenShots();
     });
 
-    testWidgets('should 1 then ABC', (WidgetTester tester) async {
+    testWidgets('should show invalid email message',
+        (WidgetTester tester) async {
       Logger.tests('1 - Sign In Options Page');
 
       await tester.pumpAndSettle();
@@ -68,10 +69,9 @@ void main() {
 
       Logger.tests('3 - Invalid email message');
 
-      await tester.enterText(
-          signInCredentialPageValidationButton(), 'invalid-email');
+      await tester.enterText(signInCredentialPageInput(), 'invalid-email');
 
-      await tester.tap(signInCredentialPageInput());
+      await tester.tap(signInCredentialPageValidationButton());
 
       await tester.pumpAndSettle();
 
