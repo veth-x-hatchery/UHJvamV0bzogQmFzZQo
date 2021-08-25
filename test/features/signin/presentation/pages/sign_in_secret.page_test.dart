@@ -11,8 +11,8 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
+import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
@@ -64,7 +64,7 @@ void main() {
   void _navigationCubitState() {
     when(_sl.mockNavigationCubit.goTo(any)).thenReturn(null);
     when(_sl.mockNavigationCubit.stream)
-        .thenAnswer((_) => Stream.value(const NavigationState.initial()));
+        .thenAnswer((_) => Stream.value(SignInPageGoTo.optionsPage()));
   }
 
   void _setInitialState() {

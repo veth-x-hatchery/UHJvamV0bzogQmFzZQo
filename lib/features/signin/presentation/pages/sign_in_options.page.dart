@@ -51,9 +51,9 @@ class SignInOptionsPage extends StatefulWidget {
 }
 
 class _SignInOptionsPageState extends State<SignInOptionsPage> {
-  Stream<NavigationState>? _previousStream;
+  Stream<SignInPageGoTo>? _previousStream;
   StreamSubscription? _streamSubscription;
-  void _listenGoTo(Stream<NavigationState> received) {
+  void _listenGoTo(Stream<SignInPageGoTo> received) {
     if (received != _previousStream) {
       _streamSubscription?.cancel();
       _previousStream = received;
@@ -131,46 +131,41 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
     );
   }
 
-  void _goTo(NavigationState state) {
+  void _goTo(SignInPageGoTo page) {
     FocusScope.of(context).unfocus();
-    Logger.widget('SignInPage -> NavigationCubit -> $state');
-    state.when(
-      initial: () {},
-      goTo: (page) {
-        switch (page.to) {
-          case SignInPageRoutes.secretEntry:
-            Navigator.pushReplacement(
-              context,
-              SlideLeftRoute<void>(
-                page: SignInSecretPage.create(serviceLocator: serviceLocator),
-              ),
-            );
-            break;
-          case SignInPageRoutes.registerCredentialSignIn:
-            Navigator.pushReplacement(
-                context,
-                SlideLeftRoute<void>(
-                    page: SignInRegisterPage.create(
-                        serviceLocator: serviceLocator,
-                        credential: page.parameters as Credential?)));
-            break;
-          case SignInPageRoutes.credentialEntry:
-            final credentialPage =
-                SignInCredentialPage.create(serviceLocator: serviceLocator);
-            // return showModalBottomSheet<void>(
-            //   context: context,
-            //   builder: (_) => credentialPage,
-            // );
-            page.from == SignInPageRoutes.signInOptions
-                ? Navigator.push(
-                    context, SlideLeftRoute<void>(page: credentialPage))
-                : Navigator.pushReplacement(
-                    context, SlideRightRoute<void>(page: credentialPage));
-            break;
-          default:
-            break;
-        }
-      },
-    );
+    Logger.widget('SignInPage -> NavigationCubit -> $page');
+    switch (page.to) {
+      case SignInPageRoutes.secretEntry:
+        Navigator.pushReplacement(
+          context,
+          SlideLeftRoute<void>(
+            page: SignInSecretPage.create(serviceLocator: serviceLocator),
+          ),
+        );
+        break;
+      case SignInPageRoutes.registerCredentialSignIn:
+        Navigator.pushReplacement(
+            context,
+            SlideLeftRoute<void>(
+                page: SignInRegisterPage.create(
+                    serviceLocator: serviceLocator,
+                    credential: page.parameters as Credential?)));
+        break;
+      case SignInPageRoutes.credentialEntry:
+        final credentialPage =
+            SignInCredentialPage.create(serviceLocator: serviceLocator);
+        // return showModalBottomSheet<void>(
+        //   context: context,
+        //   builder: (_) => credentialPage,
+        // );
+        page.from == SignInPageRoutes.signInOptions
+            ? Navigator.push(
+                context, SlideLeftRoute<void>(page: credentialPage))
+            : Navigator.pushReplacement(
+                context, SlideRightRoute<void>(page: credentialPage));
+        break;
+      default:
+        break;
+    }
   }
 }

@@ -336,8 +336,8 @@ void main() {
       _sl.navigationCubit.stream.listen((value) {
         expect(
             value,
-            NavigationState.goTo(SignInPageGoTo.credentialPage(
-                from: SignInPageRoutes.signInOptions)));
+            SignInPageGoTo.credentialPage(
+                from: SignInPageRoutes.signInOptions));
       });
 
       await tester.pumpAndSettle();
