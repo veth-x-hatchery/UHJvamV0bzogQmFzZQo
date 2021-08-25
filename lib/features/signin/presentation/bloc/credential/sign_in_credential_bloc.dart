@@ -7,7 +7,7 @@ import 'package:vethx_beta/core/notifications/notification.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
 part 'sign_in_credential_event.dart';
@@ -17,7 +17,7 @@ part 'sign_in_credential_bloc.freezed.dart';
 class SignInCredentialBloc
     extends Bloc<SignInCredentialEvent, SignInCredentialState> {
   final SignInCredentialCheck _credentialCheck;
-  final NavigationCubit _navigation;
+  final NavigationManager _navigation;
 
   SignInCredentialBloc(
     this._credentialCheck,

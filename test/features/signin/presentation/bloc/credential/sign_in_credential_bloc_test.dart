@@ -8,22 +8,22 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 
 import 'sign_in_credential_bloc_test.mocks.dart';
 
 @GenerateMocks([
-  NavigationCubit,
+  NavigationManager,
   SignInCredentialCheck,
 ])
 void main() {
   late SignInCredentialBloc _bloc;
   late MockSignInCredentialCheck _mockSignInWithSecret;
-  late MockNavigationCubit _mockNavigation;
+  late MockNavigationManager _mockNavigation;
 
   setUp(() {
     _mockSignInWithSecret = MockSignInCredentialCheck();
-    _mockNavigation = MockNavigationCubit();
+    _mockNavigation = MockNavigationManager();
     _bloc = SignInCredentialBloc(
       _mockSignInWithSecret,
       _mockNavigation,

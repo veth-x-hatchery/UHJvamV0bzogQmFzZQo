@@ -11,7 +11,7 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
     as _i8;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart'
     as _i7;
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart'
     as _i2;
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart'
     as _i5;
@@ -31,11 +31,11 @@ class _FakeStreamSubscription_1<T> extends _i1.Fake
 
 class _FakeEither_2<L, R> extends _i1.Fake implements _i4.Either<L, R> {}
 
-/// A class which mocks [NavigationCubit].
+/// A class which mocks [NavigationManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigationCubit extends _i1.Mock implements _i2.NavigationCubit {
-  MockNavigationCubit() {
+class MockNavigationManager extends _i1.Mock implements _i2.NavigationManager {
+  MockNavigationManager() {
     _i1.throwOnMissingStub(this);
   }
 

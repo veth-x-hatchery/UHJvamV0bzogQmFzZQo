@@ -8,7 +8,7 @@ import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
@@ -39,7 +39,7 @@ class SignInOptionsPage extends StatefulWidget {
           create: (_) => sl.get<SignInOptionsBloc>(),
         ),
         // BlocProvider(
-        //   create: (_) => sl.get<NavigationCubit>(),
+        //   create: (_) => sl.get<NavigationManager>(),
         // ),
       ],
       child: SignInOptionsPage(serviceLocator: sl),
@@ -72,7 +72,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
 
   @override
   void didChangeDependencies() {
-    _listenGoTo(serviceLocator.get<NavigationCubit>().stream);
+    _listenGoTo(serviceLocator.get<NavigationManager>().stream);
     FocusScope.of(context).unfocus();
     super.didChangeDependencies();
   }
@@ -119,7 +119,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
               color: Colors.teal[700],
               onPressed: isLoading
                   ? () => {}
-                  : () => serviceLocator.get<NavigationCubit>().goTo(
+                  : () => serviceLocator.get<NavigationManager>().goTo(
                         SignInPageGoTo.credentialPage(
                             from: SignInPageRoutes.signInOptions),
                       ),
@@ -133,7 +133,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
 
   void _goTo(SignInPageGoTo page) {
     FocusScope.of(context).unfocus();
-    Logger.widget('SignInPage -> NavigationCubit -> $page');
+    Logger.widget('SignInPage -> NavigationManager -> $page');
     switch (page.to) {
       case SignInPageRoutes.secretEntry:
         Navigator.pushReplacement(

@@ -6,7 +6,7 @@ import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -72,7 +72,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
-      onPressed: () => getIt<NavigationCubit>().goTo(
+      onPressed: () => getIt<NavigationManager>().goTo(
           SignInPageGoTo.credentialPage(from: SignInPageRoutes.secretEntry)),
       child: BlocConsumer<SignInSecretBloc, SignInSecretState>(
         listener: (context, state) {
@@ -129,7 +129,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
                   key: const Key(SignInPageKeys.signInChangeCredentialButton),
                   onPressed: state.isLoading
                       ? () {}
-                      : () => getIt<NavigationCubit>()
+                      : () => getIt<NavigationManager>()
                               .goTo(SignInPageGoTo.credentialPage(
                             from: SignInPageRoutes.secretEntry,
                           )),

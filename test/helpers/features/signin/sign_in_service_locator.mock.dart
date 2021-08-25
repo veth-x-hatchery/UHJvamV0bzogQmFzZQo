@@ -7,7 +7,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_opt
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 
 import 'sign_in_service_locator.mock.mocks.dart';
@@ -18,13 +18,13 @@ class MockISignInServiceLocator extends Mock implements ISignInServiceLocator {
   late MockSignInRegisterBloc mockSignInRegisterBloc;
   late MockSignInSecretBloc mockSignInSecretBloc;
   late MockSignInSecretResetBloc mockSignInSecretResetBloc;
-  late MockNavigationCubit mockNavigationCubit;
+  late MockNavigationManager mockNavigationManager;
 
   final GetIt getIt;
 
   /// In some test cases we can need to use .GoTo funcionality
   final bool useNavigationMock;
-  late NavigationCubit navigationCubit;
+  late NavigationManager navigationCubit;
 
   MockISignInServiceLocator({
     required this.getIt,
@@ -35,8 +35,8 @@ class MockISignInServiceLocator extends Mock implements ISignInServiceLocator {
     mockSignInCredentialBloc = MockSignInCredentialBloc();
     mockSignInRegisterBloc = MockSignInRegisterBloc();
     mockSignInSecretResetBloc = MockSignInSecretResetBloc();
-    mockNavigationCubit = MockNavigationCubit();
-    navigationCubit = NavigationCubit();
+    mockNavigationManager = MockNavigationManager();
+    navigationCubit = NavigationManager();
   }
 
   @override
@@ -64,8 +64,8 @@ class MockISignInServiceLocator extends Mock implements ISignInServiceLocator {
     getIt.registerFactory<SignInSecretResetBloc>(
       () => mockSignInSecretResetBloc,
     );
-    getIt.registerLazySingleton<NavigationCubit>(
-      () => useNavigationMock ? mockNavigationCubit : navigationCubit,
+    getIt.registerLazySingleton<NavigationManager>(
+      () => useNavigationMock ? mockNavigationManager : navigationCubit,
     );
 
     Logger.serviceLocator('MockISignInServiceLocator -> pushNewScope');
@@ -87,6 +87,6 @@ class MockISignInServiceLocator extends Mock implements ISignInServiceLocator {
   SignInRegisterBloc,
   SignInSecretBloc,
   SignInSecretResetBloc,
-  NavigationCubit,
+  NavigationManager,
 ])
 void main() {}

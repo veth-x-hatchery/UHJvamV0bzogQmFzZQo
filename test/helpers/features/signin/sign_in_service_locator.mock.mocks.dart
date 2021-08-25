@@ -16,7 +16,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_i
     as _i7;
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart'
     as _i6;
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart'
     as _i8;
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart'
     as _i10;
@@ -557,11 +557,11 @@ class MockSignInSecretResetBloc extends _i1.Mock
   String toString() => super.toString();
 }
 
-/// A class which mocks [NavigationCubit].
+/// A class which mocks [NavigationManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigationCubit extends _i1.Mock implements _i8.NavigationCubit {
-  MockNavigationCubit() {
+class MockNavigationManager extends _i1.Mock implements _i8.NavigationManager {
+  MockNavigationManager() {
     _i1.throwOnMissingStub(this);
   }
 

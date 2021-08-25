@@ -10,26 +10,26 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.d
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 
 import 'sign_in_secret_bloc_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
   SignInSecretResetBloc,
-  NavigationCubit,
+  NavigationManager,
   SignInWithSecret,
 ])
 void main() {
   late SignInSecretBloc _bloc;
   late MockAuthBloc _mockAuthBloc;
-  late MockNavigationCubit _mockNavigation;
+  late MockNavigationManager _mockNavigation;
   late MockSignInWithSecret _mockSignInWithSecret;
 
   setUp(() {
     _mockAuthBloc = MockAuthBloc();
     _mockSignInWithSecret = MockSignInWithSecret();
-    _mockNavigation = MockNavigationCubit();
+    _mockNavigation = MockNavigationManager();
     _bloc = SignInSecretBloc(
       _mockAuthBloc,
       _mockNavigation,

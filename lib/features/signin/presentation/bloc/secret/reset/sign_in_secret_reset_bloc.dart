@@ -7,7 +7,7 @@ import 'package:vethx_beta/core/notifications/notification.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
 part 'sign_in_secret_reset_event.dart';
@@ -22,7 +22,7 @@ class SignInSecretResetBloc
   ) : super(SignInSecretResetState.initial());
 
   final SignInSecretReset _useCase;
-  final NavigationCubit _navigation;
+  final NavigationManager _navigation;
 
   @override
   Stream<SignInSecretResetState> mapEventToState(

@@ -62,8 +62,8 @@ void main() {
   }
 
   void _navigationCubitState() {
-    when(_sl.mockNavigationCubit.goTo(any)).thenReturn(null);
-    when(_sl.mockNavigationCubit.stream)
+    when(_sl.mockNavigationManager.goTo(any)).thenReturn(null);
+    when(_sl.mockNavigationManager.stream)
         .thenAnswer((_) => Stream.value(SignInPageGoTo.optionsPage()));
   }
 
@@ -269,7 +269,7 @@ void main() {
 
     // assert
 
-    // verify(_sl.mockNavigationCubit).called(1);
+    // verify(_sl.mockNavigationManager).called(1);
   });
 
   testWidgets('when receive a failure then should show a snack message',
@@ -318,7 +318,7 @@ void main() {
 
       // assert
 
-      verify(_sl.mockNavigationCubit.goTo(any)).called(1);
+      verify(_sl.mockNavigationManager.goTo(any)).called(1);
     });
   });
 
