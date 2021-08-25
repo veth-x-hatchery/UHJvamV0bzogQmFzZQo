@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
@@ -80,13 +81,18 @@ void main() {
       await helper.screenshot(prefix: prefix, name: '1.2.1_go_to_secret_page');
 
       Logger.tests('1.2.1.1 - Forgot my password');
+      await hideKeyboard(tester);
       await forgotSecret(tester);
       expect(find.byType(SnackBar), findsOneWidget);
       await helper.screenshot(
           prefix: prefix, name: '1.2.1.1_forgot_my_password');
+      await Future.delayed(snackBarNotificationDuration);
+      await Future.delayed(snackBarNotificationDuration);
+      await tester.pumpAndSettle();
 
       Logger.tests('1.2.1.2 - Change my email');
-      await signInSecretDragChangeCredentialButton(tester);
+      await hideKeyboard(tester);
+      // await dragChangeCredentialButton(tester);
       await helper.screenshot(prefix: prefix, name: '1.2.1.2_change_my_email');
       await changeCredential(tester);
       expect(find.byType(SignInCredentialPage), findsOneWidget);

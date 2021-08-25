@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -77,5 +78,13 @@ Future<void> goToEmailPage(IntegrationTestsParameters parameters) async {
       prefix: parameters.screenshots!.prefix,
       name: 'sign_in_email',
     );
+  }
+}
+
+Future<void> hideKeyboard(WidgetTester tester) async {
+  Logger.tests('Hiding keyboard...');
+  if (tester.testTextInput.isRegistered) {
+    tester.testTextInput.hide();
+    await tester.pumpAndSettle();
   }
 }

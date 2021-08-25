@@ -35,8 +35,9 @@ Future<void> dragChangeCredentialButton(WidgetTester tester) async {
   await tester.dragUntilVisible(
     signInSecretChangeCredentialButton(), // what you want to find
     signInSecretPageFormColumn(), // widget you want to scroll
-    const Offset(-250, 0), // delta to move
+    const Offset(0, 500), // delta to move
   );
+  await tester.pumpAndSettle();
 }
 
 Future<void> changeCredential(WidgetTester tester) async {
@@ -52,8 +53,9 @@ Future<void> dragForgotSecretButton(WidgetTester tester) async {
   await tester.dragUntilVisible(
     signInSecretResetButton(), // what you want to find
     signInSecretPageFormColumn(), // widget you want to scroll
-    const Offset(-250, 0), // delta to move
+    const Offset(0, 500), // delta to move
   );
+  await tester.pumpAndSettle();
 }
 
 Future<void> forgotSecret(WidgetTester tester) async {

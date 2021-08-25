@@ -17,7 +17,7 @@ Future<void> enterAnInvalidEmail(WidgetTester tester) async {
 
 Future<void> enterAvalidRegisteredEmail(WidgetTester tester) async {
   Logger.tests('Enter a valid registered email');
-  await enterEmail(tester, text: 'test@vethx.com');
+  await enterEmail(tester, text: 'a@a.com');
 }
 
 Future<void> submitEmail(WidgetTester tester) async {
