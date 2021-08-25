@@ -69,11 +69,13 @@ void main() {
         (WidgetTester tester) async {
       const prefix = 'case-1';
 
-      await goToEmailPage(
-        prefix: prefix,
-        tester: tester,
+      final parameters = IntegrationTestsParameters(
+        widgetTester: tester,
         helper: helper,
+        prefix: prefix,
       );
+
+      await goToEmailPage(parameters);
 
       await enterAnInvalidEmail(tester);
 
@@ -91,11 +93,7 @@ void main() {
 
       expect(find.byType(SignInOptionsPage), findsOneWidget);
 
-      await goToEmailPage(
-        prefix: prefix,
-        tester: tester,
-        helper: helper,
-      );
+      await goToEmailPage(parameters);
 
       await enterAvalidRegisteredEmail(tester);
 
