@@ -7,7 +7,6 @@ import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
-import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
@@ -57,8 +56,6 @@ void main() {
   group('sign in with email tests', () {
     testWidgets('should show invalid email message',
         (WidgetTester tester) async {
-      setupDefaultMocks();
-
       const prefix = 'case-1';
 
       final parameters = IntegrationTestsParameters(
@@ -68,6 +65,9 @@ void main() {
 
       Logger.tests('1 - Sign in options');
       await startingSignInOptions(parameters);
+
+      setupDefaultMocks();
+
       expect(find.byType(SignInOptionsPage), findsOneWidget);
       await helper.screenshot(prefix: prefix, name: '1_sign_in_options');
 
@@ -122,16 +122,16 @@ void main() {
       Logger.tests('Goto:  1.2.1 - Go To Secret Page');
       await submitEmail(tester);
 
-      Logger.tests('1.2.1.2 - Enter a valid password');
+      Logger.tests('1.2.1.3 - Enter a valid password');
       await enterAvalidRegisteredSecret(tester);
       await helper.screenshot(
-          prefix: prefix, name: '1.2.1.2_enter_a_valid_password');
+          prefix: prefix, name: '1.2.1.3_enter_a_valid_password');
 
-      Logger.tests('1.2.1.3 - Authenticate with success and go to Home Page');
+      Logger.tests('1.2.1.4 - Authenticate with success and go to Home Page');
       await submitSecret(tester);
       await helper.screenshot(
           prefix: prefix,
-          name: '1.2.1.3_authenticate_with_success_and_go_to_home_page');
+          name: '1.2.1.4_authenticate_with_success_and_go_to_home_page');
       expect(find.byType(HomePage), findsOneWidget);
     });
   });

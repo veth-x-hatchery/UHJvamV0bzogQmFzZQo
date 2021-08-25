@@ -1,11 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 
 import '../../../../test/helpers/features/signin/presentation/pages/sign_in_secret.helpers.dart';
 
 Future<void> enterSecret(WidgetTester tester, {required String text}) async {
+  await tester.pumpAndSettle();
   await tester.tap(signInSecretInput());
   await tester.pumpAndSettle();
   await tester.enterText(signInSecretInput(), text);
