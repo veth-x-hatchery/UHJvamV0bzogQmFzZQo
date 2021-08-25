@@ -34,9 +34,6 @@ class SignInSecretPage extends StatefulWidget {
         BlocProvider<SignInSecretResetBloc>(
           create: (_) => serviceLocator.get<SignInSecretResetBloc>(),
         ),
-        BlocProvider<NavigationCubit>(
-          create: (_) => serviceLocator.get<NavigationCubit>(),
-        ),
       ],
       child: const SignInSecretPage(),
     );

@@ -72,7 +72,6 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
 
   @override
   void didChangeDependencies() {
-    // BlocProvider.of<NavigationCubit>(context).stream
     _listenGoTo(serviceLocator.get<NavigationCubit>().stream);
     FocusScope.of(context).unfocus();
     super.didChangeDependencies();
