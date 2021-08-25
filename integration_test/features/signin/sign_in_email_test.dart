@@ -72,46 +72,40 @@ void main() {
       final parameters = IntegrationTestsParameters(
         widgetTester: tester,
         helper: helper,
-        prefix: prefix,
       );
 
+      Logger.tests('1 - Sign in options');
+      await startingSignInOptions(parameters);
+      await helper.screenshot(prefix: prefix, name: '1_sign_in_options');
+
+      Logger.tests('1.1 - Sign in with email');
       await goToEmailPage(parameters);
+      await helper.screenshot(prefix: prefix, name: '1.1_sign_in_with_email');
 
+      Logger.tests('1.1.1 - Invalid email message');
       await enterAnInvalidEmail(tester);
-
       await submitEmail(tester);
-
       expect(find.text(CredentialAddressMessageErrors.invalidCredential),
           findsOneWidget);
-
       await helper.screenshot(
-        prefix: prefix,
-        name: 'sign_in_email_invalid_email',
-      );
+          prefix: prefix, name: '1.1.1_invalid_email_message');
 
+      Logger.tests('Goto:  1.1 - Sign in with email');
       await goBackPage(tester);
-
       expect(find.byType(SignInOptionsPage), findsOneWidget);
-
       await goToEmailPage(parameters);
 
+      Logger.tests('1.2 - Valid Registered email');
       await enterAvalidRegisteredEmail(tester);
-
       await helper.screenshot(
-        prefix: prefix,
-        name: 'sign_in_email_valid_registerd_email',
-      );
+          prefix: prefix, name: '1.2_valid_registered_email');
 
+      Logger.tests('1.2.1 - Go To Secret Page');
       await submitEmail(tester);
-
-      Logger.tests('Go to password page');
-
       expect(find.byType(SignInSecretPage), findsOneWidget);
+      await helper.screenshot(prefix: prefix, name: '1.2.1_go_to_secret_page');
 
-      await helper.screenshot(
-        prefix: prefix,
-        name: 'sign_in_password_page',
-      );
+      Logger.tests('1.2.1.1 - Forgot my password');
     });
   });
 }

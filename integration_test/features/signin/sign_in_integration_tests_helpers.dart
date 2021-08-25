@@ -34,50 +34,48 @@ class IntegrationTestsHelpers {
   }
 }
 
+class IntegrationTestsParametersScreeenshot {
+  final String prefix;
+  IntegrationTestsParametersScreeenshot(this.prefix);
+}
+
 class IntegrationTestsParameters {
   final WidgetTester widgetTester;
   final IntegrationTestsHelpers helper;
-  final String prefix;
-  final bool screenshots;
+  final IntegrationTestsParametersScreeenshot? screenshots;
   IntegrationTestsParameters({
     required this.widgetTester,
     required this.helper,
-    required this.prefix,
-    this.screenshots = true,
+    this.screenshots,
   });
+  bool get takeScreenshot => screenshots != null;
 }
 
 Future<void> startingSignInOptions(
     IntegrationTestsParameters parameters) async {
-  Logger.tests('Starting on Sign In Options Page');
-
   await parameters.widgetTester.pumpAndSettle();
 
   expect(find.byType(SignInOptionsPage), findsOneWidget);
 
-  if (parameters.screenshots) {
+  if (parameters.takeScreenshot) {
     await parameters.helper.screenshot(
-      prefix: parameters.prefix,
+      prefix: parameters.screenshots!.prefix,
       name: 'sign_in_options',
     );
   }
 }
 
 Future<void> goToEmailPage(IntegrationTestsParameters parameters) async {
-  final signInWithCredentials =
-      find.byKey(const Key(SignInPageKeys.signInWithCredential));
-
-  Logger.tests('Go to Email Sign In Page');
-
-  await parameters.widgetTester.tap(signInWithCredentials);
+  await parameters.widgetTester
+      .tap(find.byKey(const Key(SignInPageKeys.signInWithCredential)));
 
   await parameters.widgetTester.pumpAndSettle();
 
   expect(find.byType(SignInCredentialPage), findsOneWidget);
 
-  if (parameters.screenshots) {
+  if (parameters.takeScreenshot) {
     await parameters.helper.screenshot(
-      prefix: parameters.prefix,
+      prefix: parameters.screenshots!.prefix,
       name: 'sign_in_email',
     );
   }
