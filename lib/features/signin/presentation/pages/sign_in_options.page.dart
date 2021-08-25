@@ -38,9 +38,9 @@ class SignInOptionsPage extends StatefulWidget {
         BlocProvider(
           create: (_) => sl.get<SignInOptionsBloc>(),
         ),
-        BlocProvider(
-          create: (_) => sl.get<NavigationCubit>(),
-        ),
+        // BlocProvider(
+        //   create: (_) => sl.get<NavigationCubit>(),
+        // ),
       ],
       child: SignInOptionsPage(serviceLocator: sl),
     );
@@ -73,7 +73,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
   @override
   void didChangeDependencies() {
     // BlocProvider.of<NavigationCubit>(context).stream
-    _listenGoTo(BlocProvider.of<NavigationCubit>(context).stream);
+    _listenGoTo(serviceLocator.get<NavigationCubit>().stream);
     FocusScope.of(context).unfocus();
     super.didChangeDependencies();
   }
@@ -120,7 +120,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
               color: Colors.teal[700],
               onPressed: isLoading
                   ? () => {}
-                  : () => BlocProvider.of<NavigationCubit>(context).goTo(
+                  : () => serviceLocator.get<NavigationCubit>().goTo(
                         SignInPageGoTo.credentialPage(
                             from: SignInPageRoutes.signInOptions),
                       ),
@@ -158,6 +158,10 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
           case SignInPageRoutes.credentialEntry:
             final credentialPage =
                 SignInCredentialPage.create(serviceLocator: serviceLocator);
+            // return showModalBottomSheet<void>(
+            //   context: context,
+            //   builder: (_) => credentialPage,
+            // );
             page.from == SignInPageRoutes.signInOptions
                 ? Navigator.push(
                     context, SlideLeftRoute<void>(page: credentialPage))
