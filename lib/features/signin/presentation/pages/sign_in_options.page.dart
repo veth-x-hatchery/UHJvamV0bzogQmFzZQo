@@ -81,6 +81,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
   void dispose() {
     Logger.widget('SignInOptionsPage -> dispose');
     serviceLocator.dispose();
+    _streamSubscription?.cancel();
     super.dispose();
   }
 
