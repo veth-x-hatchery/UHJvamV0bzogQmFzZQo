@@ -95,7 +95,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
           state.notification.fold(
             () {},
             (notification) {
-              Logger.presentation(
+              Logger.widget(
                   'SignInRegisterPage -> notification: $notification');
               vethxNotify(context, notification);
             },

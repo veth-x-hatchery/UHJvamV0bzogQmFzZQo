@@ -70,7 +70,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
     return BlocListener<NavigationCubit, NavigationState>(
       listener: (context, state) {
         FocusScope.of(context).unfocus();
-        Logger.presentation('SignInPage -> NavigationCubit -> $state');
+        Logger.widget('SignInPage -> NavigationCubit -> $state');
         state.when(
           initial: () {},
           goTo: (page) {

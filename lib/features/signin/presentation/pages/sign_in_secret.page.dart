@@ -87,8 +87,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
           state.notification.fold(
             () {},
             (notification) {
-              Logger.presentation(
-                  'SignInSecretPage -> notification: $notification');
+              Logger.widget('SignInSecretPage -> notification: $notification');
               vethxNotify(context, notification);
             },
           );
@@ -166,7 +165,7 @@ class SignInSecretResetButton extends StatelessWidget {
         state.notification.fold(
           () {},
           (notification) {
-            Logger.presentation(
+            Logger.widget(
                 'SignInSecretPage -> SignInSecretResetBloc -> notification: $notification');
             vethxNotify(context, notification);
           },
