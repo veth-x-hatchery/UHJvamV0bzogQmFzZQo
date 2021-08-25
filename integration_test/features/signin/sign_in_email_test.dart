@@ -6,13 +6,17 @@ import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:vethx_beta/main.dart' as app;
+import 'package:vethx_beta/service_locator.dart';
 
 import 'finders/sign_in_email.page.dart';
 import 'finders/sign_in_secret.page.dart';
+import 'infrastructure/services/firebase_auth_facade_mock.dart';
 import 'sign_in_integration_tests_helpers.dart';
 
 void main() {
@@ -25,6 +29,19 @@ void main() {
   /// This is required prior to taking the screenshot (Android only).
   Future<void> _setupAndroidScreenShots() async {
     await _binding.convertFlutterSurfaceToImage();
+  }
+
+  void setupAuth({
+    required bool isCredentialAlreadyInUse,
+  }) {
+    getIt.unregister<IAuthFacade>();
+    getIt.registerLazySingleton<IAuthFacade>(
+      () => FirebaseAuthFacadeMock(isCredentialAlreadyInUse: true),
+    );
+  }
+
+  void setupDefaultMocks() {
+    setupAuth(isCredentialAlreadyInUse: true);
   }
 
   setUp(() async {
@@ -40,6 +57,8 @@ void main() {
   group('sign in with email tests', () {
     testWidgets('should show invalid email message',
         (WidgetTester tester) async {
+      setupDefaultMocks();
+
       const prefix = 'case-1';
 
       final parameters = IntegrationTestsParameters(
