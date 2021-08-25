@@ -60,7 +60,6 @@ void main() {
   }
 
   void _navigationState(SignInPageGoTo state) {
-    when(_sl.mockNavigationManager.state).thenReturn(state);
     when(_sl.mockNavigationManager.stream)
         .thenAnswer((_) => Stream.value(state));
   }

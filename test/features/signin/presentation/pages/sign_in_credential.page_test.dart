@@ -152,14 +152,13 @@ void main() {
 
     const invalidCredential = 'invalidcredential';
 
-    await tester.enterText(
-        signInCredentialPageValidationButton(), invalidCredential);
+    await tester.enterText(signInCredentialPageInput(), invalidCredential);
 
     _prepareFormValidationValues(value: invalidCredential);
 
     // Act
 
-    await tester.tap(signInCredentialPageInput());
+    await tester.tap(signInCredentialPageValidationButton());
 
     await tester.pump();
 
@@ -177,14 +176,13 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(
-        signInCredentialPageValidationButton(), 'teste@teste.com');
+    await tester.enterText(signInCredentialPageInput(), 'teste@teste.com');
 
     _prepareFormValidationValues(value: 'teste@teste.com');
 
     // Act
 
-    await tester.tap(signInCredentialPageInput());
+    await tester.tap(signInCredentialPageValidationButton());
 
     // assert
 
