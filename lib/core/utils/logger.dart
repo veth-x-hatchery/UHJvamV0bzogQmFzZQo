@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 enum ArchitectureLayer {
   presentation,
   domain,
@@ -118,10 +120,12 @@ class Logger {
     //https://dev.to/mhadaily/how-to-capture-errors-and-send-platform-specific-information-to-sentry-in-flutter-4l6m
     // reportError(ex, stacktrace, message: message);
     // ignore: avoid_print, leading_newlines_in_multiline_strings
-    print('''\nLogger: $layer
+    print('''\n══╡ $layer ╞════════════════════════════════════════════════════
+             \nLogger: $layer
              \nMessage: $message 
              \nException: ${ex.toString()} 
-             \nStacktrace: ${stacktrace.toString()}\n''');
+             \nStacktrace: ${stacktrace.toString()}\n
+            \n═════════════════════════════════════════════════════════════════''');
   }
 
   static void i(
@@ -129,7 +133,9 @@ class Logger {
     ArchitectureLayer layer = ArchitectureLayer.presentation,
   }) {
     // ignore: avoid_print, leading_newlines_in_multiline_strings
-    print('''\nLogger: $layer
-             \nMessage: $message''');
+    print('''\n══╡ $layer ╞════════════════════════════════════════════════════
+             \nLogger: $layer
+             \nMessage: $message
+             \n═════════════════════════════════════════════════════════════════''');
   }
 }

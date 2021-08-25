@@ -119,8 +119,12 @@ void main() {
       Logger.tests('Goto:  1.1 - Sign in with email');
       Logger.tests('Goto:  1.2 - Valid Registered email');
       await enterAvalidRegisteredEmail(tester);
+
       Logger.tests('Goto:  1.2.1 - Go To Secret Page');
       await submitEmail(tester);
+      await tester.pumpAndSettle();
+      await Future.delayed(const Duration(seconds: 5));
+      expect(find.byType(SignInSecretPage), findsOneWidget);
 
       Logger.tests('1.2.1.3 - Enter a valid password');
       await enterAvalidRegisteredSecret(tester);
