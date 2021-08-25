@@ -7,7 +7,7 @@ import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repositor
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
 
 class SignInRepository implements ISignInRepository {
-  static const genericErrorMessage = 'Cache problem';
+  static const genericErrorMessage = 'Cac he problem';
 
   final INetworkInfo _networkInfo;
   final ISignInLocalSource _localDataSource;
