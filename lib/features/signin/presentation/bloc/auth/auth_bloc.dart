@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
@@ -18,8 +19,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(
     AuthEvent event,
   ) async* {
+    Logger.bloc('AuthBloc -> event: $event');
     yield* event.map(
       authCheckRequested: (e) async* {
+        yield const AuthState.authenticating();
         yield await _authFacade.getSignedInUser().then((user) => user == null
             ? const AuthState.unauthenticated()
             : AuthState.authenticated(user));

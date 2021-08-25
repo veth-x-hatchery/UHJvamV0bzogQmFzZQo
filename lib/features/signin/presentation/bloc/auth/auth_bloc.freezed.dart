@@ -308,6 +308,10 @@ class _$AuthStateTearOff {
   _Unauthenticated unauthenticated() {
     return const _Unauthenticated();
   }
+
+  _Authenticating authenticating() {
+    return const _Authenticating();
+  }
 }
 
 /// @nodoc
@@ -320,6 +324,7 @@ mixin _$AuthState {
     required TResult Function() initial,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() authenticating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -327,6 +332,7 @@ mixin _$AuthState {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authenticating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -334,6 +340,7 @@ mixin _$AuthState {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authenticating,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -342,6 +349,7 @@ mixin _$AuthState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_Authenticating value) authenticating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -349,6 +357,7 @@ mixin _$AuthState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Authenticating value)? authenticating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -356,6 +365,7 @@ mixin _$AuthState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Authenticating value)? authenticating,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -416,6 +426,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() authenticating,
   }) {
     return initial();
   }
@@ -426,6 +437,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authenticating,
   }) {
     return initial?.call();
   }
@@ -436,6 +448,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authenticating,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -450,6 +463,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_Authenticating value) authenticating,
   }) {
     return initial(this);
   }
@@ -460,6 +474,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Authenticating value)? authenticating,
   }) {
     return initial?.call(this);
   }
@@ -470,6 +485,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Authenticating value)? authenticating,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -559,6 +575,7 @@ class _$_Authenticated implements _Authenticated {
     required TResult Function() initial,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() authenticating,
   }) {
     return authenticated(user);
   }
@@ -569,6 +586,7 @@ class _$_Authenticated implements _Authenticated {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authenticating,
   }) {
     return authenticated?.call(user);
   }
@@ -579,6 +597,7 @@ class _$_Authenticated implements _Authenticated {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authenticating,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -593,6 +612,7 @@ class _$_Authenticated implements _Authenticated {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_Authenticating value) authenticating,
   }) {
     return authenticated(this);
   }
@@ -603,6 +623,7 @@ class _$_Authenticated implements _Authenticated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Authenticating value)? authenticating,
   }) {
     return authenticated?.call(this);
   }
@@ -613,6 +634,7 @@ class _$_Authenticated implements _Authenticated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Authenticating value)? authenticating,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -673,6 +695,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     required TResult Function() initial,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() authenticating,
   }) {
     return unauthenticated();
   }
@@ -683,6 +706,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authenticating,
   }) {
     return unauthenticated?.call();
   }
@@ -693,6 +717,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authenticating,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -707,6 +732,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_Authenticating value) authenticating,
   }) {
     return unauthenticated(this);
   }
@@ -717,6 +743,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Authenticating value)? authenticating,
   }) {
     return unauthenticated?.call(this);
   }
@@ -727,6 +754,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Authenticating value)? authenticating,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -738,4 +766,119 @@ class _$_Unauthenticated implements _Unauthenticated {
 
 abstract class _Unauthenticated implements AuthState {
   const factory _Unauthenticated() = _$_Unauthenticated;
+}
+
+/// @nodoc
+abstract class _$AuthenticatingCopyWith<$Res> {
+  factory _$AuthenticatingCopyWith(
+          _Authenticating value, $Res Function(_Authenticating) then) =
+      __$AuthenticatingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$AuthenticatingCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+    implements _$AuthenticatingCopyWith<$Res> {
+  __$AuthenticatingCopyWithImpl(
+      _Authenticating _value, $Res Function(_Authenticating) _then)
+      : super(_value, (v) => _then(v as _Authenticating));
+
+  @override
+  _Authenticating get _value => super._value as _Authenticating;
+}
+
+/// @nodoc
+
+class _$_Authenticating implements _Authenticating {
+  const _$_Authenticating();
+
+  @override
+  String toString() {
+    return 'AuthState.authenticating()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _Authenticating);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(User user) authenticated,
+    required TResult Function() unauthenticated,
+    required TResult Function() authenticating,
+  }) {
+    return authenticating();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(User user)? authenticated,
+    TResult Function()? unauthenticated,
+    TResult Function()? authenticating,
+  }) {
+    return authenticating?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(User user)? authenticated,
+    TResult Function()? unauthenticated,
+    TResult Function()? authenticating,
+    required TResult orElse(),
+  }) {
+    if (authenticating != null) {
+      return authenticating();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_Authenticating value) authenticating,
+  }) {
+    return authenticating(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Authenticating value)? authenticating,
+  }) {
+    return authenticating?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Authenticating value)? authenticating,
+    required TResult orElse(),
+  }) {
+    if (authenticating != null) {
+      return authenticating(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Authenticating implements AuthState {
+  const factory _Authenticating() = _$_Authenticating;
 }

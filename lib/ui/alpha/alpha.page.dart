@@ -31,6 +31,7 @@ class AlphaPage extends StatelessWidget {
         Logger.widget('AlphaPage -> $state');
         return state.map(
           initial: (_) => _PageWidget(),
+          authenticating: (_) => _PageWidget(),
           authenticated: (_) => const HomePage(),
           unauthenticated: (_) => SignInOptionsPage.create(),
         );

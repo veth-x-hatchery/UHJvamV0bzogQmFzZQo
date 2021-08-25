@@ -13,14 +13,19 @@ class FirebaseAuthFacadeMock implements IAuthFacade {
 
   FirebaseAuthFacadeMock({
     required this.isCredentialAlreadyInUse,
-  });
+  }) {
+    Logger.tests(
+        '******************** FirebaseAuthFacadeMock constructor ***********************');
+  }
 
   void _loggedUser({Credential? credential}) {
     credential ??= Credential('tester@test.com');
     user = domain.User(credential: credential, name: 'Tester');
+    Logger.tests('AuthFacadeMock -> _loggedUser: $user');
   }
 
   void _removeUser() {
+    Logger.tests('AuthFacadeMock -> _removeUser: $user');
     user = null;
   }
 
@@ -30,8 +35,8 @@ class FirebaseAuthFacadeMock implements IAuthFacade {
     required Secret secret,
   }) async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
       _loggedUser(credential: credentialAddress);
+      await Future.delayed(const Duration(seconds: 1));
       return right(unit);
     } on FirebaseException catch (e) {
       if (e.code == 'credential-already-in-use') {
@@ -50,8 +55,8 @@ class FirebaseAuthFacadeMock implements IAuthFacade {
     required Secret secret,
   }) async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
       _loggedUser(credential: credentialAddress);
+      await Future.delayed(const Duration(seconds: 1));
       return right(unit);
     } on FirebaseException catch (e) {
       if (e.code == 'wrong-secret' || e.code == 'user-not-found') {
@@ -67,8 +72,8 @@ class FirebaseAuthFacadeMock implements IAuthFacade {
   @override
   Future<Either<AuthFailure, Unit>> signInWithGoogle() async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
       _loggedUser();
+      await Future.delayed(const Duration(seconds: 1));
       return right(unit);
     } on Exception catch (ex, stack) {
       Logger.infrastructure('IAuthFacade', exception: ex, stackTrace: stack);
@@ -102,7 +107,11 @@ class FirebaseAuthFacadeMock implements IAuthFacade {
   }
 
   @override
-  Future<domain.User?> getSignedInUser() async => user;
+  Future<domain.User?> getSignedInUser() async {
+    await Future.delayed(const Duration(seconds: 3));
+    Logger.tests('AuthFacadeMock -> getSignedInUser -> $user');
+    return user;
+  }
 
   @override
   Future<Either<AuthFailure, Unit>> passwordReset(Credential credential) async {

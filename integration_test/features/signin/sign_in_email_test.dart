@@ -33,6 +33,7 @@ void main() {
   void setupAuth({
     required bool isCredentialAlreadyInUse,
   }) {
+    Logger.tests('******************** setupAuth MOCK ***********************');
     getIt.unregister<IAuthFacade>();
     getIt.registerLazySingleton<IAuthFacade>(
       () => FirebaseAuthFacadeMock(isCredentialAlreadyInUse: true),
@@ -132,6 +133,10 @@ void main() {
 
       Logger.tests('1.2.1.4 - Authenticate with success and go to Home Page');
       await submitSecret(tester);
+      await tester.pump();
+      await Future.delayed(const Duration(seconds: 10));
+      await tester.pump();
+      await Future.delayed(const Duration(seconds: 10));
       await helper.screenshot(
           prefix: prefix,
           name: '1.2.1.4_authenticate_with_success_and_go_to_home_page');
