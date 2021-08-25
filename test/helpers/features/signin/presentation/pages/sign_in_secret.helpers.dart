@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 
-Finder secretInput() {
+Finder signInSecretInput() {
   // arrange
   final secretInput =
       find.byKey(const Key(SignInPageKeys.signInSecretPageSecretTextField));
@@ -11,7 +11,7 @@ Finder secretInput() {
   return secretInput;
 }
 
-Finder validationButton() {
+Finder signInSecretValidationButton() {
   // arrange
   final validationButton =
       find.byKey(const Key(SignInPageKeys.signInSecretPageValidateButton));
@@ -20,7 +20,7 @@ Finder validationButton() {
   return validationButton;
 }
 
-Finder changeCredentialButton() {
+Finder signInSecretChangeCredentialButton() {
   // arrange
   final button =
       find.byKey(const Key(SignInPageKeys.signInChangeCredentialButton));
@@ -29,11 +29,20 @@ Finder changeCredentialButton() {
   return button;
 }
 
-Finder secretResetButton() {
+Finder signInSecretResetButton() {
   // arrange
   final secretResetButton =
       find.byKey(const Key(SignInPageKeys.signInsecretResetButton));
   // Act && Assert
   expect(secretResetButton, findsOneWidget);
   return secretResetButton;
+}
+
+// Todo(v): duplicated
+Finder signInBackPageButton() {
+  // arrange
+  final button = find.byKey(const Key(SignInPageKeys.signInBackPageButton));
+  // Act && Assert
+  expect(button, findsOneWidget);
+  return button;
 }

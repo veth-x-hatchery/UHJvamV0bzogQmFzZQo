@@ -195,7 +195,7 @@ void main() {
 
     _prepareFormValidationValues();
 
-    await tester.tap(validationButton());
+    await tester.tap(signInSecretValidationButton());
 
     await tester.pump();
 
@@ -214,13 +214,13 @@ void main() {
 
     const invalidSecret = '1234';
 
-    await tester.enterText(secretInput(), invalidSecret);
+    await tester.enterText(signInSecretInput(), invalidSecret);
 
     // Act
 
     _prepareFormValidationValues(value: invalidSecret);
 
-    await tester.tap(validationButton());
+    await tester.tap(signInSecretValidationButton());
 
     await tester.pump();
 
@@ -240,13 +240,13 @@ void main() {
 
     const validSecret = 'dmFsaWRwYXNzd29yZAo';
 
-    await tester.enterText(secretInput(), validSecret);
+    await tester.enterText(signInSecretInput(), validSecret);
 
     _prepareFormValidationValues(value: validSecret);
 
     // Act
 
-    await tester.tap(validationButton());
+    await tester.tap(signInSecretValidationButton());
 
     // assert
 
@@ -265,7 +265,7 @@ void main() {
 
     // Act
 
-    await tester.tap(changeCredentialButton());
+    await tester.tap(signInSecretChangeCredentialButton());
 
     // assert
 
@@ -314,7 +314,7 @@ void main() {
 
       // Act
 
-      await tester.tap(changeCredentialButton());
+      await tester.tap(signInSecretChangeCredentialButton());
 
       // assert
 
@@ -332,7 +332,7 @@ void main() {
 
       // Act
 
-      await tester.tap(secretResetButton());
+      await tester.tap(signInSecretResetButton());
 
       // assert
 

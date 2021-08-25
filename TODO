@@ -26,9 +26,9 @@ Drive Tests
 
 					1.2.1 - Go To Secret Page
 
-			1.2.1.2 - Home Page
+			1.2.1.2 - Enter a valid password
 
-			1.2.1.2 - Change my email
+			1.2.1.3 - Authenticate with success and go to Home Page
 		
 		1.2.2 - Go To Register Page
 
