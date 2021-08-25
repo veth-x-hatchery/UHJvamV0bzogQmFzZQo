@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,6 +51,16 @@ class SignInOptionsPage extends StatefulWidget {
 }
 
 class _SignInOptionsPageState extends State<SignInOptionsPage> {
+  Stream<NavigationState>? _previousStream;
+  StreamSubscription? _streamSubscription;
+  void _listenGoTo(Stream<NavigationState> received) {
+    if (received != _previousStream) {
+      _streamSubscription?.cancel();
+      _previousStream = received;
+      _streamSubscription = _previousStream!.listen(_goTo);
+    }
+  }
+
   ISignInServiceLocator get serviceLocator => widget.serviceLocator;
 
   @override
@@ -56,6 +68,14 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
     Logger.widget('SignInOptionsPage -> initState');
     serviceLocator.init();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // BlocProvider.of<NavigationCubit>(context).stream
+    _listenGoTo(BlocProvider.of<NavigationCubit>(context).stream);
+    FocusScope.of(context).unfocus();
+    super.didChangeDependencies();
   }
 
   @override
@@ -67,89 +87,87 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<NavigationCubit, NavigationState>(
-      listener: (context, state) {
+    return signInScaffold(
+      context,
+      child: BlocBuilder<SignInOptionsBloc, SignInOptionsState>(
+          builder: (context, state) {
         FocusScope.of(context).unfocus();
-        Logger.widget('SignInPage -> NavigationCubit -> $state');
-        state.when(
-          initial: () {},
-          goTo: (page) {
-            switch (page.to) {
-              case SignInPageRoutes.secretEntry:
-                Navigator.pushReplacement(
-                  context,
-                  SlideLeftRoute<void>(
-                    page:
-                        SignInSecretPage.create(serviceLocator: serviceLocator),
-                  ),
-                );
-                break;
-              case SignInPageRoutes.registerCredentialSignIn:
-                Navigator.pushReplacement(
-                    context,
-                    SlideLeftRoute<void>(
-                        page: SignInRegisterPage.create(
-                            serviceLocator: serviceLocator,
-                            credential: page.parameters as Credential?)));
-                break;
-              case SignInPageRoutes.credentialEntry:
-                final credentialPage =
-                    SignInCredentialPage.create(serviceLocator: serviceLocator);
-                page.from == SignInPageRoutes.signInOptions
-                    ? Navigator.push(
-                        context, SlideLeftRoute<void>(page: credentialPage))
-                    : Navigator.pushReplacement(
-                        context, SlideRightRoute<void>(page: credentialPage));
-                break;
-              default:
-                break;
-            }
-          },
+        final isLoading = state == const SignInOptionsState.loading();
+        return FormColumn(
+          children: [
+            SizedBox(height: SizeConfig.defaultEdgeSpace),
+            SignInLoader(
+              key: const Key(SignInPageKeys.signInLoader),
+              size: SizeConfig.screenHeight * 0.25,
+              loading: isLoading,
+            ),
+            SizedBox(height: SizeConfig.defaultEdgeSpace),
+            SignInButton(
+              key: const Key(SignInPageKeys.signInWithGoogleButton),
+              assetName: 'assets/images/google-logo.png',
+              text: Texts.signInWithGoogle,
+              textColor: Colors.black87,
+              color: Colors.white,
+              onPressed: () => BlocProvider.of<SignInOptionsBloc>(context)
+                  .add(const SignInOptionsEvent.signInWithGoogleEvent()),
+            ),
+            SizedBox(height: SizeConfig.defaultEdgeSpace),
+            SignInButton(
+              key: const Key(SignInPageKeys.signInWithCredential),
+              assetName: 'assets/images/mail-logo.png',
+              text: Texts.signInWithCredential,
+              textColor: Colors.white,
+              color: Colors.teal[700],
+              onPressed: isLoading
+                  ? () => {}
+                  : () => BlocProvider.of<NavigationCubit>(context).goTo(
+                        SignInPageGoTo.credentialPage(
+                            from: SignInPageRoutes.signInOptions),
+                      ),
+            ),
+          ],
         );
+      }),
+      leading: false,
+    );
+  }
+
+  void _goTo(NavigationState state) {
+    FocusScope.of(context).unfocus();
+    Logger.widget('SignInPage -> NavigationCubit -> $state');
+    state.when(
+      initial: () {},
+      goTo: (page) {
+        switch (page.to) {
+          case SignInPageRoutes.secretEntry:
+            Navigator.pushReplacement(
+              context,
+              SlideLeftRoute<void>(
+                page: SignInSecretPage.create(serviceLocator: serviceLocator),
+              ),
+            );
+            break;
+          case SignInPageRoutes.registerCredentialSignIn:
+            Navigator.pushReplacement(
+                context,
+                SlideLeftRoute<void>(
+                    page: SignInRegisterPage.create(
+                        serviceLocator: serviceLocator,
+                        credential: page.parameters as Credential?)));
+            break;
+          case SignInPageRoutes.credentialEntry:
+            final credentialPage =
+                SignInCredentialPage.create(serviceLocator: serviceLocator);
+            page.from == SignInPageRoutes.signInOptions
+                ? Navigator.push(
+                    context, SlideLeftRoute<void>(page: credentialPage))
+                : Navigator.pushReplacement(
+                    context, SlideRightRoute<void>(page: credentialPage));
+            break;
+          default:
+            break;
+        }
       },
-      child: signInScaffold(
-        context,
-        child: BlocBuilder<SignInOptionsBloc, SignInOptionsState>(
-            builder: (context, state) {
-          FocusScope.of(context).unfocus();
-          final isLoading = state == const SignInOptionsState.loading();
-          return FormColumn(
-            children: [
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              SignInLoader(
-                key: const Key(SignInPageKeys.signInLoader),
-                size: SizeConfig.screenHeight * 0.25,
-                loading: isLoading,
-              ),
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              SignInButton(
-                key: const Key(SignInPageKeys.signInWithGoogleButton),
-                assetName: 'assets/images/google-logo.png',
-                text: Texts.signInWithGoogle,
-                textColor: Colors.black87,
-                color: Colors.white,
-                onPressed: () => BlocProvider.of<SignInOptionsBloc>(context)
-                    .add(const SignInOptionsEvent.signInWithGoogleEvent()),
-              ),
-              SizedBox(height: SizeConfig.defaultEdgeSpace),
-              SignInButton(
-                key: const Key(SignInPageKeys.signInWithCredential),
-                assetName: 'assets/images/mail-logo.png',
-                text: Texts.signInWithCredential,
-                textColor: Colors.white,
-                color: Colors.teal[700],
-                onPressed: isLoading
-                    ? () => {}
-                    : () => BlocProvider.of<NavigationCubit>(context).goTo(
-                          SignInPageGoTo.credentialPage(
-                              from: SignInPageRoutes.signInOptions),
-                        ),
-              ),
-            ],
-          );
-        }),
-        leading: false,
-      ),
     );
   }
 }
