@@ -86,9 +86,10 @@ void main() {
           prefix: prefix, name: '1.2.1.1_forgot_my_password');
 
       Logger.tests('1.2.1.2 - Change my email');
+      await signInSecretDragChangeCredentialButton(tester);
+      await helper.screenshot(prefix: prefix, name: '1.2.1.2_change_my_email');
       await changeCredential(tester);
       expect(find.byType(SignInCredentialPage), findsOneWidget);
-      await helper.screenshot(prefix: prefix, name: '1.2.1.2_change_my_email');
 
       Logger.tests('Goto:  1.1 - Sign in with email');
       Logger.tests('Goto:  1.2 - Valid Registered email');

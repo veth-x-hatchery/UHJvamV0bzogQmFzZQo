@@ -97,6 +97,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
           return Form(
             key: _formKey,
             child: FormColumn(
+              key: const Key(SignInPageKeys.signInSecretPageFormColumn),
               children: [
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 SignInLoader(

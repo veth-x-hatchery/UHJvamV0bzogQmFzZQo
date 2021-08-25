@@ -46,3 +46,12 @@ Finder signInBackPageButton() {
   expect(button, findsOneWidget);
   return button;
 }
+
+Finder signInSecretPageFormColumn() {
+  // arrange
+  final widget =
+      find.byKey(const Key(SignInPageKeys.signInSecretPageFormColumn));
+  // Act && Assert
+  expect(widget, findsOneWidget);
+  return widget;
+}

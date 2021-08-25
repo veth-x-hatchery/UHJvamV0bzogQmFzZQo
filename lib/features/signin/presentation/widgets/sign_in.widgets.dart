@@ -22,6 +22,8 @@ class SignInPageKeys {
 
   //! sign in secret page
 
+  static const String signInSecretPageFormColumn = 'signInSecretPageFormColumn';
+
   static const String signInSecretPageSecretTextField =
       'signInSecretPageSecretTextField';
 
