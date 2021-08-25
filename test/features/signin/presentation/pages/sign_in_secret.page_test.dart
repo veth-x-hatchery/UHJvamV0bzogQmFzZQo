@@ -16,6 +16,7 @@ import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.pag
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
+import '../../../../helpers/features/signin/presentation/pages/sign_in_secret.helpers.dart';
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
@@ -70,42 +71,6 @@ void main() {
     _secretBlocState(SignInSecretState.initial());
     _scretResetBlocState(SignInSecretResetState.initial());
     _navigationCubitState();
-  }
-
-  Finder _secretInput() {
-    // arrange
-    final secretInput =
-        find.byKey(const Key(SignInPageKeys.signInSecretPageSecretTextField));
-    // Act && Assert
-    expect(secretInput, findsOneWidget);
-    return secretInput;
-  }
-
-  Finder _validationButton() {
-    // arrange
-    final validationButton =
-        find.byKey(const Key(SignInPageKeys.signInSecretPageValidateButton));
-    // Act && Assert
-    expect(validationButton, findsOneWidget);
-    return validationButton;
-  }
-
-  Finder _changeCredentialButton() {
-    // arrange
-    final button =
-        find.byKey(const Key(SignInPageKeys.signInChangeCredentialButton));
-    // Act && Assert
-    expect(button, findsOneWidget);
-    return button;
-  }
-
-  Finder _secretResetButton() {
-    // arrange
-    final secretResetButton =
-        find.byKey(const Key(SignInPageKeys.signInsecretResetButton));
-    // Act && Assert
-    expect(secretResetButton, findsOneWidget);
-    return secretResetButton;
   }
 
   /// Form uses BLoC state to realize validations
@@ -230,7 +195,7 @@ void main() {
 
     _prepareFormValidationValues();
 
-    await tester.tap(_validationButton());
+    await tester.tap(validationButton());
 
     await tester.pump();
 
@@ -249,13 +214,13 @@ void main() {
 
     const invalidSecret = '1234';
 
-    await tester.enterText(_secretInput(), invalidSecret);
+    await tester.enterText(secretInput(), invalidSecret);
 
     // Act
 
     _prepareFormValidationValues(value: invalidSecret);
 
-    await tester.tap(_validationButton());
+    await tester.tap(validationButton());
 
     await tester.pump();
 
@@ -275,13 +240,13 @@ void main() {
 
     const validSecret = 'dmFsaWRwYXNzd29yZAo';
 
-    await tester.enterText(_secretInput(), validSecret);
+    await tester.enterText(secretInput(), validSecret);
 
     _prepareFormValidationValues(value: validSecret);
 
     // Act
 
-    await tester.tap(_validationButton());
+    await tester.tap(validationButton());
 
     // assert
 
@@ -300,7 +265,7 @@ void main() {
 
     // Act
 
-    await tester.tap(_changeCredentialButton());
+    await tester.tap(changeCredentialButton());
 
     // assert
 
@@ -349,7 +314,7 @@ void main() {
 
       // Act
 
-      await tester.tap(_changeCredentialButton());
+      await tester.tap(changeCredentialButton());
 
       // assert
 
@@ -367,7 +332,7 @@ void main() {
 
       // Act
 
-      await tester.tap(_secretResetButton());
+      await tester.tap(secretResetButton());
 
       // assert
 
