@@ -13,7 +13,7 @@ import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_p
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
-import '../../../../helpers/features/signin/presentation/pages/sign_in_register.helpers.dart';
+import '../../../../helpers/features/signin/presentation/pages/sign_in_register.finders.dart';
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 

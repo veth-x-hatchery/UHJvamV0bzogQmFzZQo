@@ -16,7 +16,7 @@ import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dar
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
-import '../../../../helpers/features/signin/presentation/pages/sign_in_secret.helpers.dart';
+import '../../../../helpers/features/signin/presentation/pages/sign_in_secret.finders.dart';
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 

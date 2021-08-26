@@ -15,8 +15,8 @@ import 'package:vethx_beta/main.dart' as app;
 import 'package:vethx_beta/service_locator.dart';
 
 import 'finders/home.page.dart';
-import 'finders/sign_in_email.page.dart';
-import 'finders/sign_in_secret.page.dart';
+import 'finders/sign_in_email.helpers.dart';
+import 'finders/sign_in_secret.helpers.dart';
 import 'helpers/sign_in_integration_tests_helpers.dart';
 
 void main() {
