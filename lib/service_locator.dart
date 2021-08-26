@@ -8,7 +8,7 @@ import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/api/api_setup.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
-import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade_mock.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';

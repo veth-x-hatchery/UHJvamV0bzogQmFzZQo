@@ -21,5 +21,6 @@ lcov --directory lib/features \
 "*_event.dart" \
 "*.freezed.dart" \
 "*_state.dart" \
+"*mock.dart" \
 -o coverage/new_lcov.info
 genhtml coverage/new_lcov.info -o coverage/html
