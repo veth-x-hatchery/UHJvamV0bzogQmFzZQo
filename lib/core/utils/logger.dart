@@ -109,6 +109,18 @@ class Logger {
     );
   }
 
+  Logger.testStep(
+    String message, {
+    dynamic exception,
+    StackTrace? stackTrace,
+  }) {
+    Logger.tests(
+      '[Step] $message',
+      exception: exception,
+      stackTrace: stackTrace,
+    );
+  }
+
   static void e(
     String message, {
     dynamic ex,
