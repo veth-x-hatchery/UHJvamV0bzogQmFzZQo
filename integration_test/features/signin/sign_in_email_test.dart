@@ -100,8 +100,6 @@ void main() {
 
       step = '1.2.1.1_forgot_my_password';
       Logger.testStep(step);
-      Logger.testStep(step);
-      await hideKeyboard(tester);
       await forgotSecret(tester);
       expect(find.byType(SnackBar), findsOneWidget);
       await helper.screenshot(prefix: prefix, name: step);
@@ -122,27 +120,29 @@ void main() {
       await enterAvalidRegisteredEmail(tester);
       Logger.testStep('goto:__1.2.1_-_go_to_secret_page');
       await submitEmail(tester);
-      await Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(FirebaseAuthFacadeMock.loadingDuration);
       expect(find.byType(SignInSecretPage), findsOneWidget);
 
-      step = '1.2.1.4_enter_a_valid_password';
+      step = '1.2.1.4_enter_an_invalid_password';
       Logger.testStep(step);
       await enterAnInvalidSecret(tester);
-      await helper.screenshot(prefix: prefix, name: step);
+      await submitSecret(tester);
       expect(find.text(SecretMessageErrors.shortSecret), findsOneWidget);
       await helper.screenshot(prefix: prefix, name: step);
 
       step = '1.2.1.5_authenticate_with_success_and_go_to_home_page';
       Logger.testStep(step);
+      await enterAvalidRegisteredSecret(tester);
       await submitSecret(tester);
-      await Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(FirebaseAuthFacadeMock.loadingDuration);
       expect(find.byType(HomePage), findsOneWidget);
       await helper.screenshot(prefix: prefix, name: step);
 
       step = '1.2.1.6_logout';
       Logger.testStep(step);
-      setupAuth(isCredentialAlreadyInUse: false);
-      await tester.pump();
+      await logOut(tester);
+      await Future.delayed(FirebaseAuthFacadeMock.loadingDuration);
+      await tester.pumpAndSettle();
       expect(find.byType(SignInOptionsPage), findsOneWidget);
     });
   });

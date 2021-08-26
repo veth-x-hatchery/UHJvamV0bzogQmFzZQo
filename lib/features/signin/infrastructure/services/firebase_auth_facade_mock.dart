@@ -8,6 +8,8 @@ import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
 class FirebaseAuthFacadeMock implements IAuthFacade {
+  static const loadingDuration = Duration(seconds: 1);
+
   domain.User? user;
   final bool isCredentialAlreadyInUse;
 
