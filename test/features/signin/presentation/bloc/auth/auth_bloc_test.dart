@@ -30,6 +30,7 @@ void main() {
           .thenAnswer((_) async => Future.value());
 
       final expected = [
+        const AuthState.authenticating(),
         const AuthState.unauthenticated(),
       ];
 
@@ -52,6 +53,7 @@ void main() {
           .thenAnswer((_) => Future.value(user));
 
       final expected = [
+        const AuthState.authenticating(),
         AuthState.authenticated(user),
       ];
 

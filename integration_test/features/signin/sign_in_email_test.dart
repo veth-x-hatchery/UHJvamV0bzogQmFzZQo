@@ -140,36 +140,8 @@ void main() {
       step = '1.2.1.5_logout';
       Logger.testStep(step);
       setupAuth(isCredentialAlreadyInUse: false);
-      // await logOut(tester);
       await tester.pump();
       expect(find.byType(SignInOptionsPage), findsOneWidget);
-
-      // step = '1.2.2_go_to_register_page';
-      // Logger.testStep(step);
-      // await goToEmailPage(parameters);
-      // expect(find.byType(SignInCredentialPage), findsOneWidget);
-
-      // step = '1.2.2.1_invalid_email_message';
-      // Logger.testStep(step);
-      // // await enterAnInvalidEmail(tester);
-      // // await submitEmail(tester);
-      // expect(find.text(CredentialAddressMessageErrors.invalidCredential),
-      //     findsOneWidget);
-      // await helper.screenshot(prefix: prefix, name: step);
-
-      // step = '1.2.2.2_invalid_password_message';
-      // Logger.testStep(step);
-      // // await enterAnInvalidEmail(tester);
-      // // await submitEmail(tester);
-      // expect(find.text(SecretMessageErrors.shortSecret), findsOneWidget);
-      // await helper.screenshot(prefix: prefix, name: step);
-
-      // step = '1.2.2.3_enter_a_valid_password_and_go_to_home_page';
-      // Logger.testStep(step);
-      // // await submitSecret(tester);
-      // // await Future.delayed(const Duration(seconds: 5));
-      // expect(find.byType(HomePage), findsOneWidget);
-      // await helper.screenshot(prefix: prefix, name: step);
     });
   });
 }
