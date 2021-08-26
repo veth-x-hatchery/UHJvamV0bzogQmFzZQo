@@ -15,7 +15,7 @@ import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 
 final getIt = GetIt.instance;
 
-Future<void> init() async {
+Future<void> serviceLocatorInit() async {
   //! External
 
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -44,7 +44,7 @@ Future<void> init() async {
   getIt.registerLazySingleton<FirebaseUserMapper>(() => FirebaseUserMapper());
 
   getIt.registerLazySingleton<IAuthFacade>(
-    () => FirebaseAuthFacadeMock(isCredentialAlreadyInUse: false),
+    () => AuthFacadeMock(isCredentialAlreadyInUse: false),
   );
   // getIt.registerLazySingleton<IAuthFacade>(
   //   () => FirebaseAuthFacade(

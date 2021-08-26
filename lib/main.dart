@@ -7,7 +7,7 @@ import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await init();
+  await serviceLocatorInit();
   runApp(App());
 }
 

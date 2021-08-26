@@ -7,17 +7,50 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
-class FirebaseAuthFacadeMock implements IAuthFacade {
-  static const loadingDuration = Duration(seconds: 1);
+class AuthFacadeMock implements IAuthFacade {
+  //! Variables
 
   domain.User? user;
-  final bool isCredentialAlreadyInUse;
 
-  FirebaseAuthFacadeMock({
+  bool isCredentialAlreadyInUse;
+
+  /// Each integration test will have a specific scenario
+  /// [integration_test/features/signin/sign_in_email_test.dart]
+  /// This can be useful in other .mocks.dart
+  void setupSignInEmailIntegrationTest() {
+    Logger.tests(
+        '****** AuthFacadeMock setupSignInEmailIntegrationTest **********');
+    isCredentialAlreadyInUse = true;
+  }
+
+  /// [integration_test/features/signin/sign_in_register_test.dart]
+  void setupSignInRegisterIntegrationTest() {
+    Logger.tests(
+        '****** AuthFacadeMock setupSignInEmailIntegrationTest **********');
+    isCredentialAlreadyInUse = false;
+  }
+
+  void setupHomeAlreadyLoggedIntegrationTest() {
+    Logger.tests(
+        '****** AuthFacadeMock setupHomeAlreadyLoggedIntegrationTest **********');
+    isCredentialAlreadyInUse = false;
+    user = defaultUserTester;
+  }
+
+  //! Test helpers
+
+  static const loadingDuration = Duration(seconds: 1);
+
+  static domain.User defaultUserTester = domain.User(
+    credential: Credential('tester@test.com'),
+    name: 'Tester',
+  );
+
+  AuthFacadeMock({
     required this.isCredentialAlreadyInUse,
   }) {
     Logger.tests(
-        '******************** FirebaseAuthFacadeMock constructor ***********************');
+        '******************** AuthFacadeMock constructor ***********************');
   }
 
   void _loggedUser({Credential? credential}) {
@@ -45,7 +78,7 @@ class FirebaseAuthFacadeMock implements IAuthFacade {
         return left(const AuthFailure.credentialAlreadyInUse());
       } else {
         Logger.infrastructure(
-            'FirebaseAuthFacadeMock.registerWithCredentialAndSecret -> ${e.code}');
+            'AuthFacadeMock.registerWithCredentialAndSecret -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
     }
@@ -65,7 +98,7 @@ class FirebaseAuthFacadeMock implements IAuthFacade {
         return left(const AuthFailure.invalidCredentialAndSecretCombination());
       } else {
         Logger.infrastructure(
-            'FirebaseAuthFacadeMock.signInWithCredentialAndSecret -> ${e.code}');
+            'AuthFacadeMock.signInWithCredentialAndSecret -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
     }
@@ -96,7 +129,7 @@ class FirebaseAuthFacadeMock implements IAuthFacade {
         return right(false);
       } else {
         Logger.infrastructure(
-            'FirebaseAuthFacadeMock.credentialIsAlreadyInUse -> ${e.code}');
+            'AuthFacadeMock.credentialIsAlreadyInUse -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
     }
@@ -125,10 +158,8 @@ class FirebaseAuthFacadeMock implements IAuthFacade {
           e.code.contains('user-not-found')) {
         return left(const AuthFailure.invalidCachedCredential());
       } else {
-        Logger.infrastructure(
-            'FirebaseAuthFacadeMock.resetPassword -> ${e.code}',
-            exception: e,
-            stackTrace: s);
+        Logger.infrastructure('AuthFacadeMock.resetPassword -> ${e.code}',
+            exception: e, stackTrace: s);
         return left(const AuthFailure.serverError());
       }
     }

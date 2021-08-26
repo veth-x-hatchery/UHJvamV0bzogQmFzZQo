@@ -21,12 +21,11 @@ class IntegrationTestsHelpers {
     required String prefix,
     required String name,
   }) async {
-    await Future.delayed(const Duration(seconds: 1));
-
     index++;
 
     // Todo(v): create a function that guarantee that folder
     // Maybe create a folder by test group
+    
     final List<int> firstPng = await binding.takeScreenshot(
         '.${Directory.current.path}screenshots/screenshot_$prefix.${index}_$name');
 
