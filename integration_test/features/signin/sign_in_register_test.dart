@@ -35,6 +35,8 @@ void main() {
   }
 
   setUp(() async {
+    INTEGRATION_TESTS = true;
+
     app.main();
 
     await _setupAndroidScreenShots();

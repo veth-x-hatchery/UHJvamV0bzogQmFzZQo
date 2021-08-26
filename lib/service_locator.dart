@@ -15,6 +15,9 @@ import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 
 final getIt = GetIt.instance;
 
+// ignore: non_constant_identifier_names
+bool INTEGRATION_TESTS = false;
+
 Future<void> serviceLocatorInit() async {
   //! External
 
