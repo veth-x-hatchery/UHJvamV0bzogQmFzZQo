@@ -11,11 +11,12 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
+import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
+import '../../../../helpers/features/signin/presentation/pages/sign_in_secret.finders.dart';
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
@@ -61,51 +62,15 @@ void main() {
   }
 
   void _navigationCubitState() {
-    when(_sl.mockNavigationCubit.goTo(any)).thenReturn(null);
-    when(_sl.mockNavigationCubit.stream)
-        .thenAnswer((_) => Stream.value(const NavigationState.initial()));
+    when(_sl.mockNavigationManager.goTo(any)).thenReturn(null);
+    when(_sl.mockNavigationManager.stream)
+        .thenAnswer((_) => Stream.value(SignInPageGoTo.optionsPage()));
   }
 
   void _setInitialState() {
     _secretBlocState(SignInSecretState.initial());
     _scretResetBlocState(SignInSecretResetState.initial());
     _navigationCubitState();
-  }
-
-  Finder _secretInput() {
-    // arrange
-    final secretInput =
-        find.byKey(const Key(SignInPageKeys.signInSecretPageSecretTextField));
-    // Act && Assert
-    expect(secretInput, findsOneWidget);
-    return secretInput;
-  }
-
-  Finder _validationButton() {
-    // arrange
-    final validationButton =
-        find.byKey(const Key(SignInPageKeys.signInSecretPageValidateButton));
-    // Act && Assert
-    expect(validationButton, findsOneWidget);
-    return validationButton;
-  }
-
-  Finder _changeCredentialButton() {
-    // arrange
-    final button =
-        find.byKey(const Key(SignInPageKeys.signInChangeCredentialButton));
-    // Act && Assert
-    expect(button, findsOneWidget);
-    return button;
-  }
-
-  Finder _secretResetButton() {
-    // arrange
-    final secretResetButton =
-        find.byKey(const Key(SignInPageKeys.signInsecretResetButton));
-    // Act && Assert
-    expect(secretResetButton, findsOneWidget);
-    return secretResetButton;
   }
 
   /// Form uses BLoC state to realize validations
@@ -230,7 +195,7 @@ void main() {
 
     _prepareFormValidationValues();
 
-    await tester.tap(_validationButton());
+    await tester.tap(signInSecretValidationButton());
 
     await tester.pump();
 
@@ -249,13 +214,13 @@ void main() {
 
     const invalidSecret = '1234';
 
-    await tester.enterText(_secretInput(), invalidSecret);
+    await tester.enterText(signInSecretInput(), invalidSecret);
 
     // Act
 
     _prepareFormValidationValues(value: invalidSecret);
 
-    await tester.tap(_validationButton());
+    await tester.tap(signInSecretValidationButton());
 
     await tester.pump();
 
@@ -275,13 +240,13 @@ void main() {
 
     const validSecret = 'dmFsaWRwYXNzd29yZAo';
 
-    await tester.enterText(_secretInput(), validSecret);
+    await tester.enterText(signInSecretInput(), validSecret);
 
     _prepareFormValidationValues(value: validSecret);
 
     // Act
 
-    await tester.tap(_validationButton());
+    await tester.tap(signInSecretValidationButton());
 
     // assert
 
@@ -300,11 +265,11 @@ void main() {
 
     // Act
 
-    await tester.tap(_changeCredentialButton());
+    await tester.tap(signInSecretChangeCredentialButton());
 
     // assert
 
-    // verify(_sl.mockNavigationCubit).called(1);
+    // verify(_sl.mockNavigationManager).called(1);
   });
 
   testWidgets('when receive a failure then should show a snack message',
@@ -349,11 +314,11 @@ void main() {
 
       // Act
 
-      await tester.tap(_changeCredentialButton());
+      await tester.tap(signInSecretChangeCredentialButton());
 
       // assert
 
-      verify(_sl.mockNavigationCubit.goTo(any)).called(1);
+      verify(_sl.mockNavigationManager.goTo(any)).called(1);
     });
   });
 
@@ -367,7 +332,7 @@ void main() {
 
       // Act
 
-      await tester.tap(_secretResetButton());
+      await tester.tap(signInSecretResetButton());
 
       // assert
 

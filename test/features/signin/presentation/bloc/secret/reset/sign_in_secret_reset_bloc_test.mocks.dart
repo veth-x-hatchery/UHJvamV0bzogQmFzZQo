@@ -2,18 +2,17 @@
 // in vethx_beta/test/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
-import 'package:bloc/bloc.dart' as _i6;
-import 'package:dartz/dartz.dart' as _i4;
+import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
-    as _i8;
-import 'package:vethx_beta/features/signin/domain/core/usecase.dart' as _i9;
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart'
     as _i7;
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart'
-    as _i2;
+import 'package:vethx_beta/features/signin/domain/core/usecase.dart' as _i8;
+import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart'
+    as _i6;
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart'
+    as _i3;
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart'
     as _i5;
 
@@ -25,70 +24,25 @@ import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dar
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
-class _FakeNavigationState_0 extends _i1.Fake implements _i2.NavigationState {}
+class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 
-class _FakeStreamSubscription_1<T> extends _i1.Fake
-    implements _i3.StreamSubscription<T> {}
-
-class _FakeEither_2<L, R> extends _i1.Fake implements _i4.Either<L, R> {}
-
-/// A class which mocks [NavigationCubit].
+/// A class which mocks [NavigationManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigationCubit extends _i1.Mock implements _i2.NavigationCubit {
-  MockNavigationCubit() {
+class MockNavigationManager extends _i1.Mock implements _i3.NavigationManager {
+  MockNavigationManager() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.NavigationState get state =>
-      (super.noSuchMethod(Invocation.getter(#state),
-          returnValue: _FakeNavigationState_0()) as _i2.NavigationState);
-  @override
-  _i3.Stream<_i2.NavigationState> get stream =>
+  _i4.Stream<_i5.SignInPageGoTo> get stream =>
       (super.noSuchMethod(Invocation.getter(#stream),
-              returnValue: Stream<_i2.NavigationState>.empty())
-          as _i3.Stream<_i2.NavigationState>);
+              returnValue: Stream<_i5.SignInPageGoTo>.empty())
+          as _i4.Stream<_i5.SignInPageGoTo>);
   @override
   void goTo(_i5.SignInPageGoTo? parameters) =>
       super.noSuchMethod(Invocation.method(#goTo, [parameters]),
           returnValueForMissingStub: null);
-  @override
-  _i3.StreamSubscription<_i2.NavigationState> listen(
-          void Function(_i2.NavigationState)? onData,
-          {Function? onError,
-          void Function()? onDone,
-          bool? cancelOnError}) =>
-      (super.noSuchMethod(
-              Invocation.method(#listen, [
-                onData
-              ], {
-                #onError: onError,
-                #onDone: onDone,
-                #cancelOnError: cancelOnError
-              }),
-              returnValue: _FakeStreamSubscription_1<_i2.NavigationState>())
-          as _i3.StreamSubscription<_i2.NavigationState>);
-  @override
-  void emit(_i2.NavigationState? state) =>
-      super.noSuchMethod(Invocation.method(#emit, [state]),
-          returnValueForMissingStub: null);
-  @override
-  void onChange(_i6.Change<_i2.NavigationState>? change) =>
-      super.noSuchMethod(Invocation.method(#onChange, [change]),
-          returnValueForMissingStub: null);
-  @override
-  void addError(Object? error, [StackTrace? stackTrace]) =>
-      super.noSuchMethod(Invocation.method(#addError, [error, stackTrace]),
-          returnValueForMissingStub: null);
-  @override
-  void onError(Object? error, StackTrace? stackTrace) =>
-      super.noSuchMethod(Invocation.method(#onError, [error, stackTrace]),
-          returnValueForMissingStub: null);
-  @override
-  _i3.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
   @override
   String toString() => super.toString();
 }
@@ -96,18 +50,18 @@ class MockNavigationCubit extends _i1.Mock implements _i2.NavigationCubit {
 /// A class which mocks [SignInSecretReset].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInSecretReset extends _i1.Mock implements _i7.SignInSecretReset {
+class MockSignInSecretReset extends _i1.Mock implements _i6.SignInSecretReset {
   MockSignInSecretReset() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<_i4.Either<_i8.FailureDetails, _i4.Unit>> call(
-          _i9.NoParams? params) =>
+  _i4.Future<_i2.Either<_i7.FailureDetails, _i2.Unit>> call(
+          _i8.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<_i4.Either<_i8.FailureDetails, _i4.Unit>>.value(
-              _FakeEither_2<_i8.FailureDetails, _i4.Unit>())) as _i3
-          .Future<_i4.Either<_i8.FailureDetails, _i4.Unit>>);
+          returnValue: Future<_i2.Either<_i7.FailureDetails, _i2.Unit>>.value(
+              _FakeEither_0<_i7.FailureDetails, _i2.Unit>())) as _i4
+          .Future<_i2.Either<_i7.FailureDetails, _i2.Unit>>);
   @override
   String toString() => super.toString();
 }

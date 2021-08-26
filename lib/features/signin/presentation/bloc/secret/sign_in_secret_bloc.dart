@@ -9,7 +9,7 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 
 part 'sign_in_secret_event.dart';
@@ -18,7 +18,7 @@ part 'sign_in_secret_bloc.freezed.dart';
 
 class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
   final AuthBloc _authBloc;
-  final NavigationCubit _navigation;
+  final NavigationManager _navigation;
   final SignInWithSecret _signInWithSecret;
 
   SignInSecretBloc(

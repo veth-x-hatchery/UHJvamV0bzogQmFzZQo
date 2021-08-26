@@ -97,6 +97,30 @@ class Logger {
     );
   }
 
+  Logger.tests(
+    String message, {
+    dynamic exception,
+    StackTrace? stackTrace,
+  }) {
+    Logger.presentation(
+      '[Tests] $message',
+      exception: exception,
+      stackTrace: stackTrace,
+    );
+  }
+
+  Logger.testStep(
+    String message, {
+    dynamic exception,
+    StackTrace? stackTrace,
+  }) {
+    Logger.tests(
+      '[Step] $message',
+      exception: exception,
+      stackTrace: stackTrace,
+    );
+  }
+
   static void e(
     String message, {
     dynamic ex,
@@ -106,10 +130,12 @@ class Logger {
     //https://dev.to/mhadaily/how-to-capture-errors-and-send-platform-specific-information-to-sentry-in-flutter-4l6m
     // reportError(ex, stacktrace, message: message);
     // ignore: avoid_print, leading_newlines_in_multiline_strings
-    print('''\nLogger: $layer
+    print('''\n══╡ Logger ╞════════════════════════════════════════════════════
+             \nLogger: $layer
              \nMessage: $message 
              \nException: ${ex.toString()} 
-             \nStacktrace: ${stacktrace.toString()}\n''');
+             \nStacktrace: ${stacktrace.toString()}\n
+             \n════════════════════════════════════════════════════════════════''');
   }
 
   static void i(
@@ -117,7 +143,9 @@ class Logger {
     ArchitectureLayer layer = ArchitectureLayer.presentation,
   }) {
     // ignore: avoid_print, leading_newlines_in_multiline_strings
-    print('''\nLogger: $layer
-             \nMessage: $message''');
+    print('''\n══╡ Logger ╞═════════════════════════════════════════════════════
+             \nLogger: $layer
+             \nMessage: $message
+             \n═════════════════════════════════════════════════════════════════''');
   }
 }

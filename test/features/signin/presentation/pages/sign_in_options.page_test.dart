@@ -11,7 +11,6 @@ import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_opt
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
@@ -336,8 +335,8 @@ void main() {
       _sl.navigationCubit.stream.listen((value) {
         expect(
             value,
-            NavigationState.goTo(SignInPageGoTo.credentialPage(
-                from: SignInPageRoutes.signInOptions)));
+            SignInPageGoTo.credentialPage(
+                from: SignInPageRoutes.signInOptions));
       });
 
       await tester.pumpAndSettle();

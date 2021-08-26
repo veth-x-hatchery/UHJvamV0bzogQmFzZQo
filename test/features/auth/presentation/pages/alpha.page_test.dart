@@ -10,8 +10,8 @@ import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
+import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
@@ -59,9 +59,9 @@ void main() {
     when(_mockAuthBloc.stream).thenAnswer((_) => Stream.value(state));
   }
 
-  void _navigationState(NavigationState state) {
-    when(_sl.mockNavigationCubit.state).thenReturn(state);
-    when(_sl.mockNavigationCubit.stream).thenAnswer((_) => Stream.value(state));
+  void _navigationState(SignInPageGoTo state) {
+    when(_sl.mockNavigationManager.stream)
+        .thenAnswer((_) => Stream.value(state));
   }
 
   void _signInState(SignInOptionsState state) {
@@ -71,7 +71,7 @@ void main() {
 
   void _initialState() {
     _authState(const AuthState.unauthenticated());
-    _navigationState(const NavigationState.initial());
+    _navigationState(SignInPageGoTo.optionsPage());
     _signInState(const SignInOptionsState.initial());
   }
 

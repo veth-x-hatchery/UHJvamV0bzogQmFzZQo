@@ -3,6 +3,8 @@ import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/notifications/notification.dart';
 import 'package:vethx_beta/ui/widgets/shared/platform_alert_dialog.widget.dart';
 
+const snackBarNotificationDuration = Duration(seconds: 3);
+
 void vethxNotify(BuildContext context, VethxNotification notification) {
   WidgetsBinding.instance!.addPostFrameCallback((_) {
     switch (notification.type) {
@@ -10,7 +12,7 @@ void vethxNotify(BuildContext context, VethxNotification notification) {
         ScaffoldMessenger.of(context).removeCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(notification.message, textAlign: TextAlign.center),
-          duration: const Duration(seconds: 3),
+          duration: snackBarNotificationDuration,
         ));
         break;
       case VethxNotificationType.alert:

@@ -13,6 +13,7 @@ import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
+import '../../../../helpers/features/signin/presentation/pages/sign_in_credential.finders.dart';
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
@@ -47,24 +48,6 @@ void main() {
     when(_sl.mockSignInCredentialBloc.state).thenReturn(state);
     when(_sl.mockSignInCredentialBloc.stream)
         .thenAnswer((_) => Stream.value(state));
-  }
-
-  Finder _credentialInput() {
-    // arrange
-    final credentialInput = find.byKey(
-        const Key(SignInPageKeys.signInCredentialPageCredentialTextField));
-    // Act && Assert
-    expect(credentialInput, findsOneWidget);
-    return credentialInput;
-  }
-
-  Finder _validationButton() {
-    // arrange
-    final validationButton = find
-        .byKey(const Key(SignInPageKeys.signInCredentialPageValidateButton));
-    // Act && Assert
-    expect(validationButton, findsOneWidget);
-    return validationButton;
   }
 
   /// Form uses BLoC state to realize validations
@@ -150,7 +133,7 @@ void main() {
 
     _prepareFormValidationValues();
 
-    await tester.tap(_validationButton());
+    await tester.tap(signInCredentialPageInput());
 
     // assert
 
@@ -169,13 +152,13 @@ void main() {
 
     const invalidCredential = 'invalidcredential';
 
-    await tester.enterText(_credentialInput(), invalidCredential);
+    await tester.enterText(signInCredentialPageInput(), invalidCredential);
 
     _prepareFormValidationValues(value: invalidCredential);
 
     // Act
 
-    await tester.tap(_validationButton());
+    await tester.tap(signInCredentialPageValidationButton());
 
     await tester.pump();
 
@@ -193,13 +176,13 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(_credentialInput(), 'teste@teste.com');
+    await tester.enterText(signInCredentialPageInput(), 'teste@teste.com');
 
     _prepareFormValidationValues(value: 'teste@teste.com');
 
     // Act
 
-    await tester.tap(_validationButton());
+    await tester.tap(signInCredentialPageValidationButton());
 
     // assert
 

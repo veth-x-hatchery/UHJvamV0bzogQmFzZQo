@@ -7,22 +7,22 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 
 import 'sign_in_secret_reset_bloc_test.mocks.dart';
 
 @GenerateMocks([
-  NavigationCubit,
+  NavigationManager,
   SignInSecretReset,
 ])
 void main() {
   late SignInSecretResetBloc _bloc;
-  late MockNavigationCubit _mockNavigation;
+  late MockNavigationManager _mockNavigation;
   late MockSignInSecretReset _mockSignInSecretReset;
 
   setUp(() {
     _mockSignInSecretReset = MockSignInSecretReset();
-    _mockNavigation = MockNavigationCubit();
+    _mockNavigation = MockNavigationManager();
     _bloc = SignInSecretResetBloc(
       _mockSignInSecretReset,
       _mockNavigation,

@@ -5,7 +5,7 @@ import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
 
 class CredentialAddressMessageErrors {
   static const empty = 'Inform your email';
-  static const invalidCredential = 'Inform email';
+  static const invalidCredential = 'Inform a valid email';
 }
 
 class Credential extends ValueObject<String> {

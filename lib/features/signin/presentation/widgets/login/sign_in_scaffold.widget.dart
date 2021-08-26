@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 
 Scaffold signInScaffold(
   BuildContext context, {
@@ -12,6 +13,7 @@ Scaffold signInScaffold(
       elevation: 0,
       leading: leading
           ? IconButton(
+              key: const Key(SignInPageKeys.signInBackPageButton),
               icon: Icon(
                 Icons.arrow_back_ios,
                 color: Theme.of(context).primaryColor,

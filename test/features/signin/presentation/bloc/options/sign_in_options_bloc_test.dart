@@ -7,25 +7,25 @@ import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 
 import 'sign_in_options_bloc_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
-  NavigationCubit,
+  NavigationManager,
   SignInWithGoogle,
 ])
 void main() {
   late SignInOptionsBloc _bloc;
 
   late MockAuthBloc _authBloc;
-  late MockNavigationCubit _mockNavigation;
+  late MockNavigationManager _mockNavigation;
   late MockSignInWithGoogle _mockSignInWithGoogle;
 
   setUp(() {
     _authBloc = MockAuthBloc();
-    _mockNavigation = MockNavigationCubit();
+    _mockNavigation = MockNavigationManager();
     _mockSignInWithGoogle = MockSignInWithGoogle();
 
     _bloc = SignInOptionsBloc(

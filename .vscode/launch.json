@@ -5,6 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Integration Test: Sign In With Email",
+            "program": "${workspaceFolder}/integration_test/features/signin/sign_in_email_test.dart",
+            "request": "launch",
+            "type": "dart",
+        },
+        {
             "name": "vethx_beta",
             "request": "launch",
             "type": "dart"

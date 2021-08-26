@@ -36,19 +36,19 @@ class NavigationRoutes {
 class LoggingNavigationObserver extends RouteObserver<PageRoute<dynamic>> {
   @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    Logger.presentation(
+    Logger.widget(
         'LoggingNavigationObserver -> didPop: ${route.settings.name}');
   }
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    Logger.presentation(
+    Logger.widget(
         'LoggingNavigationObserver -> didPush: ${route.settings.name}');
   }
 
   @override
   void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    Logger.presentation(
+    Logger.widget(
         'LoggingNavigationObserver -> didRemove: previousRoute:${previousRoute?.settings.name},  route: ${route.settings.name}');
   }
 

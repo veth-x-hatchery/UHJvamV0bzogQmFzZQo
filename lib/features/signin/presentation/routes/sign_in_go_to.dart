@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 
 enum SignInPageRoutes {
@@ -8,22 +9,22 @@ enum SignInPageRoutes {
   registerCredentialSignIn,
 }
 
+@immutable
 class SignInPageGoTo {
   final SignInPageRoutes from;
   final SignInPageRoutes to;
   final Object? parameters;
 
-  SignInPageGoTo._internal({
+  const SignInPageGoTo._internal({
     required this.from,
     required this.to,
     this.parameters,
   });
 
-  // factory SignInPageGoTo.alpha({required SignInPageRoutes from}) =>
-  //     SignInPageGoTo._internal(
-  //       to: SignInPageRoutes.alpha,
-  //       from: from,
-  //     );
+  factory SignInPageGoTo.optionsPage() => const SignInPageGoTo._internal(
+        to: SignInPageRoutes.signInOptions,
+        from: SignInPageRoutes.signInOptions,
+      );
 
   factory SignInPageGoTo.secretPage({
     required SignInPageRoutes from,

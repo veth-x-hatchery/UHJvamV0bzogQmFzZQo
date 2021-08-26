@@ -4,8 +4,13 @@ export 'login/sign_in_button.widget.dart';
 export 'login/sign_in_scaffold.widget.dart';
 
 class SignInPageKeys {
+  //! shared
+  static const signInBackPageButton = 'signInBackPageButton';
+  static const logOutHomePageButton = 'logOutHomePageButton';
+
   //! sign in options
 
+  static const signInLoader = 'signInLoader';
   static const signInWithGoogleButton = 'signInWithGoogleButton';
   static const signInWithCredential = 'signInWithCredential';
 
@@ -17,6 +22,8 @@ class SignInPageKeys {
       'signInCredentialPageCredentialTextField';
 
   //! sign in secret page
+
+  static const String signInSecretPageFormColumn = 'signInSecretPageFormColumn';
 
   static const String signInSecretPageSecretTextField =
       'signInSecretPageSecretTextField';

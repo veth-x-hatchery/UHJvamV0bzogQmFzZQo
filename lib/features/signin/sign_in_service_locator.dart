@@ -16,7 +16,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_opt
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/cubit/navigation_cubit.dart';
+import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 import 'package:vethx_beta/service_locator.dart';
 
 /// Will be responsible for the entire sign in feature dependencies.
@@ -103,14 +103,14 @@ class SignInServiceLocator implements ISignInServiceLocator {
 
     // BLoC
 
-    getIt.registerLazySingleton<NavigationCubit>(
-      () => NavigationCubit(),
+    getIt.registerLazySingleton<NavigationManager>(
+      () => NavigationManager(),
     );
 
     getIt.registerFactory<SignInOptionsBloc>(
       () => SignInOptionsBloc(
         getIt<AuthBloc>(),
-        getIt<NavigationCubit>(),
+        getIt<NavigationManager>(),
         getIt<SignInWithGoogle>(),
       ),
     );
@@ -118,7 +118,7 @@ class SignInServiceLocator implements ISignInServiceLocator {
     getIt.registerFactory<SignInCredentialBloc>(
       () => SignInCredentialBloc(
         getIt<SignInCredentialCheck>(),
-        getIt<NavigationCubit>(),
+        getIt<NavigationManager>(),
       ),
     );
 
@@ -132,7 +132,7 @@ class SignInServiceLocator implements ISignInServiceLocator {
     getIt.registerFactory<SignInSecretBloc>(
       () => SignInSecretBloc(
         getIt<AuthBloc>(),
-        getIt<NavigationCubit>(),
+        getIt<NavigationManager>(),
         getIt<SignInWithSecret>(),
       ),
     );
@@ -140,7 +140,7 @@ class SignInServiceLocator implements ISignInServiceLocator {
     getIt.registerFactory<SignInSecretResetBloc>(
       () => SignInSecretResetBloc(
         getIt<SignInSecretReset>(),
-        getIt<NavigationCubit>(),
+        getIt<NavigationManager>(),
       ),
     );
   }

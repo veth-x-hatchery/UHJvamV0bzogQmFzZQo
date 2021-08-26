@@ -66,7 +66,7 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
           state.notification.fold(
             () {},
             (notification) {
-              Logger.presentation(
+              Logger.widget(
                   'SignInCredentialPage -> notification: $notification');
               vethxNotify(context, notification);
             },
