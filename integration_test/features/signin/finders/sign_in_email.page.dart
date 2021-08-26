@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 
 import '../../../../test/helpers/features/signin/presentation/pages/sign_in_credential.helpers.dart';
-import '../sign_in_integration_tests_helpers.dart';
+import '../helpers/sign_in_integration_tests_helpers.dart';
 
 Future<void> enterEmail(WidgetTester tester, {required String text}) async {
   await tester.tap(signInCredentialPageInput());
