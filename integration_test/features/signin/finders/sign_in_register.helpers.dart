@@ -4,7 +4,8 @@ import 'package:vethx_beta/core/utils/logger.dart';
 import '../../../../test/helpers/features/signin/presentation/pages/sign_in_register.finders.dart';
 import '../helpers/sign_in_integration_tests_helpers.dart';
 
-Future<void> enterEmail(WidgetTester tester, {required String text}) async {
+Future<void> signInRegisterEnterEmail(WidgetTester tester,
+    {required String text}) async {
   await tester.tap(signInRegisterPageCredentialInput());
   await tester.pumpAndSettle();
   await tester.enterText(signInRegisterPageCredentialInput(), text);
@@ -12,17 +13,18 @@ Future<void> enterEmail(WidgetTester tester, {required String text}) async {
   await hideKeyboard(tester);
 }
 
-Future<void> enterAnInvalidEmail(WidgetTester tester) async {
+Future<void> signInRegisterEnterAnInvalidEmail(WidgetTester tester) async {
   Logger.tests('Enter an invalid email');
-  await enterEmail(tester, text: 'invalid-email');
+  await signInRegisterEnterEmail(tester, text: 'invalid-email');
 }
 
-Future<void> enterAvalidUnregisteredEmail(WidgetTester tester) async {
+Future<void> signInRegisterEnterAvalidEmail(WidgetTester tester) async {
   Logger.tests('Enter a valid registered email');
-  await enterEmail(tester, text: 'a@a.com');
+  await signInRegisterEnterEmail(tester, text: 'a@a.com');
 }
 
-Future<void> enterSecret(WidgetTester tester, {required String text}) async {
+Future<void> signInRegisterEnterSecret(WidgetTester tester,
+    {required String text}) async {
   await tester.pumpAndSettle();
   await tester.tap(signInRegisterPageSecretInput());
   await tester.pumpAndSettle();
@@ -31,17 +33,17 @@ Future<void> enterSecret(WidgetTester tester, {required String text}) async {
   await hideKeyboard(tester);
 }
 
-Future<void> enterAnInvalidSecret(WidgetTester tester) async {
+Future<void> signInRegisterEnterAnInvalidSecret(WidgetTester tester) async {
   Logger.tests('Enter an invalid password');
-  await enterSecret(tester, text: '1234');
+  await signInRegisterEnterSecret(tester, text: '1234');
 }
 
-Future<void> enterAvalidRegisteredSecret(WidgetTester tester) async {
+Future<void> signInRegisterEnterAvalidSecret(WidgetTester tester) async {
   Logger.tests('Enter a valid registered password');
-  await enterSecret(tester, text: '123456');
+  await signInRegisterEnterSecret(tester, text: '123456');
 }
 
-Future<void> submitRegister(WidgetTester tester) async {
+Future<void> signInRegisterSubmitRegister(WidgetTester tester) async {
   Logger.tests('Submiting credentials');
   await tester.ensureVisible(signInRegisterPageCredentialValidationButton());
   await tester.pumpAndSettle();

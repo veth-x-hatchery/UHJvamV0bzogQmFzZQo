@@ -4,7 +4,8 @@ import 'package:vethx_beta/core/utils/logger.dart';
 import '../../../../test/helpers/features/signin/presentation/pages/sign_in_credential.finders.dart';
 import '../helpers/sign_in_integration_tests_helpers.dart';
 
-Future<void> enterEmail(WidgetTester tester, {required String text}) async {
+Future<void> signInEmailEnterEmail(WidgetTester tester,
+    {required String text}) async {
   await tester.tap(signInCredentialPageInput());
   await tester.pumpAndSettle();
   await tester.enterText(signInCredentialPageInput(), text);
@@ -12,17 +13,17 @@ Future<void> enterEmail(WidgetTester tester, {required String text}) async {
   await hideKeyboard(tester);
 }
 
-Future<void> enterAnInvalidEmail(WidgetTester tester) async {
+Future<void> signInEmailEnterAnInvalidEmail(WidgetTester tester) async {
   Logger.tests('Enter an invalid email');
-  await enterEmail(tester, text: 'invalid-email');
+  await signInEmailEnterEmail(tester, text: 'invalid-email');
 }
 
-Future<void> enterAvalidRegisteredEmail(WidgetTester tester) async {
+Future<void> signInEmailEnterAvalidEmail(WidgetTester tester) async {
   Logger.tests('Enter a valid registered email');
-  await enterEmail(tester, text: 'a@a.com');
+  await signInEmailEnterEmail(tester, text: 'a@a.com');
 }
 
-Future<void> submitEmail(WidgetTester tester) async {
+Future<void> signInEmailSubmitEmail(WidgetTester tester) async {
   Logger.tests('Submiting email');
   await tester.ensureVisible(signInCredentialPageValidationButton());
   await tester.pumpAndSettle();
@@ -30,7 +31,7 @@ Future<void> submitEmail(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
-Future<void> signInCredentialGoBackPage(WidgetTester tester) async {
+Future<void> signInEmailSignInCredentialGoBackPage(WidgetTester tester) async {
   Logger.tests('Go back');
   await tester.tap(signInBackPageButton());
   await tester.pumpAndSettle();

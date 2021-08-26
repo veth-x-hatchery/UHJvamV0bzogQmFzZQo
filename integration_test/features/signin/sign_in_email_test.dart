@@ -75,26 +75,26 @@ void main() {
 
       step = '1.1.1_invalid_email_message';
       Logger.testStep(step);
-      await enterAnInvalidEmail(tester);
-      await submitEmail(tester);
+      await signInEmailEnterAnInvalidEmail(tester);
+      await signInEmailSubmitEmail(tester);
       expect(find.text(CredentialAddressMessageErrors.invalidCredential),
           findsOneWidget);
       await helper.screenshot(prefix: prefix, name: step);
 
       step = 'goto:__1.1_-_sign_in_with_email';
       Logger.testStep(step);
-      await signInCredentialGoBackPage(tester);
+      await signInEmailSignInCredentialGoBackPage(tester);
       expect(find.byType(SignInOptionsPage), findsOneWidget);
       await goToEmailPage(parameters);
 
       step = '1.1.2_valid_registered_email';
       Logger.testStep(step);
-      await enterAvalidRegisteredEmail(tester);
+      await signInEmailEnterAvalidEmail(tester);
       await helper.screenshot(prefix: prefix, name: step);
 
       step = '1.1.2.1_go_to_secret_page';
       Logger.testStep(step);
-      await submitEmail(tester);
+      await signInEmailSubmitEmail(tester);
       expect(find.byType(SignInSecretPage), findsOneWidget);
       await helper.screenshot(prefix: prefix, name: step);
 
@@ -117,9 +117,9 @@ void main() {
 
       Logger.testStep('goto:__1.1_-_sign_in_with_email');
       Logger.testStep('goto:__1.2_-_valid_registered_email');
-      await enterAvalidRegisteredEmail(tester);
+      await signInEmailEnterAvalidEmail(tester);
       Logger.testStep('goto:__1.1.2.1_-_go_to_secret_page');
-      await submitEmail(tester);
+      await signInEmailSubmitEmail(tester);
       await Future.delayed(FirebaseAuthFacadeMock.loadingDuration);
       expect(find.byType(SignInSecretPage), findsOneWidget);
 

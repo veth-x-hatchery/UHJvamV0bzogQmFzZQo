@@ -44,7 +44,7 @@ Future<void> init() async {
   getIt.registerLazySingleton<FirebaseUserMapper>(() => FirebaseUserMapper());
 
   getIt.registerLazySingleton<IAuthFacade>(
-    () => FirebaseAuthFacadeMock(isCredentialAlreadyInUse: true),
+    () => FirebaseAuthFacadeMock(isCredentialAlreadyInUse: false),
   );
   // getIt.registerLazySingleton<IAuthFacade>(
   //   () => FirebaseAuthFacade(
