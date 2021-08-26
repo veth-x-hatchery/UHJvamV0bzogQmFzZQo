@@ -33,11 +33,11 @@ void main() {
   void setupAuth({
     required bool isCredentialAlreadyInUse,
   }) {
-    Logger.tests('******************** setupAuth MOCK ***********************');
-    getIt.unregister<IAuthFacade>();
-    getIt.registerLazySingleton<IAuthFacade>(
-      () => FirebaseAuthFacadeMock(isCredentialAlreadyInUse: true),
-    );
+    // step = ('******************** setupAuth MOCK ***********************');
+    // getIt.unregister<IAuthFacade>();
+    // getIt.registerLazySingleton<IAuthFacade>(
+    //   () => FirebaseAuthFacadeMock(isCredentialAlreadyInUse: true),
+    // );
   }
 
   void setupDefaultMocks() {
@@ -57,90 +57,87 @@ void main() {
   group('sign in with email tests', () {
     testWidgets('should show invalid email message',
         (WidgetTester tester) async {
-      const prefix = 'case-1';
-
       final parameters = IntegrationTestsParameters(
         widgetTester: tester,
         helper: helper,
       );
 
-      Logger.tests('1 - Sign in options');
+      const prefix = 'case-1';
+      String step = '1_sign_in_options';
+      Logger.tests(step);
       await startingSignInOptions(parameters);
-
-      setupDefaultMocks();
-
       expect(find.byType(SignInOptionsPage), findsOneWidget);
-      await helper.screenshot(prefix: prefix, name: '1_sign_in_options');
+      await helper.screenshot(prefix: prefix, name: step);
 
-      Logger.tests('1.1 - Sign in with email');
+      step = '1.1_sign_in_with_email';
+      Logger.tests(step);
       await goToEmailPage(parameters);
       expect(find.byType(SignInCredentialPage), findsOneWidget);
-      await helper.screenshot(prefix: prefix, name: '1.1_sign_in_with_email');
+      await helper.screenshot(prefix: prefix, name: step);
 
-      Logger.tests('1.1.1 - Invalid email message');
+      step = '1.1.1_invalid_email_message';
+      Logger.tests(step);
       await enterAnInvalidEmail(tester);
       await submitEmail(tester);
       expect(find.text(CredentialAddressMessageErrors.invalidCredential),
           findsOneWidget);
-      await helper.screenshot(
-          prefix: prefix, name: '1.1.1_invalid_email_message');
+      await helper.screenshot(prefix: prefix, name: step);
 
-      Logger.tests('Goto:  1.1 - Sign in with email');
+      step = 'goto:__1.1_-_sign_in_with_email';
+      Logger.tests(step);
       await signInCredentialGoBackPage(tester);
       expect(find.byType(SignInOptionsPage), findsOneWidget);
       await goToEmailPage(parameters);
 
-      Logger.tests('1.2 - Valid Registered email');
+      step = '1.2_valid_registered_email';
+      Logger.tests(step);
       await enterAvalidRegisteredEmail(tester);
-      await helper.screenshot(
-          prefix: prefix, name: '1.2_valid_registered_email');
+      await helper.screenshot(prefix: prefix, name: step);
 
-      Logger.tests('1.2.1 - Go To Secret Page');
+      step = '1.2.1_go_to_secret_page';
+      Logger.tests(step);
       await submitEmail(tester);
       expect(find.byType(SignInSecretPage), findsOneWidget);
-      await helper.screenshot(prefix: prefix, name: '1.2.1_go_to_secret_page');
+      await helper.screenshot(prefix: prefix, name: step);
 
-      Logger.tests('1.2.1.1 - Forgot my password');
+      step = '1.2.1.1_forgot_my_password';
+      Logger.tests(step);
+      Logger.tests(step);
       await hideKeyboard(tester);
       await forgotSecret(tester);
       expect(find.byType(SnackBar), findsOneWidget);
-      await helper.screenshot(
-          prefix: prefix, name: '1.2.1.1_forgot_my_password');
+      await helper.screenshot(prefix: prefix, name: step);
       await Future.delayed(snackBarNotificationDuration);
       await Future.delayed(snackBarNotificationDuration);
       await tester.pumpAndSettle();
 
-      Logger.tests('1.2.1.2 - Change my email');
-      await hideKeyboard(tester);
+      step = '1.2.1.2_change_my_email';
+      Logger.tests(step);
+
       // await dragChangeCredentialButton(tester);
-      await helper.screenshot(prefix: prefix, name: '1.2.1.2_change_my_email');
+      await helper.screenshot(prefix: prefix, name: step);
       await changeCredential(tester);
       expect(find.byType(SignInCredentialPage), findsOneWidget);
 
-      Logger.tests('Goto:  1.1 - Sign in with email');
-      Logger.tests('Goto:  1.2 - Valid Registered email');
+      Logger.tests('goto:__1.1_-_sign_in_with_email');
+      Logger.tests('goto:__1.2_-_valid_registered_email');
       await enterAvalidRegisteredEmail(tester);
-
-      Logger.tests('Goto:  1.2.1 - Go To Secret Page');
+      Logger.tests('goto:__1.2.1_-_go_to_secret_page');
       await submitEmail(tester);
       await Future.delayed(const Duration(seconds: 5));
       expect(find.byType(SignInSecretPage), findsOneWidget);
 
-      Logger.tests('1.2.1.3 - Enter a valid password');
+      step = '1.2.1.3_enter_a_valid_password';
+      Logger.tests(step);
       await enterAvalidRegisteredSecret(tester);
-      await helper.screenshot(
-          prefix: prefix, name: '1.2.1.3_enter_a_valid_password');
+      await helper.screenshot(prefix: prefix, name: step);
 
-      Logger.tests('1.2.1.4 - Authenticate with success and go to Home Page');
+      step = '1.2.1.4_authenticate_with_success_and_go_to_home_page';
+      Logger.tests(step);
       await submitSecret(tester);
-      await tester.pump();
-      await Future.delayed(const Duration(seconds: 10));
-      await tester.pump();
-      await Future.delayed(const Duration(seconds: 10));
-      await helper.screenshot(
-          prefix: prefix,
-          name: '1.2.1.4_authenticate_with_success_and_go_to_home_page');
+      await Future.delayed(const Duration(seconds: 5));
       expect(find.byType(HomePage), findsOneWidget);
+      await helper.screenshot(prefix: prefix, name: step);
     });
   });
 }

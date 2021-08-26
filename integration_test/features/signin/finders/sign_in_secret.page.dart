@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 
 import '../../../../test/helpers/features/signin/presentation/pages/sign_in_secret.helpers.dart';
+import '../sign_in_integration_tests_helpers.dart';
 
 Future<void> enterSecret(WidgetTester tester, {required String text}) async {
   await tester.pumpAndSettle();
@@ -9,6 +10,7 @@ Future<void> enterSecret(WidgetTester tester, {required String text}) async {
   await tester.pumpAndSettle();
   await tester.enterText(signInSecretInput(), text);
   await tester.pumpAndSettle();
+  await hideKeyboard(tester);
 }
 
 Future<void> enterAnInvalidSecret(WidgetTester tester) async {
