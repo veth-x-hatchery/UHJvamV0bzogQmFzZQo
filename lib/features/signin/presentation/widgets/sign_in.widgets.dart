@@ -6,6 +6,7 @@ export 'login/sign_in_scaffold.widget.dart';
 class SignInPageKeys {
   //! shared
   static const signInBackPageButton = 'signInBackPageButton';
+  static const logOutHomePageButton = 'logOutHomePageButton';
 
   //! sign in options
 
