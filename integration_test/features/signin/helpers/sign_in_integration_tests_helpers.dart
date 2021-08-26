@@ -23,14 +23,14 @@ class IntegrationTestsHelpers {
   }) async {
     await Future.delayed(const Duration(seconds: 1));
 
-    // index++;
+    index++;
 
-    // // Todo(v): create a function that guarantee that folder
-    // // Maybe create a folder by test group
-    // final List<int> firstPng = await binding.takeScreenshot(
-    //     '.${Directory.current.path}screenshots/screenshot_$prefix.${index}_$name');
+    // Todo(v): create a function that guarantee that folder
+    // Maybe create a folder by test group
+    final List<int> firstPng = await binding.takeScreenshot(
+        '.${Directory.current.path}screenshots/screenshot_$prefix.${index}_$name');
 
-    // expect(firstPng.isNotEmpty, isTrue);
+    expect(firstPng.isNotEmpty, isTrue);
   }
 }
 

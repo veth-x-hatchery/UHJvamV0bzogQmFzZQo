@@ -59,19 +59,22 @@ void main() {
         helper: helper,
       );
 
-      const prefix = 'case-1';
+      const prefix = 'case-2';
       String step = '1_sign_in_options';
       Logger.testStep(step);
       await startingSignInOptions(parameters);
       expect(find.byType(SignInOptionsPage), findsOneWidget);
       await helper.screenshot(prefix: prefix, name: step);
 
-      step = '1.2.2_go_to_register_page';
+      step = '1.3_valid_unregistered_email';
+      Logger.testStep(step);
+
+      step = '1.3.2_go_to_register_page';
       Logger.testStep(step);
       await goToEmailPage(parameters);
       expect(find.byType(SignInCredentialPage), findsOneWidget);
 
-      step = '1.2.2.1_invalid_email_message';
+      step = '1.3.2.1_invalid_email_message';
       Logger.testStep(step);
       // await enterAnInvalidEmail(tester);
       // await submitEmail(tester);
@@ -79,14 +82,14 @@ void main() {
           findsOneWidget);
       await helper.screenshot(prefix: prefix, name: step);
 
-      step = '1.2.2.2_invalid_password_message';
+      step = '1.3.2.2_invalid_password_message';
       Logger.testStep(step);
       // await enterAnInvalidEmail(tester);
       // await submitEmail(tester);
       expect(find.text(SecretMessageErrors.shortSecret), findsOneWidget);
       await helper.screenshot(prefix: prefix, name: step);
 
-      step = '1.2.2.3_enter_a_valid_password_and_go_to_home_page';
+      step = '1.3.2.3_enter_a_valid_password_and_go_to_home_page';
       Logger.testStep(step);
       // await submitSecret(tester);
       // await Future.delayed(const Duration(seconds: 5));
