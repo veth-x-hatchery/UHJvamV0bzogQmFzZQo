@@ -13,6 +13,7 @@ import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_p
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
+import '../../../../helpers/features/signin/presentation/pages/sign_in_register.helpers.dart';
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
 
@@ -46,33 +47,6 @@ void main() {
     when(_sl.mockSignInRegisterBloc.state).thenReturn(state);
     when(_sl.mockSignInRegisterBloc.stream)
         .thenAnswer((_) => Stream.value(state));
-  }
-
-  Finder _credentialInput() {
-    // arrange
-    final credentialInput = find
-        .byKey(const Key(SignInPageKeys.signInRegisterPageCredentialTextField));
-    // Act && Assert
-    // expect(credentialInput, findsOneWidget);
-    return credentialInput;
-  }
-
-  Finder _secretInput() {
-    // arrange
-    final secretInput =
-        find.byKey(const Key(SignInPageKeys.signInRegisterPageSecretTextField));
-    // Act && Assert
-    // expect(secretInput, findsOneWidget);
-    return secretInput;
-  }
-
-  Finder _validationButton() {
-    // arrange
-    final validationButton =
-        find.byKey(const Key(SignInPageKeys.signInRegisterPageValidateButton));
-    // Act && Assert
-    expect(validationButton, findsOneWidget);
-    return validationButton;
   }
 
   const validCredential = 'test@test.com';
@@ -189,7 +163,7 @@ void main() {
 
     // Act
 
-    await tester.tap(_validationButton());
+    await tester.tap(signInRegisterPageCredentialValidationButton());
 
     await tester.pump();
 
@@ -207,13 +181,14 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(_credentialInput(), invalidCredential);
+    await tester.enterText(
+        signInRegisterPageCredentialInput(), invalidCredential);
 
     _prepareFormValidationValues(credential: invalidCredential);
 
     // Act
 
-    await tester.tap(_validationButton());
+    await tester.tap(signInRegisterPageCredentialValidationButton());
 
     // assert
 
@@ -229,16 +204,17 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(_credentialInput(), validCredential);
+    await tester.enterText(
+        signInRegisterPageCredentialInput(), validCredential);
 
-    await tester.enterText(_secretInput(), invalidSecret);
+    await tester.enterText(signInRegisterPageSecretInput(), invalidSecret);
 
     _prepareFormValidationValues(
         credential: validCredential, secret: invalidSecret);
 
     // Act
 
-    await tester.tap(_validationButton());
+    await tester.tap(signInRegisterPageCredentialValidationButton());
 
     // assert
 
@@ -255,16 +231,17 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(_credentialInput(), validCredential);
+    await tester.enterText(
+        signInRegisterPageCredentialInput(), validCredential);
 
-    await tester.enterText(_secretInput(), validSecret);
+    await tester.enterText(signInRegisterPageSecretInput(), validSecret);
 
     _prepareFormValidationValues(
         credential: validCredential, secret: validSecret);
 
     // Act
 
-    await tester.tap(_validationButton());
+    await tester.tap(signInRegisterPageCredentialValidationButton());
 
     // assert
 
