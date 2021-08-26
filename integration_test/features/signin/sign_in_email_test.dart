@@ -125,19 +125,21 @@ void main() {
       await Future.delayed(const Duration(seconds: 5));
       expect(find.byType(SignInSecretPage), findsOneWidget);
 
-      step = '1.2.1.3_enter_a_valid_password';
+      step = '1.2.1.4_enter_a_valid_password';
       Logger.testStep(step);
-      await enterAvalidRegisteredSecret(tester);
+      await enterAnInvalidSecret(tester);
+      await helper.screenshot(prefix: prefix, name: step);
+      expect(find.text(SecretMessageErrors.shortSecret), findsOneWidget);
       await helper.screenshot(prefix: prefix, name: step);
 
-      step = '1.2.1.4_authenticate_with_success_and_go_to_home_page';
+      step = '1.2.1.5_authenticate_with_success_and_go_to_home_page';
       Logger.testStep(step);
       await submitSecret(tester);
       await Future.delayed(const Duration(seconds: 5));
       expect(find.byType(HomePage), findsOneWidget);
       await helper.screenshot(prefix: prefix, name: step);
 
-      step = '1.2.1.5_logout';
+      step = '1.2.1.6_logout';
       Logger.testStep(step);
       setupAuth(isCredentialAlreadyInUse: false);
       await tester.pump();
