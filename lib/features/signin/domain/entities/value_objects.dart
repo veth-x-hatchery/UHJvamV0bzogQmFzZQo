@@ -28,11 +28,6 @@ class Credential extends ValueObject<String> {
         (_) => null,
       );
 
-  String? get inputedValue => value.fold(
-        (l) => l.failedValue,
-        (r) => r,
-      );
-
   const Credential._(this.value);
 }
 

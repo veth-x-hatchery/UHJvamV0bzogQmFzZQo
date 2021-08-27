@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 
 void main() {
@@ -16,7 +15,8 @@ void main() {
 
     expect(result.name, 'Tester');
 
-    expect(result.credential.getOrCrash(), 'test@test.com');
+    expect(result.credential.getOrCrash(),
+        AuthFacadeMock.validTestCredential.getOrCrash());
   });
 
   test('should compare with success', () {

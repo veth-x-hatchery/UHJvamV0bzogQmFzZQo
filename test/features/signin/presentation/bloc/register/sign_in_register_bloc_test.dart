@@ -7,6 +7,7 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 
@@ -85,17 +86,17 @@ void main() {
       () async {
     // arrange
 
-    const credential = 'test@test.com';
-    const secret = 'dmFsaWRwYXNzd29yZAo';
+    final credential = AuthFacadeMock.validTestCredential.inputedValue!;
+    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
 
     when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(const Right(unit)));
 
     // act
 
-    _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
+    _bloc.add(SignInRegisterEvent.credentialChanged(credential));
 
-    _bloc.add(const SignInRegisterEvent.secretChanged(secret));
+    _bloc.add(SignInRegisterEvent.secretChanged(secret));
 
     _bloc.add(
         const SignInRegisterEvent.registerWithCredentialAndSecretPressed());

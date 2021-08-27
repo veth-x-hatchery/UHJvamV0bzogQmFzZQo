@@ -9,6 +9,7 @@ import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repositor
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 
 import 'sign_in_check_credential_test.mocks.dart';
 
@@ -30,9 +31,9 @@ void main() {
     );
   });
 
-  final credential = Credential('test@vethx.com');
+  final credential = AuthFacadeMock.validTestCredential;
 
-  final secret = Secret('dGVzdEB2ZXRoeC5jb20K');
+  final secret = AuthFacadeMock.validTestSecret;
 
   group('when sign in with credential and secret', () {
     test('should return success with the given credentials', () async {

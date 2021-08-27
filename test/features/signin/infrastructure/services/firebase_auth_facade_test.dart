@@ -10,6 +10,7 @@ import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart'
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
 
 import 'firebase_auth_facade_test.mocks.dart';
@@ -51,9 +52,8 @@ void main() {
   });
 
   group('when [FirebaseAuthFacade.registerWithCredentialAndSecret]', () {
-    final credential = Credential('test@vethx.com');
-
-    final secret = Secret('dGVzdEB2ZXRoeC5jb20K');
+    final credential = AuthFacadeMock.validTestCredential;
+    final secret = AuthFacadeMock.validTestSecret;
 
     Future<void> _registerWithCredentialAndSecret(
       Exception firebaseException,
@@ -141,9 +141,8 @@ void main() {
   });
 
   group('when [FirebaseAuthFacade.signInWithCredentialAndSecret]', () {
-    final credential = Credential('test@vethx.com');
-
-    final secret = Secret('dGVzdEB2ZXRoeC5jb20K');
+    final credential = AuthFacadeMock.validTestCredential;
+    final secret = AuthFacadeMock.validTestSecret;
 
     Future<void> _throwExceptionAssert(
       Exception firebaseException,
@@ -317,7 +316,7 @@ void main() {
   });
 
   group('when check if credential is already in use', () {
-    final credential = Credential('test@vethx.com');
+    final credential = AuthFacadeMock.validTestCredential;
 
     Future<void> _credentialIsAlreadyInUse(Exception firebaseException) async {
       // Arrange
@@ -471,7 +470,7 @@ void main() {
   });
 
   group('when request password reset', () {
-    final credential = Credential('test@vethx.com');
+    final credential = AuthFacadeMock.validTestCredential;
 
     Future<void> _throwExceptionAssert(
       Exception firebaseException,

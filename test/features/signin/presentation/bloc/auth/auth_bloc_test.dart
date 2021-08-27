@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 
 import 'auth_bloc_test.mocks.dart';
@@ -45,9 +46,8 @@ void main() {
 
     test('should return the authenticated user', () async {
       // arrange
-
-      final user =
-          User(credential: Credential('test@vethx.com'), name: 'Vethx Test');
+      final credential = AuthFacadeMock.validTestCredential;
+      final user = User(credential: credential, name: 'Vethx Test');
 
       when(_mockIAuthFacade.getSignedInUser())
           .thenAnswer((_) => Future.value(user));

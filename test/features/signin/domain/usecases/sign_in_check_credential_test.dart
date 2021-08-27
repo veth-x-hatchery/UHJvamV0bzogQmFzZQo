@@ -9,6 +9,7 @@ import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repositor
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 
 import 'sign_in_check_credential_test.mocks.dart';
 
@@ -33,7 +34,7 @@ void main() {
   });
 
   group('when check user credential is already registered', () {
-    final credential = Credential('test@vethx.com');
+    final credential = AuthFacadeMock.invalidCredential;
 
     test('should return user is registered', () async {
       // arrange

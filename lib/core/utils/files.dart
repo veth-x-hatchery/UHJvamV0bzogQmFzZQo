@@ -5,30 +5,30 @@ import 'package:vethx_beta/core/utils/logger.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class FilesUtil {
-  Future<Directory?>? _requestAppDocumentsDirectory() {
-    return getApplicationDocumentsDirectory();
-  }
+  // Future<Directory?>? _requestAppDocumentsDirectory() {
+  //   return getApplicationDocumentsDirectory();
+  // }
 
-  Future<Directory?>? _requestAppSupportDirectory() {
-    return getApplicationSupportDirectory();
-  }
+  // Future<Directory?>? _requestAppSupportDirectory() {
+  //   return getApplicationSupportDirectory();
+  // }
 
-  Future<Directory?>? _requestAppLibraryDirectory() {
-    return getLibraryDirectory();
-  }
+  // Future<Directory?>? _requestAppLibraryDirectory() {
+  //   return getLibraryDirectory();
+  // }
 
-  Future<Directory?>? _requestExternalStorageDirectory() {
-    return getExternalStorageDirectory();
-  }
+  // Future<Directory?>? _requestExternalStorageDirectory() {
+  //   return getExternalStorageDirectory();
+  // }
 
-  Future<List<Directory>?>? _requestExternalStorageDirectories(
-      StorageDirectory type) {
-    return getExternalStorageDirectories(type: type);
-  }
+  // Future<List<Directory>?>? _requestExternalStorageDirectories(
+  //     StorageDirectory type) {
+  //   return getExternalStorageDirectories(type: type);
+  // }
 
-  Future<List<Directory>?> _requestExternalCacheDirectories() {
-    return getExternalCacheDirectories();
-  }
+  // Future<List<Directory>?> _requestExternalCacheDirectories() {
+  //   return getExternalCacheDirectories();
+  // }
 
   static Future<String> createFolderInAppDocDir(String folderName) async {
     //Get this App Document Directory

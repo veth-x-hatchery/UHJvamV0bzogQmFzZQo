@@ -7,6 +7,7 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 
@@ -60,7 +61,7 @@ void main() {
       () async {
     // arrange
 
-    const credential = 'test@test.com';
+    final credential = AuthFacadeMock.validTestCredential.inputedValue!;
 
     final valueObject = Credential(credential);
 
@@ -69,7 +70,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInCredentialEvent.credentialChanged(credential));
+    _bloc.add(SignInCredentialEvent.credentialChanged(credential));
 
     _bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
 
@@ -150,7 +151,7 @@ void main() {
       () async {
     // arrange
 
-    const credential = 'test@test.com';
+    final credential = AuthFacadeMock.validTestCredential.inputedValue!;
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
       message: CheckCredentialErrorMessages.credentialAlreadyRegistered,
@@ -161,7 +162,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInCredentialEvent.credentialChanged(credential));
+    _bloc.add(SignInCredentialEvent.credentialChanged(credential));
 
     _bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
 
@@ -196,14 +197,14 @@ void main() {
   test('when confirmation occour then should go to other page', () async {
     // arrange
 
-    const credential = 'test@test.com';
+    final credential = AuthFacadeMock.validTestCredential.inputedValue!;
 
     when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(right(true)));
 
     // act
 
-    _bloc.add(const SignInCredentialEvent.credentialChanged(credential));
+    _bloc.add(SignInCredentialEvent.credentialChanged(credential));
 
     _bloc.add(const SignInCredentialEvent.analyseCredentialPressed());
 

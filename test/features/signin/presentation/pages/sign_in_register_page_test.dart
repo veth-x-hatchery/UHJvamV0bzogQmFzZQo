@@ -8,6 +8,7 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -49,11 +50,11 @@ void main() {
         .thenAnswer((_) => Stream.value(state));
   }
 
-  const validCredential = 'test@test.com';
-  const validSecret = 'dmFsaWRwYXNzd29yZAo';
+  final validCredential = AuthFacadeMock.validTestCredential.inputedValue!;
+  final validSecret = AuthFacadeMock.validTestSecret.inputedValue!;
 
-  const invalidCredential = 'invalidcredential';
-  const invalidSecret = '1234';
+  final invalidCredential = AuthFacadeMock.invalidCredential.inputedValue!;
+  final invalidSecret = AuthFacadeMock.invalidSecret.inputedValue!;
 
   /// Form uses BLoC state to realize validations
   void _prepareFormValidationValues({
@@ -254,9 +255,9 @@ void main() {
       (tester) async {
     // Arrange
 
-    const credential = 'test@test.com';
+    final credential = AuthFacadeMock.validTestSecret.inputedValue!;
 
-    const secret = 'dmFsaWRwYXNzd29yZAo';
+    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),

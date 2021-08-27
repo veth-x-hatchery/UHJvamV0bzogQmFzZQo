@@ -23,6 +23,11 @@ abstract class ValueObject<T> {
 
   bool isValid() => value.isRight();
 
+  T? get inputedValue => value.fold(
+        (l) => l.failedValue,
+        (r) => r,
+      );
+
   @override
   int get hashCode => value.hashCode;
 
