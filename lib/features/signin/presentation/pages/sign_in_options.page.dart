@@ -160,8 +160,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
         //   builder: (_) => credentialPage,
         // );
         page.from == SignInPageRoutes.signInOptions
-            ? Navigator.push(
-                context, SlideLeftRoute<void>(page: credentialPage))
+            ? Navigator.push(context, SlideTopRoute<void>(page: credentialPage))
             : Navigator.pushReplacement(
                 context, SlideRightRoute<void>(page: credentialPage));
         break;

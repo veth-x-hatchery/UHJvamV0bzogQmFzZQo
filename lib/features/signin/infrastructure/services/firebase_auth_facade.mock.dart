@@ -12,7 +12,7 @@ class AuthFacadeMock implements IAuthFacade {
 
   domain.User? user;
 
-  bool isCredentialAlreadyInUse;
+  bool isCredentialAlreadyInUse = false;
 
   /// Each integration test will have a specific scenario
   /// [integration_test/features/signin/sign_in_email_test.dart]
@@ -46,9 +46,7 @@ class AuthFacadeMock implements IAuthFacade {
     name: 'Tester',
   );
 
-  AuthFacadeMock({
-    required this.isCredentialAlreadyInUse,
-  }) {
+  AuthFacadeMock() {
     Logger.tests(
         '******************** AuthFacadeMock constructor ***********************');
   }

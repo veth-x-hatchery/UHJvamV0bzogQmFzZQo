@@ -47,7 +47,7 @@ Future<void> serviceLocatorInit() async {
   getIt.registerLazySingleton<FirebaseUserMapper>(() => FirebaseUserMapper());
 
   getIt.registerLazySingleton<IAuthFacade>(
-    () => AuthFacadeMock(isCredentialAlreadyInUse: false),
+    () => AuthFacadeMock()..setupSignInEmailIntegrationTest(),
   );
   // getIt.registerLazySingleton<IAuthFacade>(
   //   () => FirebaseAuthFacade(

@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:vethx_beta/ui/widgets/transitions/defaults.dart';
 
 class SlideRightRoute<T> extends PageRouteBuilder<T> {
+  @override
+  Duration get transitionDuration => DefaultAnimationSettings.duration;
+
+  @override
+  Duration get reverseTransitionDuration => DefaultAnimationSettings.duration;
+
   SlideRightRoute({required Widget page})
       : super(
           pageBuilder: (
@@ -62,6 +68,12 @@ class SlideLeftRoute<T> extends PageRouteBuilder<T> {
 }
 
 class SlideTopRoute<T> extends PageRouteBuilder<T> {
+  @override
+  Duration get transitionDuration => DefaultAnimationSettings.duration;
+
+  @override
+  Duration get reverseTransitionDuration => DefaultAnimationSettings.duration;
+
   SlideTopRoute({required this.page})
       : super(
           pageBuilder: (
@@ -88,6 +100,12 @@ class SlideTopRoute<T> extends PageRouteBuilder<T> {
 }
 
 class SlideBottomRoute<T> extends PageRouteBuilder<T> {
+  @override
+  Duration get transitionDuration => DefaultAnimationSettings.duration;
+
+  @override
+  Duration get reverseTransitionDuration => DefaultAnimationSettings.duration;
+
   SlideBottomRoute({required this.page})
       : super(
           pageBuilder: (
