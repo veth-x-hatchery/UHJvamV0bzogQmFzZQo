@@ -57,6 +57,11 @@ void main() {
       helper: helper,
     );
 
+    Logger.tests('all states:');
+    // ignore: avoid_print, avoid_function_literals_in_foreach_calls
+    tester.allStates.forEach(
+        (s) => Logger.tests(s.toString(minLevel: DiagnosticLevel.fine)));
+
     const prefix = 'case-1';
     String step = '1_sign_in_options';
     Logger.testStep(step);

@@ -24,6 +24,7 @@ dependencies:
   cloud_firestore: ^2.4.0
   cupertino_icons: ^1.0.2
   dartz: ^0.10.0-nullsafety.2
+  device_info_plus: ^2.1.0
   firebase_auth: ^3.0.1
   firebase_core: ^1.4.0
   flutter:
@@ -34,9 +35,10 @@ dependencies:
   google_sign_in: ^5.0.7
   http: ^0.13.3
   internet_connection_checker: ^0.0.1+2
+  path_provider: ^2.0.2
   shared_preferences: ^2.0.6
   uuid: ^3.0.4
-  
+
 dev_dependencies:
   analyzer: ^2.1.0
   build_runner: ^2.1.1

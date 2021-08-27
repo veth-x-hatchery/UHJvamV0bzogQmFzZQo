@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:vethx_beta/core/device/device_info.dart';
+import 'package:vethx_beta/core/utils/files.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
@@ -21,13 +23,19 @@ class IntegrationTestsHelpers {
     required String prefix,
     required String name,
   }) async {
+    final basePath = '.${Directory.current.path}screenshots';
+
+    String deviceModel = await DeviceInfo().modelName();
+    deviceModel =
+        deviceModel.replaceAll(',', '_').replaceAll(RegExp(r'/^\w+$/'), '');
+
+    // final currentScreenshotPath = await FilesUtil.validateDirectory(Directory(
+    //     '$basePath/${Platform.isAndroid ? 'android' : 'ios'}/$deviceModel'));
+
     index++;
 
-    // Todo(v): create a function that guarantee that folder
-    // Maybe create a folder by test group
-    
     final List<int> firstPng = await binding.takeScreenshot(
-        '.${Directory.current.path}screenshots/screenshot_$prefix.${index}_$name');
+        '$basePath/${Platform.isAndroid ? 'android' : 'ios'}/${deviceModel}_$prefix.${index}_$name');
 
     expect(firstPng.isNotEmpty, isTrue);
   }

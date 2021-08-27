@@ -2,6 +2,7 @@ enum ArchitectureLayer {
   presentation,
   domain,
   infrastructure,
+  utils,
 }
 
 class Logger {
@@ -119,6 +120,26 @@ class Logger {
       exception: exception,
       stackTrace: stackTrace,
     );
+  }
+
+  Logger.utils(
+    String message, {
+    dynamic exception,
+    StackTrace? stackTrace,
+  }) {
+    if (exception != null) {
+      Logger.e(
+        '[Utils] $message',
+        ex: exception,
+        stacktrace: stackTrace,
+        layer: ArchitectureLayer.utils,
+      );
+    } else {
+      Logger.i(
+        '[Utils] $message',
+        layer: ArchitectureLayer.utils,
+      );
+    }
   }
 
   static void e(
