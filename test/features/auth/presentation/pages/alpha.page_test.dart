@@ -8,6 +8,7 @@ import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
@@ -116,7 +117,7 @@ void main() {
       _initialState();
 
       _authState(AuthState.authenticated(User(
-        credential: Credential('test@test.com'),
+        credential: AuthFacadeMock.validTestCredential,
         name: 'test',
       )));
 

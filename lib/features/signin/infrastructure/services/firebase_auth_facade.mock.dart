@@ -41,8 +41,13 @@ class AuthFacadeMock implements IAuthFacade {
 
   static const loadingDuration = Duration(seconds: 1);
 
+  static Credential validTestCredential = Credential('domenico@tester.com');
+  static Secret validTestSecret = Secret('ZG9tZW5pY29AdmV0aHguY29tCg');
+  static Credential invalidCredential = Credential('invalid.email.com');
+  static Secret invalidSecret = Secret('1234');
+
   static domain.User defaultUserTester = domain.User(
-    credential: Credential('tester@test.com'),
+    credential: validTestCredential,
     name: 'Tester',
   );
 
@@ -52,7 +57,7 @@ class AuthFacadeMock implements IAuthFacade {
   }
 
   void _loggedUser({Credential? credential}) {
-    credential ??= Credential('tester@test.com');
+    credential ??= validTestCredential;
     user = domain.User(credential: credential, name: 'Tester');
     Logger.tests('AuthFacadeMock -> _loggedUser: $user');
   }

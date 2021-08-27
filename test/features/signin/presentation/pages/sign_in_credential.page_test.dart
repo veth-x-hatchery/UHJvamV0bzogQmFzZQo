@@ -8,6 +8,7 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -107,7 +108,7 @@ void main() {
     // Arrange
 
     _signInState(SignInCredentialState(
-      credential: Credential('test@test.com'),
+      credential: AuthFacadeMock.validTestCredential,
       isLoading: true,
       authFailureOrSuccessOption: none(),
       notification: none(),
@@ -176,9 +177,11 @@ void main() {
 
     await _pumpPage(tester);
 
-    await tester.enterText(signInCredentialPageInput(), 'teste@teste.com');
+    await tester.enterText(signInCredentialPageInput(),
+        AuthFacadeMock.validTestCredential.inputedValue!);
 
-    _prepareFormValidationValues(value: 'teste@teste.com');
+    _prepareFormValidationValues(
+        value: AuthFacadeMock.validTestCredential.inputedValue!);
 
     // Act
 
@@ -201,7 +204,7 @@ void main() {
     );
 
     _signInState(SignInCredentialState(
-      credential: Credential('test@test.com'),
+      credential: AuthFacadeMock.validTestCredential,
       isLoading: false,
       authFailureOrSuccessOption: some(Left(expectedFailure)),
       notification:

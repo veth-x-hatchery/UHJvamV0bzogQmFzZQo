@@ -3,10 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vethx_beta/features/signin/domain/core/errors.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 
 void main() {
-  const String validCredential = 'teste@vethx.com';
-  const String inValidCredential = '@com';
+  final validCredential = AuthFacadeMock.validTestCredential.inputedValue!;
+  final inValidCredential = AuthFacadeMock.invalidCredential.inputedValue!;
 
   group('when validate CredentialAddress', () {
     test(
@@ -38,10 +39,8 @@ void main() {
 
       // assert
 
-      expect(
-          credentialAddress.value,
-          left(const ValueFailure.invalidCredential(
-              failedValue: inValidCredential)));
+      expect(credentialAddress.value,
+          left(ValueFailure.invalidCredential(failedValue: inValidCredential)));
 
       expect(credentialAddress.validation,
           CredentialAddressMessageErrors.invalidCredential);

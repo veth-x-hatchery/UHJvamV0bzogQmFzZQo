@@ -6,6 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
@@ -141,7 +142,7 @@ void main() {
 
       _sl.navigationCubit.goTo(SignInPageGoTo.secretPage(
         from: SignInPageRoutes.credentialEntry,
-        credential: 'teste@teste.com',
+        credential: AuthFacadeMock.validTestCredential.inputedValue,
       ));
 
       // assert
@@ -168,7 +169,7 @@ void main() {
 
       _sl.navigationCubit.goTo(SignInPageGoTo.registerPage(
         from: SignInPageRoutes.credentialEntry,
-        credential: Credential('test@test.com'),
+        credential: AuthFacadeMock.validTestCredential,
       ));
 
       // assert

@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 
 import 'sign_in_local_data_source_test.mocks.dart';
 
@@ -21,7 +22,7 @@ void main() {
   });
 
   group('when dealing with cache credential', () {
-    final credential = Credential('test@test.com');
+    final credential = AuthFacadeMock.validTestCredential;
 
     test(
       'should return current credential from SharedPreferences when there is one in the cache',

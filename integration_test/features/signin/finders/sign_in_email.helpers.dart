@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 
 import '../../../../test/helpers/features/signin/presentation/pages/sign_in_credential.finders.dart';
 import '../helpers/sign_in_integration_tests_helpers.dart';
@@ -15,12 +16,14 @@ Future<void> signInEmailEnterEmail(WidgetTester tester,
 
 Future<void> signInEmailEnterAnInvalidEmail(WidgetTester tester) async {
   Logger.tests('Enter an invalid email');
-  await signInEmailEnterEmail(tester, text: 'invalid-email');
+  await signInEmailEnterEmail(tester,
+      text: AuthFacadeMock.invalidCredential.inputedValue!);
 }
 
 Future<void> signInEmailEnterAvalidEmail(WidgetTester tester) async {
   Logger.tests('Enter a valid registered email');
-  await signInEmailEnterEmail(tester, text: 'a@a.com');
+  await signInEmailEnterEmail(tester,
+      text: AuthFacadeMock.validTestCredential.inputedValue!);
 }
 
 Future<void> signInEmailSubmitEmail(WidgetTester tester) async {

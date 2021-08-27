@@ -8,6 +8,7 @@ import 'package:vethx_beta/core/network/network_info.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
 import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 
 import 'sign_in_repository_test.mocks.dart';
 
@@ -34,7 +35,7 @@ void main() {
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
     });
 
-    final credential = Credential('test@test.com');
+    final credential = AuthFacadeMock.validTestCredential;
 
     test(
       'should return last locally cached data when the cached data is present',

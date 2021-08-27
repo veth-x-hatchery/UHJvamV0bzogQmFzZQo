@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 
 void main() {
   group('when validate is null or empty', () {
@@ -46,7 +47,7 @@ void main() {
 
     test('should validate credential with success', () {
       // arrange
-      const String credential = 'teste@vethx.com';
+      final credential = AuthFacadeMock.validTestCredential.inputedValue!;
       // act
       final credentialAddress = validateCredentialAddress(credential);
       // assert
