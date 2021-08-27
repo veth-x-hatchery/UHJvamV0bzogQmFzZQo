@@ -42,8 +42,7 @@ class SignInCredentialBloc
           authFailureOrSuccessOption: none(),
           notification: none(),
         );
-        final result =
-            await _credentialCheck.call(Params(credential: state.credential));
+        final result = await _credentialCheck.call(state.credential);
         yield state.copyWith(
           isLoading: false,
           notification: result.fold(

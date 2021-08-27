@@ -50,11 +50,10 @@ class SignInRegisterBloc
           notification: none(),
         );
         final result = await _signInRegisterCredentialAndSecret.call(
-          Params(
-              credentials: Credentials(
+          Credentials(
             user: state.credential,
             secret: state.secret,
-          )),
+          ),
         );
         yield state.copyWith(
           isLoading: false,

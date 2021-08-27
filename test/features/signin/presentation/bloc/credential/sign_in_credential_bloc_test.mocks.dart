@@ -8,6 +8,8 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
     as _i7;
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
+    as _i8;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart'
     as _i6;
 import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart'
@@ -56,8 +58,9 @@ class MockSignInCredentialCheck extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i7.FailureDetails, bool>> call(_i6.Params? params) =>
-      (super.noSuchMethod(Invocation.method(#call, [params]),
+  _i4.Future<_i2.Either<_i7.FailureDetails, bool>> call(
+          _i8.Credential? credential) =>
+      (super.noSuchMethod(Invocation.method(#call, [credential]),
               returnValue: Future<_i2.Either<_i7.FailureDetails, bool>>.value(
                   _FakeEither_0<_i7.FailureDetails, bool>()))
           as _i4.Future<_i2.Either<_i7.FailureDetails, bool>>);

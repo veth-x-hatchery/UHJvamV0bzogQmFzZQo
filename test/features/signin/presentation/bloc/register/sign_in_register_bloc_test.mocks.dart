@@ -9,6 +9,8 @@ import 'package:dartz/dartz.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
     as _i7;
+import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart'
+    as _i8;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart'
     as _i6;
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
@@ -130,8 +132,8 @@ class MockSignInRegisterCredentialAndSecret extends _i1.Mock
 
   @override
   _i3.Future<_i4.Either<_i7.FailureDetails, _i4.Unit>> call(
-          _i6.Params? params) =>
-      (super.noSuchMethod(Invocation.method(#call, [params]),
+          _i8.Credentials? credentials) =>
+      (super.noSuchMethod(Invocation.method(#call, [credentials]),
           returnValue: Future<_i4.Either<_i7.FailureDetails, _i4.Unit>>.value(
               _FakeEither_2<_i7.FailureDetails, _i4.Unit>())) as _i3
           .Future<_i4.Either<_i7.FailureDetails, _i4.Unit>>);

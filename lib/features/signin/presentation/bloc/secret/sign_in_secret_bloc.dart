@@ -45,8 +45,7 @@ class SignInSecretBloc extends Bloc<SignInSecretEvent, SignInSecretState> {
           authFailureOrSuccessOption: none(),
           notification: none(),
         );
-        final result =
-            await _signInWithSecret.call(Params(secret: state.secret));
+        final result = await _signInWithSecret.call(state.secret);
         yield state.copyWith(
           isLoading: false,
           notification: result.fold(

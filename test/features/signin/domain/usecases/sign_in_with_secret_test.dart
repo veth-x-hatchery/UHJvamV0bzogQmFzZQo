@@ -48,7 +48,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(Params(secret: secret));
+      final result = await _signInUseCase.call(secret);
 
       // assert
 
@@ -79,7 +79,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(Params(secret: secret));
+      final result = await _signInUseCase.call(secret);
       // assert
 
       expect(result, left(failureDetails));
@@ -112,7 +112,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(Params(secret: secret));
+      final result = await _signInUseCase.call(secret);
       // assert
 
       expect(result, left(failureDetails));
@@ -139,7 +139,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(Params(secret: secret));
+      final result = await _signInUseCase.call(secret);
 
       // assert
 

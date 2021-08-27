@@ -46,8 +46,7 @@ void main() {
 
       // act
 
-      final result = await _signInCheckIfCredentialIsInUse
-          .call(Params(credential: credential));
+      final result = await _signInCheckIfCredentialIsInUse.call(credential);
 
       // assert
 
@@ -72,8 +71,7 @@ void main() {
 
       // act
 
-      final result = await _signInCheckIfCredentialIsInUse
-          .call(Params(credential: credential));
+      final result = await _signInCheckIfCredentialIsInUse.call(credential);
 
       // assert
 
@@ -95,8 +93,7 @@ void main() {
 
       // act
 
-      await _signInCheckIfCredentialIsInUse
-          .call(Params(credential: credential));
+      await _signInCheckIfCredentialIsInUse.call(credential);
 
       // assert
 

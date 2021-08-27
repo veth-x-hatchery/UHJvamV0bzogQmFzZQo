@@ -1,14 +1,11 @@
 import 'package:dartz/dartz.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
-part 'sign_in_register_credential_and_secret.freezed.dart';
-
-class SignInRegisterCredentialAndSecret extends UseCase<Unit, Params> {
+class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
   // final ISignInRepository _signInRepository;
   final IAuthFacade _authFacade;
 
@@ -18,11 +15,11 @@ class SignInRegisterCredentialAndSecret extends UseCase<Unit, Params> {
   );
 
   @override
-  Future<Either<FailureDetails, Unit>> call(Params params) {
+  Future<Either<FailureDetails, Unit>> call(Credentials credentials) {
     return _authFacade
         .registerWithCredentialAndSecret(
-          credentialAddress: params.credentials.user,
-          secret: params.credentials.secret,
+          credentialAddress: credentials.user,
+          secret: credentials.secret,
         )
         .then((value) => value.fold(
               (l) => left(_mapFailures(l)),
@@ -57,11 +54,4 @@ class SignInRegisterCredentialAndSecretErrorMessages {
   static const credentialAlreadyInUse = 'This credential is already in use';
   static const invalidCredentialAndSecretCombination =
       'Invalid credential and secret combination';
-}
-
-@freezed
-class Params with _$Params {
-  const factory Params({
-    required Credentials credentials,
-  }) = _Params;
 }

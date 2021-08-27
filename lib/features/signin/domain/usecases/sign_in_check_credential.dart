@@ -7,9 +7,7 @@ import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repositor
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
-part 'sign_in_check_credential.freezed.dart';
-
-class SignInCredentialCheck extends UseCase<bool, Params> {
+class SignInCredentialCheck extends UseCase<bool, Credential> {
   final ISignInRepository _signInRepository;
 
   final IAuthFacade _authFacade;
@@ -20,12 +18,12 @@ class SignInCredentialCheck extends UseCase<bool, Params> {
   );
 
   @override
-  Future<Either<FailureDetails, bool>> call(Params params) =>
-      _authFacade.credentialIsAlreadyInUse(params.credential).then(
+  Future<Either<FailureDetails, bool>> call(Credential credential) =>
+      _authFacade.credentialIsAlreadyInUse(credential).then(
             (value) => value.fold(
               (l) => left(_mapFailures(l)),
               (r) {
-                _signInRepository.cacheCredential(params.credential);
+                _signInRepository.cacheCredential(credential);
                 return right(r);
               },
             ),
@@ -37,13 +35,6 @@ class SignInCredentialCheck extends UseCase<bool, Params> {
       message: CheckCredentialErrorMessages.unavailable,
     );
   }
-}
-
-@freezed
-class Params with _$Params {
-  const factory Params({
-    required Credential credential,
-  }) = _Params;
 }
 
 class CheckCredentialErrorMessages {

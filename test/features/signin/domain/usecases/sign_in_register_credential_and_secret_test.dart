@@ -45,9 +45,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(
-        Params(credentials: credentials),
-      );
+      final result = await _signInUseCase.call(credentials);
 
       // assert
 
@@ -77,9 +75,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(
-        Params(credentials: credentials),
-      );
+      final result = await _signInUseCase.call(credentials);
       // assert
 
       expect(result, left(failureDetails));
@@ -109,9 +105,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(
-        Params(credentials: credentials),
-      );
+      final result = await _signInUseCase.call(credentials);
       // assert
 
       expect(result, left(failureDetails));

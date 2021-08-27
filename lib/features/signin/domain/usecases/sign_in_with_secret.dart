@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
@@ -7,9 +6,7 @@ import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repositor
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
-part 'sign_in_with_secret.freezed.dart';
-
-class SignInWithSecret extends UseCase<Unit, Params> {
+class SignInWithSecret extends UseCase<Unit, Secret> {
   final ISignInRepository _signInRepository;
   final IAuthFacade _authFacade;
 
@@ -19,7 +16,7 @@ class SignInWithSecret extends UseCase<Unit, Params> {
   );
 
   @override
-  Future<Either<FailureDetails, Unit>> call(Params params) async {
+  Future<Either<FailureDetails, Unit>> call(Secret secret) async {
     final cachedCredential = await _signInRepository.cachedCredential();
     return cachedCredential.fold(
       (l) => left(_mapFailures(const AuthFailure.invalidCachedCredential())),
@@ -27,7 +24,7 @@ class SignInWithSecret extends UseCase<Unit, Params> {
         return _authFacade
             .signInWithCredentialAndSecret(
               credentialAddress: credential,
-              secret: params.secret,
+              secret: secret,
             )
             .then((value) => value.fold(
                   (l) => left(_mapFailures(l)),
@@ -63,11 +60,4 @@ class SignInWithSecretErrorMessages {
   static const invalidCredentialAndSecretCombination =
       'Invalid email and password combination';
   static const invalidCachedCredential = 'Please confirm your email';
-}
-
-@freezed
-class Params with _$Params {
-  const factory Params({
-    required Secret secret,
-  }) = _Params;
 }

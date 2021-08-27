@@ -9,6 +9,8 @@ import 'package:dartz/dartz.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
     as _i10;
+import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
+    as _i11;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart'
     as _i9;
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
@@ -263,8 +265,8 @@ class MockSignInWithSecret extends _i1.Mock implements _i9.SignInWithSecret {
 
   @override
   _i3.Future<_i5.Either<_i10.FailureDetails, _i5.Unit>> call(
-          _i9.Params? params) =>
-      (super.noSuchMethod(Invocation.method(#call, [params]),
+          _i11.Secret? secret) =>
+      (super.noSuchMethod(Invocation.method(#call, [secret]),
           returnValue: Future<_i5.Either<_i10.FailureDetails, _i5.Unit>>.value(
               _FakeEither_3<_i10.FailureDetails, _i5.Unit>())) as _i3
           .Future<_i5.Either<_i10.FailureDetails, _i5.Unit>>);
