@@ -1,4 +1,4 @@
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vethx_beta/core/error/exceptions.dart';
 
 enum CacheKeys {
   basicAuth,
@@ -7,36 +7,46 @@ enum CacheKeys {
   userProfile,
 }
 
-class CacheService {
+abstract class ICacheService {
+  /// throws [CacheException] when there's no value;
+  Future<String> get({required CacheKeys key});
+
+  /// throws [CacheException] when something goes wrong;
+  Future<void> write({required CacheKeys key, required String obj});
+
+  /// throws [CacheException] when something goes wrong;
+  Future<void> remove({required CacheKeys key});
+}
+
+class CacheService implements ICacheService {
+  /// echo 'CacheKeys.*' | base64
   static const Map<CacheKeys, String> _cacheKeys = {
-    CacheKeys.authToken: 'key_accesstoken',
-    CacheKeys.user: 'key_profileUser',
-    CacheKeys.basicAuth: '9ada5718-2383-45c3-8185-e86993ed171d',
-    CacheKeys.userProfile: '788afc2a-1ab9-4429-ac7e-db80629df61d',
+    CacheKeys.authToken: 'Q2FjaGVLZXlzLmF1dGhUb2tlbgo',
+    CacheKeys.user: 'Q2FjaGVLZXlzLnVzZXIK',
+    CacheKeys.basicAuth: 'Q2FjaGVLZXlzLmJhc2ljQXV0aAo',
+    CacheKeys.userProfile: 'Q2FjaGVLZXlzLnVzZXJQcm9maWxlCg',
   };
 
-  Future<String?> get({
+  @override
+  Future<String> get({
     required CacheKeys key,
   }) async {
     // final sharedPreferences = await SharedPreferences.getInstance();
     // return sharedPreferences.getString(_cacheKeys[key]);
-    return null;
+    throw CacheException();
   }
 
-  Future<bool> write({
-    required CacheKeys key,
-    required String obj,
-  }) async {
-    // final sharedPreferences = await SharedPreferences.getInstance();
-    // return sharedPreferences.setString(_cacheKeys[key], obj);
-    return Future.value(true);
-  }
-
-  Future<bool> remove({
+  @override
+  Future<void> remove({
     required CacheKeys key,
   }) async {
     // final sharedPreferences = await SharedPreferences.getInstance();
     // return sharedPreferences.remove(_cacheKeys[key]);
-    return Future.value(true);
+    throw CacheException();
+  }
+
+  @override
+  Future<void> write({required CacheKeys key, required String obj}) {
+    throw CacheException();
   }
 }
