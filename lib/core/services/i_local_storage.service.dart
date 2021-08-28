@@ -2,12 +2,12 @@ import 'package:dartz/dartz.dart';
 import 'package:vethx_beta/core/error/failures.dart';
 
 /// Improve performance using AES-256 encryption
-enum SensitiveData {
+enum SensitiveDataKeys {
   apiEndPointXYZ,
 }
 
 /// Uses Keystore for Android and Keychains for iOS
-enum PersonallyIdentifiableInformation {
+enum PersonallyIdentifiableInformationKeys {
   refreshToken,
   authToken,
   userProfile,

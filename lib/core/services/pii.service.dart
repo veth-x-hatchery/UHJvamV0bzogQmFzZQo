@@ -6,7 +6,7 @@ import 'package:vethx_beta/core/utils/logger.dart';
 
 import 'i_local_storage.service.dart';
 
-class PII implements ILocalStorage<PersonallyIdentifiableInformation> {
+class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
   late FlutterSecureStorage _storage;
 
   PII._() {
@@ -16,15 +16,16 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformation> {
   static final instance = PII._();
 
   /// echo 'PIIKeys.*' | base64
-  static const Map<PersonallyIdentifiableInformation, String> _piiKeys = {
-    PersonallyIdentifiableInformation.authToken: 'UElJS2V5cy5hdXRoVG9rZW4K',
-    PersonallyIdentifiableInformation.userProfile:
+  static const Map<PersonallyIdentifiableInformationKeys, String> _piiKeys = {
+    PersonallyIdentifiableInformationKeys.authToken: 'UElJS2V5cy5hdXRoVG9rZW4K',
+    PersonallyIdentifiableInformationKeys.userProfile:
         'UElJS2V5cy51c2VyUHJvZmlsZQo',
-    PersonallyIdentifiableInformation.credential: 'UElJS2V5cy5jcmVkZW50aWFsCg',
+    PersonallyIdentifiableInformationKeys.credential:
+        'UElJS2V5cy5jcmVkZW50aWFsCg',
   };
 
   @override
-  Either<Failure, String> getKey(PersonallyIdentifiableInformation key) {
+  Either<Failure, String> getKey(PersonallyIdentifiableInformationKeys key) {
     final value = _piiKeys[key];
     if (value == null) {
       return left(Failure.cacheFailure(
@@ -35,7 +36,7 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformation> {
 
   @override
   Future<Either<Failure, String>> get(
-      {required PersonallyIdentifiableInformation key}) async {
+      {required PersonallyIdentifiableInformationKeys key}) async {
     return getKey(key).fold(
       (_) => left(_),
       (keyValue) async {
@@ -51,7 +52,7 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformation> {
 
   @override
   Future<Either<Failure, Unit>> remove(
-      {required PersonallyIdentifiableInformation key}) async {
+      {required PersonallyIdentifiableInformationKeys key}) async {
     return getKey(key).fold(
       (_) => left(_),
       (keyValue) async {
@@ -69,7 +70,7 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformation> {
 
   @override
   Future<Either<Failure, Unit>> write(
-      {required PersonallyIdentifiableInformation key,
+      {required PersonallyIdentifiableInformationKeys key,
       required String obj}) async {
     return getKey(key).fold(
       (_) => left(_),

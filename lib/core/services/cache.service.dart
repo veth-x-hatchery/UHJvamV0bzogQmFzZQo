@@ -6,31 +6,35 @@ import 'package:vethx_beta/core/utils/logger.dart';
 
 import 'i_local_storage.service.dart';
 
-class CacheService implements ILocalStorage<SensitiveData> {
+class CacheService implements ILocalStorage<SensitiveDataKeys> {
   /// echo 'CacheKeys.*' | base64
-  static const Map<SensitiveData, String> _cacheKeys = {
-    SensitiveData.apiEndPointXYZ: 'Q2FjaGVLZXlzLmFwaUVuZFBvaW50WFlaCg',
+  static const Map<SensitiveDataKeys, String> _cacheKeys = {
+    SensitiveDataKeys.apiEndPointXYZ: 'Q2FjaGVLZXlzLmFwaUVuZFBvaW50WFlaCg',
   };
 
-  static const String hiveBoxName = 'asdf';
+  static Failure objectNotFound(SensitiveDataKeys key) =>
+      Failure.cacheFailure(message: 'key: $key object not found');
 
-  late HiveInterface _storage;
+  static Failure unavailableService() =>
+      const Failure.cacheFailure(message: 'Cache storage unavailable');
 
-  CacheService._() {
-    _storage = Hive;
-    _storage.openBox(hiveBoxName);
+  static const String hiveBoxName =
+      'SUxvY2FsU3RvcmFnZTxTZW5zaXRpdmVEYXRhS2V5cz4K';
+
+  final HiveInterface _storage;
+
+  CacheService(this._storage) {
+    _storage.openBox<String>(hiveBoxName);
   }
-
-  static final instance = CacheService._();
 
   Future<void> _openBox() async {
     if (!_storage.isBoxOpen(hiveBoxName)) {
-      await _storage.openBox(hiveBoxName);
+      await _storage.openBox<String>(hiveBoxName);
     }
   }
 
   @override
-  Either<Failure, String> getKey(SensitiveData key) {
+  Either<Failure, String> getKey(SensitiveDataKeys key) {
     final value = _cacheKeys[key];
     if (value == null) {
       return left(Failure.cacheFailure(
@@ -40,15 +44,14 @@ class CacheService implements ILocalStorage<SensitiveData> {
   }
 
   @override
-  Future<Either<Failure, String>> get({required SensitiveData key}) async {
+  Future<Either<Failure, String>> get({required SensitiveDataKeys key}) async {
     return getKey(key).fold(
       (_) => left(_),
       (keyValue) async {
         await _openBox();
         final obj = _storage.box<String>(hiveBoxName).get(keyValue);
         if (obj == null) {
-          return left(
-              Failure.cacheFailure(message: 'key: $key object not found'));
+          return left(objectNotFound(key));
         }
         return right(obj);
       },
@@ -56,7 +59,7 @@ class CacheService implements ILocalStorage<SensitiveData> {
   }
 
   @override
-  Future<Either<Failure, Unit>> remove({required SensitiveData key}) async {
+  Future<Either<Failure, Unit>> remove({required SensitiveDataKeys key}) async {
     return getKey(key).fold(
       (_) => left(_),
       (keyValue) async {
@@ -64,8 +67,7 @@ class CacheService implements ILocalStorage<SensitiveData> {
           await _storage.box(hiveBoxName).delete(keyValue);
         } on PlatformException catch (ex, stack) {
           Logger.utils('CacheService, write', exception: ex, stackTrace: stack);
-          return left(
-              const Failure.cacheFailure(message: 'Cache storage unavailable'));
+          return left(unavailableService());
         }
         return right(unit);
       },
@@ -74,7 +76,7 @@ class CacheService implements ILocalStorage<SensitiveData> {
 
   @override
   Future<Either<Failure, Unit>> write({
-    required SensitiveData key,
+    required SensitiveDataKeys key,
     required String obj,
   }) async {
     return getKey(key).fold(
@@ -84,8 +86,7 @@ class CacheService implements ILocalStorage<SensitiveData> {
           await _storage.box(hiveBoxName).put(keyValue, obj);
         } on PlatformException catch (ex, stack) {
           Logger.utils('CacheService, write', exception: ex, stackTrace: stack);
-          return left(
-              const Failure.cacheFailure(message: 'Cache storage unavailable'));
+          return left(unavailableService());
         }
         return right(unit);
       },

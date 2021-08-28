@@ -18,7 +18,7 @@ class APIBase {
   final API _api;
   final h.Client _http;
   final INetworkInfo _networkInfo;
-  final ILocalStorage<PersonallyIdentifiableInformation> _cacheService;
+  final ILocalStorage<PersonallyIdentifiableInformationKeys> _cacheService;
 
   Future checkInternetConnection() async {
     if (!await _networkInfo.isConnected) {
@@ -28,7 +28,7 @@ class APIBase {
 
   Future<String> authTokenRefresh() async {
     final authorization = await _cacheService.get(
-        key: PersonallyIdentifiableInformation.refreshToken);
+        key: PersonallyIdentifiableInformationKeys.refreshToken);
     return authorization.fold(
       (_) {
         Logger.utils(
@@ -44,9 +44,9 @@ class APIBase {
 
   Future resetCache() async {
     for (final key in [
-      PersonallyIdentifiableInformation.authToken,
-      PersonallyIdentifiableInformation.userProfile,
-      PersonallyIdentifiableInformation.refreshToken,
+      PersonallyIdentifiableInformationKeys.authToken,
+      PersonallyIdentifiableInformationKeys.userProfile,
+      PersonallyIdentifiableInformationKeys.refreshToken,
     ]) {
       await _cacheService.remove(key: key);
     }
@@ -54,7 +54,7 @@ class APIBase {
 
   Future<String> authToken() async {
     final token = await _cacheService.get(
-        key: PersonallyIdentifiableInformation.authToken);
+        key: PersonallyIdentifiableInformationKeys.authToken);
     return token.fold(
       (l) => authTokenRefresh(),
       (token) => token,
@@ -86,9 +86,10 @@ class APIBase {
 
       if (accessToken != null) {
         await _cacheService.write(
-            key: PersonallyIdentifiableInformation.authToken, obj: accessToken);
+            key: PersonallyIdentifiableInformationKeys.authToken,
+            obj: accessToken);
         await _cacheService.write(
-            key: PersonallyIdentifiableInformation.refreshToken,
+            key: PersonallyIdentifiableInformationKeys.refreshToken,
             obj: '$credential:$password');
         return accessToken;
       }
