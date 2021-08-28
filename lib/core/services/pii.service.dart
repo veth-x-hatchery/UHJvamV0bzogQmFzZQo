@@ -7,13 +7,9 @@ import 'package:vethx_beta/core/utils/logger.dart';
 import 'i_local_storage.service.dart';
 
 class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
-  late FlutterSecureStorage _storage;
+  final FlutterSecureStorage _storage;
 
-  PII._() {
-    _storage = const FlutterSecureStorage();
-  }
-
-  static final instance = PII._();
+  PII(this._storage);
 
   /// echo 'PIIKeys.*' | base64
   static const Map<PersonallyIdentifiableInformationKeys, String> _piiKeys = {
@@ -22,7 +18,15 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
         'UElJS2V5cy51c2VyUHJvZmlsZQo',
     PersonallyIdentifiableInformationKeys.credential:
         'UElJS2V5cy5jcmVkZW50aWFsCg',
+    PersonallyIdentifiableInformationKeys.refreshToken:
+        'UElJS2V5cy5yZWZyZXNoVG9rZW4K',
   };
+
+  static Failure objectNotFound(PersonallyIdentifiableInformationKeys key) =>
+      Failure.cacheFailure(message: 'key: $key object not found');
+
+  static Failure unavailableService() =>
+      const Failure.cacheFailure(message: 'Cache storage unavailable');
 
   @override
   Either<Failure, String> getKey(PersonallyIdentifiableInformationKeys key) {
@@ -42,8 +46,7 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
       (keyValue) async {
         final obj = await _storage.read(key: keyValue);
         if (obj == null) {
-          return left(
-              Failure.cacheFailure(message: 'key: $key object not found'));
+          return left(objectNotFound(key));
         }
         return right(obj);
       },
@@ -60,8 +63,7 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
           await _storage.delete(key: keyValue);
         } on PlatformException catch (ex, stack) {
           Logger.utils('PII, remove', exception: ex, stackTrace: stack);
-          return left(const Failure.cacheFailure(
-              message: 'Secure storage unavailable'));
+          return left(unavailableService());
         }
         return right(unit);
       },
@@ -79,8 +81,7 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
           await _storage.write(key: keyValue, value: obj);
         } on PlatformException catch (ex, stack) {
           Logger.utils('PII, write', exception: ex, stackTrace: stack);
-          return left(const Failure.cacheFailure(
-              message: 'Secure storage unavailable'));
+          return left(unavailableService());
         }
         return right(unit);
       },
