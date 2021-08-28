@@ -1,3 +1,6 @@
+import 'package:dartz/dartz.dart';
+import 'package:vethx_beta/core/error/failures.dart';
+
 /// Improve performance using AES-256 encryption
 enum SensitiveData {
   apiEndPointXYZ,
@@ -13,11 +16,11 @@ enum PersonallyIdentifiableInformation {
 
 abstract class ILocalStorage<Key extends Enum> {
   /// throws [CacheException] when there's no value;
-  Future<String> get({required Key key});
+  Future<Either<Failure, String>> get({required Key key});
 
   /// throws [CacheException] when something goes wrong;
-  Future<void> write({required Key key, required String obj});
+  Future<Either<Failure, Unit>> write({required Key key, required String obj});
 
   /// throws [CacheException] when something goes wrong;
-  Future<void> remove({required Key key});
+  Future<Either<Failure, Unit>> remove({required Key key});
 }

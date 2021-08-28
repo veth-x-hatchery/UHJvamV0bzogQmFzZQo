@@ -1,4 +1,5 @@
-import 'package:vethx_beta/core/error/exceptions.dart';
+import 'package:dartz/dartz.dart';
+import 'package:vethx_beta/core/error/failures.dart';
 
 import 'i_local_storage.service.dart';
 
@@ -9,24 +10,18 @@ class CacheService implements ILocalStorage<SensitiveData> {
   };
 
   @override
-  Future<String> get({
-    required SensitiveData key,
-  }) async {
-    // TODO: implement get
-    return _cacheKeys[key]!;
+  Future<Either<Failure, String>> get({required SensitiveData key}) async {
+    return Right(_cacheKeys[key]!);
   }
 
   @override
-  Future<void> remove({
-    required SensitiveData key,
-  }) async {
-    // final sharedPreferences = await SharedPreferences.getInstance();
-    // return sharedPreferences.remove(_cacheKeys[key]);
-    throw CacheException();
+  Future<Either<Failure, Unit>> remove({required SensitiveData key}) async {
+    return const Left(Failure.cacheFailure());
   }
 
   @override
-  Future<void> write({required SensitiveData key, required String obj}) {
-    throw CacheException();
+  Future<Either<Failure, Unit>> write(
+      {required SensitiveData key, required String obj}) async {
+    return const Left(Failure.cacheFailure());
   }
 }

@@ -27,17 +27,19 @@ class APIBase {
   }
 
   Future<String> authTokenRefresh() async {
-    try {
-      final authorization = await _cacheService.get(
-          key: PersonallyIdentifiableInformation.refreshToken);
-
-      final auth = authorization.split(':');
-
-      return authenticate(credential: auth[0], password: auth[1]);
-    } on CacheException {
-      Logger.utils('APIBase, authTokenRefresh() => authorization == null');
-      throw ServerException();
-    }
+    final authorization = await _cacheService.get(
+        key: PersonallyIdentifiableInformation.refreshToken);
+    return authorization.fold(
+      (_) {
+        Logger.utils(
+            'APIBase, authTokenRefresh() => authorization == null: $_');
+        throw ServerException();
+      },
+      (authorization) {
+        final auth = authorization.split(':');
+        return authenticate(credential: auth[0], password: auth[1]);
+      },
+    );
   }
 
   Future resetCache() async {
@@ -53,11 +55,10 @@ class APIBase {
   Future<String> authToken() async {
     final token = await _cacheService.get(
         key: PersonallyIdentifiableInformation.authToken);
-
-    if (token != null) {
-      return token;
-    }
-    return authTokenRefresh();
+    return token.fold(
+      (l) => authTokenRefresh(),
+      (token) => token,
+    );
   }
 
   Future<String> authenticate({

@@ -1,4 +1,5 @@
-import 'package:vethx_beta/core/error/exceptions.dart';
+import 'package:dartz/dartz.dart';
+import 'package:vethx_beta/core/error/failures.dart';
 
 import 'i_local_storage.service.dart';
 
@@ -12,21 +13,21 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformation> {
   };
 
   @override
-  Future<String> get({required PersonallyIdentifiableInformation key}) async {
-    // TODO: implement get
-    return _piiKeys[key]!;
+  Future<Either<Failure, String>> get(
+      {required PersonallyIdentifiableInformation key}) async {
+    return right(_piiKeys[key]!);
   }
 
   @override
-  Future<void> remove({required PersonallyIdentifiableInformation key}) {
-    // TODO: implement remove
-    throw CacheException();
+  Future<Either<Failure, Unit>> remove(
+      {required PersonallyIdentifiableInformation key}) async {
+    return const Left(Failure.cacheFailure());
   }
 
   @override
-  Future<void> write(
-      {required PersonallyIdentifiableInformation key, required String obj}) {
-    // TODO: implement write
-    throw CacheException();
+  Future<Either<Failure, Unit>> write(
+      {required PersonallyIdentifiableInformation key,
+      required String obj}) async {
+    return const Left(Failure.cacheFailure());
   }
 }
