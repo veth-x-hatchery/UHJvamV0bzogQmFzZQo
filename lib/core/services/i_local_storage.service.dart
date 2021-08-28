@@ -15,12 +15,11 @@ enum PersonallyIdentifiableInformation {
 }
 
 abstract class ILocalStorage<Key extends Enum> {
-  /// throws [CacheException] when there's no value;
   Future<Either<Failure, String>> get({required Key key});
 
-  /// throws [CacheException] when something goes wrong;
   Future<Either<Failure, Unit>> write({required Key key, required String obj});
 
-  /// throws [CacheException] when something goes wrong;
   Future<Either<Failure, Unit>> remove({required Key key});
+
+  Either<Failure, String> getKey(Key key);
 }

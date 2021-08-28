@@ -23,7 +23,8 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformation> {
     PersonallyIdentifiableInformation.credential: 'UElJS2V5cy5jcmVkZW50aWFsCg',
   };
 
-  Either<Failure, String> _getKey(PersonallyIdentifiableInformation key) {
+  @override
+  Either<Failure, String> getKey(PersonallyIdentifiableInformation key) {
     final value = _piiKeys[key];
     if (value == null) {
       return left(Failure.cacheFailure(
@@ -35,7 +36,7 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformation> {
   @override
   Future<Either<Failure, String>> get(
       {required PersonallyIdentifiableInformation key}) async {
-    return _getKey(key).fold(
+    return getKey(key).fold(
       (_) => left(_),
       (keyValue) async {
         final obj = await _storage.read(key: keyValue);
@@ -51,7 +52,7 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformation> {
   @override
   Future<Either<Failure, Unit>> remove(
       {required PersonallyIdentifiableInformation key}) async {
-    return _getKey(key).fold(
+    return getKey(key).fold(
       (_) => left(_),
       (keyValue) async {
         try {
@@ -70,7 +71,7 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformation> {
   Future<Either<Failure, Unit>> write(
       {required PersonallyIdentifiableInformation key,
       required String obj}) async {
-    return _getKey(key).fold(
+    return getKey(key).fold(
       (_) => left(_),
       (keyValue) async {
         try {
