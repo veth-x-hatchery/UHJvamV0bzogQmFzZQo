@@ -1,36 +1,38 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/core/services/i_local_storage.service.dart';
+import 'package:vethx_beta/core/services/pii.service.dart';
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 
 import 'sign_in_local_data_source_test.mocks.dart';
 
 @GenerateMocks([
-  SharedPreferences,
+  PII,
 ])
 void main() {
   late SignInLocalSource dataSource;
-  late MockSharedPreferences mockSharedPreferences;
+  late MockPII mockStorageService;
 
   setUp(() {
-    mockSharedPreferences = MockSharedPreferences();
-    dataSource = SignInLocalSource(mockSharedPreferences);
+    mockStorageService = MockPII();
+    dataSource = SignInLocalSource(mockStorageService);
   });
 
   group('when dealing with cache credential', () {
     final credential = AuthFacadeMock.validTestCredential;
+    const key = PersonallyIdentifiableInformationKeys.credential;
 
     test(
-      'should return current credential from SharedPreferences when there is one in the cache',
+      'should return current credential from [PII] when there is one in the cache',
       () async {
         // arrange
 
-        when(mockSharedPreferences.getString(any))
-            .thenReturn(credential.getOrCrash());
+        when(mockStorageService.get(key: key))
+            .thenAnswer((_) async => right(credential.getOrCrash()));
 
         // act
 
@@ -38,8 +40,7 @@ void main() {
 
         // assert
 
-        verify(mockSharedPreferences
-            .getString(SignInLocalSource.cached_credential_key));
+        verify(mockStorageService.get(key: key));
 
         expect(result, equals(credential));
       },
@@ -50,7 +51,8 @@ void main() {
       () async {
         // arrange
 
-        when(mockSharedPreferences.getString(any)).thenReturn(null);
+        when(mockStorageService.get(key: key)).thenAnswer((_) async => left(PII
+            .objectNotFound(PersonallyIdentifiableInformationKeys.authToken)));
 
         // act
 
@@ -63,12 +65,12 @@ void main() {
     );
 
     test(
-      'should call SharedPreferences to cache the data',
+      'should call [PII] to cache the data',
       () async {
         // arrange
 
-        when(mockSharedPreferences.setString(any, any))
-            .thenAnswer((_) async => true);
+        when(mockStorageService.write(key: key, obj: credential.getOrCrash()))
+            .thenAnswer((_) async => right(unit));
 
         // act
 
@@ -76,20 +78,18 @@ void main() {
 
         // assert
 
-        verify(mockSharedPreferences.setString(
-          SignInLocalSource.cached_credential_key,
-          credential.getOrCrash(),
-        ));
+        verify(
+            mockStorageService.write(key: key, obj: credential.getOrCrash()));
       },
     );
 
     test(
-      'should throw CacheExeption when call SharedPreferences to cache the data',
+      'should throw CacheExeption when call [PII] to cache the data',
       () async {
         // arrange
 
-        when(mockSharedPreferences.setString(any, any))
-            .thenAnswer((_) async => false);
+        when(mockStorageService.write(key: key, obj: credential.getOrCrash()))
+            .thenAnswer((_) async => left(PII.unavailableService()));
 
         // act && assert
 

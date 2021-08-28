@@ -181,7 +181,7 @@ void main() {
         AuthFacadeMock.validTestCredential.inputedValue!);
 
     _prepareFormValidationValues(
-        value: AuthFacadeMock.validTestCredential.inputedValue!);
+        value: AuthFacadeMock.validTestCredential.inputedValue);
 
     // Act
 

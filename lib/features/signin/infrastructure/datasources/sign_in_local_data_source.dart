@@ -1,5 +1,6 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dartz/dartz.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
+import 'package:vethx_beta/core/services/i_local_storage.service.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 
 abstract class ISignInLocalSource {
@@ -11,28 +12,29 @@ abstract class ISignInLocalSource {
 }
 
 class SignInLocalSource implements ISignInLocalSource {
-  // ignore: constant_identifier_names
-  static const String cached_credential_key = 'CACHED_CREDENTIAL';
+  final ILocalStorage<PersonallyIdentifiableInformationKeys> _cacheService;
 
-  final SharedPreferences _sharedPreferences;
-
-  SignInLocalSource(this._sharedPreferences);
+  SignInLocalSource(this._cacheService);
 
   @override
   Future<void> cacheCredential(Credential credential) async {
-    final result = await _sharedPreferences.setString(
-        cached_credential_key, credential.getOrCrash());
-    if (!result) {
-      throw CacheException();
-    }
+    final result = await _cacheService.write(
+      key: PersonallyIdentifiableInformationKeys.credential,
+      obj: credential.getOrCrash(),
+    );
+    return result.fold(
+      (l) => throw CacheException(),
+      (r) => unit,
+    );
   }
 
   @override
-  Future<Credential> cachedCredential() {
-    final value = _sharedPreferences.getString(cached_credential_key);
-    if (value == null) {
-      throw CacheException();
-    }
-    return Future.value(Credential(value));
+  Future<Credential> cachedCredential() async {
+    final result = await _cacheService.get(
+        key: PersonallyIdentifiableInformationKeys.credential);
+    return result.fold(
+      (l) => throw CacheException(),
+      (value) => Credential(value),
+    );
   }
 }

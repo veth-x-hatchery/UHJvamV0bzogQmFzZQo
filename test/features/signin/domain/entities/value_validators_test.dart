@@ -37,12 +37,12 @@ void main() {
   group('when validate credential address', () {
     test('should return [ValueFailure.invalidCredential]', () {
       // arrange
-      const String credential = '@asdf';
+      final String credential = AuthFacadeMock.invalidCredential.inputedValue!;
       // act
       final credentialAddress = validateCredentialAddress(credential);
       // assert
       expect(credentialAddress,
-          left(const ValueFailure.invalidCredential(failedValue: credential)));
+          left(ValueFailure.invalidCredential(failedValue: credential)));
     });
 
     test('should validate credential with success', () {
@@ -68,7 +68,7 @@ void main() {
 
     test('should validate secret with success', () {
       // arrange
-      const String secret = 'dmFsdWVfdmFsaWRhdG9yc190ZXN0LmRhcnQK';
+      final String secret = AuthFacadeMock.validTestSecret.inputedValue!;
       // act
       final validation = validateSecret(secret);
       // assert

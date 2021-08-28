@@ -7,6 +7,7 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
@@ -40,11 +41,11 @@ void main() {
   test('when secret changes occour then should emit correct state', () async {
     // arrange
 
-    const secret = 'test';
+    final secret = AuthFacadeMock.invalidSecret.inputedValue!;
 
     // act
 
-    _bloc.add(const SignInSecretEvent.secretChanged(secret));
+    _bloc.add(SignInSecretEvent.secretChanged(secret));
 
     // assert
 
@@ -66,7 +67,7 @@ void main() {
       () async {
     // arrange
 
-    const secret = 'dmFsaWRwYXNzd29yZAo';
+    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
 
     final valueObject = Secret(secret);
 
@@ -75,7 +76,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInSecretEvent.secretChanged(secret));
+    _bloc.add(SignInSecretEvent.secretChanged(secret));
 
     _bloc.add(const SignInSecretEvent.analyseSecretPressed());
 
@@ -112,14 +113,14 @@ void main() {
       () async {
     // arrange
 
-    const secret = 'test';
+    final secret = AuthFacadeMock.invalidSecret.inputedValue!;
 
     when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(right(unit)));
 
     // act
 
-    _bloc.add(const SignInSecretEvent.secretChanged(secret));
+    _bloc.add(SignInSecretEvent.secretChanged(secret));
 
     _bloc.add(const SignInSecretEvent.analyseSecretPressed());
 
@@ -154,7 +155,7 @@ void main() {
   test('when confirmation occour then should emit a failure detais', () async {
     // arrange
 
-    const secret = 'dmFsaWRwYXNzd29yZAo';
+    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
       message:
@@ -166,7 +167,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInSecretEvent.secretChanged(secret));
+    _bloc.add(SignInSecretEvent.secretChanged(secret));
 
     _bloc.add(const SignInSecretEvent.analyseSecretPressed());
 
@@ -201,7 +202,7 @@ void main() {
   test('should notify Auth BLoC when sign in is allowed', () async {
     // arrange
 
-    const secret = 'dmFsaWRwYXNzd29yZAo';
+    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
 
     final valueObject = Secret(secret);
 
@@ -210,7 +211,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInSecretEvent.secretChanged(secret));
+    _bloc.add(SignInSecretEvent.secretChanged(secret));
 
     _bloc.add(const SignInSecretEvent.analyseSecretPressed());
 
@@ -246,7 +247,7 @@ void main() {
       () async {
     // arrange
 
-    const secret = 'dmFsaWRwYXNzd29yZAo';
+    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
 
     final valueObject = Secret(secret);
 
@@ -260,7 +261,7 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInSecretEvent.secretChanged(secret));
+    _bloc.add(SignInSecretEvent.secretChanged(secret));
 
     _bloc.add(const SignInSecretEvent.analyseSecretPressed());
 

@@ -98,7 +98,7 @@ void main() {
     test('should return [ValueFailure.shortSecret]', () {
       // arrange
 
-      const String secret = '1234';
+      final String secret = AuthFacadeMock.invalidSecret.inputedValue!;
 
       // act
 
@@ -106,8 +106,7 @@ void main() {
 
       // assert
 
-      expect(result.value,
-          left(const ValueFailure.shortSecret(failedValue: secret)));
+      expect(result.value, left(ValueFailure.shortSecret(failedValue: secret)));
 
       expect(result.validation, SecretMessageErrors.shortSecret);
     });
@@ -115,7 +114,7 @@ void main() {
     test('should validate credential with success', () {
       // arrange
 
-      const String secret = 'dmFsdWVfdmFsaWRhdG9yc190ZXN0LmRhcnQK';
+      final String secret = AuthFacadeMock.validTestSecret.inputedValue!;
 
       // act
 

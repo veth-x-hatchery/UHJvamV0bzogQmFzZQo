@@ -9,6 +9,7 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
@@ -276,7 +277,7 @@ void main() {
       (tester) async {
     // Arrange
 
-    const secret = 'dmFsaWRwYXNzd29yZAo';
+    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
 
     final valueObject = Secret(secret);
 
