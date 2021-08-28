@@ -1,16 +1,16 @@
 import 'package:vethx_beta/core/error/exceptions.dart';
 
-import 'i_cache.service.dart';
+import 'i_local_storage.service.dart';
 
-class CacheService implements ICacheService<RemoteData> {
+class CacheService implements ILocalStorage<SensitiveData> {
   /// echo 'CacheKeys.*' | base64
-  static const Map<RemoteData, String> _cacheKeys = {
-    RemoteData.apiEndPointXYZ: 'Q2FjaGVLZXlzLmFwaUVuZFBvaW50WFlaCg',
+  static const Map<SensitiveData, String> _cacheKeys = {
+    SensitiveData.apiEndPointXYZ: 'Q2FjaGVLZXlzLmFwaUVuZFBvaW50WFlaCg',
   };
 
   @override
   Future<String> get({
-    required RemoteData key,
+    required SensitiveData key,
   }) async {
     // TODO: implement get
     return _cacheKeys[key]!;
@@ -18,7 +18,7 @@ class CacheService implements ICacheService<RemoteData> {
 
   @override
   Future<void> remove({
-    required RemoteData key,
+    required SensitiveData key,
   }) async {
     // final sharedPreferences = await SharedPreferences.getInstance();
     // return sharedPreferences.remove(_cacheKeys[key]);
@@ -26,7 +26,7 @@ class CacheService implements ICacheService<RemoteData> {
   }
 
   @override
-  Future<void> write({required RemoteData key, required String obj}) {
+  Future<void> write({required SensitiveData key, required String obj}) {
     throw CacheException();
   }
 }

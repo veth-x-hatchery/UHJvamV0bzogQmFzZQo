@@ -4,7 +4,7 @@ import 'package:http/http.dart' as h;
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
-import 'package:vethx_beta/core/services/i_cache.service.dart';
+import 'package:vethx_beta/core/services/i_local_storage.service.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 
 class APIBase {
