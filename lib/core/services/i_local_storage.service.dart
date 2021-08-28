@@ -1,15 +1,17 @@
-enum ComumInformation {
+/// Improve performance using AES-256 encryption
+enum SensitiveData {
   apiEndPointXYZ,
 }
 
-enum PersonalyIdentifiableInformation {
+/// Uses Keystore for Android and Keychains for iOS
+enum PersonallyIdentifiableInformation {
   refreshToken,
   authToken,
   userProfile,
   credential,
 }
 
-abstract class ICacheService<Key extends Enum> {
+abstract class ILocalStorage<Key extends Enum> {
   /// throws [CacheException] when there's no value;
   Future<String> get({required Key key});
 
