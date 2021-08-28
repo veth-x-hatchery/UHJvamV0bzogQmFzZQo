@@ -105,6 +105,7 @@ void main() {
     Logger.testStep(step);
     await forgotSecret(tester);
     expect(find.byType(SnackBar), findsOneWidget);
+    await tester.pump();
     await helper.screenshot(prefix: prefix, name: step);
     await Future.delayed(snackBarNotificationDuration);
     await Future.delayed(snackBarNotificationDuration);

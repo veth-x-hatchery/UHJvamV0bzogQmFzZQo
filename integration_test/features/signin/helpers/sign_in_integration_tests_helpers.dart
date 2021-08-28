@@ -26,7 +26,7 @@ class IntegrationTestsHelpers {
 
     String deviceModel = await DeviceInfo().modelName();
     deviceModel =
-        deviceModel.replaceAll(',', '_').replaceAll(RegExp(r'/^\w+$/'), '');
+        deviceModel.replaceAll(',', '_').replaceAll(' ', '_').replaceAll(RegExp(r'/^\w+$/'), '');
 
     // final currentScreenshotPath = await FilesUtil.validateDirectory(Directory(
     //     '$basePath/${Platform.isAndroid ? 'android' : 'ios'}/$deviceModel'));
