@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
+import 'package:vethx_beta/core/services/i_local_storage.service.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
@@ -52,7 +53,8 @@ class SignInServiceLocator implements ISignInServiceLocator {
     // Data sources
 
     getIt.registerLazySingleton<ISignInLocalSource>(
-      () => SignInLocalSource(getIt<SharedPreferences>()),
+      () => SignInLocalSource(
+          getIt<ILocalStorage<PersonallyIdentifiableInformationKeys>>()),
     );
 
     // Repository

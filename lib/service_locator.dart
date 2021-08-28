@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
@@ -7,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/api/api_setup.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
+import 'package:vethx_beta/core/services/i_local_storage.service.dart';
+import 'package:vethx_beta/core/services/pii.service.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
@@ -21,9 +24,14 @@ bool INTEGRATION_TESTS = false;
 Future<void> serviceLocatorInit() async {
   //! External
 
-  final sharedPreferences = await SharedPreferences.getInstance();
+  // final sharedPreferences = await SharedPreferences.getInstance();
 
-  getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+  // getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+
+  getIt.registerLazySingleton<
+      ILocalStorage<PersonallyIdentifiableInformationKeys>>(
+    () => PII(const FlutterSecureStorage()),
+  );
 
   getIt.registerLazySingleton(() => http.Client());
 

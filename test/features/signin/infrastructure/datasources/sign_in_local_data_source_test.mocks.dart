@@ -2,10 +2,13 @@
 // in vethx_beta/test/features/signin/infrastructure/datasources/sign_in_local_data_source_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i3;
+import 'dart:async' as _i6;
 
+import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:shared_preferences/shared_preferences.dart' as _i2;
+import 'package:vethx_beta/core/error/failures.dart' as _i4;
+import 'package:vethx_beta/core/services/i_local_storage.service.dart' as _i5;
+import 'package:vethx_beta/core/services/pii.service.dart' as _i3;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -15,76 +18,43 @@ import 'package:shared_preferences/shared_preferences.dart' as _i2;
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
-/// A class which mocks [SharedPreferences].
+class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
+
+/// A class which mocks [PII].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
-  MockSharedPreferences() {
+class MockPII extends _i1.Mock implements _i3.PII {
+  MockPII() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  Set<String> getKeys() => (super.noSuchMethod(Invocation.method(#getKeys, []),
-      returnValue: <String>{}) as Set<String>);
+  _i2.Either<_i4.Failure, String> getKey(
+          _i5.PersonallyIdentifiableInformationKeys? key) =>
+      (super.noSuchMethod(Invocation.method(#getKey, [key]),
+              returnValue: _FakeEither_0<_i4.Failure, String>())
+          as _i2.Either<_i4.Failure, String>);
   @override
-  Object? get(String? key) =>
-      (super.noSuchMethod(Invocation.method(#get, [key])) as Object?);
+  _i6.Future<_i2.Either<_i4.Failure, String>> get(
+          {_i5.PersonallyIdentifiableInformationKeys? key}) =>
+      (super.noSuchMethod(Invocation.method(#get, [], {#key: key}),
+              returnValue: Future<_i2.Either<_i4.Failure, String>>.value(
+                  _FakeEither_0<_i4.Failure, String>()))
+          as _i6.Future<_i2.Either<_i4.Failure, String>>);
   @override
-  bool? getBool(String? key) =>
-      (super.noSuchMethod(Invocation.method(#getBool, [key])) as bool?);
+  _i6.Future<_i2.Either<_i4.Failure, _i2.Unit>> remove(
+          {_i5.PersonallyIdentifiableInformationKeys? key}) =>
+      (super.noSuchMethod(Invocation.method(#remove, [], {#key: key}),
+              returnValue: Future<_i2.Either<_i4.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i4.Failure, _i2.Unit>()))
+          as _i6.Future<_i2.Either<_i4.Failure, _i2.Unit>>);
   @override
-  int? getInt(String? key) =>
-      (super.noSuchMethod(Invocation.method(#getInt, [key])) as int?);
-  @override
-  double? getDouble(String? key) =>
-      (super.noSuchMethod(Invocation.method(#getDouble, [key])) as double?);
-  @override
-  String? getString(String? key) =>
-      (super.noSuchMethod(Invocation.method(#getString, [key])) as String?);
-  @override
-  bool containsKey(String? key) =>
-      (super.noSuchMethod(Invocation.method(#containsKey, [key]),
-          returnValue: false) as bool);
-  @override
-  List<String>? getStringList(String? key) =>
-      (super.noSuchMethod(Invocation.method(#getStringList, [key]))
-          as List<String>?);
-  @override
-  _i3.Future<bool> setBool(String? key, bool? value) =>
-      (super.noSuchMethod(Invocation.method(#setBool, [key, value]),
-          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
-  @override
-  _i3.Future<bool> setInt(String? key, int? value) =>
-      (super.noSuchMethod(Invocation.method(#setInt, [key, value]),
-          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
-  @override
-  _i3.Future<bool> setDouble(String? key, double? value) =>
-      (super.noSuchMethod(Invocation.method(#setDouble, [key, value]),
-          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
-  @override
-  _i3.Future<bool> setString(String? key, String? value) =>
-      (super.noSuchMethod(Invocation.method(#setString, [key, value]),
-          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
-  @override
-  _i3.Future<bool> setStringList(String? key, List<String>? value) =>
-      (super.noSuchMethod(Invocation.method(#setStringList, [key, value]),
-          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
-  @override
-  _i3.Future<bool> remove(String? key) =>
-      (super.noSuchMethod(Invocation.method(#remove, [key]),
-          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
-  @override
-  _i3.Future<bool> commit() =>
-      (super.noSuchMethod(Invocation.method(#commit, []),
-          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
-  @override
-  _i3.Future<bool> clear() => (super.noSuchMethod(Invocation.method(#clear, []),
-      returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
-  @override
-  _i3.Future<void> reload() =>
-      (super.noSuchMethod(Invocation.method(#reload, []),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
+  _i6.Future<_i2.Either<_i4.Failure, _i2.Unit>> write(
+          {_i5.PersonallyIdentifiableInformationKeys? key, String? obj}) =>
+      (super.noSuchMethod(Invocation.method(#write, [], {#key: key, #obj: obj}),
+              returnValue: Future<_i2.Either<_i4.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i4.Failure, _i2.Unit>()))
+          as _i6.Future<_i2.Either<_i4.Failure, _i2.Unit>>);
   @override
   String toString() => super.toString();
 }
