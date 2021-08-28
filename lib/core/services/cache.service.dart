@@ -1,44 +1,24 @@
 import 'package:vethx_beta/core/error/exceptions.dart';
 
-enum CacheKeys {
-  basicAuth,
-  authToken,
-  user,
-  userProfile,
-}
+import 'i_cache.service.dart';
 
-abstract class ICacheService {
-  /// throws [CacheException] when there's no value;
-  Future<String> get({required CacheKeys key});
-
-  /// throws [CacheException] when something goes wrong;
-  Future<void> write({required CacheKeys key, required String obj});
-
-  /// throws [CacheException] when something goes wrong;
-  Future<void> remove({required CacheKeys key});
-}
-
-class CacheService implements ICacheService {
+class CacheService implements ICacheService<RemoteData> {
   /// echo 'CacheKeys.*' | base64
-  static const Map<CacheKeys, String> _cacheKeys = {
-    CacheKeys.authToken: 'Q2FjaGVLZXlzLmF1dGhUb2tlbgo',
-    CacheKeys.user: 'Q2FjaGVLZXlzLnVzZXIK',
-    CacheKeys.basicAuth: 'Q2FjaGVLZXlzLmJhc2ljQXV0aAo',
-    CacheKeys.userProfile: 'Q2FjaGVLZXlzLnVzZXJQcm9maWxlCg',
+  static const Map<RemoteData, String> _cacheKeys = {
+    RemoteData.apiEndPointXYZ: 'Q2FjaGVLZXlzLmFwaUVuZFBvaW50WFlaCg',
   };
 
   @override
   Future<String> get({
-    required CacheKeys key,
+    required RemoteData key,
   }) async {
-    // final sharedPreferences = await SharedPreferences.getInstance();
-    // return sharedPreferences.getString(_cacheKeys[key]);
-    throw CacheException();
+    // TODO: implement get
+    return _cacheKeys[key]!;
   }
 
   @override
   Future<void> remove({
-    required CacheKeys key,
+    required RemoteData key,
   }) async {
     // final sharedPreferences = await SharedPreferences.getInstance();
     // return sharedPreferences.remove(_cacheKeys[key]);
@@ -46,7 +26,7 @@ class CacheService implements ICacheService {
   }
 
   @override
-  Future<void> write({required CacheKeys key, required String obj}) {
+  Future<void> write({required RemoteData key, required String obj}) {
     throw CacheException();
   }
 }

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as h;
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
-import 'package:vethx_beta/core/services/cache.service.dart';
+import 'package:vethx_beta/core/services/i_cache.service.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 
 class APIBase {
@@ -18,7 +18,7 @@ class APIBase {
   final API _api;
   final h.Client _http;
   final INetworkInfo _networkInfo;
-  final CacheService _cacheService;
+  final ICacheService<PersonalyIdentifiableInformation> _cacheService;
 
   Future checkInternetConnection() async {
     if (!await _networkInfo.isConnected) {
@@ -27,25 +27,33 @@ class APIBase {
   }
 
   Future<String> authTokenRefresh() async {
-    final authorization = await _cacheService.get(key: CacheKeys.basicAuth);
-    if (authorization == null) {
+    try {
+      final authorization = await _cacheService.get(
+          key: PersonalyIdentifiableInformation.refreshToken);
+
+      final auth = authorization.split(':');
+
+      return authenticate(credential: auth[0], password: auth[1]);
+    } on CacheException {
       Logger.utils('APIBase, authTokenRefresh() => authorization == null');
       throw ServerException();
     }
-    final auth = authorization.split(':');
-    return authenticate(credential: auth[0], password: auth[1]);
   }
 
   Future resetCache() async {
-    await _cacheService.remove(key: CacheKeys.authToken);
-    await _cacheService.remove(key: CacheKeys.user);
-    await _cacheService.remove(key: CacheKeys.basicAuth);
+    for (final key in [
+      PersonalyIdentifiableInformation.authToken,
+      PersonalyIdentifiableInformation.userProfile,
+      PersonalyIdentifiableInformation.refreshToken,
+    ]) {
+      await _cacheService.remove(key: key);
+    }
   }
 
   Future<String> authToken() async {
     final token = await _cacheService.get(
-        key: CacheKeys
-            .authToken); // Todo(v): Realizar validacao do Token antes de retornar
+        key: PersonalyIdentifiableInformation.authToken);
+
     if (token != null) {
       return token;
     }
@@ -76,11 +84,11 @@ class APIBase {
       final accessToken = data['access_token'] as String?;
 
       if (accessToken != null) {
-        await _cacheService.write(key: CacheKeys.authToken, obj: accessToken);
         await _cacheService.write(
-            key: CacheKeys.basicAuth,
-            obj:
-                '$credential:$password'); // Todo(v): Criptografar Encrypter(AES(key, mode: AESMode.cbc));
+            key: PersonalyIdentifiableInformation.authToken, obj: accessToken);
+        await _cacheService.write(
+            key: PersonalyIdentifiableInformation.refreshToken,
+            obj: '$credential:$password');
         return accessToken;
       }
     }

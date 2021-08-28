@@ -1,44 +1,30 @@
 import 'package:vethx_beta/core/error/exceptions.dart';
 
-enum PIIKeys {
-  authToken,
-  userProfile,
-  credential,
-}
+import 'i_cache.service.dart';
 
-abstract class IPIIService {
-  /// throws [CacheException] when there's no value;
-  Future<String> get({required PIIKeys key});
-
-  /// throws [CacheException] when something goes wrong;
-  Future<void> write({required PIIKeys key, required String obj});
-
-  /// throws [CacheException] when something goes wrong;
-  Future<void> remove({required PIIKeys key});
-}
-
-class PersonalyIdentifiableInformation implements IPIIService {
+class PII implements ICacheService<PersonalyIdentifiableInformation> {
   /// echo 'PIIKeys.*' | base64
-  static const Map<PIIKeys, String> _piiKeys = {
-    PIIKeys.authToken: 'UElJS2V5cy5hdXRoVG9rZW4K',
-    PIIKeys.userProfile: 'UElJS2V5cy51c2VyUHJvZmlsZQo',
-    PIIKeys.credential: 'UElJS2V5cy5jcmVkZW50aWFsCg',
+  static const Map<PersonalyIdentifiableInformation, String> _piiKeys = {
+    PersonalyIdentifiableInformation.authToken: 'UElJS2V5cy5hdXRoVG9rZW4K',
+    PersonalyIdentifiableInformation.userProfile: 'UElJS2V5cy51c2VyUHJvZmlsZQo',
+    PersonalyIdentifiableInformation.credential: 'UElJS2V5cy5jcmVkZW50aWFsCg',
   };
 
   @override
-  Future<String> get({required PIIKeys key}) {
+  Future<String> get({required PersonalyIdentifiableInformation key}) async {
     // TODO: implement get
-    throw CacheException();
+    return _piiKeys[key]!;
   }
 
   @override
-  Future<void> remove({required PIIKeys key}) {
+  Future<void> remove({required PersonalyIdentifiableInformation key}) {
     // TODO: implement remove
     throw CacheException();
   }
 
   @override
-  Future<void> write({required PIIKeys key, required String obj}) {
+  Future<void> write(
+      {required PersonalyIdentifiableInformation key, required String obj}) {
     // TODO: implement write
     throw CacheException();
   }
