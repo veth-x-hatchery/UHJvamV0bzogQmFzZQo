@@ -60,11 +60,11 @@ void main() {
   test('when secret changes occour then should emit correct state', () async {
     // arrange
 
-    const secret = '1234';
+    final secret = AuthFacadeMock.invalidSecret.inputedValue!;
 
     // act
 
-    _bloc.add(const SignInRegisterEvent.secretChanged(secret));
+    _bloc.add(SignInRegisterEvent.secretChanged(secret));
 
     // assert
     await expectLater(
@@ -146,8 +146,8 @@ void main() {
       () async {
     // arrange
 
-    const credential = 'test';
-    const secret = 'dmFsaWRwYXNzd29yZAo';
+    final credential = AuthFacadeMock.invalidCredential.inputedValue!;
+    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
       message: SignInRegisterCredentialAndSecretErrorMessages
@@ -159,8 +159,8 @@ void main() {
 
     // act
 
-    _bloc.add(const SignInRegisterEvent.credentialChanged(credential));
-    _bloc.add(const SignInRegisterEvent.secretChanged(secret));
+    _bloc.add(SignInRegisterEvent.credentialChanged(credential));
+    _bloc.add(SignInRegisterEvent.secretChanged(secret));
     _bloc.add(
         const SignInRegisterEvent.registerWithCredentialAndSecretPressed());
 
