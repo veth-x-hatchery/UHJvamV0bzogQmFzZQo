@@ -1,73 +1,72 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as h;
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
-import 'package:vethx_beta/core/services/data_cache_service.dart';
+import 'package:vethx_beta/core/services/cache.service.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 
 class APIBase {
   APIBase(
-    this.api,
-    this.client,
-    this.networkInfo,
-    this.servicoDeCache,
+    this._api,
+    this._http,
+    this._networkInfo,
+    this._cacheService,
   );
 
-  final API api;
-  final http.Client client;
-  final INetworkInfo networkInfo;
-  final CacheService servicoDeCache;
+  final API _api;
+  final h.Client _http;
+  final INetworkInfo _networkInfo;
+  final CacheService _cacheService;
 
-  Future verificarConexaoComInternet() async {
-    if (!await networkInfo.isConnected) {
+  Future checkInternetConnection() async {
+    if (!await _networkInfo.isConnected) {
       throw ServerException();
     }
   }
 
-  Future<String> tokenRefresh() async {
-    final authorizacao = await servicoDeCache.get(key: CacheKeys.authorizacao);
-    if (authorizacao == null) {
-      Logger.i(
-        'APIBase, tokenRefresh() => authorizacao == null',
-        layer: ArchitectureLayer.infrastructure,
-      );
-      throw Exception('Falha na autenticacao');
+  Future<String> authTokenRefresh() async {
+    final authorization = await _cacheService.get(key: CacheKeys.basicAuth);
+    if (authorization == null) {
+      Logger.utils('APIBase, authTokenRefresh() => authorization == null');
+      throw ServerException();
     }
-    final auth = authorizacao.split(':');
-    return realizarAutenticacao(credential: auth[0], senha: auth[1]);
+    final auth = authorization.split(':');
+    return authenticate(credential: auth[0], password: auth[1]);
   }
 
-  Future limparCache() async {
-    await servicoDeCache.remove(key: CacheKeys.token);
-    await servicoDeCache.remove(key: CacheKeys.usuario);
-    await servicoDeCache.remove(key: CacheKeys.authorizacao);
+  Future resetCache() async {
+    await _cacheService.remove(key: CacheKeys.authToken);
+    await _cacheService.remove(key: CacheKeys.user);
+    await _cacheService.remove(key: CacheKeys.basicAuth);
   }
 
-  Future<String> obterToken() async {
-    final token = await servicoDeCache.get(
+  Future<String> authToken() async {
+    final token = await _cacheService.get(
         key: CacheKeys
-            .token); // Todo(v): Realizar validacao do Token antes de retornar
+            .authToken); // Todo(v): Realizar validacao do Token antes de retornar
     if (token != null) {
       return token;
     }
-    return tokenRefresh();
+    return authTokenRefresh();
   }
 
-  Future<String> realizarAutenticacao(
-      {required String credential, required String senha}) async {
-    await verificarConexaoComInternet();
+  Future<String> authenticate({
+    required String credential,
+    required String password,
+  }) async {
+    await checkInternetConnection();
 
     final data = <String, dynamic>{};
 
     data['grant_type'] = 'password';
     data['tipo'] = 'cliente';
     data['username'] = credential;
-    data['password'] = senha;
+    data['password'] = password;
 
-    final response = await client.post(
-      api.tokenUri(),
+    final response = await _http.post(
+      _api.tokenUri(),
       body: data,
     );
 
@@ -77,21 +76,22 @@ class APIBase {
       final accessToken = data['access_token'] as String?;
 
       if (accessToken != null) {
-        await servicoDeCache.write(key: CacheKeys.token, obj: accessToken);
-        await servicoDeCache.write(
-            key: CacheKeys.authorizacao,
+        await _cacheService.write(key: CacheKeys.authToken, obj: accessToken);
+        await _cacheService.write(
+            key: CacheKeys.basicAuth,
             obj:
-                '$credential:$senha'); // Todo(v): Criptografar Encrypter(AES(key, mode: AESMode.cbc));
+                '$credential:$password'); // Todo(v): Criptografar Encrypter(AES(key, mode: AESMode.cbc));
         return accessToken;
       }
     }
 
-    if (response.statusCode == 400) {
-      throw Exception('response.statusCode == 400');
-    }
+    Logger.utils('''
+        APIBase, authenticate => Request ${_api.tokenUri()} failed\n
+        Response: ${response.statusCode} ${response.reasonPhrase}''');
 
-    Logger.i(
-        'class APIBase, autenticar => Request ${api.tokenUri()} failed\nResponse: ${response.statusCode} ${response.reasonPhrase}');
+    if (response.statusCode == 400) {
+      throw ServerException();
+    }
 
     throw response;
   }
