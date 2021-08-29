@@ -22,5 +22,6 @@ class Startup {
   static Future<void> configure({String envPath = 'lib/.env'}) async {
     Logger.utils('Startup -> load($envPath)');
     await dotenv.load(fileName: envPath);
+    Logger.utils('.env -> ${dotenv.env}');
   }
 }

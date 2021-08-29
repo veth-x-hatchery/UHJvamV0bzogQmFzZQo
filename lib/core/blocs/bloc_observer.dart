@@ -26,7 +26,8 @@ class CustomBlocObserver extends BlocObserver {
   /// [onChange] is called before a bloc's state has been updated.
   @override
   void onChange(BlocBase bloc, Change change) {
-    Logger.bloc('CustomBlocObserver -> onChange: $change');
+    Logger.bloc('CustomBlocObserver -> onChange:');
+    Logger.bloc(change.toString(), jsonMessage: true);
     super.onChange(bloc, change);
   }
 
@@ -37,7 +38,8 @@ class CustomBlocObserver extends BlocObserver {
   /// [onTransition] is called before a [bloc]'s state has been updated.
   @override
   void onTransition(Bloc bloc, Transition transition) {
-    Logger.bloc('CustomBlocObserver -> onTransition: $transition');
+    Logger.bloc('CustomBlocObserver -> onTransition:');
+    Logger.bloc(transition.toString(), jsonMessage: true);
     super.onTransition(bloc, transition);
   }
 

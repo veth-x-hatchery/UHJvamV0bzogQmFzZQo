@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
 import 'package:vethx_beta/core/services/i_local_storage.service.dart';

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 enum ArchitectureLayer {
   presentation,
   domain,
@@ -66,12 +68,18 @@ class Logger {
     String message, {
     dynamic exception,
     StackTrace? stackTrace,
+    bool jsonMessage = false,
   }) {
-    Logger.presentation(
-      '[BLoC] $message',
-      exception: exception,
-      stackTrace: stackTrace,
-    );
+    if (jsonMessage) {
+      // ignore: avoid_print
+      print(prettyJson(message, indent: 4));
+    } else {
+      Logger.presentation(
+        '[BLoC] $message',
+        exception: exception,
+        stackTrace: stackTrace,
+      );
+    }
   }
 
   Logger.widget(
@@ -126,6 +134,7 @@ class Logger {
     String message, {
     dynamic exception,
     StackTrace? stackTrace,
+    bool jsonMessage = false,
   }) {
     if (exception != null) {
       Logger.e(
@@ -135,11 +144,21 @@ class Logger {
         layer: ArchitectureLayer.utils,
       );
     } else {
+      if (jsonMessage) {
+        // ignore: avoid_print
+        print(prettyJson(message, indent: 4));
+      }
       Logger.i(
         '[Utils] $message',
         layer: ArchitectureLayer.utils,
       );
     }
+  }
+
+  String prettyJson(dynamic json, {int indent = 2}) {
+    final spaces = ' ' * indent;
+    final encoder = JsonEncoder.withIndent(spaces);
+    return encoder.convert(json);
   }
 
   static void e(
