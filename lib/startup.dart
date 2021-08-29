@@ -16,7 +16,7 @@ class Startup {
     await ServiceLocatorConfig.init();
   }
 
-  static Future<void> configure({String envPath = '.env'}) async {
+  static Future<void> configure({String envPath = 'lib/.env'}) async {
     Logger.utils('Startup -> load($envPath)');
     await dotenv.load(fileName: envPath);
   }
