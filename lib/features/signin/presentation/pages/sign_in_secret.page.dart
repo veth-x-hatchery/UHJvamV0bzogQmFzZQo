@@ -72,7 +72,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
-      onPressed: () => getIt<NavigationManager>().goTo(
+      onPressed: () => ServiceLocatorConfig.getIt<NavigationManager>().goTo(
           SignInPageGoTo.credentialPage(from: SignInPageRoutes.secretEntry)),
       child: BlocConsumer<SignInSecretBloc, SignInSecretState>(
         listener: (context, state) {
@@ -129,7 +129,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
                   key: const Key(SignInPageKeys.signInChangeCredentialButton),
                   onPressed: state.isLoading
                       ? () {}
-                      : () => getIt<NavigationManager>()
+                      : () => ServiceLocatorConfig.getIt<NavigationManager>()
                               .goTo(SignInPageGoTo.credentialPage(
                             from: SignInPageRoutes.secretEntry,
                           )),

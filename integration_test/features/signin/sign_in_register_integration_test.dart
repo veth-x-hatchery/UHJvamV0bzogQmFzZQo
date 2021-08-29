@@ -30,13 +30,11 @@ void main() {
   Future<void> setupServiceLocator(WidgetTester tester) async {
     Logger.testStep('Setup service locator scenario');
     await tester.pumpAndSettle();
-    (getIt<IAuthFacade>() as AuthFacadeMock)
+    (ServiceLocatorConfig.getIt<IAuthFacade>() as AuthFacadeMock)
         .setupSignInRegisterIntegrationTest();
   }
 
   setUp(() async {
-    INTEGRATION_TESTS = true;
-
     app.main();
 
     await _setupAndroidScreenShots();
