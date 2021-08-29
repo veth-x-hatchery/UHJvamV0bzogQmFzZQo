@@ -135,7 +135,9 @@ void main() {
 
       _initialState();
 
-      _authState(const AuthState.initial());
+      _authState(
+        const AuthState.inProcess(),
+      );
 
       // Act
 
@@ -144,6 +146,25 @@ void main() {
       // Assert
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
+
+    testWidgets('shoud return a splash page with a image asset png',
+        (WidgetTester tester) async {
+      // Arrange
+
+      _initialState();
+
+      _authState(
+        const AuthState.initial(),
+      );
+
+      // Act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      // Assert
+
+      expect(find.byType(Image), findsOneWidget);
     });
   });
 }

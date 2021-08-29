@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
+import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/service_locator.dart';
 import 'package:vethx_beta/ui/splash/splash.page.dart';
+import 'package:vethx_beta/ui/widgets/default/lifecycle_manager.widget.dart';
+import 'package:vethx_beta/ui/widgets/default/loading_page.widget.dart';
 
 class AlphaPage extends StatelessWidget {
   const AlphaPage({
@@ -23,7 +26,6 @@ class AlphaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         Logger.widget('AlphaPage -> AuthBloc: $state');
@@ -31,10 +33,10 @@ class AlphaPage extends StatelessWidget {
       builder: (context, state) {
         Logger.widget('AlphaPage -> $state');
         return state.map(
-          initial: (_) => Splash(),
-          authenticating: (_) => _PageLoading(),
-          authenticated: (_) => const HomePage(),
-          unauthenticated: (_) => SignInOptionsPage.create(),
+          initial: (_) => _Root(home: Splash()),
+          inProcess: (_) => _Root(home: LoadingPage()),
+          authenticated: (_) => const _Root(home: HomePage()),
+          unauthenticated: (_) => _Root(home: SignInOptionsPage.create()),
         );
       },
       // child: _PageWidget(),
@@ -42,12 +44,30 @@ class AlphaPage extends StatelessWidget {
   }
 }
 
-class _PageLoading extends StatelessWidget {
+class _Root extends StatelessWidget {
+  final Widget home;
+  const _Root({
+    Key? key,
+    required this.home,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
+    return LifeCycleManager(
+      onLifecycleStateChange: (s) => Logger.widget('AppLifecycleState: $s'),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: NavigationRoutes.onGenerateRoute,
+        routes: NavigationRoutes.routes(),
+        // initialRoute: NavigationRoutes.alpha,
+        navigatorObservers: [LoggingNavigationObserver()],
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: Builder(
+          builder: (context) {
+            SizeConfig().init(context);
+            return home;
+          },
+        ),
       ),
     );
   }

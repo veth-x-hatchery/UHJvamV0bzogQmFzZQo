@@ -30,7 +30,7 @@ void main() {
           .thenAnswer((_) async => Future.value());
 
       final expected = [
-        const AuthState.authenticating(),
+        const AuthState.inProcess(),
         const AuthState.unauthenticated(),
       ];
 
@@ -52,7 +52,7 @@ void main() {
           .thenAnswer((_) => Future.value(user));
 
       final expected = [
-        const AuthState.authenticating(),
+        const AuthState.inProcess(),
         AuthState.authenticated(user),
       ];
 
@@ -73,6 +73,7 @@ void main() {
     when(_mockIAuthFacade.signOut()).thenAnswer((_) async => _);
 
     final expected = [
+      const AuthState.inProcess(),
       const AuthState.unauthenticated(),
     ];
 
