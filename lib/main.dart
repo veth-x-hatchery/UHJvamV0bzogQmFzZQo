@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/startup.dart';
 import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   await Startup.init();
   runApp(App());
 }
