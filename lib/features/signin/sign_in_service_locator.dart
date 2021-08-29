@@ -1,4 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_it/get_it.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
 import 'package:vethx_beta/core/services/i_local_storage.service.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
@@ -29,120 +29,122 @@ abstract class ISignInServiceLocator {
 }
 
 class SignInServiceLocator implements ISignInServiceLocator {
+  GetIt get _getIt => ServiceLocatorConfig.getIt;
+
   @override
   Future<void> init() async {
     Logger.serviceLocator(
         'SignInServiceLocator -> pushNewScope: SignInGetItScope');
-    getIt.pushNewScope(scopeName: 'SignInGetItScope');
+    _getIt.pushNewScope(scopeName: 'SignInGetItScope');
     await _signInDependencies();
   }
 
   @override
   Future<void> dispose() async {
     Logger.serviceLocator('SignInServiceLocator -> popScope: SignInGetItScope');
-    getIt.popScopesTill('SignInGetItScope');
+    _getIt.popScopesTill('SignInGetItScope');
   }
 
   @override
   T get<T extends Object>() {
     Logger.serviceLocator('SignInServiceLocator -> get: $T');
-    return getIt<T>();
+    return _getIt<T>();
   }
 
   Future<void> _signInDependencies() async {
     // Data sources
 
-    getIt.registerLazySingleton<ISignInLocalSource>(
+    _getIt.registerLazySingleton<ISignInLocalSource>(
       () => SignInLocalSource(
-          getIt<ILocalStorage<PersonallyIdentifiableInformationKeys>>()),
+          _getIt<ILocalStorage<PersonallyIdentifiableInformationKeys>>()),
     );
 
     // Repository
-    getIt.registerLazySingleton<ISignInRepository>(
+    _getIt.registerLazySingleton<ISignInRepository>(
       () => SignInRepository(
         // sl<ISignInRemoteSource>(),
-        getIt<ISignInLocalSource>(),
-        getIt<INetworkInfo>(),
+        _getIt<ISignInLocalSource>(),
+        _getIt<INetworkInfo>(),
       ),
     );
 
     // Use cases
 
-    getIt.registerLazySingleton<SignInCredentialCheck>(
+    _getIt.registerLazySingleton<SignInCredentialCheck>(
       () => SignInCredentialCheck(
-        getIt<ISignInRepository>(),
-        getIt<IAuthFacade>(),
+        _getIt<ISignInRepository>(),
+        _getIt<IAuthFacade>(),
       ),
     );
 
-    getIt.registerLazySingleton<SignInWithSecret>(
+    _getIt.registerLazySingleton<SignInWithSecret>(
       () => SignInWithSecret(
-        getIt<ISignInRepository>(),
-        getIt<IAuthFacade>(),
+        _getIt<ISignInRepository>(),
+        _getIt<IAuthFacade>(),
       ),
     );
 
-    getIt.registerLazySingleton<SignInSecretReset>(
+    _getIt.registerLazySingleton<SignInSecretReset>(
       () => SignInSecretReset(
-        getIt<ISignInRepository>(),
-        getIt<IAuthFacade>(),
+        _getIt<ISignInRepository>(),
+        _getIt<IAuthFacade>(),
       ),
     );
 
-    getIt.registerLazySingleton<SignInWithGoogle>(
+    _getIt.registerLazySingleton<SignInWithGoogle>(
       () => SignInWithGoogle(
         // sl<ISignInRepository>(),
-        getIt<IAuthFacade>(),
+        _getIt<IAuthFacade>(),
       ),
     );
 
-    getIt.registerLazySingleton<SignInRegisterCredentialAndSecret>(
+    _getIt.registerLazySingleton<SignInRegisterCredentialAndSecret>(
       () => SignInRegisterCredentialAndSecret(
         // sl<ISignInRepository>(),
-        getIt<IAuthFacade>(),
+        _getIt<IAuthFacade>(),
       ),
     );
 
     // BLoC
 
-    getIt.registerLazySingleton<NavigationManager>(
+    _getIt.registerLazySingleton<NavigationManager>(
       () => NavigationManager(),
     );
 
-    getIt.registerFactory<SignInOptionsBloc>(
+    _getIt.registerFactory<SignInOptionsBloc>(
       () => SignInOptionsBloc(
-        getIt<AuthBloc>(),
-        getIt<NavigationManager>(),
-        getIt<SignInWithGoogle>(),
+        _getIt<AuthBloc>(),
+        _getIt<NavigationManager>(),
+        _getIt<SignInWithGoogle>(),
       ),
     );
 
-    getIt.registerFactory<SignInCredentialBloc>(
+    _getIt.registerFactory<SignInCredentialBloc>(
       () => SignInCredentialBloc(
-        getIt<SignInCredentialCheck>(),
-        getIt<NavigationManager>(),
+        _getIt<SignInCredentialCheck>(),
+        _getIt<NavigationManager>(),
       ),
     );
 
-    getIt.registerFactory<SignInRegisterBloc>(
+    _getIt.registerFactory<SignInRegisterBloc>(
       () => SignInRegisterBloc(
-        getIt<AuthBloc>(),
-        getIt<SignInRegisterCredentialAndSecret>(),
+        _getIt<AuthBloc>(),
+        _getIt<SignInRegisterCredentialAndSecret>(),
       ),
     );
 
-    getIt.registerFactory<SignInSecretBloc>(
+    _getIt.registerFactory<SignInSecretBloc>(
       () => SignInSecretBloc(
-        getIt<AuthBloc>(),
-        getIt<NavigationManager>(),
-        getIt<SignInWithSecret>(),
+        _getIt<AuthBloc>(),
+        _getIt<NavigationManager>(),
+        _getIt<SignInWithSecret>(),
       ),
     );
 
-    getIt.registerFactory<SignInSecretResetBloc>(
+    _getIt.registerFactory<SignInSecretResetBloc>(
       () => SignInSecretResetBloc(
-        getIt<SignInSecretReset>(),
-        getIt<NavigationManager>(),
+        _getIt<SignInSecretReset>(),
+        _getIt<NavigationManager>(),
       ),
     );
   }

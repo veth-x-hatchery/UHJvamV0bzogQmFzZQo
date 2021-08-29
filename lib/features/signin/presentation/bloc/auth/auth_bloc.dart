@@ -19,7 +19,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(
     AuthEvent event,
   ) async* {
-    Logger.bloc('AuthBloc -> event: $event');
     yield* event.map(
       authCheckRequested: (e) async* {
         yield const AuthState.authenticating();

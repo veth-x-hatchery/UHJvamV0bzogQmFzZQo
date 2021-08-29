@@ -32,7 +32,8 @@ class SignInOptionsPage extends StatefulWidget {
     ISignInServiceLocator? serviceLocator,
   }) {
     Logger.widget('SignInOptionsPage -> create');
-    final sl = serviceLocator ?? getIt<ISignInServiceLocator>();
+    final sl =
+        serviceLocator ?? ServiceLocatorConfig.getIt<ISignInServiceLocator>();
     return MultiBlocProvider(
       providers: [
         BlocProvider(

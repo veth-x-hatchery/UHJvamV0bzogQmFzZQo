@@ -4,7 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/api/api_setup.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
@@ -16,66 +15,75 @@ import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 
-final getIt = GetIt.instance;
+// ignore: avoid_classes_with_only_static_members
+class ServiceLocatorConfig {
+  static final ServiceLocatorConfig _singleton =
+      ServiceLocatorConfig._internal();
 
-// ignore: non_constant_identifier_names
-bool INTEGRATION_TESTS = false;
+  factory ServiceLocatorConfig() {
+    return _singleton;
+  }
 
-Future<void> serviceLocatorInit() async {
-  //! External
+  ServiceLocatorConfig._internal();
 
-  // final sharedPreferences = await SharedPreferences.getInstance();
+  static final GetIt getIt = GetIt.instance;
 
-  // getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+  static Future<void> init() async {
+    //! External
 
-  getIt.registerLazySingleton<
-      ILocalStorage<PersonallyIdentifiableInformationKeys>>(
-    () => PII(const FlutterSecureStorage()),
-  );
+    // final sharedPreferences = await SharedPreferences.getInstance();
 
-  getIt.registerLazySingleton(() => http.Client());
+    // getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 
-  getIt.registerLazySingleton(() => InternetConnectionChecker());
+    getIt.registerLazySingleton<
+        ILocalStorage<PersonallyIdentifiableInformationKeys>>(
+      () => PII(const FlutterSecureStorage()),
+    );
 
-  getIt.registerLazySingleton(() => FirebaseAuth.instance);
+    getIt.registerLazySingleton(() => http.Client());
 
-  getIt.registerLazySingleton(() => GoogleSignIn());
+    getIt.registerLazySingleton(() => InternetConnectionChecker());
 
-  //! Core
+    getIt.registerLazySingleton(() => FirebaseAuth.instance);
 
-  getIt.registerLazySingleton<INetworkInfo>(
-      () => NetworkInfo(getIt<InternetConnectionChecker>()));
+    getIt.registerLazySingleton(() => GoogleSignIn());
 
-  getIt.registerLazySingleton<IApiSetup>(() => ApiSetupProduction());
+    //! Core
 
-  getIt.registerLazySingleton<API>(() => API(getIt<IApiSetup>()));
+    getIt.registerLazySingleton<INetworkInfo>(
+        () => NetworkInfo(getIt<InternetConnectionChecker>()));
 
-  // Services
+    getIt.registerLazySingleton<IApiSetup>(() => ApiSetupProduction());
 
-  getIt.registerLazySingleton<FirebaseUserMapper>(() => FirebaseUserMapper());
+    getIt.registerLazySingleton<API>(() => API(getIt<IApiSetup>()));
 
-  getIt.registerLazySingleton<IAuthFacade>(
-    () => AuthFacadeMock()..setupSignInEmailIntegrationTest(),
-  );
-  // getIt.registerLazySingleton<IAuthFacade>(
-  //   () => FirebaseAuthFacade(
-  //     getIt<FirebaseAuth>(),
-  //     getIt<GoogleSignIn>(),
-  //     getIt<FirebaseUserMapper>(),
-  //   ),
-  // );
+    // Services
 
-  // BLoC
+    getIt.registerLazySingleton<FirebaseUserMapper>(() => FirebaseUserMapper());
 
-  getIt.registerLazySingleton<AuthBloc>(
-    () => AuthBloc(
-      getIt<IAuthFacade>(),
-    ),
-  );
+    getIt.registerLazySingleton<IAuthFacade>(
+      () => AuthFacadeMock()..setupSignInEmailIntegrationTest(),
+    );
+    // getIt.registerLazySingleton<IAuthFacade>(
+    //   () => FirebaseAuthFacade(
+    //     getIt<FirebaseAuth>(),
+    //     getIt<GoogleSignIn>(),
+    //     getIt<FirebaseUserMapper>(),
+    //   ),
+    // );
 
-  // Features Service Locators
+    // BLoC
 
-  getIt.registerFactory<ISignInServiceLocator>(
-    () => SignInServiceLocator(),
-  );
+    getIt.registerLazySingleton<AuthBloc>(
+      () => AuthBloc(
+        getIt<IAuthFacade>(),
+      ),
+    );
+
+    // Features Service Locators
+
+    getIt.registerFactory<ISignInServiceLocator>(
+      () => SignInServiceLocator(),
+    );
+  }
 }

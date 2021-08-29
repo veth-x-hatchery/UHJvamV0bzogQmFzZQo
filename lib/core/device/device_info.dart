@@ -42,7 +42,7 @@ class DeviceInfo {
         'Error:': 'Failed to get platform version.'
       };
     }
-    Logger.utils(deviceData.toString());
+    Logger.utils('Device Info: $deviceData');
   }
 
   Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {
