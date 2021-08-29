@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
 
 class LifeCycleManager extends StatefulWidget {
   final Widget child;
