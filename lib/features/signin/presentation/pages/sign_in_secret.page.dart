@@ -11,13 +11,17 @@ import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dar
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
-import 'package:vethx_beta/service_locator.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 class SignInSecretPage extends StatefulWidget {
-  const SignInSecretPage({Key? key}) : super(key: key);
+  final NavigationManager navigationManager;
+
+  const SignInSecretPage({
+    Key? key,
+    required this.navigationManager,
+  }) : super(key: key);
 
   @override
   State<SignInSecretPage> createState() => _SignInSecretPageState();
@@ -35,7 +39,8 @@ class SignInSecretPage extends StatefulWidget {
           create: (_) => serviceLocator.get<SignInSecretResetBloc>(),
         ),
       ],
-      child: const SignInSecretPage(),
+      child: SignInSecretPage(
+          navigationManager: serviceLocator.get<NavigationManager>()),
     );
   }
 }
@@ -45,6 +50,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
   final _secretFocusNode = FocusNode();
   final _secretTextEditingController = TextEditingController();
 
+  NavigationManager get navigation => widget.navigationManager;
   SignInSecretBloc get bloc => BlocProvider.of<SignInSecretBloc>(context);
   SignInSecretState get current => bloc.state;
 
@@ -72,7 +78,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
-      onPressed: () => ServiceLocatorConfig.getIt<NavigationManager>().goTo(
+      onPressed: () => navigation.goTo(
           SignInPageGoTo.credentialPage(from: SignInPageRoutes.secretEntry)),
       child: BlocConsumer<SignInSecretBloc, SignInSecretState>(
         listener: (context, state) {
@@ -129,8 +135,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
                   key: const Key(SignInPageKeys.signInChangeCredentialButton),
                   onPressed: state.isLoading
                       ? () {}
-                      : () => ServiceLocatorConfig.getIt<NavigationManager>()
-                              .goTo(SignInPageGoTo.credentialPage(
+                      : () => navigation.goTo(SignInPageGoTo.credentialPage(
                             from: SignInPageRoutes.secretEntry,
                           )),
                   child: Text(
