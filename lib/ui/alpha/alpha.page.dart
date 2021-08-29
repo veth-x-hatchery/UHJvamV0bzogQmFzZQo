@@ -6,6 +6,7 @@ import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/service_locator.dart';
+import 'package:vethx_beta/ui/splash/splash.page.dart';
 
 class AlphaPage extends StatelessWidget {
   const AlphaPage({
@@ -30,7 +31,7 @@ class AlphaPage extends StatelessWidget {
       builder: (context, state) {
         Logger.widget('AlphaPage -> $state');
         return state.map(
-          initial: (_) => _PageWidget(),
+          initial: (_) => Splash(),
           authenticating: (_) => _PageWidget(),
           authenticated: (_) => const HomePage(),
           unauthenticated: (_) => SignInOptionsPage.create(),
