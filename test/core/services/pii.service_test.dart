@@ -4,8 +4,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/services/i_local_storage.service.dart';
-import 'package:vethx_beta/core/services/pii.service.dart';
+import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
+import 'package:vethx_beta/core/services/storage/pii.service.dart';
 
 import 'pii.service_test.mocks.dart';
 

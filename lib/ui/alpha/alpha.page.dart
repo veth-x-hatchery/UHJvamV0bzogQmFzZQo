@@ -32,7 +32,7 @@ class AlphaPage extends StatelessWidget {
         Logger.widget('AlphaPage -> $state');
         return state.map(
           initial: (_) => Splash(),
-          authenticating: (_) => _PageWidget(),
+          authenticating: (_) => _PageLoading(),
           authenticated: (_) => const HomePage(),
           unauthenticated: (_) => SignInOptionsPage.create(),
         );
@@ -42,7 +42,7 @@ class AlphaPage extends StatelessWidget {
   }
 }
 
-class _PageWidget extends StatelessWidget {
+class _PageLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
