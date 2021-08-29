@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/startup.dart';
@@ -6,7 +5,6 @@ import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
   await Startup.init();
   runApp(App());
 }

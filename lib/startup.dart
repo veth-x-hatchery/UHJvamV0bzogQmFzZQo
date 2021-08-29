@@ -13,7 +13,7 @@ class Startup {
   static Future<void> configureServices() async {
     Logger.utils('Startup -> configureServices()');
     await Firebase.initializeApp();
-    await ServiceLocatorConfig.serviceLocatorInit();
+    await ServiceLocatorConfig.init();
   }
 
   static Future<void> configure({String envPath = '.env'}) async {

@@ -26,9 +26,9 @@ class ServiceLocatorConfig {
 
   ServiceLocatorConfig._internal();
 
-  static final GetIt getIt = GetIt.instance();
+  static final GetIt getIt = GetIt.instance;
 
-  static Future<void> serviceLocatorInit() async {
+  static Future<void> init() async {
     //! External
 
     // final sharedPreferences = await SharedPreferences.getInstance();
