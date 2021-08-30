@@ -4,9 +4,11 @@ import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/api/api_setup.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
+import 'package:vethx_beta/core/services/auth/local_auth.service.dart';
 import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
 import 'package:vethx_beta/core/services/storage/pii.service.dart';
 import 'package:vethx_beta/core/utils/app_config.dart';
@@ -73,6 +75,15 @@ class ServiceLocatorConfig {
     getIt.registerLazySingleton<IAuthFacade>(
       () => AuthFacadeMock()..setupSignInEmailIntegrationTest(),
     );
+
+    getIt.registerLazySingleton<LocalAuthentication>(
+      () => LocalAuthentication(),
+    );
+
+    getIt.registerLazySingleton<ILocalAuth>(
+      () => LocalAuth(getIt<LocalAuthentication>()),
+    );
+
     // getIt.registerLazySingleton<IAuthFacade>(
     //   () => FirebaseAuthFacade(
     //     getIt<FirebaseAuth>(),
@@ -86,6 +97,7 @@ class ServiceLocatorConfig {
     getIt.registerLazySingleton<AuthBloc>(
       () => AuthBloc(
         getIt<IAuthFacade>(),
+        getIt<ILocalAuth>(),
       ),
     );
 

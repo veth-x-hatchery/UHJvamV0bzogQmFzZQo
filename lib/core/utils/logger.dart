@@ -44,6 +44,26 @@ class Logger {
     }
   }
 
+  Logger.service(
+    String message, {
+    dynamic exception,
+    StackTrace? stackTrace,
+  }) {
+    if (exception != null) {
+      Logger.e(
+        '[SERVICE] $message',
+        ex: exception,
+        stacktrace: stackTrace,
+        layer: ArchitectureLayer.domain,
+      );
+    } else {
+      Logger.i(
+        '[SERVICE] $message',
+        layer: ArchitectureLayer.domain,
+      );
+    }
+  }
+
   Logger.infrastructure(
     String message, {
     dynamic exception,

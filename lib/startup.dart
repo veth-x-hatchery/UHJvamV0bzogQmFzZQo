@@ -16,8 +16,8 @@ class Startup {
 
   static Future<void> configureServices() async {
     Logger.utils('Startup -> configureServices()');
-    await Firebase.initializeApp();
     Bloc.observer = CustomBlocObserver();
+    await Firebase.initializeApp();
     await ServiceLocatorConfig.init();
   }
 

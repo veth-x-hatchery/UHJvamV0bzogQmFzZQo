@@ -1,14 +1,14 @@
-import 'dart:io';
-
+import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/auth_strings.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
 import 'package:local_auth/local_auth.dart';
+import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 
 abstract class ILocalAuth {
-  Future<bool> isBiometricsAvaiable();
-  Future<void> authenticate();
-  Future<void> cancel();
+  Future<Either<AuthFailure, bool>> authenticate();
+  Future<Either<AuthFailure, Unit>> cancel();
 }
 
 class LocalAuth implements ILocalAuth {
@@ -23,20 +23,16 @@ class LocalAuth implements ILocalAuth {
       lockOut: 'Please reenable your Touch ID');
 
   @override
-  Future<bool> isBiometricsAvaiable() async {
-    return _localAuth.canCheckBiometrics;
-  }
-
-  @override
-  Future<void> authenticate() async {
+  Future<Either<AuthFailure, bool>> authenticate() async {
     try {
-      await _localAuth.authenticate(
+      return right(await _localAuth.authenticate(
         localizedReason: 'Please authenticate...',
         useErrorDialogs: false,
         iOSAuthStrings: _iosStrings,
         stickyAuth: true,
-      );
-    } on PlatformException catch (e) {
+      ));
+    } on PlatformException catch (e, s) {
+      Logger.service('LocalAuth: ${e.code}', exception: e, stackTrace: s);
       switch (e.code) {
         case auth_error.passcodeNotSet:
           break;
@@ -51,25 +47,17 @@ class LocalAuth implements ILocalAuth {
         case auth_error.permanentlyLockedOut:
           break;
         default:
+          break;
       }
     }
+    return left(const AuthFailure.serverError());
   }
 
   @override
-  Future<void> cancel() async {
-    _localAuth.stopAuthentication();
-  }
-
-  /// On Android, you can check only for existence of fingerprint hardware prior to API 29 (Android Q)
-  Future<void> _availableBiometrics() async {
-    final availableBiometrics = await _localAuth.getAvailableBiometrics();
-
-    if (Platform.isIOS) {
-      if (availableBiometrics.contains(BiometricType.face)) {
-        // Face ID.
-      } else if (availableBiometrics.contains(BiometricType.fingerprint)) {
-        // Touch ID.
-      }
+  Future<Either<AuthFailure, Unit>> cancel() async {
+    if (!await _localAuth.stopAuthentication()) {
+      return left(const AuthFailure.serverError());
     }
+    return right(unit);
   }
 }

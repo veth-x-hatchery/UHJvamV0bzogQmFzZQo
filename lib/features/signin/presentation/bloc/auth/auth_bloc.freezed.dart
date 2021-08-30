@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AuthEventTearOff {
   const _$AuthEventTearOff();
 
+  LocalAuthCheckRequested localAuthCheckRequested() {
+    return const LocalAuthCheckRequested();
+  }
+
   AuthCheckRequested authCheckRequested() {
     return const AuthCheckRequested();
   }
@@ -33,18 +37,21 @@ const $AuthEvent = _$AuthEventTearOff();
 mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() localAuthCheckRequested,
     required TResult Function() authCheckRequested,
     required TResult Function() signedOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? localAuthCheckRequested,
     TResult Function()? authCheckRequested,
     TResult Function()? signedOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? localAuthCheckRequested,
     TResult Function()? authCheckRequested,
     TResult Function()? signedOut,
     required TResult orElse(),
@@ -52,18 +59,22 @@ mixin _$AuthEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LocalAuthCheckRequested value)
+        localAuthCheckRequested,
     required TResult Function(AuthCheckRequested value) authCheckRequested,
     required TResult Function(SignedOut value) signedOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LocalAuthCheckRequested value)? localAuthCheckRequested,
     TResult Function(AuthCheckRequested value)? authCheckRequested,
     TResult Function(SignedOut value)? signedOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LocalAuthCheckRequested value)? localAuthCheckRequested,
     TResult Function(AuthCheckRequested value)? authCheckRequested,
     TResult Function(SignedOut value)? signedOut,
     required TResult orElse(),
@@ -84,6 +95,117 @@ class _$AuthEventCopyWithImpl<$Res> implements $AuthEventCopyWith<$Res> {
   final AuthEvent _value;
   // ignore: unused_field
   final $Res Function(AuthEvent) _then;
+}
+
+/// @nodoc
+abstract class $LocalAuthCheckRequestedCopyWith<$Res> {
+  factory $LocalAuthCheckRequestedCopyWith(LocalAuthCheckRequested value,
+          $Res Function(LocalAuthCheckRequested) then) =
+      _$LocalAuthCheckRequestedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$LocalAuthCheckRequestedCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res>
+    implements $LocalAuthCheckRequestedCopyWith<$Res> {
+  _$LocalAuthCheckRequestedCopyWithImpl(LocalAuthCheckRequested _value,
+      $Res Function(LocalAuthCheckRequested) _then)
+      : super(_value, (v) => _then(v as LocalAuthCheckRequested));
+
+  @override
+  LocalAuthCheckRequested get _value => super._value as LocalAuthCheckRequested;
+}
+
+/// @nodoc
+
+class _$LocalAuthCheckRequested implements LocalAuthCheckRequested {
+  const _$LocalAuthCheckRequested();
+
+  @override
+  String toString() {
+    return 'AuthEvent.localAuthCheckRequested()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is LocalAuthCheckRequested);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() localAuthCheckRequested,
+    required TResult Function() authCheckRequested,
+    required TResult Function() signedOut,
+  }) {
+    return localAuthCheckRequested();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? localAuthCheckRequested,
+    TResult Function()? authCheckRequested,
+    TResult Function()? signedOut,
+  }) {
+    return localAuthCheckRequested?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? localAuthCheckRequested,
+    TResult Function()? authCheckRequested,
+    TResult Function()? signedOut,
+    required TResult orElse(),
+  }) {
+    if (localAuthCheckRequested != null) {
+      return localAuthCheckRequested();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LocalAuthCheckRequested value)
+        localAuthCheckRequested,
+    required TResult Function(AuthCheckRequested value) authCheckRequested,
+    required TResult Function(SignedOut value) signedOut,
+  }) {
+    return localAuthCheckRequested(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LocalAuthCheckRequested value)? localAuthCheckRequested,
+    TResult Function(AuthCheckRequested value)? authCheckRequested,
+    TResult Function(SignedOut value)? signedOut,
+  }) {
+    return localAuthCheckRequested?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LocalAuthCheckRequested value)? localAuthCheckRequested,
+    TResult Function(AuthCheckRequested value)? authCheckRequested,
+    TResult Function(SignedOut value)? signedOut,
+    required TResult orElse(),
+  }) {
+    if (localAuthCheckRequested != null) {
+      return localAuthCheckRequested(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LocalAuthCheckRequested implements AuthEvent {
+  const factory LocalAuthCheckRequested() = _$LocalAuthCheckRequested;
 }
 
 /// @nodoc
@@ -126,6 +248,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() localAuthCheckRequested,
     required TResult Function() authCheckRequested,
     required TResult Function() signedOut,
   }) {
@@ -135,6 +258,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? localAuthCheckRequested,
     TResult Function()? authCheckRequested,
     TResult Function()? signedOut,
   }) {
@@ -144,6 +268,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? localAuthCheckRequested,
     TResult Function()? authCheckRequested,
     TResult Function()? signedOut,
     required TResult orElse(),
@@ -157,6 +282,8 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LocalAuthCheckRequested value)
+        localAuthCheckRequested,
     required TResult Function(AuthCheckRequested value) authCheckRequested,
     required TResult Function(SignedOut value) signedOut,
   }) {
@@ -166,6 +293,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LocalAuthCheckRequested value)? localAuthCheckRequested,
     TResult Function(AuthCheckRequested value)? authCheckRequested,
     TResult Function(SignedOut value)? signedOut,
   }) {
@@ -175,6 +303,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LocalAuthCheckRequested value)? localAuthCheckRequested,
     TResult Function(AuthCheckRequested value)? authCheckRequested,
     TResult Function(SignedOut value)? signedOut,
     required TResult orElse(),
@@ -227,6 +356,7 @@ class _$SignedOut implements SignedOut {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() localAuthCheckRequested,
     required TResult Function() authCheckRequested,
     required TResult Function() signedOut,
   }) {
@@ -236,6 +366,7 @@ class _$SignedOut implements SignedOut {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? localAuthCheckRequested,
     TResult Function()? authCheckRequested,
     TResult Function()? signedOut,
   }) {
@@ -245,6 +376,7 @@ class _$SignedOut implements SignedOut {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? localAuthCheckRequested,
     TResult Function()? authCheckRequested,
     TResult Function()? signedOut,
     required TResult orElse(),
@@ -258,6 +390,8 @@ class _$SignedOut implements SignedOut {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LocalAuthCheckRequested value)
+        localAuthCheckRequested,
     required TResult Function(AuthCheckRequested value) authCheckRequested,
     required TResult Function(SignedOut value) signedOut,
   }) {
@@ -267,6 +401,7 @@ class _$SignedOut implements SignedOut {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LocalAuthCheckRequested value)? localAuthCheckRequested,
     TResult Function(AuthCheckRequested value)? authCheckRequested,
     TResult Function(SignedOut value)? signedOut,
   }) {
@@ -276,6 +411,7 @@ class _$SignedOut implements SignedOut {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LocalAuthCheckRequested value)? localAuthCheckRequested,
     TResult Function(AuthCheckRequested value)? authCheckRequested,
     TResult Function(SignedOut value)? signedOut,
     required TResult orElse(),
