@@ -99,17 +99,12 @@ class MockILocalAuth extends _i1.Mock implements _i8.ILocalAuth {
   }
 
   @override
-  bool get checkIsAvailable =>
-      (super.noSuchMethod(Invocation.getter(#checkIsAvailable),
+  bool get lastResultAvailable =>
+      (super.noSuchMethod(Invocation.getter(#lastResultAvailable),
           returnValue: false) as bool);
   @override
-  _i2.Either<_i6.AuthFailure, bool> get authResult =>
-      (super.noSuchMethod(Invocation.getter(#authResult),
-              returnValue: _FakeEither_0<_i6.AuthFailure, bool>())
-          as _i2.Either<_i6.AuthFailure, bool>);
-  @override
-  _i4.Future<_i2.Either<_i6.AuthFailure, bool>> authenticate() =>
-      (super.noSuchMethod(Invocation.method(#authenticate, []),
+  _i4.Future<_i2.Either<_i6.AuthFailure, bool>> request() =>
+      (super.noSuchMethod(Invocation.method(#request, []),
               returnValue: Future<_i2.Either<_i6.AuthFailure, bool>>.value(
                   _FakeEither_0<_i6.AuthFailure, bool>()))
           as _i4.Future<_i2.Either<_i6.AuthFailure, bool>>);
@@ -119,6 +114,14 @@ class MockILocalAuth extends _i1.Mock implements _i8.ILocalAuth {
               returnValue: Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>.value(
                   _FakeEither_0<_i6.AuthFailure, _i2.Unit>()))
           as _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>);
+  @override
+  _i2.Either<_i6.AuthFailure, bool> cachedResult(
+          {Duration? scheduleCachedResultClean = const Duration(seconds: 1)}) =>
+      (super.noSuchMethod(
+              Invocation.method(#cachedResult, [],
+                  {#scheduleCachedResultClean: scheduleCachedResultClean}),
+              returnValue: _FakeEither_0<_i6.AuthFailure, bool>())
+          as _i2.Either<_i6.AuthFailure, bool>);
   @override
   String toString() => super.toString();
 }

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/core/services/auth/local_auth.service.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 
@@ -38,17 +37,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           yield const AuthState.unauthenticated();
           return;
         }
-        if (_localAuth.checkIsAvailable) {
-          yield _localAuth.authResult.fold(
-            (l) => const AuthState.unauthenticated(),
-            (allowed) => allowed
-                ? AuthState.authenticated(user)
-                : const AuthState.unauthenticated(),
-          );
-        } else {
-          // See this method documentation
-          await _localAuth.authenticate();
-        }
+        final result = await _localAuth.request();
+        yield result.fold(
+          (l) => const AuthState.unauthenticated(),
+          (allowed) => allowed
+              ? AuthState.authenticated(user)
+              : const AuthState.unauthenticated(),
+        );
       },
       signedOut: (e) async* {
         yield const AuthState.inProcess();

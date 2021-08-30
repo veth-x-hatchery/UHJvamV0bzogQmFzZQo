@@ -4,18 +4,8 @@ import 'package:local_auth/auth_strings.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
 import 'package:local_auth/local_auth.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
-
-abstract class ILocalAuth {
-  // ignore: constant_identifier_names
-  static const TOLERANCE_BETWEEN_REQUESTS = Duration(seconds: 10);
-
-  /// Actually will INATIVATE app lifecycle state.
-  /// And this will kill the BLoC that call it.
-  /// When app returns from RESUME will get the last result
-  /// [lastResultAvailable] and [cachedResult]
-  Future<Either<AuthFailure, bool>> request({Duration? cacheTolerance});
-}
 
 class LocalAuth implements ILocalAuth {
   final LocalAuthentication _localAuth;
@@ -29,6 +19,10 @@ class LocalAuth implements ILocalAuth {
     return _cache(cacheTolerance, _authenticate);
   }
 
+  void _scheduleCleanCache(Duration cacheTolerance) {
+    Future.delayed(cacheTolerance).then((_) => _lastRequestResult = null);
+  }
+
   Future<Either<AuthFailure, bool>> _cache(Duration? cacheTolerance,
       Future<Either<AuthFailure, bool>> Function() auth) async {
     if (_lastRequestResult != null) {
@@ -37,8 +31,8 @@ class LocalAuth implements ILocalAuth {
 
     _lastRequestResult = await auth();
 
-    Future.delayed(cacheTolerance ?? ILocalAuth.TOLERANCE_BETWEEN_REQUESTS)
-        .then((_) => _lastRequestResult = null);
+    _scheduleCleanCache(
+        cacheTolerance ?? ILocalAuth.TOLERANCE_BETWEEN_REQUESTS);
 
     return _lastRequestResult!;
   }
