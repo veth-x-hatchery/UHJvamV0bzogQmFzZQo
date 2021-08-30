@@ -54,7 +54,13 @@ class _Root extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LifeCycleManager(
-      onLifecycleStateChange: (s) => Logger.widget('AppLifecycleState: $s'),
+      onLifecycleStateChange: (s) {
+        Logger.widget('AppLifecycleState: $s');
+        if (s == AppLifecycleState.resumed) {
+          ServiceLocatorConfig.getIt<AuthBloc>()
+              .add(const AuthEvent.localAuthCheckRequested());
+        }
+      },
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: NavigationRoutes.onGenerateRoute,
