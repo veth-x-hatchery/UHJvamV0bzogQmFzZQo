@@ -36,7 +36,9 @@ class AlphaPage extends StatelessWidget {
           initial: (_) => _Root(home: Splash()),
           inProcess: (_) => _Root(home: LoadingPage()),
           authenticated: (_) => const _Root(home: HomePage()),
-          unauthenticated: (_) => _Root(home: SignInOptionsPage.create()),
+          unauthenticated: (_) => _Root(
+            home: SignInOptionsPage.create(),
+          ),
         );
       },
       // child: _PageWidget(),
@@ -46,10 +48,7 @@ class AlphaPage extends StatelessWidget {
 
 class _Root extends StatelessWidget {
   final Widget home;
-  const _Root({
-    Key? key,
-    required this.home,
-  }) : super(key: key);
+  const _Root({Key? key, required this.home}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

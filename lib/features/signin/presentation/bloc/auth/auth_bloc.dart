@@ -36,12 +36,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final user = await _authFacade.getSignedInUser();
         if (user == null) {
           yield const AuthState.unauthenticated();
-        } else {
-          final localAuthResult = await _localAuth.authenticate();
-          localAuthResult.fold(
+          return;
+        }
+        if (_localAuth.checkIsAvailable) {
+          yield _localAuth.authResult.fold(
             (l) => const AuthState.unauthenticated(),
-            (r) => AuthState.authenticated(user),
+            (allowed) => allowed
+                ? AuthState.authenticated(user)
+                : const AuthState.unauthenticated(),
           );
+        } else {
+          // See this method documentation
+          await _localAuth.authenticate();
         }
       },
       signedOut: (e) async* {
