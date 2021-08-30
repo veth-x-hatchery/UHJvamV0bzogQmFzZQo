@@ -5,6 +5,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
+import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
@@ -21,6 +22,7 @@ import 'alpha.page_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
+  LocalAuthenticationBloc,
 ], customMocks: [
   MockSpec<NavigatorObserver>(returnNullOnMissingStub: true),
 ])
@@ -29,6 +31,7 @@ void main() {
   late MockAuthBloc _mockAuthBloc;
   late MockISignInServiceLocator _sl;
   late MockNavigatorObserver _mockNavigationObserver;
+  late MockLocalAuthenticationBloc _mockLocalAuthenticationBloc;
 
   setUp(() {
     getIt = GetIt.instance;
@@ -37,12 +40,18 @@ void main() {
 
     _mockAuthBloc = MockAuthBloc();
 
+    _mockLocalAuthenticationBloc = MockLocalAuthenticationBloc();
+
     _mockNavigationObserver = MockNavigatorObserver();
 
     // BLoC
 
     getIt.registerLazySingleton<AuthBloc>(
       () => _mockAuthBloc,
+    );
+
+    getIt.registerLazySingleton<LocalAuthenticationBloc>(
+      () => _mockLocalAuthenticationBloc,
     );
 
     // Features Service Locators
@@ -53,6 +62,12 @@ void main() {
   });
 
   tearDown(() => getIt.reset());
+
+  void _localAuthorizationState(LocalAuthenticationState state) {
+    when(_mockLocalAuthenticationBloc.state).thenReturn(state);
+    when(_mockLocalAuthenticationBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
+  }
 
   void _authState(AuthState state) {
     when(_mockAuthBloc.state).thenReturn(state);
@@ -70,6 +85,7 @@ void main() {
   }
 
   void _initialState() {
+    _localAuthorizationState(const LocalAuthenticationState.authorized());
     _authState(const AuthState.unauthenticated());
     _navigationState(SignInPageGoTo.optionsPage());
     _signInState(const SignInOptionsState.initial());
