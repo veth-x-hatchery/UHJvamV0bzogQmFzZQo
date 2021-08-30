@@ -14,8 +14,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$AuthenticationBlocEventTearOff {
-  const _$AuthenticationBlocEventTearOff();
+class _$LocalAuthenticationEventTearOff {
+  const _$LocalAuthenticationEventTearOff();
 
   _Started started() {
     return const _Started();
@@ -27,10 +27,10 @@ class _$AuthenticationBlocEventTearOff {
 }
 
 /// @nodoc
-const $AuthenticationBlocEvent = _$AuthenticationBlocEventTearOff();
+const $LocalAuthenticationEvent = _$LocalAuthenticationEventTearOff();
 
 /// @nodoc
-mixin _$AuthenticationBlocEvent {
+mixin _$LocalAuthenticationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
@@ -72,20 +72,20 @@ mixin _$AuthenticationBlocEvent {
 }
 
 /// @nodoc
-abstract class $AuthenticationBlocEventCopyWith<$Res> {
-  factory $AuthenticationBlocEventCopyWith(AuthenticationBlocEvent value,
-          $Res Function(AuthenticationBlocEvent) then) =
-      _$AuthenticationBlocEventCopyWithImpl<$Res>;
+abstract class $LocalAuthenticationEventCopyWith<$Res> {
+  factory $LocalAuthenticationEventCopyWith(LocalAuthenticationEvent value,
+          $Res Function(LocalAuthenticationEvent) then) =
+      _$LocalAuthenticationEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AuthenticationBlocEventCopyWithImpl<$Res>
-    implements $AuthenticationBlocEventCopyWith<$Res> {
-  _$AuthenticationBlocEventCopyWithImpl(this._value, this._then);
+class _$LocalAuthenticationEventCopyWithImpl<$Res>
+    implements $LocalAuthenticationEventCopyWith<$Res> {
+  _$LocalAuthenticationEventCopyWithImpl(this._value, this._then);
 
-  final AuthenticationBlocEvent _value;
+  final LocalAuthenticationEvent _value;
   // ignore: unused_field
-  final $Res Function(AuthenticationBlocEvent) _then;
+  final $Res Function(LocalAuthenticationEvent) _then;
 }
 
 /// @nodoc
@@ -96,7 +96,7 @@ abstract class _$StartedCopyWith<$Res> {
 
 /// @nodoc
 class __$StartedCopyWithImpl<$Res>
-    extends _$AuthenticationBlocEventCopyWithImpl<$Res>
+    extends _$LocalAuthenticationEventCopyWithImpl<$Res>
     implements _$StartedCopyWith<$Res> {
   __$StartedCopyWithImpl(_Started _value, $Res Function(_Started) _then)
       : super(_value, (v) => _then(v as _Started));
@@ -112,7 +112,7 @@ class _$_Started implements _Started {
 
   @override
   String toString() {
-    return 'AuthenticationBlocEvent.started()';
+    return 'LocalAuthenticationEvent.started()';
   }
 
   @override
@@ -186,7 +186,7 @@ class _$_Started implements _Started {
   }
 }
 
-abstract class _Started implements AuthenticationBlocEvent {
+abstract class _Started implements LocalAuthenticationEvent {
   const factory _Started() = _$_Started;
 }
 
@@ -198,7 +198,7 @@ abstract class _$RequestCopyWith<$Res> {
 
 /// @nodoc
 class __$RequestCopyWithImpl<$Res>
-    extends _$AuthenticationBlocEventCopyWithImpl<$Res>
+    extends _$LocalAuthenticationEventCopyWithImpl<$Res>
     implements _$RequestCopyWith<$Res> {
   __$RequestCopyWithImpl(_Request _value, $Res Function(_Request) _then)
       : super(_value, (v) => _then(v as _Request));
@@ -214,7 +214,7 @@ class _$_Request implements _Request {
 
   @override
   String toString() {
-    return 'AuthenticationBlocEvent.request()';
+    return 'LocalAuthenticationEvent.request()';
   }
 
   @override
@@ -288,13 +288,13 @@ class _$_Request implements _Request {
   }
 }
 
-abstract class _Request implements AuthenticationBlocEvent {
+abstract class _Request implements LocalAuthenticationEvent {
   const factory _Request() = _$_Request;
 }
 
 /// @nodoc
-class _$AuthenticationBlocStateTearOff {
-  const _$AuthenticationBlocStateTearOff();
+class _$LocalAuthenticationStateTearOff {
+  const _$LocalAuthenticationStateTearOff();
 
   _Initial initial() {
     return const _Initial();
@@ -310,10 +310,10 @@ class _$AuthenticationBlocStateTearOff {
 }
 
 /// @nodoc
-const $AuthenticationBlocState = _$AuthenticationBlocStateTearOff();
+const $LocalAuthenticationState = _$LocalAuthenticationStateTearOff();
 
 /// @nodoc
-mixin _$AuthenticationBlocState {
+mixin _$LocalAuthenticationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -361,20 +361,20 @@ mixin _$AuthenticationBlocState {
 }
 
 /// @nodoc
-abstract class $AuthenticationBlocStateCopyWith<$Res> {
-  factory $AuthenticationBlocStateCopyWith(AuthenticationBlocState value,
-          $Res Function(AuthenticationBlocState) then) =
-      _$AuthenticationBlocStateCopyWithImpl<$Res>;
+abstract class $LocalAuthenticationStateCopyWith<$Res> {
+  factory $LocalAuthenticationStateCopyWith(LocalAuthenticationState value,
+          $Res Function(LocalAuthenticationState) then) =
+      _$LocalAuthenticationStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AuthenticationBlocStateCopyWithImpl<$Res>
-    implements $AuthenticationBlocStateCopyWith<$Res> {
-  _$AuthenticationBlocStateCopyWithImpl(this._value, this._then);
+class _$LocalAuthenticationStateCopyWithImpl<$Res>
+    implements $LocalAuthenticationStateCopyWith<$Res> {
+  _$LocalAuthenticationStateCopyWithImpl(this._value, this._then);
 
-  final AuthenticationBlocState _value;
+  final LocalAuthenticationState _value;
   // ignore: unused_field
-  final $Res Function(AuthenticationBlocState) _then;
+  final $Res Function(LocalAuthenticationState) _then;
 }
 
 /// @nodoc
@@ -385,7 +385,7 @@ abstract class _$InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$InitialCopyWithImpl<$Res>
-    extends _$AuthenticationBlocStateCopyWithImpl<$Res>
+    extends _$LocalAuthenticationStateCopyWithImpl<$Res>
     implements _$InitialCopyWith<$Res> {
   __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
       : super(_value, (v) => _then(v as _Initial));
@@ -401,7 +401,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'AuthenticationBlocState.initial()';
+    return 'LocalAuthenticationState.initial()';
   }
 
   @override
@@ -481,7 +481,7 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements AuthenticationBlocState {
+abstract class _Initial implements LocalAuthenticationState {
   const factory _Initial() = _$_Initial;
 }
 
@@ -494,7 +494,7 @@ abstract class _$AuthorizedCopyWith<$Res> {
 
 /// @nodoc
 class __$AuthorizedCopyWithImpl<$Res>
-    extends _$AuthenticationBlocStateCopyWithImpl<$Res>
+    extends _$LocalAuthenticationStateCopyWithImpl<$Res>
     implements _$AuthorizedCopyWith<$Res> {
   __$AuthorizedCopyWithImpl(
       _Authorized _value, $Res Function(_Authorized) _then)
@@ -511,7 +511,7 @@ class _$_Authorized implements _Authorized {
 
   @override
   String toString() {
-    return 'AuthenticationBlocState.authorized()';
+    return 'LocalAuthenticationState.authorized()';
   }
 
   @override
@@ -591,7 +591,7 @@ class _$_Authorized implements _Authorized {
   }
 }
 
-abstract class _Authorized implements AuthenticationBlocState {
+abstract class _Authorized implements LocalAuthenticationState {
   const factory _Authorized() = _$_Authorized;
 }
 
@@ -604,7 +604,7 @@ abstract class _$UnauthorizedCopyWith<$Res> {
 
 /// @nodoc
 class __$UnauthorizedCopyWithImpl<$Res>
-    extends _$AuthenticationBlocStateCopyWithImpl<$Res>
+    extends _$LocalAuthenticationStateCopyWithImpl<$Res>
     implements _$UnauthorizedCopyWith<$Res> {
   __$UnauthorizedCopyWithImpl(
       _Unauthorized _value, $Res Function(_Unauthorized) _then)
@@ -621,7 +621,7 @@ class _$_Unauthorized implements _Unauthorized {
 
   @override
   String toString() {
-    return 'AuthenticationBlocState.unauthorized()';
+    return 'LocalAuthenticationState.unauthorized()';
   }
 
   @override
@@ -701,6 +701,6 @@ class _$_Unauthorized implements _Unauthorized {
   }
 }
 
-abstract class _Unauthorized implements AuthenticationBlocState {
+abstract class _Unauthorized implements LocalAuthenticationState {
   const factory _Unauthorized() = _$_Unauthorized;
 }

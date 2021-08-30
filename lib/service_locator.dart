@@ -8,11 +8,13 @@ import 'package:local_auth/local_auth.dart';
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/api/api_setup.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
-import 'package:vethx_beta/core/services/auth/local_auth.service.dart';
 import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
 import 'package:vethx_beta/core/services/storage/pii.service.dart';
 import 'package:vethx_beta/core/utils/app_config.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
+import 'package:vethx_beta/features/authentication/domain/usecases/request_authorization.usecase.dart';
+import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth.service.dart';
+import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
@@ -83,7 +85,6 @@ class ServiceLocatorConfig {
     getIt.registerLazySingleton<ILocalAuth>(
       () => LocalAuth(getIt<LocalAuthentication>()),
     );
-
     // getIt.registerLazySingleton<IAuthFacade>(
     //   () => FirebaseAuthFacade(
     //     getIt<FirebaseAuth>(),
@@ -92,12 +93,21 @@ class ServiceLocatorConfig {
     //   ),
     // );
 
+    //! Use case
+
+    getIt.registerLazySingleton<RequestLocalAuthorization>(
+      () => RequestLocalAuthorization(getIt<ILocalAuth>()),
+    );
+
     // BLoC
+
+    getIt.registerLazySingleton<LocalAuthenticationBloc>(
+      () => LocalAuthenticationBloc(getIt<RequestLocalAuthorization>()),
+    );
 
     getIt.registerLazySingleton<AuthBloc>(
       () => AuthBloc(
         getIt<IAuthFacade>(),
-        getIt<ILocalAuth>(),
       ),
     );
 

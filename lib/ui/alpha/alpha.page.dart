@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
@@ -35,7 +36,25 @@ class AlphaPage extends StatelessWidget {
         return state.map(
           initial: (_) => _Root(home: Splash()),
           inProcess: (_) => _Root(home: LoadingPage()),
-          authenticated: (_) => const _Root(home: HomePage()),
+          authenticated: (_) =>
+              BlocBuilder<LocalAuthenticationBloc, LocalAuthenticationState>(
+            builder: (context, state) {
+              return state.map(
+                initial: (_) => _Root(home: Splash()),
+                authorized: (_) => _Root(
+                  home: const HomePage(),
+                  onLifecycleStateChange: (s) {
+                    Logger.widget('AppLifecycleState: $s');
+                    if (s == AppLifecycleState.resumed) {
+                      BlocProvider.of<LocalAuthenticationBloc>(context)
+                          .add(const LocalAuthenticationEvent.request());
+                    }
+                  },
+                ),
+                unauthorized: (_) => _Root(home: Splash()),
+              );
+            },
+          ),
           unauthenticated: (_) => _Root(
             home: SignInOptionsPage.create(),
           ),
@@ -48,17 +67,19 @@ class AlphaPage extends StatelessWidget {
 
 class _Root extends StatelessWidget {
   final Widget home;
-  const _Root({Key? key, required this.home}) : super(key: key);
+  final Function(AppLifecycleState)? onLifecycleStateChange;
+  const _Root({
+    Key? key,
+    required this.home,
+    this.onLifecycleStateChange,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return LifeCycleManager(
       onLifecycleStateChange: (s) {
         Logger.widget('AppLifecycleState: $s');
-        if (s == AppLifecycleState.resumed) {
-          ServiceLocatorConfig.getIt<AuthBloc>()
-              .add(const AuthEvent.localAuthCheckRequested());
-        }
+        onLifecycleStateChange?.call(s);
       },
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/services/auth/local_auth.service.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
@@ -11,19 +10,15 @@ import 'auth_bloc_test.mocks.dart';
 
 @GenerateMocks([
   IAuthFacade,
-  ILocalAuth,
 ])
 void main() {
   late AuthBloc _bloc;
   late MockIAuthFacade _mockIAuthFacade;
-  late MockILocalAuth _mockLocalAuth;
 
   setUp(() {
-    _mockLocalAuth = MockILocalAuth();
     _mockIAuthFacade = MockIAuthFacade();
     _bloc = AuthBloc(
       _mockIAuthFacade,
-      _mockLocalAuth,
     );
   });
 
