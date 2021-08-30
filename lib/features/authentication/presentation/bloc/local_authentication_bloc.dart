@@ -12,7 +12,7 @@ part 'local_authentication_state.dart';
 class LocalAuthenticationBloc
     extends Bloc<LocalAuthenticationEvent, LocalAuthenticationState> {
   final RequestLocalAuthorization _usecase;
-  LocalAuthenticationBloc(this._usecase) : super(const _Initial());
+  LocalAuthenticationBloc(this._usecase) : super(const _Authorized());
 
   @override
   Stream<LocalAuthenticationState> mapEventToState(
@@ -20,7 +20,7 @@ class LocalAuthenticationBloc
   ) async* {
     yield* event.map(
       started: (_) async* {
-        yield const LocalAuthenticationState.authorized();
+        yield const LocalAuthenticationState.initial();
       },
       request: (e) async* {
         yield const LocalAuthenticationState.initial();

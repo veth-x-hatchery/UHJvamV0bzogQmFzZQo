@@ -18,9 +18,16 @@ class AlphaPage extends StatelessWidget {
   }) : super(key: key);
 
   static Widget create(BuildContext context) {
-    return BlocProvider(
-      create: (_) => ServiceLocatorConfig.getIt<AuthBloc>()
-        ..add(const AuthEvent.authCheckRequested()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => ServiceLocatorConfig.getIt<AuthBloc>()
+            ..add(const AuthEvent.authCheckRequested()),
+        ),
+        BlocProvider(
+          create: (_) => ServiceLocatorConfig.getIt<LocalAuthenticationBloc>(),
+        ),
+      ],
       child: const AlphaPage(),
     );
   }
@@ -37,7 +44,10 @@ class AlphaPage extends StatelessWidget {
           initial: (_) => _Root(home: Splash()),
           inProcess: (_) => _Root(home: LoadingPage()),
           authenticated: (_) =>
-              BlocBuilder<LocalAuthenticationBloc, LocalAuthenticationState>(
+              BlocConsumer<LocalAuthenticationBloc, LocalAuthenticationState>(
+            listener: (context, state) {
+              Logger.widget('AlphaPage -> LocalAuthenticationBloc: $state');
+            },
             builder: (context, state) {
               return state.map(
                 initial: (_) => _Root(home: Splash()),
