@@ -19,11 +19,8 @@ class LocalAuthenticationBloc
     LocalAuthenticationEvent event,
   ) async* {
     yield* event.map(
-      started: (_) async* {
-        yield const LocalAuthenticationState.initial();
-      },
       request: (e) async* {
-        yield const LocalAuthenticationState.initial();
+        yield const LocalAuthenticationState.loading();
         yield await _usecase.call(const NoParams()).then(
               (value) => value.fold(
                 (failure) => const LocalAuthenticationState.unauthorized(),

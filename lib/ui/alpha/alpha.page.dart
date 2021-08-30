@@ -50,11 +50,10 @@ class AlphaPage extends StatelessWidget {
             },
             builder: (context, state) {
               return state.map(
-                initial: (_) => _Root(home: Splash()),
+                loading: (_) => _Root(home: Splash()),
                 authorized: (_) => _Root(
                   home: const HomePage(),
                   onLifecycleStateChange: (s) {
-                    Logger.widget('AppLifecycleState: $s');
                     if (s == AppLifecycleState.resumed) {
                       BlocProvider.of<LocalAuthenticationBloc>(context)
                           .add(const LocalAuthenticationEvent.request());
