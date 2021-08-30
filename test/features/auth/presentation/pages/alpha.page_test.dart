@@ -27,16 +27,16 @@ import 'alpha.page_test.mocks.dart';
   MockSpec<NavigatorObserver>(returnNullOnMissingStub: true),
 ])
 void main() {
-  late GetIt getIt;
+  late GetIt _getIt;
   late MockAuthBloc _mockAuthBloc;
   late MockISignInServiceLocator _sl;
   late MockNavigatorObserver _mockNavigationObserver;
   late MockLocalAuthenticationBloc _mockLocalAuthenticationBloc;
 
   setUp(() {
-    getIt = GetIt.instance;
+    _getIt = GetIt.instance;
 
-    _sl = MockISignInServiceLocator(getIt: getIt);
+    _sl = MockISignInServiceLocator(getIt: _getIt);
 
     _mockAuthBloc = MockAuthBloc();
 
@@ -46,22 +46,22 @@ void main() {
 
     // BLoC
 
-    getIt.registerLazySingleton<AuthBloc>(
+    _getIt.registerLazySingleton<AuthBloc>(
       () => _mockAuthBloc,
     );
 
-    getIt.registerLazySingleton<LocalAuthenticationBloc>(
+    _getIt.registerLazySingleton<LocalAuthenticationBloc>(
       () => _mockLocalAuthenticationBloc,
     );
 
     // Features Service Locators
 
-    getIt.registerLazySingleton<ISignInServiceLocator>(
+    _getIt.registerLazySingleton<ISignInServiceLocator>(
       () => _sl,
     );
   });
 
-  tearDown(() => getIt.reset());
+  tearDown(() => _getIt.reset());
 
   void _localAuthorizationState(LocalAuthenticationState state) {
     when(_mockLocalAuthenticationBloc.state).thenReturn(state);
