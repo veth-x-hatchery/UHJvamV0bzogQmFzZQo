@@ -9,6 +9,8 @@ import 'package:vethx_beta/core/api/api_setup.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
 import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
 import 'package:vethx_beta/core/services/storage/pii.service.dart';
+import 'package:vethx_beta/core/utils/app_config.dart';
+import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
@@ -28,12 +30,19 @@ class ServiceLocatorConfig {
 
   static final GetIt getIt = GetIt.instance;
 
+  // static T get<T extends Object>() {
+  //   Logger.serviceLocator('ServiceLocatorConfig -> get: $T');
+  //   return getIt<T>();
+  // }
+
   static Future<void> init() async {
     //! External
 
     // final sharedPreferences = await SharedPreferences.getInstance();
 
     // getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+
+    getIt.registerLazySingleton<AppConfig>(() => AppConfig());
 
     getIt.registerLazySingleton<
         ILocalStorage<PersonallyIdentifiableInformationKeys>>(
