@@ -5,17 +5,18 @@ import 'package:local_auth/error_codes.dart' as auth_error;
 import 'package:local_auth/local_auth.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
+import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth_failure.dart';
 
 class LocalAuth implements ILocalAuth {
   final LocalAuthentication _localAuth;
 
   LocalAuth(this._localAuth);
 
-  Either<AuthFailure, bool>? _lastRequestResult;
+  Either<LocalAuthFailure, bool>? _lastRequestResult;
 
   @override
-  Future<Either<AuthFailure, bool>> request({Duration? cacheTolerance}) async {
+  Future<Either<LocalAuthFailure, bool>> request(
+      {Duration? cacheTolerance}) async {
     return _cache(cacheTolerance, _authenticate);
   }
 
@@ -23,8 +24,8 @@ class LocalAuth implements ILocalAuth {
     Future.delayed(cacheTolerance).then((_) => _lastRequestResult = null);
   }
 
-  Future<Either<AuthFailure, bool>> _cache(Duration? cacheTolerance,
-      Future<Either<AuthFailure, bool>> Function() auth) async {
+  Future<Either<LocalAuthFailure, bool>> _cache(Duration? cacheTolerance,
+      Future<Either<LocalAuthFailure, bool>> Function() auth) async {
     if (_lastRequestResult != null) {
       return _lastRequestResult!;
     }
@@ -43,7 +44,7 @@ class LocalAuth implements ILocalAuth {
       goToSettingsDescription: 'Please set up your Touch ID.',
       lockOut: 'Please reenable your Touch ID');
 
-  Future<Either<AuthFailure, bool>> _authenticate() async {
+  Future<Either<LocalAuthFailure, bool>> _authenticate() async {
     try {
       final result = await _localAuth.authenticate(
         localizedReason: 'Please authenticate...',
@@ -57,21 +58,15 @@ class LocalAuth implements ILocalAuth {
       Logger.service('LocalAuth: ${e.code}', exception: e, stackTrace: s);
       switch (e.code) {
         case auth_error.passcodeNotSet:
-          return right(true);
         case auth_error.notEnrolled:
-          return right(true);
         case auth_error.notAvailable:
-          break;
         case auth_error.otherOperatingSystem:
-          break;
         case auth_error.lockedOut:
-          break;
+          return left(const LocalAuthFailure.notAvailable());
         case auth_error.permanentlyLockedOut:
           return right(false);
-        default:
-          break;
       }
     }
-    return left(const AuthFailure.serverError());
+    return left(const LocalAuthFailure.genericError());
   }
 }
