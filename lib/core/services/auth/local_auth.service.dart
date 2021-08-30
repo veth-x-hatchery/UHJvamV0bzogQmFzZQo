@@ -35,9 +35,9 @@ class LocalAuth implements ILocalAuth {
       Logger.service('LocalAuth: ${e.code}', exception: e, stackTrace: s);
       switch (e.code) {
         case auth_error.passcodeNotSet:
-          break;
+          return right(true);
         case auth_error.notEnrolled:
-          break;
+          return right(true);
         case auth_error.notAvailable:
           break;
         case auth_error.otherOperatingSystem:
@@ -45,7 +45,7 @@ class LocalAuth implements ILocalAuth {
         case auth_error.lockedOut:
           break;
         case auth_error.permanentlyLockedOut:
-          break;
+          return right(false);
         default:
           break;
       }

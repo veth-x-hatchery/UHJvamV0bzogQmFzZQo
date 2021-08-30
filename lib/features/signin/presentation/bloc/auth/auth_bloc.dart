@@ -32,7 +32,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             : AuthState.authenticated(user));
       },
       localAuthCheckRequested: (e) async* {
-        yield const AuthState.inProcess();
+        yield const AuthState.initial();
         final user = await _authFacade.getSignedInUser();
         if (user == null) {
           yield const AuthState.unauthenticated();
