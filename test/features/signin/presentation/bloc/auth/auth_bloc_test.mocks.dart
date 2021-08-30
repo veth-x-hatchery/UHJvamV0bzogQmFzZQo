@@ -6,6 +6,7 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:vethx_beta/core/services/auth/local_auth.service.dart' as _i8;
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart'
     as _i5;
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
@@ -82,6 +83,39 @@ class MockIAuthFacade extends _i1.Mock implements _i3.IAuthFacade {
   _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>> passwordReset(
           _i7.Credential? credential) =>
       (super.noSuchMethod(Invocation.method(#passwordReset, [credential]),
+              returnValue: Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>.value(
+                  _FakeEither_0<_i6.AuthFailure, _i2.Unit>()))
+          as _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [ILocalAuth].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockILocalAuth extends _i1.Mock implements _i8.ILocalAuth {
+  MockILocalAuth() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  bool get checkIsAvailable =>
+      (super.noSuchMethod(Invocation.getter(#checkIsAvailable),
+          returnValue: false) as bool);
+  @override
+  _i2.Either<_i6.AuthFailure, bool> get authResult =>
+      (super.noSuchMethod(Invocation.getter(#authResult),
+              returnValue: _FakeEither_0<_i6.AuthFailure, bool>())
+          as _i2.Either<_i6.AuthFailure, bool>);
+  @override
+  _i4.Future<_i2.Either<_i6.AuthFailure, bool>> authenticate() =>
+      (super.noSuchMethod(Invocation.method(#authenticate, []),
+              returnValue: Future<_i2.Either<_i6.AuthFailure, bool>>.value(
+                  _FakeEither_0<_i6.AuthFailure, bool>()))
+          as _i4.Future<_i2.Either<_i6.AuthFailure, bool>>);
+  @override
+  _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>> cancel() =>
+      (super.noSuchMethod(Invocation.method(#cancel, []),
               returnValue: Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>.value(
                   _FakeEither_0<_i6.AuthFailure, _i2.Unit>()))
           as _i4.Future<_i2.Either<_i6.AuthFailure, _i2.Unit>>);
