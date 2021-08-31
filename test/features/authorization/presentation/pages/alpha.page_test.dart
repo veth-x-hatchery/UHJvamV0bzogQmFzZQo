@@ -6,6 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
+import 'package:vethx_beta/features/authentication/presentation/pages/local_authentication.page.dart';
 import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
 import 'package:vethx_beta/features/authorization/presentation/pages/alpha.page.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
@@ -15,6 +16,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_opt
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
+import 'package:vethx_beta/ui/splash/splash.page.dart';
 
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
 import 'alpha.page_test.mocks.dart';
@@ -180,6 +182,74 @@ void main() {
       // Assert
 
       expect(find.byType(Image), findsOneWidget);
+    });
+  });
+
+  group('when requesting local authorization', () {
+    testWidgets('when receive loading should show corret page',
+        (WidgetTester tester) async {
+      // arrange
+
+      _initialState();
+
+      _authState(AuthState.authenticated(User(
+        credential: AuthFacadeMock.validTestCredential,
+        name: 'test',
+      )));
+
+      _localAuthorizationState(const LocalAuthenticationState.loading());
+
+      // act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      // assert
+
+      expect(find.byType(Splash), findsOneWidget);
+    });
+
+    testWidgets('when receive unauthorized should show corret page',
+        (WidgetTester tester) async {
+      // arrange
+
+      _initialState();
+
+      _authState(AuthState.authenticated(User(
+        credential: AuthFacadeMock.validTestCredential,
+        name: 'test',
+      )));
+
+      _localAuthorizationState(const LocalAuthenticationState.unauthorized());
+
+      // act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      // assert
+
+      expect(find.byType(LocalAuthenticationPage), findsOneWidget);
+    });
+
+    testWidgets('when receive authorized should show corret page',
+        (WidgetTester tester) async {
+      // arrange
+
+      _initialState();
+
+      _authState(AuthState.authenticated(User(
+        credential: AuthFacadeMock.validTestCredential,
+        name: 'test',
+      )));
+
+      _localAuthorizationState(const LocalAuthenticationState.authorized());
+
+      // act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      // assert
+
+      expect(find.byType(HomePage), findsOneWidget);
     });
   });
 }
