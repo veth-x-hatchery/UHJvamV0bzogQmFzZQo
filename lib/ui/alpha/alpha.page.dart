@@ -53,7 +53,7 @@ class AlphaPage extends StatelessWidget {
               return state.map(
                 loading: (_) => _Root(home: Splash()),
                 authorized: (_) => _Root(
-                  home: const HomePage(),
+                  home: HomePage(),
                   onLifecycleStateChange: (s) {
                     if (s == AppLifecycleState.resumed) {
                       BlocProvider.of<LocalAuthenticationBloc>(context)

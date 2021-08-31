@@ -178,8 +178,8 @@ abstract class _Request implements LocalAuthenticationEvent {
 class _$LocalAuthenticationStateTearOff {
   const _$LocalAuthenticationStateTearOff();
 
-  _Initial loading() {
-    return const _Initial();
+  _Loading loading() {
+    return const _Loading();
   }
 
   _Authorized authorized() {
@@ -220,21 +220,21 @@ mixin _$LocalAuthenticationState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) loading,
+    required TResult Function(_Loading value) loading,
     required TResult Function(_Authorized value) authorized,
     required TResult Function(_Unauthorized value) unauthorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? loading,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Authorized value)? authorized,
     TResult Function(_Unauthorized value)? unauthorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? loading,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Authorized value)? authorized,
     TResult Function(_Unauthorized value)? unauthorized,
     required TResult orElse(),
@@ -260,26 +260,26 @@ class _$LocalAuthenticationStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$InitialCopyWith<$Res> {
-  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
-      __$InitialCopyWithImpl<$Res>;
+abstract class _$LoadingCopyWith<$Res> {
+  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) then) =
+      __$LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$InitialCopyWithImpl<$Res>
+class __$LoadingCopyWithImpl<$Res>
     extends _$LocalAuthenticationStateCopyWithImpl<$Res>
-    implements _$InitialCopyWith<$Res> {
-  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
-      : super(_value, (v) => _then(v as _Initial));
+    implements _$LoadingCopyWith<$Res> {
+  __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
+      : super(_value, (v) => _then(v as _Loading));
 
   @override
-  _Initial get _value => super._value as _Initial;
+  _Loading get _value => super._value as _Loading;
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$_Loading implements _Loading {
+  const _$_Loading();
 
   @override
   String toString() {
@@ -288,7 +288,7 @@ class _$_Initial implements _Initial {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Initial);
+    return identical(this, other) || (other is _Loading);
   }
 
   @override
@@ -331,7 +331,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) loading,
+    required TResult Function(_Loading value) loading,
     required TResult Function(_Authorized value) authorized,
     required TResult Function(_Unauthorized value) unauthorized,
   }) {
@@ -341,7 +341,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? loading,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Authorized value)? authorized,
     TResult Function(_Unauthorized value)? unauthorized,
   }) {
@@ -351,7 +351,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? loading,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Authorized value)? authorized,
     TResult Function(_Unauthorized value)? unauthorized,
     required TResult orElse(),
@@ -363,8 +363,8 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements LocalAuthenticationState {
-  const factory _Initial() = _$_Initial;
+abstract class _Loading implements LocalAuthenticationState {
+  const factory _Loading() = _$_Loading;
 }
 
 /// @nodoc
@@ -441,7 +441,7 @@ class _$_Authorized implements _Authorized {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) loading,
+    required TResult Function(_Loading value) loading,
     required TResult Function(_Authorized value) authorized,
     required TResult Function(_Unauthorized value) unauthorized,
   }) {
@@ -451,7 +451,7 @@ class _$_Authorized implements _Authorized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? loading,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Authorized value)? authorized,
     TResult Function(_Unauthorized value)? unauthorized,
   }) {
@@ -461,7 +461,7 @@ class _$_Authorized implements _Authorized {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? loading,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Authorized value)? authorized,
     TResult Function(_Unauthorized value)? unauthorized,
     required TResult orElse(),
@@ -551,7 +551,7 @@ class _$_Unauthorized implements _Unauthorized {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) loading,
+    required TResult Function(_Loading value) loading,
     required TResult Function(_Authorized value) authorized,
     required TResult Function(_Unauthorized value) unauthorized,
   }) {
@@ -561,7 +561,7 @@ class _$_Unauthorized implements _Unauthorized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? loading,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Authorized value)? authorized,
     TResult Function(_Unauthorized value)? unauthorized,
   }) {
@@ -571,7 +571,7 @@ class _$_Unauthorized implements _Unauthorized {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? loading,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Authorized value)? authorized,
     TResult Function(_Unauthorized value)? unauthorized,
     required TResult orElse(),
