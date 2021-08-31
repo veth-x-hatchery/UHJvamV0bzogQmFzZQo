@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/authentication/domain/core/usecase.dart';
-import 'package:vethx_beta/features/authentication/domain/usecases/request_authorization.usecase.dart';
+import 'package:vethx_beta/features/authentication/domain/usecases/request_authentication.usecase.dart';
 
 part 'local_authentication_bloc.freezed.dart';
 part 'local_authentication_event.dart';
@@ -11,7 +11,7 @@ part 'local_authentication_state.dart';
 
 class LocalAuthenticationBloc
     extends Bloc<LocalAuthenticationEvent, LocalAuthenticationState> {
-  final RequestLocalAuthorization _usecase;
+  final RequestLocalAuthentication _usecase;
   LocalAuthenticationBloc(this._usecase) : super(const _Authorized());
 
   @override

@@ -12,7 +12,7 @@ import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
 import 'package:vethx_beta/core/services/storage/pii.service.dart';
 import 'package:vethx_beta/core/utils/app_config.dart';
 import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
-import 'package:vethx_beta/features/authentication/domain/usecases/request_authorization.usecase.dart';
+import 'package:vethx_beta/features/authentication/domain/usecases/request_authentication.usecase.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth.service.dart';
 import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
@@ -95,14 +95,14 @@ class ServiceLocatorConfig {
 
     //! Use case
 
-    getIt.registerLazySingleton<RequestLocalAuthorization>(
-      () => RequestLocalAuthorization(getIt<ILocalAuth>()),
+    getIt.registerLazySingleton<RequestLocalAuthentication>(
+      () => RequestLocalAuthentication(getIt<ILocalAuth>()),
     );
 
     // BLoC
 
     getIt.registerLazySingleton<LocalAuthenticationBloc>(
-      () => LocalAuthenticationBloc(getIt<RequestLocalAuthorization>()),
+      () => LocalAuthenticationBloc(getIt<RequestLocalAuthentication>()),
     );
 
     getIt.registerLazySingleton<AuthBloc>(

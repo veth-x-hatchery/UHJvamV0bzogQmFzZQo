@@ -3,10 +3,10 @@ import 'package:vethx_beta/features/authentication/domain/core/failures_details.
 import 'package:vethx_beta/features/authentication/domain/core/usecase.dart';
 import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
 
-class RequestLocalAuthorization implements UseCase<bool, NoParams> {
+class RequestLocalAuthentication implements UseCase<bool, NoParams> {
   final ILocalAuth _localAuth;
 
-  RequestLocalAuthorization(this._localAuth);
+  RequestLocalAuthentication(this._localAuth);
 
   @override
   Future<Either<FailureDetails, bool>> call(NoParams params) =>

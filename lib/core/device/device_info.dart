@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 
+enum BuildMode { debug, profile, release }
+
 class DeviceInfo {
   static final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
   static Map<String, dynamic> deviceData = <String, dynamic>{};
@@ -12,6 +14,19 @@ class DeviceInfo {
   Future<String> modelName() async {
     await _initPlatformState();
     return (deviceData['utsname.machine'] ?? deviceData['model']).toString();
+  }
+
+  BuildMode currentBuildMode() {
+    if (const bool.fromEnvironment('dart.vm.product')) {
+      return BuildMode.release;
+    }
+    var result = BuildMode.profile;
+    //Little trick, since assert only runs on DEBUG mode
+    assert(() {
+      result = BuildMode.debug;
+      return true;
+    }());
+    return result;
   }
 
   Future<void> _initPlatformState() async {

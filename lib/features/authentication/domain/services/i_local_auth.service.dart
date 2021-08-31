@@ -3,7 +3,7 @@ import 'package:vethx_beta/features/authentication/infrastructure/services/local
 
 abstract class ILocalAuth {
   // ignore: constant_identifier_names
-  static const TOLERANCE_BETWEEN_REQUESTS = Duration(seconds: 5);
+  static const TOLERANCE_BETWEEN_REQUESTS = Duration(seconds: 10);
 
   /// Actually will INATIVATE app lifecycle state.
   /// And this will kill the BLoC that call it.

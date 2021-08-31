@@ -4,6 +4,7 @@ import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
+import 'package:vethx_beta/features/authentication/presentation/pages/local_authentication.page.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
@@ -60,7 +61,14 @@ class AlphaPage extends StatelessWidget {
                     }
                   },
                 ),
-                unauthorized: (_) => _Root(home: Splash()),
+                unauthorized: (_) => _Root(
+                  home: LocalAuthenticationPage(
+                    onAuthenticate: () =>
+                        BlocProvider.of<LocalAuthenticationBloc>(context).add(
+                      const LocalAuthenticationEvent.request(),
+                    ),
+                  ),
+                ),
               );
             },
           ),

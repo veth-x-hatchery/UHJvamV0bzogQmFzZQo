@@ -32,8 +32,17 @@ class LocalAuth implements ILocalAuth {
 
     _lastRequestResult = await auth();
 
-    _scheduleCleanCache(
-        cacheTolerance ?? ILocalAuth.TOLERANCE_BETWEEN_REQUESTS);
+    bool noCache = false;
+    _lastRequestResult!.fold(
+      (_) => noCache = !noCache,
+      (allowed) => noCache = !allowed,
+    );
+
+    final timeToClear = noCache
+        ? const Duration(milliseconds: 500)
+        : (cacheTolerance ?? ILocalAuth.TOLERANCE_BETWEEN_REQUESTS);
+
+    _scheduleCleanCache(timeToClear);
 
     return _lastRequestResult!;
   }
