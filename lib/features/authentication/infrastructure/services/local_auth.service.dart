@@ -27,6 +27,8 @@ class LocalAuth implements ILocalAuth {
   Future<Either<LocalAuthFailure, bool>> _cache(Duration? cacheTolerance,
       Future<Either<LocalAuthFailure, bool>> Function() auth) async {
     if (_lastRequestResult != null) {
+      Logger.service(
+          'LocalAuth: cached last auth result -> $_lastRequestResult');
       return _lastRequestResult!;
     }
 
@@ -47,7 +49,7 @@ class LocalAuth implements ILocalAuth {
     return _lastRequestResult!;
   }
 
-  final IOSAuthMessages _iosStrings = const IOSAuthMessages(
+  final IOSAuthMessages iosStrings = const IOSAuthMessages(
       cancelButton: 'cancel',
       goToSettingsButton: 'settings',
       goToSettingsDescription: 'Please set up your Touch ID.',
@@ -58,7 +60,7 @@ class LocalAuth implements ILocalAuth {
       final result = await _localAuth.authenticate(
         localizedReason: 'Please authenticate...',
         useErrorDialogs: false,
-        iOSAuthStrings: _iosStrings,
+        iOSAuthStrings: iosStrings,
         stickyAuth: true,
       );
       Logger.service('LocalAuth: authenticate -> $result');
@@ -70,12 +72,13 @@ class LocalAuth implements ILocalAuth {
         case auth_error.notEnrolled:
         case auth_error.notAvailable:
         case auth_error.otherOperatingSystem:
-        case auth_error.lockedOut:
           return left(const LocalAuthFailure.notAvailable());
+        case auth_error.lockedOut:
         case auth_error.permanentlyLockedOut:
           return right(false);
+        default:
+          return left(const LocalAuthFailure.genericError());
       }
     }
-    return left(const LocalAuthFailure.genericError());
   }
 }
