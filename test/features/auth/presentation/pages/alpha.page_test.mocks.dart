@@ -9,7 +9,7 @@ import 'package:flutter/src/widgets/navigator.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart'
     as _i4;
-import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
+import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart'
     as _i2;
 
 // ignore_for_file: avoid_redundant_argument_values

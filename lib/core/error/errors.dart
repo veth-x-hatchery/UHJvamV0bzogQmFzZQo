@@ -1,5 +1,3 @@
-import 'package:vethx_beta/features/signin/domain/core/failures.dart';
-
 class UnexpectedValueError extends Error {
   final String valueFailure;
 

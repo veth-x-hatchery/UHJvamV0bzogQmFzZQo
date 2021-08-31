@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:vethx_beta/features/authorization/presentation/pages/alpha.page.dart';
 import 'package:vethx_beta/startup.dart';
-import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

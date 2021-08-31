@@ -13,7 +13,7 @@ import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.da
     as _i8;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart'
     as _i6;
-import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
+import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart'
     as _i2;
 
 // ignore_for_file: avoid_redundant_argument_values

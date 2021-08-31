@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
+import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 
 class HomePage extends StatelessWidget {

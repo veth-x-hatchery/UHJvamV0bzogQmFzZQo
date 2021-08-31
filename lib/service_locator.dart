@@ -15,10 +15,10 @@ import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.
 import 'package:vethx_beta/features/authentication/domain/usecases/request_authentication.usecase.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth.service.dart';
 import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
+import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 
 // ignore: avoid_classes_with_only_static_members

@@ -6,18 +6,17 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
+import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
+import 'package:vethx_beta/features/authorization/presentation/pages/alpha.page.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
-import 'package:vethx_beta/ui/alpha/alpha.page.dart';
 
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
-
 import 'alpha.page_test.mocks.dart';
 
 @GenerateMocks([

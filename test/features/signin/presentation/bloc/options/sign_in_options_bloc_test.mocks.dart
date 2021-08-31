@@ -12,7 +12,7 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart' as _i10;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart'
     as _i8;
-import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart'
+import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart'
     as _i2;
 import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart'
     as _i6;
