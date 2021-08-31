@@ -8,7 +8,6 @@ import 'package:local_auth/local_auth.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth.service.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth_failure.dart';
 
