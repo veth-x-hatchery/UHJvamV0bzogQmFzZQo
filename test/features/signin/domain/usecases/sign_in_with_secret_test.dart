@@ -9,6 +9,7 @@ import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 import 'sign_in_check_credential_test.mocks.dart';
 
@@ -66,7 +67,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInWithSecretErrorMessages.unavailable(),
+        message: SignInWithSecretErrorMessages.unavailable().translate(null)!,
       );
 
       when(_mockSignInRepository.cachedCredential())
@@ -104,7 +105,8 @@ void main() {
       final failureDetails = FailureDetails(
         failure: throwFailure,
         message: SignInWithSecretErrorMessages
-            .invalidCredentialAndSecretCombination(),
+                .invalidCredentialAndSecretCombination()
+            .translate(null)!,
       );
 
       when(_mockSignInRepository.cachedCredential())
@@ -136,7 +138,8 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInWithSecretErrorMessages.invalidCachedCredential(),
+        message: SignInWithSecretErrorMessages.invalidCachedCredential()
+            .translate(null)!,
       );
 
       when(_mockSignInRepository.cachedCredential())

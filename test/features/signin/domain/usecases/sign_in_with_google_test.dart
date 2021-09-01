@@ -5,6 +5,7 @@ import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
 import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 import 'sign_in_with_secret_test.mocks.dart';
 
@@ -49,7 +50,8 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInWithGoogleErrorMessages.cancelledByUser(),
+        message:
+            SignInWithGoogleErrorMessages.cancelledByUser().translate(null)!,
       );
 
       when(_mockAuthFacade.signInWithGoogle())
@@ -74,7 +76,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInWithGoogleErrorMessages.unknowError(),
+        message: SignInWithGoogleErrorMessages.unknowError().translate(null)!,
       );
 
       when(_mockAuthFacade.signInWithGoogle())

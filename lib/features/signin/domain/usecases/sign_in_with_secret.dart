@@ -39,19 +39,21 @@ class SignInWithSecret extends UseCase<Unit, Secret> {
     if (auth == const AuthFailure.invalidCachedCredential()) {
       return FailureDetails(
         failure: auth,
-        message: SignInWithSecretErrorMessages.invalidCachedCredential(),
+        message: SignInWithSecretErrorMessages.invalidCachedCredential()
+            .translate(null)!,
       );
     }
     if (auth == const AuthFailure.invalidCredentialAndSecretCombination()) {
       return FailureDetails(
         failure: auth,
         message: SignInWithSecretErrorMessages
-            .invalidCredentialAndSecretCombination(),
+                .invalidCredentialAndSecretCombination()
+            .translate(null)!,
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInWithSecretErrorMessages.unavailable(),
+      message: SignInWithSecretErrorMessages.unavailable().translate(null)!,
     );
   }
 }

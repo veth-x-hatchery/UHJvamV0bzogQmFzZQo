@@ -282,7 +282,8 @@ void main() {
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCachedCredential(),
-      message: SignInWithSecretErrorMessages.invalidCachedCredential(),
+      message: SignInWithSecretErrorMessages.invalidCachedCredential()
+          .translate(null)!,
     );
 
     _scretResetBlocState(SignInSecretResetState.initial());
@@ -301,8 +302,7 @@ void main() {
 
     // Act && Assert
 
-    expect(find.text(expectedFailure.message.translate(tester.l10n)!),
-        findsOneWidget);
+    expect(find.text(expectedFailure.message), findsOneWidget);
   });
 
   group('when request change credentials', () {
@@ -348,7 +348,8 @@ void main() {
 
       final expectedFailure = FailureDetails(
         failure: const AuthFailure.invalidCachedCredential(),
-        message: SignInSecretResetMessages.invalidCachedCredential(),
+        message: SignInSecretResetMessages.invalidCachedCredential()
+            .translate(null)!,
       );
 
       _secretBlocState(SignInSecretState.initial());
@@ -365,8 +366,7 @@ void main() {
 
       // Act && Assert
 
-      expect(find.text(expectedFailure.message.translate(tester.l10n)!),
-          findsOneWidget);
+      expect(find.text(expectedFailure.message), findsOneWidget);
     });
 
     testWidgets('when request a reset should show a progress indicator',
@@ -397,7 +397,7 @@ void main() {
       _scretResetBlocState(SignInSecretResetState(
         isLoading: false,
         notification: optionOf(VethxNotification.snack(
-            message: SignInSecretResetMessages.success())),
+            message: SignInSecretResetMessages.success().translate(null)!)),
       ));
 
       await _pumpPage(tester);

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
 
 enum VethxNotificationType {
   alert,
@@ -9,8 +8,8 @@ enum VethxNotificationType {
 
 class VethxNotification extends Equatable {
   final VethxNotificationType type;
-  final MessageFromLocations message;
-  final MessageFromLocations? title;
+  final String message;
+  final String? title;
 
   const VethxNotification._internal({
     required this.type,
@@ -19,7 +18,7 @@ class VethxNotification extends Equatable {
   });
 
   factory VethxNotification.snack({
-    required MessageFromLocations message,
+    required String message,
   }) =>
       VethxNotification._internal(
         message: message,
@@ -27,8 +26,8 @@ class VethxNotification extends Equatable {
       );
 
   factory VethxNotification.alert({
-    required MessageFromLocations message,
-    required MessageFromLocations title,
+    required String message,
+    required String title,
   }) =>
       VethxNotification._internal(
         title: title,

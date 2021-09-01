@@ -9,6 +9,7 @@ import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 import 'sign_in_check_credential_test.mocks.dart';
 
@@ -63,7 +64,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: CheckCredentialErrorMessages.unavailable(),
+        message: CheckCredentialErrorMessages.unavailable().translate(null)!,
       );
 
       when(_mockAuthFacade.credentialIsAlreadyInUse(credential))

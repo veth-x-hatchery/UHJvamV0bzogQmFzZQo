@@ -261,7 +261,8 @@ void main() {
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.credentialAlreadyInUse(),
       message: SignInRegisterCredentialAndSecretErrorMessages
-          .credentialAlreadyInUse(),
+              .credentialAlreadyInUse()
+          .translate(null)!,
     );
 
     _signInState(SignInRegisterState(
@@ -279,7 +280,6 @@ void main() {
 
     // Act && Assert
 
-    expect(find.text(expectedFailure.message.translate(tester.l10n)!),
-        findsOneWidget);
+    expect(find.text(expectedFailure.message), findsOneWidget);
   });
 }

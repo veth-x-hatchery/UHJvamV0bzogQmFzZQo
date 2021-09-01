@@ -10,6 +10,7 @@ import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 import 'sign_in_secret_reset_test.mocks.dart';
 
@@ -60,7 +61,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInSecretResetMessages.unavailable(),
+        message: SignInSecretResetMessages.unavailable().translate(null)!,
       );
 
       when(_mockSignInRepository.cachedCredential())
@@ -87,7 +88,8 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInSecretResetMessages.invalidCachedCredential(),
+        message: SignInSecretResetMessages.invalidCachedCredential()
+            .translate(null)!,
       );
 
       when(_mockSignInRepository.cachedCredential())

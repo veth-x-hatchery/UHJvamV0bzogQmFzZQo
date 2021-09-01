@@ -199,7 +199,8 @@ void main() {
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
-      message: CheckCredentialErrorMessages.credentialAlreadyRegistered(),
+      message: CheckCredentialErrorMessages.credentialAlreadyRegistered()
+          .translate(null)!,
     );
 
     _signInState(SignInCredentialState(
@@ -216,7 +217,6 @@ void main() {
 
     // Act && Assert
 
-    expect(find.text(expectedFailure.message.translate(tester.l10n)!),
-        findsOneWidget);
+    expect(find.text(expectedFailure.message), findsOneWidget);
   });
 }

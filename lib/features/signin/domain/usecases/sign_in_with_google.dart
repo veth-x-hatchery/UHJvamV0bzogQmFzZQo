@@ -26,12 +26,13 @@ class SignInWithGoogle extends UseCase<Unit, NoParams> {
     if (auth == const AuthFailure.cancelledByUser()) {
       return FailureDetails(
         failure: auth,
-        message: SignInWithGoogleErrorMessages.cancelledByUser(),
+        message:
+            SignInWithGoogleErrorMessages.cancelledByUser().translate(null)!,
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInWithGoogleErrorMessages.unknowError(),
+      message: SignInWithGoogleErrorMessages.unknowError().translate(null)!,
     );
   }
 }

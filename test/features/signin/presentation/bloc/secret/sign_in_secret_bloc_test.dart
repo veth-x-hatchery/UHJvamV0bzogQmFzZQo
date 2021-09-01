@@ -12,6 +12,7 @@ import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 import 'sign_in_secret_bloc_test.mocks.dart';
 
@@ -159,7 +160,8 @@ void main() {
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
       message:
-          SignInWithSecretErrorMessages.invalidCredentialAndSecretCombination(),
+          SignInWithSecretErrorMessages.invalidCredentialAndSecretCombination()
+              .translate(null)!,
     );
 
     when(_mockSignInWithSecret.call(any))
@@ -253,7 +255,8 @@ void main() {
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCachedCredential(),
-      message: SignInWithSecretErrorMessages.invalidCachedCredential(),
+      message: SignInWithSecretErrorMessages.invalidCachedCredential()
+          .translate(null)!,
     );
 
     when(_mockSignInWithSecret.call(any))

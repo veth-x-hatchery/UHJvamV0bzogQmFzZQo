@@ -10,6 +10,7 @@ import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credent
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 import 'sign_in_credential_bloc_test.mocks.dart';
 
@@ -154,7 +155,8 @@ void main() {
     final credential = AuthFacadeMock.validTestCredential.inputedValue!;
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
-      message: CheckCredentialErrorMessages.credentialAlreadyRegistered(),
+      message: CheckCredentialErrorMessages.credentialAlreadyRegistered()
+          .translate(null)!,
     );
 
     when(_mockSignInWithSecret.call(any))

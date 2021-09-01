@@ -9,6 +9,7 @@ import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart';
 import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 part 'sign_in_secret_reset_event.dart';
 part 'sign_in_secret_reset_state.dart';
@@ -46,7 +47,8 @@ class SignInSecretResetBloc
                 return optionOf(VethxNotification.snack(message: l.message));
               },
               (r) => optionOf(VethxNotification.snack(
-                  message: SignInSecretResetMessages.success())),
+                  message:
+                      SignInSecretResetMessages.success().translate(null)!)),
             ));
       },
     );

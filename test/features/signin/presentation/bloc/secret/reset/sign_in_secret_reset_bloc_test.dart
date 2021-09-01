@@ -8,6 +8,7 @@ import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 import 'sign_in_secret_reset_bloc_test.mocks.dart';
 
@@ -54,7 +55,8 @@ void main() {
             SignInSecretResetState(
                 isLoading: false,
                 notification: optionOf(VethxNotification.snack(
-                    message: SignInSecretResetMessages.success()))),
+                    message:
+                        SignInSecretResetMessages.success().translate(null)!))),
           ],
         ));
   });
@@ -64,7 +66,8 @@ void main() {
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
-      message: SignInSecretResetMessages.invalidCachedCredential(),
+      message:
+          SignInSecretResetMessages.invalidCachedCredential().translate(null)!,
     );
 
     when(_mockSignInSecretReset.call(any))
@@ -97,7 +100,8 @@ void main() {
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCachedCredential(),
-      message: SignInSecretResetMessages.invalidCachedCredential(),
+      message:
+          SignInSecretResetMessages.invalidCachedCredential().translate(null)!,
     );
 
     when(_mockSignInSecretReset.call(any))

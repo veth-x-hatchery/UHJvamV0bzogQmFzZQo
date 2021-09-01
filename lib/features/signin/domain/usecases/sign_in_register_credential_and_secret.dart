@@ -33,19 +33,22 @@ class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
       return FailureDetails(
         failure: auth,
         message: SignInRegisterCredentialAndSecretErrorMessages
-            .credentialAlreadyInUse(),
+                .credentialAlreadyInUse()
+            .translate(null)!,
       );
     }
     if (auth == const AuthFailure.invalidCredentialAndSecretCombination()) {
       return FailureDetails(
         failure: auth,
         message: SignInRegisterCredentialAndSecretErrorMessages
-            .credentialAlreadyInUse(),
+                .credentialAlreadyInUse()
+            .translate(null)!,
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInRegisterCredentialAndSecretErrorMessages.unavailable(),
+      message: SignInRegisterCredentialAndSecretErrorMessages.unavailable()
+          .translate(null)!,
     );
   }
 }

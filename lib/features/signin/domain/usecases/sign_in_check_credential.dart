@@ -9,7 +9,6 @@ import 'package:vethx_beta/l10n/l10n.dart';
 
 class SignInCredentialCheck extends UseCase<bool, Credential> {
   final ISignInRepository _signInRepository;
-
   final IAuthFacade _authFacade;
 
   SignInCredentialCheck(
@@ -32,7 +31,7 @@ class SignInCredentialCheck extends UseCase<bool, Credential> {
   FailureDetails _mapFailures(AuthFailure auth) {
     return FailureDetails(
       failure: auth,
-      message: CheckCredentialErrorMessages.unavailable(),
+      message: CheckCredentialErrorMessages.unavailable().translate(null)!,
     );
   }
 }

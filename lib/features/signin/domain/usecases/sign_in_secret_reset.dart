@@ -33,12 +33,13 @@ class SignInSecretReset extends UseCase<Unit, NoParams> {
     if (auth == const AuthFailure.invalidCachedCredential()) {
       return FailureDetails(
         failure: auth,
-        message: SignInSecretResetMessages.invalidCachedCredential(),
+        message: SignInSecretResetMessages.invalidCachedCredential()
+            .translate(null)!,
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInSecretResetMessages.unavailable(),
+      message: SignInSecretResetMessages.unavailable().translate(null)!,
     );
   }
 }
