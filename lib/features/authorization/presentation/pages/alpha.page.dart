@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
@@ -105,6 +106,15 @@ class _Root extends StatelessWidget {
         // initialRoute: NavigationRoutes.alpha,
         navigatorObservers: [LoggingNavigationObserver()],
         theme: ThemeData(primarySwatch: Colors.blue),
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en', ''),
+          Locale('es', ''),
+        ],
         home: Builder(
           builder: (context) {
             SizeConfig().init(context);
