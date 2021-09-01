@@ -16,16 +16,16 @@ class Credential extends ValueObject<String> {
 
   const Credential._(this.value);
 
-  MessageFromLocations _emptyCredentialMessage() =>
+  MessageFromLocalization _emptyCredentialMessage() =>
       (locations) => locations?.signIn_valueObject_credentialEmpty;
 
-  MessageFromLocations _invalidCredentialMessage() =>
+  MessageFromLocalization _invalidCredentialMessage() =>
       (locations) => locations?.signIn_valueObject_credentialInvalid;
 
-  MessageFromLocations _orElseMessage() =>
+  MessageFromLocalization _orElseMessage() =>
       (locations) => locations?.comum_error_troubleFriendlyMessage;
 
-  MessageFromLocations _failureReason() => value.fold(
+  MessageFromLocalization _failureReason() => value.fold(
         (f) => f.maybeMap(
           empty: (_) => _emptyCredentialMessage(),
           invalidCredential: (_) => _invalidCredentialMessage(),
@@ -49,16 +49,16 @@ class Secret extends ValueObject<String> {
 
   const Secret._(this.value);
 
-  MessageFromLocations emptySecretMessage() =>
+  MessageFromLocalization emptySecretMessage() =>
       (locations) => locations?.signIn_valueObject_secretEmpty;
 
-  MessageFromLocations shortSecretMessage() =>
+  MessageFromLocalization shortSecretMessage() =>
       (locations) => locations?.signIn_valueObject_secretShort;
 
-  MessageFromLocations _orElseMessage() =>
+  MessageFromLocalization _orElseMessage() =>
       (locations) => locations?.comum_error_troubleFriendlyMessage;
 
-  MessageFromLocations failureReason() => value.fold(
+  MessageFromLocalization failureReason() => value.fold(
         (f) => f.maybeMap(
           empty: (_) => emptySecretMessage(),
           shortSecret: (_) => shortSecretMessage(),

@@ -9,8 +9,8 @@ enum VethxNotificationType {
 
 class VethxNotification extends Equatable {
   final VethxNotificationType type;
-  final MessageFromLocations message;
-  final MessageFromLocations? title;
+  final MessageFromLocalization message;
+  final MessageFromLocalization? title;
 
   const VethxNotification._internal({
     required this.type,
@@ -19,7 +19,7 @@ class VethxNotification extends Equatable {
   });
 
   factory VethxNotification.snack({
-    required MessageFromLocations message,
+    required MessageFromLocalization message,
   }) =>
       VethxNotification._internal(
         message: message,
@@ -27,8 +27,8 @@ class VethxNotification extends Equatable {
       );
 
   factory VethxNotification.alert({
-    required MessageFromLocations message,
-    required MessageFromLocations title,
+    required MessageFromLocalization message,
+    required MessageFromLocalization title,
   }) =>
       VethxNotification._internal(
         title: title,

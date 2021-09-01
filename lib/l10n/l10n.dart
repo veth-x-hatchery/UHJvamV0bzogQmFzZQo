@@ -7,8 +7,8 @@ extension AppLocalizationsX on BuildContext {
   AppLocalizations get l10n => AppLocalizations.of(this)!;
 }
 
-typedef MessageFromLocations = String? Function(AppLocalizations? _);
+typedef MessageFromLocalization = String? Function(AppLocalizations? _);
 
-extension MessageFromLocationsX on MessageFromLocations {
+extension MessageFromLocalizationX on MessageFromLocalization {
   String? translate(AppLocalizations? _) => this.call(_);
 }

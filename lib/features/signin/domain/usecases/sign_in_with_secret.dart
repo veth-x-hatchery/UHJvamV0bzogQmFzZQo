@@ -58,11 +58,11 @@ class SignInWithSecret extends UseCase<Unit, Secret> {
 
 // ignore: avoid_classes_with_only_static_members
 class SignInWithSecretErrorMessages {
-  static MessageFromLocations unavailable() =>
+  static MessageFromLocalization unavailable() =>
       (locations) => locations?.signIn_usecase_withSecret_unavailable;
-  static MessageFromLocations invalidCredentialAndSecretCombination() =>
+  static MessageFromLocalization invalidCredentialAndSecretCombination() =>
       (locations) => locations
           ?.signIn_usecase_withSecret_invalidCredentialAndSecretCombination;
-  static MessageFromLocations invalidCachedCredential() => (locations) =>
+  static MessageFromLocalization invalidCachedCredential() => (locations) =>
       locations?.signIn_usecase_withSecret_invalidCachedCredential;
 }
