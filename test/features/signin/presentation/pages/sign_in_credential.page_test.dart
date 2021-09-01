@@ -198,7 +198,7 @@ void main() {
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
-      message: CheckCredentialErrorMessages.credentialAlreadyRegistered,
+      message: CheckCredentialErrorMessages.credentialAlreadyRegistered(),
     );
 
     _signInState(SignInCredentialState(

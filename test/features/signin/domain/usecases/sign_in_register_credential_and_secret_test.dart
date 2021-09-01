@@ -65,7 +65,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInRegisterCredentialAndSecretErrorMessages.unavailable,
+        message: SignInRegisterCredentialAndSecretErrorMessages.unavailable(),
       );
 
       when(_mockAuthFacade.registerWithCredentialAndSecret(
@@ -95,7 +95,7 @@ void main() {
       final failureDetails = FailureDetails(
         failure: throwFailure,
         message: SignInRegisterCredentialAndSecretErrorMessages
-            .credentialAlreadyInUse,
+            .credentialAlreadyInUse(),
       );
 
       when(_mockAuthFacade.registerWithCredentialAndSecret(

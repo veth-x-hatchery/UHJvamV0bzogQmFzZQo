@@ -70,19 +70,24 @@ void main() {
       );
 
       when(_mockSignInRepository.cachedCredential())
-          .thenAnswer((_) async => Right(credential));
+          .thenAnswer((_) async => right(credential));
 
       when(_mockAuthFacade.signInWithCredentialAndSecret(
         credentialAddress: credential,
         secret: secret,
-      )).thenAnswer((_) async => const Left(throwFailure));
+      )).thenAnswer((_) async => left(throwFailure));
 
       // act
 
-      final result = await _signInUseCase.call(secret);
+      final result = await _signInUseCase(secret);
       // assert
 
-      expect(result, left(failureDetails));
+      expect(result.isLeft(), true);
+
+      result.fold(
+        (l) => expect(l, failureDetails),
+        (_) => _,
+      );
 
       verify(_mockAuthFacade.signInWithCredentialAndSecret(
         credentialAddress: credential,

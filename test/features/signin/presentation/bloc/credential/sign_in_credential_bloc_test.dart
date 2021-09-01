@@ -154,7 +154,7 @@ void main() {
     final credential = AuthFacadeMock.validTestCredential.inputedValue!;
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
-      message: CheckCredentialErrorMessages.credentialAlreadyRegistered,
+      message: CheckCredentialErrorMessages.credentialAlreadyRegistered(),
     );
 
     when(_mockSignInWithSecret.call(any))
