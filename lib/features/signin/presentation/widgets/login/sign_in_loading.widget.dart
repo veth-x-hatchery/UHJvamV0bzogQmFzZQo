@@ -19,7 +19,7 @@ class SignInLoader extends StatelessWidget {
     final style = Theme.of(context).textTheme.headline3;
     return Localizations.override(
       context: context,
-      locale: const Locale('es'),
+      locale: const Locale('en'),
       child: Builder(builder: (context) {
         return SizedBox(
           height: size,
@@ -29,7 +29,7 @@ class SignInLoader extends StatelessWidget {
                 : Text(
                     title ??
                         context.l10n
-                            .helloWorld, //context.l10n.signin_signInPageTitle,
+                            .signin_signInPageTitle, //context.l10n.signin_signInPageTitle,
                     textAlign: TextAlign.center,
                     style: style,
                   ),
