@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
@@ -45,6 +46,9 @@ class AlphaPage extends StatelessWidget {
         return state.map(
           initial: (_) => _Root(home: Splash()),
           inProcess: (_) => _Root(home: LoadingPage()),
+          unauthenticated: (_) => _Root(
+            home: SignInOptionsPage.create(),
+          ),
           authenticated: (_) =>
               BlocConsumer<LocalAuthenticationBloc, LocalAuthenticationState>(
             listener: (context, state) {
@@ -72,9 +76,6 @@ class AlphaPage extends StatelessWidget {
                 ),
               );
             },
-          ),
-          unauthenticated: (_) => _Root(
-            home: SignInOptionsPage.create(),
           ),
         );
       },
@@ -106,15 +107,8 @@ class _Root extends StatelessWidget {
         // initialRoute: NavigationRoutes.alpha,
         navigatorObservers: [LoggingNavigationObserver()],
         theme: ThemeData(primarySwatch: Colors.blue),
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en', ''),
-          Locale('es', ''),
-        ],
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Builder(
           builder: (context) {
             SizeConfig().init(context);
