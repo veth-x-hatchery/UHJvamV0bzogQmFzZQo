@@ -80,7 +80,7 @@ void main() {
     Logger.testStep(step);
     await signInEmailEnterAnInvalidEmail(tester);
     await signInEmailSubmitEmail(tester);
-    expect(find.text(CredentialAddressMessageErrors.invalidCredential),
+    expect(find.text(tester.l10n.signInValueObjectCredentialInvalid),
         findsOneWidget);
     await helper.screenshot(prefix: prefix, name: step);
 
