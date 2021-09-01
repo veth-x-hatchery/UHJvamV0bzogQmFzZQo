@@ -18,6 +18,7 @@ import 'finders/home.page.dart';
 import 'finders/sign_in_email.helpers.dart';
 import 'finders/sign_in_secret.helpers.dart';
 import 'helpers/sign_in_integration_tests_helpers.dart';
+import '../../../test/helpers/widgets/pumpWidget.widget.dart';
 
 void main() {
   final IntegrationTestWidgetsFlutterBinding _binding =
@@ -130,7 +131,7 @@ void main() {
     Logger.testStep(step);
     await enterAnInvalidSecret(tester);
     await submitSecret(tester);
-    expect(find.text(SecretMessageErrors.shortSecret), findsOneWidget);
+    expect(find.text(tester.l10n.signInValueObjectSecretShort), findsOneWidget);
     await helper.screenshot(prefix: prefix, name: step);
 
     step = '1.1.2.1.4_authenticate_with_success_and_go_to_home_page';

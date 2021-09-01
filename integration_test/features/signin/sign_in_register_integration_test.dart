@@ -11,6 +11,7 @@ import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.pa
 import 'package:vethx_beta/main.dart' as app;
 import 'package:vethx_beta/service_locator.dart';
 
+import '../../../test/helpers/widgets/pumpWidget.widget.dart';
 import 'finders/home.page.dart';
 import 'finders/sign_in_email.helpers.dart';
 import 'finders/sign_in_register.helpers.dart';
@@ -88,7 +89,7 @@ void main() {
     Logger.testStep(step);
     await signInRegisterEnterAnInvalidSecret(tester);
     await signInRegisterSubmitRegister(tester);
-    expect(find.text(SecretMessageErrors.shortSecret), findsOneWidget);
+    expect(find.text(tester.l10n.signInValueObjectSecretShort), findsOneWidget);
     await helper.screenshot(prefix: prefix, name: step);
 
     step = '1.1.3.1.3_enter_a_valid_password_and_go_to_home_page';

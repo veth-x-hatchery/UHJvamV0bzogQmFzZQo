@@ -54,13 +54,13 @@ class Secret extends ValueObject<String> {
   Function _shortSecretMessage() =>
       (AppLocalizations _) => _.signInValueObjectSecretShort;
 
-  Function _orElseMessage() => (_) => null;
+  Function _orElseMessage() => (AppLocalizations _) => null;
 
   Function validation() => value.fold(
         (f) => f.maybeMap(
-          empty: (_) => _emptyMessage,
-          shortSecret: (_) => _shortSecretMessage,
-          orElse: () => _orElseMessage,
+          empty: (_) => _emptyMessage(),
+          shortSecret: (_) => _shortSecretMessage(),
+          orElse: () => _orElseMessage(),
         ),
         (_) => _orElseMessage,
       );
