@@ -62,7 +62,7 @@ class Secret extends ValueObject<String> {
           shortSecret: (_) => _shortSecretMessage(),
           orElse: () => _orElseMessage(),
         ),
-        (_) => _orElseMessage,
+        (_) => (_) => null,
       );
 
   const Secret._(this.value);

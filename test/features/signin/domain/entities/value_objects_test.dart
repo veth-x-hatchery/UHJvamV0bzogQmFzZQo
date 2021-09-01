@@ -126,7 +126,9 @@ void main() {
 
       expect(result.value, right(secret));
 
-      expect(result.validation, null);
+      final failureReason = result.validation();
+
+      expect(failureReason(null), null);
     });
 
     test(
