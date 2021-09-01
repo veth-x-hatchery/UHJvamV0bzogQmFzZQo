@@ -48,12 +48,15 @@ class Secret extends ValueObject<String> {
     );
   }
 
-  Function _emptyMessage(AppLocalizations _) => () => _.error_emptyMessage;
-  Function _shortSecretMessage(AppLocalizations _) =>
-      () => _.error_emptyMessage;
-  Function _orElseMessage(AppLocalizations _) => () => _.error_emptyMessage;
+  Function _emptyMessage() =>
+      (AppLocalizations _) => _.signInValueObjectSecretEmpty;
 
-  Function get validation => value.fold(
+  Function _shortSecretMessage() =>
+      (AppLocalizations _) => _.signInValueObjectSecretShort;
+
+  Function _orElseMessage() => (_) => null;
+
+  Function validation() => value.fold(
         (f) => f.maybeMap(
           empty: (_) => _emptyMessage,
           shortSecret: (_) => _shortSecretMessage,

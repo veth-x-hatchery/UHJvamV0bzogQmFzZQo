@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
@@ -11,6 +10,7 @@ import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dar
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
@@ -117,7 +117,10 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
                       state.isLoading ? () {} : () => _authenticate(),
                   onChanged: (value) =>
                       bloc.add(SignInSecretEvent.secretChanged(value)),
-                  validator: (_) => current.secret.validation,
+                  validator: (_) {
+                    final message = current.secret.validation();
+                    return message(context.l10n) as String?;
+                  },
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 CustomRaisedButton(

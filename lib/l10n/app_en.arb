@@ -20,6 +20,8 @@
     "signin_signInRegisterEntryTitle": "Register",
     "signin_signInWithGoogle": "Sign In With Google",
     "signin_signInWithCredential": "Sign in with email",
+    "signInValueObjectSecretEmpty" : "Inform your password",
+    "signInValueObjectSecretShort" : "Your password must be more than 6 chars",
     "error_errorTroubleFriendlyMessage": "Ops...",
     "error_errorMessage": "Ops... failure",
     "error_emptyMessage": "No results"

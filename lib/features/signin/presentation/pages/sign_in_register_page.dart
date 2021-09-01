@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
@@ -9,6 +8,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_re
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 
@@ -137,7 +137,10 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                       SignInPageKeys.signInRegisterPageSecretTextField),
                   onChanged: (value) =>
                       bloc.add(SignInRegisterEvent.secretChanged(value)),
-                  validator: (_) => current.secret.validation,
+                  validator: (_) {
+                    final message = current.secret.validation();
+                    return message(context.l10n) as String?;
+                  },
                   onEditingComplete: state.isLoading ? () {} : _validateForm,
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
