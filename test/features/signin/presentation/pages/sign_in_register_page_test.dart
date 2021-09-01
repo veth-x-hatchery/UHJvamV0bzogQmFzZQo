@@ -278,6 +278,7 @@ void main() {
 
     // Act && Assert
 
-    expect(find.text(expectedFailure.message), findsOneWidget);
+    expect(find.text(expectedFailure.l10nFromMessage(tester.l10n)!),
+        findsOneWidget);
   });
 }

@@ -161,10 +161,6 @@ class _$_FailureDetails implements _FailureDetails {
   @override
   _$FailureDetailsCopyWith<_FailureDetails> get copyWith =>
       __$FailureDetailsCopyWithImpl<_FailureDetails>(this, _$identity);
-
-  @override
-  String? reason(AppLocalizations? _) =>
-      (message as MessageFromLocations).call(_);
 }
 
 abstract class _FailureDetails implements FailureDetails {

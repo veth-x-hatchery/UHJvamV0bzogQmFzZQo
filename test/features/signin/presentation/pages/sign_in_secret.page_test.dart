@@ -300,7 +300,8 @@ void main() {
 
     // Act && Assert
 
-    expect(find.text(expectedFailure.message), findsOneWidget);
+    expect(find.text(expectedFailure.l10nFromMessage(tester.l10n)!),
+        findsOneWidget);
   });
 
   group('when request change credentials', () {
@@ -363,7 +364,8 @@ void main() {
 
       // Act && Assert
 
-      expect(find.text(expectedFailure.message), findsOneWidget);
+      expect(find.text(expectedFailure.l10nFromMessage(tester.l10n)!),
+          findsOneWidget);
     });
 
     testWidgets('when request a reset should show a progress indicator',

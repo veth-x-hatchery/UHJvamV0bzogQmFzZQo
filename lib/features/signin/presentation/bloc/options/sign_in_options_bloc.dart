@@ -57,6 +57,9 @@ class SignInOptionsBloc extends Bloc<SignInOptionsEvent, SignInOptionsState> {
     if (failure.failure == const AuthFailure.cancelledByUser()) {
       return const SignInOptionsState.signInCancelled();
     }
-    return SignInOptionsState.signInNotification(message: failure.message);
+    // Todo(v): remove this and use another state definition
+    return SignInOptionsState.signInNotification(
+      message: failure.message,
+    );
   }
 }

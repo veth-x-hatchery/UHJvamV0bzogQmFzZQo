@@ -11,3 +11,8 @@ class FailureDetails with _$FailureDetails {
     required AuthFailure failure,
   }) = _FailureDetails;
 }
+
+extension FailureDetailsX on FailureDetails {
+  String? l10nFromMessage(AppLocalizations? _) =>
+      (message as MessageFromLocations).call(_);
+}
