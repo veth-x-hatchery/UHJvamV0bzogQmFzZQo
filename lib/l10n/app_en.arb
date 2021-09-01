@@ -98,5 +98,13 @@
     "signIn_usecase_credentialCheck_credentialAlreadyRegistered" : "Credential already registered",
     "@signIn_usecase_credentialCheck_credentialAlreadyRegistered": {
       "description": "..."
+    },
+    "signIn_usecase_registerCredentialAndSecret_unavailable" : "Unavailable",
+    "@signIn_usecase_registerCredentialAndSecret_unavailable": {
+      "description": "..."
+    },
+    "signIn_usecase_registerCredentialAndSecret_credentialAlreadyInUse" : "This credential is already in use",
+    "@signIn_usecase_registerCredentialAndSecret_credentialAlreadyInUse": {
+      "description": "..."
     }
 }

@@ -4,6 +4,7 @@ import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
   // final ISignInRepository _signInRepository;
@@ -39,7 +40,7 @@ class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
       return FailureDetails(
         failure: auth,
         message: SignInRegisterCredentialAndSecretErrorMessages
-            .credentialAlreadyInUse,
+            .credentialAlreadyInUse(),
       );
     }
     return FailureDetails(
@@ -49,9 +50,11 @@ class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
   }
 }
 
+// ignore: avoid_classes_with_only_static_members
 class SignInRegisterCredentialAndSecretErrorMessages {
-  static const unavailable = 'Unavailable';
-  static const credentialAlreadyInUse = 'This credential is already in use';
-  static const invalidCredentialAndSecretCombination =
-      'Invalid credential and secret combination';
+  static MessageFromLocations unavailable() =>
+      (locations) => locations?.signIn_usecase_registerCredentialAndSecret_unavailable;
+
+  static MessageFromLocations credentialAlreadyInUse() => (locations) =>
+      locations?.signIn_usecase_registerCredentialAndSecret_credentialAlreadyInUse;
 }

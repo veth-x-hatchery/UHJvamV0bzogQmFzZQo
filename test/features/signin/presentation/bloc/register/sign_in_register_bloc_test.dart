@@ -148,10 +148,11 @@ void main() {
 
     final credential = AuthFacadeMock.invalidCredential.inputedValue!;
     final secret = AuthFacadeMock.validTestSecret.inputedValue!;
+
     final expectedFailure = FailureDetails(
-      failure: const AuthFailure.invalidCredentialAndSecretCombination(),
+      failure: const AuthFailure.credentialAlreadyInUse(),
       message: SignInRegisterCredentialAndSecretErrorMessages
-          .invalidCredentialAndSecretCombination,
+          .credentialAlreadyInUse(),
     );
 
     when(_mockSignInWithSecret.call(any))
