@@ -95,7 +95,7 @@ void main() {
       expect(result.value, left(const ValueFailure.empty(failedValue: secret)));
 
       // get AppLocalizations instance without BuildContext
-      // expect(result.validation, tester.l10n.signInValueObjectSecretEmpty);
+      // expect(result.validation, tester.l10n.signIn_valueObject_secretEmpty);
     });
 
     test('should return [ValueFailure.shortSecret]', () {
@@ -112,7 +112,7 @@ void main() {
       expect(result.value, left(ValueFailure.shortSecret(failedValue: secret)));
 
       // Todo(v): get AppLocalizations instance without BuildContext...
-      // expect(result.validation, tester.l10n.signInValueObjectSecretShort);
+      // expect(result.validation, tester.l10n.signIn_valueObject_secretShort);
     });
 
     test('should validate credential with success', () {

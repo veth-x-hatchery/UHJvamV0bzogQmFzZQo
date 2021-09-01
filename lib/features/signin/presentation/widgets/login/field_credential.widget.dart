@@ -27,7 +27,7 @@ class FieldCredential extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       decoration: vethxInputDecoration(
         context,
-        hintText: context.l10n.signin_credentialHint,
+        hintText: context.l10n.signin_input_credentialHint,
       ),
       style: Theme.of(context).textTheme.bodyText1,
       validator: validator,

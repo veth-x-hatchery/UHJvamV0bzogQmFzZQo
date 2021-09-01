@@ -124,7 +124,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
                   key: const Key(SignInPageKeys.signInSecretPageValidateButton),
                   onPressed: state.isLoading ? () {} : () => _authenticate(),
                   child: Text(
-                    context.l10n.general_goToAccess,
+                    context.l10n.comum_accessConfirmation,
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),
@@ -139,7 +139,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
                             from: SignInPageRoutes.secretEntry,
                           )),
                   child: Text(
-                    context.l10n.signin_changeCredential,
+                    context.l10n.signin_page_secret_changeCredential,
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),
@@ -185,7 +185,7 @@ class SignInSecretResetButton extends StatelessWidget {
                     onPressed: () => bloc
                         .add(const SignInSecretResetEvent.secretResetRequest()),
                     child: Text(
-                      context.l10n.signin_forgotMySecret,
+                      context.l10n.signin_page_secret_forgotMySecret,
                       style: Theme.of(context).textTheme.button,
                     ),
                   ),

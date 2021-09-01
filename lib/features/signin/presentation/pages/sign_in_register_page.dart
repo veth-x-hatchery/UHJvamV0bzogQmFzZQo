@@ -108,7 +108,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
               children: [
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 SignInLoader(
-                  title: context.l10n.signin_signInRegisterEntryTitle,
+                  title: context.l10n.signin_page_register_title,
                   size: SizeConfig.screenHeight * 0.25,
                   loading: state.isLoading,
                 ),
@@ -146,7 +146,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                       SignInPageKeys.signInRegisterPageValidateButton),
                   onPressed: state.isLoading ? () {} : () => _validateForm(),
                   child: Text(
-                    context.l10n.general_goToNextStep,
+                    context.l10n.comum_nextStep,
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),

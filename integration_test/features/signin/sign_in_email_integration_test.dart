@@ -80,7 +80,7 @@ void main() {
     Logger.testStep(step);
     await signInEmailEnterAnInvalidEmail(tester);
     await signInEmailSubmitEmail(tester);
-    expect(find.text(tester.l10n.signInValueObjectCredentialInvalid),
+    expect(find.text(tester.l10n.signIn_valueObject_credentialInvalid),
         findsOneWidget);
     await helper.screenshot(prefix: prefix, name: step);
 
@@ -131,7 +131,8 @@ void main() {
     Logger.testStep(step);
     await enterAnInvalidSecret(tester);
     await submitSecret(tester);
-    expect(find.text(tester.l10n.signInValueObjectSecretShort), findsOneWidget);
+    expect(
+        find.text(tester.l10n.signIn_valueObject_secretShort), findsOneWidget);
     await helper.screenshot(prefix: prefix, name: step);
 
     step = '1.1.2.1.4_authenticate_with_success_and_go_to_home_page';

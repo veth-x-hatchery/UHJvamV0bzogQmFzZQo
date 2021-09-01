@@ -100,7 +100,7 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
                       SignInPageKeys.signInCredentialPageValidateButton),
                   onPressed: () => state.isLoading ? {} : _validateCredential(),
                   child: Text(
-                    context.l10n.general_goToNextStep,
+                    context.l10n.comum_nextStep,
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),

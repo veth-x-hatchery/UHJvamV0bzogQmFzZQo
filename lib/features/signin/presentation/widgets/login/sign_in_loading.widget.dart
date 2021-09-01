@@ -29,7 +29,7 @@ class SignInLoader extends StatelessWidget {
                 : Text(
                     title ??
                         context.l10n
-                            .signin_signInPageTitle, //context.l10n.signin_signInPageTitle,
+                            .signin_page_options_title, //context.l10n.signin_page_options_title,
                     textAlign: TextAlign.center,
                     style: style,
                   ),

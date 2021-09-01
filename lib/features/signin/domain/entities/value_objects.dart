@@ -17,13 +17,13 @@ class Credential extends ValueObject<String> {
   const Credential._(this.value);
 
   MessageFromLocations _emptyCredentialMessage() =>
-      (locations) => locations?.signInValueObjectCredentialEmpty;
+      (locations) => locations?.signIn_valueObject_credentialEmpty;
 
   MessageFromLocations _invalidCredentialMessage() =>
-      (locations) => locations?.signInValueObjectCredentialInvalid;
+      (locations) => locations?.signIn_valueObject_credentialInvalid;
 
   MessageFromLocations _orElseMessage() =>
-      (locations) => locations?.error_errorTroubleFriendlyMessage;
+      (locations) => locations?.comum_error_troubleFriendlyMessage;
 
   MessageFromLocations _failureReason() => value.fold(
         (f) => f.maybeMap(
@@ -50,13 +50,13 @@ class Secret extends ValueObject<String> {
   const Secret._(this.value);
 
   MessageFromLocations emptySecretMessage() =>
-      (locations) => locations?.signInValueObjectSecretEmpty;
+      (locations) => locations?.signIn_valueObject_secretEmpty;
 
   MessageFromLocations shortSecretMessage() =>
-      (locations) => locations?.signInValueObjectSecretShort;
+      (locations) => locations?.signIn_valueObject_secretShort;
 
   MessageFromLocations _orElseMessage() =>
-      (locations) => locations?.error_errorTroubleFriendlyMessage;
+      (locations) => locations?.comum_error_troubleFriendlyMessage;
 
   MessageFromLocations failureReason() => value.fold(
         (f) => f.maybeMap(

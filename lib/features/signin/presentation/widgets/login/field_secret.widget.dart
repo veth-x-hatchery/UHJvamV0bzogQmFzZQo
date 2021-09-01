@@ -37,7 +37,7 @@ class _FieldSecretState extends State<FieldSecret> {
       obscureText: _hideSecret,
       decoration: vethxInputDecoration(
         context,
-        hintText: context.l10n.signin_secretHint,
+        hintText: context.l10n.signin_input_secretHint,
         suffixIcon: IconButton(
           icon: Icon(
             _hideSecret ? Icons.visibility : Icons.visibility_off,

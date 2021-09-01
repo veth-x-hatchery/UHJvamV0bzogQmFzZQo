@@ -106,7 +106,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
             SignInButton(
               key: const Key(SignInPageKeys.signInWithGoogleButton),
               assetName: 'assets/images/google-logo.png',
-              text: context.l10n.signin_signInWithGoogle,
+              text: context.l10n.signin_page_options_with_google,
               textColor: Colors.black87,
               color: Colors.white,
               onPressed: () => BlocProvider.of<SignInOptionsBloc>(context)
@@ -116,7 +116,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
             SignInButton(
               key: const Key(SignInPageKeys.signInWithCredential),
               assetName: 'assets/images/mail-logo.png',
-              text: context.l10n.signin_signInWithCredential,
+              text: context.l10n.signin_page_options_with_credentials,
               textColor: Colors.white,
               color: Colors.teal[700],
               onPressed: isLoading

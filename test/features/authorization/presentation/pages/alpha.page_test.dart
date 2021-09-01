@@ -117,7 +117,7 @@ void main() {
 
       // Assert
 
-      expect(find.text(tester.l10n.signin_signInPageTitle), findsOneWidget);
+      expect(find.text(tester.l10n.signin_page_options_title), findsOneWidget);
 
       expect(find.byType(SignInOptionsPage), findsOneWidget);
     });

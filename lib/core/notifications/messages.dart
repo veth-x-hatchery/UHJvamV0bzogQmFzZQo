@@ -19,8 +19,8 @@ void vethxNotify(BuildContext context, VethxNotification notification) {
         PlatformAlertDialog(
           title: notification.title ?? '',
           content: notification.message,
-          defaultActionText: context.l10n.general_oK,
-          cancelActionText: context.l10n.general_cancel,
+          defaultActionText: context.l10n.comum_ok,
+          cancelActionText: context.l10n.comum_cancel,
         ).show(context);
         break;
       case VethxNotificationType.notification:

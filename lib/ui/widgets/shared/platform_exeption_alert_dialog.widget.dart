@@ -12,8 +12,8 @@ class PlatformExceptionAlertDialog extends PlatformAlertDialog {
   }) : super(
             title: title,
             content: _message(exception, alternativeMessage),
-            defaultActionText: context.l10n.general_oK,
-            cancelActionText: context.l10n.general_cancel);
+            defaultActionText: context.l10n.comum_ok,
+            cancelActionText: context.l10n.comum_cancel);
 
   static String _message(Exception exception, String alternativeMessage) {
     if (exception is PlatformException) {
