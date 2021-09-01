@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 class SignInLoader extends StatelessWidget {
@@ -27,9 +27,7 @@ class SignInLoader extends StatelessWidget {
             child: loading
                 ? const GenericProgressIndicator()
                 : Text(
-                    title ??
-                        AppLocalizations.of(context)!
-                            .helloWorld, //Texts.signInPageTitle,
+                    title ?? context.l10n.helloWorld, //Texts.signInPageTitle,
                     textAlign: TextAlign.center,
                     style: style,
                   ),
