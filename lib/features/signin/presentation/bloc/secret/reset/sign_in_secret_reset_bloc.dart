@@ -46,7 +46,7 @@ class SignInSecretResetBloc
                 return optionOf(VethxNotification.snack(message: l.message));
               },
               (r) => optionOf(VethxNotification.snack(
-                  message: SignInSecretResetMessages.success)),
+                  message: SignInSecretResetMessages.success())),
             ));
       },
     );

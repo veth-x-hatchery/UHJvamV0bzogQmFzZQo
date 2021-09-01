@@ -15,6 +15,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secr
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/features/signin/presentation/pages/sign_in_secret.finders.dart';
@@ -300,7 +301,7 @@ void main() {
 
     // Act && Assert
 
-    expect(find.text(expectedFailure.l10nFromMessage(tester.l10n)!),
+    expect(find.text(expectedFailure.message.translate(tester.l10n)!),
         findsOneWidget);
   });
 
@@ -364,7 +365,7 @@ void main() {
 
       // Act && Assert
 
-      expect(find.text(expectedFailure.l10nFromMessage(tester.l10n)!),
+      expect(find.text(expectedFailure.message.translate(tester.l10n)!),
           findsOneWidget);
     });
 

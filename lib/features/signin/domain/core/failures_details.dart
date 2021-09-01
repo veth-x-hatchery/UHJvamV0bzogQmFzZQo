@@ -17,7 +17,3 @@ class FailureDetails extends Equatable {
   @override
   bool get stringify => false;
 }
-
-extension FailureDetailsX on FailureDetails {
-  String? l10nFromMessage(AppLocalizations? _) => message.call(_);
-}

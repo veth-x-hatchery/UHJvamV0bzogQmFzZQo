@@ -12,6 +12,7 @@ import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/features/signin/presentation/pages/sign_in_register.finders.dart';
@@ -278,7 +279,7 @@ void main() {
 
     // Act && Assert
 
-    expect(find.text(expectedFailure.l10nFromMessage(tester.l10n)!),
+    expect(find.text(expectedFailure.message.translate(tester.l10n)!),
         findsOneWidget);
   });
 }

@@ -54,7 +54,7 @@ void main() {
             SignInSecretResetState(
                 isLoading: false,
                 notification: optionOf(VethxNotification.snack(
-                    message: SignInSecretResetMessages.success))),
+                    message: SignInSecretResetMessages.success()))),
           ],
         ));
   });

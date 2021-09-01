@@ -10,5 +10,5 @@ extension AppLocalizationsX on BuildContext {
 typedef MessageFromLocations = String? Function(AppLocalizations? _);
 
 extension MessageFromLocationsX on MessageFromLocations {
-  String? get(AppLocalizations? _) => this.call(_);
+  String? translate(AppLocalizations? _) => this.call(_);
 }

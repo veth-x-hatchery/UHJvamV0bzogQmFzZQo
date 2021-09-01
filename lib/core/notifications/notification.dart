@@ -1,7 +1,5 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 import 'package:vethx_beta/l10n/l10n.dart';
-
-part 'notification.freezed.dart';
 
 enum VethxNotificationType {
   alert,
@@ -9,16 +7,19 @@ enum VethxNotificationType {
   notification,
 }
 
-@freezed
-class VethxNotification with _$VethxNotification {
-  factory VethxNotification._internal({
-    required VethxNotificationType type,
-    required dynamic message,
-    dynamic title,
-  }) = _VethxNotification;
+class VethxNotification extends Equatable {
+  final VethxNotificationType type;
+  final MessageFromLocations message;
+  final MessageFromLocations? title;
+
+  const VethxNotification._internal({
+    required this.type,
+    required this.message,
+    this.title,
+  });
 
   factory VethxNotification.snack({
-    required dynamic message,
+    required MessageFromLocations message,
   }) =>
       VethxNotification._internal(
         message: message,
@@ -26,20 +27,15 @@ class VethxNotification with _$VethxNotification {
       );
 
   factory VethxNotification.alert({
-    required dynamic message,
-    required dynamic title,
+    required MessageFromLocations message,
+    required MessageFromLocations title,
   }) =>
       VethxNotification._internal(
         title: title,
         message: message,
         type: VethxNotificationType.alert,
       );
-}
 
-extension MessageFromLocationsInVethxNotification on VethxNotification {
-  String? l10nFromMessage(AppLocalizations? _) =>
-      (message as MessageFromLocations).call(_);
-
-  String? l10nFromTitle(AppLocalizations? _) =>
-      (message as MessageFromLocations).call(_);
+  @override
+  List<Object?> get props => [message.toString()];
 }
