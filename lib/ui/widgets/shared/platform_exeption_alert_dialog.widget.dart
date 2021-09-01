@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/platform_alert_dialog.widget.dart';
 
 class PlatformExceptionAlertDialog extends PlatformAlertDialog {
@@ -10,8 +10,8 @@ class PlatformExceptionAlertDialog extends PlatformAlertDialog {
   }) : super(
             title: title,
             content: _message(exception, alternativeMessage),
-            defaultActionText: Texts.oK,
-            cancelActionText: Texts.cancel);
+            defaultActionText: context.l10n.general_oK,
+            cancelActionText: context.l10n.general_cancel);
 
   static String _message(Exception exception, String alternativeMessage) {
     if (exception is PlatformException) {

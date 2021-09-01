@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
@@ -108,7 +108,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
               children: [
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 SignInLoader(
-                  title: Texts.signInRegisterEntryTitle,
+                  title: context.l10n.signin_signInRegisterEntryTitle,
                   size: SizeConfig.screenHeight * 0.25,
                   loading: state.isLoading,
                 ),
@@ -146,7 +146,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                       SignInPageKeys.signInRegisterPageValidateButton),
                   onPressed: state.isLoading ? () {} : () => _validateForm(),
                   child: Text(
-                    Texts.goToNextStep,
+                    context.l10n.general_goToNextStep,
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),

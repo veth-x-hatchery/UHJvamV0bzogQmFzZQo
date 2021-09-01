@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
@@ -124,7 +124,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
                   key: const Key(SignInPageKeys.signInSecretPageValidateButton),
                   onPressed: state.isLoading ? () {} : () => _authenticate(),
                   child: Text(
-                    Texts.goToAccess,
+                    context.l10n.general_goToAccess,
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),
@@ -139,7 +139,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
                             from: SignInPageRoutes.secretEntry,
                           )),
                   child: Text(
-                    Texts.changeCredential,
+                    context.l10n.signin_changeCredential,
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),
@@ -185,7 +185,7 @@ class SignInSecretResetButton extends StatelessWidget {
                     onPressed: () => bloc
                         .add(const SignInSecretResetEvent.secretResetRequest()),
                     child: Text(
-                      Texts.forgotMySecret,
+                      context.l10n.signin_forgotMySecret,
                       style: Theme.of(context).textTheme.button,
                     ),
                   ),

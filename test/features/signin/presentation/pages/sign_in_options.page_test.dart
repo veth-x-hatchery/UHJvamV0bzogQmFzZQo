@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
@@ -114,7 +114,7 @@ void main() {
 
       // Assert
 
-      expect(find.text(Texts.signInPageTitle), findsOneWidget);
+      expect(find.text(context.l10n.signin_signInPageTitle), findsOneWidget);
 
       // verifyNever(_sl.dispose);
     });

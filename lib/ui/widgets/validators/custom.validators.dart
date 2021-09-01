@@ -1,4 +1,4 @@
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 abstract class StringValidator {
   bool isValid(String value);
@@ -16,6 +16,7 @@ class CredentialAndSecretValidators {
   // final StringValidator secretValidator = NonEmptyStringValidator();
   // final StringValidator confirmSecretValidator = NonEmptyStringValidator();
 
-  final String invalidCredentialTextErrorText = Texts.invalidCredential;
-  final String invalidSecretTextErrorText = Texts.invalidSecret;
+  final String invalidCredentialTextErrorText =
+      context.l10n.signin_invalidCredential;
+  final String invalidSecretTextErrorText = context.l10n.signin_invalidSecret;
 }

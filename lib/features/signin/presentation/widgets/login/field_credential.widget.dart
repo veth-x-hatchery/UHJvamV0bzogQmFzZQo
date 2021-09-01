@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
 
 class FieldCredential extends StatelessWidget {
@@ -27,7 +27,7 @@ class FieldCredential extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       decoration: vethxInputDecoration(
         context,
-        hintText: Texts.credentialHint,
+        hintText: context.l10n.signin_credentialHint,
       ),
       style: Theme.of(context).textTheme.bodyText1,
       validator: validator,

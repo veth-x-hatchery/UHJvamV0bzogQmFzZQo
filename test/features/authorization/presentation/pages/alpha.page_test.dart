@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
 import 'package:vethx_beta/features/authentication/presentation/pages/local_authentication.page.dart';
@@ -121,7 +121,7 @@ void main() {
 
       // Assert
 
-      expect(find.text(Texts.signInPageTitle), findsOneWidget);
+      expect(find.text(context.l10n.signin_signInPageTitle), findsOneWidget);
 
       expect(find.byType(SignInOptionsPage), findsOneWidget);
     });

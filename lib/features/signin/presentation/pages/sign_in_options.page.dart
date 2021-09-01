@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
@@ -106,7 +106,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
             SignInButton(
               key: const Key(SignInPageKeys.signInWithGoogleButton),
               assetName: 'assets/images/google-logo.png',
-              text: Texts.signInWithGoogle,
+              text: context.l10n.signin_signInWithGoogle,
               textColor: Colors.black87,
               color: Colors.white,
               onPressed: () => BlocProvider.of<SignInOptionsBloc>(context)
@@ -116,7 +116,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
             SignInButton(
               key: const Key(SignInPageKeys.signInWithCredential),
               assetName: 'assets/images/mail-logo.png',
-              text: Texts.signInWithCredential,
+              text: context.l10n.signin_signInWithCredential,
               textColor: Colors.white,
               color: Colors.teal[700],
               onPressed: isLoading

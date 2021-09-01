@@ -27,7 +27,9 @@ class SignInLoader extends StatelessWidget {
             child: loading
                 ? const GenericProgressIndicator()
                 : Text(
-                    title ?? context.l10n.helloWorld, //Texts.signInPageTitle,
+                    title ??
+                        context.l10n
+                            .helloWorld, //context.l10n.signin_signInPageTitle,
                     textAlign: TextAlign.center,
                     style: style,
                   ),
