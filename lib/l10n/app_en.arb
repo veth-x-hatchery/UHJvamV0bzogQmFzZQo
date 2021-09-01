@@ -2,5 +2,31 @@
     "helloWorld": "Hello World!",
     "@helloWorld": {
       "description": "The conventional newborn programmer greeting"
+    },
+    "general": {
+      "oK": "OK",
+      "cancel": "CANCEL",
+      "goToNextStep": "NEXT",
+      "goToAccess": "ACCESS",
+    }
+    "signIn": {
+      "forgotMySecret": "FORGOT MY PASSWORD",
+      "changeCredential": "CHANGE MY E-MAIL",
+      "invalidCredential": "Invalid email",
+      "invalidSecret": "Invalid password",
+      "secretHint": "Password",
+      "credentialHint": "Email",
+      "resetSecretRequestAnswer": "We sent you an credential with instructions",
+      "credentialNotFound": "Your credential was not found in your system",
+      "accessDeniedMessage": "E-mail or password invalid",
+      "signInPageTitle": "Sign-In",
+      "signInRegisterEntryTitle": "Register",
+      "signInWithGoogle": "Sign In With Google",
+      "signInWithCredential": "Sign in with email",
+    },
+    "error":{
+      "errorTroubleFriendlyMessage": "Ops...",
+      "errorMessage": "Ops... failure",
+      "emptyMessage": "No results",
     }
 }
