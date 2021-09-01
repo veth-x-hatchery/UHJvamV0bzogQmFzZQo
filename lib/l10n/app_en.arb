@@ -3,30 +3,24 @@
     "@helloWorld": {
       "description": "The conventional newborn programmer greeting"
     },
-    "general": {
-      "oK": "OK",
-      "cancel": "CANCEL",
-      "goToNextStep": "NEXT",
-      "goToAccess": "ACCESS",
-    }
-    "signIn": {
-      "forgotMySecret": "FORGOT MY PASSWORD",
-      "changeCredential": "CHANGE MY E-MAIL",
-      "invalidCredential": "Invalid email",
-      "invalidSecret": "Invalid password",
-      "secretHint": "Password",
-      "credentialHint": "Email",
-      "resetSecretRequestAnswer": "We sent you an credential with instructions",
-      "credentialNotFound": "Your credential was not found in your system",
-      "accessDeniedMessage": "E-mail or password invalid",
-      "signInPageTitle": "Sign-In",
-      "signInRegisterEntryTitle": "Register",
-      "signInWithGoogle": "Sign In With Google",
-      "signInWithCredential": "Sign in with email",
-    },
-    "error":{
-      "errorTroubleFriendlyMessage": "Ops...",
-      "errorMessage": "Ops... failure",
-      "emptyMessage": "No results",
-    }
+    "general_oK": "OK",
+    "general_cancel": "CANCEL",
+    "general_goToNextStep": "NEXT",
+    "general_goToAccess": "ACCESS",
+    "signin_forgotMySecret": "FORGOT MY PASSWORD",
+    "signin_changeCredential": "CHANGE MY E-MAIL",
+    "signin_invalidCredential": "Invalid email",
+    "signin_invalidSecret": "Invalid password",
+    "signin_secretHint": "Password",
+    "signin_credentialHint": "Email",
+    "signin_resetSecretRequestAnswer": "We sent you an credential with instructions",
+    "signin_credentialNotFound": "Your credential was not found in your system",
+    "signin_accessDeniedMessage": "E-mail or password invalid",
+    "signin_signInPageTitle": "Sign-In",
+    "signin_signInRegisterEntryTitle": "Register",
+    "signin_signInWithGoogle": "Sign In With Google",
+    "signin_signInWithCredential": "Sign in with email",
+    "error_errorTroubleFriendlyMessage": "Ops...",
+    "error_errorMessage": "Ops... failure",
+    "error_emptyMessage": "No results"
 }
