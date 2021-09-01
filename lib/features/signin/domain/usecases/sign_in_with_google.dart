@@ -4,6 +4,7 @@ import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 // import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 class SignInWithGoogle extends UseCase<Unit, NoParams> {
   // final ISignInRepository _signInRepository;
@@ -25,17 +26,20 @@ class SignInWithGoogle extends UseCase<Unit, NoParams> {
     if (auth == const AuthFailure.cancelledByUser()) {
       return FailureDetails(
         failure: auth,
-        message: SignInWithGoogleErrorMessages.cancelledByUser,
+        message: SignInWithGoogleErrorMessages.cancelledByUser(),
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInWithGoogleErrorMessages.unknowError,
+      message: SignInWithGoogleErrorMessages.unknowError(),
     );
   }
 }
 
+// ignore: avoid_classes_with_only_static_members
 class SignInWithGoogleErrorMessages {
-  static const unknowError = 'Unavailable';
-  static const cancelledByUser = 'Cancelled by user';
+  static MessageFromLocations unknowError() =>
+      (locations) => locations?.signIn_usecase_withGoogle_unknowError;
+  static MessageFromLocations cancelledByUser() =>
+      (locations) => locations?.signIn_usecase_withGoogle_cancelledByUser;
 }

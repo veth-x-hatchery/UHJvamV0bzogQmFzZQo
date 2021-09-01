@@ -106,5 +106,25 @@
     "signIn_usecase_registerCredentialAndSecret_credentialAlreadyInUse" : "This credential is already in use",
     "@signIn_usecase_registerCredentialAndSecret_credentialAlreadyInUse": {
       "description": "..."
+    },
+    "signIn_usecase_secretReset_unavailable" : "Unavailable",
+    "@signIn_usecase_secretReset_unavailable": {
+      "description": "..."
+    },
+    "signIn_usecase_secretReset_invalidCachedCredential" : "Please confirm your email",
+    "@signIn_usecase_secretReset_invalidCachedCredential": {
+      "description": "..."
+    },
+    "signIn_usecase_secretReset_success" : "The reset instructions was sent to your email",
+    "@signIn_usecase_secretReset_success": {
+      "description": "..."
+    },
+    "signIn_usecase_withGoogle_unknowError" : "Unavailable",
+    "@signIn_usecase_withGoogle_unknowError": {
+      "description": "..."
+    },
+    "signIn_usecase_withGoogle_cancelledByUser" : "Cancelled by user",
+    "@signIn_usecase_withGoogle_cancelledByUser": {
+      "description": "..."
     }
 }

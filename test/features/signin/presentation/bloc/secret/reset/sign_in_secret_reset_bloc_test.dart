@@ -64,7 +64,7 @@ void main() {
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
-      message: SignInSecretResetMessages.invalidCachedCredential,
+      message: SignInSecretResetMessages.invalidCachedCredential(),
     );
 
     when(_mockSignInSecretReset.call(any))
@@ -97,7 +97,7 @@ void main() {
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCachedCredential(),
-      message: SignInSecretResetMessages.invalidCachedCredential,
+      message: SignInSecretResetMessages.invalidCachedCredential(),
     );
 
     when(_mockSignInSecretReset.call(any))

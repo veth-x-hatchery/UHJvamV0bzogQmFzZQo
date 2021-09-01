@@ -347,7 +347,7 @@ void main() {
 
       final expectedFailure = FailureDetails(
         failure: const AuthFailure.invalidCachedCredential(),
-        message: SignInSecretResetMessages.invalidCachedCredential,
+        message: SignInSecretResetMessages.invalidCachedCredential(),
       );
 
       _secretBlocState(SignInSecretState.initial());
@@ -396,7 +396,7 @@ void main() {
       _scretResetBlocState(SignInSecretResetState(
         isLoading: false,
         notification: optionOf(VethxNotification.snack(
-            message: SignInSecretResetMessages.success)),
+            message: SignInSecretResetMessages.success())),
       ));
 
       await _pumpPage(tester);
@@ -405,7 +405,8 @@ void main() {
 
       // Act && Assert
 
-      expect(find.text(SignInSecretResetMessages.success), findsOneWidget);
+      expect(find.text(SignInSecretResetMessages.success().call(tester.l10n)!),
+          findsOneWidget);
     });
   });
 }

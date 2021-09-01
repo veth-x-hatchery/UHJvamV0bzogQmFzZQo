@@ -4,6 +4,7 @@ import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 class SignInSecretReset extends UseCase<Unit, NoParams> {
   final ISignInRepository _signInRepository;
@@ -32,18 +33,22 @@ class SignInSecretReset extends UseCase<Unit, NoParams> {
     if (auth == const AuthFailure.invalidCachedCredential()) {
       return FailureDetails(
         failure: auth,
-        message: SignInSecretResetMessages.invalidCachedCredential,
+        message: SignInSecretResetMessages.invalidCachedCredential(),
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInSecretResetMessages.unavailable,
+      message: SignInSecretResetMessages.unavailable(),
     );
   }
 }
 
+// ignore: avoid_classes_with_only_static_members
 class SignInSecretResetMessages {
-  static const unavailable = 'Unavailable';
-  static const invalidCachedCredential = 'Please confirm your email';
-  static const success = 'The reset instructions was sent to your email ';
+  static MessageFromLocations unavailable() =>
+      (locations) => locations?.signIn_usecase_secretReset_unavailable;
+  static MessageFromLocations invalidCachedCredential() => (locations) =>
+      locations?.signIn_usecase_secretReset_invalidCachedCredential;
+  static MessageFromLocations success() =>
+      (locations) => locations?.signIn_usecase_secretReset_success;
 }

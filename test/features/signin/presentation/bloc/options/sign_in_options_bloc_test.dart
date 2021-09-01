@@ -49,7 +49,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInWithGoogleErrorMessages.cancelledByUser,
+        message: SignInWithGoogleErrorMessages.cancelledByUser(),
       );
 
       when(_mockSignInWithGoogle.call(any))
@@ -74,7 +74,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInWithGoogleErrorMessages.unknowError,
+        message: SignInWithGoogleErrorMessages.unknowError(),
       );
 
       when(_mockSignInWithGoogle.call(any))
