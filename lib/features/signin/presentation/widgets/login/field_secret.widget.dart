@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
 
 class FieldSecret extends StatefulWidget {
@@ -47,10 +47,7 @@ class _FieldSecretState extends State<FieldSecret> {
         ),
       ),
       style: Theme.of(context).textTheme.bodyText1,
-      validator: (value) {
-        final message = Secret(value).validation();
-        return message(context.l10n);
-      },
+      validator: (value) => Secret(value).validation(context.l10n),
       onEditingComplete: widget.onEditingComplete,
       onChanged: widget.onChanged,
     );

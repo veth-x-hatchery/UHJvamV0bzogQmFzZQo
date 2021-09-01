@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
@@ -61,7 +60,7 @@ class Secret extends ValueObject<String> {
   MessageFromLocations _orElseMessage() =>
       (locations) => locations?.error_errorTroubleFriendlyMessage;
 
-  MessageFromLocations validation() => value.fold(
+  MessageFromLocations failureReason() => value.fold(
         (f) => f.maybeMap(
           empty: (_) => _emptyMessage(),
           shortSecret: (_) => _shortSecretMessage(),
@@ -69,4 +68,6 @@ class Secret extends ValueObject<String> {
         ),
         (_) => (_) => null,
       );
+
+  String? validation(AppLocalizations? _) => failureReason().call(_);
 }

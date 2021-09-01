@@ -117,10 +117,7 @@ class _SignInSecretPageState extends State<SignInSecretPage> {
                       state.isLoading ? () {} : () => _authenticate(),
                   onChanged: (value) =>
                       bloc.add(SignInSecretEvent.secretChanged(value)),
-                  validator: (_) {
-                    final message = current.secret.validation();
-                    return message(context.l10n) as String?;
-                  },
+                  validator: (_) => current.secret.validation(context.l10n),
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 CustomRaisedButton(

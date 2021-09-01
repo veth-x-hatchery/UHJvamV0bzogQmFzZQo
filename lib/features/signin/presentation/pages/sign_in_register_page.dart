@@ -137,10 +137,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                       SignInPageKeys.signInRegisterPageSecretTextField),
                   onChanged: (value) =>
                       bloc.add(SignInRegisterEvent.secretChanged(value)),
-                  validator: (_) {
-                    final message = current.secret.validation();
-                    return message(context.l10n) as String?;
-                  },
+                  validator: (_) => current.secret.validation(context.l10n),
                   onEditingComplete: state.isLoading ? () {} : _validateForm,
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
