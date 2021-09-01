@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 class CredentialAddressMessageErrors {
   static const empty = 'Inform your email';
@@ -46,13 +48,18 @@ class Secret extends ValueObject<String> {
     );
   }
 
-  String? get validation => value.fold(
+  Function _emptyMessage(AppLocalizations _) => () => _.error_emptyMessage;
+  Function _shortSecretMessage(AppLocalizations _) =>
+      () => _.error_emptyMessage;
+  Function _orElseMessage(AppLocalizations _) => () => _.error_emptyMessage;
+
+  Function get validation => value.fold(
         (f) => f.maybeMap(
-          empty: (_) => SecretMessageErrors.empty,
-          shortSecret: (_) => SecretMessageErrors.shortSecret,
-          orElse: () => null,
+          empty: (_) => _emptyMessage,
+          shortSecret: (_) => _shortSecretMessage,
+          orElse: () => _orElseMessage,
         ),
-        (_) => null,
+        (_) => _orElseMessage,
       );
 
   const Secret._(this.value);

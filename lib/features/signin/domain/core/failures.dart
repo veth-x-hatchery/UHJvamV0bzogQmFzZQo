@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'failures.freezed.dart';
 
+/// TODO(v): change failedValue to failureReason
 @freezed
 class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.invalidCredential({
