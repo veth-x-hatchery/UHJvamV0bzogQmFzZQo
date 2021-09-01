@@ -32,18 +32,16 @@ class SignInCredentialCheck extends UseCase<bool, Credential> {
   FailureDetails _mapFailures(AuthFailure auth) {
     return FailureDetails(
       failure: auth,
-      message: null, //_unavailable(),
+      message: CheckCredentialErrorMessages.unavailable(),
     );
   }
-
-  //MessageFromLocations _unavailable() =>
-  //    (locations) => locations?.signIn_usecase_credentialCheck_unavailable;
-//
-  //MessageFromLocations _credentialAlreadyRegistered() => (locations) =>
-  //    locations?.signIn_usecase_credentialCheck_credentialAlreadyRegistered;
 }
 
+// ignore: avoid_classes_with_only_static_members
 class CheckCredentialErrorMessages {
-  static const unavailable = 'Unavailable';
-  static const credentialAlreadyRegistered = 'Credential already registered';
+  static MessageFromLocations unavailable() =>
+      (locations) => locations?.signIn_usecase_credentialCheck_unavailable;
+
+  static MessageFromLocations credentialAlreadyRegistered() => (locations) =>
+      locations?.signIn_usecase_credentialCheck_credentialAlreadyRegistered;
 }

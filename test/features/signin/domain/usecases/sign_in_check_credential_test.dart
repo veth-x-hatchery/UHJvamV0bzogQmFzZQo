@@ -63,7 +63,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: CheckCredentialErrorMessages.unavailable,
+        message: CheckCredentialErrorMessages.unavailable(),
       );
 
       when(_mockAuthFacade.credentialIsAlreadyInUse(credential))

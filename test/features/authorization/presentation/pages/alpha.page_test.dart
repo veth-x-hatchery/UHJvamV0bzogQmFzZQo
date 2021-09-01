@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
 import 'package:vethx_beta/features/authentication/presentation/pages/local_authentication.page.dart';
 import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
@@ -15,7 +14,6 @@ import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_opt
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/splash/splash.page.dart';
 
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
