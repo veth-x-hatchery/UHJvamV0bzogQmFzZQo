@@ -146,7 +146,7 @@ class AuthFacadeMock implements IAuthFacade {
 
   @override
   Future<domain.User?> getSignedInUser() async {
-    await Future.delayed(const Duration(seconds: 3));
+    // await Future.delayed(const Duration(seconds: 3));
     Logger.tests('AuthFacadeMock -> getSignedInUser -> $user');
     return user;
   }

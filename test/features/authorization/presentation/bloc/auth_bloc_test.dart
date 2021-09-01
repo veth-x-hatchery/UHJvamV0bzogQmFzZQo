@@ -1,21 +1,25 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 
 import 'auth_bloc_test.mocks.dart';
 
-@GenerateMocks([IAuthFacade])
+@GenerateMocks([
+  IAuthFacade,
+])
 void main() {
   late AuthBloc _bloc;
   late MockIAuthFacade _mockIAuthFacade;
 
   setUp(() {
     _mockIAuthFacade = MockIAuthFacade();
-    _bloc = AuthBloc(_mockIAuthFacade);
+    _bloc = AuthBloc(
+      _mockIAuthFacade,
+    );
   });
 
   // tearDown(() {
@@ -30,7 +34,7 @@ void main() {
           .thenAnswer((_) async => Future.value());
 
       final expected = [
-        const AuthState.authenticating(),
+        const AuthState.inProcess(),
         const AuthState.unauthenticated(),
       ];
 
@@ -52,7 +56,7 @@ void main() {
           .thenAnswer((_) => Future.value(user));
 
       final expected = [
-        const AuthState.authenticating(),
+        const AuthState.inProcess(),
         AuthState.authenticated(user),
       ];
 
@@ -73,6 +77,7 @@ void main() {
     when(_mockIAuthFacade.signOut()).thenAnswer((_) async => _);
 
     final expected = [
+      const AuthState.inProcess(),
       const AuthState.unauthenticated(),
     ];
 

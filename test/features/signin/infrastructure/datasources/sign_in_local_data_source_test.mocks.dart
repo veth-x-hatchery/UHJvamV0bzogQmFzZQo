@@ -7,8 +7,9 @@ import 'dart:async' as _i6;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/core/error/failures.dart' as _i4;
-import 'package:vethx_beta/core/services/i_local_storage.service.dart' as _i5;
-import 'package:vethx_beta/core/services/pii.service.dart' as _i3;
+import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart'
+    as _i5;
+import 'package:vethx_beta/core/services/storage/pii.service.dart' as _i3;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters

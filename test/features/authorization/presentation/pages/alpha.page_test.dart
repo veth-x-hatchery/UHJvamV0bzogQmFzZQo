@@ -5,54 +5,70 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
+import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
+import 'package:vethx_beta/features/authentication/presentation/pages/local_authentication.page.dart';
+import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
+import 'package:vethx_beta/features/authorization/presentation/pages/alpha.page.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
 import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/auth/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
-import 'package:vethx_beta/ui/alpha/alpha.page.dart';
+import 'package:vethx_beta/ui/splash/splash.page.dart';
 
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
-
 import 'alpha.page_test.mocks.dart';
 
 @GenerateMocks([
   AuthBloc,
+  LocalAuthenticationBloc,
 ], customMocks: [
   MockSpec<NavigatorObserver>(returnNullOnMissingStub: true),
 ])
 void main() {
-  late GetIt getIt;
+  late GetIt _getIt;
   late MockAuthBloc _mockAuthBloc;
   late MockISignInServiceLocator _sl;
   late MockNavigatorObserver _mockNavigationObserver;
+  late MockLocalAuthenticationBloc _mockLocalAuthenticationBloc;
 
   setUp(() {
-    getIt = GetIt.instance;
+    _getIt = GetIt.instance;
 
-    _sl = MockISignInServiceLocator(getIt: getIt);
+    _sl = MockISignInServiceLocator(getIt: _getIt);
 
     _mockAuthBloc = MockAuthBloc();
+
+    _mockLocalAuthenticationBloc = MockLocalAuthenticationBloc();
 
     _mockNavigationObserver = MockNavigatorObserver();
 
     // BLoC
 
-    getIt.registerLazySingleton<AuthBloc>(
+    _getIt.registerLazySingleton<AuthBloc>(
       () => _mockAuthBloc,
+    );
+
+    _getIt.registerLazySingleton<LocalAuthenticationBloc>(
+      () => _mockLocalAuthenticationBloc,
     );
 
     // Features Service Locators
 
-    getIt.registerLazySingleton<ISignInServiceLocator>(
+    _getIt.registerLazySingleton<ISignInServiceLocator>(
       () => _sl,
     );
   });
 
-  tearDown(() => getIt.reset());
+  tearDown(() => _getIt.reset());
+
+  void _localAuthorizationState(LocalAuthenticationState state) {
+    when(_mockLocalAuthenticationBloc.state).thenReturn(state);
+    when(_mockLocalAuthenticationBloc.stream)
+        .thenAnswer((_) => Stream.value(state));
+  }
 
   void _authState(AuthState state) {
     when(_mockAuthBloc.state).thenReturn(state);
@@ -70,6 +86,7 @@ void main() {
   }
 
   void _initialState() {
+    _localAuthorizationState(const LocalAuthenticationState.authorized());
     _authState(const AuthState.unauthenticated());
     _navigationState(SignInPageGoTo.optionsPage());
     _signInState(const SignInOptionsState.initial());
@@ -135,7 +152,9 @@ void main() {
 
       _initialState();
 
-      _authState(const AuthState.initial());
+      _authState(
+        const AuthState.inProcess(),
+      );
 
       // Act
 
@@ -144,6 +163,93 @@ void main() {
       // Assert
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
+
+    testWidgets('shoud return a splash page with a image asset png',
+        (WidgetTester tester) async {
+      // Arrange
+
+      _initialState();
+
+      _authState(
+        const AuthState.initial(),
+      );
+
+      // Act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      // Assert
+
+      expect(find.byType(Image), findsOneWidget);
+    });
+  });
+
+  group('when requesting local authorization', () {
+    testWidgets('when receive loading should show corret page',
+        (WidgetTester tester) async {
+      // arrange
+
+      _initialState();
+
+      _authState(AuthState.authenticated(User(
+        credential: AuthFacadeMock.validTestCredential,
+        name: 'test',
+      )));
+
+      _localAuthorizationState(const LocalAuthenticationState.loading());
+
+      // act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      // assert
+
+      expect(find.byType(Splash), findsOneWidget);
+    });
+
+    testWidgets('when receive unauthorized should show corret page',
+        (WidgetTester tester) async {
+      // arrange
+
+      _initialState();
+
+      _authState(AuthState.authenticated(User(
+        credential: AuthFacadeMock.validTestCredential,
+        name: 'test',
+      )));
+
+      _localAuthorizationState(const LocalAuthenticationState.unauthorized());
+
+      // act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      // assert
+
+      expect(find.byType(LocalAuthenticationPage), findsOneWidget);
+    });
+
+    testWidgets('when receive authorized should show corret page',
+        (WidgetTester tester) async {
+      // arrange
+
+      _initialState();
+
+      _authState(AuthState.authenticated(User(
+        credential: AuthFacadeMock.validTestCredential,
+        name: 'test',
+      )));
+
+      _localAuthorizationState(const LocalAuthenticationState.authorized());
+
+      // act
+
+      await _pumpWidgetAlphaPage(tester);
+
+      // assert
+
+      expect(find.byType(HomePage), findsOneWidget);
     });
   });
 }

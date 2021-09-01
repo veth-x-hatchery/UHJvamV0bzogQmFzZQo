@@ -5,8 +5,8 @@ import 'package:hive/hive.dart';
 import 'package:hive/src/hive_impl.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/services/cache.service.dart';
-import 'package:vethx_beta/core/services/i_local_storage.service.dart';
+import 'package:vethx_beta/core/services/storage/cache.service.dart';
+import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
 
 import 'cache.service_test.mocks.dart';
 
