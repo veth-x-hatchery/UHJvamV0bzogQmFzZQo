@@ -5,6 +5,7 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 class SignInCredentialCheck extends UseCase<bool, Credential> {
   final ISignInRepository _signInRepository;
@@ -31,9 +32,15 @@ class SignInCredentialCheck extends UseCase<bool, Credential> {
   FailureDetails _mapFailures(AuthFailure auth) {
     return FailureDetails(
       failure: auth,
-      message: CheckCredentialErrorMessages.unavailable,
+      message: null, //_unavailable(),
     );
   }
+
+  //MessageFromLocations _unavailable() =>
+  //    (locations) => locations?.signIn_usecase_credentialCheck_unavailable;
+//
+  //MessageFromLocations _credentialAlreadyRegistered() => (locations) =>
+  //    locations?.signIn_usecase_credentialCheck_credentialAlreadyRegistered;
 }
 
 class CheckCredentialErrorMessages {

@@ -1,12 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
-part 'failures_details.freezed.dart';
+part 'failures_details.unfreezed.dart';
 
-@freezed
+// @freezed
 class FailureDetails with _$FailureDetails {
   factory FailureDetails({
-    required String message,
+    required dynamic message,
     required AuthFailure failure,
   }) = _FailureDetails;
+
+  String? reason(AppLocalizations? _) =>
+      (message as MessageFromLocations).call(_);
 }

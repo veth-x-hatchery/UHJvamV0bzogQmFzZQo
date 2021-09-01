@@ -19,8 +19,8 @@ class _$VethxNotificationTearOff {
 
   _VethxNotification _internal(
       {required VethxNotificationType type,
-      required String message,
-      String? title}) {
+      required dynamic message,
+      dynamic title}) {
     return _VethxNotification(
       type: type,
       message: message,
@@ -35,8 +35,8 @@ const $VethxNotification = _$VethxNotificationTearOff();
 /// @nodoc
 mixin _$VethxNotification {
   VethxNotificationType get type => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
+  dynamic get message => throw _privateConstructorUsedError;
+  dynamic get title => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $VethxNotificationCopyWith<VethxNotification> get copyWith =>
@@ -48,7 +48,7 @@ abstract class $VethxNotificationCopyWith<$Res> {
   factory $VethxNotificationCopyWith(
           VethxNotification value, $Res Function(VethxNotification) then) =
       _$VethxNotificationCopyWithImpl<$Res>;
-  $Res call({VethxNotificationType type, String message, String? title});
+  $Res call({VethxNotificationType type, dynamic message, dynamic title});
 }
 
 /// @nodoc
@@ -74,11 +74,11 @@ class _$VethxNotificationCopyWithImpl<$Res>
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
     ));
   }
 }
@@ -90,7 +90,7 @@ abstract class _$VethxNotificationCopyWith<$Res>
           _VethxNotification value, $Res Function(_VethxNotification) then) =
       __$VethxNotificationCopyWithImpl<$Res>;
   @override
-  $Res call({VethxNotificationType type, String message, String? title});
+  $Res call({VethxNotificationType type, dynamic message, dynamic title});
 }
 
 /// @nodoc
@@ -118,11 +118,11 @@ class __$VethxNotificationCopyWithImpl<$Res>
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
     ));
   }
 }
@@ -135,9 +135,9 @@ class _$_VethxNotification implements _VethxNotification {
   @override
   final VethxNotificationType type;
   @override
-  final String message;
+  final dynamic message;
   @override
-  final String? title;
+  final dynamic title;
 
   @override
   String toString() {
@@ -173,15 +173,15 @@ class _$_VethxNotification implements _VethxNotification {
 abstract class _VethxNotification implements VethxNotification {
   factory _VethxNotification(
       {required VethxNotificationType type,
-      required String message,
-      String? title}) = _$_VethxNotification;
+      required dynamic message,
+      dynamic title}) = _$_VethxNotification;
 
   @override
   VethxNotificationType get type => throw _privateConstructorUsedError;
   @override
-  String get message => throw _privateConstructorUsedError;
+  dynamic get message => throw _privateConstructorUsedError;
   @override
-  String? get title => throw _privateConstructorUsedError;
+  dynamic get title => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$VethxNotificationCopyWith<_VethxNotification> get copyWith =>

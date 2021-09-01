@@ -18,7 +18,7 @@ class _$FailureDetailsTearOff {
   const _$FailureDetailsTearOff();
 
   _FailureDetails call(
-      {required String message, required AuthFailure failure}) {
+      {required dynamic message, required AuthFailure failure}) {
     return _FailureDetails(
       message: message,
       failure: failure,
@@ -31,7 +31,7 @@ const $FailureDetails = _$FailureDetailsTearOff();
 
 /// @nodoc
 mixin _$FailureDetails {
-  String get message => throw _privateConstructorUsedError;
+  dynamic get message => throw _privateConstructorUsedError;
   AuthFailure get failure => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -44,7 +44,7 @@ abstract class $FailureDetailsCopyWith<$Res> {
   factory $FailureDetailsCopyWith(
           FailureDetails value, $Res Function(FailureDetails) then) =
       _$FailureDetailsCopyWithImpl<$Res>;
-  $Res call({String message, AuthFailure failure});
+  $Res call({dynamic message, AuthFailure failure});
 
   $AuthFailureCopyWith<$Res> get failure;
 }
@@ -67,7 +67,7 @@ class _$FailureDetailsCopyWithImpl<$Res>
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
       failure: failure == freezed
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
@@ -90,7 +90,7 @@ abstract class _$FailureDetailsCopyWith<$Res>
           _FailureDetails value, $Res Function(_FailureDetails) then) =
       __$FailureDetailsCopyWithImpl<$Res>;
   @override
-  $Res call({String message, AuthFailure failure});
+  $Res call({dynamic message, AuthFailure failure});
 
   @override
   $AuthFailureCopyWith<$Res> get failure;
@@ -116,7 +116,7 @@ class __$FailureDetailsCopyWithImpl<$Res>
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
       failure: failure == freezed
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
@@ -131,7 +131,7 @@ class _$_FailureDetails implements _FailureDetails {
   _$_FailureDetails({required this.message, required this.failure});
 
   @override
-  final String message;
+  final dynamic message;
   @override
   final AuthFailure failure;
 
@@ -161,15 +161,19 @@ class _$_FailureDetails implements _FailureDetails {
   @override
   _$FailureDetailsCopyWith<_FailureDetails> get copyWith =>
       __$FailureDetailsCopyWithImpl<_FailureDetails>(this, _$identity);
+
+  @override
+  String? reason(AppLocalizations? _) =>
+      (message as MessageFromLocations).call(_);
 }
 
 abstract class _FailureDetails implements FailureDetails {
   factory _FailureDetails(
-      {required String message,
+      {required dynamic message,
       required AuthFailure failure}) = _$_FailureDetails;
 
   @override
-  String get message => throw _privateConstructorUsedError;
+  dynamic get message => throw _privateConstructorUsedError;
   @override
   AuthFailure get failure => throw _privateConstructorUsedError;
   @override

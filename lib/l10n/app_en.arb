@@ -87,8 +87,16 @@
     "@signIn_valueObject_credentialEmpty": {
       "description": "..."
     },
-    "signIn_valueObject_credentialInvalid" : "Inform a valid email"
+    "signIn_valueObject_credentialInvalid" : "Inform a valid email",
     "@signIn_valueObject_credentialInvalid": {
       "description": "..."
     },
+    "signIn_usecase_credentialCheck_unavailable" : "Unavailable",
+    "@signIn_usecase_credentialCheck_unavailable": {
+      "description": "..."
+    },
+    "signIn_usecase_credentialCheck_credentialAlreadyRegistered" : "Credential already registered",
+    "@signIn_usecase_credentialCheck_credentialAlreadyRegistered": {
+      "description": "..."
+    }
 }

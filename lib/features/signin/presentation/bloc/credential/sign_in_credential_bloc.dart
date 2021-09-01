@@ -46,11 +46,13 @@ class SignInCredentialBloc
         yield state.copyWith(
           isLoading: false,
           notification: result.fold(
-            (l) => optionOf(VethxNotification.snack(message: l.message)),
+            (l) => optionOf(VethxNotification.snack(
+              message: l.message,
+            )),
             (r) => none(),
           ),
           authFailureOrSuccessOption: result.fold(
-            (l) => optionOf(left(l)), // Todo(v): Simplify it
+            (l) => optionOf(left(l)),
             (isAlreadyInUse) {
               _navigation.goTo(isAlreadyInUse
                   ? SignInPageGoTo.secretPage(
