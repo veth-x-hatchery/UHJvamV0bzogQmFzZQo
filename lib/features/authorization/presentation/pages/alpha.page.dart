@@ -20,7 +20,7 @@ class AlphaPage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  static Widget create(BuildContext context) {
+  static Widget create({BuildContext? context}) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(

@@ -17,6 +17,6 @@ class CredentialAndSecretValidators {
   // final StringValidator confirmSecretValidator = NonEmptyStringValidator();
 
   final String invalidCredentialTextErrorText =
-      context.l10n.signin_invalidCredential;
-  final String invalidSecretTextErrorText = context.l10n.signin_invalidSecret;
+      'context.l10n.signin_invalidCredential';
+  final String invalidSecretTextErrorText = 'context.l10n.signin_invalidSecret';
 }

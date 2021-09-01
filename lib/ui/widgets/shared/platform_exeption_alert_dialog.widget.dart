@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/platform_alert_dialog.widget.dart';
 
 class PlatformExceptionAlertDialog extends PlatformAlertDialog {
-  PlatformExceptionAlertDialog({
+  PlatformExceptionAlertDialog(
+    BuildContext context, {
     required String title,
     required Exception exception,
     required String alternativeMessage,

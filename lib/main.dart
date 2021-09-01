@@ -17,6 +17,6 @@ Future<void> main() async {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return AlphaPage.create(context);
+    return AlphaPage.create();
   }
 }

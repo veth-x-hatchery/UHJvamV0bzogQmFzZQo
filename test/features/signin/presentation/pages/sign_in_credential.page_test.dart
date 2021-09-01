@@ -35,11 +35,9 @@ void main() {
 
   Future<void> _pumpPage(WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        home: setupToPump(
-          Scaffold(
-            body: SignInCredentialPage.create(serviceLocator: _sl),
-          ),
+      setupToPump(
+        Scaffold(
+          body: SignInCredentialPage.create(serviceLocator: _sl),
         ),
       ),
     );

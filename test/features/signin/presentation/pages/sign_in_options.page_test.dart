@@ -87,16 +87,14 @@ void main() {
 
   Future<void> _pumpPage(WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
+      setupToPump(
+        Scaffold(
+          body: SignInOptionsPage.create(serviceLocator: _sl),
+        ),
         navigatorObservers: [
           _mockNavigationObserver,
           LoggingNavigationObserver()
         ],
-        home: setupToPump(
-          Scaffold(
-            body: SignInOptionsPage.create(serviceLocator: _sl),
-          ),
-        ),
       ),
     );
   }
@@ -114,7 +112,7 @@ void main() {
 
       // Assert
 
-      expect(find.text(context.l10n.signin_signInPageTitle), findsOneWidget);
+      expect(find.text(tester.l10n.signin_signInPageTitle), findsOneWidget);
 
       // verifyNever(_sl.dispose);
     });
