@@ -1,14 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_beta/core/entities/object_validations.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
 import 'package:vethx_beta/l10n/l10n.dart';
-
-class CredentialAddressMessageErrors {
-  static const empty = 'Inform your email';
-  static const invalidCredential = 'Inform a valid email';
-}
 
 class Credential extends ValueObject<String> {
   @override
@@ -20,22 +14,27 @@ class Credential extends ValueObject<String> {
     );
   }
 
-  String? get validation => value.fold(
+  const Credential._(this.value);
+
+  MessageFromLocations _emptyCredentialMessage() =>
+      (locations) => locations?.signInValueObjectCredentialEmpty;
+
+  MessageFromLocations _invalidCredentialMessage() =>
+      (locations) => locations?.signInValueObjectCredentialInvalid;
+
+  MessageFromLocations _orElseMessage() =>
+      (locations) => locations?.error_errorTroubleFriendlyMessage;
+
+  MessageFromLocations _failureReason() => value.fold(
         (f) => f.maybeMap(
-          empty: (_) => CredentialAddressMessageErrors.empty,
-          invalidCredential: (_) =>
-              CredentialAddressMessageErrors.invalidCredential,
-          orElse: () => null,
+          empty: (_) => _emptyCredentialMessage(),
+          invalidCredential: (_) => _invalidCredentialMessage(),
+          orElse: () => _orElseMessage(),
         ),
-        (_) => null,
+        (_) => (_) => null,
       );
 
-  const Credential._(this.value);
-}
-
-class SecretMessageErrors {
-  static const empty = 'Inform your password';
-  static const shortSecret = 'Your password must be more than 6 chars';
+  String? validation(AppLocalizations? _) => _failureReason().call(_);
 }
 
 class Secret extends ValueObject<String> {
@@ -56,14 +55,14 @@ class Secret extends ValueObject<String> {
   MessageFromLocations shortSecretMessage() =>
       (locations) => locations?.signInValueObjectSecretShort;
 
-  MessageFromLocations orElseMessage() =>
+  MessageFromLocations _orElseMessage() =>
       (locations) => locations?.error_errorTroubleFriendlyMessage;
 
   MessageFromLocations failureReason() => value.fold(
         (f) => f.maybeMap(
           empty: (_) => emptySecretMessage(),
           shortSecret: (_) => shortSecretMessage(),
-          orElse: () => orElseMessage(),
+          orElse: () => _orElseMessage(),
         ),
         (_) => (_) => null,
       );

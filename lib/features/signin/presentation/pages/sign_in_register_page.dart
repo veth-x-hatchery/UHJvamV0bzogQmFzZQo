@@ -120,7 +120,7 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
                       SignInPageKeys.signInRegisterPageCredentialTextField),
                   onChanged: (value) =>
                       bloc.add(SignInRegisterEvent.credentialChanged(value)),
-                  validator: (_) => current.credential.validation,
+                  validator: (_) => current.credential.validation(context.l10n),
                   onEditingComplete: state.isLoading
                       ? () {}
                       : () {

@@ -92,7 +92,7 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
                       state.isLoading ? {} : _validateCredential(),
                   onChanged: (value) =>
                       bloc.add(SignInCredentialEvent.credentialChanged(value)),
-                  validator: (_) => current.credential.validation,
+                  validator: (_) => current.credential.validation(context.l10n),
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 CustomRaisedButton(
