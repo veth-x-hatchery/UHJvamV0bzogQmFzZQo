@@ -66,7 +66,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInWithSecretErrorMessages.unavailable,
+        message: SignInWithSecretErrorMessages.unavailable(),
       );
 
       when(_mockSignInRepository.cachedCredential())
@@ -98,8 +98,8 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message:
-            SignInWithSecretErrorMessages.invalidCredentialAndSecretCombination,
+        message: SignInWithSecretErrorMessages
+            .invalidCredentialAndSecretCombination(),
       );
 
       when(_mockSignInRepository.cachedCredential())
@@ -131,7 +131,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInWithSecretErrorMessages.invalidCachedCredential,
+        message: SignInWithSecretErrorMessages.invalidCachedCredential(),
       );
 
       when(_mockSignInRepository.cachedCredential())

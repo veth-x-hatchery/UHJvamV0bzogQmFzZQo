@@ -5,6 +5,7 @@ import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 class SignInWithSecret extends UseCase<Unit, Secret> {
   final ISignInRepository _signInRepository;
@@ -38,26 +39,30 @@ class SignInWithSecret extends UseCase<Unit, Secret> {
     if (auth == const AuthFailure.invalidCachedCredential()) {
       return FailureDetails(
         failure: auth,
-        message: SignInWithSecretErrorMessages.invalidCachedCredential,
+        message: SignInWithSecretErrorMessages.invalidCachedCredential(),
       );
     }
     if (auth == const AuthFailure.invalidCredentialAndSecretCombination()) {
       return FailureDetails(
         failure: auth,
-        message:
-            SignInWithSecretErrorMessages.invalidCredentialAndSecretCombination,
+        message: SignInWithSecretErrorMessages
+            .invalidCredentialAndSecretCombination(),
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInWithSecretErrorMessages.unavailable,
+      message: SignInWithSecretErrorMessages.unavailable(),
     );
   }
 }
 
+// ignore: avoid_classes_with_only_static_members
 class SignInWithSecretErrorMessages {
-  static const unavailable = 'Unavailable';
-  static const invalidCredentialAndSecretCombination =
-      'Invalid email and password combination';
-  static const invalidCachedCredential = 'Please confirm your email';
+  static MessageFromLocations unavailable() =>
+      (locations) => locations?.signIn_usecase_withSecret_unavailable;
+  static MessageFromLocations invalidCredentialAndSecretCombination() =>
+      (locations) => locations
+          ?.signIn_usecase_withSecret_invalidCredentialAndSecretCombination;
+  static MessageFromLocations invalidCachedCredential() => (locations) =>
+      locations?.signIn_usecase_withSecret_invalidCachedCredential;
 }

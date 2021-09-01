@@ -126,5 +126,17 @@
     "signIn_usecase_withGoogle_cancelledByUser" : "Cancelled by user",
     "@signIn_usecase_withGoogle_cancelledByUser": {
       "description": "..."
+    },
+    "signIn_usecase_withSecret_unavailable" : "Unavailable",
+    "@signIn_usecase_withSecret_unavailable": {
+      "description": "..."
+    },
+    "signIn_usecase_withSecret_invalidCredentialAndSecretCombination" : "Invalid email and password combination",
+    "@signIn_usecase_withSecret_invalidCredentialAndSecretCombination": {
+      "description": "..."
+    },
+    "signIn_usecase_withSecret_invalidCachedCredential" : "Please confirm your email",
+    "@signIn_usecase_withSecret_invalidCachedCredential": {
+      "description": "..."
     }
-}
+  }

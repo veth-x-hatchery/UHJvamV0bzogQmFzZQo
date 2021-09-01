@@ -281,7 +281,7 @@ void main() {
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCachedCredential(),
-      message: SignInWithSecretErrorMessages.invalidCachedCredential,
+      message: SignInWithSecretErrorMessages.invalidCachedCredential(),
     );
 
     _scretResetBlocState(SignInSecretResetState.initial());
