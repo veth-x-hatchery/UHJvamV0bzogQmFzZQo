@@ -49,7 +49,7 @@ class _FieldSecretState extends State<FieldSecret> {
       style: Theme.of(context).textTheme.bodyText1,
       validator: (value) {
         final message = Secret(value).validation();
-        return message(context.l10n) as String?;
+        return message(context.l10n);
       },
       onEditingComplete: widget.onEditingComplete,
       onChanged: widget.onChanged,

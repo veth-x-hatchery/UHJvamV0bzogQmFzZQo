@@ -38,6 +38,8 @@ class SecretMessageErrors {
   static const shortSecret = 'Your password must be more than 6 chars';
 }
 
+typedef MessageFromLocations = String? Function(AppLocalizations? _);
+
 class Secret extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -48,15 +50,18 @@ class Secret extends ValueObject<String> {
     );
   }
 
-  Function _emptyMessage() =>
-      (AppLocalizations _) => _.signInValueObjectSecretEmpty;
+  const Secret._(this.value);
 
-  Function _shortSecretMessage() =>
-      (AppLocalizations _) => _.signInValueObjectSecretShort;
+  MessageFromLocations _emptyMessage() =>
+      (locations) => locations?.signInValueObjectSecretEmpty;
 
-  Function _orElseMessage() => (AppLocalizations _) => null;
+  MessageFromLocations _shortSecretMessage() =>
+      (locations) => locations?.signInValueObjectSecretShort;
 
-  Function validation() => value.fold(
+  MessageFromLocations _orElseMessage() =>
+      (locations) => locations?.error_errorTroubleFriendlyMessage;
+
+  MessageFromLocations validation() => value.fold(
         (f) => f.maybeMap(
           empty: (_) => _emptyMessage(),
           shortSecret: (_) => _shortSecretMessage(),
@@ -64,6 +69,4 @@ class Secret extends ValueObject<String> {
         ),
         (_) => (_) => null,
       );
-
-  const Secret._(this.value);
 }
