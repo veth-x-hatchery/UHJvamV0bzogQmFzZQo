@@ -37,5 +37,5 @@ class VethxNotification extends Equatable {
       );
 
   @override
-  List<Object?> get props => [message.toString()];
+  List<Object?> get props => [type];
 }
