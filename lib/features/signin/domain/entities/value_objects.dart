@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:vethx_beta/core/entities/object_validations.dart';
 import 'package:vethx_beta/features/signin/domain/core/failures.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
@@ -37,8 +38,6 @@ class SecretMessageErrors {
   static const shortSecret = 'Your password must be more than 6 chars';
 }
 
-typedef MessageFromLocations = String? Function(AppLocalizations? _);
-
 class Secret extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -51,20 +50,20 @@ class Secret extends ValueObject<String> {
 
   const Secret._(this.value);
 
-  MessageFromLocations _emptyMessage() =>
+  MessageFromLocations emptySecretMessage() =>
       (locations) => locations?.signInValueObjectSecretEmpty;
 
-  MessageFromLocations _shortSecretMessage() =>
+  MessageFromLocations shortSecretMessage() =>
       (locations) => locations?.signInValueObjectSecretShort;
 
-  MessageFromLocations _orElseMessage() =>
+  MessageFromLocations orElseMessage() =>
       (locations) => locations?.error_errorTroubleFriendlyMessage;
 
   MessageFromLocations failureReason() => value.fold(
         (f) => f.maybeMap(
-          empty: (_) => _emptyMessage(),
-          shortSecret: (_) => _shortSecretMessage(),
-          orElse: () => _orElseMessage(),
+          empty: (_) => emptySecretMessage(),
+          shortSecret: (_) => shortSecretMessage(),
+          orElse: () => orElseMessage(),
         ),
         (_) => (_) => null,
       );
