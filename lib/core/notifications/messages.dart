@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/core/notifications/notification.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/platform_alert_dialog.widget.dart';
 
 const snackBarNotificationDuration = Duration(seconds: 3);
@@ -11,14 +11,15 @@ void vethxNotify(BuildContext context, VethxNotification notification) {
       case VethxNotificationType.snack:
         ScaffoldMessenger.of(context).removeCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(notification.message, textAlign: TextAlign.center),
+          content: Text(notification.reasonMessage(context.l10n),
+              textAlign: TextAlign.center),
           duration: snackBarNotificationDuration,
         ));
         break;
       case VethxNotificationType.alert:
         PlatformAlertDialog(
-          title: notification.title ?? '',
-          content: notification.message,
+          title: notification.reasonTitle(context.l10n) ?? '',
+          content: notification.reasonMessage(context.l10n),
           defaultActionText: context.l10n.comum_ok,
           cancelActionText: context.l10n.comum_cancel,
         ).show(context);

@@ -34,4 +34,10 @@ class VethxNotification with _$VethxNotification {
         message: message,
         type: VethxNotificationType.alert,
       );
+
+  String reasonMessage(AppLocalizations? _) =>
+      (message as MessageFromLocations).call(_)!;
+
+  String? reasonTitle(AppLocalizations? _) =>
+      (title as MessageFromLocations).call(_)!;
 }
