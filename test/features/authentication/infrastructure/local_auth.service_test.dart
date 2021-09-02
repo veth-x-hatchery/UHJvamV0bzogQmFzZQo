@@ -27,18 +27,18 @@ void main() {
 
   void _throwExceptionCode(String code) {
     when(_mockLocalAuthentication.authenticate(
-      localizedReason: 'Please authenticate...',
+      localizedReason: LocalAuth.localizedReason,
       useErrorDialogs: false,
-      iOSAuthStrings: _localAuth.iosStrings,
+      // iOSAuthStrings: LocalAuth.iosStrings,
       stickyAuth: true,
     )).thenThrow(PlatformException(code: code));
   }
 
   void _authenticationResult(bool result) {
     when(_mockLocalAuthentication.authenticate(
-      localizedReason: 'Please authenticate...',
+      localizedReason: LocalAuth.localizedReason,
       useErrorDialogs: false,
-      iOSAuthStrings: _localAuth.iosStrings,
+      // iOSAuthStrings: LocalAuth.iosStrings,
       stickyAuth: true,
     )).thenAnswer((_) async => result);
   }
@@ -121,9 +121,9 @@ void main() {
     // assert
 
     verify(_mockLocalAuthentication.authenticate(
-      localizedReason: 'Please authenticate...',
+      localizedReason: LocalAuth.localizedReason,
       useErrorDialogs: false,
-      iOSAuthStrings: _localAuth.iosStrings,
+      // iOSAuthStrings: LocalAuth.iosStrings,
       stickyAuth: true,
     )).called(1);
   });
@@ -153,9 +153,9 @@ void main() {
     // assert
 
     verify(_mockLocalAuthentication.authenticate(
-      localizedReason: 'Please authenticate...',
+      localizedReason: LocalAuth.localizedReason,
       useErrorDialogs: false,
-      iOSAuthStrings: _localAuth.iosStrings,
+      // iOSAuthStrings: LocalAuth.iosStrings,
       stickyAuth: true,
     )).called(cacheTolerance.inSeconds);
   });

@@ -50,18 +50,20 @@ class LocalAuth implements ILocalAuth {
   }
 
   // Todo(v): Localizations
-  final IOSAuthMessages iosStrings = const IOSAuthMessages(
+  static const IOSAuthMessages iosStrings = IOSAuthMessages(
       cancelButton: 'cancel',
       goToSettingsButton: 'settings',
       goToSettingsDescription: 'Please set up your Touch ID.',
       lockOut: 'Please reenable your Touch ID');
 
+  static const localizedReason = 'Please authenticate...';
+
   Future<Either<LocalAuthFailure, bool>> _authenticate() async {
     try {
       final result = await _localAuth.authenticate(
-        localizedReason: 'Please authenticate...',
+        localizedReason: localizedReason,
         useErrorDialogs: false,
-        iOSAuthStrings: iosStrings,
+        // iOSAuthStrings: iosStrings,
         stickyAuth: true,
       );
       Logger.service('LocalAuth: authenticate -> $result');
