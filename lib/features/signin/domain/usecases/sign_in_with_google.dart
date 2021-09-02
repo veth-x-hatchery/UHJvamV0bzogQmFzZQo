@@ -38,8 +38,10 @@ class SignInWithGoogle extends UseCase<Unit, NoParams> {
 
 // ignore: avoid_classes_with_only_static_members
 class SignInWithGoogleErrorMessages {
-  static MessageFromLocalizations unknowError() =>
-      (locations) => locations?.signIn_usecase_withGoogle_unknowError;
-  static MessageFromLocalizations cancelledByUser() =>
-      (locations) => locations?.signIn_usecase_withGoogle_cancelledByUser;
+  static MessageFromLocalizations unknowError() => (locations) =>
+      locations?.signIn_usecase_withGoogle_unknowError ??
+      'signIn_usecase_withGoogle_unknowError';
+  static MessageFromLocalizations cancelledByUser() => (locations) =>
+      locations?.signIn_usecase_withGoogle_cancelledByUser ??
+      'signIn_usecase_withGoogle_cancelledByUser';
 }

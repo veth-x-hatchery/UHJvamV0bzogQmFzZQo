@@ -17,7 +17,6 @@ void main() {
     Converter<String> x2() => (x) => 'x1: $x';
 
     Logger.tests('''
-
       asdf1: ${x1()(0).hashCode}
       asdf2: ${x2()(0).hashCode}
 

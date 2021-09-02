@@ -45,10 +45,13 @@ class SignInSecretReset extends UseCase<Unit, NoParams> {
 
 // ignore: avoid_classes_with_only_static_members
 class SignInSecretResetMessages {
-  static MessageFromLocalizations unavailable() =>
-      (locations) => locations?.signIn_usecase_secretReset_unavailable;
+  static MessageFromLocalizations unavailable() => (locations) =>
+      locations?.signIn_usecase_secretReset_unavailable ??
+      'signIn_usecase_secretReset_unavailable';
   static MessageFromLocalizations invalidCachedCredential() => (locations) =>
-      locations?.signIn_usecase_secretReset_invalidCachedCredential;
-  static MessageFromLocalizations success() =>
-      (locations) => locations?.signIn_usecase_secretReset_success;
+      locations?.signIn_usecase_secretReset_invalidCachedCredential ??
+      'signIn_usecase_secretReset_invalidCachedCredential';
+  static MessageFromLocalizations success() => (locations) =>
+      locations?.signIn_usecase_secretReset_success ??
+      'signIn_usecase_secretReset_success';
 }
