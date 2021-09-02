@@ -7,7 +7,7 @@ enum VethxNotificationType {
   notification,
 }
 
-class VethxNotification {
+class VethxNotification extends Equatable {
   final VethxNotificationType type;
   final MessageFromLocalization message;
   final MessageFromLocalization? title;
@@ -36,6 +36,6 @@ class VethxNotification {
         type: VethxNotificationType.alert,
       );
 
-  // @override
-  // List<Object?> get props => [type];
+  @override
+  List<Object?> get props => [type];
 }
