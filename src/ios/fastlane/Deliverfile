@@ -1,0 +1,51 @@
+# The Deliverfile allows you to store various App Store Connect metadata
+# For more information, check out the docs
+# https://docs.fastlane.tools/actions/deliver/
+
+########################################
+# App Metadata
+########################################
+
+# apple_id ''
+
+screenshots_path "./fastlane/screenshots"
+
+metadata_path "./fastlane/metadata"
+
+app_rating_config_path "./fastlane/rating_config.json"
+
+# app_icon "./AppIcon.png"
+
+# title({
+#   "en-US" => "Your App Name"
+# })
+
+# # changelog({
+# #   "en-US" => "iPhone 6 (Plus) Support" 
+# # })
+
+# description({
+#   'en-US' => "one line too?"
+# })
+
+# copyright "Verthcos - Delta App"
+
+# automatic_release true
+
+# app_review_information({
+#   first_name: "verthcos",
+#   last_name: "verthcos",
+#   phone_number: "verthcos",
+#   email_address: "verthcos@verthcos.com",
+#   demo_user: "verthcos user",
+#   demo_password: "verthcos pass",
+#   notes: "verthcos notes
+# verthcos new line"
+# })
+
+# primary_category "Business"
+# secondary_category "Books"
+
+# ratings_config_path "./ratings.json"
+
+# price_tier 5
