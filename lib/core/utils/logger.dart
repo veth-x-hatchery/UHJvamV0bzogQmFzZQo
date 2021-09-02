@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'dart:developer';
+
 enum ArchitectureLayer {
   presentation,
   domain,
@@ -189,13 +191,15 @@ class Logger {
   }) {
     //https://dev.to/mhadaily/how-to-capture-errors-and-send-platform-specific-information-to-sentry-in-flutter-4l6m
     // reportError(ex, stacktrace, message: message);
+    // log(details.exceptionAsString(), stackTrace: details.stack);
     // ignore: avoid_print, leading_newlines_in_multiline_strings
-    print('''\n══╡ Logger ╞════════════════════════════════════════════════════
-             \nLogger: $layer
-             \nMessage: $message 
-             \nException: ${ex.toString()} 
-             \nStacktrace: ${stacktrace.toString()}\n
-             \n════════════════════════════════════════════════════════════════''');
+    // ignore: leading_newlines_in_multiline_strings
+    log('''\n══╡ Logger ╞════════════════════════════════════════════════════
+           \nLogger: $layer
+           \nMessage: $message 
+           \nException: ${ex.toString()} 
+           \nStacktrace: ${stacktrace.toString()}\n
+           \n════════════════════════════════════════════════════════════════''');
   }
 
   static void i(
@@ -203,9 +207,9 @@ class Logger {
     ArchitectureLayer layer = ArchitectureLayer.presentation,
   }) {
     // ignore: avoid_print, leading_newlines_in_multiline_strings
-    print('''\n══╡ Logger ╞═════════════════════════════════════════════════════
-             \nLogger: $layer
-             \nMessage: $message
-             \n═════════════════════════════════════════════════════════════════''');
+    log('''\n══╡ Logger ╞═════════════════════════════════════════════════════
+           \nLogger: $layer
+           \nMessage: $message
+           \n═════════════════════════════════════════════════════════════════''');
   }
 }
