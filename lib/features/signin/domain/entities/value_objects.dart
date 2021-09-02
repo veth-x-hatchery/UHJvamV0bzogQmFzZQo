@@ -37,6 +37,9 @@ class Credential extends ValueObject<String> {
         (_) => (_) => null,
       );
 
+  /// When receives NULL as parameter, if there is some [ValueFailure],
+  /// will returns the AppLocalizations json property name.
+  /// It will be enough to unit tests.
   String? validation(AppLocalizations? _) => _failureReason().call(_);
 }
 
@@ -52,14 +55,17 @@ class Secret extends ValueObject<String> {
 
   const Secret._(this.value);
 
-  MessageFromLocalizations emptySecretMessage() =>
-      (locations) => locations?.signIn_valueObject_secretEmpty;
+  MessageFromLocalizations emptySecretMessage() => (locations) =>
+      locations?.signIn_valueObject_secretEmpty ??
+      'signIn_valueObject_secretEmpty';
 
-  MessageFromLocalizations shortSecretMessage() =>
-      (locations) => locations?.signIn_valueObject_secretShort;
+  MessageFromLocalizations shortSecretMessage() => (locations) =>
+      locations?.signIn_valueObject_secretShort ??
+      'signIn_valueObject_secretShort';
 
-  MessageFromLocalizations _orElseMessage() =>
-      (locations) => locations?.comum_error_troubleFriendlyMessage;
+  MessageFromLocalizations _orElseMessage() => (locations) =>
+      locations?.comum_error_troubleFriendlyMessage ??
+      'comum_error_troubleFriendlyMessage';
 
   MessageFromLocalizations failureReason() => value.fold(
         (f) => f.maybeMap(

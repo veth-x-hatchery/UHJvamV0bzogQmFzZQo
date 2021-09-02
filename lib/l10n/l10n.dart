@@ -9,9 +9,22 @@ extension AppLocalizationsX on BuildContext {
 
 /// Actualy this type, closure, has no hash based on function received body
 /// This means that is not possible compare same values
-/// [VethxNotification] has a workaround to deal with it
+/// [MessageFromLocalizationsX] has a workaround to deal with it
+///
+/// When declaring a type [MessageFromLocalizations] need to return ?? '[var_name]'
+///
+///
 typedef MessageFromLocalizations = String? Function(AppLocalizations? _);
 
 extension MessageFromLocalizationsX on MessageFromLocalizations {
-  String? translate(AppLocalizations? _) => this.call(_);
+  // Use the AppLocalizations.of(BuildContext) to translate it
+  String translate(AppLocalizations _) => this.call(_)!;
+  // Workaround to deal with this closure compare
+  int get overridedHash => this.call(null)!.hashCode;
+  // Returns Localizations json property name
+  String get compare => this.call(null)!;
+}
+
+extension AppLocalizationsX2 on AppLocalizations {
+  MessageFromLocalizations asdf() => (_) => comum_accessConfirmation;
 }

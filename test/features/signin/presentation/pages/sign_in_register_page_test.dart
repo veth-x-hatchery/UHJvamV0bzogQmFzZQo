@@ -279,7 +279,7 @@ void main() {
 
     // Act && Assert
 
-    expect(find.text(expectedFailure.message.translate(tester.l10n)!),
+    expect(find.text(expectedFailure.message.translate(tester.l10n)),
         findsOneWidget);
   });
 }

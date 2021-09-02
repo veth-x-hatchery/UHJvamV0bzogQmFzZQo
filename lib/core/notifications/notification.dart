@@ -40,6 +40,6 @@ class VethxNotification extends Equatable {
   @override
   List<Object?> get props => [
         type,
-        message.translate(null),
+        message.overridedHash,
       ];
 }

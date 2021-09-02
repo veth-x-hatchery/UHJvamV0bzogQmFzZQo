@@ -301,7 +301,7 @@ void main() {
 
     // Act && Assert
 
-    expect(find.text(expectedFailure.message.translate(tester.l10n)!),
+    expect(find.text(expectedFailure.message.translate(tester.l10n)),
         findsOneWidget);
   });
 
@@ -365,7 +365,7 @@ void main() {
 
       // Act && Assert
 
-      expect(find.text(expectedFailure.message.translate(tester.l10n)!),
+      expect(find.text(expectedFailure.message.translate(tester.l10n)),
           findsOneWidget);
     });
 
@@ -406,7 +406,8 @@ void main() {
 
       // Act && Assert
 
-      expect(find.text(SignInSecretResetMessages.success().call(tester.l10n)!),
+      expect(
+          find.text(SignInSecretResetMessages.success().translate(tester.l10n)),
           findsOneWidget);
     });
   });

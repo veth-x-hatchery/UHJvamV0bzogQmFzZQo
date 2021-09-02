@@ -11,7 +11,7 @@ void vethxNotify(BuildContext context, VethxNotification notification) {
       case VethxNotificationType.snack:
         ScaffoldMessenger.of(context).removeCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(notification.message.translate(context.l10n)!,
+          content: Text(notification.message.translate(context.l10n),
               textAlign: TextAlign.center),
           duration: snackBarNotificationDuration,
         ));
@@ -19,7 +19,7 @@ void vethxNotify(BuildContext context, VethxNotification notification) {
       case VethxNotificationType.alert:
         PlatformAlertDialog(
           title: notification.title?.translate(context.l10n) ?? '',
-          content: notification.message.translate(context.l10n)!,
+          content: notification.message.translate(context.l10n),
           defaultActionText: context.l10n.comum_ok,
           cancelActionText: context.l10n.comum_cancel,
         ).show(context);
