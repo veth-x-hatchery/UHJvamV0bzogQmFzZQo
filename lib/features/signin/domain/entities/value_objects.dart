@@ -4,6 +4,8 @@ import 'package:vethx_beta/features/signin/domain/core/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
 import 'package:vethx_beta/l10n/l10n.dart';
 
+/// Todo(v): Remove duplicated code between [Credential] and [Secret]
+
 class Credential extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -16,16 +18,16 @@ class Credential extends ValueObject<String> {
 
   const Credential._(this.value);
 
-  MessageFromLocalizations _emptyCredentialMessage() => (locations) =>
-      locations?.signIn_valueObject_credentialEmpty ??
+  MessageFromLocalizations _emptyCredentialMessage() => (appLocalizations) =>
+      appLocalizations?.signIn_valueObject_credentialEmpty ??
       'signIn_valueObject_credentialEmpty';
 
-  MessageFromLocalizations _invalidCredentialMessage() => (locations) =>
-      locations?.signIn_valueObject_credentialInvalid ??
+  MessageFromLocalizations _invalidCredentialMessage() => (appLocalizations) =>
+      appLocalizations?.signIn_valueObject_credentialInvalid ??
       'signIn_valueObject_credentialInvalid';
 
-  MessageFromLocalizations _orElseMessage() => (locations) =>
-      locations?.comum_error_troubleFriendlyMessage ??
+  MessageFromLocalizations _orElseMessage() => (appLocalizations) =>
+      appLocalizations?.comum_error_troubleFriendlyMessage ??
       'comum_error_troubleFriendlyMessage';
 
   MessageFromLocalizations _failureReason() => value.fold(
@@ -55,16 +57,16 @@ class Secret extends ValueObject<String> {
 
   const Secret._(this.value);
 
-  MessageFromLocalizations emptySecretMessage() => (locations) =>
-      locations?.signIn_valueObject_secretEmpty ??
+  MessageFromLocalizations emptySecretMessage() => (appLocalizations) =>
+      appLocalizations?.signIn_valueObject_secretEmpty ??
       'signIn_valueObject_secretEmpty';
 
-  MessageFromLocalizations shortSecretMessage() => (locations) =>
-      locations?.signIn_valueObject_secretShort ??
+  MessageFromLocalizations shortSecretMessage() => (appLocalizations) =>
+      appLocalizations?.signIn_valueObject_secretShort ??
       'signIn_valueObject_secretShort';
 
-  MessageFromLocalizations _orElseMessage() => (locations) =>
-      locations?.comum_error_troubleFriendlyMessage ??
+  MessageFromLocalizations _orElseMessage() => (appLocalizations) =>
+      appLocalizations?.comum_error_troubleFriendlyMessage ??
       'comum_error_troubleFriendlyMessage';
 
   MessageFromLocalizations failureReason() => value.fold(

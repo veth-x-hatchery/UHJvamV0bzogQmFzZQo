@@ -58,15 +58,16 @@ class SignInWithSecret extends UseCase<Unit, Secret> {
 
 // ignore: avoid_classes_with_only_static_members
 class SignInWithSecretErrorMessages {
-  static MessageFromLocalizations unavailable() => (locations) =>
-      locations?.signIn_usecase_withSecret_unavailable ??
+  static MessageFromLocalizations unavailable() => (appLocalizations) =>
+      appLocalizations?.signIn_usecase_withSecret_unavailable ??
       'signIn_usecase_withSecret_unavailable';
   static MessageFromLocalizations invalidCredentialAndSecretCombination() =>
-      (locations) =>
-          locations
+      (appLocalizations) =>
+          appLocalizations
               ?.signIn_usecase_withSecret_invalidCredentialAndSecretCombination ??
           'signIn_usecase_withSecret_invalidCredentialAndSecretCombination';
-  static MessageFromLocalizations invalidCachedCredential() => (locations) =>
-      locations?.signIn_usecase_withSecret_invalidCachedCredential ??
-      'signIn_usecase_withSecret_invalidCachedCredential';
+  static MessageFromLocalizations
+      invalidCachedCredential() => (appLocalizations) =>
+          appLocalizations?.signIn_usecase_withSecret_invalidCachedCredential ??
+          'signIn_usecase_withSecret_invalidCachedCredential';
 }

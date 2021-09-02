@@ -13,18 +13,17 @@ extension AppLocalizationsX on BuildContext {
 ///
 /// When declaring a type [MessageFromLocalizations] need to return ?? '[var_name]'
 ///
-///
+///   MessageFromLocalizations message() => (appLocalizations) =>
+///   appLocalizations?.[property] ?? '[property_name]';
 typedef MessageFromLocalizations = String? Function(AppLocalizations? _);
 
 extension MessageFromLocalizationsX on MessageFromLocalizations {
-  // Use the AppLocalizations.of(BuildContext) to translate it
+  /// Use the [AppLocalizations].of(BuildContext) to translate it
   String translate(AppLocalizations _) => this.call(_)!;
-  // Workaround to deal with this closure compare
-  int get overridedHash => this.call(null)!.hashCode;
-  // Returns Localizations json property name
-  String get compare => this.call(null)!;
-}
 
-extension AppLocalizationsX2 on AppLocalizations {
-  MessageFromLocalizations asdf() => (_) => comum_accessConfirmation;
+  /// Workaround to deal with this closure compare
+  int get overridedHash => this.call(null)!.hashCode;
+
+  /// Returns [AppLocalizations] json property name
+  String get compare => this.call(null)!;
 }
