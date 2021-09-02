@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/error/failures.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
-import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
+
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
@@ -60,7 +60,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInSecretResetMessages.unavailable,
+        message: SignInSecretResetMessages.unavailable(),
       );
 
       when(_mockSignInRepository.cachedCredential())
@@ -87,7 +87,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInSecretResetMessages.invalidCachedCredential,
+        message: SignInSecretResetMessages.invalidCachedCredential(),
       );
 
       when(_mockSignInRepository.cachedCredential())

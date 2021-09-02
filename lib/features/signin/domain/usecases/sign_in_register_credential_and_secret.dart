@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
-import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
+
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
   // final ISignInRepository _signInRepository;
@@ -15,7 +16,8 @@ class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
   );
 
   @override
-  Future<Either<FailureDetails, Unit>> call(Credentials credentials) {
+  Future<Either<FailureDetails<AuthFailure>, Unit>> call(
+      Credentials credentials) {
     return _authFacade
         .registerWithCredentialAndSecret(
           credentialAddress: credentials.user,
@@ -27,31 +29,37 @@ class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
             ));
   }
 
-  FailureDetails _mapFailures(AuthFailure auth) {
+  FailureDetails<AuthFailure> _mapFailures(AuthFailure auth) {
     if (auth == const AuthFailure.credentialAlreadyInUse()) {
       return FailureDetails(
         failure: auth,
         message: SignInRegisterCredentialAndSecretErrorMessages
-            .credentialAlreadyInUse,
+            .credentialAlreadyInUse(),
       );
     }
     if (auth == const AuthFailure.invalidCredentialAndSecretCombination()) {
       return FailureDetails(
         failure: auth,
         message: SignInRegisterCredentialAndSecretErrorMessages
-            .credentialAlreadyInUse,
+            .credentialAlreadyInUse(),
       );
     }
     return FailureDetails(
       failure: auth,
-      message: SignInRegisterCredentialAndSecretErrorMessages.unavailable,
+      message: SignInRegisterCredentialAndSecretErrorMessages.unavailable(),
     );
   }
 }
 
+// ignore: avoid_classes_with_only_static_members
 class SignInRegisterCredentialAndSecretErrorMessages {
-  static const unavailable = 'Unavailable';
-  static const credentialAlreadyInUse = 'This credential is already in use';
-  static const invalidCredentialAndSecretCombination =
-      'Invalid credential and secret combination';
+  static MessageFromLocalizations unavailable() => (appLocalizations) =>
+      appLocalizations
+          ?.signIn_usecase_registerCredentialAndSecret_unavailable ??
+      'signIn_usecase_registerCredentialAndSecret_unavailable';
+
+  static MessageFromLocalizations credentialAlreadyInUse() => (appLocalizations) =>
+      appLocalizations
+          ?.signIn_usecase_registerCredentialAndSecret_credentialAlreadyInUse ??
+      'signIn_usecase_registerCredentialAndSecret_credentialAlreadyInUse';
 }

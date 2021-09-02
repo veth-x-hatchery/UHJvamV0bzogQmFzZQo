@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
@@ -18,7 +19,7 @@ class AlphaPage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  static Widget create(BuildContext context) {
+  static Widget create({BuildContext? context}) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -44,6 +45,9 @@ class AlphaPage extends StatelessWidget {
         return state.map(
           initial: (_) => _Root(home: Splash()),
           inProcess: (_) => _Root(home: LoadingPage()),
+          unauthenticated: (_) => _Root(
+            home: SignInOptionsPage.create(),
+          ),
           authenticated: (_) =>
               BlocConsumer<LocalAuthenticationBloc, LocalAuthenticationState>(
             listener: (context, state) {
@@ -71,9 +75,6 @@ class AlphaPage extends StatelessWidget {
                 ),
               );
             },
-          ),
-          unauthenticated: (_) => _Root(
-            home: SignInOptionsPage.create(),
           ),
         );
       },
@@ -105,6 +106,9 @@ class _Root extends StatelessWidget {
         // initialRoute: NavigationRoutes.alpha,
         navigatorObservers: [LoggingNavigationObserver()],
         theme: ThemeData(primarySwatch: Colors.blue),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale('pt'),
         home: Builder(
           builder: (context) {
             SizeConfig().init(context);

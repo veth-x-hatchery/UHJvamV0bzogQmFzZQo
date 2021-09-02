@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 class SignInLoader extends StatelessWidget {
@@ -17,18 +17,22 @@ class SignInLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = Theme.of(context).textTheme.headline3;
-    return SizedBox(
-      height: size,
-      child: Center(
-        child: loading
-            ? const GenericProgressIndicator()
-            : Text(
-                title ?? Texts.signInPageTitle,
-                textAlign: TextAlign.center,
-                style: style,
-              ),
-      ),
-    );
+    return Builder(builder: (context) {
+      return SizedBox(
+        height: size,
+        child: Center(
+          child: loading
+              ? const GenericProgressIndicator()
+              : Text(
+                  title ??
+                      context.l10n
+                          .signin_page_options_title, //context.l10n.signin_page_options_title,
+                  textAlign: TextAlign.center,
+                  style: style,
+                ),
+        ),
+      );
+    });
     // Todo(v): Colocar o LOGO Veth-X
     // return Image.asset(
     //   assetsLogoSigavi,

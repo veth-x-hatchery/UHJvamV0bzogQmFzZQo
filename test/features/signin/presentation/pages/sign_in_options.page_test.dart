@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
@@ -87,16 +86,14 @@ void main() {
 
   Future<void> _pumpPage(WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
+      setupToPump(
+        Scaffold(
+          body: SignInOptionsPage.create(serviceLocator: _sl),
+        ),
         navigatorObservers: [
           _mockNavigationObserver,
           LoggingNavigationObserver()
         ],
-        home: setupToPump(
-          Scaffold(
-            body: SignInOptionsPage.create(serviceLocator: _sl),
-          ),
-        ),
       ),
     );
   }
@@ -114,7 +111,7 @@ void main() {
 
       // Assert
 
-      expect(find.text(Texts.signInPageTitle), findsOneWidget);
+      expect(find.text(tester.l10n.signin_page_options_title), findsOneWidget);
 
       // verifyNever(_sl.dispose);
     });

@@ -3,7 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/error/failures.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
+
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
@@ -66,23 +67,28 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInWithSecretErrorMessages.unavailable,
+        message: SignInWithSecretErrorMessages.unavailable(),
       );
 
       when(_mockSignInRepository.cachedCredential())
-          .thenAnswer((_) async => Right(credential));
+          .thenAnswer((_) async => right(credential));
 
       when(_mockAuthFacade.signInWithCredentialAndSecret(
         credentialAddress: credential,
         secret: secret,
-      )).thenAnswer((_) async => const Left(throwFailure));
+      )).thenAnswer((_) async => left(throwFailure));
 
       // act
 
-      final result = await _signInUseCase.call(secret);
+      final result = await _signInUseCase(secret);
       // assert
 
-      expect(result, left(failureDetails));
+      expect(result.isLeft(), true);
+
+      result.fold(
+        (l) => expect(l, failureDetails),
+        (_) => _,
+      );
 
       verify(_mockAuthFacade.signInWithCredentialAndSecret(
         credentialAddress: credential,
@@ -98,8 +104,8 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message:
-            SignInWithSecretErrorMessages.invalidCredentialAndSecretCombination,
+        message: SignInWithSecretErrorMessages
+            .invalidCredentialAndSecretCombination(),
       );
 
       when(_mockSignInRepository.cachedCredential())
@@ -131,7 +137,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: SignInWithSecretErrorMessages.invalidCachedCredential,
+        message: SignInWithSecretErrorMessages.invalidCachedCredential(),
       );
 
       when(_mockSignInRepository.cachedCredential())

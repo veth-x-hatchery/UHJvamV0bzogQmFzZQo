@@ -333,7 +333,7 @@ class _$SignInOptionsStateTearOff {
     return const _SignInCancelled();
   }
 
-  _SignInNotification signInNotification({required String message}) {
+  _SignInNotification signInNotification({required dynamic message}) {
     return _SignInNotification(
       message: message,
     );
@@ -352,7 +352,7 @@ mixin _$SignInOptionsState {
     required TResult Function() signInAllowed,
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
-    required TResult Function(String message) signInNotification,
+    required TResult Function(dynamic message) signInNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -362,7 +362,7 @@ mixin _$SignInOptionsState {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -372,7 +372,7 @@ mixin _$SignInOptionsState {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -469,7 +469,7 @@ class _$_Initial implements _Initial {
     required TResult Function() signInAllowed,
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
-    required TResult Function(String message) signInNotification,
+    required TResult Function(dynamic message) signInNotification,
   }) {
     return initial();
   }
@@ -482,7 +482,7 @@ class _$_Initial implements _Initial {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
   }) {
     return initial?.call();
   }
@@ -495,7 +495,7 @@ class _$_Initial implements _Initial {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -597,7 +597,7 @@ class _$_SignInLoading implements _SignInLoading {
     required TResult Function() signInAllowed,
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
-    required TResult Function(String message) signInNotification,
+    required TResult Function(dynamic message) signInNotification,
   }) {
     return loading();
   }
@@ -610,7 +610,7 @@ class _$_SignInLoading implements _SignInLoading {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
   }) {
     return loading?.call();
   }
@@ -623,7 +623,7 @@ class _$_SignInLoading implements _SignInLoading {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -725,7 +725,7 @@ class _$_SignInAllowed implements _SignInAllowed {
     required TResult Function() signInAllowed,
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
-    required TResult Function(String message) signInNotification,
+    required TResult Function(dynamic message) signInNotification,
   }) {
     return signInAllowed();
   }
@@ -738,7 +738,7 @@ class _$_SignInAllowed implements _SignInAllowed {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
   }) {
     return signInAllowed?.call();
   }
@@ -751,7 +751,7 @@ class _$_SignInAllowed implements _SignInAllowed {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
     required TResult orElse(),
   }) {
     if (signInAllowed != null) {
@@ -853,7 +853,7 @@ class _$_SignInDenied implements _SignInDenied {
     required TResult Function() signInAllowed,
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
-    required TResult Function(String message) signInNotification,
+    required TResult Function(dynamic message) signInNotification,
   }) {
     return signInDenied();
   }
@@ -866,7 +866,7 @@ class _$_SignInDenied implements _SignInDenied {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
   }) {
     return signInDenied?.call();
   }
@@ -879,7 +879,7 @@ class _$_SignInDenied implements _SignInDenied {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
     required TResult orElse(),
   }) {
     if (signInDenied != null) {
@@ -981,7 +981,7 @@ class _$_SignInCancelled implements _SignInCancelled {
     required TResult Function() signInAllowed,
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
-    required TResult Function(String message) signInNotification,
+    required TResult Function(dynamic message) signInNotification,
   }) {
     return signInCancelled();
   }
@@ -994,7 +994,7 @@ class _$_SignInCancelled implements _SignInCancelled {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
   }) {
     return signInCancelled?.call();
   }
@@ -1007,7 +1007,7 @@ class _$_SignInCancelled implements _SignInCancelled {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
     required TResult orElse(),
   }) {
     if (signInCancelled != null) {
@@ -1069,7 +1069,7 @@ abstract class _$SignInNotificationCopyWith<$Res> {
   factory _$SignInNotificationCopyWith(
           _SignInNotification value, $Res Function(_SignInNotification) then) =
       __$SignInNotificationCopyWithImpl<$Res>;
-  $Res call({String message});
+  $Res call({dynamic message});
 }
 
 /// @nodoc
@@ -1091,7 +1091,7 @@ class __$SignInNotificationCopyWithImpl<$Res>
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
     ));
   }
 }
@@ -1102,7 +1102,7 @@ class _$_SignInNotification implements _SignInNotification {
   const _$_SignInNotification({required this.message});
 
   @override
-  final String message;
+  final dynamic message;
 
   @override
   String toString() {
@@ -1134,7 +1134,7 @@ class _$_SignInNotification implements _SignInNotification {
     required TResult Function() signInAllowed,
     required TResult Function() signInDenied,
     required TResult Function() signInCancelled,
-    required TResult Function(String message) signInNotification,
+    required TResult Function(dynamic message) signInNotification,
   }) {
     return signInNotification(message);
   }
@@ -1147,7 +1147,7 @@ class _$_SignInNotification implements _SignInNotification {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
   }) {
     return signInNotification?.call(message);
   }
@@ -1160,7 +1160,7 @@ class _$_SignInNotification implements _SignInNotification {
     TResult Function()? signInAllowed,
     TResult Function()? signInDenied,
     TResult Function()? signInCancelled,
-    TResult Function(String message)? signInNotification,
+    TResult Function(dynamic message)? signInNotification,
     required TResult orElse(),
   }) {
     if (signInNotification != null) {
@@ -1214,10 +1214,10 @@ class _$_SignInNotification implements _SignInNotification {
 }
 
 abstract class _SignInNotification implements SignInOptionsState {
-  const factory _SignInNotification({required String message}) =
+  const factory _SignInNotification({required dynamic message}) =
       _$_SignInNotification;
 
-  String get message => throw _privateConstructorUsedError;
+  dynamic get message => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$SignInNotificationCopyWith<_SignInNotification> get copyWith =>
       throw _privateConstructorUsedError;

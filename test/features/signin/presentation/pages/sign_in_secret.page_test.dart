@@ -4,7 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/notifications/notification.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
+
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart';
@@ -15,6 +16,7 @@ import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secr
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/features/signin/presentation/pages/sign_in_secret.finders.dart';
@@ -40,11 +42,9 @@ void main() {
 
   Future<void> _pumpPage(WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        home: setupToPump(
-          Scaffold(
-            body: SignInSecretPage.create(serviceLocator: _sl),
-          ),
+      setupToPump(
+        Scaffold(
+          body: SignInSecretPage.create(serviceLocator: _sl),
         ),
       ),
     );
@@ -283,7 +283,7 @@ void main() {
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCachedCredential(),
-      message: SignInWithSecretErrorMessages.invalidCachedCredential,
+      message: SignInWithSecretErrorMessages.invalidCachedCredential(),
     );
 
     _scretResetBlocState(SignInSecretResetState.initial());
@@ -302,7 +302,8 @@ void main() {
 
     // Act && Assert
 
-    expect(find.text(expectedFailure.message), findsOneWidget);
+    expect(find.text(expectedFailure.message.translate(tester.l10n)),
+        findsOneWidget);
   });
 
   group('when request change credentials', () {
@@ -348,7 +349,7 @@ void main() {
 
       final expectedFailure = FailureDetails(
         failure: const AuthFailure.invalidCachedCredential(),
-        message: SignInSecretResetMessages.invalidCachedCredential,
+        message: SignInSecretResetMessages.invalidCachedCredential(),
       );
 
       _secretBlocState(SignInSecretState.initial());
@@ -365,7 +366,8 @@ void main() {
 
       // Act && Assert
 
-      expect(find.text(expectedFailure.message), findsOneWidget);
+      expect(find.text(expectedFailure.message.translate(tester.l10n)),
+          findsOneWidget);
     });
 
     testWidgets('when request a reset should show a progress indicator',
@@ -396,7 +398,7 @@ void main() {
       _scretResetBlocState(SignInSecretResetState(
         isLoading: false,
         notification: optionOf(VethxNotification.snack(
-            message: SignInSecretResetMessages.success)),
+            message: SignInSecretResetMessages.success())),
       ));
 
       await _pumpPage(tester);
@@ -405,7 +407,9 @@ void main() {
 
       // Act && Assert
 
-      expect(find.text(SignInSecretResetMessages.success), findsOneWidget);
+      expect(
+          find.text(SignInSecretResetMessages.success().translate(tester.l10n)),
+          findsOneWidget);
     });
   });
 }

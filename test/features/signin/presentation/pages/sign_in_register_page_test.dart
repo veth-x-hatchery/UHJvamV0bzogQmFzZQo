@@ -4,7 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/notifications/notification.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
+
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
@@ -12,6 +13,7 @@ import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth
 import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_register_page.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
 
 import '../../../../helpers/features/signin/presentation/pages/sign_in_register.finders.dart';
@@ -34,11 +36,9 @@ void main() {
 
   Future<void> _pumpPage(WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        home: setupToPump(
-          Scaffold(
-            body: SignInRegisterPage.create(serviceLocator: _sl),
-          ),
+      setupToPump(
+        Scaffold(
+          body: SignInRegisterPage.create(serviceLocator: _sl),
         ),
       ),
     );
@@ -260,9 +260,9 @@ void main() {
     final secret = AuthFacadeMock.validTestSecret.inputedValue!;
 
     final expectedFailure = FailureDetails(
-      failure: const AuthFailure.invalidCredentialAndSecretCombination(),
+      failure: const AuthFailure.credentialAlreadyInUse(),
       message: SignInRegisterCredentialAndSecretErrorMessages
-          .invalidCredentialAndSecretCombination,
+          .credentialAlreadyInUse(),
     );
 
     _signInState(SignInRegisterState(
@@ -280,6 +280,7 @@ void main() {
 
     // Act && Assert
 
-    expect(find.text(expectedFailure.message), findsOneWidget);
+    expect(find.text(expectedFailure.message.translate(tester.l10n)),
+        findsOneWidget);
   });
 }

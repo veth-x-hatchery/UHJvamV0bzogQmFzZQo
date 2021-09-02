@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vethx_beta/core/consts/size_config.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
 import 'package:vethx_beta/core/notifications/messages.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
 import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
 import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
 
@@ -92,7 +92,7 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
                       state.isLoading ? {} : _validateCredential(),
                   onChanged: (value) =>
                       bloc.add(SignInCredentialEvent.credentialChanged(value)),
-                  validator: (_) => current.credential.validation,
+                  validator: (_) => current.credential.validation(context.l10n),
                 ),
                 SizedBox(height: SizeConfig.defaultEdgeSpace),
                 CustomRaisedButton(
@@ -100,7 +100,7 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
                       SignInPageKeys.signInCredentialPageValidateButton),
                   onPressed: () => state.isLoading ? {} : _validateCredential(),
                   child: Text(
-                    Texts.goToNextStep,
+                    context.l10n.comum_nextStep,
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),

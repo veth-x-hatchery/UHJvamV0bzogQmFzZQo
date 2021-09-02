@@ -2,7 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
+
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 // import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
@@ -63,7 +64,7 @@ void main() {
 
       final failureDetails = FailureDetails(
         failure: throwFailure,
-        message: CheckCredentialErrorMessages.unavailable,
+        message: CheckCredentialErrorMessages.unavailable(),
       );
 
       when(_mockAuthFacade.credentialIsAlreadyInUse(credential))
@@ -71,7 +72,7 @@ void main() {
 
       // act
 
-      final result = await _signInCheckIfCredentialIsInUse.call(credential);
+      final result = await _signInCheckIfCredentialIsInUse(credential);
 
       // assert
 

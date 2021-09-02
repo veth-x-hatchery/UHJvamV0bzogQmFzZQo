@@ -7,11 +7,12 @@ import 'dart:async' as _i3;
 import 'package:bloc/bloc.dart' as _i5;
 import 'package:dartz/dartz.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart' as _i7;
 import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart'
     as _i2;
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
-    as _i7;
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart'
+    as _i9;
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart'
     as _i8;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart'
     as _i6;
@@ -131,12 +132,14 @@ class MockSignInRegisterCredentialAndSecret extends _i1.Mock
   }
 
   @override
-  _i3.Future<_i4.Either<_i7.FailureDetails, _i4.Unit>> call(
-          _i8.Credentials? credentials) =>
+  _i3.Future<_i4.Either<_i7.FailureDetails<_i8.AuthFailure>, _i4.Unit>> call(
+          _i9.Credentials? credentials) =>
       (super.noSuchMethod(Invocation.method(#call, [credentials]),
-          returnValue: Future<_i4.Either<_i7.FailureDetails, _i4.Unit>>.value(
-              _FakeEither_2<_i7.FailureDetails, _i4.Unit>())) as _i3
-          .Future<_i4.Either<_i7.FailureDetails, _i4.Unit>>);
+          returnValue:
+              Future<_i4.Either<_i7.FailureDetails<_i8.AuthFailure>, _i4.Unit>>.value(
+                  _FakeEither_2<_i7.FailureDetails<_i8.AuthFailure>,
+                      _i4.Unit>())) as _i3
+          .Future<_i4.Either<_i7.FailureDetails<_i8.AuthFailure>, _i4.Unit>>);
   @override
   String toString() => super.toString();
 }

@@ -3,8 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/consts/vethx_connect_texts.dart';
-import 'package:vethx_beta/core/routes/navigation.dart';
 import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
 import 'package:vethx_beta/features/authentication/presentation/pages/local_authentication.page.dart';
 import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
@@ -19,6 +17,7 @@ import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
 import 'package:vethx_beta/ui/splash/splash.page.dart';
 
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
+import '../../../../helpers/widgets/pumpWidget.widget.dart';
 import 'alpha.page_test.mocks.dart';
 
 @GenerateMocks([
@@ -94,16 +93,11 @@ void main() {
 
   Future<void> _pumpWidgetAlphaPage(WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: NavigationRoutes.onGenerateRoute,
-        routes: NavigationRoutes.routes(),
-        // initialRoute: NavigationRoutes.alpha,
+      setupToPump(
+        Scaffold(
+          body: AlphaPage.create(),
+        ),
         navigatorObservers: [_mockNavigationObserver],
-        theme: ThemeData(primarySwatch: Colors.blue),
-        home: Builder(builder: (context) {
-          return AlphaPage.create(context);
-        }),
       ),
     );
   }
@@ -121,7 +115,7 @@ void main() {
 
       // Assert
 
-      expect(find.text(Texts.signInPageTitle), findsOneWidget);
+      expect(find.text(tester.l10n.signin_page_options_title), findsOneWidget);
 
       expect(find.byType(SignInOptionsPage), findsOneWidget);
     });

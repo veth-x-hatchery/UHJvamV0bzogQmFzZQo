@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures.dart';
-import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
+
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 
 void main() {

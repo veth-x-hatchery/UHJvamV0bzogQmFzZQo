@@ -1,6 +1,5 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'notification.freezed.dart';
+import 'package:equatable/equatable.dart';
+import 'package:vethx_beta/l10n/l10n.dart';
 
 enum VethxNotificationType {
   alert,
@@ -8,27 +7,39 @@ enum VethxNotificationType {
   notification,
 }
 
-@freezed
-class VethxNotification with _$VethxNotification {
-  factory VethxNotification._internal({
-    required VethxNotificationType type,
-    required String message,
-    String? title,
-  }) = _VethxNotification;
+class VethxNotification extends Equatable {
+  final VethxNotificationType type;
+  final MessageFromLocalizations message;
+  final MessageFromLocalizations? title;
+  // final int hash
 
-  factory VethxNotification.snack({required String message}) =>
+  const VethxNotification._internal({
+    required this.type,
+    required this.message,
+    this.title,
+  });
+
+  factory VethxNotification.snack({
+    required MessageFromLocalizations message,
+  }) =>
       VethxNotification._internal(
         message: message,
         type: VethxNotificationType.snack,
       );
 
   factory VethxNotification.alert({
-    required String message,
-    required String title,
+    required MessageFromLocalizations message,
+    required MessageFromLocalizations title,
   }) =>
       VethxNotification._internal(
         title: title,
         message: message,
         type: VethxNotificationType.alert,
       );
+
+  @override
+  List<Object?> get props => [
+        type,
+        message.overridedHash,
+      ];
 }

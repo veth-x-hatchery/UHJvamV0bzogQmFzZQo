@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:vethx_beta/features/signin/domain/core/errors.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures.dart';
+
+import 'errors.dart';
+import 'failures.dart';
 
 @immutable
 abstract class ValueObject<T> {

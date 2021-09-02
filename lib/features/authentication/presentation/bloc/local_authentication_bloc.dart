@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:vethx_beta/features/authentication/domain/core/usecase.dart';
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
 import 'package:vethx_beta/features/authentication/domain/usecases/request_authentication.usecase.dart';
 
 part 'local_authentication_bloc.freezed.dart';

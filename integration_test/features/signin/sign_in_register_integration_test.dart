@@ -3,7 +3,6 @@ import 'package:get_it/get_it.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
@@ -11,6 +10,7 @@ import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.pa
 import 'package:vethx_beta/main.dart' as app;
 import 'package:vethx_beta/service_locator.dart';
 
+import '../../../test/helpers/widgets/pumpWidget.widget.dart';
 import 'finders/home.page.dart';
 import 'finders/sign_in_email.helpers.dart';
 import 'finders/sign_in_register.helpers.dart';
@@ -80,7 +80,7 @@ void main() {
     Logger.testStep(step);
     await signInRegisterEnterAnInvalidEmail(tester);
     await signInRegisterSubmitRegister(tester);
-    expect(find.text(CredentialAddressMessageErrors.invalidCredential),
+    expect(find.text(tester.l10n.signIn_valueObject_credentialInvalid),
         findsOneWidget);
     await helper.screenshot(prefix: prefix, name: step);
 
@@ -88,7 +88,8 @@ void main() {
     Logger.testStep(step);
     await signInRegisterEnterAnInvalidSecret(tester);
     await signInRegisterSubmitRegister(tester);
-    expect(find.text(SecretMessageErrors.shortSecret), findsOneWidget);
+    expect(
+        find.text(tester.l10n.signIn_valueObject_secretShort), findsOneWidget);
     await helper.screenshot(prefix: prefix, name: step);
 
     step = '1.1.3.1.3_enter_a_valid_password_and_go_to_home_page';

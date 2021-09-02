@@ -3,7 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/notifications/notification.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
+
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
@@ -154,7 +155,7 @@ void main() {
     final credential = AuthFacadeMock.validTestCredential.inputedValue!;
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
-      message: CheckCredentialErrorMessages.credentialAlreadyRegistered,
+      message: CheckCredentialErrorMessages.credentialAlreadyRegistered(),
     );
 
     when(_mockSignInWithSecret.call(any))

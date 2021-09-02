@@ -8,5 +8,5 @@ class SignInOptionsState with _$SignInOptionsState {
   const factory SignInOptionsState.signInDenied() = _SignInDenied;
   const factory SignInOptionsState.signInCancelled() = _SignInCancelled;
   const factory SignInOptionsState.signInNotification(
-      {required String message}) = _SignInNotification;
+      {required dynamic message}) = _SignInNotification;
 }

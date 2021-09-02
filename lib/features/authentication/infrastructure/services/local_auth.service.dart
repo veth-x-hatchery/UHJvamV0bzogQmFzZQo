@@ -49,6 +49,7 @@ class LocalAuth implements ILocalAuth {
     return _lastRequestResult!;
   }
 
+  // Todo(v): Localizations
   final IOSAuthMessages iosStrings = const IOSAuthMessages(
       cancelButton: 'cancel',
       goToSettingsButton: 'settings',

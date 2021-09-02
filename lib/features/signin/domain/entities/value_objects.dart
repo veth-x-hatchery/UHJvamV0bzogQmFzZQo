@@ -1,12 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures.dart';
-import 'package:vethx_beta/features/signin/domain/core/value_objects.dart';
-import 'package:vethx_beta/features/signin/domain/core/value_validators.dart';
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
 
-class CredentialAddressMessageErrors {
-  static const empty = 'Inform your email';
-  static const invalidCredential = 'Inform a valid email';
-}
+import 'package:vethx_beta/l10n/l10n.dart';
+
+/// Todo(v): Remove duplicated code between [Credential] and [Secret]
 
 class Credential extends ValueObject<String> {
   @override
@@ -18,22 +15,33 @@ class Credential extends ValueObject<String> {
     );
   }
 
-  String? get validation => value.fold(
+  const Credential._(this.value);
+
+  MessageFromLocalizations _emptyCredentialMessage() => (appLocalizations) =>
+      appLocalizations?.signIn_valueObject_credentialEmpty ??
+      'signIn_valueObject_credentialEmpty';
+
+  MessageFromLocalizations _invalidCredentialMessage() => (appLocalizations) =>
+      appLocalizations?.signIn_valueObject_credentialInvalid ??
+      'signIn_valueObject_credentialInvalid';
+
+  MessageFromLocalizations _orElseMessage() => (appLocalizations) =>
+      appLocalizations?.comum_error_troubleFriendlyMessage ??
+      'comum_error_troubleFriendlyMessage';
+
+  MessageFromLocalizations _failureReason() => value.fold(
         (f) => f.maybeMap(
-          empty: (_) => CredentialAddressMessageErrors.empty,
-          invalidCredential: (_) =>
-              CredentialAddressMessageErrors.invalidCredential,
-          orElse: () => null,
+          empty: (_) => _emptyCredentialMessage(),
+          invalidCredential: (_) => _invalidCredentialMessage(),
+          orElse: () => _orElseMessage(),
         ),
-        (_) => null,
+        (_) => (_) => null,
       );
 
-  const Credential._(this.value);
-}
-
-class SecretMessageErrors {
-  static const empty = 'Inform your password';
-  static const shortSecret = 'Your password must be more than 6 chars';
+  /// When receives NULL as parameter, if there is some [ValueFailure],
+  /// will returns the AppLocalizations json property name.
+  /// It will be enough to unit tests.
+  String? validation(AppLocalizations? _) => _failureReason().call(_);
 }
 
 class Secret extends ValueObject<String> {
@@ -46,14 +54,28 @@ class Secret extends ValueObject<String> {
     );
   }
 
-  String? get validation => value.fold(
+  const Secret._(this.value);
+
+  MessageFromLocalizations emptySecretMessage() => (appLocalizations) =>
+      appLocalizations?.signIn_valueObject_secretEmpty ??
+      'signIn_valueObject_secretEmpty';
+
+  MessageFromLocalizations shortSecretMessage() => (appLocalizations) =>
+      appLocalizations?.signIn_valueObject_secretShort ??
+      'signIn_valueObject_secretShort';
+
+  MessageFromLocalizations _orElseMessage() => (appLocalizations) =>
+      appLocalizations?.comum_error_troubleFriendlyMessage ??
+      'comum_error_troubleFriendlyMessage';
+
+  MessageFromLocalizations failureReason() => value.fold(
         (f) => f.maybeMap(
-          empty: (_) => SecretMessageErrors.empty,
-          shortSecret: (_) => SecretMessageErrors.shortSecret,
-          orElse: () => null,
+          empty: (_) => emptySecretMessage(),
+          shortSecret: (_) => shortSecretMessage(),
+          orElse: () => _orElseMessage(),
         ),
-        (_) => null,
+        (_) => (_) => null,
       );
 
-  const Secret._(this.value);
+  String? validation(AppLocalizations? _) => failureReason().call(_);
 }

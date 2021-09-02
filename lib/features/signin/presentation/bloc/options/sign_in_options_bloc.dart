@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
 import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
-import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
@@ -57,6 +56,9 @@ class SignInOptionsBloc extends Bloc<SignInOptionsEvent, SignInOptionsState> {
     if (failure.failure == const AuthFailure.cancelledByUser()) {
       return const SignInOptionsState.signInCancelled();
     }
-    return SignInOptionsState.signInNotification(message: failure.message);
+    // Todo(v): remove this and use another state definition
+    return SignInOptionsState.signInNotification(
+      message: failure.message,
+    );
   }
 }
