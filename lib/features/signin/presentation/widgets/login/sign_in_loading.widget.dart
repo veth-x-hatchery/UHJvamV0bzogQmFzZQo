@@ -17,26 +17,22 @@ class SignInLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = Theme.of(context).textTheme.headline3;
-    return Localizations.override(
-      context: context,
-      locale: const Locale('en'),
-      child: Builder(builder: (context) {
-        return SizedBox(
-          height: size,
-          child: Center(
-            child: loading
-                ? const GenericProgressIndicator()
-                : Text(
-                    title ??
-                        context.l10n
-                            .signin_page_options_title, //context.l10n.signin_page_options_title,
-                    textAlign: TextAlign.center,
-                    style: style,
-                  ),
-          ),
-        );
-      }),
-    );
+    return Builder(builder: (context) {
+      return SizedBox(
+        height: size,
+        child: Center(
+          child: loading
+              ? const GenericProgressIndicator()
+              : Text(
+                  title ??
+                      context.l10n
+                          .signin_page_options_title, //context.l10n.signin_page_options_title,
+                  textAlign: TextAlign.center,
+                  style: style,
+                ),
+        ),
+      );
+    });
     // Todo(v): Colocar o LOGO Veth-X
     // return Image.asset(
     //   assetsLogoSigavi,
