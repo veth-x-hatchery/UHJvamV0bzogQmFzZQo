@@ -16,16 +16,19 @@ class Credential extends ValueObject<String> {
 
   const Credential._(this.value);
 
-  MessageFromLocalization _emptyCredentialMessage() =>
-      (locations) => locations?.signIn_valueObject_credentialEmpty;
+  MessageFromLocalizations _emptyCredentialMessage() => (locations) =>
+      locations?.signIn_valueObject_credentialEmpty ??
+      'signIn_valueObject_credentialEmpty';
 
-  MessageFromLocalization _invalidCredentialMessage() =>
-      (locations) => locations?.signIn_valueObject_credentialInvalid;
+  MessageFromLocalizations _invalidCredentialMessage() => (locations) =>
+      locations?.signIn_valueObject_credentialInvalid ??
+      'signIn_valueObject_credentialInvalid';
 
-  MessageFromLocalization _orElseMessage() =>
-      (locations) => locations?.comum_error_troubleFriendlyMessage;
+  MessageFromLocalizations _orElseMessage() => (locations) =>
+      locations?.comum_error_troubleFriendlyMessage ??
+      'comum_error_troubleFriendlyMessage';
 
-  MessageFromLocalization _failureReason() => value.fold(
+  MessageFromLocalizations _failureReason() => value.fold(
         (f) => f.maybeMap(
           empty: (_) => _emptyCredentialMessage(),
           invalidCredential: (_) => _invalidCredentialMessage(),
@@ -49,16 +52,16 @@ class Secret extends ValueObject<String> {
 
   const Secret._(this.value);
 
-  MessageFromLocalization emptySecretMessage() =>
+  MessageFromLocalizations emptySecretMessage() =>
       (locations) => locations?.signIn_valueObject_secretEmpty;
 
-  MessageFromLocalization shortSecretMessage() =>
+  MessageFromLocalizations shortSecretMessage() =>
       (locations) => locations?.signIn_valueObject_secretShort;
 
-  MessageFromLocalization _orElseMessage() =>
+  MessageFromLocalizations _orElseMessage() =>
       (locations) => locations?.comum_error_troubleFriendlyMessage;
 
-  MessageFromLocalization failureReason() => value.fold(
+  MessageFromLocalizations failureReason() => value.fold(
         (f) => f.maybeMap(
           empty: (_) => emptySecretMessage(),
           shortSecret: (_) => shortSecretMessage(),

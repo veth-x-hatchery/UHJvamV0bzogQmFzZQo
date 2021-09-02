@@ -39,9 +39,10 @@ class SignInCredentialCheck extends UseCase<bool, Credential> {
 
 // ignore: avoid_classes_with_only_static_members
 class CheckCredentialErrorMessages {
-  static MessageFromLocalization unavailable() =>
+  static MessageFromLocalizations unavailable() =>
       (locations) => locations?.signIn_usecase_credentialCheck_unavailable;
 
-  static MessageFromLocalization credentialAlreadyRegistered() => (locations) =>
-      locations?.signIn_usecase_credentialCheck_credentialAlreadyRegistered;
+  static MessageFromLocalizations credentialAlreadyRegistered() =>
+      (locations) =>
+          locations?.signIn_usecase_credentialCheck_credentialAlreadyRegistered;
 }

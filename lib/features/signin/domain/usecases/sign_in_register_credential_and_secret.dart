@@ -52,10 +52,10 @@ class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
 
 // ignore: avoid_classes_with_only_static_members
 class SignInRegisterCredentialAndSecretErrorMessages {
-  static MessageFromLocalization unavailable() => (locations) =>
+  static MessageFromLocalizations unavailable() => (locations) =>
       locations?.signIn_usecase_registerCredentialAndSecret_unavailable;
 
-  static MessageFromLocalization credentialAlreadyInUse() =>
+  static MessageFromLocalizations credentialAlreadyInUse() =>
       (locations) => locations
           ?.signIn_usecase_registerCredentialAndSecret_credentialAlreadyInUse;
 }
