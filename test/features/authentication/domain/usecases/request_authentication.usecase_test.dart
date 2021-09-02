@@ -2,8 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/features/authentication/domain/core/failures_details.dart';
-import 'package:vethx_beta/features/authentication/domain/core/usecase.dart';
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
 import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
 import 'package:vethx_beta/features/authentication/domain/usecases/request_authentication.usecase.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth_failure.dart';
@@ -24,13 +23,18 @@ void main() {
 
   test('when request local auth then should return correct failure details',
       () async {
-    for (final failure in [
-      const LocalAuthFailure.genericError(),
-      const LocalAuthFailure.notAvailable()
-    ]) {
+    final expectedFailuresAndDetails = {
+      const LocalAuthFailure.genericError():
+          RequestLocalAuthenticationErrorMessages.genericError(),
+      const LocalAuthFailure.notAvailable():
+          RequestLocalAuthenticationErrorMessages.unavailable(),
+    };
+
+    for (final failure in expectedFailuresAndDetails.entries) {
       // arrange
 
-      when(_mockILocalAuth.request()).thenAnswer((_) async => left(failure));
+      when(_mockILocalAuth.request())
+          .thenAnswer((_) async => left(failure.key));
 
       // act
 
@@ -41,8 +45,8 @@ void main() {
       expect(
         result,
         left(FailureDetails(
-          message: 'MAP_ERROR_MESSAGE',
-          failure: failure,
+          failure: failure.key,
+          message: failure.value,
         )),
       );
     }

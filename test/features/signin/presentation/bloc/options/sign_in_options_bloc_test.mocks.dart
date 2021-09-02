@@ -10,6 +10,8 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart' as _i9;
 import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart'
     as _i2;
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart'
+    as _i10;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart'
     as _i8;
 import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart'
@@ -152,12 +154,14 @@ class MockSignInWithGoogle extends _i1.Mock implements _i8.SignInWithGoogle {
   }
 
   @override
-  _i3.Future<_i4.Either<_i9.FailureDetails, _i4.Unit>> call(
+  _i3.Future<_i4.Either<_i9.FailureDetails<_i10.AuthFailure>, _i4.Unit>> call(
           _i9.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<_i4.Either<_i9.FailureDetails, _i4.Unit>>.value(
-              _FakeEither_2<_i9.FailureDetails, _i4.Unit>())) as _i3
-          .Future<_i4.Either<_i9.FailureDetails, _i4.Unit>>);
+          returnValue:
+              Future<_i4.Either<_i9.FailureDetails<_i10.AuthFailure>, _i4.Unit>>.value(
+                  _FakeEither_2<_i9.FailureDetails<_i10.AuthFailure>,
+                      _i4.Unit>())) as _i3
+          .Future<_i4.Either<_i9.FailureDetails<_i10.AuthFailure>, _i4.Unit>>);
   @override
   String toString() => super.toString();
 }

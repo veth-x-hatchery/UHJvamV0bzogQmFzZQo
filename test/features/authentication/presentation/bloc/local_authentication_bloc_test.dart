@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/features/authentication/domain/core/failures_details.dart';
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
 import 'package:vethx_beta/features/authentication/domain/usecases/request_authentication.usecase.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth_failure.dart';
 import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
@@ -26,8 +26,8 @@ void main() {
     // arrange
 
     final failure = FailureDetails(
-      message: 'MAP_ERROR_MESSAGE',
-      failure: const LocalAuthFailure.notAvailable(),
+      message: RequestLocalAuthenticationErrorMessages.genericError(),
+      failure: const LocalAuthFailure.genericError(),
     );
 
     when(_mockRequestLocalAuthentication.call(any))

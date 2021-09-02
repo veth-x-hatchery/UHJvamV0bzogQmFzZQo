@@ -16,7 +16,8 @@ class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
   );
 
   @override
-  Future<Either<FailureDetails, Unit>> call(Credentials credentials) {
+  Future<Either<FailureDetails<AuthFailure>, Unit>> call(
+      Credentials credentials) {
     return _authFacade
         .registerWithCredentialAndSecret(
           credentialAddress: credentials.user,
@@ -28,7 +29,7 @@ class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
             ));
   }
 
-  FailureDetails _mapFailures(AuthFailure auth) {
+  FailureDetails<AuthFailure> _mapFailures(AuthFailure auth) {
     if (auth == const AuthFailure.credentialAlreadyInUse()) {
       return FailureDetails(
         failure: auth,

@@ -1,10 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/l10n/l10n.dart';
 
-class FailureDetails extends Equatable {
+class FailureDetails<F> extends Equatable {
   final MessageFromLocalizations message;
-  final AuthFailure failure;
+  final F failure;
 
   const FailureDetails({
     required this.message,
@@ -13,7 +12,7 @@ class FailureDetails extends Equatable {
 
   @override
   List<Object> get props => [
-        failure,
+        F,
         message.overridedHash,
       ];
 

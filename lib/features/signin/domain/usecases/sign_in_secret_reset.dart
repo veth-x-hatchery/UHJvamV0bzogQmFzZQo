@@ -16,7 +16,8 @@ class SignInSecretReset extends UseCase<Unit, NoParams> {
   );
 
   @override
-  Future<Either<FailureDetails, Unit>> call(NoParams params) async {
+  Future<Either<FailureDetails<AuthFailure>, Unit>> call(
+      NoParams params) async {
     final cachedCredential = await _signInRepository.cachedCredential();
     return cachedCredential.fold(
       (l) => left(_mapFailures(const AuthFailure.invalidCachedCredential())),
@@ -29,7 +30,7 @@ class SignInSecretReset extends UseCase<Unit, NoParams> {
     );
   }
 
-  FailureDetails _mapFailures(AuthFailure auth) {
+  FailureDetails<AuthFailure> _mapFailures(AuthFailure auth) {
     if (auth == const AuthFailure.invalidCachedCredential()) {
       return FailureDetails(
         failure: auth,

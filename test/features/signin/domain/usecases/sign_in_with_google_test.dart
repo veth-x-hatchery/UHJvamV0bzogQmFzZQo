@@ -32,7 +32,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(const NoParams());
+      final result = await _signInUseCase(const NoParams());
 
       // assert
 
@@ -57,7 +57,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(const NoParams());
+      final result = await _signInUseCase(const NoParams());
 
       // assert
 
@@ -82,7 +82,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(const NoParams());
+      final result = await _signInUseCase(const NoParams());
 
       // assert
 

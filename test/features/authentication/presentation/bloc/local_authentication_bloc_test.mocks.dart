@@ -6,12 +6,11 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:vethx_beta/features/authentication/domain/core/failures_details.dart'
-    as _i5;
-import 'package:vethx_beta/features/authentication/domain/core/usecase.dart'
-    as _i6;
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart' as _i5;
 import 'package:vethx_beta/features/authentication/domain/usecases/request_authentication.usecase.dart'
     as _i3;
+import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth_failure.dart'
+    as _i6;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -33,11 +32,14 @@ class MockRequestLocalAuthentication extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.FailureDetails, bool>> call(_i6.NoParams? params) =>
+  _i4.Future<_i2.Either<_i5.FailureDetails<_i6.LocalAuthFailure>, bool>> call(
+          _i5.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-              returnValue: Future<_i2.Either<_i5.FailureDetails, bool>>.value(
-                  _FakeEither_0<_i5.FailureDetails, bool>()))
-          as _i4.Future<_i2.Either<_i5.FailureDetails, bool>>);
+          returnValue:
+              Future<_i2.Either<_i5.FailureDetails<_i6.LocalAuthFailure>, bool>>.value(
+                  _FakeEither_0<_i5.FailureDetails<_i6.LocalAuthFailure>,
+                      bool>())) as _i4
+          .Future<_i2.Either<_i5.FailureDetails<_i6.LocalAuthFailure>, bool>>);
   @override
   String toString() => super.toString();
 }

@@ -11,6 +11,8 @@ import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart' as _i10;
 import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart'
     as _i2;
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
+    as _i12;
+import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart'
     as _i11;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart'
     as _i9;
@@ -263,12 +265,14 @@ class MockSignInWithSecret extends _i1.Mock implements _i9.SignInWithSecret {
   }
 
   @override
-  _i3.Future<_i5.Either<_i10.FailureDetails, _i5.Unit>> call(
-          _i11.Secret? secret) =>
+  _i3.Future<_i5.Either<_i10.FailureDetails<_i11.AuthFailure>, _i5.Unit>> call(
+          _i12.Secret? secret) =>
       (super.noSuchMethod(Invocation.method(#call, [secret]),
-          returnValue: Future<_i5.Either<_i10.FailureDetails, _i5.Unit>>.value(
-              _FakeEither_3<_i10.FailureDetails, _i5.Unit>())) as _i3
-          .Future<_i5.Either<_i10.FailureDetails, _i5.Unit>>);
+          returnValue:
+              Future<_i5.Either<_i10.FailureDetails<_i11.AuthFailure>, _i5.Unit>>.value(
+                  _FakeEither_3<_i10.FailureDetails<_i11.AuthFailure>,
+                      _i5.Unit>())) as _i3
+          .Future<_i5.Either<_i10.FailureDetails<_i11.AuthFailure>, _i5.Unit>>);
   @override
   String toString() => super.toString();
 }

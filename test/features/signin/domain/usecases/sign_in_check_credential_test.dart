@@ -72,7 +72,7 @@ void main() {
 
       // act
 
-      final result = await _signInCheckIfCredentialIsInUse.call(credential);
+      final result = await _signInCheckIfCredentialIsInUse(credential);
 
       // assert
 

@@ -18,7 +18,8 @@ class SignInCredentialCheck extends UseCase<bool, Credential> {
   );
 
   @override
-  Future<Either<FailureDetails, bool>> call(Credential credential) =>
+  Future<Either<FailureDetails<AuthFailure>, bool>> call(
+          Credential credential) =>
       _authFacade.credentialIsAlreadyInUse(credential).then(
             (value) => value.fold(
               (l) => left(_mapFailures(l)),
@@ -29,7 +30,7 @@ class SignInCredentialCheck extends UseCase<bool, Credential> {
             ),
           );
 
-  FailureDetails _mapFailures(AuthFailure auth) {
+  FailureDetails<AuthFailure> _mapFailures(AuthFailure auth) {
     return FailureDetails(
       failure: auth,
       message: CheckCredentialErrorMessages.unavailable(),

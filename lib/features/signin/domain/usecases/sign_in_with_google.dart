@@ -16,13 +16,13 @@ class SignInWithGoogle extends UseCase<Unit, NoParams> {
   );
 
   @override
-  Future<Either<FailureDetails, Unit>> call(NoParams params) =>
+  Future<Either<FailureDetails<AuthFailure>, Unit>> call(NoParams params) =>
       _authFacade.signInWithGoogle().then((result) => result.fold(
             (l) => left(_mapFailures(l)),
             (r) => right(unit),
           ));
 
-  FailureDetails _mapFailures(AuthFailure auth) {
+  FailureDetails<AuthFailure> _mapFailures(AuthFailure auth) {
     if (auth == const AuthFailure.cancelledByUser()) {
       return FailureDetails(
         failure: auth,
