@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
+
+import 'failures_details.dart';
 
 part 'usecase.freezed.dart';
 

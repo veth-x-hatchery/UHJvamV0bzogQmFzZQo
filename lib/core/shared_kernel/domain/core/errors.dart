@@ -1,4 +1,4 @@
-import 'package:vethx_beta/features/signin/domain/core/failures.dart';
+import 'failures.dart';
 
 class UnexpectedValueError extends Error {
   final ValueFailure valueFailure;

@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vethx_beta/core/notifications/notification.dart';
-import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart';
 import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';

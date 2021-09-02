@@ -2,8 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
 import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
+
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';

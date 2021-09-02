@@ -7,10 +7,9 @@ import 'dart:async' as _i3;
 import 'package:bloc/bloc.dart' as _i6;
 import 'package:dartz/dartz.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart' as _i10;
 import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart'
     as _i2;
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart'
-    as _i10;
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
     as _i11;
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart'

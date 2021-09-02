@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures_details.dart';
-import 'package:vethx_beta/features/signin/domain/core/usecase.dart';
+
+import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
 import 'package:vethx_beta/features/signin/domain/entities/credentials_entity.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';

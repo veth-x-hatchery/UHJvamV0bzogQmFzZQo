@@ -12,7 +12,10 @@ class FailureDetails extends Equatable {
   });
 
   @override
-  List<Object> get props => [failure];
+  List<Object> get props => [
+        failure,
+        message.overridedHash,
+      ];
 
   @override
   bool get stringify => false;

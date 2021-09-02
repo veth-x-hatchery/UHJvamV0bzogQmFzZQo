@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_beta/features/signin/domain/core/failures.dart';
+
+import 'failures.dart';
 
 Either<ValueFailure<String>, String> validateCredentialAddress(String input) {
   const credentialRegex =
