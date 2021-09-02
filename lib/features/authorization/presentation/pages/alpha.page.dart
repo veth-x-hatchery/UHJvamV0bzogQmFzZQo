@@ -108,7 +108,7 @@ class _Root extends StatelessWidget {
         theme: ThemeData(primarySwatch: Colors.blue),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        locale: const Locale('pt'),
+        // locale: const Locale('pt'),
         home: Builder(
           builder: (context) {
             SizeConfig().init(context);
