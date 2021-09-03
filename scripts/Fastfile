@@ -36,7 +36,7 @@ end
 
 desc "set --dart-define's on prod environment"
 lane :dart_define do
-  "--dart-define=APP_ENVIRONMENT=dev"
+  "--dart-define=APP_ENVIRONMENT=dev --flavor=dev"
 end
 
 lane :test do |options|
