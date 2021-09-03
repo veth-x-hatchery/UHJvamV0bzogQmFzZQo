@@ -72,11 +72,22 @@ class ServiceLocatorConfig {
 
     // Services
 
-    getIt.registerLazySingleton<FirebaseUserMapper>(() => FirebaseUserMapper());
+    if (AppConfig().isDevelopment()) {
+      getIt.registerLazySingleton<IAuthFacade>(
+        () => AuthFacadeMock()..setupSignInEmailIntegrationTest(),
+      );
+    } else {
+      getIt.registerLazySingleton<FirebaseUserMapper>(
+          () => FirebaseUserMapper());
 
-    getIt.registerLazySingleton<IAuthFacade>(
-      () => AuthFacadeMock()..setupSignInEmailIntegrationTest(),
-    );
+      // getIt.registerLazySingleton<IAuthFacade>(
+      //   () => FirebaseAuthFacade(
+      //     getIt<FirebaseAuth>(),
+      //     getIt<GoogleSignIn>(),
+      //     getIt<FirebaseUserMapper>(),
+      //   ),
+      // );
+    }
 
     getIt.registerLazySingleton<LocalAuthentication>(
       () => LocalAuthentication(),
@@ -85,13 +96,6 @@ class ServiceLocatorConfig {
     getIt.registerLazySingleton<ILocalAuth>(
       () => LocalAuth(getIt<LocalAuthentication>()),
     );
-    // getIt.registerLazySingleton<IAuthFacade>(
-    //   () => FirebaseAuthFacade(
-    //     getIt<FirebaseAuth>(),
-    //     getIt<GoogleSignIn>(),
-    //     getIt<FirebaseUserMapper>(),
-    //   ),
-    // );
 
     //! Use case
 
