@@ -5,72 +5,67 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="00: opt_out_usage" time="0.001575301">
+      <testcase classname="fastlane.lanes" name="00: opt_out_usage" time="0.000567273">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="01: default_platform" time="0.000552458">
+      <testcase classname="fastlane.lanes" name="01: default_platform" time="0.000422307">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="02: Switch to android load_env lane" time="0.000437485">
+      <testcase classname="fastlane.lanes" name="02: Switch to android load_env lane" time="0.000405155">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="03: Switch to android clean_environment lane" time="0.000357144">
+      <testcase classname="fastlane.lanes" name="03: Switch to android apk_file_path lane" time="0.000304604">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="04: Switch to android sh_on_root lane" time="0.000171525">
+      <testcase classname="fastlane.lanes" name="04: Switch to android release_flavor_path lane" time="0.000250329">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="05: cd /media/programmer/Library/Projects/vethx/playground/beta/mobile/src &amp;&amp; flutter clean" time="2.04187211">
+      <testcase classname="fastlane.lanes" name="05: Switch to android flutter_flavor_value lane" time="0.000466666">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="06: Switch to android fetch_dependencies lane" time="0.000363145">
+      <testcase classname="fastlane.lanes" name="06: Switch to android flutter_flavor_value lane" time="0.000185799">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="07: Switch to android sh_on_root lane" time="0.000314901">
+      <testcase classname="fastlane.lanes" name="07: Switch to android release_flavor_name lane" time="0.000151615">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="08: cd /media/programmer/Library/Projects/vethx/playground/beta/mobile/src &amp;&amp; flutter pub get --suppress-analytics" time="3.145817211">
+      <testcase classname="fastlane.lanes" name="08: Switch to android flutter_flavor_value lane" time="0.000150372">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="09: Switch to android dart_define lane" time="0.000676615">
+      <testcase classname="fastlane.lanes" name="09: Switch to android flutter_flavor_value lane" time="0.000152343">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="10: Switch to android sh_on_root lane" time="0.000429003">
+      <testcase classname="fastlane.lanes" name="10: firebase_app_distribution" time="18.303503539">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="11: cd /media/programmer/Library/Projects/vethx/playground/beta/mobile/src &amp;&amp; flutter build appbundle --no-pub --release --suppress-analytics --dart-define=APP_ENVIRONMENT=dev --flavor=dev" time="139.988541647">
+      <testcase classname="fastlane.lanes" name="11: slack" time="0.409607668">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="12: slack" time="23.096687947">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="13: notification" time="0.00401272">
+      <testcase classname="fastlane.lanes" name="12: notification" time="0.002053203">
         
       </testcase>
     

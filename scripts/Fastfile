@@ -2,8 +2,8 @@ opt_out_usage
 
 fastlane_require 'dotenv'
 
-private_lane :load_env do
-  Dotenv.overload '../../../infrastructure/.files/environment/.env'
+lane :load_env do
+  Dotenv.overload '../../../../infrastructure/.files/environment/.env'
 end
 
 desc "have an easy way to run flutter tasks on the root of the project"
@@ -36,7 +36,16 @@ end
 
 desc "set --dart-define's on prod environment"
 lane :dart_define do
-  "--dart-define=APP_ENVIRONMENT=dev --flavor=dev"
+  "--dart-define=APP_ENVIRONMENT=dev #{flutter_flavor_option}"
+end
+
+lane :flutter_flavor_option do
+ "#{flutter_flavor_value.nil? ? "" : "--flavor=#{flutter_flavor_value}"}"
+end
+
+desc "define flutter flavor to use"
+lane :flutter_flavor_value do
+  "dev"
 end
 
 lane :test do |options|

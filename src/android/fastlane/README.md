@@ -15,6 +15,11 @@ Install _fastlane_ using
 or alternatively using `brew install fastlane`
 
 # Available Actions
+### load_env
+```
+fastlane load_env
+```
+
 ### sh_on_root
 ```
 fastlane sh_on_root
@@ -45,6 +50,16 @@ fastlane lint
 fastlane dart_define
 ```
 set --dart-define's on prod environment
+### flutter_flavor_option
+```
+fastlane flutter_flavor_option
+```
+
+### flutter_flavor_value
+```
+fastlane flutter_flavor_value
+```
+define flutter flavor to use
 ### test
 ```
 fastlane test
