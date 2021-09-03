@@ -1,7 +1,7 @@
 opt_out_usage
 
 fastlane_require 'dotenv'
-  
+
 private_lane :load_env do
   Dotenv.overload '../../../infrastructure/.files/environment/.env'
 end
