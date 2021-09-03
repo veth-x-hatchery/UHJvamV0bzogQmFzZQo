@@ -28,19 +28,19 @@ app_rating_config_path "./fastlane/rating_config.json"
 #   'en-US' => "one line too?"
 # })
 
-# copyright "Verthcos - Delta App"
+# copyright "Hatchery - Delta App"
 
 # automatic_release true
 
 # app_review_information({
-#   first_name: "verthcos",
-#   last_name: "verthcos",
-#   phone_number: "verthcos",
-#   email_address: "verthcos@verthcos.com",
-#   demo_user: "verthcos user",
-#   demo_password: "verthcos pass",
-#   notes: "verthcos notes
-# verthcos new line"
+#   first_name: "vethxhatchery",
+#   last_name: "vethxhatchery",
+#   phone_number: "vethxhatchery",
+#   email_address: "vethxhatchery@vethxhatchery.com",
+#   demo_user: "vethxhatchery user",
+#   demo_password: "vethxhatchery pass",
+#   notes: "vethxhatchery notes
+# vethxhatchery new line"
 # })
 
 # primary_category "Business"

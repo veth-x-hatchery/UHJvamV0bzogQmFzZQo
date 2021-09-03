@@ -112,22 +112,22 @@ platform :ios do
       uses_non_exempt_encryption: true,
       reject_build_waiting_for_review: true,
       expire_previous_builds: true,
-      beta_app_feedback_email: "email@verthcos.com",
+      beta_app_feedback_email: "email@vethxhatchery.com",
       beta_app_description: "This is a description of my app",
       beta_app_review_info: {
-        contact_email: "email@verthcos.com",
+        contact_email: "email@vethxhatchery.com",
         contact_first_name: "Connect",
         contact_last_name: "API",
         contact_phone: "+5511988887777",
-        demo_account_name: "demo@verthcos.com",
+        demo_account_name: "demo@vethxhatchery.com",
         demo_account_password: "connectapi",
         notes: "this is review note for the reviewer <3 thank you for reviewing"
       },
       localized_app_info: {
         "default": {
-          feedback_email: "default@verthcos.com",
-          marketing_url: "https://verthcos.com/marketing-defafult",
-          privacy_policy_url: "https://verthcos.com/privacy-defafult",
+          feedback_email: "default@vethxhatchery.com",
+          marketing_url: "https://vethxhatchery.com/marketing-defafult",
+          privacy_policy_url: "https://vethxhatchery.com/privacy-defafult",
           description: "Default description",
         }
       },
