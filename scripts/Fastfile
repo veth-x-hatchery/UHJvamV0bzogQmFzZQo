@@ -35,7 +35,8 @@ lane :lint do
 end
 
 lane :test do |options|
-  sh_on_root(command: "flutter test --no-pub --coverage --suppress-analytics")
+  # sh_on_root(command: "flutter test --no-pub --coverage --suppress-analytics")
+  sh_on_root(command: "./test/coverate_settings.sh --no-pub")
 end
 
 lane :integration_tests do |options|

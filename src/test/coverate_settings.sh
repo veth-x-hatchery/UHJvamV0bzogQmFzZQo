@@ -12,7 +12,7 @@
 # echo "void main(){}" >> $file
 
 rm -rf coverage/*
-flutter test --coverage
+flutter test --coverage --suppress-analytics $1
 lcov --directory lib/features \
 --remove coverage/lcov.info \
 "lib/features/home/*" \

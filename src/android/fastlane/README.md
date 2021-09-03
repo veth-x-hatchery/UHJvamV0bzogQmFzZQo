@@ -45,6 +45,11 @@ fastlane lint
 fastlane test
 ```
 
+### integration_tests
+```
+fastlane integration_tests
+```
+
 ### screenshots_tests
 ```
 fastlane screenshots_tests
