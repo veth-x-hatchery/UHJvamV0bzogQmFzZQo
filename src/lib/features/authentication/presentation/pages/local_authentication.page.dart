@@ -26,7 +26,7 @@ class LocalAuthenticationPage extends StatelessWidget {
             SizedBox(height: SizeConfig.screenHeight * 0.35),
             CustomRaisedButton(
               child: const Text(
-                'Authenticate',
+                context.l10n.localAuthentication_page_button,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15.0,

@@ -3,7 +3,7 @@ opt_out_usage
 fastlane_require 'dotenv'
   
 private_lane :load_env do
-  Dotenv.overload '../../../../VmFyaWF2ZWlzIGRlIEFtYmllbnRlCg/.files/WmVpY2hlbiBUYXNrcwo/.env'
+  Dotenv.overload '../../../infrastructure/.files/environment/.env'
 end
 
 desc "have an easy way to run flutter tasks on the root of the project"

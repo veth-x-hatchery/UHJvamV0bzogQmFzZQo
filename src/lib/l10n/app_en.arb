@@ -140,5 +140,9 @@
     "signIn_usecase_withSecret_invalidCachedCredential" : "Please confirm your email",
     "@signIn_usecase_withSecret_invalidCachedCredential": {
       "description": "..."
+    },
+    "localAuthentication_page_button" : "Authenticate",
+    "@localAuthentication_page_button": {
+      "description": "..."
     }
   }
