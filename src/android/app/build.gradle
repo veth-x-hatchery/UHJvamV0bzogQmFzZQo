@@ -91,8 +91,8 @@ android {
     productFlavors {
         dev {
             dimension "hatchery"
-            applicationIdSuffix ".dev"
-            versionNameSuffix ".dev"
+            // applicationIdSuffix ".dev" => will be applyed to applicationId.. problem here. Create a new firebase project
+            // versionNameSuffix ".dev"
             applicationId "dev.hatchery.vethx"
             resValue "string", "app_name", "Vethx Hatchery"
         }
