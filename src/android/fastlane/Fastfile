@@ -53,9 +53,9 @@ platform :android do
 
   lane :deploy_firebase do
 
-    # build_apk
+    build_apk
 
-    # test
+    test
 
     firebase_app_distribution(
       service_credentials_file: ENV["FIREBASE_DIST_SERVICE_ACCOUNT_FILE"],
