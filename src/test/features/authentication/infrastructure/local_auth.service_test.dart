@@ -7,6 +7,8 @@ import 'package:local_auth/error_codes.dart' as auth_error;
 import 'package:local_auth/local_auth.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
+import 'package:vethx_beta/core/services/storage/pii.service.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth.service.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth_failure.dart';
@@ -15,15 +17,41 @@ import 'local_auth.service_test.mocks.dart';
 
 @GenerateMocks([
   LocalAuthentication,
+  PII,
 ])
 void main() {
   late MockLocalAuthentication _mockLocalAuthentication;
+  late MockPII _mockStorageService;
   late LocalAuth _localAuth;
 
   setUp(() {
+    _mockStorageService = MockPII();
     _mockLocalAuthentication = MockLocalAuthentication();
-    _localAuth = LocalAuth(_mockLocalAuthentication);
+    _localAuth = LocalAuth(
+      _mockLocalAuthentication,
+      _mockStorageService,
+    );
   });
+
+  void _storageResultNotFound() {
+    when(_mockStorageService.get(
+            key: PersonallyIdentifiableInformationKeys.authenticationRequest))
+        .thenAnswer((_) async => left(PII.objectNotFound(
+            PersonallyIdentifiableInformationKeys.authenticationRequest)));
+  }
+
+  void _storageResult() {
+    when(_mockStorageService.get(
+            key: PersonallyIdentifiableInformationKeys.authenticationRequest))
+        .thenAnswer((_) async => right('[RANDOM_VALUE]'));
+  }
+
+  void _storageRemove() {
+    when(_mockStorageService.remove(
+            key: PersonallyIdentifiableInformationKeys.authenticationRequest))
+        .thenAnswer((_) async => right(unit));
+    _storageResultNotFound();
+  }
 
   void _throwExceptionCode(String code) {
     when(_mockLocalAuthentication.authenticate(

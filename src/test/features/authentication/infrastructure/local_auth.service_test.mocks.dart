@@ -2,11 +2,16 @@
 // in vethx_beta/test/features/authentication/infrastructure/local_auth.service_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
-import 'package:local_auth/auth_strings.dart' as _i4;
-import 'package:local_auth/local_auth.dart' as _i2;
+import 'package:dartz/dartz.dart' as _i2;
+import 'package:local_auth/auth_strings.dart' as _i5;
+import 'package:local_auth/local_auth.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:vethx_beta/core/error/failures.dart' as _i7;
+import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart'
+    as _i8;
+import 'package:vethx_beta/core/services/storage/pii.service.dart' as _i6;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -16,27 +21,29 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
+class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
+
 /// A class which mocks [LocalAuthentication].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLocalAuthentication extends _i1.Mock
-    implements _i2.LocalAuthentication {
+    implements _i3.LocalAuthentication {
   MockLocalAuthentication() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<bool> get canCheckBiometrics =>
+  _i4.Future<bool> get canCheckBiometrics =>
       (super.noSuchMethod(Invocation.getter(#canCheckBiometrics),
-          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
   @override
-  _i3.Future<bool> authenticateWithBiometrics(
+  _i4.Future<bool> authenticateWithBiometrics(
           {String? localizedReason,
           bool? useErrorDialogs = true,
           bool? stickyAuth = false,
-          _i4.AndroidAuthMessages? androidAuthStrings =
-              const _i4.AndroidAuthMessages(),
-          _i4.IOSAuthMessages? iOSAuthStrings = const _i4.IOSAuthMessages(),
+          _i5.AndroidAuthMessages? androidAuthStrings =
+              const _i5.AndroidAuthMessages(),
+          _i5.IOSAuthMessages? iOSAuthStrings = const _i5.IOSAuthMessages(),
           bool? sensitiveTransaction = true}) =>
       (super.noSuchMethod(
           Invocation.method(#authenticateWithBiometrics, [], {
@@ -47,15 +54,15 @@ class MockLocalAuthentication extends _i1.Mock
             #iOSAuthStrings: iOSAuthStrings,
             #sensitiveTransaction: sensitiveTransaction
           }),
-          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
   @override
-  _i3.Future<bool> authenticate(
+  _i4.Future<bool> authenticate(
           {String? localizedReason,
           bool? useErrorDialogs = true,
           bool? stickyAuth = false,
-          _i4.AndroidAuthMessages? androidAuthStrings =
-              const _i4.AndroidAuthMessages(),
-          _i4.IOSAuthMessages? iOSAuthStrings = const _i4.IOSAuthMessages(),
+          _i5.AndroidAuthMessages? androidAuthStrings =
+              const _i5.AndroidAuthMessages(),
+          _i5.IOSAuthMessages? iOSAuthStrings = const _i5.IOSAuthMessages(),
           bool? sensitiveTransaction = true,
           bool? biometricOnly = false}) =>
       (super.noSuchMethod(
@@ -68,21 +75,60 @@ class MockLocalAuthentication extends _i1.Mock
             #sensitiveTransaction: sensitiveTransaction,
             #biometricOnly: biometricOnly
           }),
-          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
   @override
-  _i3.Future<bool> stopAuthentication() =>
+  _i4.Future<bool> stopAuthentication() =>
       (super.noSuchMethod(Invocation.method(#stopAuthentication, []),
-          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
   @override
-  _i3.Future<bool> isDeviceSupported() =>
+  _i4.Future<bool> isDeviceSupported() =>
       (super.noSuchMethod(Invocation.method(#isDeviceSupported, []),
-          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
   @override
-  _i3.Future<List<_i2.BiometricType>> getAvailableBiometrics() =>
+  _i4.Future<List<_i3.BiometricType>> getAvailableBiometrics() =>
       (super.noSuchMethod(Invocation.method(#getAvailableBiometrics, []),
               returnValue:
-                  Future<List<_i2.BiometricType>>.value(<_i2.BiometricType>[]))
-          as _i3.Future<List<_i2.BiometricType>>);
+                  Future<List<_i3.BiometricType>>.value(<_i3.BiometricType>[]))
+          as _i4.Future<List<_i3.BiometricType>>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [PII].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPII extends _i1.Mock implements _i6.PII {
+  MockPII() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.Either<_i7.Failure, String> getKey(
+          _i8.PersonallyIdentifiableInformationKeys? key) =>
+      (super.noSuchMethod(Invocation.method(#getKey, [key]),
+              returnValue: _FakeEither_0<_i7.Failure, String>())
+          as _i2.Either<_i7.Failure, String>);
+  @override
+  _i4.Future<_i2.Either<_i7.Failure, String>> get(
+          {_i8.PersonallyIdentifiableInformationKeys? key}) =>
+      (super.noSuchMethod(Invocation.method(#get, [], {#key: key}),
+              returnValue: Future<_i2.Either<_i7.Failure, String>>.value(
+                  _FakeEither_0<_i7.Failure, String>()))
+          as _i4.Future<_i2.Either<_i7.Failure, String>>);
+  @override
+  _i4.Future<_i2.Either<_i7.Failure, _i2.Unit>> remove(
+          {_i8.PersonallyIdentifiableInformationKeys? key}) =>
+      (super.noSuchMethod(Invocation.method(#remove, [], {#key: key}),
+              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
+          as _i4.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
+  @override
+  _i4.Future<_i2.Either<_i7.Failure, _i2.Unit>> write(
+          {_i8.PersonallyIdentifiableInformationKeys? key, String? obj}) =>
+      (super.noSuchMethod(Invocation.method(#write, [], {#key: key, #obj: obj}),
+              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
+          as _i4.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
   @override
   String toString() => super.toString();
 }

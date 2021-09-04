@@ -66,7 +66,8 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
         try {
           await _storage.box(hiveBoxName).delete(keyValue);
         } on PlatformException catch (ex, stack) {
-          Logger.utils('CacheService, write', exception: ex, stackTrace: stack);
+          Logger.utils('CacheService, remove',
+              exception: ex, stackTrace: stack);
           return left(unavailableService());
         }
         return right(unit);

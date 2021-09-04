@@ -71,6 +71,8 @@ class ServiceLocatorConfig {
 
     getIt.registerLazySingleton<API>(() => API(getIt<IApiSetup>()));
 
+    // Data sources
+
     // Services
 
     if (AppConfig().isIntegrationTest()) {
@@ -94,7 +96,10 @@ class ServiceLocatorConfig {
     );
 
     getIt.registerLazySingleton<ILocalAuth>(
-      () => LocalAuth(getIt<LocalAuthentication>()),
+      () => LocalAuth(
+        getIt<LocalAuthentication>(),
+        getIt<ILocalStorage<PersonallyIdentifiableInformationKeys>>(),
+      ),
     );
 
     //! Use case
