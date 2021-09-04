@@ -31,7 +31,9 @@ class LocalAuth implements ILocalAuth {
 
   Future<Either<LocalAuthFailure, bool>> _cache(Duration? cacheTolerance,
       Future<Either<LocalAuthFailure, bool>> Function() auth) async {
-    if (!await _pendingAuthentication()) {
+    final hasPendingAuthentication = await _pendingAuthentication();
+
+    if (!hasPendingAuthentication) {
       if (_lastRequestResult != null) {
         Logger.service(
             'LocalAuth: cached last auth result -> $_lastRequestResult');
