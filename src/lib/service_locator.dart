@@ -65,7 +65,8 @@ class ServiceLocatorConfig {
     //! Core
 
     getIt.registerLazySingleton<INetworkInfo>(
-        () => NetworkInfo(getIt<InternetConnectionChecker>()));
+      () => NetworkInfo(getIt<InternetConnectionChecker>()),
+    );
 
     getIt.registerLazySingleton<IApiSetup>(() => ApiSetupProduction());
 

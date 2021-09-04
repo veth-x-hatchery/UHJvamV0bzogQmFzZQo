@@ -9,17 +9,27 @@
             "program": "${workspaceFolder}/integration_test/features/signin/sign_in_email_test.dart",
             "request": "launch",
             "type": "dart",
+            "args": [
+                "--flavor=dev",
+                "--dart-env=test"
+            ]
         },
         {
             "name": "vethx_beta",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": [
+                "--flavor=dev"
+            ]
         },
         {
             "name": "vethx_beta (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "args": [
+                "--flavor=dev"
+            ]
         }
     ]
 }

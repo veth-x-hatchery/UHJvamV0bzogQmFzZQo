@@ -44,12 +44,12 @@ class LocalAuth implements ILocalAuth {
     bool noCache = false;
     _lastRequestResult!.fold(
       (_) => noCache = !noCache,
-      (allowed) {
+      (allowed) async {
         noCache = !allowed;
         if (allowed) {
-          _removeAuthenticationRequest();
+          await _removeAuthenticationRequest();
         } else {
-          _registerAuthenticationRequest();
+          await _registerAuthenticationRequest();
         }
       },
     );
@@ -104,6 +104,7 @@ class LocalAuth implements ILocalAuth {
       key: PersonallyIdentifiableInformationKeys.authenticationRequest,
       obj: ILocalAuth.STORAGE_KEY,
     );
+    Logger.service('LocalAuth: _registerAuthenticationRequest -> $result');
     return result.fold(
       (l) =>
           throw PlatformException(code: '${l.runtimeType}: unavailableService'),
@@ -113,7 +114,9 @@ class LocalAuth implements ILocalAuth {
 
   Future<void> _removeAuthenticationRequest() async {
     final result = await _cacheService.remove(
-        key: PersonallyIdentifiableInformationKeys.authenticationRequest);
+      key: PersonallyIdentifiableInformationKeys.authenticationRequest,
+    );
+    Logger.service('LocalAuth: _removeAuthenticationRequest -> $result');
     return result.fold(
       (_) => unit,
       (_) => unit,
@@ -125,6 +128,7 @@ class LocalAuth implements ILocalAuth {
   Future<bool> _pendingAuthentication() async {
     final result = await _cacheService.get(
         key: PersonallyIdentifiableInformationKeys.authenticationRequest);
+    Logger.service('LocalAuth: _pendingAuthentication -> $result');
     return result.fold(
       (notFound) => false,
       (_) => true,
