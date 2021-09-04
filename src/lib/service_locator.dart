@@ -17,6 +17,7 @@ import 'package:vethx_beta/features/authentication/infrastructure/services/local
 import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
 import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
 import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
+import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
 import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
@@ -72,21 +73,20 @@ class ServiceLocatorConfig {
 
     // Services
 
-    if (AppConfig().isDevelopment()) {
+    if (AppConfig().isIntegrationTest()) {
       getIt.registerLazySingleton<IAuthFacade>(
         () => AuthFacadeMock()..setupSignInEmailIntegrationTest(),
       );
     } else {
       getIt.registerLazySingleton<FirebaseUserMapper>(
           () => FirebaseUserMapper());
-
-      // getIt.registerLazySingleton<IAuthFacade>(
-      //   () => FirebaseAuthFacade(
-      //     getIt<FirebaseAuth>(),
-      //     getIt<GoogleSignIn>(),
-      //     getIt<FirebaseUserMapper>(),
-      //   ),
-      // );
+      getIt.registerLazySingleton<IAuthFacade>(
+        () => FirebaseAuthFacade(
+          getIt<FirebaseAuth>(),
+          getIt<GoogleSignIn>(),
+          getIt<FirebaseUserMapper>(),
+        ),
+      );
     }
 
     getIt.registerLazySingleton<LocalAuthentication>(
