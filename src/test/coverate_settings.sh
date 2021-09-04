@@ -18,7 +18,7 @@ default_flavor="--flavor=dev"
 flutter_flavor="${2:-$default_flavor}"
 
 rm -rf coverage/*
-flutter test --coverage --suppress-analytics $no_pub $default_flavor
+flutter test --coverage --suppress-analytics $no_pub
 lcov --directory lib/features \
 --remove coverage/lcov.info \
 "lib/features/home/*" \
