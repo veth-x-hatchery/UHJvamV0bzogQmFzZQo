@@ -2,15 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:vethx_beta/core/api/api.dart';
 import 'package:vethx_beta/core/api/api_setup.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
+import 'package:vethx_beta/core/services/storage/cache.service.dart';
 import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
 import 'package:vethx_beta/core/services/storage/pii.service.dart';
 import 'package:vethx_beta/core/utils/app_config.dart';
+import 'package:vethx_beta/core/utils/files.dart';
 import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
 import 'package:vethx_beta/features/authentication/domain/usecases/request_authentication.usecase.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth.service.dart';
@@ -48,6 +51,12 @@ class ServiceLocatorConfig {
     // getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 
     getIt.registerLazySingleton<AppConfig>(() => AppConfig());
+
+    Hive.init(
+        await FilesUtil.createFolderInAppDocDir(CacheService.storageFolder));
+    getIt.registerLazySingleton<ILocalStorage<SensitiveDataKeys>>(
+      () => CacheService(Hive),
+    );
 
     getIt.registerLazySingleton<
         ILocalStorage<PersonallyIdentifiableInformationKeys>>(
@@ -99,7 +108,7 @@ class ServiceLocatorConfig {
     getIt.registerLazySingleton<ILocalAuth>(
       () => LocalAuth(
         getIt<LocalAuthentication>(),
-        getIt<ILocalStorage<PersonallyIdentifiableInformationKeys>>(),
+        getIt<ILocalStorage<SensitiveDataKeys>>(),
       ),
     );
 

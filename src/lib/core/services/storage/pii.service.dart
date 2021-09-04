@@ -6,6 +6,8 @@ import 'package:vethx_beta/core/utils/logger.dart';
 
 import 'i_local_storage.service.dart';
 
+/// Todo(v): when closing the app, killing the process, appears do not persist the data
+/// Read docs
 class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
   final FlutterSecureStorage _storage;
 
@@ -20,8 +22,6 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
         'UElJS2V5cy5jcmVkZW50aWFsCg',
     PersonallyIdentifiableInformationKeys.refreshToken:
         'UElJS2V5cy5yZWZyZXNoVG9rZW4K',
-    PersonallyIdentifiableInformationKeys.authenticationRequest:
-        'UElJS2V5cy5hdXRoZW50aWNhdGlvblJlcXVlc3QK',
   };
 
   static Failure objectNotFound(PersonallyIdentifiableInformationKeys key) =>

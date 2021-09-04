@@ -7,8 +7,8 @@ import 'package:local_auth/error_codes.dart' as auth_error;
 import 'package:local_auth/local_auth.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/core/services/storage/cache.service.dart';
 import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
-import 'package:vethx_beta/core/services/storage/pii.service.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth.service.dart';
@@ -18,15 +18,15 @@ import 'local_auth.service_test.mocks.dart';
 
 @GenerateMocks([
   LocalAuthentication,
-  PII,
+  CacheService,
 ])
 void main() {
   late MockLocalAuthentication _mockLocalAuthentication;
-  late MockPII _mockStorageService;
+  late MockCacheService _mockStorageService;
   late LocalAuth _localAuth;
 
   setUp(() {
-    _mockStorageService = MockPII();
+    _mockStorageService = MockCacheService();
     _mockLocalAuthentication = MockLocalAuthentication();
     _localAuth = LocalAuth(
       _mockLocalAuthentication,
@@ -35,28 +35,26 @@ void main() {
   });
 
   void _storageResultNotFound() {
-    when(_mockStorageService.get(
-            key: PersonallyIdentifiableInformationKeys.authenticationRequest))
-        .thenAnswer((_) async => left(PII.objectNotFound(
-            PersonallyIdentifiableInformationKeys.authenticationRequest)));
+    when(_mockStorageService.get(key: SensitiveDataKeys.authenticationRequest))
+        .thenAnswer((_) async => left(CacheService.objectNotFound(
+            SensitiveDataKeys.authenticationRequest)));
   }
 
   void _storagePendingAuthentication() {
-    when(_mockStorageService.get(
-            key: PersonallyIdentifiableInformationKeys.authenticationRequest))
+    when(_mockStorageService.get(key: SensitiveDataKeys.authenticationRequest))
         .thenAnswer((_) async => right(ILocalAuth.STORAGE_KEY));
   }
 
   void _storageWrite() {
     when(_mockStorageService.write(
-            key: PersonallyIdentifiableInformationKeys.authenticationRequest,
+            key: SensitiveDataKeys.authenticationRequest,
             obj: ILocalAuth.STORAGE_KEY))
         .thenAnswer((_) async => right(unit));
   }
 
   void _storageRemove() {
     when(_mockStorageService.remove(
-            key: PersonallyIdentifiableInformationKeys.authenticationRequest))
+            key: SensitiveDataKeys.authenticationRequest))
         .thenAnswer((_) async => right(unit));
   }
 
@@ -234,7 +232,7 @@ void main() {
     )).called(1);
 
     verify(_mockStorageService.remove(
-            key: PersonallyIdentifiableInformationKeys.authenticationRequest))
+            key: SensitiveDataKeys.authenticationRequest))
         .called(1);
   });
 }

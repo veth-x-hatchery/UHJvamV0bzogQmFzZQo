@@ -10,7 +10,7 @@ import 'package:vethx_beta/features/authentication/infrastructure/services/local
 
 class LocalAuth implements ILocalAuth {
   final LocalAuthentication _localAuth;
-  final ILocalStorage<PersonallyIdentifiableInformationKeys> _cacheService;
+  final ILocalStorage<SensitiveDataKeys> _cacheService;
 
   LocalAuth(
     this._localAuth,
@@ -32,6 +32,8 @@ class LocalAuth implements ILocalAuth {
   Future<Either<LocalAuthFailure, bool>> _cache(Duration? cacheTolerance,
       Future<Either<LocalAuthFailure, bool>> Function() auth) async {
     final hasPendingAuthentication = await _pendingAuthentication();
+    Logger.service(
+        'LocalAuth: hasPendingAuthentication -> $hasPendingAuthentication');
 
     if (!hasPendingAuthentication) {
       if (_lastRequestResult != null) {
@@ -103,7 +105,7 @@ class LocalAuth implements ILocalAuth {
 
   Future<void> _registerAuthenticationRequest() async {
     final result = await _cacheService.write(
-      key: PersonallyIdentifiableInformationKeys.authenticationRequest,
+      key: SensitiveDataKeys.authenticationRequest,
       obj: ILocalAuth.STORAGE_KEY,
     );
     Logger.service('LocalAuth: _registerAuthenticationRequest -> $result');
@@ -116,7 +118,7 @@ class LocalAuth implements ILocalAuth {
 
   Future<void> _removeAuthenticationRequest() async {
     final result = await _cacheService.remove(
-      key: PersonallyIdentifiableInformationKeys.authenticationRequest,
+      key: SensitiveDataKeys.authenticationRequest,
     );
     Logger.service('LocalAuth: _removeAuthenticationRequest -> $result');
     return result.fold(
@@ -128,8 +130,8 @@ class LocalAuth implements ILocalAuth {
   /// If when app request authentication the user close the app
   /// Its necessary to come back requesting the same authorization
   Future<bool> _pendingAuthentication() async {
-    final result = await _cacheService.get(
-        key: PersonallyIdentifiableInformationKeys.authenticationRequest);
+    final result =
+        await _cacheService.get(key: SensitiveDataKeys.authenticationRequest);
     Logger.service('LocalAuth: _pendingAuthentication -> $result');
     return result.fold(
       (notFound) => false,
