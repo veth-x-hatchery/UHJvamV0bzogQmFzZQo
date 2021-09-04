@@ -41,7 +41,7 @@ void main() {
             PersonallyIdentifiableInformationKeys.authenticationRequest)));
   }
 
-  void _storageResult() {
+  void _storagePendingAuthentication() {
     when(_mockStorageService.get(
             key: PersonallyIdentifiableInformationKeys.authenticationRequest))
         .thenAnswer((_) async => right(ILocalAuth.STORAGE_KEY));
@@ -58,7 +58,6 @@ void main() {
     when(_mockStorageService.remove(
             key: PersonallyIdentifiableInformationKeys.authenticationRequest))
         .thenAnswer((_) async => right(unit));
-    _storageResultNotFound();
   }
 
   void _throwExceptionCode(String code) {
@@ -208,5 +207,34 @@ void main() {
       // iOSAuthStrings: LocalAuth.iosStrings,
       stickyAuth: true,
     )).called(cacheTolerance.inSeconds);
+  });
+
+  test(
+      'when have a register that indicate pending authentication request then should request it to the user',
+      () async {
+    //
+
+    _storagePendingAuthentication();
+
+    _storageWrite();
+
+    _authenticationResult(true);
+
+    _storageRemove();
+
+    await _localAuth.request();
+
+    // assert
+
+    verify(_mockLocalAuthentication.authenticate(
+      localizedReason: LocalAuth.localizedReason,
+      useErrorDialogs: false,
+      // iOSAuthStrings: LocalAuth.iosStrings,
+      stickyAuth: true,
+    )).called(1);
+
+    verify(_mockStorageService.remove(
+            key: PersonallyIdentifiableInformationKeys.authenticationRequest))
+        .called(1);
   });
 }
