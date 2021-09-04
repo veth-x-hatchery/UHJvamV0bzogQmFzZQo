@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # rm test/coverage_helper_test.dart
 # file=test/coverage_helper_test.dart
 # echo "// Helper file to make coverage work for all dart files\n" > $file
@@ -11,8 +12,13 @@
 # | cut -c4- | awk -v package=vethx_beta '{printf "import '\''package:%s%s'\'';\n", package, $1}' >> $file
 # echo "void main(){}" >> $file
 
+no_pub=$1
+
+default_flavor="--flavor=dev"
+flutter_flavor="${2:-$default_flavor}"
+
 rm -rf coverage/*
-flutter test --coverage --suppress-analytics $1
+flutter test --coverage --suppress-analytics $no_pub $default_flavor
 lcov --directory lib/features \
 --remove coverage/lcov.info \
 "lib/features/home/*" \

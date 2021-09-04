@@ -50,11 +50,11 @@ end
 
 lane :test do |options|
   # sh_on_root(command: "flutter test --no-pub --coverage --suppress-analytics")
-  sh_on_root(command: "./test/coverate_settings.sh --no-pub")
+  sh_on_root(command: "./test/coverate_settings.sh --no-pub #{flutter_flavor_option}")
 end
 
 lane :integration_tests do |options|
-  sh_on_root(command: "./integration_test/integration_tests.sh")
+  sh_on_root(command: "./integration_test/integration_tests.sh #{flutter_flavor_option}")
 end
 
 lane :screenshots_tests do
