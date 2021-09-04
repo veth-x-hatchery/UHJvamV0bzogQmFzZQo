@@ -3,14 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/auth_strings.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
 import 'package:local_auth/local_auth.dart';
+import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
 import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth_failure.dart';
 
 class LocalAuth implements ILocalAuth {
   final LocalAuthentication _localAuth;
+  final ILocalStorage<SensitiveDataKeys> _cacheService;
 
-  LocalAuth(this._localAuth);
+  LocalAuth(
+    this._localAuth,
+    this._cacheService,
+  );
 
   Either<LocalAuthFailure, bool>? _lastRequestResult;
 
@@ -26,10 +31,16 @@ class LocalAuth implements ILocalAuth {
 
   Future<Either<LocalAuthFailure, bool>> _cache(Duration? cacheTolerance,
       Future<Either<LocalAuthFailure, bool>> Function() auth) async {
-    if (_lastRequestResult != null) {
-      Logger.service(
-          'LocalAuth: cached last auth result -> $_lastRequestResult');
-      return _lastRequestResult!;
+    final hasPendingAuthentication = await _pendingAuthentication();
+    Logger.service(
+        'LocalAuth: hasPendingAuthentication -> $hasPendingAuthentication');
+
+    if (!hasPendingAuthentication) {
+      if (_lastRequestResult != null) {
+        Logger.service(
+            'LocalAuth: cached last auth result -> $_lastRequestResult');
+        return _lastRequestResult!;
+      }
     }
 
     _lastRequestResult = await auth();
@@ -37,7 +48,14 @@ class LocalAuth implements ILocalAuth {
     bool noCache = false;
     _lastRequestResult!.fold(
       (_) => noCache = !noCache,
-      (allowed) => noCache = !allowed,
+      (allowed) async {
+        noCache = !allowed;
+        if (allowed) {
+          await _removeAuthenticationRequest();
+        } else {
+          await _registerAuthenticationRequest();
+        }
+      },
     );
 
     final timeToClear = noCache
@@ -83,5 +101,41 @@ class LocalAuth implements ILocalAuth {
           return left(const LocalAuthFailure.genericError());
       }
     }
+  }
+
+  Future<void> _registerAuthenticationRequest() async {
+    final result = await _cacheService.write(
+      key: SensitiveDataKeys.authenticationRequest,
+      obj: ILocalAuth.STORAGE_KEY,
+    );
+    Logger.service('LocalAuth: _registerAuthenticationRequest -> $result');
+    return result.fold(
+      (l) =>
+          throw PlatformException(code: '${l.runtimeType}: unavailableService'),
+      (r) => unit,
+    );
+  }
+
+  Future<void> _removeAuthenticationRequest() async {
+    final result = await _cacheService.remove(
+      key: SensitiveDataKeys.authenticationRequest,
+    );
+    Logger.service('LocalAuth: _removeAuthenticationRequest -> $result');
+    return result.fold(
+      (_) => unit,
+      (_) => unit,
+    );
+  }
+
+  /// If when app request authentication the user close the app
+  /// Its necessary to come back requesting the same authorization
+  Future<bool> _pendingAuthentication() async {
+    final result =
+        await _cacheService.get(key: SensitiveDataKeys.authenticationRequest);
+    Logger.service('LocalAuth: _pendingAuthentication -> $result');
+    return result.fold(
+      (notFound) => false,
+      (_) => true,
+    );
   }
 }

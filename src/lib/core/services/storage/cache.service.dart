@@ -10,6 +10,8 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
   /// echo 'CacheKeys.*' | base64
   static const Map<SensitiveDataKeys, String> _cacheKeys = {
     SensitiveDataKeys.apiEndPointXYZ: 'Q2FjaGVLZXlzLmFwaUVuZFBvaW50WFlaCg',
+    SensitiveDataKeys.authenticationRequest:
+        'UElJS2V5cy5hdXRoZW50aWNhdGlvblJlcXVlc3QK',
   };
 
   static Failure objectNotFound(SensitiveDataKeys key) =>
@@ -21,24 +23,27 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
   static const String hiveBoxName =
       'SUxvY2FsU3RvcmFnZTxTZW5zaXRpdmVEYXRhS2V5cz4K';
 
+  /// Receive the path from AppConfig env
+  static String storageFolder = 'avcmFnZTxTZW5';
+
   final HiveInterface _storage;
 
-  CacheService(this._storage) {
-    _storage.openBox<String>(hiveBoxName);
-  }
+  CacheService(this._storage);
 
-  Future<void> _openBox() async {
+  late Box<String> __box;
+
+  Future<Box<String>> _box() async {
     if (!_storage.isBoxOpen(hiveBoxName)) {
-      await _storage.openBox<String>(hiveBoxName);
+      __box = await _storage.openBox<String>(hiveBoxName);
     }
+    return __box;
   }
 
   @override
   Either<Failure, String> getKey(SensitiveDataKeys key) {
     final value = _cacheKeys[key];
     if (value == null) {
-      return left(Failure.cacheFailure(
-          message: 'key: $key not registered in our enum'));
+      throw Exception('key: $key not registered in our enum');
     }
     return right(value);
   }
@@ -48,8 +53,7 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
     return getKey(key).fold(
       (_) => left(_),
       (keyValue) async {
-        await _openBox();
-        final obj = _storage.box<String>(hiveBoxName).get(keyValue);
+        final obj = (await _box()).get(keyValue);
         if (obj == null) {
           return left(objectNotFound(key));
         }
@@ -64,9 +68,10 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
       (_) => left(_),
       (keyValue) async {
         try {
-          await _storage.box(hiveBoxName).delete(keyValue);
+          await (await _box()).delete(keyValue);
         } on PlatformException catch (ex, stack) {
-          Logger.utils('CacheService, write', exception: ex, stackTrace: stack);
+          Logger.utils('CacheService, remove',
+              exception: ex, stackTrace: stack);
           return left(unavailableService());
         }
         return right(unit);
@@ -83,7 +88,7 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
       (_) => left(_),
       (keyValue) async {
         try {
-          await _storage.box(hiveBoxName).put(keyValue, obj);
+          await (await _box()).put(keyValue, obj);
         } on PlatformException catch (ex, stack) {
           Logger.utils('CacheService, write', exception: ex, stackTrace: stack);
           return left(unavailableService());

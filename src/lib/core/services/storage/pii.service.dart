@@ -6,6 +6,8 @@ import 'package:vethx_beta/core/utils/logger.dart';
 
 import 'i_local_storage.service.dart';
 
+/// Todo(v): when closing the app, killing the process, appears do not persist the data
+/// Read docs
 class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
   final FlutterSecureStorage _storage;
 
@@ -28,12 +30,15 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
   static Failure unavailableService() =>
       const Failure.cacheFailure(message: 'Cache storage unavailable');
 
+  static Failure keyNotRegistered(PersonallyIdentifiableInformationKeys key) =>
+      Failure.cacheFailure(message: 'key: $key not registered in our enum');
+
   @override
   Either<Failure, String> getKey(PersonallyIdentifiableInformationKeys key) {
     final value = _piiKeys[key];
     if (value == null) {
-      return left(Failure.cacheFailure(
-          message: 'key: $key not registered in our enum'));
+      // Exceptional case. We have tests but... its safe have an exception here
+      return throw Exception('key: $key not registered in our enum');
     }
     return right(value);
   }
@@ -42,7 +47,7 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
   Future<Either<Failure, String>> get(
       {required PersonallyIdentifiableInformationKeys key}) async {
     return getKey(key).fold(
-      (_) => left(_),
+      (_) => left(keyNotRegistered(key)),
       (keyValue) async {
         final obj = await _storage.read(key: keyValue);
         if (obj == null) {
@@ -57,12 +62,12 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
   Future<Either<Failure, Unit>> remove(
       {required PersonallyIdentifiableInformationKeys key}) async {
     return getKey(key).fold(
-      (_) => left(_),
+      (_) => left(_), // Todo(v): Need to return
       (keyValue) async {
         try {
           await _storage.delete(key: keyValue);
         } on PlatformException catch (ex, stack) {
-          Logger.utils('PII, remove', exception: ex, stackTrace: stack);
+          Logger.service('PII, remove', exception: ex, stackTrace: stack);
           return left(unavailableService());
         }
         return right(unit);
@@ -71,16 +76,17 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
   }
 
   @override
-  Future<Either<Failure, Unit>> write(
-      {required PersonallyIdentifiableInformationKeys key,
-      required String obj}) async {
+  Future<Either<Failure, Unit>> write({
+    required PersonallyIdentifiableInformationKeys key,
+    required String obj,
+  }) async {
     return getKey(key).fold(
       (_) => left(_),
       (keyValue) async {
         try {
           await _storage.write(key: keyValue, value: obj);
         } on PlatformException catch (ex, stack) {
-          Logger.utils('PII, write', exception: ex, stackTrace: stack);
+          Logger.service('PII, write', exception: ex, stackTrace: stack);
           return left(unavailableService());
         }
         return right(unit);
