@@ -13,13 +13,15 @@
 # echo "void main(){}" >> $file
 
 no_pub=$1
-
 default_flavor="--flavor=dev"
 flutter_flavor="${2:-$default_flavor}"
 
 rm -rf coverage/*
+
 flutter test --coverage --suppress-analytics $no_pub
-lcov --directory lib/features \
+
+lcov \
+--directory lib/features \
 --remove coverage/lcov.info \
 "lib/features/home/*" \
 "lib/core/*" \
@@ -31,4 +33,6 @@ lcov --directory lib/features \
 "*_state.dart" \
 "*mock.dart" \
 -o coverage/new_lcov.info
-genhtml coverage/new_lcov.info -o coverage/html
+
+genhtml coverage/new_lcov.info \
+-o coverage/html
