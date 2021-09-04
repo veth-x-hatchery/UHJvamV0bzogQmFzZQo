@@ -102,7 +102,7 @@ class LocalAuth implements ILocalAuth {
   Future<void> _registerAuthenticationRequest() async {
     final result = await _cacheService.write(
       key: PersonallyIdentifiableInformationKeys.authenticationRequest,
-      obj: 'YnZhb3NkZmFkbnN2YVtzMGFmc2RmW2Fpb3NkbmEK',
+      obj: ILocalAuth.STORAGE_KEY,
     );
     return result.fold(
       (l) =>
