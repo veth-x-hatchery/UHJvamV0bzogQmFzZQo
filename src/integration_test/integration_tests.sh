@@ -21,7 +21,7 @@ echo "════════════════════════�
 flutter drive \
 --driver=test_driver/integration_test_driver_extended.dart \
 --target=integration_test/features/signin/sign_in_register_integration_test.dart \
---flavor $flutter_flavor
+$flutter_flavor
 
 echo ""
 echo ""
@@ -34,7 +34,7 @@ echo "════════════════════════�
 flutter drive \
 --driver=test_driver/integration_test_driver_extended.dart \
 --target=integration_test/features/signin/sign_in_email_integration_test.dart \
---flavor $flutter_flavor
+$flutter_flavor
 
 echo ""
 echo ""
