@@ -40,7 +40,7 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
   //! Encryption Key
 
   Future<String> _generateEnctryptionKey() async {
-    final encryptionKey = base64UrlEncode(Hive.generateSecureKey());
+    final encryptionKey = base64UrlEncode(_storage.generateSecureKey());
 
     final result = await _config.write(
       key: PersonallyIdentifiableInformationKeys.cacheConfig,
@@ -48,7 +48,9 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
     );
 
     return result.fold(
-      (_) => throw Exception('Was not possible to use LocalStorage service'),
+      (_) => throw PlatformException(
+          message: 'Was not possible to use LocalStorage service',
+          code: 'secure_storage_unavailable'),
       (_) => encryptionKey,
     );
   }
@@ -66,6 +68,12 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
   static String? _secretKeyCached;
   Future<Uint8List> _key() async {
     return base64Url.decode(_secretKeyCached ??= await _encryptionKey());
+  }
+
+  void dispose() {
+    Logger.service('CacheService => dispose()');
+    _secretKeyCached = null;
+    _storage.close();
   }
 
   /// Workaround: In our unit tests Mockito dont understand "HiveAesCipher(encryptionKey)"
@@ -88,7 +96,9 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
   Either<Failure, String> getKey(SensitiveDataKeys key) {
     final value = _cacheKeys[key];
     if (value == null) {
-      throw Exception('key: $key not registered in our enum');
+      throw PlatformException(
+          message: 'key: $key not registered in our enum',
+          code: 'key_not_registered');
     }
     return right(value);
   }
@@ -98,12 +108,18 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
     return getKey(key).fold(
       (_) => left(_),
       (keyValue) async {
-        final table = await _table();
-        final obj = table.get(keyValue);
-        if (obj == null) {
-          return left(objectNotFound(key));
+        try {
+          final table = await _table();
+          final obj = table.get(keyValue);
+          if (obj == null) {
+            return left(objectNotFound(key));
+          }
+          return right(obj);
+        } on PlatformException catch (ex, stack) {
+          Logger.utils('CacheService, remove',
+              exception: ex, stackTrace: stack);
+          return left(unavailableService());
         }
-        return right(obj);
       },
     );
   }
