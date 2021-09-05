@@ -23,9 +23,6 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
   static const String hiveBoxName =
       'SUxvY2FsU3RvcmFnZTxTZW5zaXRpdmVEYXRhS2V5cz4K';
 
-  /// Receive the path from AppConfig env
-  static String storageFolder = 'avcmFnZTxTZW5';
-
   final HiveInterface _storage;
 
   CacheService(this._storage);
