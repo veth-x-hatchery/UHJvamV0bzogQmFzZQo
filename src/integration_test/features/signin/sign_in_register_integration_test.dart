@@ -24,7 +24,8 @@ void main() {
   late IntegrationTestsHelpers helper;
 
   Future<void> _setupAndroidScreenShots() async {
-    await _binding.convertFlutterSurfaceToImage();
+    // TODO
+    // await _binding.convertFlutterSurfaceToImage();
   }
 
   Future<void> setupServiceLocator(WidgetTester tester) async {

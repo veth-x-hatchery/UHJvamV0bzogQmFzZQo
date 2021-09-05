@@ -37,8 +37,12 @@ class IntegrationTestsHelpers {
 
     // final List<int> firstPng =
 
-    await binding.takeScreenshot(
-        '$basePath/${Platform.isAndroid ? 'android' : 'ios'}/${deviceModel}_$prefix.${index}_$name');
+    // Todo(v): Workaround
+
+    if (!Platform.isAndroid) {
+      await binding.takeScreenshot(
+          '$basePath/${Platform.isAndroid ? 'android' : 'ios'}/${deviceModel}_$prefix.${index}_$name');
+    }
 
     // expect(firstPng.isNotEmpty, isTrue);
   }
