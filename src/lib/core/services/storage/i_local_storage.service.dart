@@ -5,6 +5,8 @@ import 'package:vethx_beta/core/error/failures.dart';
 enum SensitiveDataKeys {
   apiEndPointXYZ,
   authenticationRequest,
+  // Todo(v): Create a new object that contains all needed properties to LocalAuth config
+  localAuthenticationSkipNextRequest,
 }
 
 /// Uses Keystore for Android and Keychains for iOS

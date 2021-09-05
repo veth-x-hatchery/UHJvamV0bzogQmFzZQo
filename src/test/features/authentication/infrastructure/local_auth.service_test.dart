@@ -169,7 +169,7 @@ void main() {
       'then should request it to the user', () async {
     // arrange
 
-    await _localAuth.request(hasPendingAuthentication: true);
+    await _localAuth.request(ignoreCacheAndForceRequest: true);
 
     // assert
 

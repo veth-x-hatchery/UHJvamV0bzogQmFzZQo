@@ -35,11 +35,12 @@ class MockILocalAuth extends _i1.Mock implements _i3.ILocalAuth {
 
   @override
   _i4.Future<_i2.Either<_i5.LocalAuthFailure, bool>> request(
-          {Duration? cacheTolerance, bool? hasPendingAuthentication = false}) =>
+          {Duration? cacheTolerance,
+          bool? ignoreCacheAndForceRequest = false}) =>
       (super.noSuchMethod(
               Invocation.method(#request, [], {
                 #cacheTolerance: cacheTolerance,
-                #hasPendingAuthentication: hasPendingAuthentication
+                #ignoreCacheAndForceRequest: ignoreCacheAndForceRequest
               }),
               returnValue: Future<_i2.Either<_i5.LocalAuthFailure, bool>>.value(
                   _FakeEither_0<_i5.LocalAuthFailure, bool>()))

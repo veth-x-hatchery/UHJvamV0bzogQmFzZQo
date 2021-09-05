@@ -54,6 +54,13 @@ void main() {
         .thenAnswer((_) async => right(unit));
   }
 
+  void _withoutIgnoreNextAuthRequest() {
+    when(_mockStorageService.get(
+            key: SensitiveDataKeys.localAuthenticationSkipNextRequest))
+        .thenAnswer((_) async => left(CacheService.objectNotFound(
+            SensitiveDataKeys.localAuthenticationSkipNextRequest)));
+  }
+
   test('when request local auth then should return correct failure details',
       () async {
     final expectedFailuresAndDetails = {
@@ -64,6 +71,8 @@ void main() {
     };
 
     _storageWithoutPendingRequests();
+
+    _withoutIgnoreNextAuthRequest();
 
     for (final failure in expectedFailuresAndDetails.entries) {
       // arrange
@@ -92,6 +101,8 @@ void main() {
 
     _storageWithoutPendingRequests();
 
+    _withoutIgnoreNextAuthRequest();
+
     _storageRemove();
 
     when(_mockILocalAuth.request()).thenAnswer((_) async => right(true));
@@ -114,6 +125,8 @@ void main() {
     // arrange
 
     _storageWithoutPendingRequests();
+
+    _withoutIgnoreNextAuthRequest();
 
     _storageWrite();
 
@@ -144,9 +157,11 @@ void main() {
 
     _storagePendingAuthentication();
 
+    _withoutIgnoreNextAuthRequest();
+
     _storageRemove();
 
-    when(_mockILocalAuth.request(hasPendingAuthentication: true))
+    when(_mockILocalAuth.request(ignoreCacheAndForceRequest: true))
         .thenAnswer((_) async => right(true));
 
     await _useCase(const NoParams());
@@ -156,5 +171,33 @@ void main() {
     verify(_mockStorageService.remove(
             key: SensitiveDataKeys.authenticationRequest))
         .called(1);
+  });
+
+  test(
+      'when have a ignore request to this request '
+      'then should allow the user access without validations '
+      'and remove the actual pending request register from database', () async {
+    // arrange
+
+    when(_mockStorageService.get(
+            key: SensitiveDataKeys.localAuthenticationSkipNextRequest))
+        .thenAnswer((_) async => right('true'));
+
+    when(_mockStorageService.remove(
+            key: SensitiveDataKeys.localAuthenticationSkipNextRequest))
+        .thenAnswer((_) async => right(unit));
+
+    await _useCase(const NoParams());
+
+    // assert
+
+    verify(_mockStorageService.remove(
+            key: SensitiveDataKeys.localAuthenticationSkipNextRequest))
+        .called(1);
+
+    verifyNever(
+        _mockStorageService.get(key: SensitiveDataKeys.authenticationRequest));
+
+    verifyNever(_mockILocalAuth.request());
   });
 }

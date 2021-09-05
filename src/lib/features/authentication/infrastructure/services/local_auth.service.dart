@@ -17,11 +17,11 @@ class LocalAuth implements ILocalAuth {
   @override
   Future<Either<LocalAuthFailure, bool>> request({
     Duration? cacheTolerance,
-    bool hasPendingAuthentication = false,
+    bool ignoreCacheAndForceRequest = false,
   }) async {
     return _cache(
       cacheTolerance,
-      hasPendingAuthentication,
+      ignoreCacheAndForceRequest,
       _authenticate,
     );
   }

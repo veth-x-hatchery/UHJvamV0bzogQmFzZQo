@@ -13,6 +13,6 @@ abstract class ILocalAuth {
   /// [lastResultAvailable] and [cachedResult]
   Future<Either<LocalAuthFailure, bool>> request({
     Duration? cacheTolerance,
-    bool hasPendingAuthentication = false,
+    bool ignoreCacheAndForceRequest = false,
   });
 }

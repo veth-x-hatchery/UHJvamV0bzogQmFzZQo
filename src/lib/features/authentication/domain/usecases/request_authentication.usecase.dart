@@ -19,9 +19,15 @@ class RequestLocalAuthentication implements UseCase<bool, NoParams> {
   @override
   Future<Either<FailureDetails<LocalAuthFailure>, bool>> call(
       NoParams params) async {
+    final ignoreThisRequest = await _shouldIgnoreThisRequest();
+
+    if (ignoreThisRequest) {
+      return right(true);
+    }
+
     final hasPendingAuthentication = await _pendingAuthentication();
     return _localAuth
-        .request(hasPendingAuthentication: hasPendingAuthentication)
+        .request(ignoreCacheAndForceRequest: hasPendingAuthentication)
         .then((result) {
       return result.fold(
         (failure) => left(_mapFailures(failure)),
@@ -35,6 +41,20 @@ class RequestLocalAuthentication implements UseCase<bool, NoParams> {
         },
       );
     });
+  }
+
+  Future<bool> _shouldIgnoreThisRequest() async {
+    final result = await _cacheService.get(
+        key: SensitiveDataKeys.localAuthenticationSkipNextRequest);
+    Logger.service('LocalAuth: _shouldIgnoreThisRequest -> $result');
+    return result.fold(
+      (_) => false, // notFound
+      (r) async {
+        await _cacheService.remove(
+            key: SensitiveDataKeys.localAuthenticationSkipNextRequest);
+        return true;
+      },
+    );
   }
 
   Future<void> _registerAuthenticationRequest() async {

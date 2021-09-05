@@ -16,6 +16,8 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
     SensitiveDataKeys.apiEndPointXYZ: 'Q2FjaGVLZXlzLmFwaUVuZFBvaW50WFlaCg',
     SensitiveDataKeys.authenticationRequest:
         'UElJS2V5cy5hdXRoZW50aWNhdGlvblJlcXVlc3QK',
+    SensitiveDataKeys.localAuthenticationSkipNextRequest:
+        'Q2FjaGVLZXlzLmxvY2FsQXV0aGVudGljYXRpb25Ta2lwTmV4dFJlcXVlc3QK',
   };
 
   static Failure objectNotFound(SensitiveDataKeys key) =>
