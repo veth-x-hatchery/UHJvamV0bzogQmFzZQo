@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -23,21 +26,33 @@ import 'cache.service_test.mocks.dart';
 ])
 void main() {
   late CacheService _cacheService;
+
   late MockHiveImpl _mockStorage;
   late MockBox<String> _mockHiveBox;
+
   late MockPII _mockPII;
+
+  late String _secret;
+  late List<int> _encryptionKey;
 
   void _setupHive() {
     _mockHiveBox = MockBox<String>();
     _mockStorage = MockHiveImpl();
     _mockPII = MockPII();
 
+    _encryptionKey = Hive.generateSecureKey();
+    _secret = base64UrlEncode(_encryptionKey);
+
     when(_mockStorage.box<String>(any)).thenAnswer((_) => _mockHiveBox);
 
-    when(_mockStorage.openBox<String>(any))
-        .thenAnswer((_) async => _mockHiveBox);
-
-    when(_mockStorage.isBoxOpen(any)).thenAnswer((_) => true);
+    /// Workaround: In our unit tests Mockito dont understand "HiveAesCipher(encryptionKey)"
+    /// Because of this we still using the deprecated "encryptionKey" option
+    /// to be possible use MockSpec<HiveImpl>
+    /// Fix it in the next Narnia travel
+    when(_mockStorage.openBox<String>(
+      CacheService.hiveBoxName,
+      encryptionKey: _encryptionKey,
+    )).thenAnswer((_) async => _mockHiveBox);
   }
 
   setUp(() {
@@ -47,6 +62,11 @@ void main() {
       _mockPII,
     );
   });
+
+  void _initialSetup() {
+    when(_mockPII.get(key: PersonallyIdentifiableInformationKeys.cacheConfig))
+        .thenAnswer((_) async => right(_secret));
+  }
 
   test('should get all key values', () {
     // arrange && act && assert
@@ -59,6 +79,8 @@ void main() {
   group('when get cached value', () {
     test('should return object not found', () async {
       // arrange
+
+      _initialSetup();
 
       when(_mockHiveBox.get(any)).thenReturn(null);
 
@@ -75,6 +97,8 @@ void main() {
 
     test('should return the object', () async {
       // arrange
+
+      _initialSetup();
 
       const keyValue = '{data: data}';
 
@@ -95,6 +119,8 @@ void main() {
     test('should throw an exception', () async {
       // arrange
 
+      _initialSetup();
+
       when(_mockHiveBox.delete(any)).thenThrow(PlatformException(code: ''));
 
       // act
@@ -109,6 +135,8 @@ void main() {
 
     test('should remove with success', () async {
       // arrange
+
+      _initialSetup();
 
       when(_mockHiveBox.delete(any)).thenAnswer((_) => Future.value());
 
@@ -127,6 +155,8 @@ void main() {
     test('should throw an exception', () async {
       // arrange
 
+      _initialSetup();
+
       when(_mockHiveBox.put(any, any)).thenThrow(PlatformException(code: ''));
 
       // act
@@ -144,6 +174,8 @@ void main() {
     test('should write with success', () async {
       // arrange
 
+      _initialSetup();
+
       when(_mockHiveBox.put(any, any)).thenAnswer((_) => Future.value());
 
       // act
@@ -157,5 +189,9 @@ void main() {
 
       expect(result, right(unit));
     });
+  });
+
+  group('when dont have encryption key on device Secure Storage', () {
+    //
   });
 }

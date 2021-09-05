@@ -316,3 +316,31 @@ class MockHiveImpl extends _i1.Mock implements _i8.HiveImpl {
   @override
   String toString() => super.toString();
 }
+
+/// A class which mocks [HiveCipher].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHiveCipher extends _i1.Mock implements _i3.HiveCipher {
+  @override
+  int calculateKeyCrc() => (super
+          .noSuchMethod(Invocation.method(#calculateKeyCrc, []), returnValue: 0)
+      as int);
+  @override
+  int maxEncryptedSize(_i11.Uint8List? inp) =>
+      (super.noSuchMethod(Invocation.method(#maxEncryptedSize, [inp]),
+          returnValue: 0) as int);
+  @override
+  int encrypt(_i11.Uint8List? inp, int? inpOff, int? inpLength,
+          _i11.Uint8List? out, int? outOff) =>
+      (super.noSuchMethod(
+          Invocation.method(#encrypt, [inp, inpOff, inpLength, out, outOff]),
+          returnValue: 0) as int);
+  @override
+  int decrypt(_i11.Uint8List? inp, int? inpOff, int? inpLength,
+          _i11.Uint8List? out, int? outOff) =>
+      (super.noSuchMethod(
+          Invocation.method(#decrypt, [inp, inpOff, inpLength, out, outOff]),
+          returnValue: 0) as int);
+  @override
+  String toString() => super.toString();
+}

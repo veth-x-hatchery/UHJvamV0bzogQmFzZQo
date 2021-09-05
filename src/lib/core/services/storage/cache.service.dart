@@ -68,11 +68,17 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
     return base64Url.decode(_secretKeyCached ??= await _encryptionKey());
   }
 
+  /// Workaround: In our unit tests Mockito dont understand "HiveAesCipher(encryptionKey)"
+  /// Because of this we still using the deprecated "encryptionKey" option
+  /// to be possible use MockSpec<HiveImpl>
+  /// Fix it in the next Narnia travel
   Future<Box<String>> _table() async {
     final encryptionKey = await _key();
     return _storage.openBox<String>(
       hiveBoxName,
-      encryptionCipher: HiveAesCipher(encryptionKey),
+      // ignore: deprecated_member_use
+      encryptionKey: encryptionKey,
+      // encryptionCipher: HiveAesCipher(encryptionKey),
     );
   }
 
