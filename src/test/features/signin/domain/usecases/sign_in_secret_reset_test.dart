@@ -33,9 +33,17 @@ void main() {
 
   final credential = AuthFacadeMock.validTestCredential;
 
+  void _registerAuthenticationRequest() {
+    when(_mockSignInRepository.skipNextLocalAuthenticationRequest())
+        // ignore: void_checks
+        .thenAnswer((_) async => right(unit));
+  }
+
   group('when request password reset', () {
     test('should return success', () async {
       // arrange
+
+      _registerAuthenticationRequest();
 
       when(_mockSignInRepository.cachedCredential())
           .thenAnswer((_) async => Right(credential));
@@ -56,6 +64,7 @@ void main() {
 
     test('should return a server failure', () async {
       // arrange
+
       const throwFailure = AuthFailure.serverError();
 
       final failureDetails = FailureDetails(
@@ -102,6 +111,34 @@ void main() {
       expect(result, left(failureDetails));
 
       verifyNever(_mockAuthFacade.passwordReset(credential));
+    });
+
+    test(
+        'when login with success '
+        'then should cache a request to skip next local authentication request',
+        () async {
+      // arrange
+
+      _registerAuthenticationRequest();
+
+      when(_mockSignInRepository.cachedCredential())
+          .thenAnswer((_) async => Right(credential));
+
+      when(_mockAuthFacade.passwordReset(credential))
+          .thenAnswer((_) async => const Right(unit));
+
+      // act
+
+      final result = await _signInUseCase.call(const NoParams());
+
+      // assert
+
+      expect(result, const Right(unit));
+
+      verify(_mockAuthFacade.passwordReset(credential));
+
+      verify(_mockSignInRepository.skipNextLocalAuthenticationRequest())
+          .called(1);
     });
   });
 }

@@ -169,6 +169,8 @@ void main() {
       'then should request it to the user', () async {
     // arrange
 
+    _authenticationResult(false);
+
     await _localAuth.request(ignoreCacheAndForceRequest: true);
 
     // assert

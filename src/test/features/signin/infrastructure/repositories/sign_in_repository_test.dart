@@ -5,6 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
 import 'package:vethx_beta/core/error/failures.dart';
 import 'package:vethx_beta/core/network/network_info.dart';
+import 'package:vethx_beta/core/services/storage/cache.service.dart';
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
 import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
@@ -13,27 +14,24 @@ import 'sign_in_repository_test.mocks.dart';
 
 @GenerateMocks([
   ISignInLocalSource,
-  INetworkInfo,
+  CacheService,
 ])
 void main() {
   late SignInRepository repository;
   late MockISignInLocalSource mockLocalDataSource;
-  late MockINetworkInfo mockNetworkInfo;
+  late MockCacheService _mockStorageService;
 
   setUp(() {
     mockLocalDataSource = MockISignInLocalSource();
-    mockNetworkInfo = MockINetworkInfo();
+    _mockStorageService = MockCacheService();
+
     repository = SignInRepository(
       mockLocalDataSource,
-      mockNetworkInfo,
+      _mockStorageService,
     );
   });
 
   group('when doing cache operations', () {
-    setUp(() {
-      when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
-    });
-
     final credential = AuthFacadeMock.validTestCredential;
 
     test(

@@ -79,6 +79,7 @@ class LocalAuth implements ILocalAuth {
         localizedReason: localizedReason,
         useErrorDialogs: false,
         // iOSAuthStrings: iosStrings,
+        // androidAuthStrings: null,
         stickyAuth: true,
       );
       Logger.service('LocalAuth: authenticate -> $result');

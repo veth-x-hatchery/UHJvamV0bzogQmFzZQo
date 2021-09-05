@@ -62,9 +62,8 @@ class SignInServiceLocator implements ISignInServiceLocator {
     // Repository
     _getIt.registerLazySingleton<ISignInRepository>(
       () => SignInRepository(
-        // sl<ISignInRemoteSource>(),
         _getIt<ISignInLocalSource>(),
-        _getIt<INetworkInfo>(),
+        _getIt<ILocalStorage<SensitiveDataKeys>>(),
       ),
     );
 
@@ -93,9 +92,8 @@ class SignInServiceLocator implements ISignInServiceLocator {
 
     _getIt.registerLazySingleton<SignInWithGoogle>(
       () => SignInWithGoogle(
-        // sl<ISignInRepository>(),
         _getIt<IAuthFacade>(),
-        _getIt<ILocalStorage<SensitiveDataKeys>>(),
+        _getIt<ISignInRepository>(),
       ),
     );
 

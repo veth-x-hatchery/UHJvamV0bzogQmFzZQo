@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:vethx_beta/core/error/exceptions.dart';
 import 'package:vethx_beta/core/error/failures.dart';
-import 'package:vethx_beta/core/network/network_info.dart';
+import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
@@ -9,12 +9,12 @@ import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_lo
 class SignInRepository implements ISignInRepository {
   static const genericErrorMessage = 'Cache problem';
 
-  final INetworkInfo _networkInfo;
   final ISignInLocalSource _localDataSource;
+  final ILocalStorage<SensitiveDataKeys> _cacheService;
 
   SignInRepository(
     this._localDataSource,
-    this._networkInfo,
+    this._cacheService,
   );
 
   @override
@@ -35,5 +35,13 @@ class SignInRepository implements ISignInRepository {
     } on CacheException {
       return const Left(Failure.cacheFailure(message: genericErrorMessage));
     }
+  }
+
+  @override
+  Future<Either<Failure, void>> skipNextLocalAuthenticationRequest() async {
+    return _cacheService.write(
+      key: SensitiveDataKeys.localAuthenticationSkipNextRequest,
+      obj: 'true',
+    );
   }
 }

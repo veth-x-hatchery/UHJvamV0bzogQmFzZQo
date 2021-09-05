@@ -22,10 +22,15 @@ class SignInSecretReset extends UseCase<Unit, NoParams> {
     return cachedCredential.fold(
       (l) => left(_mapFailures(const AuthFailure.invalidCachedCredential())),
       (credential) {
-        return _authFacade.passwordReset(credential).then((value) => value.fold(
-              (l) => left(_mapFailures(l)),
-              (r) => right(unit),
-            ));
+        return _authFacade.passwordReset(credential).then(
+              (value) => value.fold(
+                (l) => left(_mapFailures(l)),
+                (r) async {
+                  await _signInRepository.skipNextLocalAuthenticationRequest();
+                  return right(unit);
+                },
+              ),
+            );
       },
     );
   }

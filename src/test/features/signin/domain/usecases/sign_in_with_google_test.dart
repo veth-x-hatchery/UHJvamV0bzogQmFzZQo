@@ -2,38 +2,37 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/services/storage/cache.service.dart';
-import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
 import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
+import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
+import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
 import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
 
 import 'sign_in_with_google_test.mocks.dart';
-import 'sign_in_with_secret_test.mocks.dart';
 
 @GenerateMocks([
-  CacheService,
+  ISignInRepository,
+  IAuthFacade,
 ])
 void main() {
   late SignInWithGoogle _signInUseCase;
+  late MockISignInRepository _mockSignInRepository;
   late MockIAuthFacade _mockAuthFacade;
-  late MockCacheService _mockStorageService;
 
   setUp(() {
+    _mockSignInRepository = MockISignInRepository();
     _mockAuthFacade = MockIAuthFacade();
-    _mockStorageService = MockCacheService();
 
     _signInUseCase = SignInWithGoogle(
       _mockAuthFacade,
-      _mockStorageService,
+      _mockSignInRepository,
     );
   });
 
   void _registerAuthenticationRequest() {
-    when(_mockStorageService.write(
-      key: SensitiveDataKeys.localAuthenticationSkipNextRequest,
-      obj: 'true',
-    )).thenAnswer((_) async => const Right(unit));
+    when(_mockSignInRepository.skipNextLocalAuthenticationRequest())
+        // ignore: void_checks
+        .thenAnswer((_) async => right(unit));
   }
 
   group('when sign in with google', () {
@@ -110,8 +109,6 @@ void main() {
       expect(result, left(failureDetails));
 
       verify(_mockAuthFacade.signInWithGoogle());
-
-      // verifyNoMoreInteractions(_mockSignInRepository);
     });
 
     test(
@@ -135,10 +132,8 @@ void main() {
 
       verify(_mockAuthFacade.signInWithGoogle());
 
-      verify(_mockStorageService.write(
-        key: SensitiveDataKeys.localAuthenticationSkipNextRequest,
-        obj: 'true',
-      )).called(1);
+      verify(_mockSignInRepository.skipNextLocalAuthenticationRequest())
+          .called(1);
     });
   });
 }

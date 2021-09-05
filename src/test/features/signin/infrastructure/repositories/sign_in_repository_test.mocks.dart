@@ -2,14 +2,19 @@
 // in vethx_beta/test/features/signin/infrastructure/repositories/sign_in_repository_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
+import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:vethx_beta/core/network/network_info.dart' as _i5;
+import 'package:vethx_beta/core/error/failures.dart' as _i8;
+import 'package:vethx_beta/core/network/network_info.dart' as _i6;
+import 'package:vethx_beta/core/services/storage/cache.service.dart' as _i7;
+import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart'
+    as _i9;
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
     as _i2;
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart'
-    as _i3;
+    as _i4;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -21,25 +26,27 @@ import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_lo
 
 class _FakeCredential_0 extends _i1.Fake implements _i2.Credential {}
 
+class _FakeEither_1<L, R> extends _i1.Fake implements _i3.Either<L, R> {}
+
 /// A class which mocks [ISignInLocalSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockISignInLocalSource extends _i1.Mock
-    implements _i3.ISignInLocalSource {
+    implements _i4.ISignInLocalSource {
   MockISignInLocalSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<void> cacheCredential(_i2.Credential? credential) =>
+  _i5.Future<void> cacheCredential(_i2.Credential? credential) =>
       (super.noSuchMethod(Invocation.method(#cacheCredential, [credential]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
   @override
-  _i4.Future<_i2.Credential> cachedCredential() =>
+  _i5.Future<_i2.Credential> cachedCredential() =>
       (super.noSuchMethod(Invocation.method(#cachedCredential, []),
               returnValue: Future<_i2.Credential>.value(_FakeCredential_0()))
-          as _i4.Future<_i2.Credential>);
+          as _i5.Future<_i2.Credential>);
   @override
   String toString() => super.toString();
 }
@@ -47,15 +54,56 @@ class MockISignInLocalSource extends _i1.Mock
 /// A class which mocks [INetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockINetworkInfo extends _i1.Mock implements _i5.INetworkInfo {
+class MockINetworkInfo extends _i1.Mock implements _i6.INetworkInfo {
   MockINetworkInfo() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<bool> get isConnected =>
+  _i5.Future<bool> get isConnected =>
       (super.noSuchMethod(Invocation.getter(#isConnected),
-          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [CacheService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCacheService extends _i1.Mock implements _i7.CacheService {
+  MockCacheService() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  void dispose() => super.noSuchMethod(Invocation.method(#dispose, []),
+      returnValueForMissingStub: null);
+  @override
+  _i3.Either<_i8.Failure, String> getKey(_i9.SensitiveDataKeys? key) =>
+      (super.noSuchMethod(Invocation.method(#getKey, [key]),
+              returnValue: _FakeEither_1<_i8.Failure, String>())
+          as _i3.Either<_i8.Failure, String>);
+  @override
+  _i5.Future<_i3.Either<_i8.Failure, String>> get(
+          {_i9.SensitiveDataKeys? key}) =>
+      (super.noSuchMethod(Invocation.method(#get, [], {#key: key}),
+              returnValue: Future<_i3.Either<_i8.Failure, String>>.value(
+                  _FakeEither_1<_i8.Failure, String>()))
+          as _i5.Future<_i3.Either<_i8.Failure, String>>);
+  @override
+  _i5.Future<_i3.Either<_i8.Failure, _i3.Unit>> remove(
+          {_i9.SensitiveDataKeys? key}) =>
+      (super.noSuchMethod(Invocation.method(#remove, [], {#key: key}),
+              returnValue: Future<_i3.Either<_i8.Failure, _i3.Unit>>.value(
+                  _FakeEither_1<_i8.Failure, _i3.Unit>()))
+          as _i5.Future<_i3.Either<_i8.Failure, _i3.Unit>>);
+  @override
+  _i5.Future<_i3.Either<_i8.Failure, _i3.Unit>> write(
+          {_i9.SensitiveDataKeys? key, String? obj}) =>
+      (super.noSuchMethod(Invocation.method(#write, [], {#key: key, #obj: obj}),
+              returnValue: Future<_i3.Either<_i8.Failure, _i3.Unit>>.value(
+                  _FakeEither_1<_i8.Failure, _i3.Unit>()))
+          as _i5.Future<_i3.Either<_i8.Failure, _i3.Unit>>);
   @override
   String toString() => super.toString();
 }

@@ -50,6 +50,13 @@ class MockISignInRepository extends _i1.Mock implements _i3.ISignInRepository {
                   _FakeEither_0<_i5.Failure, void>()))
           as _i4.Future<_i2.Either<_i5.Failure, void>>);
   @override
+  _i4.Future<_i2.Either<_i5.Failure, void>>
+      skipNextLocalAuthenticationRequest() => (super.noSuchMethod(
+              Invocation.method(#skipNextLocalAuthenticationRequest, []),
+              returnValue: Future<_i2.Either<_i5.Failure, void>>.value(
+                  _FakeEither_0<_i5.Failure, void>()))
+          as _i4.Future<_i2.Either<_i5.Failure, void>>);
+  @override
   String toString() => super.toString();
 }
 
