@@ -27,6 +27,13 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
 
   CacheService(this._storage);
 
+  Future<Box<String>> _table() async {
+    return _storage.openBox<String>(
+      hiveBoxName,
+      // Todo(v): https://docs.hivedb.dev/#/advanced/encrypted_box
+    );
+  }
+
   @override
   Either<Failure, String> getKey(SensitiveDataKeys key) {
     final value = _cacheKeys[key];
@@ -41,8 +48,8 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
     return getKey(key).fold(
       (_) => left(_),
       (keyValue) async {
-        final box = await _storage.openBox<String>(hiveBoxName);
-        final obj = box.get(keyValue);
+        final table = await _table();
+        final obj = table.get(keyValue);
         if (obj == null) {
           return left(objectNotFound(key));
         }
@@ -57,8 +64,8 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
       (_) => left(_),
       (keyValue) async {
         try {
-          final box = await _storage.openBox<String>(hiveBoxName);
-          await box.delete(keyValue);
+          final table = await _table();
+          await table.delete(keyValue);
         } on PlatformException catch (ex, stack) {
           Logger.utils('CacheService, remove',
               exception: ex, stackTrace: stack);
@@ -78,8 +85,8 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
       (_) => left(_),
       (keyValue) async {
         try {
-          final box = await _storage.openBox<String>(hiveBoxName);
-          await box.put(keyValue, obj);
+          final table = await _table();
+          await table.put(keyValue, obj);
         } on PlatformException catch (ex, stack) {
           Logger.utils('CacheService, write', exception: ex, stackTrace: stack);
           return left(unavailableService());
