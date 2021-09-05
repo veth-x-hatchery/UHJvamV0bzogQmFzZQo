@@ -10,6 +10,7 @@ import 'package:vethx_beta/service_locator.dart';
 class Startup {
   static Future<void> init() async {
     // await Startup.configure();
+
     await Startup.configureServices();
   }
 

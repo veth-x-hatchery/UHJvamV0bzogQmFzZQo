@@ -1,35 +1,59 @@
-[
+1 - Copiar os arquivos do Fastlane para a pasta Script
 
-Drive Tests
+	0 - Copiar os scripts para o repositorio base
 
-*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** 
+	1 - Atualizar o replace.sh
 
-1 - Inject SignInBLoC with the SignInPage
+		src/script/Fastfile
+		
+		android/fastlane
+		
+		integration_test/integration_tests.sh
+		
+		test/coverate_settings.sh
+		
+		pubspec.yaml
+		
+		l10n.yaml
+		
+		flutter_native_splash.yaml
+		
+		android/app/src/androidTest/java/com/example/vethx_login/MainActivityTest.java
+		
+	2 - Remover o flavor de todos os scripts
+	
+2 - Criar um novo projeto
 
-2 - Validacao das notificacoes
+	1 - Buscar um comando que ja permita indicar o bundleId/ApplicationId
 
-4 - Escrever os testes de Integracao com DRIVER
+		flutter create xyz...
 
-5 - Adicionar um SPLASH durante o carregamento das dependencias
-	1 - Get_It
-	2 - Firebase
-	3 - ETC...
-		Liberar o app a partir deste carregamento...
+3 - Adicionar o dart-define
 
+	https://itnext.io/flutter-1-17-no-more-flavors-no-more-ios-schemas-command-argument-that-solves-everything-8b145ed4285d
 
-					1 - email -> credential
-					2 - password -> secret
-						find . -name '*password*' -print0 | xargs -0 -n1 bash -c 'mv "$0" "${0/password/secret}"'
-					3 - renomear arquivos e pastas
-					4 - renomear variaveis e objetos
+	https://medium.com/@tatsu.ukraine/flutter-2-2-dart-defines-and-breaking-changes-here-we-go-again-ce40cfea74fd
+	
+	1 - Scripts para o iOS
+	
+	2 - Android
 
-*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** 
+	3 - Definir os Flavor a partir do ENVIRONMENT
 
-]
+		4 - Fastfile's
 
+			ENV[app_name]
 
-flutter pub run intl_translation:extract_to_arb --output-dir=lib/l10n lib/main.dart
+			ENV[bundle_id]
 
-flutter pub run intl_translation:generate_from_arb \
-    --output-dir=lib/l10n --no-use-deferred-loading \
-    lib/main.dart lib/l10n/intl_*.arb
+4 - Testar
+
+5 - Adicionar o Splash Screen Nativo
+
+	1 - Alterar o LOGO pelo da Veth-X
+
+6 - Ser feliz
+
+	
+	
+	
