@@ -110,14 +110,16 @@ class ServiceLocatorConfig {
     getIt.registerLazySingleton<ILocalAuth>(
       () => LocalAuth(
         getIt<LocalAuthentication>(),
-        getIt<ILocalStorage<SensitiveDataKeys>>(),
       ),
     );
 
     //! Use case
 
     getIt.registerLazySingleton<RequestLocalAuthentication>(
-      () => RequestLocalAuthentication(getIt<ILocalAuth>()),
+      () => RequestLocalAuthentication(
+        getIt<ILocalAuth>(),
+        getIt<ILocalStorage<SensitiveDataKeys>>(),
+      ),
     );
 
     // BLoC

@@ -11,5 +11,8 @@ abstract class ILocalAuth {
   /// And this will kill the BLoC that call it.
   /// When app returns from RESUME will get the last result
   /// [lastResultAvailable] and [cachedResult]
-  Future<Either<LocalAuthFailure, bool>> request({Duration? cacheTolerance});
+  Future<Either<LocalAuthFailure, bool>> request({
+    Duration? cacheTolerance,
+    bool hasPendingAuthentication = false,
+  });
 }

@@ -27,8 +27,7 @@ class AlphaPage extends StatelessWidget {
             ..add(const AuthEvent.authCheckRequested()),
         ),
         BlocProvider(
-          create: (_) => ServiceLocatorConfig.getIt<LocalAuthenticationBloc>()
-            ..add(const LocalAuthenticationEvent.request()),
+          create: (_) => ServiceLocatorConfig.getIt<LocalAuthenticationBloc>(),
         ),
       ],
       child: const AlphaPage(),
