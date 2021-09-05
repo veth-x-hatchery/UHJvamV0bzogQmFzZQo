@@ -37,6 +37,8 @@ void main() {
   late List<int> _encryptionKey;
 
   void _initialSetup() {
+    _cacheService.dispose();
+
     when(_mockStorage.box<String>(any)).thenAnswer((_) => _mockHiveBox);
 
     /// Workaround: In our unit tests Mockito dont understand "HiveAesCipher(encryptionKey)"
@@ -180,14 +182,16 @@ void main() {
   });
 
   group('when dont have encryption key on device Secure Storage', () {
-    test('should failure with [notfound] and write a new encryption key',
-        () async {
-      // arrange
-
+    setUp(() {
       const encryptionKey = PersonallyIdentifiableInformationKeys.cacheConfig;
 
       when(_mockPII.get(key: encryptionKey))
           .thenAnswer((_) async => left(PII.objectNotFound(encryptionKey)));
+    });
+
+    test('should failure with [notfound] and write a new encryption key',
+        () async {
+      // arrange
 
       when(_mockStorage.generateSecureKey()).thenReturn(_encryptionKey);
 
@@ -205,6 +209,11 @@ void main() {
 
       expect(result,
           left(CacheService.objectNotFound(SensitiveDataKeys.apiEndPointXYZ)));
+
+      verify(_mockPII.write(
+        key: PersonallyIdentifiableInformationKeys.cacheConfig,
+        obj: _secret,
+      )).called(1);
     });
 
     test(
@@ -227,6 +236,11 @@ void main() {
       // assert
 
       expect(result, left(CacheService.unavailableService()));
+
+      verify(_mockPII.write(
+        key: PersonallyIdentifiableInformationKeys.cacheConfig,
+        obj: _secret,
+      )).called(1);
     });
   });
 }
