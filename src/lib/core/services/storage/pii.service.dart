@@ -22,6 +22,8 @@ class PII implements ILocalStorage<PersonallyIdentifiableInformationKeys> {
         'UElJS2V5cy5jcmVkZW50aWFsCg',
     PersonallyIdentifiableInformationKeys.refreshToken:
         'UElJS2V5cy5yZWZyZXNoVG9rZW4K',
+    PersonallyIdentifiableInformationKeys.cacheConfig:
+        'a2V5OiBvYmplY3Qgbm90IGZvdW5kCg',
   };
 
   static Failure objectNotFound(PersonallyIdentifiableInformationKeys key) =>

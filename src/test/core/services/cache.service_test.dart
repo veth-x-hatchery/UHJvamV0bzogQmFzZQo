@@ -7,6 +7,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/services/storage/cache.service.dart';
 import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
+import 'package:vethx_beta/core/services/storage/pii.service.dart';
 
 import 'cache.service_test.mocks.dart';
 
@@ -14,7 +15,9 @@ import 'cache.service_test.mocks.dart';
 
 // class MockHiveBox<T> extends Mock implements Box<T> {}
 
-@GenerateMocks([], customMocks: [
+@GenerateMocks([
+  PII,
+], customMocks: [
   MockSpec<Box>(returnNullOnMissingStub: true),
   MockSpec<HiveImpl>(returnNullOnMissingStub: true),
 ])
@@ -22,10 +25,12 @@ void main() {
   late CacheService _cacheService;
   late MockHiveImpl _mockStorage;
   late MockBox<String> _mockHiveBox;
+  late MockPII _mockPII;
 
   void _setupHive() {
     _mockHiveBox = MockBox<String>();
     _mockStorage = MockHiveImpl();
+    _mockPII = MockPII();
 
     when(_mockStorage.box<String>(any)).thenAnswer((_) => _mockHiveBox);
 
@@ -37,7 +42,10 @@ void main() {
 
   setUp(() {
     _setupHive();
-    _cacheService = CacheService(_mockStorage);
+    _cacheService = CacheService(
+      _mockStorage,
+      _mockPII,
+    );
   });
 
   test('should get all key values', () {

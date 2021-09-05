@@ -52,14 +52,17 @@ class ServiceLocatorConfig {
 
     getIt.registerLazySingleton<AppConfig>(() => AppConfig());
 
-    await Hive.initFlutter();
-    getIt.registerLazySingleton<ILocalStorage<SensitiveDataKeys>>(
-      () => CacheService(Hive),
-    );
-
     getIt.registerLazySingleton<
         ILocalStorage<PersonallyIdentifiableInformationKeys>>(
       () => PII(const FlutterSecureStorage()),
+    );
+
+    await Hive.initFlutter();
+    getIt.registerLazySingleton<ILocalStorage<SensitiveDataKeys>>(
+      () => CacheService(
+        Hive,
+        getIt<ILocalStorage<PersonallyIdentifiableInformationKeys>>(),
+      ),
     );
 
     getIt.registerLazySingleton(() => http.Client());
