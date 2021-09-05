@@ -13,6 +13,7 @@ enum PersonallyIdentifiableInformationKeys {
   authToken,
   userProfile,
   credential,
+  cacheConfig,
 }
 
 abstract class ILocalStorage<Key extends Enum> {
