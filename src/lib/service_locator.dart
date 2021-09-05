@@ -50,7 +50,8 @@ class ServiceLocatorConfig {
 
     // getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 
-    getIt.registerLazySingleton<AppConfig>(() => AppConfig());
+    getIt
+        .registerLazySingleton<AppConfig>(() => AppConfig()..fromEnvironment());
 
     getIt.registerLazySingleton<
         ILocalStorage<PersonallyIdentifiableInformationKeys>>(
@@ -87,7 +88,7 @@ class ServiceLocatorConfig {
 
     // Services
 
-    if (AppConfig().isIntegrationTest()) {
+    if (getIt<AppConfig>().isIntegrationTest()) {
       getIt.registerLazySingleton<IAuthFacade>(
         () => AuthFacadeMock()..setupSignInEmailIntegrationTest(),
       );

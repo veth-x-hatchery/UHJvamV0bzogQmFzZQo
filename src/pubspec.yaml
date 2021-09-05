@@ -82,6 +82,7 @@ flutter:
   assets:
     - lib/.env
     - lib/appsettings.dev.json
+    - lib/appsettings.test.json
     - assets/images/google-logo.png
     - assets/images/facebook-logo.png
     - assets/images/mail-logo.png
