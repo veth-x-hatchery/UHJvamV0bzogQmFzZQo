@@ -95,6 +95,7 @@ class SignInServiceLocator implements ISignInServiceLocator {
       () => SignInWithGoogle(
         // sl<ISignInRepository>(),
         _getIt<IAuthFacade>(),
+        _getIt<ILocalStorage<SensitiveDataKeys>>(),
       ),
     );
 

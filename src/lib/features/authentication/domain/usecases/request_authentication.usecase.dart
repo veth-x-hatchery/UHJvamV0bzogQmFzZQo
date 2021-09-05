@@ -26,6 +26,7 @@ class RequestLocalAuthentication implements UseCase<bool, NoParams> {
     }
 
     final hasPendingAuthentication = await _pendingAuthentication();
+
     return _localAuth
         .request(ignoreCacheAndForceRequest: hasPendingAuthentication)
         .then((result) {
@@ -46,7 +47,8 @@ class RequestLocalAuthentication implements UseCase<bool, NoParams> {
   Future<bool> _shouldIgnoreThisRequest() async {
     final result = await _cacheService.get(
         key: SensitiveDataKeys.localAuthenticationSkipNextRequest);
-    Logger.service('LocalAuth: _shouldIgnoreThisRequest -> $result');
+    Logger.domain(
+        'RequestLocalAuthentication: _shouldIgnoreThisRequest -> $result');
     return result.fold(
       (_) => false, // notFound
       (r) async {
@@ -62,7 +64,8 @@ class RequestLocalAuthentication implements UseCase<bool, NoParams> {
       key: SensitiveDataKeys.authenticationRequest,
       obj: ILocalAuth.STORAGE_KEY,
     );
-    Logger.service('LocalAuth: _registerAuthenticationRequest -> $result');
+    Logger.domain(
+        'RequestLocalAuthentication: _registerAuthenticationRequest -> $result');
     return result.fold(
       (l) =>
           throw PlatformException(code: '${l.runtimeType}: unavailableService'),
@@ -74,7 +77,8 @@ class RequestLocalAuthentication implements UseCase<bool, NoParams> {
     final result = await _cacheService.remove(
       key: SensitiveDataKeys.authenticationRequest,
     );
-    Logger.service('LocalAuth: _removeAuthenticationRequest -> $result');
+    Logger.domain(
+        'RequestLocalAuthentication: _removeAuthenticationRequest -> $result');
     return result.fold(
       (_) => unit,
       (_) => unit,
@@ -86,7 +90,8 @@ class RequestLocalAuthentication implements UseCase<bool, NoParams> {
   Future<bool> _pendingAuthentication() async {
     final result =
         await _cacheService.get(key: SensitiveDataKeys.authenticationRequest);
-    Logger.service('LocalAuth: _pendingAuthentication -> $result');
+    Logger.domain(
+        'RequestLocalAuthentication: _pendingAuthentication -> $result');
     return result.fold(
       (notFound) => false,
       (_) => true,
