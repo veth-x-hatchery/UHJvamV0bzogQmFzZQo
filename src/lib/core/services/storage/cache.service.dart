@@ -84,7 +84,6 @@ class CacheService implements ILocalStorage<SensitiveDataKeys> {
     final encryptionKey = await _key();
     return _storage.openBox<String>(
       hiveBoxName,
-      // ignore: deprecated_member_use
       encryptionKey: encryptionKey,
       // encryptionCipher: HiveAesCipher(encryptionKey),
     );
