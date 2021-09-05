@@ -25,18 +25,22 @@ class IntegrationTestsHelpers {
     final basePath = '.${Directory.current.path}screenshots';
 
     String deviceModel = await DeviceInfo().modelName();
-    deviceModel =
-        deviceModel.replaceAll(',', '_').replaceAll(' ', '_').replaceAll(RegExp(r'/^\w+$/'), '');
+    deviceModel = deviceModel
+        .replaceAll(',', '_')
+        .replaceAll(' ', '_')
+        .replaceAll(RegExp(r'/^\w+$/'), '');
 
     // final currentScreenshotPath = await FilesUtil.validateDirectory(Directory(
     //     '$basePath/${Platform.isAndroid ? 'android' : 'ios'}/$deviceModel'));
 
     index++;
 
-    final List<int> firstPng = await binding.takeScreenshot(
+    // final List<int> firstPng =
+
+    await binding.takeScreenshot(
         '$basePath/${Platform.isAndroid ? 'android' : 'ios'}/${deviceModel}_$prefix.${index}_$name');
 
-    expect(firstPng.isNotEmpty, isTrue);
+    // expect(firstPng.isNotEmpty, isTrue);
   }
 }
 
