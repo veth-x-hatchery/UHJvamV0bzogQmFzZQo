@@ -82,4 +82,6 @@ class AppConfig {
   }
 
   bool isDevelopment() => _env == 'dev';
+
+  bool isIntegrationTest() => _env == 'test';
 }

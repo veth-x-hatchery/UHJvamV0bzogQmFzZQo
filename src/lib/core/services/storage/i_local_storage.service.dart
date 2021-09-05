@@ -4,6 +4,7 @@ import 'package:vethx_beta/core/error/failures.dart';
 /// Improve performance using AES-256 encryption
 enum SensitiveDataKeys {
   apiEndPointXYZ,
+  authenticationRequest,
 }
 
 /// Uses Keystore for Android and Keychains for iOS
@@ -12,6 +13,7 @@ enum PersonallyIdentifiableInformationKeys {
   authToken,
   userProfile,
   credential,
+  cacheConfig,
 }
 
 abstract class ILocalStorage<Key extends Enum> {

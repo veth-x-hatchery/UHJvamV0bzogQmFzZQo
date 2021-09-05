@@ -7,7 +7,10 @@ import 'package:local_auth/error_codes.dart' as auth_error;
 import 'package:local_auth/local_auth.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:vethx_beta/core/services/storage/cache.service.dart';
+import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
 import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth.service.dart';
 import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth_failure.dart';
 
@@ -15,15 +18,45 @@ import 'local_auth.service_test.mocks.dart';
 
 @GenerateMocks([
   LocalAuthentication,
+  CacheService,
 ])
 void main() {
   late MockLocalAuthentication _mockLocalAuthentication;
+  late MockCacheService _mockStorageService;
   late LocalAuth _localAuth;
 
   setUp(() {
+    _mockStorageService = MockCacheService();
     _mockLocalAuthentication = MockLocalAuthentication();
-    _localAuth = LocalAuth(_mockLocalAuthentication);
+    _localAuth = LocalAuth(
+      _mockLocalAuthentication,
+      _mockStorageService,
+    );
   });
+
+  void _storageResultNotFound() {
+    when(_mockStorageService.get(key: SensitiveDataKeys.authenticationRequest))
+        .thenAnswer((_) async => left(CacheService.objectNotFound(
+            SensitiveDataKeys.authenticationRequest)));
+  }
+
+  void _storagePendingAuthentication() {
+    when(_mockStorageService.get(key: SensitiveDataKeys.authenticationRequest))
+        .thenAnswer((_) async => right(ILocalAuth.STORAGE_KEY));
+  }
+
+  void _storageWrite() {
+    when(_mockStorageService.write(
+            key: SensitiveDataKeys.authenticationRequest,
+            obj: ILocalAuth.STORAGE_KEY))
+        .thenAnswer((_) async => right(unit));
+  }
+
+  void _storageRemove() {
+    when(_mockStorageService.remove(
+            key: SensitiveDataKeys.authenticationRequest))
+        .thenAnswer((_) async => right(unit));
+  }
 
   void _throwExceptionCode(String code) {
     when(_mockLocalAuthentication.authenticate(
@@ -62,6 +95,8 @@ void main() {
     ]) {
       // arrange
 
+      _storageResultNotFound();
+
       _throwExceptionCode(code);
 
       // act
@@ -82,6 +117,10 @@ void main() {
     ]) {
       // arrange
 
+      _storageResultNotFound();
+
+      _storageWrite();
+
       _throwExceptionCode(code);
 
       // act
@@ -98,6 +137,10 @@ void main() {
       'when authenticate with success then should cache the result while the [cacheTolerance] defined time',
       () async {
     // arrange
+
+    _storageResultNotFound();
+
+    _storageRemove();
 
     const cacheTolerance = Duration(seconds: 3);
 
@@ -131,6 +174,10 @@ void main() {
   test('when do not authenticate then should not cache the result', () async {
     // arrange
 
+    _storageWrite();
+
+    _storageResultNotFound();
+
     const cacheTolerance = Duration(seconds: 3);
 
     _authenticationResult(false);
@@ -158,5 +205,34 @@ void main() {
       // iOSAuthStrings: LocalAuth.iosStrings,
       stickyAuth: true,
     )).called(cacheTolerance.inSeconds);
+  });
+
+  test(
+      'when have a register that indicate pending authentication request then should request it to the user',
+      () async {
+    //
+
+    _storagePendingAuthentication();
+
+    _storageWrite();
+
+    _authenticationResult(true);
+
+    _storageRemove();
+
+    await _localAuth.request();
+
+    // assert
+
+    verify(_mockLocalAuthentication.authenticate(
+      localizedReason: LocalAuth.localizedReason,
+      useErrorDialogs: false,
+      // iOSAuthStrings: LocalAuth.iosStrings,
+      stickyAuth: true,
+    )).called(1);
+
+    verify(_mockStorageService.remove(
+            key: SensitiveDataKeys.authenticationRequest))
+        .called(1);
   });
 }

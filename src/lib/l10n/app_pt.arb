@@ -35,5 +35,6 @@
     "signIn_usecase_withGoogle_cancelledByUser" : "Solicitação cancelada",
     "signIn_usecase_withSecret_unavailable" : "Serviço indisponível no momento...",
     "signIn_usecase_withSecret_invalidCredentialAndSecretCombination" : "Senha ou email inválidos",
-    "signIn_usecase_withSecret_invalidCachedCredential" : "Por gentileza, confirme seu email"
+    "signIn_usecase_withSecret_invalidCachedCredential" : "Por gentileza, confirme seu email",
+    "localAuthentication_page_button" : "Autentique-se"
 }
