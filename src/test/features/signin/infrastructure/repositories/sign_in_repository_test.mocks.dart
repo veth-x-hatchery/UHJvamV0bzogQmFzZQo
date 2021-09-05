@@ -6,11 +6,10 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:vethx_beta/core/error/failures.dart' as _i8;
-import 'package:vethx_beta/core/network/network_info.dart' as _i6;
-import 'package:vethx_beta/core/services/storage/cache.service.dart' as _i7;
+import 'package:vethx_beta/core/error/failures.dart' as _i7;
+import 'package:vethx_beta/core/services/storage/cache.service.dart' as _i6;
 import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart'
-    as _i9;
+    as _i8;
 import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart'
     as _i2;
 import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart'
@@ -51,26 +50,10 @@ class MockISignInLocalSource extends _i1.Mock
   String toString() => super.toString();
 }
 
-/// A class which mocks [INetworkInfo].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockINetworkInfo extends _i1.Mock implements _i6.INetworkInfo {
-  MockINetworkInfo() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i5.Future<bool> get isConnected =>
-      (super.noSuchMethod(Invocation.getter(#isConnected),
-          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
-  @override
-  String toString() => super.toString();
-}
-
 /// A class which mocks [CacheService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCacheService extends _i1.Mock implements _i7.CacheService {
+class MockCacheService extends _i1.Mock implements _i6.CacheService {
   MockCacheService() {
     _i1.throwOnMissingStub(this);
   }
@@ -79,31 +62,31 @@ class MockCacheService extends _i1.Mock implements _i7.CacheService {
   void dispose() => super.noSuchMethod(Invocation.method(#dispose, []),
       returnValueForMissingStub: null);
   @override
-  _i3.Either<_i8.Failure, String> getKey(_i9.SensitiveDataKeys? key) =>
+  _i3.Either<_i7.Failure, String> getKey(_i8.SensitiveDataKeys? key) =>
       (super.noSuchMethod(Invocation.method(#getKey, [key]),
-              returnValue: _FakeEither_1<_i8.Failure, String>())
-          as _i3.Either<_i8.Failure, String>);
+              returnValue: _FakeEither_1<_i7.Failure, String>())
+          as _i3.Either<_i7.Failure, String>);
   @override
-  _i5.Future<_i3.Either<_i8.Failure, String>> get(
-          {_i9.SensitiveDataKeys? key}) =>
+  _i5.Future<_i3.Either<_i7.Failure, String>> get(
+          {_i8.SensitiveDataKeys? key}) =>
       (super.noSuchMethod(Invocation.method(#get, [], {#key: key}),
-              returnValue: Future<_i3.Either<_i8.Failure, String>>.value(
-                  _FakeEither_1<_i8.Failure, String>()))
-          as _i5.Future<_i3.Either<_i8.Failure, String>>);
+              returnValue: Future<_i3.Either<_i7.Failure, String>>.value(
+                  _FakeEither_1<_i7.Failure, String>()))
+          as _i5.Future<_i3.Either<_i7.Failure, String>>);
   @override
-  _i5.Future<_i3.Either<_i8.Failure, _i3.Unit>> remove(
-          {_i9.SensitiveDataKeys? key}) =>
+  _i5.Future<_i3.Either<_i7.Failure, _i3.Unit>> remove(
+          {_i8.SensitiveDataKeys? key}) =>
       (super.noSuchMethod(Invocation.method(#remove, [], {#key: key}),
-              returnValue: Future<_i3.Either<_i8.Failure, _i3.Unit>>.value(
-                  _FakeEither_1<_i8.Failure, _i3.Unit>()))
-          as _i5.Future<_i3.Either<_i8.Failure, _i3.Unit>>);
+              returnValue: Future<_i3.Either<_i7.Failure, _i3.Unit>>.value(
+                  _FakeEither_1<_i7.Failure, _i3.Unit>()))
+          as _i5.Future<_i3.Either<_i7.Failure, _i3.Unit>>);
   @override
-  _i5.Future<_i3.Either<_i8.Failure, _i3.Unit>> write(
-          {_i9.SensitiveDataKeys? key, String? obj}) =>
+  _i5.Future<_i3.Either<_i7.Failure, _i3.Unit>> write(
+          {_i8.SensitiveDataKeys? key, String? obj}) =>
       (super.noSuchMethod(Invocation.method(#write, [], {#key: key, #obj: obj}),
-              returnValue: Future<_i3.Either<_i8.Failure, _i3.Unit>>.value(
-                  _FakeEither_1<_i8.Failure, _i3.Unit>()))
-          as _i5.Future<_i3.Either<_i8.Failure, _i3.Unit>>);
+              returnValue: Future<_i3.Either<_i7.Failure, _i3.Unit>>.value(
+                  _FakeEither_1<_i7.Failure, _i3.Unit>()))
+          as _i5.Future<_i3.Either<_i7.Failure, _i3.Unit>>);
   @override
   String toString() => super.toString();
 }
