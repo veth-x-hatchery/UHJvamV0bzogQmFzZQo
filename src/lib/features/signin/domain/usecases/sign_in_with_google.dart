@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
 
 import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
 import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';

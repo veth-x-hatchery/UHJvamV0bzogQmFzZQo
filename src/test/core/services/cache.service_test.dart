@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +10,6 @@ import 'package:mockito/mockito.dart';
 import 'package:vethx_beta/core/services/storage/cache.service.dart';
 import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
 import 'package:vethx_beta/core/services/storage/pii.service.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
 
 import 'cache.service_test.mocks.dart';
 

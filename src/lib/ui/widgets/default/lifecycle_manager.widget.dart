@@ -31,7 +31,7 @@ class _LifeCycleManagerState extends State<LifeCycleManager>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (widget.onLifecycleStateChange != null) {
-      widget.onLifecycleStateChange!(state);
+      widget.onLifecycleStateChange!(state)!;
     }
   }
 
