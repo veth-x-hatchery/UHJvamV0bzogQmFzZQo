@@ -9,7 +9,7 @@ import 'package:vethx_beta/startup.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
