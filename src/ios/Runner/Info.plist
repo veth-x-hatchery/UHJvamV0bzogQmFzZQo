@@ -28,7 +28,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>$(HATCHERY_GOOGLE_URL_SCHEME)</string>
+				<string>$(HATCHERY_GOOGLE_REVERSED_CLIENT_ID)</string>
 			</array>
 		</dict>
 	</array>
