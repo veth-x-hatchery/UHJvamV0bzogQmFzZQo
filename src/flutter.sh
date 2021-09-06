@@ -21,10 +21,13 @@ echo "════════════════════════�
 echo "APP_ENVIRONMENT: ${flutter_environment}"
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 
-flutter run $flutter_environment
-
-# flutter \
-# --dart-define=HATCHERY_APP_NAME=Hatchery \
-# --dart-define=HATCHERY_APP_SUFFIX=.dev \
-# --dart-define=APP_ENVIRONMENT=dev \
-# build apk --release
+if [ $1 = '--run' ]; 
+then
+    flutter run $flutter_environment
+elif [ $1 = '--build-android' ];
+then
+    flutter build apk --release $flutter_environment
+elif [ $1 = '--build-ios' ];
+then
+    flutter build ios --release $flutter_environment
+fi
