@@ -28,7 +28,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.124787010793-4gkffunh2tj93mpuhuijodtg9ks1gldn</string>
+				<string>$(HATCHERY_GOOGLE_URL_SCHEME)</string>
 			</array>
 		</dict>
 	</array>
