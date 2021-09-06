@@ -3,7 +3,7 @@
 default_flavor="--flavor=dev"
 
 flutter_flavor="${1:-$default_flavor}"
-flutter_environment="--dart-define=APP_ENVIRONMENT=dev"
+flutter_environment="--dart-define=APP_ENVIRONMENT=test"
 
 echo "Flutter Flavor: ${flutter_flavor} | ${flutter_environment}"
 echo ""

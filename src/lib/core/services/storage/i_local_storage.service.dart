@@ -18,7 +18,8 @@ enum PersonallyIdentifiableInformationKeys {
   cacheConfig,
 }
 
-abstract class ILocalStorage<Key extends Enum> {
+//ILocalStorage<Key extends Enum>
+abstract class ILocalStorage<Key> {
   Future<Either<Failure, String>> get({required Key key});
 
   Future<Either<Failure, Unit>> write({required Key key, required String obj});

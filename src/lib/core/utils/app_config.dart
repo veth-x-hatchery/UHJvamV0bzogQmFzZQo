@@ -4,10 +4,10 @@ import 'package:vethx_beta/core/utils/logger.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class AppConfig {
-  static final AppConfig _singleton = AppConfig._internal();
+  static final AppConfig _instance = AppConfig._internal();
 
   factory AppConfig() {
-    return _singleton;
+    return _instance;
   }
 
   AppConfig._internal();
@@ -19,7 +19,7 @@ class AppConfig {
 
   Future<void> fromEnvironment({String? env}) async {
     try {
-      env ??= AppConfig()._env;
+      env ??= _instance._env;
       Logger.utils('AppConfig.fromEnvironment(appsettings.$env.json)');
       final contents = await rootBundle.loadString('lib/appsettings.$env.json');
       _config = jsonDecode(contents);

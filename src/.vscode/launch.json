@@ -6,12 +6,12 @@
     "configurations": [
         {
             "name": "Integration Test: Sign In With Email",
-            "program": "${workspaceFolder}/integration_test/features/signin/sign_in_email_test.dart",
+            "program": "${workspaceFolder}/integration_test/features/signin/sign_in_email_integration_test.dart",
             "request": "launch",
             "type": "dart",
             "args": [
-                "--flavor=dev",
-                "--dart-env=test"
+                "--dart-define=test",
+                "--flavor=dev"
             ]
         },
         {

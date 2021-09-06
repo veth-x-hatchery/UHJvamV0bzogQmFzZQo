@@ -52,12 +52,12 @@ class PlatformAlertDialog extends PlatformWidget {
   List<Widget> _buildActions(BuildContext context) {
     final actions = <Widget>[];
     actions.add(PlatformAlertDialogAction(
-      child: Text(cancelActionText),
       onPressed: () => Navigator.of(context).pop(false),
+      child: Text(cancelActionText),
     ));
     actions.add(PlatformAlertDialogAction(
-      child: Text(defaultActionText),
       onPressed: () => Navigator.of(context).pop(true),
+      child: Text(defaultActionText),
     ));
     return actions;
   }
