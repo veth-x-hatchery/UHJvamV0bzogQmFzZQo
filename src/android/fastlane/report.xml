@@ -80,7 +80,7 @@
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="15: cd /media/programmer/Library/Projects/vethx/playground/beta/mobile/src &amp;&amp; flutter build apk --release --dart-define=HATCHERY_APP_NAME=Hatchery --dart-define=HATCHERY_APP_SUFFIX=.dev --dart-define=APP_ENVIRONMENT=dev " time="138.464758307">
+      <testcase classname="fastlane.lanes" name="15: cd /media/programmer/Library/Projects/vethx/playground/beta/mobile/src &amp;&amp; flutter build apk --release --dart-define=HATCHERY_APP_NAME=Hatchery --dart-define=HATCHERY_APP_SUFFIX=.dev --dart-define=HATCHERY_APP_ENVIRONMENT=dev " time="138.464758307">
         
       </testcase>
     

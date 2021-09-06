@@ -15,7 +15,7 @@ class AppConfig {
   dynamic _config;
 
   String get _env =>
-      const String.fromEnvironment('APP_ENVIRONMENT', defaultValue: 'dev');
+      const String.fromEnvironment('HATCHERY_APP_ENVIRONMENT', defaultValue: 'dev');
 
   Future<void> fromEnvironment({String? env}) async {
     try {
