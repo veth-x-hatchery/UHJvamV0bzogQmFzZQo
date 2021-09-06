@@ -10,7 +10,6 @@ flutter_environment="""\
 """
 
 echo "APP_ENVIRONMENT: ${flutter_environment}"
-echo ""
 
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 echo "══╡ WORKAROUND: Expect to be executed from ./src/ ╞════════════════════════════════════════"
