@@ -23,9 +23,8 @@ echo "════════════════════════�
 
 flutter run $flutter_environment
 
-
-flutter \
---dart-define=HATCHERY_APP_NAME=Hatchery \
---dart-define=HATCHERY_APP_SUFFIX=.dev \
---dart-define=APP_ENVIRONMENT=dev \
-build apk --release
+# flutter \
+# --dart-define=HATCHERY_APP_NAME=Hatchery \
+# --dart-define=HATCHERY_APP_SUFFIX=.dev \
+# --dart-define=APP_ENVIRONMENT=dev \
+# build apk --release

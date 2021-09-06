@@ -1,4 +1,4 @@
-def localProperties = new Properties()
+. .def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader('UTF-8') { reader ->
@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 
 def dartEnvironmentVariables = [
     HATCHERY_APP_NAME: 'Hatchery Veth-X',
-    HATCHERY_APP_SUFFIX: null
+    HATCHERY_APP_SUFFIX: '.dev'
 ];
 if (project.hasProperty('dart-defines')) {
     dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
