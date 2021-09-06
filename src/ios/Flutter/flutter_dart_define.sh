@@ -10,4 +10,4 @@ do
     define_items[$index]=$(entry_decode "${define_items[$index]}");
 done
 
-printf "%s\n" "${define_items[@]}"|grep '^ENV_' > ${SRCROOT}/Flutter/Environment.xcconfig
+printf "%s\n" "${define_items[@]}"|grep '^HATCHERY_' > ${SRCROOT}/Flutter/Environment.xcconfig
