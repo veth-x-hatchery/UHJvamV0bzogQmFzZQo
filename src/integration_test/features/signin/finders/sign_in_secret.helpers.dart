@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:hatchery/core/utils/logger.dart';
 
 import '../../../../test/helpers/features/signin/presentation/pages/sign_in_secret.finders.dart';
 import '../helpers/sign_in_integration_tests_helpers.dart';

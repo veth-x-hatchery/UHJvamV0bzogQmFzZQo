@@ -1,6 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'sign_in_secret_bloc.dart';
 
@@ -40,12 +39,6 @@ mixin _$SignInSecretEvent {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String secretStr)? secretChanged,
-    TResult Function()? analyseSecretPressed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String secretStr)? secretChanged,
     TResult Function()? analyseSecretPressed,
@@ -56,12 +49,6 @@ mixin _$SignInSecretEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(SecretChanged value) secretChanged,
     required TResult Function(AnalyseSecretPressed value) analyseSecretPressed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SecretChanged value)? secretChanged,
-    TResult Function(AnalyseSecretPressed value)? analyseSecretPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -164,15 +151,6 @@ class _$SecretChanged implements SecretChanged {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String secretStr)? secretChanged,
-    TResult Function()? analyseSecretPressed,
-  }) {
-    return secretChanged?.call(secretStr);
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String secretStr)? secretChanged,
     TResult Function()? analyseSecretPressed,
@@ -191,15 +169,6 @@ class _$SecretChanged implements SecretChanged {
     required TResult Function(AnalyseSecretPressed value) analyseSecretPressed,
   }) {
     return secretChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SecretChanged value)? secretChanged,
-    TResult Function(AnalyseSecretPressed value)? analyseSecretPressed,
-  }) {
-    return secretChanged?.call(this);
   }
 
   @override
@@ -273,15 +242,6 @@ class _$AnalyseSecretPressed implements AnalyseSecretPressed {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String secretStr)? secretChanged,
-    TResult Function()? analyseSecretPressed,
-  }) {
-    return analyseSecretPressed?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String secretStr)? secretChanged,
     TResult Function()? analyseSecretPressed,
@@ -300,15 +260,6 @@ class _$AnalyseSecretPressed implements AnalyseSecretPressed {
     required TResult Function(AnalyseSecretPressed value) analyseSecretPressed,
   }) {
     return analyseSecretPressed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SecretChanged value)? secretChanged,
-    TResult Function(AnalyseSecretPressed value)? analyseSecretPressed,
-  }) {
-    return analyseSecretPressed?.call(this);
   }
 
   @override

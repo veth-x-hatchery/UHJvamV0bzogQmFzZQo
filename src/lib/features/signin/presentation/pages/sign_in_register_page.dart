@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vethx_beta/core/consts/size_config.dart';
-import 'package:vethx_beta/core/notifications/messages.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
-import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
-import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
-import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
-import 'package:vethx_beta/ui/widgets/shared/forms/form_column.widget.dart';
+import 'package:hatchery/core/consts/size_config.dart';
+import 'package:hatchery/core/notifications/messages.dart';
+import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
+import 'package:hatchery/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
+import 'package:hatchery/features/signin/presentation/widgets/login/sign_in_loading.widget.dart';
+import 'package:hatchery/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:hatchery/features/signin/sign_in_service_locator.dart';
+import 'package:hatchery/l10n/l10n.dart';
+import 'package:hatchery/ui/widgets/shared/custom_raised_button.dart';
+import 'package:hatchery/ui/widgets/shared/forms/form_column.widget.dart';
 
 class SignInRegisterPage extends StatefulWidget {
   final Credential? credential;

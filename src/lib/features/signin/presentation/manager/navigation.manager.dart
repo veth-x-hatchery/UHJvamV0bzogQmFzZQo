@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
+import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/features/signin/presentation/routes/sign_in_go_to.dart';
 
 class NavigationManager {
   final _signInPageRoutesController =

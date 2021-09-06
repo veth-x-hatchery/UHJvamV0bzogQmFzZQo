@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_beta/core/error/failures.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:hatchery/core/error/failures.dart';
+import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 
 abstract class ISignInRepository {
   Future<Either<Failure, Credential>> cachedCredential();

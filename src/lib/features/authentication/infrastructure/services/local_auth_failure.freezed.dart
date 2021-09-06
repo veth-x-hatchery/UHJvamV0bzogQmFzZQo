@@ -1,6 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'local_auth_failure.dart';
 
@@ -38,12 +37,6 @@ mixin _$LocalAuthFailure {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? genericError,
-    TResult Function()? notAvailable,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? genericError,
     TResult Function()? notAvailable,
@@ -54,12 +47,6 @@ mixin _$LocalAuthFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(GenericError value) genericError,
     required TResult Function(NotAvailable value) notAvailable,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GenericError value)? genericError,
-    TResult Function(NotAvailable value)? notAvailable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -136,15 +123,6 @@ class _$GenericError implements GenericError {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? genericError,
-    TResult Function()? notAvailable,
-  }) {
-    return genericError?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? genericError,
     TResult Function()? notAvailable,
@@ -163,15 +141,6 @@ class _$GenericError implements GenericError {
     required TResult Function(NotAvailable value) notAvailable,
   }) {
     return genericError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GenericError value)? genericError,
-    TResult Function(NotAvailable value)? notAvailable,
-  }) {
-    return genericError?.call(this);
   }
 
   @override
@@ -240,15 +209,6 @@ class _$NotAvailable implements NotAvailable {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? genericError,
-    TResult Function()? notAvailable,
-  }) {
-    return notAvailable?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? genericError,
     TResult Function()? notAvailable,
@@ -267,15 +227,6 @@ class _$NotAvailable implements NotAvailable {
     required TResult Function(NotAvailable value) notAvailable,
   }) {
     return notAvailable(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GenericError value)? genericError,
-    TResult Function(NotAvailable value)? notAvailable,
-  }) {
-    return notAvailable?.call(this);
   }
 
   @override

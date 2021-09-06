@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:hatchery/features/signin/presentation/widgets/sign_in.widgets.dart';
 
 Finder signInSecretInput() {
   // arrange

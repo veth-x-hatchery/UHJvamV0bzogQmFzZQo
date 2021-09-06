@@ -1,4 +1,4 @@
-# vethx_beta => hatchery
+# hatchery
 
 A new Flutter project.
 

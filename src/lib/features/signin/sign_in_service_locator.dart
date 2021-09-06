@@ -1,23 +1,23 @@
 import 'package:get_it/get_it.dart';
-import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
-import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_secret.dart';
-import 'package:vethx_beta/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
-import 'package:vethx_beta/features/signin/infrastructure/repositories/sign_in_repository.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
-import 'package:vethx_beta/service_locator.dart';
+import 'package:hatchery/core/services/storage/i_local_storage.service.dart';
+import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart';
+import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/domain/usecases/sign_in_check_credential.dart';
+import 'package:hatchery/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
+import 'package:hatchery/features/signin/domain/usecases/sign_in_secret_reset.dart';
+import 'package:hatchery/features/signin/domain/usecases/sign_in_with_google.dart';
+import 'package:hatchery/features/signin/domain/usecases/sign_in_with_secret.dart';
+import 'package:hatchery/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
+import 'package:hatchery/features/signin/infrastructure/repositories/sign_in_repository.dart';
+import 'package:hatchery/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
+import 'package:hatchery/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
+import 'package:hatchery/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
+import 'package:hatchery/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
+import 'package:hatchery/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
+import 'package:hatchery/features/signin/presentation/manager/navigation.manager.dart';
+import 'package:hatchery/service_locator.dart';
 
 /// Will be responsible for the entire sign in feature dependencies.
 /// Need to be initialized and disposed by the feature root page.

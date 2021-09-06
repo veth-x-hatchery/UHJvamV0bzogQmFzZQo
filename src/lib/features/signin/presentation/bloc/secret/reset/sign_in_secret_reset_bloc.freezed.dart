@@ -1,6 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'sign_in_secret_reset_bloc.dart';
 
@@ -33,11 +32,6 @@ mixin _$SignInSecretResetEvent {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? secretResetRequest,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? secretResetRequest,
     required TResult orElse(),
@@ -46,11 +40,6 @@ mixin _$SignInSecretResetEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SecretResetRequest value) secretResetRequest,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SecretResetRequest value)? secretResetRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -125,14 +114,6 @@ class _$SecretResetRequest implements SecretResetRequest {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? secretResetRequest,
-  }) {
-    return secretResetRequest?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? secretResetRequest,
     required TResult orElse(),
@@ -149,14 +130,6 @@ class _$SecretResetRequest implements SecretResetRequest {
     required TResult Function(SecretResetRequest value) secretResetRequest,
   }) {
     return secretResetRequest(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SecretResetRequest value)? secretResetRequest,
-  }) {
-    return secretResetRequest?.call(this);
   }
 
   @override

@@ -1,4 +1,4 @@
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 
 class Credentials {
   final Credential user;

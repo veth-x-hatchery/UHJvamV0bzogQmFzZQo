@@ -1,6 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'failures.dart';
 
@@ -51,13 +50,6 @@ mixin _$ValueFailure<T> {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? invalidCredential,
-    TResult Function(T failedValue)? shortSecret,
-    TResult Function(T failedValue)? empty,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T failedValue)? invalidCredential,
     TResult Function(T failedValue)? shortSecret,
@@ -70,13 +62,6 @@ mixin _$ValueFailure<T> {
     required TResult Function(InvalidCredential<T> value) invalidCredential,
     required TResult Function(ShortSecret<T> value) shortSecret,
     required TResult Function(Empty<T> value) empty,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCredential<T> value)? invalidCredential,
-    TResult Function(ShortSecret<T> value)? shortSecret,
-    TResult Function(Empty<T> value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -201,16 +186,6 @@ class _$InvalidCredential<T> implements InvalidCredential<T> {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? invalidCredential,
-    TResult Function(T failedValue)? shortSecret,
-    TResult Function(T failedValue)? empty,
-  }) {
-    return invalidCredential?.call(failedValue);
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T failedValue)? invalidCredential,
     TResult Function(T failedValue)? shortSecret,
@@ -231,16 +206,6 @@ class _$InvalidCredential<T> implements InvalidCredential<T> {
     required TResult Function(Empty<T> value) empty,
   }) {
     return invalidCredential(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCredential<T> value)? invalidCredential,
-    TResult Function(ShortSecret<T> value)? shortSecret,
-    TResult Function(Empty<T> value)? empty,
-  }) {
-    return invalidCredential?.call(this);
   }
 
   @override
@@ -347,16 +312,6 @@ class _$ShortSecret<T> implements ShortSecret<T> {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? invalidCredential,
-    TResult Function(T failedValue)? shortSecret,
-    TResult Function(T failedValue)? empty,
-  }) {
-    return shortSecret?.call(failedValue);
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T failedValue)? invalidCredential,
     TResult Function(T failedValue)? shortSecret,
@@ -377,16 +332,6 @@ class _$ShortSecret<T> implements ShortSecret<T> {
     required TResult Function(Empty<T> value) empty,
   }) {
     return shortSecret(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCredential<T> value)? invalidCredential,
-    TResult Function(ShortSecret<T> value)? shortSecret,
-    TResult Function(Empty<T> value)? empty,
-  }) {
-    return shortSecret?.call(this);
   }
 
   @override
@@ -489,16 +434,6 @@ class _$Empty<T> implements Empty<T> {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T failedValue)? invalidCredential,
-    TResult Function(T failedValue)? shortSecret,
-    TResult Function(T failedValue)? empty,
-  }) {
-    return empty?.call(failedValue);
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T failedValue)? invalidCredential,
     TResult Function(T failedValue)? shortSecret,
@@ -519,16 +454,6 @@ class _$Empty<T> implements Empty<T> {
     required TResult Function(Empty<T> value) empty,
   }) {
     return empty(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCredential<T> value)? invalidCredential,
-    TResult Function(ShortSecret<T> value)? shortSecret,
-    TResult Function(Empty<T> value)? empty,
-  }) {
-    return empty?.call(this);
   }
 
   @override

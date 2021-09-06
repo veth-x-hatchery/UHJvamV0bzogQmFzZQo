@@ -1,4 +1,4 @@
-name: vethx_beta
+name: hatchery
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -54,7 +54,6 @@ dev_dependencies:
   build_runner: any
   flutter_driver:
     sdk: flutter
-  flutter_flavorizr: any
   flutter_test:
     sdk: flutter
   freezed: any
@@ -112,25 +111,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-  
-flavorizr:
-  app:
-    android:
-      flavorDimensions: "hatchery"
-    ios:
-
-  flavors:
-
-    dev:
-      app:
-        name: "Vethx Hatchery"
-
-      android:
-        applicationId: "dev.hatchery.vethx"
-        firebase:
-          config: "[ENV]/google-services.json"
-
-      ios:
-        bundleId: "dev.hatchery.vethx"
-        firebase:
-          config: "[ENV]/GoogleService-Info.plist"

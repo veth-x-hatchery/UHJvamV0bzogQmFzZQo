@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
-import 'package:vethx_beta/core/services/storage/i_local_storage.service.dart';
-import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
-import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth_failure.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
+import 'package:hatchery/core/services/storage/i_local_storage.service.dart';
+import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
+import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/features/authentication/domain/services/i_local_auth.service.dart';
+import 'package:hatchery/features/authentication/infrastructure/services/local_auth_failure.dart';
+import 'package:hatchery/l10n/l10n.dart';
 
 class RequestLocalAuthentication implements UseCase<bool, NoParams> {
   final ILocalAuth _localAuth;

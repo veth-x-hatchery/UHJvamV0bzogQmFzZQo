@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:vethx_beta/core/consts/size_config.dart';
-import 'package:vethx_beta/core/routes/navigation.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/authentication/presentation/bloc/local_authentication_bloc.dart';
-import 'package:vethx_beta/features/authentication/presentation/pages/local_authentication.page.dart';
-import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
-import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
-import 'package:vethx_beta/service_locator.dart';
-import 'package:vethx_beta/ui/splash/splash.page.dart';
-import 'package:vethx_beta/ui/widgets/default/lifecycle_manager.widget.dart';
-import 'package:vethx_beta/ui/widgets/default/loading_page.widget.dart';
+import 'package:hatchery/core/consts/size_config.dart';
+import 'package:hatchery/core/routes/navigation.dart';
+import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/features/authentication/presentation/bloc/local_authentication_bloc.dart';
+import 'package:hatchery/features/authentication/presentation/pages/local_authentication.page.dart';
+import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart';
+import 'package:hatchery/features/home/presentation/pages/home.page.dart';
+import 'package:hatchery/features/signin/presentation/pages/sign_in_options.page.dart';
+import 'package:hatchery/service_locator.dart';
+import 'package:hatchery/ui/splash/splash.page.dart';
+import 'package:hatchery/ui/widgets/default/lifecycle_manager.widget.dart';
+import 'package:hatchery/ui/widgets/default/loading_page.widget.dart';
 
 class AlphaPage extends StatelessWidget {
   const AlphaPage({

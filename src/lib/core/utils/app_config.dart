@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:hatchery/core/utils/logger.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class AppConfig {

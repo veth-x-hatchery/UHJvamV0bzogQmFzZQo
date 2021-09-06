@@ -2,13 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/notifications/notification.dart';
-import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
+import 'package:hatchery/core/notifications/notification.dart';
+import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_secret_reset.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
+import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
+import 'package:hatchery/features/signin/domain/usecases/sign_in_secret_reset.dart';
+import 'package:hatchery/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
+import 'package:hatchery/features/signin/presentation/manager/navigation.manager.dart';
 
 import 'sign_in_secret_reset_bloc_test.mocks.dart';
 

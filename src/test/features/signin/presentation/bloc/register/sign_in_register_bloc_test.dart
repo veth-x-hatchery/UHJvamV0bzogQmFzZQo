@@ -2,15 +2,15 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/notifications/notification.dart';
-import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
-import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
+import 'package:hatchery/core/notifications/notification.dart';
+import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
+import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart';
 
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
-import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
+import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
+import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
+import 'package:hatchery/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 
 import 'sign_in_register_bloc_test.mocks.dart';
 

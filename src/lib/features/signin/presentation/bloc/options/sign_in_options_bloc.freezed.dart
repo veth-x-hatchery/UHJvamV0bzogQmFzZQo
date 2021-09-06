@@ -1,6 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'sign_in_options_bloc.dart';
 
@@ -38,12 +37,6 @@ mixin _$SignInOptionsEvent {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? signInWithCredentialEvent,
-    TResult Function()? signInWithGoogleEvent,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
@@ -56,13 +49,6 @@ mixin _$SignInOptionsEvent {
         signInWithCredentialEvent,
     required TResult Function(SignInWithGoogleEvent value)
         signInWithGoogleEvent,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SignInWithCredentialEvent value)?
-        signInWithCredentialEvent,
-    TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -141,15 +127,6 @@ class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? signInWithCredentialEvent,
-    TResult Function()? signInWithGoogleEvent,
-  }) {
-    return signInWithCredentialEvent?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
@@ -170,16 +147,6 @@ class _$SignInWithCredentialEvent implements SignInWithCredentialEvent {
         signInWithGoogleEvent,
   }) {
     return signInWithCredentialEvent(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SignInWithCredentialEvent value)?
-        signInWithCredentialEvent,
-    TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
-  }) {
-    return signInWithCredentialEvent?.call(this);
   }
 
   @override
@@ -249,15 +216,6 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? signInWithCredentialEvent,
-    TResult Function()? signInWithGoogleEvent,
-  }) {
-    return signInWithGoogleEvent?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? signInWithCredentialEvent,
     TResult Function()? signInWithGoogleEvent,
@@ -278,16 +236,6 @@ class _$SignInWithGoogleEvent implements SignInWithGoogleEvent {
         signInWithGoogleEvent,
   }) {
     return signInWithGoogleEvent(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SignInWithCredentialEvent value)?
-        signInWithCredentialEvent,
-    TResult Function(SignInWithGoogleEvent value)? signInWithGoogleEvent,
-  }) {
-    return signInWithGoogleEvent?.call(this);
   }
 
   @override
@@ -356,16 +304,6 @@ mixin _$SignInOptionsState {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? signInAllowed,
-    TResult Function()? signInDenied,
-    TResult Function()? signInCancelled,
-    TResult Function(dynamic message)? signInNotification,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
@@ -384,16 +322,6 @@ mixin _$SignInOptionsState {
     required TResult Function(_SignInDenied value) signInDenied,
     required TResult Function(_SignInCancelled value) signInCancelled,
     required TResult Function(_SignInNotification value) signInNotification,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_SignInLoading value)? loading,
-    TResult Function(_SignInAllowed value)? signInAllowed,
-    TResult Function(_SignInDenied value)? signInDenied,
-    TResult Function(_SignInCancelled value)? signInCancelled,
-    TResult Function(_SignInNotification value)? signInNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -476,19 +404,6 @@ class _$_Initial implements _Initial {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? signInAllowed,
-    TResult Function()? signInDenied,
-    TResult Function()? signInCancelled,
-    TResult Function(dynamic message)? signInNotification,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
@@ -515,19 +430,6 @@ class _$_Initial implements _Initial {
     required TResult Function(_SignInNotification value) signInNotification,
   }) {
     return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_SignInLoading value)? loading,
-    TResult Function(_SignInAllowed value)? signInAllowed,
-    TResult Function(_SignInDenied value)? signInDenied,
-    TResult Function(_SignInCancelled value)? signInCancelled,
-    TResult Function(_SignInNotification value)? signInNotification,
-  }) {
-    return initial?.call(this);
   }
 
   @override
@@ -604,19 +506,6 @@ class _$_SignInLoading implements _SignInLoading {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? signInAllowed,
-    TResult Function()? signInDenied,
-    TResult Function()? signInCancelled,
-    TResult Function(dynamic message)? signInNotification,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
@@ -643,19 +532,6 @@ class _$_SignInLoading implements _SignInLoading {
     required TResult Function(_SignInNotification value) signInNotification,
   }) {
     return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_SignInLoading value)? loading,
-    TResult Function(_SignInAllowed value)? signInAllowed,
-    TResult Function(_SignInDenied value)? signInDenied,
-    TResult Function(_SignInCancelled value)? signInCancelled,
-    TResult Function(_SignInNotification value)? signInNotification,
-  }) {
-    return loading?.call(this);
   }
 
   @override
@@ -732,19 +608,6 @@ class _$_SignInAllowed implements _SignInAllowed {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? signInAllowed,
-    TResult Function()? signInDenied,
-    TResult Function()? signInCancelled,
-    TResult Function(dynamic message)? signInNotification,
-  }) {
-    return signInAllowed?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
@@ -771,19 +634,6 @@ class _$_SignInAllowed implements _SignInAllowed {
     required TResult Function(_SignInNotification value) signInNotification,
   }) {
     return signInAllowed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_SignInLoading value)? loading,
-    TResult Function(_SignInAllowed value)? signInAllowed,
-    TResult Function(_SignInDenied value)? signInDenied,
-    TResult Function(_SignInCancelled value)? signInCancelled,
-    TResult Function(_SignInNotification value)? signInNotification,
-  }) {
-    return signInAllowed?.call(this);
   }
 
   @override
@@ -860,19 +710,6 @@ class _$_SignInDenied implements _SignInDenied {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? signInAllowed,
-    TResult Function()? signInDenied,
-    TResult Function()? signInCancelled,
-    TResult Function(dynamic message)? signInNotification,
-  }) {
-    return signInDenied?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
@@ -899,19 +736,6 @@ class _$_SignInDenied implements _SignInDenied {
     required TResult Function(_SignInNotification value) signInNotification,
   }) {
     return signInDenied(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_SignInLoading value)? loading,
-    TResult Function(_SignInAllowed value)? signInAllowed,
-    TResult Function(_SignInDenied value)? signInDenied,
-    TResult Function(_SignInCancelled value)? signInCancelled,
-    TResult Function(_SignInNotification value)? signInNotification,
-  }) {
-    return signInDenied?.call(this);
   }
 
   @override
@@ -988,19 +812,6 @@ class _$_SignInCancelled implements _SignInCancelled {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? signInAllowed,
-    TResult Function()? signInDenied,
-    TResult Function()? signInCancelled,
-    TResult Function(dynamic message)? signInNotification,
-  }) {
-    return signInCancelled?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
@@ -1027,19 +838,6 @@ class _$_SignInCancelled implements _SignInCancelled {
     required TResult Function(_SignInNotification value) signInNotification,
   }) {
     return signInCancelled(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_SignInLoading value)? loading,
-    TResult Function(_SignInAllowed value)? signInAllowed,
-    TResult Function(_SignInDenied value)? signInDenied,
-    TResult Function(_SignInCancelled value)? signInCancelled,
-    TResult Function(_SignInNotification value)? signInNotification,
-  }) {
-    return signInCancelled?.call(this);
   }
 
   @override
@@ -1141,19 +939,6 @@ class _$_SignInNotification implements _SignInNotification {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? signInAllowed,
-    TResult Function()? signInDenied,
-    TResult Function()? signInCancelled,
-    TResult Function(dynamic message)? signInNotification,
-  }) {
-    return signInNotification?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
@@ -1180,19 +965,6 @@ class _$_SignInNotification implements _SignInNotification {
     required TResult Function(_SignInNotification value) signInNotification,
   }) {
     return signInNotification(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_SignInLoading value)? loading,
-    TResult Function(_SignInAllowed value)? signInAllowed,
-    TResult Function(_SignInDenied value)? signInDenied,
-    TResult Function(_SignInCancelled value)? signInCancelled,
-    TResult Function(_SignInNotification value)? signInNotification,
-  }) {
-    return signInNotification?.call(this);
   }
 
   @override

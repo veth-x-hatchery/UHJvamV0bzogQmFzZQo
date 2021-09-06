@@ -1,5 +1,5 @@
-// import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
-// import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+// import 'package:hatchery/features/signin/domain/entities/user_entity.dart';
+// import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 
 // enum SignInProviderUserAuthType {
 //   facebook,

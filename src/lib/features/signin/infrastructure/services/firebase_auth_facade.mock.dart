@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart'
+import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/features/signin/domain/entities/user_entity.dart'
     as domain;
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
-import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
+import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
 
 class AuthFacadeMock implements IAuthFacade {
   //! Variables

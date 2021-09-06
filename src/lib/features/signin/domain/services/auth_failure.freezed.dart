@@ -1,6 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'auth_failure.dart';
 
@@ -54,15 +53,6 @@ mixin _$AuthFailure {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? invalidCachedCredential,
-    TResult Function()? cancelledByUser,
-    TResult Function()? serverError,
-    TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndSecretCombination,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? invalidCachedCredential,
     TResult Function()? cancelledByUser,
@@ -81,16 +71,6 @@ mixin _$AuthFailure {
     required TResult Function(CredentialAlreadyInUse value)
         credentialAlreadyInUse,
     required TResult Function(InvalidCredentialAndSecretCombination value)
-        invalidCredentialAndSecretCombination,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCachedCredential value)? invalidCachedCredential,
-    TResult Function(CancelledByUser value)? cancelledByUser,
-    TResult Function(ServerError value)? serverError,
-    TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndSecretCombination value)?
         invalidCredentialAndSecretCombination,
   }) =>
       throw _privateConstructorUsedError;
@@ -174,18 +154,6 @@ class _$InvalidCachedCredential implements InvalidCachedCredential {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? invalidCachedCredential,
-    TResult Function()? cancelledByUser,
-    TResult Function()? serverError,
-    TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndSecretCombination,
-  }) {
-    return invalidCachedCredential?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? invalidCachedCredential,
     TResult Function()? cancelledByUser,
@@ -213,19 +181,6 @@ class _$InvalidCachedCredential implements InvalidCachedCredential {
         invalidCredentialAndSecretCombination,
   }) {
     return invalidCachedCredential(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCachedCredential value)? invalidCachedCredential,
-    TResult Function(CancelledByUser value)? cancelledByUser,
-    TResult Function(ServerError value)? serverError,
-    TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndSecretCombination value)?
-        invalidCredentialAndSecretCombination,
-  }) {
-    return invalidCachedCredential?.call(this);
   }
 
   @override
@@ -301,18 +256,6 @@ class _$CancelledByUser implements CancelledByUser {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? invalidCachedCredential,
-    TResult Function()? cancelledByUser,
-    TResult Function()? serverError,
-    TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndSecretCombination,
-  }) {
-    return cancelledByUser?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? invalidCachedCredential,
     TResult Function()? cancelledByUser,
@@ -340,19 +283,6 @@ class _$CancelledByUser implements CancelledByUser {
         invalidCredentialAndSecretCombination,
   }) {
     return cancelledByUser(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCachedCredential value)? invalidCachedCredential,
-    TResult Function(CancelledByUser value)? cancelledByUser,
-    TResult Function(ServerError value)? serverError,
-    TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndSecretCombination value)?
-        invalidCredentialAndSecretCombination,
-  }) {
-    return cancelledByUser?.call(this);
   }
 
   @override
@@ -427,18 +357,6 @@ class _$ServerError implements ServerError {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? invalidCachedCredential,
-    TResult Function()? cancelledByUser,
-    TResult Function()? serverError,
-    TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndSecretCombination,
-  }) {
-    return serverError?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? invalidCachedCredential,
     TResult Function()? cancelledByUser,
@@ -466,19 +384,6 @@ class _$ServerError implements ServerError {
         invalidCredentialAndSecretCombination,
   }) {
     return serverError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCachedCredential value)? invalidCachedCredential,
-    TResult Function(CancelledByUser value)? cancelledByUser,
-    TResult Function(ServerError value)? serverError,
-    TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndSecretCombination value)?
-        invalidCredentialAndSecretCombination,
-  }) {
-    return serverError?.call(this);
   }
 
   @override
@@ -554,18 +459,6 @@ class _$CredentialAlreadyInUse implements CredentialAlreadyInUse {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? invalidCachedCredential,
-    TResult Function()? cancelledByUser,
-    TResult Function()? serverError,
-    TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndSecretCombination,
-  }) {
-    return credentialAlreadyInUse?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? invalidCachedCredential,
     TResult Function()? cancelledByUser,
@@ -593,19 +486,6 @@ class _$CredentialAlreadyInUse implements CredentialAlreadyInUse {
         invalidCredentialAndSecretCombination,
   }) {
     return credentialAlreadyInUse(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCachedCredential value)? invalidCachedCredential,
-    TResult Function(CancelledByUser value)? cancelledByUser,
-    TResult Function(ServerError value)? serverError,
-    TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndSecretCombination value)?
-        invalidCredentialAndSecretCombination,
-  }) {
-    return credentialAlreadyInUse?.call(this);
   }
 
   @override
@@ -686,18 +566,6 @@ class _$InvalidCredentialAndSecretCombination
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? invalidCachedCredential,
-    TResult Function()? cancelledByUser,
-    TResult Function()? serverError,
-    TResult Function()? credentialAlreadyInUse,
-    TResult Function()? invalidCredentialAndSecretCombination,
-  }) {
-    return invalidCredentialAndSecretCombination?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? invalidCachedCredential,
     TResult Function()? cancelledByUser,
@@ -725,19 +593,6 @@ class _$InvalidCredentialAndSecretCombination
         invalidCredentialAndSecretCombination,
   }) {
     return invalidCredentialAndSecretCombination(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InvalidCachedCredential value)? invalidCachedCredential,
-    TResult Function(CancelledByUser value)? cancelledByUser,
-    TResult Function(ServerError value)? serverError,
-    TResult Function(CredentialAlreadyInUse value)? credentialAlreadyInUse,
-    TResult Function(InvalidCredentialAndSecretCombination value)?
-        invalidCredentialAndSecretCombination,
-  }) {
-    return invalidCredentialAndSecretCombination?.call(this);
   }
 
   @override

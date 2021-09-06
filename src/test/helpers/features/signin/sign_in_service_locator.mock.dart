@@ -1,14 +1,14 @@
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
-import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
-import 'package:vethx_beta/features/signin/sign_in_service_locator.dart';
+import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
+import 'package:hatchery/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
+import 'package:hatchery/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
+import 'package:hatchery/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
+import 'package:hatchery/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
+import 'package:hatchery/features/signin/presentation/manager/navigation.manager.dart';
+import 'package:hatchery/features/signin/sign_in_service_locator.dart';
 
 import 'sign_in_service_locator.mock.mocks.dart';
 

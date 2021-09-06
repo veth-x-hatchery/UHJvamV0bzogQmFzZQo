@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:vethx_beta/core/blocs/bloc_observer.dart';
-import 'package:vethx_beta/core/utils/app_config.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/service_locator.dart';
+import 'package:hatchery/core/blocs/bloc_observer.dart';
+import 'package:hatchery/core/utils/app_config.dart';
+import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/service_locator.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class Startup {

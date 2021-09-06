@@ -14,7 +14,7 @@
             ]
         },
         {
-            "name": "vethx_beta",
+            "name": "hatchery",
             "request": "launch",
             "type": "dart",
             "args": [
@@ -22,7 +22,7 @@
             ]
         },
         {
-            "name": "vethx_beta (profile mode)",
+            "name": "hatchery (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile",

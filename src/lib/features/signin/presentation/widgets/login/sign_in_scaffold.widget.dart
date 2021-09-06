@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:hatchery/features/signin/presentation/widgets/sign_in.widgets.dart';
 
 Scaffold signInScaffold(
   BuildContext context, {

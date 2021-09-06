@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
-import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
+import 'package:hatchery/l10n/l10n.dart';
+import 'package:hatchery/ui/widgets/shared/forms/field_styles.dart';
 
 class FieldCredential extends StatelessWidget {
   const FieldCredential({

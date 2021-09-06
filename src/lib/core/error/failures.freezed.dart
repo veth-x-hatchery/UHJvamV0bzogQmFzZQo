@@ -1,6 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'failures.dart';
 
@@ -44,12 +43,6 @@ mixin _$Failure {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? message)? serverFailure,
-    TResult Function(String? message)? cacheFailure,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message)? serverFailure,
     TResult Function(String? message)? cacheFailure,
@@ -60,12 +53,6 @@ mixin _$Failure {
   TResult map<TResult extends Object?>({
     required TResult Function(ServerFailure value) serverFailure,
     required TResult Function(CacheFailure value) cacheFailure,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ServerFailure value)? serverFailure,
-    TResult Function(CacheFailure value)? cacheFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -181,15 +168,6 @@ class _$ServerFailure implements ServerFailure {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? message)? serverFailure,
-    TResult Function(String? message)? cacheFailure,
-  }) {
-    return serverFailure?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message)? serverFailure,
     TResult Function(String? message)? cacheFailure,
@@ -208,15 +186,6 @@ class _$ServerFailure implements ServerFailure {
     required TResult Function(CacheFailure value) cacheFailure,
   }) {
     return serverFailure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ServerFailure value)? serverFailure,
-    TResult Function(CacheFailure value)? cacheFailure,
-  }) {
-    return serverFailure?.call(this);
   }
 
   @override
@@ -317,15 +286,6 @@ class _$CacheFailure implements CacheFailure {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? message)? serverFailure,
-    TResult Function(String? message)? cacheFailure,
-  }) {
-    return cacheFailure?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? message)? serverFailure,
     TResult Function(String? message)? cacheFailure,
@@ -344,15 +304,6 @@ class _$CacheFailure implements CacheFailure {
     required TResult Function(CacheFailure value) cacheFailure,
   }) {
     return cacheFailure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ServerFailure value)? serverFailure,
-    TResult Function(CacheFailure value)? cacheFailure,
-  }) {
-    return cacheFailure?.call(this);
   }
 
   @override

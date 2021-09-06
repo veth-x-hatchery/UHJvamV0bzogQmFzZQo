@@ -2,15 +2,15 @@
 
 flutter_environment="--dart-define=APP_ENVIRONMENT=test"
 
-echo "Flutter Flavor: ${flutter_flavor} | ${flutter_environment}"
+echo "APP_ENVIRONMENT: ${flutter_environment}"
 echo ""
 
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 echo "══╡ WORKAROUND: Expect to be executed from ./src/ ╞════════════════════════════════════════"
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 
-cp android/app/src/main/kotlin/com/example/vethx_login/MainActivity.integration_tests \
-android/app/src/main/kotlin/com/example/vethx_login/MainActivity.kt
+cp android/app/src/main/kotlin/com/vethx/hatchery/MainActivity.integration_tests \
+android/app/src/main/kotlin/com/vethx/hatchery/MainActivity.kt
 
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 echo "══╡ SIGN IN REGISTER INTEGRATION TEST ╞════════════════════════════════════════════════════"
@@ -42,5 +42,5 @@ echo "════════════════════════�
 echo "══╡ WORKAROUND ╞═══════════════════════════════════════════════════════════════════════════"
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 
-cp android/app/src/main/kotlin/com/example/vethx_login/MainActivity.local_auth \
-android/app/src/main/kotlin/com/example/vethx_login/MainActivity.kt
+cp android/app/src/main/kotlin/com/vethx/hatchery/MainActivity.local_auth \
+android/app/src/main/kotlin/com/vethx/hatchery/MainActivity.kt

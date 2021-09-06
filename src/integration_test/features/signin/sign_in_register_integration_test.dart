@@ -1,14 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/home/presentation/pages/home.page.dart';
-import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
-import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_credential.page.dart';
-import 'package:vethx_beta/features/signin/presentation/pages/sign_in_options.page.dart';
-import 'package:vethx_beta/main.dart' as app;
-import 'package:vethx_beta/service_locator.dart';
+import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/features/home/presentation/pages/home.page.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/presentation/pages/sign_in_credential.page.dart';
+import 'package:hatchery/features/signin/presentation/pages/sign_in_options.page.dart';
+import 'package:hatchery/main.dart' as app;
+import 'package:hatchery/service_locator.dart';
 
 import '../../../test/helpers/widgets/pumpWidget.widget.dart';
 import 'finders/home.page.dart';

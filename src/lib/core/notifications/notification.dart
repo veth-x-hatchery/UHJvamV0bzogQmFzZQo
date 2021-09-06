@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
+import 'package:hatchery/l10n/l10n.dart';
 
 enum VethxNotificationType {
   alert,

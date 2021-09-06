@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/core/consts/size_config.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
-import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
+import 'package:hatchery/core/consts/size_config.dart';
+import 'package:hatchery/l10n/l10n.dart';
+import 'package:hatchery/ui/widgets/shared/custom_raised_button.dart';
 
 class LocalAuthenticationPage extends StatelessWidget {
   final void Function()? onAuthenticate;

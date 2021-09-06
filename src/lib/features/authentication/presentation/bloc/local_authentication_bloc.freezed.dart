@@ -1,6 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'local_authentication_bloc.dart';
 
@@ -33,11 +32,6 @@ mixin _$LocalAuthenticationEvent {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? request,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? request,
     required TResult orElse(),
@@ -46,11 +40,6 @@ mixin _$LocalAuthenticationEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Request value) request,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Request value)? request,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -123,14 +112,6 @@ class _$_Request implements _Request {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? request,
-  }) {
-    return request?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? request,
     required TResult orElse(),
@@ -147,14 +128,6 @@ class _$_Request implements _Request {
     required TResult Function(_Request value) request,
   }) {
     return request(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Request value)? request,
-  }) {
-    return request?.call(this);
   }
 
   @override
@@ -204,13 +177,6 @@ mixin _$LocalAuthenticationState {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? authorized,
-    TResult Function()? unauthorized,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? authorized,
@@ -223,13 +189,6 @@ mixin _$LocalAuthenticationState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Authorized value) authorized,
     required TResult Function(_Unauthorized value) unauthorized,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Authorized value)? authorized,
-    TResult Function(_Unauthorized value)? unauthorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -306,16 +265,6 @@ class _$_Loading implements _Loading {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? authorized,
-    TResult Function()? unauthorized,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? authorized,
@@ -336,16 +285,6 @@ class _$_Loading implements _Loading {
     required TResult Function(_Unauthorized value) unauthorized,
   }) {
     return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Authorized value)? authorized,
-    TResult Function(_Unauthorized value)? unauthorized,
-  }) {
-    return loading?.call(this);
   }
 
   @override
@@ -416,16 +355,6 @@ class _$_Authorized implements _Authorized {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? authorized,
-    TResult Function()? unauthorized,
-  }) {
-    return authorized?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? authorized,
@@ -446,16 +375,6 @@ class _$_Authorized implements _Authorized {
     required TResult Function(_Unauthorized value) unauthorized,
   }) {
     return authorized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Authorized value)? authorized,
-    TResult Function(_Unauthorized value)? unauthorized,
-  }) {
-    return authorized?.call(this);
   }
 
   @override
@@ -526,16 +445,6 @@ class _$_Unauthorized implements _Unauthorized {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? authorized,
-    TResult Function()? unauthorized,
-  }) {
-    return unauthorized?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? authorized,
@@ -556,16 +465,6 @@ class _$_Unauthorized implements _Unauthorized {
     required TResult Function(_Unauthorized value) unauthorized,
   }) {
     return unauthorized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Authorized value)? authorized,
-    TResult Function(_Unauthorized value)? unauthorized,
-  }) {
-    return unauthorized?.call(this);
   }
 
   @override

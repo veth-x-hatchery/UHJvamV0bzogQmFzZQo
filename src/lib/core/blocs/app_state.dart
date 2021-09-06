@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
-// import 'package:vethx_beta/core/blocs/core_business_logic.dart';
-// import 'package:vethx_beta/core/blocs/core_services.dart';
+// import 'package:hatchery/core/blocs/core_business_logic.dart';
+// import 'package:hatchery/core/blocs/core_services.dart';
 
 // class AppStateContainer extends StatefulWidget {
 //   final Widget child;

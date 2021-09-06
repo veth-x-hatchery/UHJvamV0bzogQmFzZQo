@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 
-import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/domain/repositories/sign_in_repository.dart';
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
-import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
+import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
+import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
+import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
+import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/l10n/l10n.dart';
 
 class SignInWithSecret extends UseCase<Unit, Secret> {
   final ISignInRepository _signInRepository;

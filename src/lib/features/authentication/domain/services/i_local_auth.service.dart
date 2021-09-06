@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth_failure.dart';
+import 'package:hatchery/features/authentication/infrastructure/services/local_auth_failure.dart';
 
 abstract class ILocalAuth {
   // ignore: constant_identifier_names

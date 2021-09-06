@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
-import 'package:vethx_beta/ui/widgets/shared/forms/field_styles.dart';
+import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
+import 'package:hatchery/l10n/l10n.dart';
+import 'package:hatchery/ui/widgets/shared/forms/field_styles.dart';
 
 class FieldSecret extends StatefulWidget {
   const FieldSecret({

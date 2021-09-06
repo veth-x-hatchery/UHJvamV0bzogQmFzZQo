@@ -1,6 +1,6 @@
 {
-    "name": "vethx_beta",
-    "short_name": "vethx_beta",
+    "name": "hatchery",
+    "short_name": "hatchery",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

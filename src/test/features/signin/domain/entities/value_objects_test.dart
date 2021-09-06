@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
+import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 
 void main() {
   final validCredential = AuthFacadeMock.validTestCredential.inputedValue!;

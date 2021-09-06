@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vethx_beta/core/consts/size_config.dart';
-import 'package:vethx_beta/core/routes/navigation.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
+import 'package:hatchery/core/consts/size_config.dart';
+import 'package:hatchery/core/routes/navigation.dart';
+import 'package:hatchery/l10n/l10n.dart';
 
 Widget setupToPump(
   Widget child, {

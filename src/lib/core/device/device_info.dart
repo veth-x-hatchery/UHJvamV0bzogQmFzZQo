@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:hatchery/core/utils/logger.dart';
 
 enum BuildMode { debug, profile, release }
 

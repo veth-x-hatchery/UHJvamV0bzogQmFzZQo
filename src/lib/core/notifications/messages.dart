@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/core/notifications/notification.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
-import 'package:vethx_beta/ui/widgets/shared/platform_alert_dialog.widget.dart';
+import 'package:hatchery/core/notifications/notification.dart';
+import 'package:hatchery/l10n/l10n.dart';
+import 'package:hatchery/ui/widgets/shared/platform_alert_dialog.widget.dart';
 
 const snackBarNotificationDuration = Duration(seconds: 3);
 

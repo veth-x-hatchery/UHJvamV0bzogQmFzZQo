@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:vethx_beta/core/notifications/notification.dart';
-import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
+import 'package:hatchery/core/notifications/notification.dart';
+import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_check_credential.dart';
-import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
-import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
+import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
+import 'package:hatchery/features/signin/domain/usecases/sign_in_check_credential.dart';
+import 'package:hatchery/features/signin/presentation/manager/navigation.manager.dart';
+import 'package:hatchery/features/signin/presentation/routes/sign_in_go_to.dart';
 
 part 'sign_in_credential_event.dart';
 part 'sign_in_credential_state.dart';

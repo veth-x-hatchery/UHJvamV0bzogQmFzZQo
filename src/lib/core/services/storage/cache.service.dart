@@ -4,8 +4,8 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
-import 'package:vethx_beta/core/error/failures.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:hatchery/core/error/failures.dart';
+import 'package:hatchery/core/utils/logger.dart';
 
 import 'i_local_storage.service.dart';
 

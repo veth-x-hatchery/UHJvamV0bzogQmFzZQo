@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/auth_strings.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
 import 'package:local_auth/local_auth.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/authentication/domain/services/i_local_auth.service.dart';
-import 'package:vethx_beta/features/authentication/infrastructure/services/local_auth_failure.dart';
+import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/features/authentication/domain/services/i_local_auth.service.dart';
+import 'package:hatchery/features/authentication/infrastructure/services/local_auth_failure.dart';
 
 class LocalAuth implements ILocalAuth {
   final LocalAuthentication _localAuth;

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
+import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 
-import 'package:vethx_beta/l10n/l10n.dart';
+import 'package:hatchery/l10n/l10n.dart';
 
 /// Todo(v): Remove duplicated code between [Credential] and [Secret]
 

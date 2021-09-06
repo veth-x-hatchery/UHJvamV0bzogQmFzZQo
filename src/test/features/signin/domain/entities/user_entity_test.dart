@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
-import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/domain/entities/user_entity.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 
 void main() {
   test('should instantiate with success', () {

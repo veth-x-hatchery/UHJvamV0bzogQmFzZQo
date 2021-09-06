@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/ui/widgets/shared/custom_raised_button.dart';
+import 'package:hatchery/ui/widgets/shared/custom_raised_button.dart';
 
 class SignInButton extends CustomRaisedButton {
   SignInButton({

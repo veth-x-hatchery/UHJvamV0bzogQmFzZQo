@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:vethx_beta/core/shared_kernel/shared_kernel.dart';
-import 'package:vethx_beta/features/authorization/presentation/bloc/auth_bloc.dart';
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
-import 'package:vethx_beta/features/signin/domain/usecases/sign_in_with_google.dart';
-import 'package:vethx_beta/features/signin/presentation/manager/navigation.manager.dart';
-import 'package:vethx_beta/features/signin/presentation/routes/sign_in_go_to.dart';
+import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
+import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart';
+import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
+import 'package:hatchery/features/signin/domain/usecases/sign_in_with_google.dart';
+import 'package:hatchery/features/signin/presentation/manager/navigation.manager.dart';
+import 'package:hatchery/features/signin/presentation/routes/sign_in_go_to.dart';
 
 part 'sign_in_options_bloc.freezed.dart';
 part 'sign_in_options_event.dart';

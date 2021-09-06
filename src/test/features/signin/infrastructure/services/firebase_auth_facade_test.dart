@@ -5,13 +5,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart'
+import 'package:hatchery/features/signin/domain/entities/user_entity.dart'
     as domain;
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
-import 'package:vethx_beta/features/signin/domain/services/auth_failure.dart';
-import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.dart';
-import 'package:vethx_beta/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
-import 'package:vethx_beta/features/signin/infrastructure/services/firebase_user_mapper.dart';
+import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
+import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_user_mapper.dart';
 
 import 'firebase_auth_facade_test.mocks.dart';
 

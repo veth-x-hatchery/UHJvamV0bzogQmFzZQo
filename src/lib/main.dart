@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
-import 'package:vethx_beta/features/authorization/presentation/pages/alpha.page.dart';
-import 'package:vethx_beta/startup.dart';
+import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/features/authorization/presentation/pages/alpha.page.dart';
+import 'package:hatchery/startup.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

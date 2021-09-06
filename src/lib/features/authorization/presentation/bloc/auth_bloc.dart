@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
-import 'package:vethx_beta/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/domain/entities/user_entity.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

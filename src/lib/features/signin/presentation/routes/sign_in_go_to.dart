@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 
 enum SignInPageRoutes {
   alpha,

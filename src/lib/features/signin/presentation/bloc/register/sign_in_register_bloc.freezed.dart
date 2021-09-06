@@ -1,6 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'sign_in_register_bloc.dart';
 
@@ -48,13 +47,6 @@ mixin _$SignInRegisterEvent {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String credentialStr)? credentialChanged,
-    TResult Function(String secretStr)? secretChanged,
-    TResult Function()? registerWithCredentialAndSecretPressed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
     TResult Function(String secretStr)? secretChanged,
@@ -67,14 +59,6 @@ mixin _$SignInRegisterEvent {
     required TResult Function(CredentialChanged value) credentialChanged,
     required TResult Function(SecretChanged value) secretChanged,
     required TResult Function(RegisterWithCredentialAndSecretPressed value)
-        registerWithCredentialAndSecretPressed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(SecretChanged value)? secretChanged,
-    TResult Function(RegisterWithCredentialAndSecretPressed value)?
         registerWithCredentialAndSecretPressed,
   }) =>
       throw _privateConstructorUsedError;
@@ -181,16 +165,6 @@ class _$CredentialChanged implements CredentialChanged {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String credentialStr)? credentialChanged,
-    TResult Function(String secretStr)? secretChanged,
-    TResult Function()? registerWithCredentialAndSecretPressed,
-  }) {
-    return credentialChanged?.call(credentialStr);
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
     TResult Function(String secretStr)? secretChanged,
@@ -212,17 +186,6 @@ class _$CredentialChanged implements CredentialChanged {
         registerWithCredentialAndSecretPressed,
   }) {
     return credentialChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(SecretChanged value)? secretChanged,
-    TResult Function(RegisterWithCredentialAndSecretPressed value)?
-        registerWithCredentialAndSecretPressed,
-  }) {
-    return credentialChanged?.call(this);
   }
 
   @override
@@ -325,16 +288,6 @@ class _$SecretChanged implements SecretChanged {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String credentialStr)? credentialChanged,
-    TResult Function(String secretStr)? secretChanged,
-    TResult Function()? registerWithCredentialAndSecretPressed,
-  }) {
-    return secretChanged?.call(secretStr);
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
     TResult Function(String secretStr)? secretChanged,
@@ -356,17 +309,6 @@ class _$SecretChanged implements SecretChanged {
         registerWithCredentialAndSecretPressed,
   }) {
     return secretChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(SecretChanged value)? secretChanged,
-    TResult Function(RegisterWithCredentialAndSecretPressed value)?
-        registerWithCredentialAndSecretPressed,
-  }) {
-    return secretChanged?.call(this);
   }
 
   @override
@@ -449,16 +391,6 @@ class _$RegisterWithCredentialAndSecretPressed
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String credentialStr)? credentialChanged,
-    TResult Function(String secretStr)? secretChanged,
-    TResult Function()? registerWithCredentialAndSecretPressed,
-  }) {
-    return registerWithCredentialAndSecretPressed?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
     TResult Function(String secretStr)? secretChanged,
@@ -480,17 +412,6 @@ class _$RegisterWithCredentialAndSecretPressed
         registerWithCredentialAndSecretPressed,
   }) {
     return registerWithCredentialAndSecretPressed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(SecretChanged value)? secretChanged,
-    TResult Function(RegisterWithCredentialAndSecretPressed value)?
-        registerWithCredentialAndSecretPressed,
-  }) {
-    return registerWithCredentialAndSecretPressed?.call(this);
   }
 
   @override

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
-import 'package:vethx_beta/features/signin/domain/entities/user_entity.dart';
-import 'package:vethx_beta/features/signin/domain/entities/value_objects.dart';
+import 'package:hatchery/features/signin/domain/entities/user_entity.dart';
+import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 
 class FirebaseUserMapper {
   User? toDomain(firebase.User? _) {

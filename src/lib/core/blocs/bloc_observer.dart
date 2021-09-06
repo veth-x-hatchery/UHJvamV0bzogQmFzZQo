@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vethx_beta/core/utils/logger.dart';
+import 'package:hatchery/core/utils/logger.dart';
 
 /// An interface for observing the behavior of [Bloc] instances.
 class CustomBlocObserver extends BlocObserver {

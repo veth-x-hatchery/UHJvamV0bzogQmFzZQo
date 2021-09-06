@@ -1,4 +1,4 @@
-import 'package:vethx_beta/core/api/api_setup.dart';
+import 'package:hatchery/core/api/api_setup.dart';
 
 enum Endpoint {
   //! SignIn

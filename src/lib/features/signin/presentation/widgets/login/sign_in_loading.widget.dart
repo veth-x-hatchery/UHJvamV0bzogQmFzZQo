@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/l10n/l10n.dart';
-import 'package:vethx_beta/ui/widgets/shared/progress-indicator.widget.dart';
+import 'package:hatchery/l10n/l10n.dart';
+import 'package:hatchery/ui/widgets/shared/progress-indicator.widget.dart';
 
 class SignInLoader extends StatelessWidget {
   const SignInLoader({

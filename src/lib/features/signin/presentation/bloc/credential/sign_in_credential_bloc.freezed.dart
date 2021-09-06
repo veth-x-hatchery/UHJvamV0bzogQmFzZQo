@@ -1,6 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'sign_in_credential_bloc.dart';
 
@@ -40,12 +39,6 @@ mixin _$SignInCredentialEvent {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String credentialStr)? credentialChanged,
-    TResult Function()? analyseCredentialPressed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
     TResult Function()? analyseCredentialPressed,
@@ -57,12 +50,6 @@ mixin _$SignInCredentialEvent {
     required TResult Function(CredentialChanged value) credentialChanged,
     required TResult Function(AnalyseCredentialPressed value)
         analyseCredentialPressed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(AnalyseCredentialPressed value)? analyseCredentialPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -165,15 +152,6 @@ class _$CredentialChanged implements CredentialChanged {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String credentialStr)? credentialChanged,
-    TResult Function()? analyseCredentialPressed,
-  }) {
-    return credentialChanged?.call(credentialStr);
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
     TResult Function()? analyseCredentialPressed,
@@ -193,15 +171,6 @@ class _$CredentialChanged implements CredentialChanged {
         analyseCredentialPressed,
   }) {
     return credentialChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(AnalyseCredentialPressed value)? analyseCredentialPressed,
-  }) {
-    return credentialChanged?.call(this);
   }
 
   @override
@@ -276,15 +245,6 @@ class _$AnalyseCredentialPressed implements AnalyseCredentialPressed {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String credentialStr)? credentialChanged,
-    TResult Function()? analyseCredentialPressed,
-  }) {
-    return analyseCredentialPressed?.call();
-  }
-
-  @override
-  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String credentialStr)? credentialChanged,
     TResult Function()? analyseCredentialPressed,
@@ -304,15 +264,6 @@ class _$AnalyseCredentialPressed implements AnalyseCredentialPressed {
         analyseCredentialPressed,
   }) {
     return analyseCredentialPressed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CredentialChanged value)? credentialChanged,
-    TResult Function(AnalyseCredentialPressed value)? analyseCredentialPressed,
-  }) {
-    return analyseCredentialPressed?.call(this);
   }
 
   @override

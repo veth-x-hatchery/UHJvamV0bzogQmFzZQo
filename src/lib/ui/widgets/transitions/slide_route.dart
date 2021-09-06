@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vethx_beta/ui/widgets/transitions/defaults.dart';
+import 'package:hatchery/ui/widgets/transitions/defaults.dart';
 
 class SlideRightRoute<T> extends PageRouteBuilder<T> {
   @override

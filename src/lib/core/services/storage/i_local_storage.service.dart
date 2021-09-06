@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:vethx_beta/core/error/failures.dart';
+import 'package:hatchery/core/error/failures.dart';
 
 /// Improve performance using AES-256 encryption
 enum SensitiveDataKeys {
