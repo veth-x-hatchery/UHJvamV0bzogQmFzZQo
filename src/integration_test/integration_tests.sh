@@ -1,6 +1,13 @@
 #!/bin/sh
 
-flutter_environment="--dart-define=APP_ENVIRONMENT=test"
+ENV_APP_NAME="Hatchery"
+ENV_APP_SUFFIX=".dev"
+
+flutter_environment="""\
+--dart-define=APP_ENVIRONMENT=test \
+--dart-define=ENV_APP_NAME=$ENV_APP_NAME \
+--dart-define=ENV_APP_SUFFIX=$ENV_APP_SUFFIX \
+"""
 
 echo "APP_ENVIRONMENT: ${flutter_environment}"
 echo ""
