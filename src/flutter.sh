@@ -18,16 +18,16 @@ flutter_environment="""\
 """
 
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
-echo "APP_ENVIRONMENT: ${flutter_environment}"
+echo "══╡ APP_ENVIRONMENT: ${flutter_environment}"
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 
-if [ $1 = '--run' ]; 
+if [ $1 = 'run' ]; 
 then
     flutter run $flutter_environment
-elif [ $1 = '--build-android' ];
+elif [ $1 = 'build-android' ];
 then
     flutter build apk --release $flutter_environment
-elif [ $1 = '--build-ios' ];
+elif [ $1 = 'build-ios' ];
 then
     flutter build ios --release $flutter_environment
 fi
