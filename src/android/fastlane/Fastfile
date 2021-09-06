@@ -8,20 +8,12 @@ platform :android do
     load_env
   end
 
-  private_lane :release_flavor_name do
-    "#{flutter_flavor_value.nil? ? "app-release" : "app-#{flutter_flavor_value}-release"}"
-  end
-
-  private_lane :release_flavor_path do
-    "#{flutter_flavor_value.nil? ? "release" : "#{flutter_flavor_value}/release"}"
-  end
-
   private_lane :aab_file_path do
-    "#{root_path}/build/app/outputs/bundle/#{release_flavor_path}/#{release_flavor_name}.aab"
+    "#{root_path}/build/app/outputs/bundle/release/app-release.aab"
   end
 
   private_lane :apk_file_path do
-    "#{root_path}/build/app/outputs/apk/#{release_flavor_path}/#{release_flavor_name}.apk"
+    "#{root_path}/build/app/outputs/apk/release/app-release.apk"
   end
 
   private_lane :build_apk do
