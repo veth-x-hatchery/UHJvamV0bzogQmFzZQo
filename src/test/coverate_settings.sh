@@ -13,8 +13,6 @@
 # echo "void main(){}" >> $file
 
 no_pub=$1
-default_flavor="--flavor=dev"
-flutter_flavor="${2:-$default_flavor}"
 
 rm -rf coverage/*
 

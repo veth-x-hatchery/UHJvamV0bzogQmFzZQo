@@ -1,8 +1,5 @@
 #!/bin/sh
 
-default_flavor="--flavor=dev"
-
-flutter_flavor="${1:-$default_flavor}"
 flutter_environment="--dart-define=APP_ENVIRONMENT=test"
 
 echo "Flutter Flavor: ${flutter_flavor} | ${flutter_environment}"
@@ -22,7 +19,6 @@ echo "════════════════════════�
 flutter drive \
 --driver=test_driver/integration_test_driver_extended.dart \
 --target=integration_test/features/signin/sign_in_register_integration_test.dart \
-$flutter_flavor \
 $flutter_environment
 
 echo ""
@@ -36,7 +32,6 @@ echo "════════════════════════�
 flutter drive \
 --driver=test_driver/integration_test_driver_extended.dart \
 --target=integration_test/features/signin/sign_in_email_integration_test.dart \
-$flutter_flavor \
 $flutter_environment
 
 echo ""

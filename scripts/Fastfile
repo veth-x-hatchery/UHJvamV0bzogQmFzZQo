@@ -36,25 +36,16 @@ end
 
 desc "set --dart-define's on prod environment"
 lane :dart_define do
-  "--dart-define=APP_ENVIRONMENT=dev #{flutter_flavor_option}"
-end
-
-lane :flutter_flavor_option do
- "#{flutter_flavor_value.nil? ? "" : "--flavor=#{flutter_flavor_value}"}"
-end
-
-desc "define flutter flavor to use"
-lane :flutter_flavor_value do
-  "dev"
+  "--dart-define=APP_ENVIRONMENT=dev"
 end
 
 lane :test do |options|
   # sh_on_root(command: "flutter test --no-pub --coverage --suppress-analytics")
-  sh_on_root(command: "./test/coverate_settings.sh --no-pub #{flutter_flavor_option}")
+  sh_on_root(command: "./test/coverate_settings.sh --no-pub")
 end
 
 lane :integration_tests do |options|
-  sh_on_root(command: "./integration_test/integration_tests.sh #{flutter_flavor_option}")
+  sh_on_root(command: "./integration_test/integration_tests.sh")
 end
 
 lane :screenshots_tests do

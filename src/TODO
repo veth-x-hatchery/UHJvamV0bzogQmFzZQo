@@ -4,23 +4,24 @@
 
 	1 - Atualizar o replace.sh
 
-		src/script/Fastfile
+		src/lib/appsettings.dev.json
+		src/lib/appsettings.prod.json
+		src/lib/appsettings.test.json
+
+		scripts/Fastfile
 		
-		android/fastlane
+		src/android/fastlane
+		src/android/Gemfile
+
+		src/ios/fastlane
+		src/ios/Gemfile
 		
-		integration_test/integration_tests.sh
+		src/integration_test/integration_tests.sh
+		src/android/app/src/androidTest/java/com/example/vethx_login/MainActivityTest.java
 		
-		test/coverate_settings.sh
+		src/test/coverate_settings.sh
 		
-		pubspec.yaml
-		
-		l10n.yaml
-		
-		flutter_native_splash.yaml
-		
-		android/app/src/androidTest/java/com/example/vethx_login/MainActivityTest.java
-		
-	2 - Remover o flavor de todos os scripts
+	*** DID -> 2 - Remover o flavor de todos os scripts
 	
 2 - Criar um novo projeto
 
