@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hatchery/features/authentication/infrastructure/services/local_auth.service.mock.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -50,8 +51,9 @@ class ServiceLocatorConfig {
 
     // getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 
-    getIt
-        .registerLazySingleton<AppConfig>(() => AppConfig()..fromEnvironment());
+    final appConfig = AppConfig();
+    await appConfig.fromEnvironment();
+    getIt.registerLazySingleton<AppConfig>(() => appConfig);
 
     getIt.registerLazySingleton<
         ILocalStorage<PersonallyIdentifiableInformationKeys>>(
@@ -74,6 +76,10 @@ class ServiceLocatorConfig {
 
     getIt.registerLazySingleton(() => GoogleSignIn());
 
+    getIt.registerLazySingleton<LocalAuthentication>(
+      () => LocalAuthentication(),
+    );
+
     //! Core
 
     getIt.registerLazySingleton<INetworkInfo>(
@@ -89,12 +95,23 @@ class ServiceLocatorConfig {
     // Services
 
     if (getIt<AppConfig>().isIntegrationTest()) {
+      // Firebase Auth Service
+
       getIt.registerLazySingleton<IAuthFacade>(
         () => AuthFacadeMock()..setupSignInEmailIntegrationTest(),
       );
+
+      // Local Authentication
+
+      getIt.registerLazySingleton<ILocalAuth>(
+        () => LocalAuthMock(),
+      );
     } else {
+      // Firebase Auth Service
+
       getIt.registerLazySingleton<FirebaseUserMapper>(
           () => FirebaseUserMapper());
+
       getIt.registerLazySingleton<IAuthFacade>(
         () => FirebaseAuthFacade(
           getIt<FirebaseAuth>(),
@@ -102,17 +119,15 @@ class ServiceLocatorConfig {
           getIt<FirebaseUserMapper>(),
         ),
       );
+
+      // Local Authentication
+
+      getIt.registerLazySingleton<ILocalAuth>(
+        () => LocalAuth(
+          getIt<LocalAuthentication>(),
+        ),
+      );
     }
-
-    getIt.registerLazySingleton<LocalAuthentication>(
-      () => LocalAuthentication(),
-    );
-
-    getIt.registerLazySingleton<ILocalAuth>(
-      () => LocalAuth(
-        getIt<LocalAuthentication>(),
-      ),
-    );
 
     //! Use case
 

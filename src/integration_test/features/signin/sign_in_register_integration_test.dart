@@ -31,6 +31,9 @@ void main() {
   Future<void> setupServiceLocator(WidgetTester tester) async {
     Logger.testStep('Setup service locator scenario');
     await tester.pumpAndSettle();
+    // Todo(v): set this value on our ENV
+    // Create an IntegrationTests StartUp that guarantee everything is ready
+    await Future.delayed(const Duration(seconds: 3));
     (ServiceLocatorConfig.getIt<IAuthFacade>() as AuthFacadeMock)
         .setupSignInRegisterIntegrationTest();
   }
@@ -106,6 +109,10 @@ void main() {
     step = '1.1.3.1.4_logout';
     Logger.testStep(step);
     await logOut(tester);
+    await Future.delayed(AuthFacadeMock.loadingDuration);
+    await tester.pumpAndSettle();
+
+    // LocalAuth time to rebuild
     await Future.delayed(AuthFacadeMock.loadingDuration);
     await tester.pumpAndSettle();
     expect(find.byType(SignInOptionsPage), findsOneWidget);

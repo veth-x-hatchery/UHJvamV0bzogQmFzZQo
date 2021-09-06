@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'dart:developer';
-
 enum ArchitectureLayer {
   presentation,
   domain,
@@ -193,8 +191,8 @@ class Logger {
     // reportError(ex, stacktrace, message: message);
     // log(details.exceptionAsString(), stackTrace: details.stack);
     // ignore: avoid_print, leading_newlines_in_multiline_strings
-    // ignore: leading_newlines_in_multiline_strings
-    log('''\n══╡ Logger ╞════════════════════════════════════════════════════
+    // ignore: leading_newlines_in_multiline_strings, avoid_print
+    print('''\n══╡ Logger ╞════════════════════════════════════════════════════
            \nLogger: $layer
            \nMessage: $message 
            \nException: ${ex.toString()} 
@@ -207,7 +205,7 @@ class Logger {
     ArchitectureLayer layer = ArchitectureLayer.presentation,
   }) {
     // ignore: avoid_print, leading_newlines_in_multiline_strings
-    log('''\n══╡ Logger ╞═════════════════════════════════════════════════════
+    print('''\n══╡ Logger ╞═════════════════════════════════════════════════════
            \nLogger: $layer
            \nMessage: $message
            \n═════════════════════════════════════════════════════════════════''');
