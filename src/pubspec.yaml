@@ -21,7 +21,6 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  cloud_firestore: any
   cupertino_icons: any
   dartz: any
   device_info_plus: any
