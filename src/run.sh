@@ -12,7 +12,7 @@ HATCHERY_APP_NAME="Hatchery"
 HATCHERY_APP_SUFFIX=".dev"
 
 flutter_environment="""\
---dart-define=APP_ENVIRONMENT=test \
+--dart-define=APP_ENVIRONMENT=dev \
 --dart-define=HATCHERY_APP_NAME=$HATCHERY_APP_NAME \
 --dart-define=HATCHERY_APP_SUFFIX=$HATCHERY_APP_SUFFIX \
 """
@@ -22,3 +22,10 @@ echo "APP_ENVIRONMENT: ${flutter_environment}"
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 
 flutter run $flutter_environment
+
+
+flutter \
+--dart-define=HATCHERY_APP_NAME=Hatchery \
+--dart-define=HATCHERY_APP_SUFFIX=.dev \
+--dart-define=APP_ENVIRONMENT=dev \
+build apk --release

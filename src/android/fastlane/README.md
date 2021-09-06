@@ -50,16 +50,6 @@ fastlane lint
 fastlane dart_define
 ```
 set --dart-define's on prod environment
-### flutter_flavor_option
-```
-fastlane flutter_flavor_option
-```
-
-### flutter_flavor_value
-```
-fastlane flutter_flavor_value
-```
-define flutter flavor to use
 ### test
 ```
 fastlane test
