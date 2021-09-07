@@ -2,8 +2,6 @@
 
 # chechout
 
-rbenv shell 2.6.4
-
 brew install gnupg
 
 git checkout develop
@@ -30,7 +28,11 @@ export PROJECT_PATH=${PWD}
 
 export PROJECT_GLOBAL_VAR=${PWD%/*}/UHJvamV0bzogU2VjcmV0cwo/.files
 
-bundle update fastlane
+rbenv shell 2.6.4
+
+gem install bundler 
+
+bundle install fastlane
 
 # Fastlane Match iOS
 
