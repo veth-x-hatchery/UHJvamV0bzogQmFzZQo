@@ -11,7 +11,7 @@ workflows:
       cocoapods: default
     scripts:
       - |
-        pwd && echo $FCI_BUILD_DIR && ls &&  ./setup.sh
+        ./setup.sh
     publishing:
       email:
         recipients:
