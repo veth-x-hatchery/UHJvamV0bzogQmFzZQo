@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/media/programmer/Library/Projects/vethx/playground/beta/mobile/src/build/flutter_secure_storage/intermediates/res/merged/release/layout-v21/notification_template_custom_big.xml",
+        "source": "/home/programmer/.gradle/caches/transforms-2/files-2.1/3c8fd1bfddb99a7a7e21faa1397acdb4/core-1.1.0/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/media/programmer/Library/Projects/vethx/playground/beta/mobile/src/build/flutter_secure_storage/intermediates/res/merged/release/layout-v21/notification_action.xml",
+        "source": "/home/programmer/.gradle/caches/transforms-2/files-2.1/3c8fd1bfddb99a7a7e21faa1397acdb4/core-1.1.0/res/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "/media/programmer/Library/Projects/vethx/playground/beta/mobile/src/build/flutter_secure_storage/intermediates/res/merged/release/layout-v21/notification_action_tombstone.xml",
+        "source": "/home/programmer/.gradle/caches/transforms-2/files-2.1/3c8fd1bfddb99a7a7e21faa1397acdb4/core-1.1.0/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/media/programmer/Library/Projects/vethx/playground/beta/mobile/src/build/flutter_secure_storage/intermediates/res/merged/release/layout-v21/notification_template_icon_group.xml",
+        "source": "/home/programmer/.gradle/caches/transforms-2/files-2.1/3c8fd1bfddb99a7a7e21faa1397acdb4/core-1.1.0/res/layout-v21/notification_template_icon_group.xml"
+    }
+]

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/media/programmer/Library/Projects/vethx/playground/beta/mobile/src/build/local_auth/intermediates/res/merged/release/layout-watch-v20/abc_alert_dialog_title_material.xml",
+        "source": "/home/programmer/.gradle/caches/transforms-2/files-2.1/debf14768ffea247ff45e3c12f02d529/appcompat-1.2.0/res/layout-watch-v20/abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "/media/programmer/Library/Projects/vethx/playground/beta/mobile/src/build/local_auth/intermediates/res/merged/release/layout-watch-v20/abc_alert_dialog_button_bar_material.xml",
+        "source": "/home/programmer/.gradle/caches/transforms-2/files-2.1/debf14768ffea247ff45e3c12f02d529/appcompat-1.2.0/res/layout-watch-v20/abc_alert_dialog_button_bar_material.xml"
+    }
+]
