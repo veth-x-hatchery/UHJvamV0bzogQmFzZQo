@@ -9,10 +9,7 @@ workflows:
       flutter: stable
       xcode: latest
       cocoapods: default
-      # ruby: 2.6.4
-    cache:
-      cache_paths:
-        - ~/.pub-cache
+      ruby: 2.6.4
     scripts:
       - |
         ./setup.sh

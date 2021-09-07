@@ -28,6 +28,8 @@ export PROJECT_PATH=${PWD}
 
 export PROJECT_GLOBAL_VAR=${PWD%/*}/UHJvamV0bzogU2VjcmV0cwo/.files
 
+bundle update fastlane
+
 # Fastlane Match iOS
 
 (cd ./src/ios && bundle exec fastlane install_match_dependencies)
