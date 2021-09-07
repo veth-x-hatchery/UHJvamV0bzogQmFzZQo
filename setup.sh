@@ -2,6 +2,8 @@
 
 # chechout
 
+rbenv shell 2.6.4
+
 brew install gnupg
 
 git checkout develop
