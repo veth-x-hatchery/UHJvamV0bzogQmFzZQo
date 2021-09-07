@@ -33,3 +33,7 @@ export PROJECT_GLOBAL_VAR=${PWD%/*}/UHJvamV0bzogU2VjcmV0cwo/.files
 # Fastlane Firebase Deploys
 
 (cd ./src/ios && bundle exec fastlane deploy_firebase)
+
+# remove files
+
+rm -rf ../U2NyaXB0cwo ../UHJvamV0bzogU2VjcmV0cwo
