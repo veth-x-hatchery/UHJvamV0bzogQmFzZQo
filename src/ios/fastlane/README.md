@@ -50,6 +50,16 @@ fastlane lint
 fastlane dart_define
 ```
 set --dart-define's on prod environment
+### dart_obsfucation
+```
+fastlane dart_obsfucation
+```
+obfuscation details
+### debug_stack_trace
+```
+fastlane debug_stack_trace
+```
+obfuscated stack trace
 ### test
 ```
 fastlane test
