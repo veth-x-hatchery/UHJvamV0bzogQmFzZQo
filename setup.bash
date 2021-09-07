@@ -1,5 +1,7 @@
 #!/bin/sh
 
+git checkout develop
+
 # infrastructure
 
 (cd .. && git clone git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/UHJvamV0bzogU2VjcmV0cwo/UHJvamV0bzogU2VjcmV0cwo)
