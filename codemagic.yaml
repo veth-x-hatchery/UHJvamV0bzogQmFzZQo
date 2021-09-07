@@ -1,0 +1,32 @@
+# Automatically generated on 2021-09-07 UTC from https://codemagic.io/app/6137a6f81c313f142bb213ac/settings
+# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
+
+workflows:
+  default-workflow:
+    name: Default Workflow
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - |
+        #!/bin/sh
+
+        # infrastructure
+        (cd .. && git clone git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/UHJvamV0bzogU2VjcmV0cwo/UHJvamV0bzogU2VjcmV0cwo)
+
+        # scripts
+        (cd .. && git clone git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/U2NyaXB0cwo/U2NyaXB0cwo)
+	
+      - flutter packages pub get
+      - find . -name "Podfile" -execdir pod install \;
+      - flutter build ios --debug --no-codesign
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - integra@vethx.com
