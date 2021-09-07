@@ -2,6 +2,8 @@ Pods
 Runner/GoogleService-Info.plist
 .symlinks/plugins
 Podfile.lock
+Flutter/Environment.xcconfig
+Gemfile.lock
 
 *.mode1v3
 *.mode2v3
