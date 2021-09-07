@@ -11,21 +11,7 @@ workflows:
       cocoapods: default
     scripts:
       - |
-        #!/bin/sh
-
-        # infrastructure
-        (cd .. && git clone git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/UHJvamV0bzogU2VjcmV0cwo/UHJvamV0bzogU2VjcmV0cwo)
-
-        # scripts
-        (cd .. && git clone git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/U2NyaXB0cwo/U2NyaXB0cwo)
-	
-      - flutter packages pub get
-      - find . -name "Podfile" -execdir pod install \;
-      - flutter build ios --debug --no-codesign
-    artifacts:
-      - build/ios/ipa/*.ipa
-      - /tmp/xcodebuild_logs/*.log
-      - flutter_drive.log
+        ./setup.sh
     publishing:
       email:
         recipients:
