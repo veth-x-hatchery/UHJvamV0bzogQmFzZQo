@@ -44,6 +44,24 @@ lane :dart_define do
 """
 end
 
+desc "obfuscation details"
+lane :dart_obsfucation do |options|
+"""\
+--obfuscate \
+--split-debug-info=#{root_path}/#{ENV['OUTPUT_DIRECTORY']}build/#{options[:platform]}/ \
+"""
+end
+
+# https://flutter.dev/docs/deployment/obfuscate#reading-an-obfuscated-stack-trace
+desc "obfuscated stack trace"
+lane :debug_stack_trace do |options|
+"""\
+flutter symbolize \
+-i #{root_path}/#{ENV['OUTPUT_DIRECTORY']}build/#{options[:platform]}/#{options[:file]} \
+-d #{root_path}/#{ENV['OUTPUT_DIRECTORY']}build/symbols/#{options[:platform]}/
+"""
+end
+
 lane :test do |options|
   # sh_on_root(command: "flutter test --no-pub --coverage --suppress-analytics")
   sh_on_root(command: "./test/coverate_settings.sh --no-pub")
