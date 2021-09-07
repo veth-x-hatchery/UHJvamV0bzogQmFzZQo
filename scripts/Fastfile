@@ -48,7 +48,7 @@ desc "obfuscation details"
 lane :dart_obsfucation do |options|
 """\
 --obfuscate \
---split-debug-info=#{root_path}/#{ENV['OUTPUT_DIRECTORY']}build/#{options[:platform]}/ \
+--split-debug-info=#{root_path}/#{ENV['OUTPUT_DIRECTORY']}build/#{options[:platform]} \
 """
 end
 
