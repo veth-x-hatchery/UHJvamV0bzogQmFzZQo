@@ -1,7 +1,7 @@
 
 src/automation/
 
-src/ios/Runner.xcodeproj/project.pbxproj
+# src/ios/Runner.xcodeproj/project.pbxproj
 
 src/ios/Flutter/Environment.xcconfig
 
