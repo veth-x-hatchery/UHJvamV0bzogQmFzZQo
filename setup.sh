@@ -2,6 +2,8 @@
 
 # chechout
 
+brew install gnupg
+
 git checkout develop
 
 # infrastructure
