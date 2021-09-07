@@ -4,12 +4,12 @@
 workflows:
   default-workflow:
     name: Default Workflow
-    max_build_duration: 60
+    max_build_duration: 120
     environment:
       flutter: stable
       xcode: latest
       cocoapods: default
-      ruby: 2.6.4
+      # ruby: 2.6.4
     cache:
       cache_paths:
         - ~/.pub-cache
