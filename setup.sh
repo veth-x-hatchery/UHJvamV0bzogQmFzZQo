@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# chechout
+
 git checkout develop
 
 # infrastructure

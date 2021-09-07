@@ -12,6 +12,12 @@ workflows:
       ruby: 2.6.4
     scripts:
       - |
+        brew install gnupg
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+    scripts:
+      - |
         ./setup.sh
     publishing:
       email:
