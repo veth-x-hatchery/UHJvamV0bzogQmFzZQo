@@ -1,15 +1,49 @@
+# ==| Keychains |==
 
-# Setting up Fastlane Match
+desc "remove the temporary keychain, if it exists"
+def delete_temp_keychain(name)
+  delete_keychain(
+    name: name
+  ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
+end
 
-desc "installs FixCode which disables the \"Fix Issue\" button in Xcode"
-private_lane :xcode do
-  install_xcode_plugin(
-    url: "https://github.com/fastlane/FixCode/releases/download/0.2.0/FixCode.xcplugin.zip"
+desc "create the temporary keychain with name and password"
+def create_temp_keychain(name, password)
+  create_keychain(
+    name: name,
+    password: password,
+    unlock: false,
+    timeout: false
   )
+end
+
+desc "ensure we have a fresh, empty temporary keychain"
+def ensure_temp_keychain(name, password)
+  delete_temp_keychain(name)
+  create_temp_keychain(name, password)
+end
+
+def keychain_init
+  unless ENV['TEMP_KEYCHAIN_NAME'].nil?
+    puts "keychain_init ===> ensure_temp_keychain"
+    ensure_temp_keychain(
+      ENV['TEMP_KEYCHAIN_NAME'], 
+      ENV['TEMP_KEYCHAIN_PASSWORD']
+    )
+  end
+end
+
+def keychain_dispose
+  unless ENV['TEMP_KEYCHAIN_NAME'].nil?
+    puts "keychain_dispose ===> delete_temp_keychain"
+    delete_temp_keychain(ENV['TEMP_KEYCHAIN_NAME'])
+  end
 end
 
 private_lane :match_configuration do |options|
   api_key = authenticate_apple_store
+
+  keychain_init
 
   sync_code_signing(
     app_identifier: [ENV['APP_IDENTIFIER']],
@@ -17,7 +51,10 @@ private_lane :match_configuration do |options|
     type: options[:type],
     api_key: api_key,
     readonly: options[:readonly],
-    verbose: true
+    verbose: true,
+    force: true,
+    keychain_name: ENV['TEMP_KEYCHAIN_NAME'],
+    keychain_password: ENV['TEMP_KEYCHAIN_PASSWORD']
   )    
 end
 
@@ -65,7 +102,7 @@ lane :staging_profile_name do
   "#{ENV['APP_IDENTIFIER']} #{ENV['PROFILE_STAGING_NAME']}";
 end
 
-lane :development_profile_name do
+lane :development_profile_name do 
   "#{ENV['APP_IDENTIFIER']} #{ENV['PROFILE_DEVELOPMENT_NAME']}";
 end
 
@@ -114,6 +151,15 @@ lane :revoke_nuke_certificates do
   match_nuke(type: "appstore", api_key: api_key, team_id: ENV['TEAM_IDENTIFIER'])
   match_nuke(type: "development", api_key: api_key, team_id: ENV['TEAM_IDENTIFIER'])
   match_nuke(type: "adhoc", api_key: api_key, team_id: ENV['TEAM_IDENTIFIER'])
+end
+
+# Setting up Fastlane Match
+
+desc "installs FixCode which disables the \"Fix Issue\" button in Xcode"
+private_lane :xcode do
+  install_xcode_plugin(
+    url: "https://github.com/fastlane/FixCode/releases/download/0.2.0/FixCode.xcplugin.zip"
+  )
 end
 
 # Utils
