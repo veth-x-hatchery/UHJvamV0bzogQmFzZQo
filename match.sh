@@ -1,1 +1,0 @@
-(cd ./src/ios && bundle exec fastlane install_match_dependencies)
