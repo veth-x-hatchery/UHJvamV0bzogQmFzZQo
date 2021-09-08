@@ -11,9 +11,7 @@ desc "create the temporary keychain with name and password"
 def create_temp_keychain(name, password)
   create_keychain(
     name: name,
-    password: password,
-    unlock: false,
-    timeout: false
+    password: password
   )
 end
 
