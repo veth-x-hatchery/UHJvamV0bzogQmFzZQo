@@ -34,14 +34,14 @@ export TEMP_KEYCHAIN_PASSWORD="SeHjQdweLCv6aCI8HUQCnbmM8FKqhH0ibQZVDq05zU0giqjAu
 
 export YXNkZgo="HF17vs#qtl7V2LFcFDWc5qaR3nHw2bN7B7Z\$CjTizC8j^nKQnobTyBFqTj3hxUhs"
 
-# Fastlane Match iOS
-
 (cd ./src/ios \
 && gem install bundler \
 && bundle add fastlane \
 && bundle install)
 
-(cd ./src/ios && bundle exec fastlane generate_match_dependencies)
+# Fastlane Match iOS
+
+(cd ./src/ios && bundle exec fastlane install_match_dependencies)
 
 # Fastlane Firebase Deploys
 
