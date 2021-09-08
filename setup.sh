@@ -49,10 +49,6 @@ git checkout develop
 
 ../U2NyaXB0cwo/google_service.sh ../UHJvamV0bzogU2VjcmV0cwo .
 
-# Fastlane Match iOS
-
-(cd ./src/ios && bundle exec fastlane install_match_dependencies)
-
 # Fastlane Firebase Deploys
 
 (cd ./src/ios && bundle exec fastlane deploy_firebase)

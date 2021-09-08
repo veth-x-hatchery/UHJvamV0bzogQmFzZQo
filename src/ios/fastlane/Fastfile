@@ -27,6 +27,8 @@ platform :ios do
 
     update_code_signing_settings(profile_name: profile_name)
 
+    install_match_dependencies
+    
     build_app(
       workspace: ENV["WORKSPACE"],
       scheme: ENV["SCHEME"],
