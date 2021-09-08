@@ -10,8 +10,6 @@ workflows:
       xcode: latest
       cocoapods: default
       ruby: 2.6.4
-      vars:
-        YXNkZgo: HF17vs#qtl7V2LFcFDWc5qaR3nHw2bN7B7Z$CjTizC8j^nKQnobTyBFqTj3hxUhs
     scripts:
       - |
         ./setup.sh
