@@ -28,13 +28,12 @@ export PROJECT_PATH=${PWD}
 
 export PROJECT_GLOBAL_VAR=${PWD%/*}/UHJvamV0bzogU2VjcmV0cwo/.files
 
-rbenv shell 2.6.4
-
-gem install bundler 
-
-bundle install fastlane
-
 # Fastlane Match iOS
+
+(cd ./src/ios \
+&& gem install bundler \
+&& bundle add fastlane \
+&& bundle install)
 
 (cd ./src/ios && bundle exec fastlane install_match_dependencies)
 
