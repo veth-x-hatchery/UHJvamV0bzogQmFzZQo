@@ -31,7 +31,7 @@ export PROJECT_GLOBAL_VAR=${PWD%/*}/UHJvamV0bzogU2VjcmV0cwo/.files
 # Fastlane Match iOS
 
 (cd ./src/ios \
-&& gem install bundler \z
+&& gem install bundler \
 && bundle add fastlane \
 && bundle install)
 
