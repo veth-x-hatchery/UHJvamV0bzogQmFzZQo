@@ -21,7 +21,7 @@ def ensure_temp_keychain(name, password)
   create_temp_keychain(name, password)
 end
 
-def keychain_init
+lane :keychain_init do
   unless ENV['TEMP_KEYCHAIN_NAME'].nil?
     puts "keychain_init ===> ensure_temp_keychain"
     ensure_temp_keychain(
@@ -31,7 +31,7 @@ def keychain_init
   end
 end
 
-def keychain_dispose
+lane :keychain_dispose do
   unless ENV['TEMP_KEYCHAIN_NAME'].nil?
     puts "keychain_dispose ===> delete_temp_keychain"
     delete_temp_keychain(ENV['TEMP_KEYCHAIN_NAME'])
