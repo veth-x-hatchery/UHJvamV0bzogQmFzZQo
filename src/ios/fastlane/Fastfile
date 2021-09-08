@@ -30,10 +30,10 @@ platform :ios do
     install_match_dependencies
 
     build_app(
+      export_method: method,
+      export_team_id: ENV["TEAM_IDENTIFIER"],
       workspace: ENV["WORKSPACE"],
       scheme: ENV["SCHEME"],
-      export_team_id: ENV["TEAM_IDENTIFIER"],
-      export_method: method,
       export_options: {
         provisioningProfiles: { 
           ENV["APP_IDENTIFIER"] => profile_name
@@ -41,7 +41,6 @@ platform :ios do
       },
       skip_profile_detection: true,
       skip_codesigning: true,
-      skip_archive: true,
       build_path: ios_build_output_directory,
       archive_path: ios_build_output_directory,
       derived_data_path: ios_build_output_directory,
