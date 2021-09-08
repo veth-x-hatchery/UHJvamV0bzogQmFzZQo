@@ -31,11 +31,11 @@ export PROJECT_GLOBAL_VAR=${PWD%/*}/UHJvamV0bzogU2VjcmV0cwo/.files
 # Fastlane Match iOS
 
 (cd ./src/ios \
-&& gem install bundler \
+&& gem install bundler \z
 && bundle add fastlane \
 && bundle install)
 
-(cd ./src/ios && bundle exec fastlane install_match_dependencies)
+(cd ./src/ios && bundle exec fastlane generate_match_dependencies)
 
 # Fastlane Firebase Deploys
 

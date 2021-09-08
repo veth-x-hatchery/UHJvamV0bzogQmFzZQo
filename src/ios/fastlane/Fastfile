@@ -25,8 +25,8 @@ platform :ios do
     code_sign_identity = method == 'ad-hoc' ? "iPhone Developer" : "iPhone Distribution"
     
     update_code_signing_settings(
-      profile_name: profile_name,
-      code_sign_identity: code_sign_identity
+      profile_name: profile_name
+      # code_sign_identity: code_sign_identity
     )
 
     build_app(
