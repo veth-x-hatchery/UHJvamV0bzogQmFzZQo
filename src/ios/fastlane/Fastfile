@@ -28,7 +28,7 @@ platform :ios do
     update_code_signing_settings(profile_name: profile_name)
 
     install_match_dependencies
-    
+
     build_app(
       workspace: ENV["WORKSPACE"],
       scheme: ENV["SCHEME"],
@@ -41,6 +41,7 @@ platform :ios do
       },
       skip_profile_detection: true,
       skip_codesigning: true,
+      skip_archive: true,
       build_path: ios_build_output_directory,
       archive_path: ios_build_output_directory,
       derived_data_path: ios_build_output_directory,
