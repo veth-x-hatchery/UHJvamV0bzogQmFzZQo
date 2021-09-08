@@ -39,13 +39,10 @@ platform :ios do
       },
       skip_profile_detection: true,
       skip_codesigning: true,
-      clean: true,
-      skip_build_archive: true,
-      skip_archive: true,
-      archive_path: SharedValues::XCODEBUILD_ARCHIVE,
-      # build_path: ios_build_output_directory,
-      # derived_data_path: ios_build_output_directory,
-      # output_directory: ios_build_output_directory, 
+      build_path: ios_build_output_directory,
+      archive_path: ios_build_output_directory,
+      derived_data_path: ios_build_output_directory,
+      output_directory: ios_build_output_directory, 
       output_name: "#{ENV['APP_IDENTIFIER']}.ipa",
     )
 
