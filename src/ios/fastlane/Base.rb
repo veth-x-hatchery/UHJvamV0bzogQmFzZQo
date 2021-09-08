@@ -50,7 +50,7 @@ private_lane :match_configuration do |options|
     api_key: api_key,
     readonly: options[:readonly],
     verbose: true,
-    force: true,
+    # force: true,
     keychain_name: ENV['TEMP_KEYCHAIN_NAME'],
     keychain_password: ENV['TEMP_KEYCHAIN_PASSWORD']
   )    
