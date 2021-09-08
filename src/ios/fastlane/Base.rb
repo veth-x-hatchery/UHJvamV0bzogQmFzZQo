@@ -23,7 +23,7 @@ end
 
 lane :keychain_init do
   unless ENV['TEMP_KEYCHAIN_NAME'].nil?
-    puts "keychain_init ===> ensure_temp_keychain"
+    puts "keychain_init ===> ensure_temp_keychain: #{ENV['TEMP_KEYCHAIN_NAME']}"
     ensure_temp_keychain(
       ENV['TEMP_KEYCHAIN_NAME'], 
       ENV['TEMP_KEYCHAIN_PASSWORD']
@@ -33,7 +33,7 @@ end
 
 lane :keychain_dispose do
   unless ENV['TEMP_KEYCHAIN_NAME'].nil?
-    puts "keychain_dispose ===> delete_temp_keychain"
+    puts "keychain_dispose ===> delete_temp_keychain: #{ENV['TEMP_KEYCHAIN_NAME']}"
     delete_temp_keychain(ENV['TEMP_KEYCHAIN_NAME'])
   end
 end
