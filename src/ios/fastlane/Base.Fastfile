@@ -17,7 +17,8 @@ private_lane :match_configuration do |options|
     type: options[:type],
     api_key: api_key,
     readonly: options[:readonly],
-    verbose: true
+    verbose: true,
+    generate_apple_certs: true
   )    
 end
 
