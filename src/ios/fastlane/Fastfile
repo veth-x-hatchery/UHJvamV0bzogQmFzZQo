@@ -48,6 +48,8 @@ platform :ios do
       output_name: "#{ENV['APP_IDENTIFIER']}.ipa",
     )
 
+    keychain_dispose
+
     puts lane_context[SharedValues::IPA_OUTPUT_PATH]
   end
 
