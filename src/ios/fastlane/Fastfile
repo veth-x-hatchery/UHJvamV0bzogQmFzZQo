@@ -24,18 +24,8 @@ platform :ios do
     profile_name = method == "ad-hoc" ? staging_profile_name : production_profile_name
     
     code_sign_identity = method == 'ad-hoc' ? "iPhone Developer" : "iPhone Distribution"
-    
-    disable_automatic_code_signing(
-      path: "./Runner.xcodeproj",
-      team_id: ENV["TEAM_IDENTIFIER"],
-      profile_name: ENV["APP_IDENTIFIER"],
-      code_sign_identity: code_sign_identity
-    )
 
-    # update_code_signing_settings(
-    #   profile_name: profile_name
-    #   # code_sign_identity: code_sign_identity
-    # )
+    update_code_signing_settings(profile_name: profile_name)
 
     build_app(
       workspace: ENV["WORKSPACE"],
