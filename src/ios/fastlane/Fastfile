@@ -65,7 +65,7 @@ platform :ios do
     
     config_param = config_only ? '--config-only' : ''
 
-    sh_on_root(command: "flutter build ios --no-pub --suppress-analytics --release #{dart_define} #{sign_param} #{config_param}")
+    sh_on_root(command: "flutter build ios --no-pub --suppress-analytics --release #{dart_define} #{sign_param} #{config_param} #{dart_obsfucation(platform: 'ios')}")
   end
 
   lane :optional_changelog do
