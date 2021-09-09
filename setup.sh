@@ -2,11 +2,11 @@
 
 ################################# PACKAGES INSTALL ############################################
 
-# GPG
+# gnupg
 
 brew install gnupg
 
-# Bundler
+# bundler
 
 (cd ./src/ios \
 && gem install bundler \
@@ -15,19 +15,19 @@ brew install gnupg
 
 ##################################### TEMP .ENV ################################################
 
-export PROJECT_PATH=${PWD}
-
-export PROJECT_GLOBAL_VAR=${PWD%/*}/UHJvamV0bzogU2VjcmV0cwo/.files
-
 export PROJECT_INFRA_GIT_PATH="git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/UHJvamV0bzogU2VjcmV0cwo/UHJvamV0bzogU2VjcmV0cwo"
+export PROJECT_INFRA_FOLDER="UHJvamV0bzogU2VjcmV0cwo"
 
 export PROJECT_SCRIPTS_GIT_PATH="git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/U2NyaXB0cwo/U2NyaXB0cwo"
+export PROJECT_SCRIPTS_FOLDER="U2NyaXB0cwo"
 
-export TEMP_KEYCHAIN_NAME="continuous.keychain"
-
-export TEMP_KEYCHAIN_PASSWORD="SeHjQdweLCv6aCI8HUQCnbmM8FKqhH0ibQZVDq05zU0giqjAuOd97GPbP7uPOT7f"
+export PROJECT_PATH=${PWD}
+export TEMP_FILES_PATH=${PWD%/*}
+export PROJECT_GLOBAL_VAR="$TEMP_FILES_PATH/$PROJECT_INFRA_FOLDER/.files"
 
 export YXNkZgo="HF17vs#qtl7V2LFcFDWc5qaR3nHw2bN7B7Z\$CjTizC8j^nKQnobTyBFqTj3hxUhs"
+export TEMP_KEYCHAIN_NAME="continuous.keychain"
+export TEMP_KEYCHAIN_PASSWORD="SeHjQdweLCv6aCI8HUQCnbmM8FKqhH0ibQZVDq05zU0giqjAuOd97GPbP7uPOT7f"
 
 ##################################### UNPACKING ################################################
 
@@ -35,24 +35,28 @@ git checkout develop
 
 # infrastructure
 
-(cd .. && git clone $PROJECT_INFRA_GIT_PATH)
+(cd $TEMP_FILES_PATH && git clone $PROJECT_INFRA_GIT_PATH)
 
 # scripts
 
-(cd .. && git clone $PROJECT_SCRIPTS_GIT_PATH)
+(cd $TEMP_FILES_PATH && git clone $PROJECT_SCRIPTS_GIT_PATH)
 
-# decrypt infrastructure .files
+# decrypting infrastructure .files
 
-../U2NyaXB0cwo/decrypt.sh ../UHJvamV0bzogU2VjcmV0cwo
+(cd "$TEMP_FILES_PATH/$PROJECT_SCRIPTS_FOLDER" && \
+./decrypt.sh "$TEMP_FILES_PATH/$PROJECT_INFRA_FOLDER")
 
-# Google Files
+# copying google files
 
-../U2NyaXB0cwo/google_service.sh ../UHJvamV0bzogU2VjcmV0cwo .
+(cd "$TEMP_FILES_PATH/$PROJECT_SCRIPTS_FOLDER" && \
+./google_service.sh "$TEMP_FILES_PATH/$PROJECT_INFRA_FOLDER" $PROJECT_PATH)
 
-# Fastlane Firebase Deploys
+# fastlane firebase deploy
 
-(cd ./src/ios && bundle exec fastlane deploy_firebase)
+# (cd ./src/ios && bundle exec fastlane deploy_firebase)
 
-# remove files
+# remove temp files
 
-rm -rf ../U2NyaXB0cwo ../UHJvamV0bzogU2VjcmV0cwo
+rm -rf \
+"$TEMP_FILES_PATH/$PROJECT_SCRIPTS_FOLDER" \
+"$TEMP_FILES_PATH/$PROJECT_INFRA_FOLDER"
