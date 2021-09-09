@@ -49,7 +49,7 @@ git checkout develop
 # copying google files
 
 (cd "$TEMP_FILES_PATH/$PROJECT_SCRIPTS_FOLDER" && \
-./google_service.sh "$TEMP_FILES_PATH/$PROJECT_INFRA_FOLDER" $PROJECT_PATH)
+./env_files.sh "$TEMP_FILES_PATH/$PROJECT_INFRA_FOLDER" $PROJECT_PATH)
 
 # fastlane firebase deploy
 
