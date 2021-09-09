@@ -44,11 +44,13 @@ git checkout develop
 # decrypting infrastructure .files
 
 (cd "$TEMP_FILES_PATH/$PROJECT_SCRIPTS_FOLDER" && \
+chmod +x ./decrypt.sh && \
 ./decrypt.sh "$TEMP_FILES_PATH/$PROJECT_INFRA_FOLDER")
 
 # copying google files
 
 (cd "$TEMP_FILES_PATH/$PROJECT_SCRIPTS_FOLDER" && \
+chmod +x ./env_files.sh && \
 ./env_files.sh "$TEMP_FILES_PATH/$PROJECT_INFRA_FOLDER" $PROJECT_PATH)
 
 # fastlane firebase deploy
