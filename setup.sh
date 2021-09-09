@@ -1,4 +1,4 @@
-#!/bin/sh
+ #!/bin/sh
 
 ################################# PACKAGES INSTALL ############################################
 
@@ -55,7 +55,7 @@ chmod +x ./env_files.sh && \
 
 # fastlane firebase deploy
 
-# (cd ./src/ios && bundle exec fastlane deploy_firebase)
+(cd ./src/ios && bundle exec fastlane deploy_firebase)
 
 # remove temp files
 
