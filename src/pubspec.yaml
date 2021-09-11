@@ -59,7 +59,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   json_serializable: any
-  lint: any
+  flutter_lints: any
   mockito: any
   test: any
 
