@@ -1,17 +1,33 @@
  #!/bin/sh
 
+if [ -n "$1" ]; then
+    platform="$1"
+else
+    platform="ios"
+fi
+
+if [ -n "$2" ]; then
+    lane="$2"
+else
+    lane="deploy_firebase"
+fi
+
+echo "═════════════════════════════════════════════════════════════════════════════════"
+echo "══╡ Platform: $platform / Lane: $lane"
+echo "═════════════════════════════════════════════════════════════════════════════════"
+
 ################################# PACKAGES INSTALL ############################################
 
-# # gnupg
+# gnupg
 
-# brew install gnupg
+brew install gnupg
 
-# # bundler
+# bundler
 
-# (cd ./src/ios \
-# && gem install bundler \
-# && bundle add fastlane \
-# && bundle install)
+(cd ./src/$platform \
+&& gem install bundler \
+&& bundle add fastlane \
+&& bundle install)
 
 ##################################### TEMP .ENV ################################################
 
@@ -55,7 +71,7 @@ chmod +x ./env_files.sh && \
 
 # fastlane firebase deploy
 
-(cd ./src/ios && bundle exec fastlane deploy_firebase)
+(cd ./src/$platform && bundle exec fastlane $lane)
 
 # dispose temp files
 
