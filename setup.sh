@@ -2,16 +2,16 @@
 
 ################################# PACKAGES INSTALL ############################################
 
-# gnupg
+# # gnupg
 
-brew install gnupg
+# brew install gnupg
 
-# bundler
+# # bundler
 
-(cd ./src/ios \
-&& gem install bundler \
-&& bundle add fastlane \
-&& bundle install)
+# (cd ./src/ios \
+# && gem install bundler \
+# && bundle add fastlane \
+# && bundle install)
 
 ##################################### TEMP .ENV ################################################
 
@@ -55,7 +55,7 @@ chmod +x ./env_files.sh && \
 
 # fastlane firebase deploy
 
-# (cd ./src/ios && bundle exec fastlane deploy_firebase)
+(cd ./src/ios && bundle exec fastlane deploy_firebase)
 
 # dispose temp files
 
