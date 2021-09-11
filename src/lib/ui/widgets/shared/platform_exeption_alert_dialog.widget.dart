@@ -6,6 +6,7 @@ import 'package:hatchery/ui/widgets/shared/platform_alert_dialog.widget.dart';
 class PlatformExceptionAlertDialog extends PlatformAlertDialog {
   PlatformExceptionAlertDialog(
     BuildContext context, {
+    Key? key,
     required String title,
     required Exception exception,
     required String alternativeMessage,

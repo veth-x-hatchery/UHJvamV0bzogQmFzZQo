@@ -98,7 +98,7 @@ class SignInServiceLocator implements ISignInServiceLocator {
 
     _getIt.registerLazySingleton<SignInRegisterCredentialAndSecret>(
       () => SignInRegisterCredentialAndSecret(
-        // sl<ISignInRepository>(),
+        _getIt<ISignInRepository>(),
         _getIt<IAuthFacade>(),
       ),
     );

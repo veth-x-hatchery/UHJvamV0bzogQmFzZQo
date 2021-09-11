@@ -27,7 +27,7 @@ Future<void> main() async {
   await Startup.init();
 
   runZonedGuarded(
-    () => runApp(App()),
+    () => runApp(const App()),
     (error, stackTrace) => Logger.e(
       error.toString(),
       ex: error,
@@ -37,6 +37,8 @@ Future<void> main() async {
 }
 
 class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return AlphaPage.create();

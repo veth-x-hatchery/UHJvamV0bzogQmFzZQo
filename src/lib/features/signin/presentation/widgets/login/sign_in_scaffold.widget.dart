@@ -4,6 +4,7 @@ import 'package:hatchery/features/signin/presentation/widgets/sign_in.widgets.da
 Scaffold signInScaffold(
   BuildContext context, {
   bool leading = true,
+  IconData? icon,
   Function()? onPressed,
   required Widget child,
 }) {
@@ -15,7 +16,7 @@ Scaffold signInScaffold(
           ? IconButton(
               key: const Key(SignInPageKeys.signInBackPageButton),
               icon: Icon(
-                Icons.arrow_back_ios,
+                icon ?? Icons.arrow_back_ios,
                 color: Theme.of(context).primaryColor,
               ),
               onPressed: () =>

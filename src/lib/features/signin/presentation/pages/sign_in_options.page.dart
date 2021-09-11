@@ -90,6 +90,7 @@ class _SignInOptionsPageState extends State<SignInOptionsPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
+      icon: Icons.close,
       child: BlocBuilder<SignInOptionsBloc, SignInOptionsState>(
           builder: (context, state) {
         FocusScope.of(context).unfocus();

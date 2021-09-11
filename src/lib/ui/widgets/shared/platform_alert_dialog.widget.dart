@@ -7,6 +7,7 @@ import 'platform.widget.dart';
 
 class PlatformAlertDialog extends PlatformWidget {
   const PlatformAlertDialog({
+    Key? key,
     required this.title,
     required this.content,
     required this.cancelActionText,
@@ -65,6 +66,7 @@ class PlatformAlertDialog extends PlatformWidget {
 
 class PlatformAlertDialogAction extends PlatformWidget {
   const PlatformAlertDialogAction({
+    Key? key,
     required this.child,
     required this.onPressed,
   });

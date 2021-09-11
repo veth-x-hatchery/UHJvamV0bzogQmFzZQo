@@ -1,17 +1,17 @@
 import 'package:dartz/dartz.dart';
-
 import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 import 'package:hatchery/features/signin/domain/entities/credentials_entity.dart';
+import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
 import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
 import 'package:hatchery/l10n/l10n.dart';
 
 class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
-  // final ISignInRepository _signInRepository;
+  final ISignInRepository _signInRepository;
   final IAuthFacade _authFacade;
 
   SignInRegisterCredentialAndSecret(
-    // this._signInRepository,
+    this._signInRepository,
     this._authFacade,
   );
 
@@ -25,7 +25,10 @@ class SignInRegisterCredentialAndSecret extends UseCase<Unit, Credentials> {
         )
         .then((value) => value.fold(
               (l) => left(_mapFailures(l)),
-              (r) => right(unit),
+                (r) async {
+                  await _signInRepository.skipNextLocalAuthenticationRequest();
+                  return right(unit);
+                },
             ));
   }
 
