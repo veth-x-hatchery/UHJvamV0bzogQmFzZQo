@@ -2,10 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mockito/mockito.dart';
 import 'package:hatchery/core/notifications/notification.dart';
 import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
-
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_secret_reset.dart';
@@ -18,6 +16,7 @@ import 'package:hatchery/features/signin/presentation/routes/sign_in_go_to.dart'
 import 'package:hatchery/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:hatchery/l10n/l10n.dart';
 import 'package:hatchery/ui/widgets/shared/progress-indicator.widget.dart';
+import 'package:mockito/mockito.dart';
 
 import '../../../../helpers/features/signin/presentation/pages/sign_in_secret.finders.dart';
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';

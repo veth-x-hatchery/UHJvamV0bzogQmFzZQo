@@ -1,13 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:integration_test/integration_test.dart';
 import 'package:hatchery/core/device/device_info.dart';
 import 'package:hatchery/core/utils/logger.dart';
 import 'package:hatchery/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:hatchery/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:hatchery/features/signin/presentation/widgets/sign_in.widgets.dart';
+import 'package:integration_test/integration_test.dart';
 
 class IntegrationTestsHelpers {
   int index;

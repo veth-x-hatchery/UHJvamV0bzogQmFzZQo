@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart';
 import 'package:hatchery/features/signin/domain/entities/user_entity.dart';
 import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
 import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 import 'auth_bloc_test.mocks.dart';
 

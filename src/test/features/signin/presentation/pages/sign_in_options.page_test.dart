@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:hatchery/core/routes/navigation.dart';
 import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
 import 'package:hatchery/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
@@ -17,10 +15,11 @@ import 'package:hatchery/features/signin/presentation/pages/sign_in_secret.page.
 import 'package:hatchery/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:hatchery/features/signin/presentation/widgets/sign_in.widgets.dart';
 import 'package:hatchery/ui/widgets/shared/progress-indicator.widget.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';
-
 import 'sign_in_options.page_test.mocks.dart';
 
 @GenerateMocks([], customMocks: [

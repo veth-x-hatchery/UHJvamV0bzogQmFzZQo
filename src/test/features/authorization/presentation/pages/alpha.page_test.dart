@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:hatchery/features/authentication/presentation/bloc/local_authentication_bloc.dart';
 import 'package:hatchery/features/authentication/presentation/pages/local_authentication.page.dart';
 import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart';
@@ -15,6 +13,8 @@ import 'package:hatchery/features/signin/presentation/pages/sign_in_options.page
 import 'package:hatchery/features/signin/presentation/routes/sign_in_go_to.dart';
 import 'package:hatchery/features/signin/sign_in_service_locator.dart';
 import 'package:hatchery/ui/splash/splash.page.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 import '../../../../helpers/features/signin/sign_in_service_locator.mock.dart';
 import '../../../../helpers/widgets/pumpWidget.widget.dart';

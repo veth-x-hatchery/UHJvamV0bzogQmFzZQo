@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as h;
 import 'package:hatchery/core/api/api.dart';
 import 'package:hatchery/core/error/exceptions.dart';
 import 'package:hatchery/core/network/network_info.dart';
 import 'package:hatchery/core/services/storage/i_local_storage.service.dart';
 import 'package:hatchery/core/utils/logger.dart';
+import 'package:http/http.dart' as h;
 
 class APIBase {
   APIBase(

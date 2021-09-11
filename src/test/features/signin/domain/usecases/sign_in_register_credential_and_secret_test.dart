@@ -1,15 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
-
 import 'package:hatchery/features/signin/domain/entities/credentials_entity.dart';
 // import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
 import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
 import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 import 'sign_in_check_credential_test.mocks.dart';
 

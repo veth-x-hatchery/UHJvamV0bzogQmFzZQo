@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/features/authentication/infrastructure/services/local_auth.service.dart';
+import 'package:hatchery/features/authentication/infrastructure/services/local_auth_failure.dart';
 import 'package:local_auth/error_codes.dart' as auth_error;
 import 'package:local_auth/local_auth.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:hatchery/core/utils/logger.dart';
-import 'package:hatchery/features/authentication/infrastructure/services/local_auth.service.dart';
-import 'package:hatchery/features/authentication/infrastructure/services/local_auth_failure.dart';
 
 import 'local_auth.service_test.mocks.dart';
 

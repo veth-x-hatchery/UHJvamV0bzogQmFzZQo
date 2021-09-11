@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:integration_test/integration_test.dart';
 import 'package:hatchery/core/notifications/messages.dart';
 import 'package:hatchery/core/utils/logger.dart';
 import 'package:hatchery/features/home/presentation/pages/home.page.dart';
@@ -12,6 +11,7 @@ import 'package:hatchery/features/signin/presentation/pages/sign_in_options.page
 import 'package:hatchery/features/signin/presentation/pages/sign_in_secret.page.dart';
 import 'package:hatchery/main.dart' as app;
 import 'package:hatchery/service_locator.dart';
+import 'package:integration_test/integration_test.dart';
 
 import '../../../test/helpers/widgets/pumpWidget.widget.dart';
 import 'finders/home.page.dart';
@@ -153,7 +153,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // LocalAuth time to rebuild
-    await Future.delayed(AuthFacadeMock.loadingDuration);
+    await Future.delayed(AuthFacadeMock.loadingDuration * 2);
     await tester.pumpAndSettle();
     expect(find.byType(SignInOptionsPage), findsOneWidget);
   });

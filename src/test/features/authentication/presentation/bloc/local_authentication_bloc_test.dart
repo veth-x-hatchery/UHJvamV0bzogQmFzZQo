@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 import 'package:hatchery/features/authentication/domain/usecases/request_authentication.usecase.dart';
 import 'package:hatchery/features/authentication/infrastructure/services/local_auth_failure.dart';
 import 'package:hatchery/features/authentication/presentation/bloc/local_authentication_bloc.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 import 'local_authentication_bloc_test.mocks.dart';
 

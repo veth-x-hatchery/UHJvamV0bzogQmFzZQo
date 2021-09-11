@@ -1,6 +1,4 @@
 import 'package:get_it/get_it.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:hatchery/core/utils/logger.dart';
 import 'package:hatchery/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:hatchery/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
@@ -9,6 +7,8 @@ import 'package:hatchery/features/signin/presentation/bloc/secret/reset/sign_in_
 import 'package:hatchery/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:hatchery/features/signin/presentation/manager/navigation.manager.dart';
 import 'package:hatchery/features/signin/sign_in_service_locator.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 import 'sign_in_service_locator.mock.mocks.dart';
 
