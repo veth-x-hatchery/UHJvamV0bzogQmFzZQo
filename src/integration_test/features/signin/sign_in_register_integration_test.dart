@@ -24,8 +24,7 @@ void main() {
   late IntegrationTestsHelpers helper;
 
   Future<void> _setupAndroidScreenShots() async {
-    // TODO
-    // await _binding.convertFlutterSurfaceToImage();
+    await _binding.convertFlutterSurfaceToImage();
   }
 
   Future<void> setupServiceLocator(WidgetTester tester) async {
@@ -47,6 +46,14 @@ void main() {
   });
 
   tearDown(() => GetIt.instance.reset());
+
+  Future<void> _waitToPump(
+    WidgetTester tester, {
+    Duration duration = AuthFacadeMock.loadingDuration,
+  }) async {
+    await Future.delayed(duration);
+    await tester.pumpAndSettle();
+  }
 
   testWidgets('should complete the register test plan',
       (WidgetTester tester) async {
@@ -98,23 +105,24 @@ void main() {
 
     step = '1.1.3.1.3_enter_a_valid_password_and_go_to_home_page';
     Logger.testStep(step);
+
     await signInRegisterEnterAvalidEmail(tester);
     await signInRegisterSubmitRegister(tester);
+
     await signInRegisterEnterAvalidSecret(tester);
     await signInRegisterSubmitRegister(tester);
-    await Future.delayed(AuthFacadeMock.loadingDuration);
+
+    await _waitToPump(tester);
+
     expect(find.byType(HomePage), findsOneWidget);
     await helper.screenshot(prefix: prefix, name: step);
 
     step = '1.1.3.1.4_logout';
     Logger.testStep(step);
     await logOut(tester);
-    await Future.delayed(AuthFacadeMock.loadingDuration);
-    await tester.pumpAndSettle();
 
     // LocalAuth time to rebuild
-    await Future.delayed(AuthFacadeMock.loadingDuration);
-    await tester.pumpAndSettle();
+    await _waitToPump(tester);
     expect(find.byType(SignInOptionsPage), findsOneWidget);
   });
 }

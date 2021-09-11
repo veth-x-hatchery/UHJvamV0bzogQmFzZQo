@@ -27,8 +27,7 @@ void main() {
   late IntegrationTestsHelpers helper;
 
   Future<void> _setupAndroidScreenShots() async {
-    // TODO
-    // await _binding.convertFlutterSurfaceToImage();
+    await _binding.convertFlutterSurfaceToImage();
   }
 
   Future<void> setupServiceLocator(WidgetTester tester) async {
@@ -50,6 +49,14 @@ void main() {
   });
 
   tearDown(() => GetIt.instance.reset());
+
+  Future<void> _waitToPump(
+    WidgetTester tester, {
+    Duration duration = AuthFacadeMock.loadingDuration,
+  }) async {
+    await Future.delayed(duration);
+    await tester.pumpAndSettle();
+  }
 
   testWidgets('should complete the sign in with email test plan',
       (WidgetTester tester) async {
@@ -110,9 +117,7 @@ void main() {
     expect(find.byType(SnackBar), findsOneWidget);
     await tester.pump();
     await helper.screenshot(prefix: prefix, name: step);
-    await Future.delayed(snackBarNotificationDuration);
-    await Future.delayed(snackBarNotificationDuration);
-    await tester.pumpAndSettle();
+    await _waitToPump(tester, duration: snackBarNotificationDuration * 2);
 
     step = '1.1.2.1.2_change_my_email';
     Logger.testStep(step);
@@ -127,7 +132,7 @@ void main() {
     await signInEmailEnterAvalidEmail(tester);
     Logger.testStep('goto:__1.1.2.1_-_go_to_secret_page');
     await signInEmailSubmitEmail(tester);
-    await Future.delayed(AuthFacadeMock.loadingDuration);
+    await _waitToPump(tester);
     expect(find.byType(SignInSecretPage), findsOneWidget);
 
     step = '1.1.2.1.3_enter_an_invalid_password';
@@ -142,19 +147,16 @@ void main() {
     Logger.testStep(step);
     await enterAvalidRegisteredSecret(tester);
     await submitSecret(tester);
-    await Future.delayed(AuthFacadeMock.loadingDuration);
+    await _waitToPump(tester);
     expect(find.byType(HomePage), findsOneWidget);
     await helper.screenshot(prefix: prefix, name: step);
 
     step = '1.1.2.1.5_logout';
     Logger.testStep(step);
     await logOut(tester);
-    await Future.delayed(AuthFacadeMock.loadingDuration);
-    await tester.pumpAndSettle();
 
     // LocalAuth time to rebuild
-    await Future.delayed(AuthFacadeMock.loadingDuration * 2);
-    await tester.pumpAndSettle();
+    await _waitToPump(tester);
     expect(find.byType(SignInOptionsPage), findsOneWidget);
   });
 }

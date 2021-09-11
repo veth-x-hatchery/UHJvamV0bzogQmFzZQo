@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hatchery/core/device/device_info.dart';
@@ -20,7 +22,7 @@ class IntegrationTestsHelpers {
     required String prefix,
     required String name,
   }) async {
-    // final basePath = '.${Directory.current.path}screenshots';
+    final basePath = '.${Directory.current.path}screenshots';
 
     String deviceModel = await DeviceInfo().modelName();
     deviceModel = deviceModel
@@ -33,14 +35,10 @@ class IntegrationTestsHelpers {
 
     index++;
 
-    // final List<int> firstPng =
+    final List<int> firstPng = await binding.takeScreenshot(
+        '$basePath/${Platform.isAndroid ? 'android' : 'ios'}/${deviceModel}_$prefix.${index}_$name');
 
-    // Todo(v): Workaround
-
-    // await binding.takeScreenshot(
-    //     '$basePath/${Platform.isAndroid ? 'android' : 'ios'}/${deviceModel}_$prefix.${index}_$name');
-
-    // expect(firstPng.isNotEmpty, isTrue);
+    expect(firstPng.isNotEmpty, isTrue);
   }
 }
 

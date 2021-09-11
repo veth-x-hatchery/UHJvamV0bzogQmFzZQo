@@ -1,11 +1,11 @@
 #!/bin/sh
 
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
-echo "══╡ WORKAROUND: MainActivity.local_auth ╞══════════════════════════════════════════════════"
+echo "══╡ WORKAROUND: Expect to be executed from ./src/ ╞════════════════════════════════════════"
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 
 # see integration_tests.sh to understand
-cp android/app/src/main/kotlin/com/vethx/hatchery/MainActivity.local_auth \
+cp android/app/src/main/kotlin/com/vethx/hatchery/MainActivity.integration_tests \
 android/app/src/main/kotlin/com/vethx/hatchery/MainActivity.kt
 
 HATCHERY_APP_NAME="Hatchery"
