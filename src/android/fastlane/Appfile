@@ -1,0 +1,3 @@
+package_name(ENV["ANDROID_PACKAGE_NAME"])
+
+json_key_file(ENV["GOOGLE_SERVICE_ACCOUNT_SECRET"])
