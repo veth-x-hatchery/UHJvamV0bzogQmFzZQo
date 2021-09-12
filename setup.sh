@@ -52,25 +52,6 @@ fi
 
 export PROJECT_PATH=${PWD}
 
-echo 
-echo "═══════════════════════════════════════════════════════════════════════════════════════════"
-echo "══╡ PACKAGES INSTALL ╞═════════════════════════════════════════════════════════════════════"
-echo "═══════════════════════════════════════════════════════════════════════════════════════════"
-echo 
-
-if [ -z "$PROJECT_FROM_LOCALHOST" ]; then
-    # gnupg
-
-    brew install gnupg
-
-    # bundler
-
-    (cd ./src/$platform \
-    && gem install bundler \
-    && bundle add fastlane \
-    && bundle install)
-fi
-
 {
 
 echo 
@@ -96,6 +77,25 @@ echo "════════════════════════�
 echo 
 
 (cd $PROJECT_SCRIPTS_PATH && chmod +x ./env_files.sh && ./env_files.sh)
+
+echo 
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo "══╡ PACKAGES INSTALL ╞═════════════════════════════════════════════════════════════════════"
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo 
+
+if [ -z "$PROJECT_FROM_LOCALHOST" ]; then
+    # gnupg
+
+    brew install gnupg
+
+    # bundler
+
+    (cd ./src/$platform \
+    && gem install bundler \
+    && bundle add fastlane \
+    && bundle install)
+fi
 
 echo
 echo "*******************************************************************************************"
