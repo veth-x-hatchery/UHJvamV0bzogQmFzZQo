@@ -37,7 +37,7 @@ dispose() {
     exit
 }
 
-trap "dispose" HUP INT QUIT ABRT TERM
+trap dispose HUP INT QUIT ABRT TERM ERR
 
 echo
 echo "*******************************************************************************************"
