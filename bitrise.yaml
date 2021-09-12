@@ -3,10 +3,8 @@ format_version: '11'
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: flutter
 trigger_map:
-- push_branch: develop
-  workflow: primary
 - pull_request_source_branch: develop
-  workflow: primary
+  workflow: deploy_firebase
 workflows:
   deploy_firebase:
     steps:
@@ -24,9 +22,5 @@ workflows:
     - script@1:
         inputs:
         - content: |-
-        ./setup.sh ios deploy_firebase
-app:
-  envs:
-  - opts:
-      is_expand: false
-    BITRISE_FLUTTER_PROJECT_LOCATION: src
+            #!/usr/bin/env bash
+            ./setup.sh ios deploy_firebase
