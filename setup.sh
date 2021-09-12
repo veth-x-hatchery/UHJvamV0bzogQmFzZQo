@@ -1,4 +1,4 @@
- #!/bin/sh
+#!/bin/sh
 
 if [ -n "$1" ]; then
     platform="$1"
@@ -12,11 +12,17 @@ else
     lane="deploy_firebase"
 fi
 
-echo "═════════════════════════════════════════════════════════════════════════════════"
-echo "══╡ Platform: $platform / Lane: $lane"
-echo "═════════════════════════════════════════════════════════════════════════════════"
+echo
+echo "*******************************************************************************************"
+echo "*** Platform: $platform / Lane: $lane"
+echo "*******************************************************************************************"
+echo
 
-################################# PACKAGES INSTALL ############################################
+echo 
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo "══╡ PACKAGES INSTALL ╞═════════════════════════════════════════════════════════════════════"
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo 
 
 # gnupg
 
@@ -29,52 +35,81 @@ brew install gnupg
 && bundle add fastlane \
 && bundle install)
 
-##################################### TEMP .ENV ################################################
-
-export PROJECT_INFRA_GIT_PATH="git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/UHJvamV0bzogU2VjcmV0cwo/UHJvamV0bzogU2VjcmV0cwo"
-export PROJECT_INFRA_FOLDER="UHJvamV0bzogU2VjcmV0cwo"
-
-export PROJECT_SCRIPTS_GIT_PATH="git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/U2NyaXB0cwo/U2NyaXB0cwo"
-export PROJECT_SCRIPTS_FOLDER="U2NyaXB0cwo"
+echo 
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo "══╡ TEMP .ENV ╞════════════════════════════════════════════════════════════════════════════"
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo 
 
 export PROJECT_PATH=${PWD}
-export TEMP_FILES_PATH=${PWD%/*}
-export PROJECT_GLOBAL_VAR="$TEMP_FILES_PATH/$PROJECT_INFRA_FOLDER/.files"
+export TEMP_FILES_PATH="/tmp" #${PWD%/*}
+
+export PROJECT_INFRA_GIT_URL="git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/UHJvamV0bzogU2VjcmV0cwo/UHJvamV0bzogU2VjcmV0cwo"
+export PROJECT_INFRA_PATH="$TEMP_FILES_PATH/UHJvamV0bzogU2VjcmV0cwo"
+
+export PROJECT_SCRIPTS_GIT_URL="git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/U2NyaXB0cwo/U2NyaXB0cwo"
+export PROJECT_SCRIPTS_PATH="$TEMP_FILES_PATH/U2NyaXB0cwo"
 
 export YXNkZgo="HF17vs#qtl7V2LFcFDWc5qaR3nHw2bN7B7Z\$CjTizC8j^nKQnobTyBFqTj3hxUhs"
 export TEMP_KEYCHAIN_NAME="continuous.keychain"
 export TEMP_KEYCHAIN_PASSWORD="SeHjQdweLCv6aCI8HUQCnbmM8FKqhH0ibQZVDq05zU0giqjAuOd97GPbP7uPOT7f"
 
-##################################### UNPACKING ################################################
+echo 
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo "══╡ UNPACKING ╞════════════════════════════════════════════════════════════════════════════"
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo 
 
 git checkout develop
 
-# infrastructure
+echo 
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo "══╡ Infrastructure ╞═══════════════════════════════════════════════════════════════════════"
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo 
 
-(cd $TEMP_FILES_PATH && git clone $PROJECT_INFRA_GIT_PATH)
+(cd $TEMP_FILES_PATH && git clone $PROJECT_INFRA_GIT_URL)
 
-# scripts
+echo 
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo "══╡ Scripts ╞══════════════════════════════════════════════════════════════════════════════"
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo 
 
-(cd $TEMP_FILES_PATH && git clone $PROJECT_SCRIPTS_GIT_PATH)
+(cd $TEMP_FILES_PATH && git clone $PROJECT_SCRIPTS_GIT_URL)
 
-# decrypting infrastructure .files
+echo 
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo "══╡ Decrypting infrastructure .files ╞═════════════════════════════════════════════════════"
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo 
 
-(cd "$TEMP_FILES_PATH/$PROJECT_SCRIPTS_FOLDER" && \
-chmod +x ./decrypt.sh && \
-./decrypt.sh "$TEMP_FILES_PATH/$PROJECT_INFRA_FOLDER")
+(cd $PROJECT_SCRIPTS_PATH && \
+chmod +x ./decrypt.sh && ./decrypt.sh)
 
-# copying google files
+echo 
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo "══╡ Copying environment files ╞════════════════════════════════════════════════════════════"
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo 
 
-(cd "$TEMP_FILES_PATH/$PROJECT_SCRIPTS_FOLDER" && \
-chmod +x ./env_files.sh && \
-./env_files.sh "$TEMP_FILES_PATH/$PROJECT_INFRA_FOLDER" $PROJECT_PATH)
+(cd $PROJECT_SCRIPTS_PATH && \
+chmod +x ./env_files.sh && ./env_files.sh)
 
-# fastlane firebase deploy
+echo
+echo "*******************************************************************************************"
+echo "*** Fastlane: $lane"
+echo "*******************************************************************************************"
+echo
 
 (cd ./src/$platform && bundle exec fastlane $lane)
 
-# dispose temp files
+echo 
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo "══╡ Disposing temp files ╞═════════════════════════════════════════════════════════════════"
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo
 
 rm -rf \
-"$TEMP_FILES_PATH/$PROJECT_SCRIPTS_FOLDER" \
-"$TEMP_FILES_PATH/$PROJECT_INFRA_FOLDER"
+$PROJECT_SCRIPTS_PATH \
+$PROJECT_INFRA_PATH
