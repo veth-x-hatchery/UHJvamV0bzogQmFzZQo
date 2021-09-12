@@ -9,7 +9,7 @@ fi
 if [ -n "$2" ]; then
     lane="$2"
 else
-    lane="deploy_firebase"
+    lane="load_env"
 fi
 
 echo
