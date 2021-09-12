@@ -34,10 +34,11 @@ dispose() {
     $PROJECT_SCRIPTS_PATH \
     $PROJECT_INFRA_PATH \
     $PROJECT_PATH
+    trap '' EXIT
     exit
 }
 
-trap dispose HUP INT QUIT ABRT TERM ERR
+trap dispose EXIT HUP INT QUIT ABRT TERM ERR
 
 echo
 echo "*******************************************************************************************"
