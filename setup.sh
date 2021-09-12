@@ -34,11 +34,14 @@ dispose() {
 
 exitfn () {
     trap SIGINT              # Restore signal handling for SIGINT
-    echo; echo 'Aarghh!!'    # Growl at user,
+    echo
+    echo "══╡ CANCELLED ╞═════════════════════════════════════════════════════════════════"
+    echo
     dispose
     exit                     #   then exit script.
 }
 
+# set up SIGINT trap to call function
 trap "exitfn" INT
 
 echo
@@ -78,8 +81,8 @@ fi
 
 {
 
-# Restore signal handling to previous before exit.
-trap SIGINT
+# # restore signal handling to previous before exit.
+# trap SIGINT
 
 echo 
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
