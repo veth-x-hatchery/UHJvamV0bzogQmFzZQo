@@ -85,6 +85,20 @@ fastlane ios_build_output_directory
 fastlane android_build_output_directory
 ```
 
+### keychain_init
+```
+fastlane keychain_init
+```
+remove the temporary keychain, if it exists
+
+create the temporary keychain with name and password
+
+ensure we have a fresh, empty temporary keychain
+### keychain_dispose
+```
+fastlane keychain_dispose
+```
+
 ### authenticate_apple_store
 ```
 fastlane authenticate_apple_store
