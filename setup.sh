@@ -28,21 +28,12 @@ dispose() {
     echo
     [ -z "$PROJECT_FROM_LOCALHOST" ] && rm -rf \
     $PROJECT_SCRIPTS_PATH \
-    $PROJECT_INFRA_PATH
-}
-
-exitfn () {
-    echo
-    echo "═══════════════════════════════════════════════════════════════════════════════════════════"
-    echo "══╡ Preparing to dispose... ╞══════════════════════════════════════════════════════════════"
-    echo "═══════════════════════════════════════════════════════════════════════════════════════════"
-    echo
-    dispose
+    $PROJECT_INFRA_PATH \
+    $PROJECT_PATH
     exit
 }
 
-# set up SIGINT trap to call function
-trap "exitfn" HUP INT QUIT ABRT TERM
+trap "dispose" HUP INT QUIT ABRT TERM
 
 echo
 echo "*******************************************************************************************"
@@ -116,3 +107,5 @@ echo
 }|| {
     echo "══╡ ERROR! ╞═════════════════════════════════════════════════════════════════"
 }
+
+dispose
