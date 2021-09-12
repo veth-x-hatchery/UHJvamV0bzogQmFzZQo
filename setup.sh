@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# LOG OPTIONS
+# ./setup.sh > /dev/null
+# ./setup.sh > script.log 2>&1
+# LOG=$(./setup.sh)
+#
+
 set -a
 
 if [ -n "$1" ]; then
