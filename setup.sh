@@ -20,6 +20,27 @@ else
     lane="load_env"
 fi
 
+dispose() {
+    echo 
+    echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+    echo "══╡ Disposing temp files ╞═════════════════════════════════════════════════════════════════"
+    echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+    echo
+    [ -z "$PROJECT_FROM_LOCALHOST" ] && rm -rf \
+    $PROJECT_SCRIPTS_PATH \
+    $PROJECT_INFRA_PATH \
+    $PROJECT_PATH
+}
+
+exitfn () {
+    trap SIGINT              # Restore signal handling for SIGINT
+    echo; echo 'Aarghh!!'    # Growl at user,
+    dispose
+    exit                     #   then exit script.
+}
+
+trap "exitfn" INT
+
 echo
 echo "*******************************************************************************************"
 echo "*** Platform: $platform / Lane: $lane"
@@ -56,6 +77,10 @@ if [ -z "$PROJECT_FROM_LOCALHOST" ]; then
 fi
 
 {
+
+# Restore signal handling to previous before exit.
+trap SIGINT
+
 echo 
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 echo "══╡ Infrastructure ╞═══════════════════════════════════════════════════════════════════════"
@@ -78,8 +103,7 @@ echo "══╡ Copying environment files ╞═══════════�
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 echo 
 
-(cd $PROJECT_SCRIPTS_PATH && \
-chmod +x ./env_files.sh && ./env_files.sh)
+(cd $PROJECT_SCRIPTS_PATH && chmod +x ./env_files.sh && ./env_files.sh)
 
 echo
 echo "*******************************************************************************************"
@@ -89,18 +113,8 @@ echo
 
 (cd ./src/$platform && bundle exec fastlane $lane)
 
-
 }|| {
     echo "══╡ ERROR! ╞═════════════════════════════════════════════════════════════════"
 }
 
-echo 
-echo "═══════════════════════════════════════════════════════════════════════════════════════════"
-echo "══╡ Disposing temp files ╞═════════════════════════════════════════════════════════════════"
-echo "═══════════════════════════════════════════════════════════════════════════════════════════"
-echo
-
-[ -z "$PROJECT_FROM_LOCALHOST" ] && rm -rf \
-$PROJECT_SCRIPTS_PATH \
-$PROJECT_INFRA_PATH \
-$PROJECT_PATH
+dispose
