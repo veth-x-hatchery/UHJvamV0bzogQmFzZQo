@@ -1,0 +1,32 @@
+---
+format_version: '11'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: flutter
+trigger_map:
+- push_branch: develop
+  workflow: primary
+- pull_request_source_branch: develop
+  workflow: primary
+workflows:
+  deploy_firebase:
+    steps:
+    - activate-ssh-key@4:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - script@1:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            brew install gnupg
+    - flutter-installer@0:
+        inputs:
+        - is_update: 'false'
+    - git-clone@6: {}
+    - script@1:
+        inputs:
+        - content: |-
+        ./setup.sh ios deploy_firebase
+app:
+  envs:
+  - opts:
+      is_expand: false
+    BITRISE_FLUTTER_PROJECT_LOCATION: src

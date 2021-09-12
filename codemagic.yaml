@@ -1,0 +1,18 @@
+# Automatically generated on 2021-09-07 UTC from https://codemagic.io/app/6137a6f81c313f142bb213ac/settings
+# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
+
+workflows:
+  deploy_firebase:
+    name: Fastlane Firebase App Distribution Deploy
+    max_build_duration: 120
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - |
+        ./setup.sh ios deploy_firebase
+    publishing:
+      email:
+        recipients:
+          - integra@vethx.com
