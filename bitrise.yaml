@@ -23,7 +23,8 @@ workflows:
     - git-clone@6: {}
     - script-runner@0:
         inputs:
-        - file_path: "./setup.sh ios deploy_firebase"
+        - content: |-
+        ./setup.sh ios deploy_firebase
 app:
   envs:
   - opts:
