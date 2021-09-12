@@ -8,7 +8,7 @@ trigger_map:
 - pull_request_source_branch: develop
   workflow: primary
 workflows:
-  primary:
+  deploy_firebase:
     steps:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
@@ -23,7 +23,7 @@ workflows:
     - git-clone@6: {}
     - script-runner@0:
         inputs:
-        - file_path: "./setup.sh"
+        - file_path: "./setup.sh ios deploy_firebase"
 app:
   envs:
   - opts:
