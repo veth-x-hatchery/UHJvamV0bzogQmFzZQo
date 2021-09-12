@@ -10,17 +10,15 @@ workflows:
     steps:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - script@1:
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            brew install gnupg
     - flutter-installer@0:
         inputs:
-        - is_update: 'false'
+        - is_update: 'true'
     - git-clone@6: {}
     - script@1:
         inputs:
         - content: |-
             #!/usr/bin/env bash
             ./setup.sh ios deploy_firebase
+meta:
+  bitrise.io:
+    machine_type_id: g2.4core
