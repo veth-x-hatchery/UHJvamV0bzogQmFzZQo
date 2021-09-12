@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/vethx/hatchery/BuildConfig.java
+ com.vethx.hatchery.BuildConfig
