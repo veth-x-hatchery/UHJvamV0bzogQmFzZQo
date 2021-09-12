@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+set -a
 
 if [ -n "$1" ]; then
     platform="$1"
@@ -16,7 +18,17 @@ echo
 echo "*******************************************************************************************"
 echo "*** Platform: $platform / Lane: $lane"
 echo "*******************************************************************************************"
+
+if [ -f ./bashrc.sh ]; then
 echo
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo "══╡ TEMP .ENV from ./bashrc.sh ╞═══════════════════════════════════════════════════════════"
+echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+echo 
+source ./bashrc.sh
+fi
+
+export PROJECT_PATH=${PWD}
 
 echo 
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
@@ -24,43 +36,18 @@ echo "══╡ PACKAGES INSTALL ╞══════════════�
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 echo 
 
-# gnupg
+if [ -z "$PROJECT_FROM_LOCALHOST" ]; then
+    # gnupg
 
-brew install gnupg
+    brew install gnupg
 
-# bundler
+    # bundler
 
-(cd ./src/$platform \
-&& gem install bundler \
-&& bundle add fastlane \
-&& bundle install)
-
-echo 
-echo "═══════════════════════════════════════════════════════════════════════════════════════════"
-echo "══╡ TEMP .ENV ╞════════════════════════════════════════════════════════════════════════════"
-echo "═══════════════════════════════════════════════════════════════════════════════════════════"
-echo 
-
-export PROJECT_PATH=${PWD}
-export TEMP_FILES_PATH="/tmp" #${PWD%/*}
-
-export PROJECT_INFRA_GIT_URL="git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/UHJvamV0bzogU2VjcmV0cwo/UHJvamV0bzogU2VjcmV0cwo"
-export PROJECT_INFRA_PATH="$TEMP_FILES_PATH/UHJvamV0bzogU2VjcmV0cwo"
-
-export PROJECT_SCRIPTS_GIT_URL="git@ssh.dev.azure.com:v3/UGxheWdyb3VuZAo/U2NyaXB0cwo/U2NyaXB0cwo"
-export PROJECT_SCRIPTS_PATH="$TEMP_FILES_PATH/U2NyaXB0cwo"
-
-export YXNkZgo="HF17vs#qtl7V2LFcFDWc5qaR3nHw2bN7B7Z\$CjTizC8j^nKQnobTyBFqTj3hxUhs"
-export TEMP_KEYCHAIN_NAME="continuous.keychain"
-export TEMP_KEYCHAIN_PASSWORD="SeHjQdweLCv6aCI8HUQCnbmM8FKqhH0ibQZVDq05zU0giqjAuOd97GPbP7uPOT7f"
-
-echo 
-echo "═══════════════════════════════════════════════════════════════════════════════════════════"
-echo "══╡ UNPACKING ╞════════════════════════════════════════════════════════════════════════════"
-echo "═══════════════════════════════════════════════════════════════════════════════════════════"
-echo 
-
-git checkout develop
+    (cd ./src/$platform \
+    && gem install bundler \
+    && bundle add fastlane \
+    && bundle install)
+fi
 
 echo 
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
@@ -68,7 +55,7 @@ echo "══╡ Infrastructure ╞═══════════════�
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 echo 
 
-(cd $TEMP_FILES_PATH && git clone $PROJECT_INFRA_GIT_URL)
+[ -z "$PROJECT_FROM_LOCALHOST" ] && git clone $PROJECT_INFRA_GIT_URL $PROJECT_INFRA_PATH
 
 echo 
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
@@ -76,7 +63,7 @@ echo "══╡ Scripts ╞═════════════════�
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 echo 
 
-(cd $TEMP_FILES_PATH && git clone $PROJECT_SCRIPTS_GIT_URL)
+[ -z "$PROJECT_FROM_LOCALHOST" ] && git clone $PROJECT_SCRIPTS_GIT_URL $PROJECT_SCRIPTS_PATH
 
 echo 
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
@@ -101,6 +88,6 @@ echo "══╡ Disposing temp files ╞═════════════�
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 echo
 
-rm -rf \
+[ -z "$PROJECT_FROM_LOCALHOST" ] && rm -rf \
 $PROJECT_SCRIPTS_PATH \
 $PROJECT_INFRA_PATH

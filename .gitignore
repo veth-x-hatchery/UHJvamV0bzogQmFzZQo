@@ -8,3 +8,5 @@ src/ios/Flutter/Environment.xcconfig
 src/ios/fastlane/report.xml
 
 src/android/fastlane/report.xml
+
+bashrc.sh
