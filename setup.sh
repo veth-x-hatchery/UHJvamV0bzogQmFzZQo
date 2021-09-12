@@ -28,21 +28,21 @@ dispose() {
     echo
     [ -z "$PROJECT_FROM_LOCALHOST" ] && rm -rf \
     $PROJECT_SCRIPTS_PATH \
-    $PROJECT_INFRA_PATH \
-    $PROJECT_PATH
+    $PROJECT_INFRA_PATH
 }
 
 exitfn () {
-    trap SIGINT              # Restore signal handling for SIGINT
     echo
-    echo "══╡ CANCELLED ╞═════════════════════════════════════════════════════════════════"
+    echo "═══════════════════════════════════════════════════════════════════════════════════════════"
+    echo "══╡ Preparing to dispose... ╞══════════════════════════════════════════════════════════════"
+    echo "═══════════════════════════════════════════════════════════════════════════════════════════"
     echo
     dispose
-    exit                     #   then exit script.
+    exit
 }
 
 # set up SIGINT trap to call function
-trap "exitfn" INT
+trap "exitfn" HUP INT QUIT ABRT TERM
 
 echo
 echo "*******************************************************************************************"
@@ -81,9 +81,6 @@ fi
 
 {
 
-# # restore signal handling to previous before exit.
-# trap SIGINT
-
 echo 
 echo "═══════════════════════════════════════════════════════════════════════════════════════════"
 echo "══╡ Infrastructure ╞═══════════════════════════════════════════════════════════════════════"
@@ -119,5 +116,3 @@ echo
 }|| {
     echo "══╡ ERROR! ╞═════════════════════════════════════════════════════════════════"
 }
-
-dispose
