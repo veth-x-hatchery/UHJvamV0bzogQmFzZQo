@@ -5,30 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define=HATCHERY_APP_ENVIRONMENT=dev",
+                "--dart-define=HATCHERY_APP_NAME=Hatchery",
+                "--dart-define=HATCHERY_APP_SUFFIX=.dev",
+                "--dart-define=HATCHERY_GOOGLE_REVERSED_CLIENT_ID=com.googleusercontent.apps.124787010793-v3rjki082uci25sm92p5mrvpqlo8mtel",
+            ]
+        },
+        {
             "name": "Integration Test: Sign In With Email",
             "program": "${workspaceFolder}/integration_test/features/signin/sign_in_email_integration_test.dart",
             "request": "launch",
             "type": "dart",
             "args": [
-                "--dart-define=test",
+                "--dart-define=HATCHERY_APP_ENVIRONMENT=test",
+                "--dart-define=HATCHERY_APP_NAME=Hatchery",
+                "--dart-define=HATCHERY_APP_SUFFIX=.dev",
+                "--dart-define=HATCHERY_GOOGLE_REVERSED_CLIENT_ID=com.googleusercontent.apps.124787010793-v3rjki082uci25sm92p5mrvpqlo8mtel",
             ]
         },
-        {
-            "name": "hatchery",
-            "request": "launch",
-            "type": "dart",
-            "args": [
-                "--dart-define=test",
-            ]
-        },
-        {
-            "name": "hatchery (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile",
-            "args": [
-                "--dart-define=test",
-            ]
-        }
     ]
 }

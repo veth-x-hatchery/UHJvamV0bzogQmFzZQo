@@ -61,6 +61,7 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
   Widget build(BuildContext context) {
     return signInScaffold(
       context,
+      icon: Icons.close,
       child: BlocConsumer<SignInCredentialBloc, SignInCredentialState>(
         listener: (context, state) {
           state.notification.fold(
@@ -73,6 +74,7 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
           );
         },
         builder: (context, state) {
+          var keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
           return Form(
             key: _formKey,
             child: FormColumn(
@@ -104,6 +106,7 @@ class _SignInCredentialPageState extends State<SignInCredentialPage> {
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),
+                SizedBox(height: keyboardHeight * 5),
               ],
             ),
           );

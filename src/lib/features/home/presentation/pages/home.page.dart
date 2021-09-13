@@ -4,6 +4,8 @@ import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart
 import 'package:hatchery/features/signin/presentation/widgets/sign_in.widgets.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

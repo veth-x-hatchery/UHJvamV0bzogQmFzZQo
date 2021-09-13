@@ -43,8 +43,8 @@ class AlphaPage extends StatelessWidget {
       builder: (context, state) {
         Logger.widget('AlphaPage -> $state');
         return state.map(
-          initial: (_) => _Root(home: Splash()),
-          inProcess: (_) => _Root(home: LoadingPage()),
+          initial: (_) => const _Root(home: Splash()),
+          inProcess: (_) => const _Root(home: LoadingPage()),
           unauthenticated: (_) => _Root(
             home: SignInOptionsPage.create(),
           ),
@@ -55,9 +55,9 @@ class AlphaPage extends StatelessWidget {
             },
             builder: (context, state) {
               return state.map(
-                loading: (_) => _Root(home: Splash()),
+                loading: (_) => const _Root(home: Splash()),
                 authorized: (_) => _Root(
-                  home: HomePage(),
+                  home: const HomePage(),
                   onLifecycleStateChange: (s) {
                     if (s == AppLifecycleState.resumed) {
                       BlocProvider.of<LocalAuthenticationBloc>(context)

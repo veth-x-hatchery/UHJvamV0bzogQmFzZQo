@@ -11,6 +11,7 @@ class PlatformExceptionAlertDialog extends PlatformAlertDialog {
     required Exception exception,
     required String alternativeMessage,
   }) : super(
+            key: key,
             title: title,
             content: _message(exception, alternativeMessage),
             defaultActionText: context.l10n.comum_ok,

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'platform.widget.dart';
 
 class PlatformAlertDialog extends PlatformWidget {
+  // ignore: use_key_in_widget_constructors
   const PlatformAlertDialog({
     Key? key,
     required this.title,
@@ -65,6 +66,7 @@ class PlatformAlertDialog extends PlatformWidget {
 }
 
 class PlatformAlertDialogAction extends PlatformWidget {
+  // ignore: use_key_in_widget_constructors
   const PlatformAlertDialogAction({
     Key? key,
     required this.child,
