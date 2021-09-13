@@ -34,9 +34,17 @@ void main() {
 
   final secret = AuthFacadeMock.validTestSecret;
 
+  void _registerAuthenticationRequest() {
+    when(_mockSignInRepository.skipNextLocalAuthenticationRequest())
+        // ignore: void_checks
+        .thenAnswer((_) async => right(unit));
+  }
+
   group('when sign in with credential and secret', () {
     test('should return success with the given credentials', () async {
       // arrange
+
+      _registerAuthenticationRequest();
 
       when(_mockSignInRepository.cachedCredential())
           .thenAnswer((_) async => Right(credential));
@@ -48,7 +56,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(secret);
+      final result = await _signInUseCase(secret);
 
       // assert
 
@@ -62,6 +70,9 @@ void main() {
 
     test('should return a server failure', () async {
       // arrange
+
+      _registerAuthenticationRequest();
+
       const throwFailure = AuthFailure.serverError();
 
       final failureDetails = FailureDetails(
@@ -99,6 +110,9 @@ void main() {
 
     test('should return invalid credential and secret combination', () async {
       // arrange
+
+      _registerAuthenticationRequest();
+
       const throwFailure = AuthFailure.invalidCredentialAndSecretCombination();
 
       final failureDetails = FailureDetails(
@@ -117,7 +131,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(secret);
+      final result = await _signInUseCase(secret);
       // assert
 
       expect(result, left(failureDetails));
@@ -132,6 +146,9 @@ void main() {
 
     test('should return invalid cached credential', () async {
       // arrange
+
+      _registerAuthenticationRequest();
+
       const throwFailure = AuthFailure.invalidCachedCredential();
 
       final failureDetails = FailureDetails(
@@ -144,7 +161,7 @@ void main() {
 
       // act
 
-      final result = await _signInUseCase.call(secret);
+      final result = await _signInUseCase(secret);
 
       // assert
 
@@ -154,6 +171,39 @@ void main() {
         credentialAddress: credential,
         secret: secret,
       ));
+    });
+
+    test(
+        'when login with success '
+        'then should cache a request to skip next local authentication request',
+        () async {
+      // arrange
+
+      _registerAuthenticationRequest();
+
+      when(_mockSignInRepository.cachedCredential())
+          .thenAnswer((_) async => Right(credential));
+
+      when(_mockAuthFacade.signInWithCredentialAndSecret(
+        credentialAddress: credential,
+        secret: secret,
+      )).thenAnswer((_) async => const Right(unit));
+
+      // act
+
+      final result = await _signInUseCase(secret);
+
+      // assert
+
+      expect(result, const Right(unit));
+
+      verify(_mockAuthFacade.signInWithCredentialAndSecret(
+        credentialAddress: credential,
+        secret: secret,
+      ));
+
+      verify(_mockSignInRepository.skipNextLocalAuthenticationRequest())
+          .called(1);
     });
   });
 }

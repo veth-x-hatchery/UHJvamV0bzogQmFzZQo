@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-
 import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
@@ -29,7 +28,11 @@ class SignInWithSecret extends UseCase<Unit, Secret> {
             )
             .then((value) => value.fold(
                   (l) => left(_mapFailures(l)),
-                  (r) => right(unit),
+                  (r) async {
+                    await _signInRepository
+                        .skipNextLocalAuthenticationRequest();
+                    return right(unit);
+                  },
                 ));
       },
     );

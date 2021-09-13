@@ -34,7 +34,7 @@ linter:
     depend_on_referenced_packages: false
     # Good packages document everything
     # public_member_api_docs: true
-    
+    avoid_renaming_method_parameters: false
     # Blindly follow the Flutter code style, which prefers types everywhere
     # always_specify_types: true
   
