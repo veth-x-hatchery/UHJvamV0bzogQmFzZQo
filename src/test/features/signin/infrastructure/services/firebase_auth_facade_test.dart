@@ -320,10 +320,9 @@ void main() {
 
     Future<void> _credentialIsAlreadyInUse(Exception firebaseException) async {
       // Arrange
-      when(_mockFirebaseAuth.signInWithEmailAndPassword(
-        email: credential.getOrCrash(),
-        password: _authFacade.randomSecret,
-      )).thenThrow(firebaseException);
+      when(_mockFirebaseAuth
+              .fetchSignInMethodsForEmail(credential.getOrCrash()))
+          .thenThrow(firebaseException);
     }
 
     test(
@@ -331,8 +330,7 @@ void main() {
         () async {
       //arrange
 
-      final firebaseException =
-          FirebaseException(code: 'user-disabled', plugin: '');
+      final firebaseException = FirebaseException(code: 'asdf', plugin: '');
 
       const expectedFailure = AuthFailure.serverError();
 
@@ -350,32 +348,9 @@ void main() {
     test('should return already in use', () async {
       //arrange
 
-      final firebaseException =
-          FirebaseException(code: 'wrong-password', plugin: '');
-
-      _credentialIsAlreadyInUse(firebaseException);
-
-      //act
-
-      final result = await _authFacade.credentialIsAlreadyInUse(credential);
-
-      // assert
-
-      expect(result, right(true));
-    });
-
-    test('should return already in use and log out', () async {
-      //arrange
-
-      when(_mockGoogleSignIn.signOut())
-          .thenAnswer((_) => Future.value(_mockGoogleSignInAccount));
-
-      when(_mockFirebaseAuth.signOut()).thenAnswer((_) async => _);
-
-      when(_mockFirebaseAuth.signInWithEmailAndPassword(
-        email: credential.getOrCrash(),
-        password: _authFacade.randomSecret,
-      )).thenAnswer((_) => Future.value(_mockUserCredential));
+      when(_mockFirebaseAuth
+              .fetchSignInMethodsForEmail(credential.getOrCrash()))
+          .thenAnswer((_) async => ['method_1', 'method_2']);
 
       //act
 
@@ -384,19 +359,14 @@ void main() {
       // assert
 
       expect(result, right(true));
-
-      verify(_mockGoogleSignIn.signOut()).called(1);
-
-      verify(_mockFirebaseAuth.signOut()).called(1);
     });
 
     test('should return not in use', () async {
       //arrange
 
-      final firebaseException =
-          FirebaseException(code: 'user-not-found', plugin: '');
-
-      _credentialIsAlreadyInUse(firebaseException);
+      when(_mockFirebaseAuth
+              .fetchSignInMethodsForEmail(credential.getOrCrash()))
+          .thenAnswer((_) async => []);
 
       //act
 

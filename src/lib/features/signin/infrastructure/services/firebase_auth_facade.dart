@@ -95,16 +95,11 @@ class FirebaseAuthFacade implements IAuthFacade {
   Future<Either<AuthFailure, bool>> credentialIsAlreadyInUse(
       Credential credentialAddress) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-        email: credentialAddress.getOrCrash(),
-        password: randomSecret,
-      );
-      signOut();
-      return right(true);
+      final availableSignInMethods = await _firebaseAuth
+          .fetchSignInMethodsForEmail(credentialAddress.getOrCrash());
+      return right(availableSignInMethods.isNotEmpty);
     } on FirebaseException catch (e) {
-      if (e.code == 'wrong-password') {
-        return right(true);
-      } else if (e.code == 'user-not-found') {
+      if (e.code == 'invalid-email') {
         return right(false);
       } else {
         Logger.infrastructure(
