@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hatchery/core/utils/logger.dart';
 import 'package:hatchery/features/home/presentation/pages/home.page.dart';
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:hatchery/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:hatchery/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:hatchery/main.dart' as app;
@@ -33,7 +33,7 @@ void main() {
     // Todo(v): set this value on our ENV
     // Create an IntegrationTests StartUp that guarantee everything is ready
     await Future.delayed(const Duration(seconds: 3));
-    (ServiceLocatorConfig.getIt<IAuthFacade>() as AuthFacadeMock)
+    (ServiceLocatorConfig.getIt<IAuthService>() as AuthServiceMock)
         .setupSignInRegisterIntegrationTest();
   }
 
@@ -49,7 +49,7 @@ void main() {
 
   Future<void> _waitToPump(
     WidgetTester tester, {
-    Duration duration = AuthFacadeMock.loadingDuration,
+    Duration duration = AuthServiceMock.loadingDuration,
   }) async {
     await Future.delayed(duration);
     await tester.pumpAndSettle();

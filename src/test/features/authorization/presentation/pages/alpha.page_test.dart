@@ -7,7 +7,7 @@ import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart
 import 'package:hatchery/features/authorization/presentation/pages/alpha.page.dart';
 import 'package:hatchery/features/home/presentation/pages/home.page.dart';
 import 'package:hatchery/features/signin/domain/entities/user_entity.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:hatchery/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:hatchery/features/signin/presentation/pages/sign_in_options.page.dart';
 import 'package:hatchery/features/signin/presentation/routes/sign_in_go_to.dart';
@@ -127,7 +127,7 @@ void main() {
       _initialState();
 
       _authState(AuthState.authenticated(User(
-        credential: AuthFacadeMock.validTestCredential,
+        credential: AuthServiceMock.validTestCredential,
         name: 'test',
       )));
 
@@ -187,7 +187,7 @@ void main() {
       _initialState();
 
       _authState(AuthState.authenticated(User(
-        credential: AuthFacadeMock.validTestCredential,
+        credential: AuthServiceMock.validTestCredential,
         name: 'test',
       )));
 
@@ -209,7 +209,7 @@ void main() {
       _initialState();
 
       _authState(AuthState.authenticated(User(
-        credential: AuthFacadeMock.validTestCredential,
+        credential: AuthServiceMock.validTestCredential,
         name: 'test',
       )));
 
@@ -231,7 +231,7 @@ void main() {
       _initialState();
 
       _authState(AuthState.authenticated(User(
-        credential: AuthFacadeMock.validTestCredential,
+        credential: AuthServiceMock.validTestCredential,
         name: 'test',
       )));
 

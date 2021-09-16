@@ -7,13 +7,13 @@ import 'package:hatchery/features/signin/domain/entities/user_entity.dart'
     as domain;
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:hatchery/features/signin/infrastructure/services/firebase_user_mapper.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'firebase_auth_facade_test.mocks.dart';
+import 'firebase_auth.service_test.mocks.dart';
 
 @GenerateMocks([
   FirebaseAuth,
@@ -34,7 +34,7 @@ void main() {
   late MockFirebaseUserMapper _mockFirebaseUserMapper;
   late MockUser _mockFirebaseUser;
 
-  late FirebaseAuthFacade _authFacade;
+  late FirebaseAuthService _authService;
 
   setUp(() {
     _mockUserCredential = MockUserCredential();
@@ -44,16 +44,16 @@ void main() {
     _mockGoogleSignInAuthentication = MockGoogleSignInAuthentication();
     _mockFirebaseUser = MockUser();
     _mockFirebaseUserMapper = MockFirebaseUserMapper();
-    _authFacade = FirebaseAuthFacade(
+    _authService = FirebaseAuthService(
       _mockFirebaseAuth,
       _mockGoogleSignIn,
       _mockFirebaseUserMapper,
     );
   });
 
-  group('when [FirebaseAuthFacade.registerWithCredentialAndSecret]', () {
-    final credential = AuthFacadeMock.validTestCredential;
-    final secret = AuthFacadeMock.validTestSecret;
+  group('when [FirebaseAuthService.registerWithCredentialAndSecret]', () {
+    final credential = AuthServiceMock.validTestCredential;
+    final secret = AuthServiceMock.validTestSecret;
 
     Future<void> _registerWithCredentialAndSecret(
       Exception firebaseException,
@@ -68,7 +68,7 @@ void main() {
 
       // act
 
-      final result = await _authFacade.registerWithCredentialAndSecret(
+      final result = await _authService.registerWithCredentialAndSecret(
         credentialAddress: credential,
         secret: secret,
       );
@@ -129,7 +129,7 @@ void main() {
 
       // act
 
-      final result = await _authFacade.registerWithCredentialAndSecret(
+      final result = await _authService.registerWithCredentialAndSecret(
         credentialAddress: credential,
         secret: secret,
       );
@@ -140,9 +140,9 @@ void main() {
     });
   });
 
-  group('when [FirebaseAuthFacade.signInWithCredentialAndSecret]', () {
-    final credential = AuthFacadeMock.validTestCredential;
-    final secret = AuthFacadeMock.validTestSecret;
+  group('when [FirebaseAuthService.signInWithCredentialAndSecret]', () {
+    final credential = AuthServiceMock.validTestCredential;
+    final secret = AuthServiceMock.validTestSecret;
 
     Future<void> _throwExceptionAssert(
       Exception firebaseException,
@@ -157,7 +157,7 @@ void main() {
 
       // act
 
-      final result = await _authFacade.signInWithCredentialAndSecret(
+      final result = await _authService.signInWithCredentialAndSecret(
         credentialAddress: credential,
         secret: secret,
       );
@@ -237,7 +237,7 @@ void main() {
 
       // act
 
-      final result = await _authFacade.signInWithCredentialAndSecret(
+      final result = await _authService.signInWithCredentialAndSecret(
         credentialAddress: credential,
         secret: secret,
       );
@@ -271,7 +271,7 @@ void main() {
 
       //act
 
-      final result = await _authFacade.signInWithGoogle();
+      final result = await _authService.signInWithGoogle();
 
       //assert
 
@@ -290,7 +290,7 @@ void main() {
 
       //act
 
-      final result = await _authFacade.signInWithGoogle();
+      final result = await _authService.signInWithGoogle();
 
       //assert
 
@@ -307,7 +307,7 @@ void main() {
 
       //act
 
-      final result = await _authFacade.signInWithGoogle();
+      final result = await _authService.signInWithGoogle();
 
       //assert
 
@@ -316,7 +316,7 @@ void main() {
   });
 
   group('when check if credential is already in use', () {
-    final credential = AuthFacadeMock.validTestCredential;
+    final credential = AuthServiceMock.validTestCredential;
 
     Future<void> _credentialIsAlreadyInUse(Exception firebaseException) async {
       // Arrange
@@ -338,7 +338,7 @@ void main() {
 
       //act
 
-      final result = await _authFacade.credentialIsAlreadyInUse(credential);
+      final result = await _authService.credentialIsAlreadyInUse(credential);
 
       // assert
 
@@ -354,7 +354,7 @@ void main() {
 
       //act
 
-      final result = await _authFacade.credentialIsAlreadyInUse(credential);
+      final result = await _authService.credentialIsAlreadyInUse(credential);
 
       // assert
 
@@ -370,7 +370,7 @@ void main() {
 
       //act
 
-      final result = await _authFacade.credentialIsAlreadyInUse(credential);
+      final result = await _authService.credentialIsAlreadyInUse(credential);
 
       // assert
 
@@ -388,7 +388,7 @@ void main() {
 
     //act
 
-    _authFacade.signOut();
+    _authService.signOut();
 
     //assert
 
@@ -407,7 +407,7 @@ void main() {
 
       //act
 
-      final result = await _authFacade.getSignedInUser();
+      final result = await _authService.getSignedInUser();
 
       //assert
 
@@ -429,7 +429,7 @@ void main() {
 
       //act
 
-      final result = await _authFacade.getSignedInUser();
+      final result = await _authService.getSignedInUser();
 
       //assert
 
@@ -440,7 +440,7 @@ void main() {
   });
 
   group('when request password reset', () {
-    final credential = AuthFacadeMock.validTestCredential;
+    final credential = AuthServiceMock.validTestCredential;
 
     Future<void> _throwExceptionAssert(
       Exception firebaseException,
@@ -454,7 +454,7 @@ void main() {
 
       // act
 
-      final result = await _authFacade.passwordReset(credential);
+      final result = await _authService.passwordReset(credential);
 
       // assert
 
@@ -471,7 +471,7 @@ void main() {
 
       // act
 
-      final result = await _authFacade.passwordReset(credential);
+      final result = await _authService.passwordReset(credential);
 
       // assert
 

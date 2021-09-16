@@ -9,11 +9,11 @@ extension AppLocalizationsX on BuildContext {
   AppLocalizations get l10n => AppLocalizations.of(this)!;
 }
 
-/// Actualy this type, closure, has no hash based on function received body
+/// Actualy this type -- closure -- has no hash based on function received body
 /// This means that is not possible compare same values
 /// [MessageFromLocalizationsX] has a workaround to deal with it
 ///
-/// When declaring a type [MessageFromLocalizations] need to return ?? '[var_name]'
+/// When declaring a type [MessageFromLocalizations] need to deal with return AppLocalizations ?? '[var_name]'
 ///
 ///   MessageFromLocalizations message() => (appLocalizations) =>
 ///   appLocalizations?.[property] ?? '[property_name]';

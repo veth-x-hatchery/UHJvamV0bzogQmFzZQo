@@ -3,7 +3,10 @@ opt_out_usage
 fastlane_require 'dotenv'
 
 lane :load_env do
-  Dotenv.overload '../../../scripts/.env'
+  env_file_path='../../../scripts/.env'
+  if File.exist?(env_file_path)
+    Dotenv.overload env_file_path
+  end
 end
 
 desc "have an easy way to run flutter tasks on the root of the project"

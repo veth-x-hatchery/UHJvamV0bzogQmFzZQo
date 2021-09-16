@@ -14,7 +14,7 @@ import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.
     as _i3;
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart'
     as _i9;
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart'
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart'
     as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -60,11 +60,11 @@ class MockISignInRepository extends _i1.Mock implements _i3.ISignInRepository {
   String toString() => super.toString();
 }
 
-/// A class which mocks [IAuthFacade].
+/// A class which mocks [IAuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIAuthFacade extends _i1.Mock implements _i7.IAuthFacade {
-  MockIAuthFacade() {
+class MockIAuthService extends _i1.Mock implements _i7.IAuthService {
+  MockIAuthService() {
     _i1.throwOnMissingStub(this);
   }
 

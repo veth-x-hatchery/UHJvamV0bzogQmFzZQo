@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hatchery/core/routes/navigation.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:hatchery/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:hatchery/features/signin/presentation/bloc/options/sign_in_options_bloc.dart';
 import 'package:hatchery/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
@@ -137,7 +137,7 @@ void main() {
 
       _sl.navigationCubit.goTo(SignInPageGoTo.secretPage(
         from: SignInPageRoutes.credentialEntry,
-        credential: AuthFacadeMock.validTestCredential.inputedValue,
+        credential: AuthServiceMock.validTestCredential.inputedValue,
       ));
 
       // assert
@@ -164,7 +164,7 @@ void main() {
 
       _sl.navigationCubit.goTo(SignInPageGoTo.registerPage(
         from: SignInPageRoutes.credentialEntry,
-        credential: AuthFacadeMock.validTestCredential,
+        credential: AuthServiceMock.validTestCredential,
       ));
 
       // assert

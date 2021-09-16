@@ -1,24 +1,24 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart';
 import 'package:hatchery/features/signin/domain/entities/user_entity.dart';
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'auth_bloc_test.mocks.dart';
 
 @GenerateMocks([
-  IAuthFacade,
+  IAuthService,
 ])
 void main() {
   late AuthBloc _bloc;
-  late MockIAuthFacade _mockIAuthFacade;
+  late MockIAuthService _mockIAuthService;
 
   setUp(() {
-    _mockIAuthFacade = MockIAuthFacade();
+    _mockIAuthService = MockIAuthService();
     _bloc = AuthBloc(
-      _mockIAuthFacade,
+      _mockIAuthService,
     );
   });
 
@@ -30,7 +30,7 @@ void main() {
     test('should return that there is no user logged in', () async {
       // arrange
 
-      when(_mockIAuthFacade.getSignedInUser())
+      when(_mockIAuthService.getSignedInUser())
           .thenAnswer((_) async => Future.value());
 
       final expected = [
@@ -49,10 +49,10 @@ void main() {
 
     test('should return the authenticated user', () async {
       // arrange
-      final credential = AuthFacadeMock.validTestCredential;
+      final credential = AuthServiceMock.validTestCredential;
       final user = User(credential: credential, name: 'Vethx Test');
 
-      when(_mockIAuthFacade.getSignedInUser())
+      when(_mockIAuthService.getSignedInUser())
           .thenAnswer((_) => Future.value(user));
 
       final expected = [
@@ -74,7 +74,7 @@ void main() {
       () async {
     // arrange
 
-    when(_mockIAuthFacade.signOut()).thenAnswer((_) async => _);
+    when(_mockIAuthService.signOut()).thenAnswer((_) async => _);
 
     final expected = [
       const AuthState.inProcess(),

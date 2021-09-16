@@ -3,16 +3,16 @@ import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart';
 import 'package:hatchery/l10n/l10n.dart';
 
 class SignInWithSecret extends UseCase<Unit, Secret> {
   final ISignInRepository _signInRepository;
-  final IAuthFacade _authFacade;
+  final IAuthService _authService;
 
   SignInWithSecret(
     this._signInRepository,
-    this._authFacade,
+    this._authService,
   );
 
   @override
@@ -21,7 +21,7 @@ class SignInWithSecret extends UseCase<Unit, Secret> {
     return cachedCredential.fold(
       (l) => left(_mapFailures(const AuthFailure.invalidCachedCredential())),
       (credential) {
-        return _authFacade
+        return _authService
             .signInWithCredentialAndSecret(
               credentialAddress: credential,
               secret: secret,

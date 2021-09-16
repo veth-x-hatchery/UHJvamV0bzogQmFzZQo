@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hatchery/core/utils/logger.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 
 import '../../../../test/helpers/features/signin/presentation/pages/sign_in_secret.finders.dart';
 import '../helpers/sign_in_integration_tests_helpers.dart';
@@ -15,12 +16,12 @@ Future<void> enterSecret(WidgetTester tester, {required String text}) async {
 
 Future<void> enterAnInvalidSecret(WidgetTester tester) async {
   Logger.tests('Enter an invalid password');
-  await enterSecret(tester, text: '1234');
+  await enterSecret(tester, text: AuthServiceMock.invalidSecret.inputedValue!);
 }
 
 Future<void> enterAvalidRegisteredSecret(WidgetTester tester) async {
   Logger.tests('Enter a valid registered password');
-  await enterSecret(tester, text: '123456');
+  await enterSecret(tester, text: AuthServiceMock.validTestSecret.inputedValue!);
 }
 
 Future<void> submitSecret(WidgetTester tester) async {

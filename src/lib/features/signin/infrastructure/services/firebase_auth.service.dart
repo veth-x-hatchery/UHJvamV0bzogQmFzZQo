@@ -6,10 +6,10 @@ import 'package:hatchery/features/signin/domain/entities/user_entity.dart'
     as domain;
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart';
 import 'package:hatchery/features/signin/infrastructure/services/firebase_user_mapper.dart';
 
-class FirebaseAuthFacade implements IAuthFacade {
+class FirebaseAuthService implements IAuthService {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
   final FirebaseUserMapper _firebaseUserMapper;
@@ -17,7 +17,7 @@ class FirebaseAuthFacade implements IAuthFacade {
   //Todo(v): implement random
   String get randomSecret => 'nnI7j5i8B2#bkRZ97bPON#I6cfpyE&I';
 
-  FirebaseAuthFacade(
+  FirebaseAuthService(
     this._firebaseAuth,
     this._googleSignIn,
     this._firebaseUserMapper,
@@ -39,7 +39,7 @@ class FirebaseAuthFacade implements IAuthFacade {
         return left(const AuthFailure.credentialAlreadyInUse());
       } else {
         Logger.infrastructure(
-            'FirebaseAuthFacade.registerWithCredentialAndSecret -> ${e.code}');
+            'FirebaseAuthService.registerWithCredentialAndSecret -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
     }
@@ -61,7 +61,7 @@ class FirebaseAuthFacade implements IAuthFacade {
         return left(const AuthFailure.invalidCredentialAndSecretCombination());
       } else {
         Logger.infrastructure(
-            'FirebaseAuthFacade.signInWithCredentialAndSecret -> ${e.code}');
+            'FirebaseAuthService.signInWithCredentialAndSecret -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
     }
@@ -86,7 +86,7 @@ class FirebaseAuthFacade implements IAuthFacade {
 
       return right(unit);
     } on Exception catch (ex, stack) {
-      Logger.infrastructure('IAuthFacade', exception: ex, stackTrace: stack);
+      Logger.infrastructure('IAuthService', exception: ex, stackTrace: stack);
       return left(const AuthFailure.serverError());
     }
   }
@@ -103,7 +103,7 @@ class FirebaseAuthFacade implements IAuthFacade {
         return right(false);
       } else {
         Logger.infrastructure(
-            'FirebaseAuthFacade.credentialIsAlreadyInUse -> ${e.code}');
+            'FirebaseAuthService.credentialIsAlreadyInUse -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
     }
@@ -134,7 +134,7 @@ class FirebaseAuthFacade implements IAuthFacade {
           e.code.contains('user-not-found')) {
         return left(const AuthFailure.invalidCachedCredential());
       } else {
-        Logger.infrastructure('FirebaseAuthFacade.resetPassword -> ${e.code}',
+        Logger.infrastructure('FirebaseAuthService.resetPassword -> ${e.code}',
             exception: e, stackTrace: s);
         return left(const AuthFailure.serverError());
       }

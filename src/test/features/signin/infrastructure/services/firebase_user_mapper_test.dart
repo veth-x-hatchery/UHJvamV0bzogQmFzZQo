@@ -4,7 +4,7 @@ import 'package:hatchery/features/signin/infrastructure/services/firebase_user_m
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'firebase_auth_facade_test.mocks.dart';
+import 'firebase_auth.service_test.mocks.dart';
 
 @GenerateMocks([User])
 void main() {

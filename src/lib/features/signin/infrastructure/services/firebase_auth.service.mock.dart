@@ -5,9 +5,9 @@ import 'package:hatchery/features/signin/domain/entities/user_entity.dart'
     as domain;
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart';
 
-class AuthFacadeMock implements IAuthFacade {
+class AuthServiceMock implements IAuthService {
   //! Variables
 
   domain.User? user;
@@ -19,20 +19,20 @@ class AuthFacadeMock implements IAuthFacade {
   /// This can be useful in other .mocks.dart
   void setupSignInEmailIntegrationTest() {
     Logger.tests(
-        '****** AuthFacadeMock setupSignInEmailIntegrationTest **********');
+        '****** AuthServiceMock setupSignInEmailIntegrationTest **********');
     isCredentialAlreadyInUse = true;
   }
 
   /// [integration_test/features/signin/sign_in_register_test.dart]
   void setupSignInRegisterIntegrationTest() {
     Logger.tests(
-        '****** AuthFacadeMock setupSignInEmailIntegrationTest **********');
+        '****** AuthServiceMock setupSignInEmailIntegrationTest **********');
     isCredentialAlreadyInUse = false;
   }
 
   void setupHomeAlreadyLoggedIntegrationTest() {
     Logger.tests(
-        '****** AuthFacadeMock setupHomeAlreadyLoggedIntegrationTest **********');
+        '****** AuthServiceMock setupHomeAlreadyLoggedIntegrationTest **********');
     isCredentialAlreadyInUse = false;
     user = defaultUserTester;
   }
@@ -51,19 +51,19 @@ class AuthFacadeMock implements IAuthFacade {
     name: 'Tester',
   );
 
-  AuthFacadeMock() {
+  AuthServiceMock() {
     Logger.tests(
-        '******************** AuthFacadeMock constructor ***********************');
+        '******************** AuthServiceMock constructor ***********************');
   }
 
   void _loggedUser({Credential? credential}) {
     credential ??= validTestCredential;
     user = domain.User(credential: credential, name: 'Tester');
-    Logger.tests('AuthFacadeMock -> _loggedUser: $user');
+    Logger.tests('AuthServiceMock -> _loggedUser: $user');
   }
 
   void _removeUser() {
-    Logger.tests('AuthFacadeMock -> _removeUser: $user');
+    Logger.tests('AuthServiceMock -> _removeUser: $user');
     user = null;
   }
 
@@ -81,7 +81,7 @@ class AuthFacadeMock implements IAuthFacade {
         return left(const AuthFailure.credentialAlreadyInUse());
       } else {
         Logger.infrastructure(
-            'AuthFacadeMock.registerWithCredentialAndSecret -> ${e.code}');
+            'AuthServiceMock.registerWithCredentialAndSecret -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
     }
@@ -101,7 +101,7 @@ class AuthFacadeMock implements IAuthFacade {
         return left(const AuthFailure.invalidCredentialAndSecretCombination());
       } else {
         Logger.infrastructure(
-            'AuthFacadeMock.signInWithCredentialAndSecret -> ${e.code}');
+            'AuthServiceMock.signInWithCredentialAndSecret -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
     }
@@ -114,7 +114,7 @@ class AuthFacadeMock implements IAuthFacade {
       await Future.delayed(const Duration(seconds: 1));
       return right(unit);
     } on Exception catch (ex, stack) {
-      Logger.infrastructure('IAuthFacade', exception: ex, stackTrace: stack);
+      Logger.infrastructure('IAuthService', exception: ex, stackTrace: stack);
       return left(const AuthFailure.serverError());
     }
   }
@@ -132,7 +132,7 @@ class AuthFacadeMock implements IAuthFacade {
         return right(false);
       } else {
         Logger.infrastructure(
-            'AuthFacadeMock.credentialIsAlreadyInUse -> ${e.code}');
+            'AuthServiceMock.credentialIsAlreadyInUse -> ${e.code}');
         return left(const AuthFailure.serverError());
       }
     }
@@ -147,7 +147,7 @@ class AuthFacadeMock implements IAuthFacade {
   @override
   Future<domain.User?> getSignedInUser() async {
     // await Future.delayed(const Duration(seconds: 3));
-    Logger.tests('AuthFacadeMock -> getSignedInUser -> $user');
+    Logger.tests('AuthServiceMock -> getSignedInUser -> $user');
     return user;
   }
 
@@ -161,7 +161,7 @@ class AuthFacadeMock implements IAuthFacade {
           e.code.contains('user-not-found')) {
         return left(const AuthFailure.invalidCachedCredential());
       } else {
-        Logger.infrastructure('AuthFacadeMock.resetPassword -> ${e.code}',
+        Logger.infrastructure('AuthServiceMock.resetPassword -> ${e.code}',
             exception: e, stackTrace: s);
         return left(const AuthFailure.serverError());
       }

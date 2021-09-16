@@ -31,13 +31,13 @@
             <td class="headerValue">new_lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">44</td>
-            <td class="headerCovTableEntry">54</td>
-            <td class="headerCovTableEntryMed">81.5 %</td>
+            <td class="headerCovTableEntry">43</td>
+            <td class="headerCovTableEntry">53</td>
+            <td class="headerCovTableEntryMed">81.1 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2021-09-11 18:42:21</td>
+            <td class="headerValue">2021-09-14 17:18:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -105,8 +105,8 @@
 <a name="43"><span class="lineNum">      43 </span><span class="lineCov">          1 :       builder: (context, state) {</span></a>
 <a name="44"><span class="lineNum">      44 </span><span class="lineCov">          2 :         Logger.widget('AlphaPage -&gt; $state');</span></a>
 <a name="45"><span class="lineNum">      45 </span><span class="lineCov">          1 :         return state.map(</span></a>
-<a name="46"><span class="lineNum">      46 </span><span class="lineCov">          3 :           initial: (_) =&gt; _Root(home: Splash()),</span></a>
-<a name="47"><span class="lineNum">      47 </span><span class="lineCov">          3 :           inProcess: (_) =&gt; _Root(home: LoadingPage()),</span></a>
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">          1 :           initial: (_) =&gt; const _Root(home: Splash()),</span></a>
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">          1 :           inProcess: (_) =&gt; const _Root(home: LoadingPage()),</span></a>
 <a name="48"><span class="lineNum">      48 </span><span class="lineCov">          2 :           unauthenticated: (_) =&gt; _Root(</span></a>
 <a name="49"><span class="lineNum">      49 </span><span class="lineCov">          1 :             home: SignInOptionsPage.create(),</span></a>
 <a name="50"><span class="lineNum">      50 </span>            :           ),</a>
@@ -117,9 +117,9 @@
 <a name="55"><span class="lineNum">      55 </span>            :             },</a>
 <a name="56"><span class="lineNum">      56 </span><span class="lineCov">          1 :             builder: (context, state) {</span></a>
 <a name="57"><span class="lineNum">      57 </span><span class="lineCov">          1 :               return state.map(</span></a>
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          3 :                 loading: (_) =&gt; _Root(home: Splash()),</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          1 :                 loading: (_) =&gt; const _Root(home: Splash()),</span></a>
 <a name="59"><span class="lineNum">      59 </span><span class="lineCov">          2 :                 authorized: (_) =&gt; _Root(</span></a>
-<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          1 :                   home: HomePage(),</span></a>
+<a name="60"><span class="lineNum">      60 </span>            :                   home: const HomePage(),</a>
 <a name="61"><span class="lineNum">      61 </span><span class="lineNoCov">          0 :                   onLifecycleStateChange: (s) {</span></a>
 <a name="62"><span class="lineNum">      62 </span><span class="lineNoCov">          0 :                     if (s == AppLifecycleState.resumed) {</span></a>
 <a name="63"><span class="lineNum">      63 </span><span class="lineNoCov">          0 :                       BlocProvider.of&lt;LocalAuthenticationBloc&gt;(context)</span></a>
@@ -148,7 +148,7 @@
 <a name="86"><span class="lineNum">      86 </span>            : class _Root extends StatelessWidget {</a>
 <a name="87"><span class="lineNum">      87 </span>            :   final Widget home;</a>
 <a name="88"><span class="lineNum">      88 </span>            :   final Function(AppLifecycleState)? onLifecycleStateChange;</a>
-<a name="89"><span class="lineNum">      89 </span><span class="lineCov">          1 :   const _Root({</span></a>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">         20 :   const _Root({</span></a>
 <a name="90"><span class="lineNum">      90 </span>            :     Key? key,</a>
 <a name="91"><span class="lineNum">      91 </span>            :     required this.home,</a>
 <a name="92"><span class="lineNum">      92 </span>            :     this.onLifecycleStateChange,</a>

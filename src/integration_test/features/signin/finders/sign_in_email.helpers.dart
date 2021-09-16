@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hatchery/core/utils/logger.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 
 import '../../../../test/helpers/features/signin/presentation/pages/sign_in_credential.finders.dart';
 import '../helpers/sign_in_integration_tests_helpers.dart';
@@ -17,13 +17,13 @@ Future<void> signInEmailEnterEmail(WidgetTester tester,
 Future<void> signInEmailEnterAnInvalidEmail(WidgetTester tester) async {
   Logger.tests('Enter an invalid email');
   await signInEmailEnterEmail(tester,
-      text: AuthFacadeMock.invalidCredential.inputedValue!);
+      text: AuthServiceMock.invalidCredential.inputedValue!);
 }
 
 Future<void> signInEmailEnterAvalidEmail(WidgetTester tester) async {
   Logger.tests('Enter a valid registered email');
   await signInEmailEnterEmail(tester,
-      text: AuthFacadeMock.validTestCredential.inputedValue!);
+      text: AuthServiceMock.validTestCredential.inputedValue!);
 }
 
 Future<void> signInEmailSubmitEmail(WidgetTester tester) async {

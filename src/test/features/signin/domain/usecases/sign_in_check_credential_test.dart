@@ -4,36 +4,36 @@ import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
 // import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_check_credential.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'sign_in_check_credential_test.mocks.dart';
 
 @GenerateMocks([
-  IAuthFacade,
+  IAuthService,
   ISignInRepository,
 ])
 void main() {
   late SignInCredentialCheck _signInCheckIfCredentialIsInUse;
 
   late MockISignInRepository _mockSignInRepository;
-  late MockIAuthFacade _mockAuthFacade;
+  late MockIAuthService _mockAuthService;
 
   setUp(() {
     _mockSignInRepository = MockISignInRepository();
-    _mockAuthFacade = MockIAuthFacade();
+    _mockAuthService = MockIAuthService();
 
     _signInCheckIfCredentialIsInUse = SignInCredentialCheck(
       _mockSignInRepository,
-      _mockAuthFacade,
+      _mockAuthService,
     );
   });
 
   group('when check user credential is already registered', () {
-    final credential = AuthFacadeMock.invalidCredential;
+    final credential = AuthServiceMock.invalidCredential;
 
     test('should return user is registered', () async {
       // arrange
@@ -41,7 +41,7 @@ void main() {
       when(_mockSignInRepository.cacheCredential(credential))
           .thenAnswer((_) async => const Right(null));
 
-      when(_mockAuthFacade.credentialIsAlreadyInUse(credential))
+      when(_mockAuthService.credentialIsAlreadyInUse(credential))
           .thenAnswer((_) async => const Right(true));
 
       // act
@@ -52,7 +52,7 @@ void main() {
 
       expect(result, const Right(true));
 
-      verify(_mockAuthFacade.credentialIsAlreadyInUse(credential));
+      verify(_mockAuthService.credentialIsAlreadyInUse(credential));
 
       // verifyNoMoreInteractions(_mockSignInRepository);
     });
@@ -66,7 +66,7 @@ void main() {
         message: CheckCredentialErrorMessages.unavailable(),
       );
 
-      when(_mockAuthFacade.credentialIsAlreadyInUse(credential))
+      when(_mockAuthService.credentialIsAlreadyInUse(credential))
           .thenAnswer((_) async => const Left(throwFailure));
 
       // act
@@ -77,7 +77,7 @@ void main() {
 
       expect(result, left(failureDetails));
 
-      verify(_mockAuthFacade.credentialIsAlreadyInUse(credential));
+      verify(_mockAuthService.credentialIsAlreadyInUse(credential));
 
       // verifyNoMoreInteractions(_mockSignInRepository);
     });
@@ -88,7 +88,7 @@ void main() {
       when(_mockSignInRepository.cacheCredential(credential))
           .thenAnswer((_) async => const Right(null));
 
-      when(_mockAuthFacade.credentialIsAlreadyInUse(credential))
+      when(_mockAuthService.credentialIsAlreadyInUse(credential))
           .thenAnswer((_) async => const Right(true));
 
       // act

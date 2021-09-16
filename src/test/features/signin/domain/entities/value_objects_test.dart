@@ -3,11 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 
 void main() {
-  final validCredential = AuthFacadeMock.validTestCredential.inputedValue!;
-  final inValidCredential = AuthFacadeMock.invalidCredential.inputedValue!;
+  final validCredential = AuthServiceMock.validTestCredential.inputedValue!;
+  final inValidCredential = AuthServiceMock.invalidCredential.inputedValue!;
 
   group('when validate CredentialAddress', () {
     test(
@@ -101,7 +101,7 @@ void main() {
     test('should return [ValueFailure.shortSecret]', () {
       // arrange
 
-      final String secret = AuthFacadeMock.invalidSecret.inputedValue!;
+      final String secret = AuthServiceMock.invalidSecret.inputedValue!;
 
       // act
 
@@ -118,7 +118,7 @@ void main() {
     test('should validate credential with success', () {
       // arrange
 
-      final String secret = AuthFacadeMock.validTestSecret.inputedValue!;
+      final String secret = AuthServiceMock.validTestSecret.inputedValue!;
 
       // act
 

@@ -8,7 +8,7 @@ import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_secret_reset.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_with_secret.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:hatchery/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:hatchery/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:hatchery/features/signin/presentation/pages/sign_in_secret.page.dart';
@@ -212,7 +212,7 @@ void main() {
 
     await _pumpPage(tester);
 
-    const invalidSecret = '1234';
+    final invalidSecret = AuthServiceMock.invalidSecret.inputedValue!;
 
     await tester.enterText(signInSecretInput(), invalidSecret);
 
@@ -276,7 +276,7 @@ void main() {
       (tester) async {
     // Arrange
 
-    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
+    final secret = AuthServiceMock.validTestSecret.inputedValue!;
 
     final valueObject = Secret(secret);
 

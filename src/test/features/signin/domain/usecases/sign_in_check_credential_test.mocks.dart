@@ -14,7 +14,7 @@ import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.
     as _i8;
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart'
     as _i6;
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart'
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -28,11 +28,11 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 
-/// A class which mocks [IAuthFacade].
+/// A class which mocks [IAuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIAuthFacade extends _i1.Mock implements _i3.IAuthFacade {
-  MockIAuthFacade() {
+class MockIAuthService extends _i1.Mock implements _i3.IAuthService {
+  MockIAuthService() {
     _i1.throwOnMissingStub(this);
   }
 

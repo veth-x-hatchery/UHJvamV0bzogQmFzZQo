@@ -6,7 +6,7 @@ import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_with_secret.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:hatchery/features/signin/presentation/bloc/secret/reset/sign_in_secret_reset_bloc.dart';
 import 'package:hatchery/features/signin/presentation/bloc/secret/sign_in_secret_bloc.dart';
 import 'package:hatchery/features/signin/presentation/manager/navigation.manager.dart';
@@ -41,7 +41,7 @@ void main() {
   test('when secret changes occour then should emit correct state', () async {
     // arrange
 
-    final secret = AuthFacadeMock.invalidSecret.inputedValue!;
+    final secret = AuthServiceMock.invalidSecret.inputedValue!;
 
     // act
 
@@ -67,7 +67,7 @@ void main() {
       () async {
     // arrange
 
-    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
+    final secret = AuthServiceMock.validTestSecret.inputedValue!;
 
     final valueObject = Secret(secret);
 
@@ -113,7 +113,7 @@ void main() {
       () async {
     // arrange
 
-    final secret = AuthFacadeMock.invalidSecret.inputedValue!;
+    final secret = AuthServiceMock.invalidSecret.inputedValue!;
 
     when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(right(unit)));
@@ -155,7 +155,7 @@ void main() {
   test('when confirmation occour then should emit a failure detais', () async {
     // arrange
 
-    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
+    final secret = AuthServiceMock.validTestSecret.inputedValue!;
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
       message:
@@ -202,7 +202,7 @@ void main() {
   test('should notify Auth BLoC when sign in is allowed', () async {
     // arrange
 
-    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
+    final secret = AuthServiceMock.validTestSecret.inputedValue!;
 
     final valueObject = Secret(secret);
 
@@ -247,7 +247,7 @@ void main() {
       () async {
     // arrange
 
-    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
+    final secret = AuthServiceMock.validTestSecret.inputedValue!;
 
     final valueObject = Secret(secret);
 

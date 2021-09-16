@@ -4,21 +4,21 @@ import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
 // import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart';
 import 'package:hatchery/l10n/l10n.dart';
 
 class SignInWithGoogle extends UseCase<Unit, NoParams> {
-  final IAuthFacade _authFacade;
+  final IAuthService _authService;
   final ISignInRepository _signInRepository;
 
   SignInWithGoogle(
-    this._authFacade,
+    this._authService,
     this._signInRepository,
   );
 
   @override
   Future<Either<FailureDetails<AuthFailure>, Unit>> call(NoParams params) =>
-      _authFacade.signInWithGoogle().then((result) => result.fold(
+      _authService.signInWithGoogle().then((result) => result.fold(
             (l) => left(_mapFailures(l)),
             (r) async {
               await _signInRepository.skipNextLocalAuthenticationRequest();

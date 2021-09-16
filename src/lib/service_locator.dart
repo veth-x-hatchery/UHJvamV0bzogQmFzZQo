@@ -15,9 +15,9 @@ import 'package:hatchery/features/authentication/infrastructure/services/local_a
 import 'package:hatchery/features/authentication/infrastructure/services/local_auth.service.mock.dart';
 import 'package:hatchery/features/authentication/presentation/bloc/local_authentication_bloc.dart';
 import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart';
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:hatchery/features/signin/infrastructure/services/firebase_user_mapper.dart';
 import 'package:hatchery/features/signin/sign_in_service_locator.dart';
 import 'package:hive/hive.dart';
@@ -97,8 +97,8 @@ class ServiceLocatorConfig {
     if (getIt<AppConfig>().isIntegrationTest()) {
       // Firebase Auth Service
 
-      getIt.registerLazySingleton<IAuthFacade>(
-        () => AuthFacadeMock()..setupSignInEmailIntegrationTest(),
+      getIt.registerLazySingleton<IAuthService>(
+        () => AuthServiceMock()..setupSignInEmailIntegrationTest(),
       );
 
       // Local Authentication
@@ -112,8 +112,8 @@ class ServiceLocatorConfig {
       getIt.registerLazySingleton<FirebaseUserMapper>(
           () => FirebaseUserMapper());
 
-      getIt.registerLazySingleton<IAuthFacade>(
-        () => FirebaseAuthFacade(
+      getIt.registerLazySingleton<IAuthService>(
+        () => FirebaseAuthService(
           getIt<FirebaseAuth>(),
           getIt<GoogleSignIn>(),
           getIt<FirebaseUserMapper>(),
@@ -146,7 +146,7 @@ class ServiceLocatorConfig {
 
     getIt.registerLazySingleton<AuthBloc>(
       () => AuthBloc(
-        getIt<IAuthFacade>(),
+        getIt<IAuthService>(),
       ),
     );
 

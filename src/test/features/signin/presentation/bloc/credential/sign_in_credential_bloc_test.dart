@@ -5,7 +5,7 @@ import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_check_credential.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:hatchery/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:hatchery/features/signin/presentation/manager/navigation.manager.dart';
 import 'package:mockito/annotations.dart';
@@ -61,7 +61,7 @@ void main() {
       () async {
     // arrange
 
-    final credential = AuthFacadeMock.validTestCredential.inputedValue!;
+    final credential = AuthServiceMock.validTestCredential.inputedValue!;
 
     final valueObject = Credential(credential);
 
@@ -151,7 +151,7 @@ void main() {
       () async {
     // arrange
 
-    final credential = AuthFacadeMock.validTestCredential.inputedValue!;
+    final credential = AuthServiceMock.validTestCredential.inputedValue!;
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.invalidCredentialAndSecretCombination(),
       message: CheckCredentialErrorMessages.credentialAlreadyRegistered(),
@@ -197,7 +197,7 @@ void main() {
   test('when confirmation occour then should go to other page', () async {
     // arrange
 
-    final credential = AuthFacadeMock.validTestCredential.inputedValue!;
+    final credential = AuthServiceMock.validTestCredential.inputedValue!;
 
     when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(right(true)));

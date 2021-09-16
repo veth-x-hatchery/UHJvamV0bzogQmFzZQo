@@ -30,7 +30,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: any
-  flutter_dotenv: any
   flutter_localizations:
     sdk: flutter
   flutter_native_splash: any
@@ -41,12 +40,8 @@ dependencies:
   hive_flutter: any
   http: any
   internet_connection_checker: any
-  intl: any
   local_auth: any
   path_provider: any
-  rxdart: any
-  shared_preferences: any
-  uuid: any
 
 dev_dependencies:
   analyzer: any

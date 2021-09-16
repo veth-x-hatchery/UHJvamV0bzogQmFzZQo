@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_with_google.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -12,19 +12,19 @@ import 'sign_in_with_google_test.mocks.dart';
 
 @GenerateMocks([
   ISignInRepository,
-  IAuthFacade,
+  IAuthService,
 ])
 void main() {
   late SignInWithGoogle _signInUseCase;
   late MockISignInRepository _mockSignInRepository;
-  late MockIAuthFacade _mockAuthFacade;
+  late MockIAuthService _mockAuthService;
 
   setUp(() {
     _mockSignInRepository = MockISignInRepository();
-    _mockAuthFacade = MockIAuthFacade();
+    _mockAuthService = MockIAuthService();
 
     _signInUseCase = SignInWithGoogle(
-      _mockAuthFacade,
+      _mockAuthService,
       _mockSignInRepository,
     );
   });
@@ -41,7 +41,7 @@ void main() {
 
       _registerAuthenticationRequest();
 
-      when(_mockAuthFacade.signInWithGoogle())
+      when(_mockAuthService.signInWithGoogle())
           .thenAnswer((_) async => const Right(unit));
 
       // act
@@ -52,7 +52,7 @@ void main() {
 
       expect(result, const Right(unit));
 
-      verify(_mockAuthFacade.signInWithGoogle());
+      verify(_mockAuthService.signInWithGoogle());
 
       // verifyNoMoreInteractions(_mockSignInRepository);
     });
@@ -69,7 +69,7 @@ void main() {
         message: SignInWithGoogleErrorMessages.cancelledByUser(),
       );
 
-      when(_mockAuthFacade.signInWithGoogle())
+      when(_mockAuthService.signInWithGoogle())
           .thenAnswer((_) async => const Left(throwFailure));
 
       // act
@@ -80,7 +80,7 @@ void main() {
 
       expect(result, left(failureDetails));
 
-      verify(_mockAuthFacade.signInWithGoogle());
+      verify(_mockAuthService.signInWithGoogle());
 
       // verifyNoMoreInteractions(_mockSignInRepository);
     });
@@ -97,7 +97,7 @@ void main() {
         message: SignInWithGoogleErrorMessages.unknowError(),
       );
 
-      when(_mockAuthFacade.signInWithGoogle())
+      when(_mockAuthService.signInWithGoogle())
           .thenAnswer((_) async => const Left(throwFailure));
 
       // act
@@ -108,7 +108,7 @@ void main() {
 
       expect(result, left(failureDetails));
 
-      verify(_mockAuthFacade.signInWithGoogle());
+      verify(_mockAuthService.signInWithGoogle());
     });
 
     test(
@@ -119,7 +119,7 @@ void main() {
 
       _registerAuthenticationRequest();
 
-      when(_mockAuthFacade.signInWithGoogle())
+      when(_mockAuthService.signInWithGoogle())
           .thenAnswer((_) async => const Right(unit));
 
       // act
@@ -130,7 +130,7 @@ void main() {
 
       expect(result, const Right(unit));
 
-      verify(_mockAuthFacade.signInWithGoogle());
+      verify(_mockAuthService.signInWithGoogle());
 
       verify(_mockSignInRepository.skipNextLocalAuthenticationRequest())
           .called(1);

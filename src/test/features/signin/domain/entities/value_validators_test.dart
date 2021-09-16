@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 
 void main() {
   group('when validate is null or empty', () {
@@ -37,7 +37,7 @@ void main() {
   group('when validate credential address', () {
     test('should return [ValueFailure.invalidCredential]', () {
       // arrange
-      final String credential = AuthFacadeMock.invalidCredential.inputedValue!;
+      final String credential = AuthServiceMock.invalidCredential.inputedValue!;
       // act
       final credentialAddress = validateCredentialAddress(credential);
       // assert
@@ -47,7 +47,7 @@ void main() {
 
     test('should validate credential with success', () {
       // arrange
-      final credential = AuthFacadeMock.validTestCredential.inputedValue!;
+      final credential = AuthServiceMock.validTestCredential.inputedValue!;
       // act
       final credentialAddress = validateCredentialAddress(credential);
       // assert
@@ -68,7 +68,7 @@ void main() {
 
     test('should validate secret with success', () {
       // arrange
-      final String secret = AuthFacadeMock.validTestSecret.inputedValue!;
+      final String secret = AuthServiceMock.validTestSecret.inputedValue!;
       // act
       final validation = validateSecret(secret);
       // assert

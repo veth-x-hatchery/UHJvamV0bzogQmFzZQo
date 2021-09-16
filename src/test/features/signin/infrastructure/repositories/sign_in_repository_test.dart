@@ -5,7 +5,7 @@ import 'package:hatchery/core/error/failures.dart';
 import 'package:hatchery/core/services/storage/cache.service.dart';
 import 'package:hatchery/features/signin/infrastructure/datasources/sign_in_local_data_source.dart';
 import 'package:hatchery/features/signin/infrastructure/repositories/sign_in_repository.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -31,7 +31,7 @@ void main() {
   });
 
   group('when doing cache operations', () {
-    final credential = AuthFacadeMock.validTestCredential;
+    final credential = AuthServiceMock.validTestCredential;
 
     test(
       'should return last locally cached data when the cached data is present',

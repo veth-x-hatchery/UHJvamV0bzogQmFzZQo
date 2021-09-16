@@ -3,16 +3,16 @@ import 'package:dartz/dartz.dart';
 import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart';
 import 'package:hatchery/l10n/l10n.dart';
 
 class SignInSecretReset extends UseCase<Unit, NoParams> {
   final ISignInRepository _signInRepository;
-  final IAuthFacade _authFacade;
+  final IAuthService _authService;
 
   SignInSecretReset(
     this._signInRepository,
-    this._authFacade,
+    this._authService,
   );
 
   @override
@@ -22,7 +22,7 @@ class SignInSecretReset extends UseCase<Unit, NoParams> {
     return cachedCredential.fold(
       (l) => left(_mapFailures(const AuthFailure.invalidCachedCredential())),
       (credential) {
-        return _authFacade.passwordReset(credential).then(
+        return _authService.passwordReset(credential).then(
               (value) => value.fold(
                 (l) => left(_mapFailures(l)),
                 (r) async {

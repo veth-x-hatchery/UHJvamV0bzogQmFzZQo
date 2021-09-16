@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hatchery/features/signin/domain/entities/user_entity.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 
 void main() {
   test('should instantiate with success', () {
     // arrange && act
 
     final result = User(
-      credential: AuthFacadeMock.validTestCredential,
+      credential: AuthServiceMock.validTestCredential,
       name: 'Tester',
     );
 
@@ -16,19 +16,19 @@ void main() {
     expect(result.name, 'Tester');
 
     expect(result.credential.getOrCrash(),
-        AuthFacadeMock.validTestCredential.getOrCrash());
+        AuthServiceMock.validTestCredential.getOrCrash());
   });
 
   test('should compare with success', () {
     // arrange && act
 
     final result1 = User(
-      credential: AuthFacadeMock.validTestCredential,
+      credential: AuthServiceMock.validTestCredential,
       name: 'Tester',
     );
 
     final result2 = User(
-      credential: AuthFacadeMock.validTestCredential,
+      credential: AuthServiceMock.validTestCredential,
       name: 'Tester',
     );
 
@@ -41,12 +41,12 @@ void main() {
     // arrange && act
 
     final result1 = User(
-      credential: AuthFacadeMock.validTestCredential,
+      credential: AuthServiceMock.validTestCredential,
       name: 'Tester',
     );
 
     final result2 = User(
-      credential: AuthFacadeMock.validTestCredential,
+      credential: AuthServiceMock.validTestCredential,
       name: 'Tester',
     ).copyWith(name: 'Tester 2');
 

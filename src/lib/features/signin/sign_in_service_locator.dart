@@ -3,7 +3,7 @@ import 'package:hatchery/core/services/storage/i_local_storage.service.dart';
 import 'package:hatchery/core/utils/logger.dart';
 import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart';
 import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_check_credential.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_secret_reset.dart';
@@ -71,27 +71,27 @@ class SignInServiceLocator implements ISignInServiceLocator {
     _getIt.registerLazySingleton<SignInCredentialCheck>(
       () => SignInCredentialCheck(
         _getIt<ISignInRepository>(),
-        _getIt<IAuthFacade>(),
+        _getIt<IAuthService>(),
       ),
     );
 
     _getIt.registerLazySingleton<SignInWithSecret>(
       () => SignInWithSecret(
         _getIt<ISignInRepository>(),
-        _getIt<IAuthFacade>(),
+        _getIt<IAuthService>(),
       ),
     );
 
     _getIt.registerLazySingleton<SignInSecretReset>(
       () => SignInSecretReset(
         _getIt<ISignInRepository>(),
-        _getIt<IAuthFacade>(),
+        _getIt<IAuthService>(),
       ),
     );
 
     _getIt.registerLazySingleton<SignInWithGoogle>(
       () => SignInWithGoogle(
-        _getIt<IAuthFacade>(),
+        _getIt<IAuthService>(),
         _getIt<ISignInRepository>(),
       ),
     );
@@ -99,7 +99,7 @@ class SignInServiceLocator implements ISignInServiceLocator {
     _getIt.registerLazySingleton<SignInRegisterCredentialAndSecret>(
       () => SignInRegisterCredentialAndSecret(
         _getIt<ISignInRepository>(),
-        _getIt<IAuthFacade>(),
+        _getIt<IAuthService>(),
       ),
     );
 

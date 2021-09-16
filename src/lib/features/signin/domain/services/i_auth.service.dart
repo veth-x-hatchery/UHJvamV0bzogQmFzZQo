@@ -3,7 +3,7 @@ import 'package:hatchery/features/signin/domain/entities/user_entity.dart';
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
 
-abstract class IAuthFacade {
+abstract class IAuthService {
   Future<User?> getSignedInUser();
 
   Future<Either<AuthFailure, bool>> credentialIsAlreadyInUse(

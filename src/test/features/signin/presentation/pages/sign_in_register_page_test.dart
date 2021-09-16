@@ -7,7 +7,7 @@ import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:hatchery/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:hatchery/features/signin/presentation/pages/sign_in_register_page.dart';
 import 'package:hatchery/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -49,11 +49,11 @@ void main() {
         .thenAnswer((_) => Stream.value(state));
   }
 
-  final validCredential = AuthFacadeMock.validTestCredential.inputedValue!;
-  final validSecret = AuthFacadeMock.validTestSecret.inputedValue!;
+  final validCredential = AuthServiceMock.validTestCredential.inputedValue!;
+  final validSecret = AuthServiceMock.validTestSecret.inputedValue!;
 
-  final invalidCredential = AuthFacadeMock.invalidCredential.inputedValue!;
-  final invalidSecret = AuthFacadeMock.invalidSecret.inputedValue!;
+  final invalidCredential = AuthServiceMock.invalidCredential.inputedValue!;
+  final invalidSecret = AuthServiceMock.invalidSecret.inputedValue!;
 
   /// Form uses BLoC state to realize validations
   void _prepareFormValidationValues({
@@ -254,9 +254,9 @@ void main() {
       (tester) async {
     // Arrange
 
-    final credential = AuthFacadeMock.validTestSecret.inputedValue!;
+    final credential = AuthServiceMock.validTestSecret.inputedValue!;
 
-    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
+    final secret = AuthServiceMock.validTestSecret.inputedValue!;
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.credentialAlreadyInUse(),

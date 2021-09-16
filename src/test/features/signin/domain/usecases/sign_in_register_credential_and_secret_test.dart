@@ -5,9 +5,9 @@ import 'package:hatchery/features/signin/domain/entities/credentials_entity.dart
 import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
 // import 'package:hatchery/features/signin/domain/repositories/sign_in_repository.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
-import 'package:hatchery/features/signin/domain/services/i_auth_facade.dart';
+import 'package:hatchery/features/signin/domain/services/i_auth.service.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -15,24 +15,24 @@ import 'sign_in_check_credential_test.mocks.dart';
 
 @GenerateMocks([
   ISignInRepository,
-  IAuthFacade,
+  IAuthService,
 ])
 void main() {
   late SignInRegisterCredentialAndSecret _signInUseCase;
   late MockISignInRepository _mockSignInRepository;
-  late MockIAuthFacade _mockAuthFacade;
+  late MockIAuthService _mockAuthService;
 
   setUp(() {
     _mockSignInRepository = MockISignInRepository();
-    _mockAuthFacade = MockIAuthFacade();
+    _mockAuthService = MockIAuthService();
     _signInUseCase = SignInRegisterCredentialAndSecret(
       _mockSignInRepository,
-      _mockAuthFacade,
+      _mockAuthService,
     );
   });
 
-  final credentialTester = AuthFacadeMock.validTestCredential;
-  final secretTester = AuthFacadeMock.validTestSecret;
+  final credentialTester = AuthServiceMock.validTestCredential;
+  final secretTester = AuthServiceMock.validTestSecret;
   final credentials = Credentials(user: credentialTester, secret: secretTester);
 
   void _registerAuthenticationRequest() {
@@ -47,7 +47,7 @@ void main() {
 
       _registerAuthenticationRequest();
 
-      when(_mockAuthFacade.registerWithCredentialAndSecret(
+      when(_mockAuthService.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       )).thenAnswer((_) async => const Right(unit));
@@ -60,7 +60,7 @@ void main() {
 
       expect(result, const Right(unit));
 
-      verify(_mockAuthFacade.registerWithCredentialAndSecret(
+      verify(_mockAuthService.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       ));
@@ -80,7 +80,7 @@ void main() {
         message: SignInRegisterCredentialAndSecretErrorMessages.unavailable(),
       );
 
-      when(_mockAuthFacade.registerWithCredentialAndSecret(
+      when(_mockAuthService.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       )).thenAnswer((_) async => const Left(throwFailure));
@@ -92,7 +92,7 @@ void main() {
 
       expect(result, left(failureDetails));
 
-      verify(_mockAuthFacade.registerWithCredentialAndSecret(
+      verify(_mockAuthService.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       ));
@@ -113,7 +113,7 @@ void main() {
             .credentialAlreadyInUse(),
       );
 
-      when(_mockAuthFacade.registerWithCredentialAndSecret(
+      when(_mockAuthService.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       )).thenAnswer((_) async => const Left(throwFailure));
@@ -126,7 +126,7 @@ void main() {
 
       expect(result, left(failureDetails));
 
-      verify(_mockAuthFacade.registerWithCredentialAndSecret(
+      verify(_mockAuthService.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       ));
@@ -142,7 +142,7 @@ void main() {
 
       _registerAuthenticationRequest();
 
-      when(_mockAuthFacade.registerWithCredentialAndSecret(
+      when(_mockAuthService.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       )).thenAnswer((_) async => const Right(unit));
@@ -155,7 +155,7 @@ void main() {
 
       expect(result, const Right(unit));
 
-      verify(_mockAuthFacade.registerWithCredentialAndSecret(
+      verify(_mockAuthService.registerWithCredentialAndSecret(
         credentialAddress: credentialTester,
         secret: secretTester,
       ));

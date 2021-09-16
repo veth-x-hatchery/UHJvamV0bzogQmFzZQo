@@ -6,7 +6,7 @@ import 'package:hatchery/features/authorization/presentation/bloc/auth_bloc.dart
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_register_credential_and_secret.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:hatchery/features/signin/presentation/bloc/register/sign_in_register_bloc.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -60,7 +60,7 @@ void main() {
   test('when secret changes occour then should emit correct state', () async {
     // arrange
 
-    final secret = AuthFacadeMock.invalidSecret.inputedValue!;
+    final secret = AuthServiceMock.invalidSecret.inputedValue!;
 
     // act
 
@@ -86,8 +86,8 @@ void main() {
       () async {
     // arrange
 
-    final credential = AuthFacadeMock.validTestCredential.inputedValue!;
-    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
+    final credential = AuthServiceMock.validTestCredential.inputedValue!;
+    final secret = AuthServiceMock.validTestSecret.inputedValue!;
 
     when(_mockSignInWithSecret.call(any))
         .thenAnswer((_) => Future.value(const Right(unit)));
@@ -146,8 +146,8 @@ void main() {
       () async {
     // arrange
 
-    final credential = AuthFacadeMock.invalidCredential.inputedValue!;
-    final secret = AuthFacadeMock.validTestSecret.inputedValue!;
+    final credential = AuthServiceMock.invalidCredential.inputedValue!;
+    final secret = AuthServiceMock.validTestSecret.inputedValue!;
 
     final expectedFailure = FailureDetails(
       failure: const AuthFailure.credentialAlreadyInUse(),

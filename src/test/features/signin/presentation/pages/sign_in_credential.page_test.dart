@@ -7,7 +7,7 @@ import 'package:hatchery/core/shared_kernel/shared_kernel.dart';
 import 'package:hatchery/features/signin/domain/entities/value_objects.dart';
 import 'package:hatchery/features/signin/domain/services/auth_failure.dart';
 import 'package:hatchery/features/signin/domain/usecases/sign_in_check_credential.dart';
-import 'package:hatchery/features/signin/infrastructure/services/firebase_auth_facade.mock.dart';
+import 'package:hatchery/features/signin/infrastructure/services/firebase_auth.service.mock.dart';
 import 'package:hatchery/features/signin/presentation/bloc/credential/sign_in_credential_bloc.dart';
 import 'package:hatchery/features/signin/presentation/pages/sign_in_credential.page.dart';
 import 'package:hatchery/features/signin/presentation/widgets/sign_in.widgets.dart';
@@ -107,7 +107,7 @@ void main() {
     // Arrange
 
     _signInState(SignInCredentialState(
-      credential: AuthFacadeMock.validTestCredential,
+      credential: AuthServiceMock.validTestCredential,
       isLoading: true,
       authFailureOrSuccessOption: none(),
       notification: none(),
@@ -177,10 +177,10 @@ void main() {
     await _pumpPage(tester);
 
     await tester.enterText(signInCredentialPageInput(),
-        AuthFacadeMock.validTestCredential.inputedValue!);
+        AuthServiceMock.validTestCredential.inputedValue!);
 
     _prepareFormValidationValues(
-        value: AuthFacadeMock.validTestCredential.inputedValue);
+        value: AuthServiceMock.validTestCredential.inputedValue);
 
     // Act
 
@@ -203,7 +203,7 @@ void main() {
     );
 
     _signInState(SignInCredentialState(
-      credential: AuthFacadeMock.validTestCredential,
+      credential: AuthServiceMock.validTestCredential,
       isLoading: false,
       authFailureOrSuccessOption: some(Left(expectedFailure)),
       notification:
