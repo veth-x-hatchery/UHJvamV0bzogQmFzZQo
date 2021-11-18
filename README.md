@@ -1,20 +1,39 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Pipelines of continuous integration and delivery
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+We'll see some possibilities of automation to release delivery to different environments, like development, tests, and production.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+We integrate with Google Play (with release promotions, to internal, beta, and alpha). With the Apple Play Store and Test Flight. And, sure, with the Firebase App Distribution.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+We'll also see ways to keep private keys, certificates, profiles, credentials, secrets securely stored - for each of our environments - and how to replace these parameters automatically, accordingly with our pipeline execution.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+We'll talk about cloud providers like Bitrise, Codemagic, or even on-premise solutions like Jenkins and Fastlane.
+
+# Flavors
+
+We'll see an excellent way of implementation of Flavors to iOS and Android. How to define dynamically, at compile-time, properties like "bundle and package id" application name, and whatever else was a need.
+
+So we will have, among other possibilities, for example, two different versions of the same product: A tests version with a different name, and a production version, both on the same smartphone.
+
+# Architecture
+
+We will see the implementation of the concepts from Domain-Driven Design, Clean Architecture, Test Driven Development, and good practices in code writing.
+
+# State Management
+
+We will focus on decoupling business rules, state managers, and visual components of the application. So we can choose the state manager regardless of our architecture.
+
+# Localizations
+
+We will see strategies to translate texts from our domain to our visual components, decoupling between layers.
+
+# Safe Local Storage
+
+We'll look at the possibilities for securely storing sensitive data with iOS and Android security levels.
+
+# Local Authentication
+
+We also have biometric authentication with some business requirements.
+
+# Tests
+
+We have over 90% test coverage, in addition to integration tests, with screenshots automation.
