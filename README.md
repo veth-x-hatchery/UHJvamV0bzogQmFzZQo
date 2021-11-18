@@ -1,3 +1,5 @@
+A piece of a robust, scalable, resilient scenario designed for a mobile application product that needs to natively serve customers on iOS and Android operating systems: Pilot - Flutter, CI/CD, Flavors, Automations: https://www.youtube.com/watch?v=2ZKDY2STeHo
+
 # Pipelines of continuous integration and delivery
 
 We'll see some possibilities of automation to release delivery to different environments, like development, tests, and production.
